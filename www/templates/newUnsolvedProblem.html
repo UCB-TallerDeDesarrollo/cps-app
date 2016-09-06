@@ -1,0 +1,15 @@
+<ion-view view-title="Unsolved Problems">
+  <ion-content ng-controller="UnsolvedProblemCtrl">
+    <ion-list>
+      <ion-item class="item-text-wrap" ng-repeat="unsolvedProblem in unsolvedProblems">
+        {{unsolvedProblem.description}}
+      </ion-item>
+    </ion-list>
+    <form>
+     <label class="item item-input">
+       <input type="text" placeholder="unsolved problem" ng-model="description">
+     </label>
+     <button class="button button-block button-positive" ng-click="createUnsolvedProblem()">Create</button>
+    </form>
+  </ion-content>
+</ion-view>
