@@ -58,7 +58,36 @@ $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);;
       $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);
     }
   };
+})
+
+.controller('DeleteCtrl', function($scope, $cordovaSQLite, $ionicPopup){
+
+  $scope.delete = function(item) {
+    var query = "DELETE FROM unsolved_problems where id = ?";
+    $cordovaSQLite.execute(db, query, [item.id]).then(function(res) {
+        $scope.unsolvedProblems.splice($scope.unsolvedProblems.indexOf(item), 1);
+    }, function (err) {
+        console.error(err);
+    });
+ }
+
+ $scope.showConfirm = function(item) {
+   var confirmPopup = $ionicPopup.confirm({
+     title: 'Delete Unsolved Problem',
+     template: 'Are you sure you want to delete this unsolved problem?'
+   });
+
+   confirmPopup.then(function(res) {
+     if(res) {
+       $scope.delete(item);
+        console.log(item);
+     } else {
+       console.log('You are not sure');
+     }
+   });
+ };
 });
+
 
 // OTHER FUNCTIONS
 

@@ -1,8 +1,10 @@
 <ion-view view-title="Unsolved Problems">
   <ion-content class="padding" ng-controller="UnsolvedProblemCtrl">
-    <ion-list>
+    <ion-list show-delete="false" can-swipe="true">
       <ion-item class="item-text-wrap" ng-repeat="unsolvedProblem in unsolvedProblems">
         {{unsolvedProblem.description}}
+        <a href="#/edit/{{item.id}}" class="button button-light icon ion-edit"></a>
+        <ion-option-button ng-controller="DeleteCtrl" class="button-assertive icon ion-trash-a" ng-click="showConfirm(unsolvedProblem)"> Delete </ion-option-button>
       </ion-item>
     </ion-list>
     <div class="text-center">
