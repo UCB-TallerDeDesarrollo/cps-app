@@ -52,7 +52,15 @@ angular.module('starter.controllers', [])
 .controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems) {
   $scope.unsolvedProblems = UnsolvedProblems.all();
   $scope.createUnsolvedProblem = function() {
-    UnsolvedProblems.insert($scope.description);
-    $scope.description="";
+    if (!input_field_is_empty($scope)) {
+      UnsolvedProblems.insert($scope.description);
+      $scope.description="";
+    }
   };
 });
+
+// OTHER FUNCTIONS
+
+var input_field_is_empty = function(scope) {
+    return scope.description.length == 0
+}

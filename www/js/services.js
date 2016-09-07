@@ -59,14 +59,6 @@ angular.module('starter.services', [])
     },
     insert: function(desc) {
       unsolvedProblems.push({description:desc});
-    },
-    get: function(laggingSkillsId) {
-      for (var i = 0; i < laggingSkillss.length; i++) {
-        if (laggingSkillss[i].id === parseInt(laggingSkillsId)) {
-          return laggingSkillss[i];
-        }
-      }
-      return null;
     }
   };
 });
