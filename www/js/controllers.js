@@ -50,20 +50,38 @@ angular.module('starter.controllers', [])
 })
 
 .controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite) {
-  $scope.unsolvedProblems = UnsolvedProblems.all();
-  $scope.createUnsolvedProblem = function() {
-    if (!input_field_is_empty($scope)) {
-      // UnsolvedProblems.insert($scope.description);
+$scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);;
+  $scope.create_unsolved_problem = function() {
+    if (!input_field_is_empty($scope.description)) {
       save_unsolved_problem($cordovaSQLite,$scope)
       $scope.description="";
+      $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);
     }
   };
 });
 
 // OTHER FUNCTIONS
 
-function input_field_is_empty(scope) {
-    return scope.description.length == 0
+function get_unsolved_problems(cordovaSQLite) {
+  var unsolved_problems = [];
+  var query ="SELECT * FROM unsolved_problems";
+  cordovaSQLite.execute(db,query).then(function(result) {
+    var rows = result.rows;
+      if(rows.length) {
+        for(var i=0; i < rows.length; i++){
+          unsolved_problems.push(rows.item(i));
+        }
+      }else {
+        console.log("No data found");
+      }
+    },function(error){
+      console.log("error"+error);
+    });
+  return unsolved_problems;
+}
+
+function input_field_is_empty(description) {
+    return description.length === 0;
 }
 
 function save_unsolved_problem(cordovaSQLite,scope){
