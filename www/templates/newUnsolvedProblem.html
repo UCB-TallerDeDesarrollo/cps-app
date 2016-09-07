@@ -1,14 +1,22 @@
 <ion-view view-title="Unsolved Problems">
-  <ion-content ng-controller="UnsolvedProblemCtrl">
+  <ion-content class="padding" ng-controller="UnsolvedProblemCtrl">
     <ion-list>
       <ion-item class="item-text-wrap" ng-repeat="unsolvedProblem in unsolvedProblems">
         {{unsolvedProblem.description}}
       </ion-item>
     </ion-list>
+    <div class="text-center">
+      <h4>Enter new unsolved problem</h4>
+    </div>
     <form>
      <label class="item item-input">
-       <input type="text" placeholder="unsolved problem" ng-model="description">
+       <textarea rows=5 placeholder="Type a new unsolved problem here" ng-model="description">
+       </textarea>
      </label>
+     <!-- <ion-item>
+       <ion-label stacked>Message</ion-label>
+       <ion-textarea [(ngModel)]="description"></ion-textarea>
+     </ion-item> -->
      <button class="button button-block button-positive" ng-click="createUnsolvedProblem()">Create</button>
     </form>
   </ion-content>
