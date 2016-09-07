@@ -1,12 +1,12 @@
 angular.module('starter.seed', [])
 
 .factory('DataSeed', function() {
-  function seedLaggingSkills(){
+  function seedLaggingSkills($cordovaSQLite){
     $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS lagging_skills (id integer primary key, description text)");
   }
   return {
     seed: function($cordovaSQLite, db) {
-      seedLaggingSkills();
+      seedLaggingSkills($cordovaSQLite);
       return;
     },
     deleteSeed: function($cordovaSQLite, db){
