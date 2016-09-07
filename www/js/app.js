@@ -54,15 +54,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       }
     })
-    .state('app.laggingSkills', {
-      url: '/laggingSkills',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/laggingSkills.html',
-          controller: 'LaggingSkillsCtrl'
-        }
+  .state('app.laggingSkills', {
+    url: '/laggingSkills',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/laggingSkills.html',
+        controller: 'LaggingSkillsCtrl'
       }
-    })
+    }
+  })
 
   .state('app.single', {
     url: '/selectUnsolvedProblems/:laggingSkillId',
@@ -72,6 +72,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: 'LaggingSkillCtrl'
       }
     }
+  })
+
+  .state('app.newUnsolvedProblem', {
+      url: '/unsolvedProblems/new',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/newUnsolvedProblem.html',
+          controller: 'UnsolvedProblemCtrl'
+        }
+      }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/laggingSkills');

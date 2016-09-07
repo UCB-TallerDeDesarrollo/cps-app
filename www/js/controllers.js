@@ -47,4 +47,12 @@ angular.module('starter.controllers', [])
 
 .controller('LaggingSkillCtrl', function($scope, $stateParams) {
   $scope.params = $stateParams;
+})
+
+.controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems) {
+  $scope.unsolvedProblems = UnsolvedProblems.all(),
+  $scope.createUnsolvedProblem = function() {
+    UnsolvedProblems.insert($scope.description);
+    $scope.description="";
+  };
 });
