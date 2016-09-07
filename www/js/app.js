@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 var db = null;
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.seed', 'ngCordova'])
 
-.run(function($ionicPlatform, $cordovaSQLite) {
+.run(function($ionicPlatform, $cordovaSQLite, DataSeed) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -22,8 +22,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
 
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
-    db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS testable (id integer primary key, firstname text, number integer)");
+    db = window.openDatabase("CPSdatabasev2","1.0","Demo",2000);
+    DataSeed.seed($cordovaSQLite, db);
   });
 })
 
