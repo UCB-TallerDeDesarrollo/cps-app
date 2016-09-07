@@ -37,7 +37,7 @@ angular.module('starter.services', [])
       return laggingSkills;
     },
     remove: function(laggingSkills) {
-      laggingSkillss.splice(laggingSkillss.indexOf(laggingSkills), 1);
+      laggingSkillss.splice(laggingSkills.indexOf(laggingSkills), 1);
     },
     get: function(laggingSkillsId) {
       for (var i = 0; i < laggingSkillss.length; i++) {

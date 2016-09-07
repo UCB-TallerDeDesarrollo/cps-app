@@ -22,8 +22,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
 
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
-    db = window.openDatabase("sqlite","1.0","./db/CPSdatabase",2000);
-    //$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
+    db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS testable (id integer primary key, firstname text, number integer)");
   });
 })
 
@@ -60,16 +60,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       'menuContent': {
         templateUrl: 'templates/laggingSkills.html',
         controller: 'LaggingSkillsCtrl'
-      }
-    }
-  })
-
-  .state('app.single', {
-    url: '/selectUnsolvedProblems/:laggingSkillId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/selectUnsolvedProblems.html',
-        controller: 'LaggingSkillCtrl'
       }
     }
   })
