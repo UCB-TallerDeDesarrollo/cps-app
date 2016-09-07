@@ -86,8 +86,31 @@ $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);;
      }
    });
  };
-});
+})
 
+
+.controller('EditUnsolvedProblemCtrl', function($scope, $cordovaSQLite, $state){
+  $scope.item = {
+      description: "",
+      id:$state.params.itemId
+    };
+
+
+  $scope.find = function(item) {
+    var query ="SELECT * FROM unsolved_problems where id = ?";
+    $cordovaSQLite.execute(db,query,[$scope.item.id]).then(function(result){
+    $scope.itemf = result.rows.item(0);
+    $scope.item.description = $scope.itemf.description;
+    $scope.description = $scope.item.description;
+  });
+  };
+
+  $scope.saveUnsolvedProblem = function(item){
+      var query ="UPDATE unsolved_problems SET description = ? where id = ?";
+      $cordovaSQLite.execute(db,query,[$scope.item.description,$scope.item.id]);
+      $state.go('app.newUnsolvedProblem');
+  };
+});
 
 // OTHER FUNCTIONS
 
