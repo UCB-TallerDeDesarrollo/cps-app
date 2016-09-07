@@ -49,11 +49,12 @@ angular.module('starter.controllers', [])
   $scope.params = $stateParams;
 })
 
-.controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems) {
+.controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite) {
   $scope.unsolvedProblems = UnsolvedProblems.all();
   $scope.createUnsolvedProblem = function() {
     if (!input_field_is_empty($scope)) {
-      UnsolvedProblems.insert($scope.description);
+      // UnsolvedProblems.insert($scope.description);
+      save_unsolved_problem($cordovaSQLite,$scope)
       $scope.description="";
     }
   };
@@ -61,6 +62,11 @@ angular.module('starter.controllers', [])
 
 // OTHER FUNCTIONS
 
-var input_field_is_empty = function(scope) {
+function input_field_is_empty(scope) {
     return scope.description.length == 0
+}
+
+function save_unsolved_problem(cordovaSQLite,scope){
+  var query ="INSERT INTO unsolved_problems(description,solved) VALUES (?,?)";
+  cordovaSQLite.execute(db,query,[scope.description,0]);
 }
