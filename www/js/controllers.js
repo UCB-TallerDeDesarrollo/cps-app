@@ -60,7 +60,7 @@ $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);;
   };
 })
 
-.controller('DeleteCtrl', function($scope, $cordovaSQLite, $ionicPopup){
+.controller('DeleteUnsolvedProblemCtrl', function($scope, $cordovaSQLite, $ionicPopup){
 
   $scope.delete = function(item) {
     var query = "DELETE FROM unsolved_problems where id = ?";
@@ -105,9 +105,9 @@ $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);;
   });
   };
 
-  $scope.saveUnsolvedProblem = function(item){
+  $scope.saveUnsolvedProblem = function(){
       var query ="UPDATE unsolved_problems SET description = ? where id = ?";
-      $cordovaSQLite.execute(db,query,[$scope.item.description,$scope.item.id]);
+      $cordovaSQLite.execute(db,query,[$scope.description,$scope.item.id]);
       $state.go('app.newUnsolvedProblem');
   };
 });
