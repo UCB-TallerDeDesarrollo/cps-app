@@ -1,0 +1,18 @@
+<ion-view view-title="Edit Unsolved Problems">
+  <ion-content ng-init = "find()" class="padding" ng-controller="EditUnsolvedProblemCtrl">
+    <div class="text-center">
+      <h4>Edit the unsolved problem</h4>
+    </div>
+    <form>
+     <label class="item item-input">
+       <textarea rows=5  ng-model="description">
+       </textarea>
+     </label>
+     <!-- <ion-item>
+       <ion-label stacked>Message</ion-label>
+       <ion-textarea [(ngModel)]="description"></ion-textarea>
+     </ion-item> -->
+     <button class="button button-block button-positive" ng-click="saveUnsolvedProblem()">Save</button>
+    </form>
+  </ion-content>
+</ion-view>

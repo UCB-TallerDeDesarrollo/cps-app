@@ -71,6 +71,58 @@ $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);;
       $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);
     }
   };
+})
+
+.controller('DeleteUnsolvedProblemCtrl', function($scope, $cordovaSQLite, $ionicPopup){
+
+  $scope.delete = function(item) {
+    var query = "DELETE FROM unsolved_problems where id = ?";
+    $cordovaSQLite.execute(db, query, [item.id]).then(function(res) {
+        $scope.unsolvedProblems.splice($scope.unsolvedProblems.indexOf(item), 1);
+    }, function (err) {
+        console.error(err);
+    });
+ }
+
+ $scope.showConfirm = function(item) {
+   var confirmPopup = $ionicPopup.confirm({
+     title: 'Delete Unsolved Problem',
+     template: 'Are you sure you want to delete this unsolved problem?'
+   });
+
+   confirmPopup.then(function(res) {
+     if(res) {
+       $scope.delete(item);
+        console.log(item);
+     } else {
+       console.log('You are not sure');
+     }
+   });
+ };
+})
+
+
+.controller('EditUnsolvedProblemCtrl', function($scope, $cordovaSQLite, $state){
+  $scope.item = {
+      description: "",
+      id:$state.params.itemId
+    };
+
+
+  $scope.find = function(item) {
+    var query ="SELECT * FROM unsolved_problems where id = ?";
+    $cordovaSQLite.execute(db,query,[$scope.item.id]).then(function(result){
+    $scope.itemf = result.rows.item(0);
+    $scope.item.description = $scope.itemf.description;
+    $scope.description = $scope.item.description;
+  });
+  };
+
+  $scope.saveUnsolvedProblem = function(){
+      var query ="UPDATE unsolved_problems SET description = ? where id = ?";
+      $cordovaSQLite.execute(db,query,[$scope.description,$scope.item.id]);
+      $state.go('app.newUnsolvedProblem');
+  };
 });
 
 // OTHER FUNCTIONS
