@@ -63,6 +63,7 @@ angular.module('starter.services', [])
   };
 })
 
+
 .factory('DataSeed', function() {
   return {
     seed: function($cordovaSQLite, db) {

@@ -72,7 +72,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           controller: 'UnsolvedProblemCtrl'
         }
       }
+  })
+
+  .state('app.helpCategories',{
+    url: '/helpCategories',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/helpCategories.html',
+        controller: 'HelpCategoryCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/laggingSkills');
+  $urlRouterProvider.otherwise('/app/helpCategories');
 });

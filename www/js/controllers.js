@@ -45,8 +45,21 @@ angular.module('starter.controllers', [])
   $scope.laggingSkills = LaggingSkills.all();
 })
 
+
 .controller('LaggingSkillCtrl', function($scope, $stateParams) {
   $scope.params = $stateParams;
+})
+
+.controller('HelpCategoryCtrl', function($scope, $stateParams) {
+  $scope.params = $stateParams;
+})
+
+.controller('HelpCategoryCtrl', function($scope) {
+  $scope.helpCategories = [
+    {name : "help_category_01" , description : "The kid isn’t talking", id:1},
+    {name : "help_category_02", description : "My kid is too young to do CPS", id:2},
+    {name : "help_category_03", description : "The kid talked but I don’t know what to do with what s/he said", id:3}
+  ];
 })
 
 .controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite) {
