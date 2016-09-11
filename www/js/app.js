@@ -30,7 +30,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
@@ -54,15 +54,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       }
     })
-  .state('app.laggingSkills', {
-    url: '/laggingSkills',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/laggingSkills.html',
-        controller: 'LaggingSkillsCtrl'
-      }
-    }
-  })
 
   .state('app.editUnsolvedProblem', {
     url: '/unsolvedProblems/edit/:itemId',
@@ -90,6 +81,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       'menuContent': {
         templateUrl: 'templates/helpCategories.html',
         controller: 'HelpCategoryCtrl'
+      }
+    }
+  })
+  
+  .state('app.laggingSkills', {
+    url: '/laggingSkills',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/laggingSkills.html',
+        controller: 'LaggingSkillsCtrl'
       }
     }
   });

@@ -74,4 +74,52 @@ angular.module('starter.services', [])
       $cordovaSQLite.execute(db, "DROP TABLE lagging_skills");
     }
   };
+})
+
+.factory('HelpCategoriesStep1',function(){
+  // First Step help categories and data
+
+  var helpCategoriesForStep1 = [
+    {name : "help_category_01" , description : "The kid isn’t talking", id:1,
+      topics: [
+        {name: "topic_01", description: "Maybe the unsolved problem wasn’t free of challenging behavior, or it wasn’t specific, or it contained an adult theory, or it was 'clumped'?", id:"1"},
+        {name: "topic_02", description: "Maybe you are using Emergency B (in the heat of the moment when the kid is already upset) instead of Proactive B?", id:"2"},
+        {name: "topic_03", description: "Maybe you are using Plan A?", id:"3"},
+        {name: "topic_04", description: "Maybe s/he really doesn’t know/hasn’t been asked about this before", id:"4"},
+        {name: "topic_05", description: "Maybe s/he needs the problem broken down into its component parts:", id:"5"},
+        {name: "topic_06", description: "Maybe s/he needs time to think", id:"6"},
+        {name: "topic_07", description: "Maybe s/he doesn’t have the words to tell you", id:"7"},
+        {name: "topic_08", description: "My kid won’t talk to me", id:"8"},
+        {name: "topic_09", description: "Talking about talking", id:"9"}
+      ]
+    },
+
+      {name : "help_category_02", description : "My kid is too young to do CPS", id:2,
+        topics: [
+          {name: "topic_01", description: "Solving Problems Collaboratively with Young Children:", id:"1"},
+          {name: "topic_02", description: "Can you use Plan B with young kids?", id:"2"},
+        ]
+      },
+      {name : "help_category_03", description : "The kid talked but I don’t know what to do with what s/he said", id:3,
+        topics:[
+          {name: "topic_01", description: "Can you use Plan B with young kids?", id:"1"},
+        ]
+    }
+  ];
+  return {
+    all: function() {
+      return helpCategoriesForStep1;
+    },
+    remove: function(helpCategoryForStep1) {
+      helpCategoriesForStep1.splice(helpCategoriesForStep1.indexOf(helpCategoryForStep1), 1);
+    },
+    get: function(helpCategoriesForStep1Id) {
+      for (var i = 0; i < helpCategoriesForStep1.length; i++) {
+        if (helpCategoriesForStep1[i].id === parseInt(helpCategoriesForStep1Id)) {
+          return helpCategoriesForStep1[i];
+        }
+      }
+      return null;
+    }
+  };
 });

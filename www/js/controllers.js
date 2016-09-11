@@ -54,12 +54,9 @@ angular.module('starter.controllers', [])
   $scope.params = $stateParams;
 })
 
-.controller('HelpCategoryCtrl', function($scope) {
-  $scope.helpCategories = [
-    {name : "help_category_01" , description : "The kid isn’t talking", id:1},
-    {name : "help_category_02", description : "My kid is too young to do CPS", id:2},
-    {name : "help_category_03", description : "The kid talked but I don’t know what to do with what s/he said", id:3}
-  ];
+.controller('HelpCategoryCtrl', function($scope, HelpCategoriesStep1) {
+  console.log(HelpCategoriesStep1);
+  $scope.helpCategories = HelpCategoriesStep1.all();
 })
 
 .controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite) {
