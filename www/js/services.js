@@ -1,6 +1,6 @@
-angular.module('starter.services', [])
+angular.module('starter.services', ['ngCordova'])
 
-.factory('LaggingSkills', function() {
+.factory('LaggingSkills', function($cordovaSQLite) {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
@@ -36,11 +36,8 @@ angular.module('starter.services', [])
     all: function() {
       return laggingSkills;
     },
-    remove: function(laggingSkills) {
-      laggingSkillss.splice(laggingSkills.indexOf(laggingSkills), 1);
-    },
     get: function(laggingSkillsId) {
-      for (var i = 0; i < laggingSkillss.length; i++) {
+      for (var i = 0; i < laggingSkills.length; i++) {
         if (laggingSkillss[i].id === parseInt(laggingSkillsId)) {
           return laggingSkillss[i];
         }
