@@ -102,7 +102,13 @@ angular.module('starter.services', [])
       },
       {name : "help_category_03", description : "The kid talked but I don’t know what to do with what s/he said", id:3,
         topics:[
-          {name: "topic_01", description: "Can you use Plan B with young kids?", id:"1"},
+          {name: "topic_01", description: "Are you confused?", id:"1"},
+          {name: "topic_02", description: "Need more information?", id:"2"},
+          {name: "topic_03", description: "The child said something that is different than I what observed?", id:"3"},
+          {name: "topic_04", description: "The child said some concerns but I think there are more!", id:"4"},
+          {name: "topic_05", description: "I’m not sure I’m done with Step 1", id:"5"},
+          {name: "topic_06", description: "I don’t know how to drill", id:"6"}
+
         ]
     }
   ];
