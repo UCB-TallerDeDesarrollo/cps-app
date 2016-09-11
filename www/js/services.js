@@ -80,7 +80,7 @@ angular.module('starter.services', [])
   // First Step help categories and data
 
   var helpCategoriesForStep1 = [
-    {name : "help_category_01" , description : "The kid isn’t talking", id:1,
+    {name : "help_category_01" , description : "The kid isn’t talking", image: "category_1.png",id:1,
       topics: [
         {name: "topic_01", description: "Maybe the unsolved problem wasn’t free of challenging behavior, or it wasn’t specific, or it contained an adult theory, or it was 'clumped'?", id:"1"},
         {name: "topic_02", description: "Maybe you are using Emergency B (in the heat of the moment when the kid is already upset) instead of Proactive B?", id:"2"},
@@ -94,13 +94,13 @@ angular.module('starter.services', [])
       ]
     },
 
-      {name : "help_category_02", description : "My kid is too young to do CPS", id:2,
+      {name : "help_category_02", description : "My kid is too young to do CPS",image: "category_2.png", id:2,
         topics: [
           {name: "topic_01", description: "Solving Problems Collaboratively with Young Children:", id:"1"},
           {name: "topic_02", description: "Can you use Plan B with young kids?", id:"2"},
         ]
       },
-      {name : "help_category_03", description : "The kid talked but I don’t know what to do with what s/he said", id:3,
+      {name : "help_category_03", description : "The kid talked but I don’t know what to do with what s/he said", image: "category_3.png", id:3,
         topics:[
           {name: "topic_01", description: "Are you confused?", id:"1"},
           {name: "topic_02", description: "Need more information?", id:"2"},
