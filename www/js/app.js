@@ -84,7 +84,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-  
+
+  .state('app.helpCategoryTopics',{
+    url: '/helpCategoryTopics/:id_category',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/helpCategoryTopics.html',
+        controller: 'HelpCategoryTopicsCtrl'
+      }
+    }
+  })
+
   .state('app.laggingSkills', {
     url: '/laggingSkills',
     views: {

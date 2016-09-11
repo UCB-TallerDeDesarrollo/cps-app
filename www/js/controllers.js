@@ -54,8 +54,11 @@ angular.module('starter.controllers', [])
   $scope.params = $stateParams;
 })
 
+.controller('HelpCategoryTopicsCtrl', function($scope, HelpCategoriesStep1, $stateParams){
+  $scope.category = HelpCategoriesStep1.get($stateParams.id_category);
+})
+
 .controller('HelpCategoryCtrl', function($scope, HelpCategoriesStep1) {
-  console.log(HelpCategoriesStep1);
   $scope.helpCategories = HelpCategoriesStep1.all();
 })
 
