@@ -45,11 +45,6 @@ angular.module('starter.controllers', [])
   $scope.laggingSkills = LaggingSkills.all();
 })
 
-
-.controller('LaggingSkillCtrl', function($scope, $stateParams) {
-  $scope.params = $stateParams;
-})
-
 .controller('HelpCategoryCtrl', function($scope, $stateParams) {
   $scope.params = $stateParams;
 })
@@ -63,12 +58,17 @@ angular.module('starter.controllers', [])
 })
 
 .controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite) {
-$scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);
-  $scope.create_unsolved_problem = function() {
-    if (!input_field_is_empty($scope.description)) {
-      save_unsolved_problem($cordovaSQLite,$scope);
+  $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite);
+  $scope.shouldShowReorder = false;
+  $scope.moveItem = function(unsolvedProblem, fromIndex, toIndex) {
+    $scope.unsolvedProblems.splice(fromIndex, 1);
+    $scope.unsolvedProblems.splice(toIndex, 0, unsolvedProblem);
+  };
+  $scope.createUnsolvedProblem = function() {
+    if (!inputFieldIsEmpty($scope.description)) {
+      saveUnsolvedProblem($cordovaSQLite,$scope);
       $scope.description="";
-      $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);
+      $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite);
     }
   };
 })
@@ -93,9 +93,6 @@ $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);
    confirmPopup.then(function(res) {
      if(res) {
        $scope.delete(item);
-        console.log(item);
-     } else {
-       console.log('You are not sure');
      }
    });
  };
@@ -127,29 +124,27 @@ $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);
 
 // OTHER FUNCTIONS
 
-function get_unsolved_problems(cordovaSQLite) {
+function getUnsolvedProblems(cordovaSQLite) {
   var unsolved_problems = [];
   var query ="SELECT * FROM unsolved_problems";
   cordovaSQLite.execute(db,query).then(function(result) {
     var rows = result.rows;
-      if(rows.length) {
-        for(var i=0; i < rows.length; i++){
-          unsolved_problems.push(rows.item(i));
-        }
-      }else {
-        console.log("No data found");
+    if(rows.length) {
+      for(var i=0; i < rows.length; i++){
+        unsolved_problems.push(rows.item(i));
       }
+    }
     },function(error){
       console.log("error"+error);
     });
   return unsolved_problems;
 }
 
-function input_field_is_empty(description) {
+function inputFieldIsEmpty(description) {
     return description.length === 0;
 }
 
-function save_unsolved_problem(cordovaSQLite,scope){
+function saveUnsolvedProblem(cordovaSQLite,scope){
   var query ="INSERT INTO unsolved_problems(description,solved) VALUES (?,?)";
   cordovaSQLite.execute(db,query,[scope.description,0]);
 }

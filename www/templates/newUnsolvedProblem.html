@@ -1,12 +1,17 @@
 <ion-view view-title="Unsolved Problems">
   <ion-content class="padding" ng-controller="UnsolvedProblemCtrl">
-    <ion-list show-delete="false" can-swipe="true">
-      <ion-item class="item-text-wrap" ng-repeat="unsolvedProblem in unsolvedProblems">
+    <ion-list show-delete="false" can-swipe="true" show-reorder="shouldShowReorder">
+      <ion-item class="item-text-wrap item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems">
         {{unsolvedProblem.description}}
-        <a href="#/app/unsolvedProblems/edit/{{unsolvedProblem.id}}" class="button button-light icon ion-edit"></a>
-        <ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-assertive icon ion-trash-a" ng-click="showConfirm(unsolvedProblem)"> Delete </ion-option-button>
+        <a href="#/app/unsolvedProblems/edit/{{unsolvedProblem.id}}" class="button button-light icon ion-edit" ng-hide="{{shouldShowReorder}}"></a>
+        <ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-assertive ion-trash-a" ng-click="showConfirm(unsolvedProblem)">&nbsp;Delete </ion-option-button>
+        <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(unsolvedProblem, $fromIndex, $toIndex)"> </ion-reorder-button>
       </ion-item>
     </ion-list>
+    <div name="text-center reorder-button-wrapper" class="padding-top">
+      <button class="button button-small button-calm" ng-show="unsolvedProblems.length > 1 && !shouldShowReorder" ng-click="shouldShowReorder = true">Reorder</button>
+      <button class="button button-small button-balanced" ng-show="unsolvedProblems.length > 1 && shouldShowReorder" ng-click="shouldShowReorder = false">Done</button>
+    </div>
     <div class="text-center">
       <h4>Enter new unsolved problem</h4>
     </div>
@@ -19,7 +24,7 @@
        <ion-label stacked>Message</ion-label>
        <ion-textarea [(ngModel)]="description"></ion-textarea>
      </ion-item> -->
-     <button class="button button-block button-positive" ng-click="create_unsolved_problem()">Create</button>
+     <button class="button button-block button-positive" ng-click="createUnsolvedProblem()">Create</button>
     </form>
   </ion-content>
 </ion-view>
