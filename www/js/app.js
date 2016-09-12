@@ -95,6 +95,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('app.helpTopicContent', {
+    url: '/helpTopicContent/:id_category/:id_topic',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/helpTopicContent.html',
+        controller: 'HelpTopicContentCtrl'
+      }
+    }
+  })
+
   .state('app.laggingSkills', {
     url: '/laggingSkills',
     views: {

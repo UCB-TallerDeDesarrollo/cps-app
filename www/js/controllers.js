@@ -57,6 +57,10 @@ angular.module('starter.controllers', [])
   $scope.helpCategories = HelpCategoriesStep1.all();
 })
 
+.controller('HelpTopicContentCtrl', function($scope, HelpCategoriesStep1, $stateParams) {
+  $scope.topic = HelpCategoriesStep1.getContent($stateParams.id_category, $stateParams.id_topic);
+})
+
 .controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite) {
   $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite);
   $scope.shouldShowReorder = false;
