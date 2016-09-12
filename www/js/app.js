@@ -23,7 +23,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
-    DataSeed.deleteSeed($cordovaSQLite, db);
     DataSeed.seed($cordovaSQLite, db);
   });
 })
@@ -108,4 +107,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/laggingSkills');
   $urlRouterProvider.otherwise('/app/helpCategories');
+})
+
+.filter('orderObjectBy', function() {
+  return function(items, field) {
+    var filtered = [];
+    angular.forEach(items, function(item) {
+      filtered.push(item);
+    });
+    filtered.sort(function (a, b) {
+      return (a[field] > b[field] ? 1 : -1);
+    });
+  };
 });

@@ -61,8 +61,16 @@ angular.module('starter.controllers', [])
   $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite);
   $scope.shouldShowReorder = false;
   $scope.moveItem = function(unsolvedProblem, fromIndex, toIndex) {
+    var timestampAuxiliary = $scope.unsolvedProblems[fromIndex].sort_timestamp;
+    $scope.unsolvedProblems[fromIndex].sort_timestamp = $scope.unsolvedProblems[toIndex].sort_timestamp;
+    $scope.unsolvedProblems[toIndex].sort_timestamp = timestampAuxiliary;
+    updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[fromIndex].description, $scope.unsolvedProblems[fromIndex].sort_timestamp, $scope.unsolvedProblems[fromIndex].id]);
+    updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[toIndex].description, $scope.unsolvedProblems[toIndex].sort_timestamp, $scope.unsolvedProblems[toIndex].id]);
     $scope.unsolvedProblems.splice(fromIndex, 1);
     $scope.unsolvedProblems.splice(toIndex, 0, unsolvedProblem);
+    $scope.unsolvedProblems.sort(function (a, b) {
+      return (a.sort_timestamp > b.sort_timestamp ? 1 : -1);
+    });
   };
   $scope.createUnsolvedProblem = function() {
     if (!inputFieldIsEmpty($scope.description)) {
@@ -109,16 +117,15 @@ angular.module('starter.controllers', [])
   $scope.find = function(item) {
     var query ="SELECT * FROM unsolved_problems where id = ?";
     $cordovaSQLite.execute(db,query,[$scope.item.id]).then(function(result){
-    $scope.itemf = result.rows.item(0);
-    $scope.item.description = $scope.itemf.description;
-    $scope.description = $scope.item.description;
-  });
+      $scope.itemf = result.rows.item(0);
+      $scope.item.description = $scope.itemf.description;
+      $scope.description = $scope.item.description;
+    });
   };
 
-  $scope.saveUnsolvedProblem = function(){
-      var query ="UPDATE unsolved_problems SET description = ? where id = ?";
-      $cordovaSQLite.execute(db,query,[$scope.description,$scope.item.id]);
-      $state.go('app.newUnsolvedProblem');
+  $scope.updateUnsolvedProblem = function(){
+    updateUnsolvedProblem($cordovaSQLite, [$scope.description,$scope.item.id]);
+    $state.go('app.newUnsolvedProblem');
   };
 });
 
@@ -126,7 +133,7 @@ angular.module('starter.controllers', [])
 
 function getUnsolvedProblems(cordovaSQLite) {
   var unsolved_problems = [];
-  var query ="SELECT * FROM unsolved_problems";
+  var query ="SELECT * FROM unsolved_problems ORDER BY sort_timestamp";
   cordovaSQLite.execute(db,query).then(function(result) {
     var rows = result.rows;
     if(rows.length) {
@@ -134,8 +141,8 @@ function getUnsolvedProblems(cordovaSQLite) {
         unsolved_problems.push(rows.item(i));
       }
     }
-    },function(error){
-      console.log("error"+error);
+    },function(err){
+      console.log(err.message);
     });
   return unsolved_problems;
 }
@@ -147,4 +154,9 @@ function inputFieldIsEmpty(description) {
 function saveUnsolvedProblem(cordovaSQLite,scope){
   var query ="INSERT INTO unsolved_problems(description,solved) VALUES (?,?)";
   cordovaSQLite.execute(db,query,[scope.description,0]);
+}
+
+function updateUnsolvedProblem($cordovaSQLite, params){
+  var query ="UPDATE unsolved_problems SET description = ?, sort_timestamp = ? where id = ?";
+    $cordovaSQLite.execute(db, query, params);
 }
