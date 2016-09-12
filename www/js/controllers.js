@@ -63,10 +63,10 @@ angular.module('starter.controllers', [])
 })
 
 .controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite) {
-$scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);;
+$scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);
   $scope.create_unsolved_problem = function() {
     if (!input_field_is_empty($scope.description)) {
-      save_unsolved_problem($cordovaSQLite,$scope)
+      save_unsolved_problem($cordovaSQLite,$scope);
       $scope.description="";
       $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);
     }
@@ -82,7 +82,7 @@ $scope.unsolvedProblems = get_unsolved_problems($cordovaSQLite);;
     }, function (err) {
         console.error(err);
     });
- }
+ };
 
  $scope.showConfirm = function(item) {
    var confirmPopup = $ionicPopup.confirm({
