@@ -83,12 +83,20 @@ angular.module('starter.services', [])
     {name : "help_category_01" , description : "The kid isn’t talking", image: "category_1.png",id:1,
       topics: [
         {name: "topic_01", description: "Maybe the unsolved problem wasn’t free of challenging behavior, or it wasn’t specific, or it contained an adult theory, or it was 'clumped'?", id:"1"},
-        {name: "topic_02", description: "Maybe you are using Emergency B (in the heat of the moment when the kid is already upset) instead of Proactive B?", id:"2"},
+        {name: "topic_02", description: "Maybe you are using Emergency B (in the heat of the moment when the kid is already upset) instead of Proactive B?", id:"2",
+          contents: [
+            {name: "content_01", description: "Make an appointment", id:"1"},
+            {name: "content_02", description: "What's the best thing to do in the heat of the moment", id:"2"},
+            {name: "content_03", description: "What to do when your child is in the midst of an outburst", id:"3"}
+          ]
+        },
         {name: "topic_03", description: "Maybe you are using Plan A?", id:"3"},
         {name: "topic_04", description: "Maybe s/he really doesn’t know/hasn’t been asked about this before", id:"4"},
         {name: "topic_05", description: "Maybe s/he needs the problem broken down into its component parts:", id:"5"},
         {name: "topic_06", description: "Maybe s/he needs time to think", id:"6"},
-        {name: "topic_07", description: "Maybe s/he doesn’t have the words to tell you", id:"7"},
+        {name: "topic_07", description: "Maybe s/he doesn’t have the words to tell you", id:"7",
+          contents: [{name: "content_01", description: "Give your kid the fingers", id:"1"}]
+        },
         {name: "topic_08", description: "My kid won’t talk to me", id:"8"},
         {name: "topic_09", description: "Talking about talking", id:"9"}
       ]
@@ -102,8 +110,16 @@ angular.module('starter.services', [])
       },
       {name : "help_category_03", description : "The kid talked but I don’t know what to do with what s/he said", image: "category_3.png", id:3,
         topics:[
-          {name: "topic_01", description: "Are you confused?", id:"1"},
-          {name: "topic_02", description: "Need more information?", id:"2"},
+          {name: "topic_01", description: "Are you confused?", id:"1",
+            contents: [
+              {name: "content_01", description: "Use REFLECTIVE LISTENING AND CLARIFYING STATEMENTS - Reflective listening basically involves mirroring what a child has said and then encouraging him/her to provide additional information by saying one of the following: • “How so?” • “I don’t quite understand” • “I’m confused” • “Can you say more about that?” • “What do you mean?” Reflective listening is your “default” drilling strategy…if you aren’t sure of which strategy to use or what to say next, use this strategy.", id:"1"}
+            ]
+          },
+          {name: "topic_02", description: "Need more information?", id:"2",
+            contents: [
+              {name: "content_01", description: "ASK ABOUT THE WHO, WHAT, WHERE/WHEN OF THE UNSOLVED PROBLEM EXAMPLES: • “Who was making fun of your clothes?” • “What’s getting the way of completing the science project?”• “Where is Eddie bossing you around?”", id:"1"},
+              {name: "content_02", description: "ASK ABOUT WHY THE PROBLEM OCCURS UNDER SOME CONDITIONS AND NOT OTHERS EXAMPLE: “You seem to be doing really well in your work group in math…but not so well in your work group in social studies…what’s getting in the way in social studies?”", id:"2"}]
+          },
           {name: "topic_03", description: "The child said something that is different than I what observed?", id:"3"},
           {name: "topic_04", description: "The child said some concerns but I think there are more!", id:"4"},
           {name: "topic_05", description: "I’m not sure I’m done with Step 1", id:"5"},
@@ -126,6 +142,19 @@ angular.module('starter.services', [])
         }
       }
       return null;
-    }
+    },
+
+    getContent: function(helpCategoriesForStep1Id, contentForTopicsId) {
+      for (var i = 0; i < helpCategoriesForStep1.length; i++) {
+        if (helpCategoriesForStep1[i].id === parseInt(helpCategoriesForStep1Id)) {
+          var category = helpCategoriesForStep1[i].topics;
+          for (var j = 1; j < category.length; j++) {
+            if (category[j].id === contentForTopicsId)
+              return category[j];
+          }
+        }
+      }
+      return null;
+    },
   };
 });
