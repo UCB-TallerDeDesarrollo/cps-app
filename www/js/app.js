@@ -30,7 +30,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
@@ -54,12 +54,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       }
     })
-  .state('app.laggingSkills', {
-    url: '/laggingSkills',
+
+  .state('app.editUnsolvedProblem', {
+    url: '/unsolvedProblems/edit/:itemId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/laggingSkills.html',
-        controller: 'LaggingSkillsCtrl'
+        templateUrl: 'templates/editUnsolvedProblem.html',
+        controller: 'EditUnsolvedProblemCtrl'
       }
     }
   })
@@ -72,7 +73,38 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           controller: 'UnsolvedProblemCtrl'
         }
       }
+  })
+
+  .state('app.helpCategories',{
+    url: '/helpCategories',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/helpCategories.html',
+        controller: 'HelpCategoryCtrl'
+      }
+    }
+  })
+
+  .state('app.helpCategoryTopics',{
+    url: '/helpCategoryTopics/:id_category',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/helpCategoryTopics.html',
+        controller: 'HelpCategoryTopicsCtrl'
+      }
+    }
+  })
+
+  .state('app.laggingSkills', {
+    url: '/laggingSkills',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/laggingSkills.html',
+        controller: 'LaggingSkillsCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/laggingSkills');
+  $urlRouterProvider.otherwise('/app/helpCategories');
 });

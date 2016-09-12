@@ -1,8 +1,10 @@
 <ion-view view-title="Unsolved Problems">
   <ion-content class="padding" ng-controller="UnsolvedProblemCtrl">
-    <ion-list>
+    <ion-list show-delete="false" can-swipe="true">
       <ion-item class="item-text-wrap" ng-repeat="unsolvedProblem in unsolvedProblems">
         {{unsolvedProblem.description}}
+        <a href="#/app/unsolvedProblems/edit/{{unsolvedProblem.id}}" class="button button-light icon ion-edit"></a>
+        <ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-assertive icon ion-trash-a" ng-click="showConfirm(unsolvedProblem)"> Delete </ion-option-button>
       </ion-item>
     </ion-list>
     <div class="text-center">
@@ -17,7 +19,7 @@
        <ion-label stacked>Message</ion-label>
        <ion-textarea [(ngModel)]="description"></ion-textarea>
      </ion-item> -->
-     <button class="button button-block button-positive" ng-click="createUnsolvedProblem()">Create</button>
+     <button class="button button-block button-positive" ng-click="create_unsolved_problem()">Create</button>
     </form>
   </ion-content>
 </ion-view>

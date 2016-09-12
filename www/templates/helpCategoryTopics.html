@@ -1,0 +1,10 @@
+<ion-view view-title="{{category.description}}">
+  <ion-content>
+    <div class="list">
+      <a class="item item-text-wrap" href="#/app/helpCategoryTopics/{{category.id}}" ng-repeat="topic in category.topics">
+        <h3>{{topic.description}}</h3>
+      </a>
+    </div>
+
+  </ion-content>
+</ion-view>
