@@ -161,6 +161,12 @@ function saveUnsolvedProblem(cordovaSQLite,scope){
 }
 
 function updateUnsolvedProblem($cordovaSQLite, params){
-  var query ="UPDATE unsolved_problems SET description = ?, sort_timestamp = ? where id = ?";
-    $cordovaSQLite.execute(db, query, params);
+  var query = "";
+  if(params.length > 2){
+    query = "UPDATE unsolved_problems SET description = ?, sort_timestamp = ? where id = ?";
+  }
+  else{
+    query = "UPDATE unsolved_problems SET description = ? where id = ?";
+  }
+  $cordovaSQLite.execute(db, query, params);
 }
