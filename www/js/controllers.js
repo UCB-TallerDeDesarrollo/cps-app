@@ -91,9 +91,9 @@ angular.module('starter.controllers', [])
     });
   };
   $scope.createUnsolvedProblem = function() {
-    if (!inputFieldIsEmpty($scope.description)) {
-      saveUnsolvedProblem($cordovaSQLite,$scope);
-      $scope.description="";
+    if (!inputFieldIsEmpty($scope.unsolvedProblem.description)) {
+      saveUnsolvedProblem($cordovaSQLite,$scope.unsolvedProblem);
+      $scope.unsolvedProblem = {};
       $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite);
     }
   };
@@ -191,9 +191,9 @@ function inputFieldIsEmpty(description) {
     return description.length === 0;
 }
 
-function saveUnsolvedProblem(cordovaSQLite,scope){
+function saveUnsolvedProblem(cordovaSQLite,unsolvedProblem){
   var query ="INSERT INTO unsolved_problems(description,solved) VALUES (?,?)";
-  cordovaSQLite.execute(db,query,[scope.description,0]);
+  cordovaSQLite.execute(db,query,[unsolvedProblem.description,0]);
 }
 
 function updateUnsolvedProblem($cordovaSQLite, params){
