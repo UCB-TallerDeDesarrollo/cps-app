@@ -2,11 +2,18 @@
   <ion-content>
     <ion-list>
       <ion-item class="item item-text-wrap item-icon-right" ng-repeat="laggingSkill in laggingSkills">
-        <p>{{laggingSkill.description}}</p>
+          <div class="positive" ng-if="laggingSkill.checked">
+            {{laggingSkill.description}}
+          </div>
+          <div class="dark" ng-if="!laggingSkill.checked">
+            {{laggingSkill.description}}
+          </div>
           <a href="#/app/unsolvedProblems/new">
-            <i class="icon ion-chevron-right"></i>
+            <i class="icon dark ion-chevron-right" ng-if="!laggingSkill.checked"></i>
+            <i class="icon positive ion-chevron-right" ng-if="laggingSkill.checked"></i>
           </a>
-        <ion-option-button class="button-positive ion-star" ng-click="showConfirm(unsolvedProblem)">&nbsp;Favorite </ion-option-button>
+        <ion-option-button class="button-positive ion-checkmark" ng-click="checkLaggingSkill({{laggingSkill.id}})" ng-if="!laggingSkill.checked">&nbsp;Check </ion-option-button>
+        <ion-option-button class="button-dark ion-checkmark" ng-click="uncheckLaggingSkill({{laggingSkill.id}})" ng-if="laggingSkill.checked">&nbsp;Uncheck </ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>

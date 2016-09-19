@@ -41,8 +41,21 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('LaggingSkillsCtrl', function($scope, LaggingSkills) {
+.controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate) {
+  //$scope.laggingSkills = getLaggingSkills($cordovaSQLite);
   $scope.laggingSkills = LaggingSkills.all();
+  $scope.checkLaggingSkill = function(laggingskillId){
+    //updateLaggingSkill($cordovaSQLite, [laggingskillId]);
+    LaggingSkills.check(laggingskillId);
+    $state.go('app.laggingSkills');
+    $ionicListDelegate.closeOptionButtons();
+  };
+  $scope.uncheckLaggingSkill = function(laggingskillId){
+    //updateLaggingSkill($cordovaSQLite, [laggingskillId]);
+    LaggingSkills.uncheck(laggingskillId);
+    $state.go('app.laggingSkills');
+    $ionicListDelegate.closeOptionButtons();
+  };
 })
 
 .controller('HelpCategoryCtrl', function($scope, $stateParams) {
@@ -159,6 +172,21 @@ function getUnsolvedProblems(cordovaSQLite) {
   return unsolved_problems;
 }
 
+function getLaggingSkills(cordovaSQLite){
+  var lagging_skills = [];
+  var query ="SELECT * FROM lagging_skills ORDER BY id";
+  cordovaSQLite.execute(db,query).then(function(result) {
+    var rows = result.rows;
+    if(rows.length) {
+      for(var i=0; i < rows.length; i++){
+        lagging_skills.push(rows.item(i));
+      }
+    }
+    },function(err){
+      console.log(err.message);
+    });
+  return lagging_skills;
+}
 function inputFieldIsEmpty(description) {
     return description.length === 0;
 }
@@ -177,4 +205,9 @@ function updateUnsolvedProblem($cordovaSQLite, params){
     query = "UPDATE unsolved_problems SET description = ? where id = ?";
   }
   $cordovaSQLite.execute(db, query, params);
+}
+
+function updateLaggingSkill($cordovaSQLite, params){
+  var query = "UPDATE lagging_skills SET checked = 1 where id = ?";
+  $cordovaSQLite.execute(db,query,params);
 }
