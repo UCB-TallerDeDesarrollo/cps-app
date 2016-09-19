@@ -2,10 +2,11 @@
   <ion-content>
     <ion-list>
       <ion-item class="item item-text-wrap item-icon-right" ng-repeat="laggingSkill in laggingSkills">
-        {{laggingSkill.description}}
+        <p>{{laggingSkill.description}}</p>
           <a href="#/app/unsolvedProblems/new">
             <i class="icon ion-chevron-right"></i>
           </a>
+        <ion-option-button class="button-positive ion-star" ng-click="showConfirm(unsolvedProblem)">&nbsp;Favorite </ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>

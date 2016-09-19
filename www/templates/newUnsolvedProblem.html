@@ -2,7 +2,7 @@
   <ion-content class="padding" ng-controller="UnsolvedProblemCtrl">
     <ion-list show-delete="false" can-swipe="true" show-reorder="shouldShowReorder">
       <ion-item class="item-text-wrap item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems">
-        {{unsolvedProblem.description}}
+        <p>{{unsolvedProblem.description}}</p>
         <a href="#/app/unsolvedProblems/edit/{{unsolvedProblem.id}}" class="button button-light icon ion-edit" ng-hide="{{shouldShowReorder}}"></a>
         <ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-assertive ion-trash-a" ng-click="showConfirm(unsolvedProblem)">&nbsp;Delete </ion-option-button>
         <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(unsolvedProblem, $fromIndex, $toIndex)"> </ion-reorder-button>
@@ -30,7 +30,8 @@
        <ion-label stacked>Message</ion-label>
        <ion-textarea [(ngModel)]="description"></ion-textarea>
      </ion-item> -->
-     <button class="button button-block button-positive" ng-click="createUnsolvedProblem()">Create</button>
+     <button class="button button-block button-positive" ng-click="createUnsolvedProblem()" ng-if="!description" disabled="true">Create</button>
+     <button class="button button-block button-positive" ng-click="createUnsolvedProblem()" ng-if="description.length > 0">Create</button>
 
     </form>
   </ion-content>
