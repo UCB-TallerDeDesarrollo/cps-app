@@ -126,25 +126,25 @@ angular.module('starter.controllers', [])
 
 
 .controller('EditUnsolvedProblemCtrl', function($scope, $cordovaSQLite, $state){
-  $scope.item = {
+  $scope.unsolvedProblem = {
       description: "",
       id:$state.params.itemId
     };
 
   $scope.emptyInput = false;
 
-  $scope.find = function(item) {
+  $scope.find = function(unsolvedProblem) {
+    console.log($scope);
     var query ="SELECT * FROM unsolved_problems where id = ?";
-    $cordovaSQLite.execute(db,query,[$scope.item.id]).then(function(result){
+    $cordovaSQLite.execute(db,query,[$scope.unsolvedProblem.id]).then(function(result){
       $scope.itemf = result.rows.item(0);
-      $scope.item.description = $scope.itemf.description;
-      $scope.description = $scope.item.description;
+      $scope.unsolvedProblem.description = $scope.itemf.description;
     });
   };
 
   $scope.updateUnsolvedProblem = function(){
-    if (!inputFieldIsEmpty($scope.description)) {
-      updateUnsolvedProblem($cordovaSQLite, [$scope.description,$scope.item.id]);
+    if (!inputFieldIsEmpty($scope.unsolvedProblem.description)) {
+      updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblem.description,$scope.unsolvedProblem.id]);
       $state.go('app.newUnsolvedProblem');
     }
     else {
