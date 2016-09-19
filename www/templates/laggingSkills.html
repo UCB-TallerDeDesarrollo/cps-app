@@ -12,8 +12,8 @@
             <i class="icon dark ion-chevron-right" ng-if="!laggingSkill.checked"></i>
             <i class="icon positive ion-chevron-right" ng-if="laggingSkill.checked"></i>
           </a>
-        <ion-option-button class="button-positive ion-close" ng-click="checkLaggingSkill({{laggingSkill.id}})" ng-if="!laggingSkill.checked">&nbsp;Check </ion-option-button>
-        <ion-option-button class="button-dark ion-checkmark" ng-click="uncheckLaggingSkill({{laggingSkill.id}})" ng-if="laggingSkill.checked">&nbsp;Uncheck </ion-option-button>
+        <ion-option-button class="button-positive ion-checkmark" ng-click="checkLaggingSkill({{laggingSkill.id}})" ng-if="!laggingSkill.checked">&nbsp;Check </ion-option-button>
+        <ion-option-button class="button-dark ion-close" ng-click="uncheckLaggingSkill({{laggingSkill.id}})" ng-if="laggingSkill.checked">&nbsp;Uncheck </ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>
