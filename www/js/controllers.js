@@ -58,6 +58,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('HelpTopicContentCtrl', function($scope, HelpCategoriesStep1, $stateParams) {
+  console.log(HelpCategoriesStep1.getContent($stateParams.id_category, $stateParams.id_topic));
   $scope.topic = HelpCategoriesStep1.getContent($stateParams.id_category, $stateParams.id_topic);
 })
 

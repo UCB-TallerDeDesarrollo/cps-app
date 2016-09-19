@@ -2,13 +2,17 @@
   <ion-content>
     <div class="list">
       <div ng-repeat="topic in category.topics">
-          <a class="item item-text-wrap item-icon-right" href="#/app/helpTopicContent/{{category.id}}/{{topic.id}}" ng-if="topic.contents.length > 0">
+          <a class="item item-text-wrap item-icon-right" href="#/app/helpTopicContent/{{category.id}}/{{topic.id}}" ng-if="topic.contents.length > 0 && !topic.link">
             <i class="icon ion-chevron-right"></i>
             <h3>{{topic.description}}</h3>
           </a>
-          <div class="item item-text-wrap item-icon-right" ng-if="!topic.contents">
+          <div class="item item-text-wrap item-icon-right" ng-if="!topic.contents && !topic.link">
             <h3>{{topic.description}}</h3>
           </div>
+          <a class="item item-text-wrap item-icon-right" href="{{topic.link}}" ng-if="(topic.link == null) && (!topic.contents)">
+            <i class="icon ion-chevron-right"></i>
+            <h3>{{topic.description}}</h3>
+          </a>
       </div>
 
     </div>
