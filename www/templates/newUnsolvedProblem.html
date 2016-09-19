@@ -15,6 +15,12 @@
     <div class="text-center">
       <h4>Enter new unsolved problem</h4>
     </div>
+    <div class="list card" ng-if="description.length == 0">
+      <a class="item item-icon-left assertive">
+        <i class="icon ion-alert"></i>
+        You cannot save an empty unsolved problem.
+      </a>
+    </div>
     <form>
      <label class="item item-input">
        <textarea rows=5 placeholder="Type a new unsolved problem here" ng-model="description">
@@ -25,6 +31,7 @@
        <ion-textarea [(ngModel)]="description"></ion-textarea>
      </ion-item> -->
      <button class="button button-block button-positive" ng-click="createUnsolvedProblem()">Create</button>
+
     </form>
   </ion-content>
 </ion-view>

@@ -58,11 +58,11 @@ angular.module('starter.controllers', [])
 })
 
 .controller('HelpTopicContentCtrl', function($scope, HelpCategoriesStep1, $stateParams) {
-  console.log(HelpCategoriesStep1.getContent($stateParams.id_category, $stateParams.id_topic));
   $scope.topic = HelpCategoriesStep1.getContent($stateParams.id_category, $stateParams.id_topic);
 })
 
 .controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite) {
+  if(!$scope.emptyInput) {$scope.emptyInput = false; console.log("no deberia llegar acá");}
   $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite);
   $scope.shouldShowReorder = false;
   $scope.moveItem = function(unsolvedProblem, fromIndex, toIndex) {
@@ -118,6 +118,7 @@ angular.module('starter.controllers', [])
       id:$state.params.itemId
     };
 
+  $scope.emptyInput = false;
 
   $scope.find = function(item) {
     var query ="SELECT * FROM unsolved_problems where id = ?";
@@ -129,8 +130,14 @@ angular.module('starter.controllers', [])
   };
 
   $scope.updateUnsolvedProblem = function(){
-    updateUnsolvedProblem($cordovaSQLite, [$scope.description,$scope.item.id]);
-    $state.go('app.newUnsolvedProblem');
+    if (!inputFieldIsEmpty($scope.description)) {
+      updateUnsolvedProblem($cordovaSQLite, [$scope.description,$scope.item.id]);
+      $state.go('app.newUnsolvedProblem');
+    }
+    else {
+      $scope.emptyInput = true;
+    }
+
   };
 });
 
