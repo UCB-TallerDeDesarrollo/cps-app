@@ -92,7 +92,9 @@ angular.module('starter.services', ['ngCordova'])
         {name: "topic_05", description: "Maybe s/he needs the problem broken down into its component parts:", id:"5"},
         {name: "topic_06", description: "Maybe s/he needs time to think", id:"6"},
         {name: "topic_07", description: "Maybe s/he doesn’t have the words to tell you", id:"7",
-          contents: [{name: "content_01", description: "Give your kid the fingers", id:"1"}]
+          contents: [
+            {name: "content_01", description: "Give your kid the fingers", id:"1"}
+          ]
         },
         {name: "topic_08", description: "My kid won’t talk to me", id:"8"},
         {name: "topic_09", description: "Talking about talking", id:"9"}

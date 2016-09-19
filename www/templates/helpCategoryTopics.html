@@ -1,10 +1,16 @@
 <ion-view view-title="{{category.description}}">
   <ion-content>
     <div class="list">
-      <a class="item item-text-wrap item-icon-right" href="#/app/helpTopicContent/{{category.id}}/{{topic.id}}" ng-repeat="topic in category.topics">
-        <h3>{{topic.description}}</h3>
-        <i class="icon ion-chevron-right"></i>
-      </a>
+      <div ng-repeat="topic in category.topics">
+          <a class="item item-text-wrap item-icon-right" href="#/app/helpTopicContent/{{category.id}}/{{topic.id}}" ng-if="topic.contents.length > 0">
+            <i class="icon ion-chevron-right"></i>
+            <h3>{{topic.description}}</h3>
+          </a>
+          <div class="item item-text-wrap item-icon-right" ng-if="!topic.contents">
+            <h3>{{topic.description}}</h3>
+          </div>
+      </div>
+
     </div>
 
   </ion-content>
