@@ -74,8 +74,7 @@ angular.module('starter.controllers', [])
   $scope.topic = HelpCategoriesStep1.getContent($stateParams.id_category, $stateParams.id_topic);
 })
 
-.controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite) {
-  if(!$scope.emptyInput) {$scope.emptyInput = false; console.log("no deberia llegar acá");}
+.controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite, $state) {
   $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite);
   $scope.shouldShowReorder = false;
   $scope.moveItem = function(unsolvedProblem, fromIndex, toIndex) {
@@ -96,6 +95,10 @@ angular.module('starter.controllers', [])
       $scope.unsolvedProblem = {};
       $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite);
     }
+  };
+
+  $scope.openUnsolvedProblem = function(unsolvedProblem){
+    $state.go('app.showUnsolvedProblem',{ itemId: unsolvedProblem.id});
   };
 })
 
@@ -130,9 +133,7 @@ angular.module('starter.controllers', [])
       description: "",
       id:$state.params.itemId
     };
-
   $scope.emptyInput = false;
-
   $scope.find = function(unsolvedProblem) {
     console.log($scope);
     var query ="SELECT * FROM unsolved_problems where id = ?";
