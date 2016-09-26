@@ -1,4 +1,6 @@
 /* Empty. Add your own CSS if you like */
-.bar-subheader{
-  height: auto;
-}
+
+  .watchlist_menu {
+     float: right;
+     margin: 5px;
+  }

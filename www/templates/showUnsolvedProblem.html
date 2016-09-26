@@ -1,14 +1,41 @@
-<ion-view cache-view="false" ng-init = "find()" view-title="Empathy Step">
-  <ion-header class="bar bar-positive bar-subheader">
-    <div  align="center" class="subtitle text" style:"height: auto;">
-      {{unsolvedProblem.description}}
-    </div>
-  </ion-header>
-  <ion-content  class="padding has-header has-subheader has-tabs" ng-controller="EditUnsolvedProblemCtrl">
-    <ion-list can-swipe="true">
-      <ion-item class="item-text-wrap item-icon-right">
-        <p></p>
-      </ion-item>
+<ion-view cache-view="false" ng-init="find()" view-title="Empathy Step">
+  <div class="bar bar-subheader bar-positive">
+    <h2 class="title">Unsolved Problem #{{unsolvedProblem.id}}</h2>
+  </div>
+
+  <ion-content  ng-init="find()"  class=" has-subheader has-tabs" ng-controller="EditUnsolvedProblemCtrl">
+    <ion-list>
+      <div class="item item-divider item-text-wrap item-icon-right">
+        <p>{{unsolvedProblem.description}}</p>
+        <a ng-click="modal.show()" class="watchlist_menu item-button">
+          <i class="icon ion-plus"></i>
+        </a>
+      </div>
     </ion-list>
+    <div class="padding">
+      <ion-list  can-swipe="true">
+        <div class="item item-text-wrap" ng-repeat="childsConcern in childsConcerns">
+          {{unsolvedProblem.description}}
+        </div>
+      </ion-list>
+    </div>
+
+    <script id="my-modal.html" type="text/ng-template">
+      <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title" style="left: 67px; right: 67px;">New child's concern</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+          <div class="list">
+            <label class="item item-input">
+              <textarea rows=5 placeholder="Type a new child's concern here." ng-model="childsConcernDescription">
+              </textarea>
+            </label>
+            <button class="button button-full button-positive" ng-click="createContact(childsConcernDescription)">Create</button>
+          </div>
+        </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
+      </ion-modal-view>
+    </script>
   </ion-content>
 </ion-view>
