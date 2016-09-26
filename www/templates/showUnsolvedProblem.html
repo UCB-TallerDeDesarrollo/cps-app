@@ -13,16 +13,17 @@
       </div>
     </ion-list>
     <div ng-init="updateChildsConcerns()" class="padding">
-      <ion-list can-swipe="true">
+      <ion-list can-swipe="true" >
         <div align="center" class="item item-text-wrap list-title">
           <p><b>List of Child's Concerns</b></p>
         </div>
-        <div class="item item-text-wrap item-icon-right" ng-repeat="childsConcern in childsConcerns">
+        <ion-item class="item item-text-wrap item-icon-right" ng-repeat="childsConcern in childsConcerns">
           <p>{{childsConcern.description}}</p>
           <a ng-click="" class="watchlist_menu item-button">
             <i class="button button-light icon ion-edit"></i>
           </a>
-        </div>
+          <ion-option-button ng-click="" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
+        </ion-item>
         <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
           <p>No child's concern registered. Please register one above.</p>
         </div>
