@@ -12,10 +12,10 @@
         </a>
       </div>
     </ion-list>
-    <div class="padding">
-      <ion-list  can-swipe="true">
+    <div ng-init="updateChildsConcerns()" class="padding">
+      <ion-list can-swipe="true">
         <div class="item item-text-wrap" ng-repeat="childsConcern in childsConcerns">
-          {{unsolvedProblem.description}}
+          <p>{{childsConcern.description}}</p>
         </div>
       </ion-list>
     </div>
@@ -32,7 +32,7 @@
               <textarea rows=5 placeholder="Type a new child's concern here." ng-model="childsConcernDescription">
               </textarea>
             </label>
-            <button class="button button-full button-positive" ng-click="createContact(childsConcernDescription)">Create</button>
+            <button class="button button-full button-positive" ng-click="createChildsConcern(childsConcernDescription)">Create</button>
           </div>
         </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
       </ion-modal-view>

@@ -134,12 +134,17 @@ angular.module('starter.controllers', [])
       id:$state.params.itemId
     };
   $scope.emptyInput = false;
+
   $scope.find = function(unsolvedProblem) {
     var query ="SELECT * FROM unsolved_problems where id = ?";
     $cordovaSQLite.execute(db,query,[$scope.unsolvedProblem.id]).then(function(result){
       $scope.itemf = result.rows.item(0);
       $scope.unsolvedProblem.description = $scope.itemf.description;
     });
+  };
+
+  $scope.updateChildsConcerns = function(){
+    $scope.childsConcerns = getChildsConcern($cordovaSQLite, $state.params.itemId);
   };
 
   $scope.updateUnsolvedProblem = function(){
@@ -176,6 +181,13 @@ angular.module('starter.controllers', [])
   $scope.$on('modal.removed', function() {
     // Execute action
   });
+
+  $scope.createChildsConcern = function(childsConcern){
+    saveChildsConcern($cordovaSQLite,childsConcern,$state.params.itemId);
+    $scope.modal.hide();
+    $state.go('app.showUnsolvedProblem',{ itemId: $state.params.itemId});
+
+  };
 });
 
 // OTHER FUNCTIONS
@@ -218,6 +230,27 @@ function inputFieldIsEmpty(description) {
 function saveUnsolvedProblem(cordovaSQLite,unsolvedProblem){
   var query ="INSERT INTO unsolved_problems(description,solved) VALUES (?,?)";
   cordovaSQLite.execute(db,query,[unsolvedProblem.description,0]);
+}
+
+function saveChildsConcern(cordovaSQLite,childsConcern,unsolvedProblemId){
+  var query ="INSERT INTO childs_concerns(description,unsolved_problem_id) VALUES (?,?)";
+  cordovaSQLite.execute(db,query,[childsConcern,unsolvedProblemId]);
+}
+
+function getChildsConcern(cordovaSQLite,unsolvedProblemId){
+  var childs_concerns = [];
+  var query ="SELECT * FROM childs_concerns WHERE unsolved_problem_id = ?";
+  cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
+    var rows = result.rows;
+    if(rows.length) {
+      for(var i=0; i < rows.length; i++){
+        childs_concerns.push(rows.item(i));
+      }
+    }
+    },function(err){
+      console.log(err.message);
+    });
+  return childs_concerns;
 }
 
 function updateUnsolvedProblem($cordovaSQLite, params){
