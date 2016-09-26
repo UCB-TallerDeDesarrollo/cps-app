@@ -74,7 +74,7 @@ angular.module('starter.controllers', [])
   $scope.topic = HelpCategoriesStep1.getContent($stateParams.id_category, $stateParams.id_topic);
 })
 
-.controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite, $state) {
+.controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite, $state, $ionicActionSheet,$ionicListDelegate, $ionicPopup) {
   $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite);
   $scope.shouldShowReorder = false;
   $scope.moveItem = function(unsolvedProblem, fromIndex, toIndex) {
@@ -100,6 +100,60 @@ angular.module('starter.controllers', [])
   $scope.openUnsolvedProblem = function(unsolvedProblem){
     $state.go('app.showUnsolvedProblem',{ itemId: unsolvedProblem.id});
   };
+
+  $scope.showActionsheet = function(unsolvedProblem) {
+
+      $ionicActionSheet.show({
+        buttons: [
+          { text: 'Step 1: Empathy Step' },
+          { text: 'Step 2: Define the problem' },
+          { text: 'Step 3: Invitation step' }
+        ],
+        destructiveText: 'Delete',
+        cancelText: 'Cancel',
+        cancel: function() {
+          console.log('CANCELLED');
+          $ionicListDelegate.closeOptionButtons();
+        },
+        buttonClicked: function(index) {
+          if(index == 0){
+            $scope.openUnsolvedProblem(unsolvedProblem);
+          }
+          console.log('BUTTON CLICKED', index);
+          return true;
+        },
+        destructiveButtonClicked: function() {
+          $scope.showConfirm(unsolvedProblem);
+          $ionicListDelegate.closeOptionButtons();
+
+          return true;
+        }
+      });
+    };
+
+    $scope.delete = function(item) {
+        var query = "DELETE FROM unsolved_problems where id = ?";
+        console.log(item);
+        $cordovaSQLite.execute(db, query, [item.id]).then(function(res) {
+            $scope.unsolvedProblems.splice($scope.unsolvedProblems.indexOf(item), 1);
+        }, function (err) {
+            console.error(err);
+        });
+     };
+
+     $scope.showConfirm = function(item) {
+       var confirmPopup = $ionicPopup.confirm({
+         title: 'Delete Unsolved Problem',
+         template: 'Are you sure you want to delete this unsolved problem?'
+       });
+
+       confirmPopup.then(function(res) {
+         if(res) {
+           $scope.delete(item);
+         }
+       });
+     };
+
 })
 
 .controller('DeleteUnsolvedProblemCtrl', function($scope, $cordovaSQLite, $ionicPopup){
@@ -127,13 +181,10 @@ angular.module('starter.controllers', [])
  };
 })
 
-
-.controller('EditUnsolvedProblemCtrl', function($scope, $cordovaSQLite, $state, $ionicModal){
-  $scope.unsolvedProblem = {
-      description: "",
-      id:$state.params.itemId
-    };
-  $scope.emptyInput = false;
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup){
+  $scope.updateChildsConcerns = function(){
+    $scope.childsConcerns = getChildsConcern($cordovaSQLite, $state.params.itemId);
+  };
 
   $scope.find = function(unsolvedProblem) {
     var query ="SELECT * FROM unsolved_problems where id = ?";
@@ -141,20 +192,6 @@ angular.module('starter.controllers', [])
       $scope.itemf = result.rows.item(0);
       $scope.unsolvedProblem.description = $scope.itemf.description;
     });
-  };
-
-  $scope.updateChildsConcerns = function(){
-    $scope.childsConcerns = getChildsConcern($cordovaSQLite, $state.params.itemId);
-  };
-
-  $scope.updateUnsolvedProblem = function(){
-    if (!inputFieldIsEmpty($scope.unsolvedProblem.description)) {
-      updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblem.description,$scope.unsolvedProblem.id]);
-      $state.go('app.newUnsolvedProblem');
-    }
-    else {
-      $scope.emptyInput = true;
-    }
   };
 
   $ionicModal.fromTemplateUrl('my-modal.html', {
@@ -189,6 +226,55 @@ angular.module('starter.controllers', [])
     $scope.childsConcerns= getChildsConcern($cordovaSQLite,$state.params.itemId);
 
   };
+
+  $scope.deleteChildsConcern = function(item) {
+    var query = "DELETE FROM childs_concerns where id = ?";
+    $cordovaSQLite.execute(db, query, [item.id]).then(function(res) {
+        $scope.childsConcerns.splice($scope.childsConcerns.indexOf(item), 1);
+    }, function (err) {
+        console.error(err);
+    });
+ };
+
+ $scope.showConfirmChildsConcern = function(item) {
+   var confirmPopup = $ionicPopup.confirm({
+     title: "Delete Child's Concern",
+     template: "Are you sure you want to delete this child's concern?"
+   });
+
+   confirmPopup.then(function(res) {
+     if(res) {
+       $scope.deleteChildsConcern(item);
+     }
+   });
+ };
+})
+
+.controller('EditUnsolvedProblemCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup){
+  $scope.unsolvedProblem = {
+      description: "",
+      id:$state.params.itemId
+    };
+  $scope.emptyInput = false;
+
+  $scope.find = function(unsolvedProblem) {
+    var query ="SELECT * FROM unsolved_problems where id = ?";
+    $cordovaSQLite.execute(db,query,[$scope.unsolvedProblem.id]).then(function(result){
+      $scope.itemf = result.rows.item(0);
+      $scope.unsolvedProblem.description = $scope.itemf.description;
+    });
+  };
+
+  $scope.updateUnsolvedProblem = function(){
+    if (!inputFieldIsEmpty($scope.unsolvedProblem.description)) {
+      updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblem.description,$scope.unsolvedProblem.id]);
+      $state.go('app.newUnsolvedProblem');
+    }
+    else {
+      $scope.emptyInput = true;
+    }
+  };
+
 });
 
 // OTHER FUNCTIONS
