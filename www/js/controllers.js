@@ -186,6 +186,7 @@ angular.module('starter.controllers', [])
     saveChildsConcern($cordovaSQLite,childsConcern,$state.params.itemId);
     $scope.modal.hide();
     $state.go('app.showUnsolvedProblem',{ itemId: $state.params.itemId});
+    $scope.childsConcerns= getChildsConcern($cordovaSQLite,$state.params.itemId);
 
   };
 });
