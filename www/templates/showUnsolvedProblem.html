@@ -1,8 +1,13 @@
-<ion-view cache-view="false" view-title="Unsolved Problem">
-  <ion-content ng-init = "find()"  class="padding" ng-controller="EditUnsolvedProblemCtrl">
+<ion-view cache-view="false" ng-init = "find()" view-title="Empathy Step">
+  <ion-header class="bar bar-positive bar-subheader">
+    <div  align="center" class="subtitle text" style:"height: auto;">
+      {{unsolvedProblem.description}}
+    </div>
+  </ion-header>
+  <ion-content  class="padding has-header has-subheader has-tabs" ng-controller="EditUnsolvedProblemCtrl">
     <ion-list can-swipe="true">
       <ion-item class="item-text-wrap item-icon-right">
-        <p>{{unsolvedProblem.description}}</p>
+        <p></p>
       </ion-item>
     </ion-list>
   </ion-content>

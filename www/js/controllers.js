@@ -135,7 +135,6 @@ angular.module('starter.controllers', [])
     };
   $scope.emptyInput = false;
   $scope.find = function(unsolvedProblem) {
-    console.log($scope);
     var query ="SELECT * FROM unsolved_problems where id = ?";
     $cordovaSQLite.execute(db,query,[$scope.unsolvedProblem.id]).then(function(result){
       $scope.itemf = result.rows.item(0);

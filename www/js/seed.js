@@ -36,15 +36,21 @@ angular.module('starter.seed', [])
   function seedUnsolvedProblems($cordovaSQLite, db){
     $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS unsolved_problems (id integer primary key autoincrement, description text, solved boolean, sort_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
   }
+  function seedChildsConcerns($cordovaSQLite, db){
+    $cordovaSQLite.execute(db,"CREATE TABLE IF NOT EXISTS childs_concerns (id integer primary key autoincrement, description text, unsolved_problem_id integer, FOREIGN KEY (unsolved_problem_id) REFERENCES unsolved_problems (id))");
+  }
+
   return {
     seed: function($cordovaSQLite, db) {
       seedLaggingSkills($cordovaSQLite, db);
       seedUnsolvedProblems($cordovaSQLite, db);
+      seedChildsConcerns($cordovaSQLite,db);
       return;
     },
     deleteSeed: function($cordovaSQLite, db){
       $cordovaSQLite.execute(db, "DROP TABLE lagging_skills");
       $cordovaSQLite.execute(db, "DROP TABLE unsolved_problems");
+      $cordovaSQLite.execute(db, "DROP TABLE childs_concerns");
     }
   };
 });
