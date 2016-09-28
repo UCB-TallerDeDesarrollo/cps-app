@@ -20,7 +20,7 @@
         <div align="center" class="item item-text-wrap list-title">
           <p><b>List of Child's Concerns</b></p>
         </div>
-        <ion-item class="item item-text-wrap item-icon-right" ng-repeat="childsConcern in childsConcerns">
+        <ion-item class="item item-text-wrap item-icon-right" href="#/app/defineTheProblem/{{childsConcern.id}}" ng-repeat="childsConcern in childsConcerns">
           <p>{{childsConcern.description}}</p>
           <a ng-click="" class="watchlist_menu item-button">
             <i class="button button-light icon ion-edit"></i>
