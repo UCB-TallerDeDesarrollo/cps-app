@@ -98,7 +98,7 @@ angular.module('starter.controllers', [])
   };
 
   $scope.openUnsolvedProblem = function(unsolvedProblem){
-    $state.go('app.showUnsolvedProblem',{ itemId: unsolvedProblem.id});
+    $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: unsolvedProblem.id});
   };
 
   $scope.showActionsheet = function(unsolvedProblem) {
@@ -116,7 +116,7 @@ angular.module('starter.controllers', [])
           $ionicListDelegate.closeOptionButtons();
         },
         buttonClicked: function(index) {
-          if(index == 0){
+          if(index === 0){
             $scope.openUnsolvedProblem(unsolvedProblem);
           }
           console.log('BUTTON CLICKED', index);
@@ -181,14 +181,16 @@ angular.module('starter.controllers', [])
  };
 })
 
-.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup){
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams){
+  $scope.unsolvedProblem = {};
+  $scope.unsolvedProblem.id = $stateParams.unsolvedProblemId;
   $scope.updateChildsConcerns = function(){
     $scope.childsConcerns = getChildsConcern($cordovaSQLite, $state.params.itemId);
   };
 
-  $scope.find = function(unsolvedProblem) {
-    var query ="SELECT * FROM unsolved_problems where id = ?";
-    $cordovaSQLite.execute(db,query,[$scope.unsolvedProblem.id]).then(function(result){
+  $scope.findUnsolvedProblem = function(unsolvedProblem) {
+    var query ="SELECT * FROM unsolved_problems where id = ?;";
+    $cordovaSQLite.execute(db,query,[unsolvedProblem.id]).then(function(result){
       $scope.itemf = result.rows.item(0);
       $scope.unsolvedProblem.description = $scope.itemf.description;
     });
@@ -250,10 +252,10 @@ angular.module('starter.controllers', [])
  };
 })
 
-.controller('EditUnsolvedProblemCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup){
+.controller('EditUnsolvedProblemCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams){
   $scope.unsolvedProblem = {
       description: "",
-      id:$state.params.itemId
+      id:$stateParams.unsolvedProblemId
     };
   $scope.emptyInput = false;
 

@@ -4,3 +4,7 @@
      float: right;
      margin: 5px;
   }
+
+.no-text-decoration {
+  text-decoration: none;
+}

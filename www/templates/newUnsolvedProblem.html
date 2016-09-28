@@ -2,7 +2,7 @@
   <ion-content class="padding" ng-controller="UnsolvedProblemCtrl">
     <ion-list show-delete="false" can-swipe="true" show-reorder="shouldShowReorder">
       <ion-item class="item-text-wrap item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems">
-        <p ng-click="openUnsolvedProblem(unsolvedProblem)">{{unsolvedProblem.description}}</p>
+        <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration"><p>{{unsolvedProblem.description}}</p></a>
         <a href="#/app/unsolvedProblems/edit/{{unsolvedProblem.id}}" class="button button-light icon ion-edit" ng-hide="{{shouldShowReorder}}"></a>
         <ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-positive ion-more" ng-click="showActionsheet(unsolvedProblem)">&nbsp;More </ion-option-button>
         <!--ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-assertive ion-trash-a" ng-click="showConfirm(unsolvedProblem)">&nbsp;Delete </ion-option-button-->

@@ -56,7 +56,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     })
 
   .state('app.editUnsolvedProblem', {
-    url: '/unsolvedProblems/edit/:itemId',
+    url: '/unsolvedProblems/edit/:unsolvedProblemId',
     views: {
       'menuContent': {
         templateUrl: 'templates/editUnsolvedProblem.html',
@@ -66,7 +66,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   })
 
   .state('app.showUnsolvedProblem', {
-    url: '/unsolvedProblem/show/:itemId',
+    url: '/unsolvedProblem/show/:unsolvedProblemId',
     views: {
       'menuContent': {
         templateUrl: 'templates/showUnsolvedProblem.html',
@@ -74,7 +74,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-  
+
 
   .state('app.newUnsolvedProblem', {
       url: '/unsolvedProblems/new',
