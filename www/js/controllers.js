@@ -105,6 +105,10 @@ angular.module('starter.controllers', [])
     $state.go('app.showUnsolvedProblem',{ itemId: unsolvedProblem.id});
   };
 
+  $scope.openStep2 = function(unsolvedProblem){
+    $state.go('app.defineTheProblem',{ itemId: unsolvedProblem.id});
+  };
+
   $scope.showActionsheet = function(unsolvedProblem) {
 
       $ionicActionSheet.show({
@@ -122,6 +126,9 @@ angular.module('starter.controllers', [])
         buttonClicked: function(index) {
           if(index == 0){
             $scope.openUnsolvedProblem(unsolvedProblem);
+          }
+          if(index == 1){
+            $scope.openStep2(unsolvedProblem);
           }
           console.log('BUTTON CLICKED', index);
           return true;
