@@ -116,6 +116,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('app.defineTheProblem', {
+    url: '/defineTheProblem/:id_concern',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/defineTheProblem.html',
+        controller: 'DefineTheProblemCtrl'
+      }
+    }
+  })
+
   .state('app.laggingSkills', {
     url: '/laggingSkills',
     views: {
