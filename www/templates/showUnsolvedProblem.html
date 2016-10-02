@@ -22,7 +22,7 @@
         </div>
         <ion-item class="item item-text-wrap item-icon-right" href="#/app/defineTheProblem/{{childsConcern.id}}" ng-repeat="childsConcern in childsConcerns">
           <p>{{childsConcern.description}}</p>
-          <a ng-click="" class="watchlist_menu item-button">
+          <a ng-click="editChildsConcern(childsConcern)" class="watchlist_menu item-button">
             <i class="button button-light icon ion-edit"></i>
           </a>
           <ion-option-button ng-click="showConfirmChildsConcern(childsConcern)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
@@ -33,11 +33,11 @@
       </ion-list>
     </div>
 
-    <script id="my-modal.html" type="text/ng-template">
+    <script id="create-modal.html" type="text/ng-template">
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
         <ion-header-bar class="bar bar-header bar-positive">
           <h1 class="title" style="left: 67px; right: 67px;">New child's concern</h1>
-          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+          <button class="button button-clear button-primary" ng-click="modalCreate.hide()">Cancel</button>
         </ion-header-bar>
         <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
           <div class="list">
@@ -47,6 +47,26 @@
             </label>
             <button class="button button-full button-positive" ng-if="!childsConcern.description.length" ng-click="createChildsConcern()" disabled>Create</button>
             <button class="button button-full button-positive" ng-if="childsConcern.description.length > 0" ng-click="createChildsConcern()">Create</button>
+          </div>
+        </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
+      </ion-modal-view>
+    </script>
+
+    <script id="edit-modal.html" type="text/ng-template">
+      <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title" style="left: 67px; right: 67px;">Edit this child's concern</h1>
+          <button class="button button-clear button-primary" ng-click="modalEdit.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+          <div class="list">
+            <label class="item item-input">
+              <textarea rows=5 placeholder="Type a new child's concern here." ng-model="childsConcerntoEdit.description">
+              </textarea>
+            </label>
+
+            <button class="button button-full button-positive" ng-if="!childsConcerntoEdit.description.length" ng-click="updateChildsConcern()" disabled>Save</button>
+            <button class="button button-full button-positive" ng-if="childsConcerntoEdit.description.length > 0" ng-click="updateChildsConcern()">Save</button>
           </div>
         </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
       </ion-modal-view>

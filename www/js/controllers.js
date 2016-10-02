@@ -208,21 +208,21 @@ angular.module('starter.controllers', [])
     });
   };
 
-  $ionicModal.fromTemplateUrl('my-modal.html', {
+  $ionicModal.fromTemplateUrl('create-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
-    $scope.modal = modal;
+    $scope.modalCreate = modal;
   });
   $scope.openModal = function() {
-    $scope.modal.show();
+    $scope.modalCreate.show();
   };
   $scope.closeModal = function() {
-    $scope.modal.hide();
+    $scope.modalCreate.hide();
   };
   // Cleanup the modal when we're done with it!
   $scope.$on('$destroy', function() {
-    $scope.modal.remove();
+    $scope.modalCreate.remove();
   });
   // Execute action on hide modal
   $scope.$on('modal.hidden', function() {
@@ -232,17 +232,58 @@ angular.module('starter.controllers', [])
   $scope.$on('modal.removed', function() {
     // Execute action
   });
+  $ionicModal.fromTemplateUrl('edit-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modalEdit   = modal;
+  });
+  $scope.openModalEdit = function() {
+    $scope.modalEdit.show();
+  };
+  $scope.closeModalEdit = function() {
+    $scope.modalEdit.hide();
+  };
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modalEdit.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
+  $scope.editChildsConcern = function(childsConcern){
+    $scope.childsConcerntoEdit = childsConcern;
+    $scope.openModalEdit();
+
+  };
 
   $scope.createChildsConcern = function(){
     if (!inputFieldIsEmpty($scope.childsConcern.description)) {
       saveChildsConcern($cordovaSQLite,$scope.childsConcern.description,$state.params.itemId);
-      $scope.modal.hide();
+      $scope.modalCreate.hide();
       $state.go('app.showUnsolvedProblem',{ itemId: $state.params.itemId});
       $scope.childsConcern.description = "";
       $scope.childsConcerns= getChildsConcern($cordovaSQLite,$state.params.itemId);
     }
   };
 
+  $scope.updateChildsConcern = function(){
+    if (!inputFieldIsEmpty($scope.childsConcerntoEdit.description)) {
+      updateChildsConcern($cordovaSQLite, [$scope.childsConcerntoEdit.description,$scope.childsConcerntoEdit.id]);
+      $scope.modalEdit.hide();
+      $scope.childsConcerntoEdit = {};
+      $scope.childsConcerns= getChildsConcern($cordovaSQLite,$state.params.itemId);
+      console.log($scope);
+    }
+    else {
+      $scope.emptyInput = true;
+    }
+  };
   $scope.deleteChildsConcern = function(item) {
     var query = "DELETE FROM childs_concerns where id = ?";
     $cordovaSQLite.execute(db, query, [item.id]).then(function(res) {
@@ -363,6 +404,18 @@ function updateUnsolvedProblem($cordovaSQLite, params){
   }
   else{
     query = "UPDATE unsolved_problems SET description = ? where id = ?";
+  }
+  $cordovaSQLite.execute(db, query, params);
+}
+
+function updateChildsConcern($cordovaSQLite, params){
+  var query = "";
+  console.log(params);
+  if(params.length > 2){
+    query = "UPDATE childs_concerns SET description = ?, sort_timestamp = ? where id = ?";
+  }
+  else{
+    query = "UPDATE childs_concerns SET description = ? where id = ?";
   }
   $cordovaSQLite.execute(db, query, params);
 }
