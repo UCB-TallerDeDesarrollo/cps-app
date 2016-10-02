@@ -120,7 +120,6 @@ angular.module('starter.controllers', [])
         destructiveText: 'Delete',
         cancelText: 'Cancel',
         cancel: function() {
-          console.log('CANCELLED');
           $ionicListDelegate.closeOptionButtons();
         },
         buttonClicked: function(index) {
@@ -130,7 +129,6 @@ angular.module('starter.controllers', [])
           if(index == 1){
             $scope.openStep2(unsolvedProblem);
           }
-          console.log('BUTTON CLICKED', index);
           return true;
         },
         destructiveButtonClicked: function() {
@@ -193,6 +191,9 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams){
+  $scope.childsConcern = {
+    description: ""
+  }
   $scope.unsolvedProblem = {};
   $scope.unsolvedProblem.id = $stateParams.unsolvedProblemId;
   $scope.updateChildsConcerns = function(){
@@ -232,12 +233,14 @@ angular.module('starter.controllers', [])
     // Execute action
   });
 
-  $scope.createChildsConcern = function(childsConcern){
-    saveChildsConcern($cordovaSQLite,childsConcern,$state.params.itemId);
-    $scope.modal.hide();
-    $state.go('app.showUnsolvedProblem',{ itemId: $state.params.itemId});
-    $scope.childsConcerns= getChildsConcern($cordovaSQLite,$state.params.itemId);
-
+  $scope.createChildsConcern = function(){
+    if (!inputFieldIsEmpty($scope.childsConcern.description)) {
+      saveChildsConcern($cordovaSQLite,$scope.childsConcern.description,$state.params.itemId);
+      $scope.modal.hide();
+      $state.go('app.showUnsolvedProblem',{ itemId: $state.params.itemId});
+      $scope.childsConcern.description = "";
+      $scope.childsConcerns= getChildsConcern($cordovaSQLite,$state.params.itemId);
+    }
   };
 
   $scope.deleteChildsConcern = function(item) {
