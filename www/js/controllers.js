@@ -282,7 +282,7 @@ angular.module('starter.controllers', [])
       updateChildsConcern($cordovaSQLite, [$scope.childsConcerntoEdit.description,$scope.childsConcerntoEdit.id]);
       $scope.modalEdit.hide();
       $scope.childsConcerntoEdit = {};
-      $scope.childsConcerns= getChildsConcern($cordovaSQLite,$state.params.itemId);
+      $scope.childsConcerns= getChildsConcern($cordovaSQLite,$stateParams.unsolvedProblemId);
     }
     else {
       $scope.emptyInput = true;
