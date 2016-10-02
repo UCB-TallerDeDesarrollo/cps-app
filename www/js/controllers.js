@@ -278,7 +278,6 @@ angular.module('starter.controllers', [])
       $scope.modalEdit.hide();
       $scope.childsConcerntoEdit = {};
       $scope.childsConcerns= getChildsConcern($cordovaSQLite,$state.params.itemId);
-      console.log($scope);
     }
     else {
       $scope.emptyInput = true;
