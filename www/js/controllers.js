@@ -263,12 +263,14 @@ angular.module('starter.controllers', [])
   };
 
   $scope.createChildsConcern = function(){
-    if (!inputFieldIsEmpty($scope.childsConcern.description)) {
-      saveChildsConcern($cordovaSQLite,$scope.childsConcern.description,$state.params.itemId);
+    if (!inputFieldIsEmpty($scope.childsConcern.description))
+    {
+      console.log($stateParams.unsolvedProblemId);
+      saveChildsConcern($cordovaSQLite,$scope.childsConcern.description, $stateParams.unsolvedProblemId);
       $scope.modalCreate.hide();
-      $state.go('app.showUnsolvedProblem',{ itemId: $state.params.itemId});
+      $state.go('app.showUnsolvedProblem',{ itemId: $stateParams.unsolvedProblemId});
       $scope.childsConcern.description = "";
-      $scope.childsConcerns= getChildsConcern($cordovaSQLite,$state.params.itemId);
+      $scope.childsConcerns= getChildsConcern($cordovaSQLite,$stateParams.unsolvedProblemId);
     }
   };
 
