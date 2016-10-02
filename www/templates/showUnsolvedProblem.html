@@ -3,7 +3,10 @@
     <h2 class="title">Unsolved Problem #{{unsolvedProblem.id}}</h2>
   </div>
 
-  <ion-content  ng-init="find()"  class=" has-subheader has-tabs" ng-controller="ChildsConcernsCtrl">
+  <ion-content  ng-init="findUnsolvedProblem(unsolvedProblem)"  class=" has-subheader has-tabs" ng-controller="ChildsConcernsCtrl">
+    <div class="item item-text-wrap text-center">
+      <h2>I've noticed that <strong>{{unsolvedProblem.description}}</strong>, what's up?</h2>
+    </div>
     <ion-list>
       <div class="item item-divider item-text-wrap item-icon-right">
         <p>{{unsolvedProblem.description}}</p>
@@ -17,7 +20,7 @@
         <div align="center" class="item item-text-wrap list-title">
           <p><b>List of Child's Concerns</b></p>
         </div>
-        <ion-item class="item item-text-wrap item-icon-right" ng-repeat="childsConcern in childsConcerns">
+        <ion-item class="item item-text-wrap item-icon-right" href="#/app/defineTheProblem/{{childsConcern.id}}" ng-repeat="childsConcern in childsConcerns">
           <p>{{childsConcern.description}}</p>
           <a ng-click="" class="watchlist_menu item-button">
             <i class="button button-light icon ion-edit"></i>
