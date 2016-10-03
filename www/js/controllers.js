@@ -196,7 +196,6 @@ angular.module('starter.controllers', [])
 
   $scope.parentsConcern = { description: ""};
 
-
   $scope.parentsConcerns = getParentsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.findUnsolvedProblem = function(unsolvedProblem) {
     var query ="SELECT * FROM unsolved_problems where id = ?;";
@@ -256,6 +255,7 @@ angular.module('starter.controllers', [])
   $scope.$on('modalEdit.removed', function() {
     // Execute action
   });
+  
   $scope.createParentsConcern = function(){
     if (!inputFieldIsEmpty($scope.parentsConcern.description))
     {
