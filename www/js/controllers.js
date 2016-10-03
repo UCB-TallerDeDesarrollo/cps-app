@@ -197,6 +197,7 @@ angular.module('starter.controllers', [])
   $scope.childsConcern = {
     description: ""
   };
+  $scope.unsolvedProblem = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.unsolvedProblem = {};
   $scope.unsolvedProblem.id = $stateParams.unsolvedProblemId;
   $scope.updateChildsConcerns = function(){
