@@ -5,12 +5,11 @@
     </div>
     <form>
      <label class="item item-input">
-       <textarea rows=5 ng-model="solution.description">
+       <textarea rows=5 ng-model="editableSolution.description">
        </textarea>
      </label>
-     <button class="button button-block button-positive" ng-click="updateSolution()" ng-if="!solution.description" disabled="true">Save</button>
-     <button class="button button-block button-positive" ng-click="updateSolution()" ng-if="solution.description.length > 0">Save</button>
+     <button class="button button-block button-positive" ng-click="updateSolution()" ng-if="!editableSolution.description" disabled="true">Save</button>
+     <button class="button button-block button-positive" ng-click="updateSolution()" ng-if="editableSolution.description.length > 0">Save</button>
     </form>
-
   </ion-content>
 </ion-view>
