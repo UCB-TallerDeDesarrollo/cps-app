@@ -357,8 +357,11 @@ angular.module('starter.controllers', [])
   };
 
   $scope.updateSolution = function() {
-    if (!inputFieldIsEmpty($scope.solution.description)) {
-      updateSolution($cordovaSQLite, [$scope.solution.description,$scope.solution.id]);
+    $scope.editableSolution = {
+        description: $scope.solution.description
+      };
+    if (!inputFieldIsEmpty($scope.editableSolution.description)) {
+      updateSolution($cordovaSQLite, [$scope.editableSolution.description,$scope.solution.id]);
       $state.go('app.newSolution');
     }
   };
