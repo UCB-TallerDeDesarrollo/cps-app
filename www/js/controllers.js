@@ -352,7 +352,7 @@ angular.module('starter.controllers', [])
     if (!inputFieldIsEmpty($scope.solution.description)) {
       saveSolution($cordovaSQLite,$scope.solution);
       $scope.solution = {};
-      $scope.soluitons = getSolutions($cordovaSQLite);
+      $scope.solutions = getSolutions($cordovaSQLite);
     }
   };
 
