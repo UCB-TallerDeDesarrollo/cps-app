@@ -339,6 +339,23 @@ angular.module('starter.controllers', [])
     }
   };
 
+})
+
+.controller('SolutionsCtrl', function($scope, $cordovaSQLite, $state) {
+  $scope.solution = {
+      description: ""
+    };
+
+  $scope.solutions = [{description:"Clean"},{description:"machine"}];//getUnsolvedProblems($cordovaSQLite);
+
+  $scope.createSolution = function() {
+    if (!inputFieldIsEmpty($scope.solution.description)) {
+      saveSolution($cordovaSQLite,$scope.solution);
+      $scope.solution = {
+          description: ""
+        };
+    }
+  };
 });
 
 // OTHER FUNCTIONS
@@ -386,6 +403,11 @@ function saveUnsolvedProblem(cordovaSQLite,unsolvedProblem){
 function saveChildsConcern(cordovaSQLite,childsConcern,unsolvedProblemId){
   var query ="INSERT INTO childs_concerns(description,unsolved_problem_id) VALUES (?,?)";
   cordovaSQLite.execute(db,query,[childsConcern,unsolvedProblemId]);
+}
+
+function saveSolution(cordovaSQLite,solution){
+  var query ="INSERT INTO solutions(description) VALUES (?)";
+  cordovaSQLite.execute(db,query,[solution.description]);
 }
 
 function getChildsConcern(cordovaSQLite,unsolvedProblemId){
