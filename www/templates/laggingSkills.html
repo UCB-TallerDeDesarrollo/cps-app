@@ -1,17 +1,13 @@
 <ion-view view-title="Lagging Skills">
   <ion-content>
     <ion-list>
-      <ion-item class="item item-text-wrap item-icon-right" ng-repeat="laggingSkill in laggingSkills">
+      <ion-item class="item item-text-wrap item-icon-right" ng-repeat="laggingSkill in laggingSkills" href="#/app/unsolvedProblems/new">
           <div class="positive" ng-if="laggingSkill.checked">
             {{laggingSkill.description}}
           </div>
           <div class="dark" ng-if="!laggingSkill.checked">
             {{laggingSkill.description}}
           </div>
-          <a href="#/app/unsolvedProblems/new">
-            <i class="icon dark ion-chevron-right" ng-if="!laggingSkill.checked"></i>
-            <i class="icon positive ion-chevron-right" ng-if="laggingSkill.checked"></i>
-          </a>
         <ion-option-button class="button-positive ion-checkmark" ng-click="checkLaggingSkill({{laggingSkill.id}})" ng-if="!laggingSkill.checked">Check</ion-option-button>
         <ion-option-button class="button-dark ion-close" ng-click="uncheckLaggingSkill({{laggingSkill.id}})" ng-if="laggingSkill.checked">Uncheck</ion-option-button>
       </ion-item>

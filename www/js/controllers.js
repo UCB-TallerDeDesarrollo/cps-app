@@ -75,7 +75,10 @@ angular.module('starter.controllers', [])
 })
 
 .controller('DefineTheProblemCtrl', function($scope, $stateParams) {
-  $scope.params = $stateParams;
+  $scope.unsolvedProblem = {
+      description: "",
+      id:$stateParams.id_unsolved
+  };
 })
 
 .controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite, $state, $ionicActionSheet,$ionicListDelegate, $ionicPopup) {
@@ -193,11 +196,12 @@ angular.module('starter.controllers', [])
 .controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams){
   $scope.childsConcern = {
     description: ""
-  }
+  };
   $scope.unsolvedProblem = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
+  $scope.unsolvedProblem = {};
   $scope.unsolvedProblem.id = $stateParams.unsolvedProblemId;
   $scope.updateChildsConcerns = function(){
-    $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
+    $scope.childsConcerns = getChildsConcern($cordovaSQLite, $state.params.itemId);
   };
 
   $scope.findUnsolvedProblem = function(unsolvedProblem) {
@@ -259,6 +263,7 @@ angular.module('starter.controllers', [])
   $scope.editChildsConcern = function(childsConcern){
     $scope.childsConcerntoEdit = childsConcern;
     $scope.openModalEdit();
+
   };
 
   $scope.createChildsConcern = function(){
