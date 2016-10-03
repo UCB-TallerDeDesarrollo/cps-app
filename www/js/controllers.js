@@ -197,11 +197,8 @@ angular.module('starter.controllers', [])
   $scope.childsConcern = {
     description: ""
   };
-  $scope.unsolvedProblem = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
-  $scope.unsolvedProblem = {};
-  $scope.unsolvedProblem.id = $stateParams.unsolvedProblemId;
   $scope.updateChildsConcerns = function(){
-    $scope.childsConcerns = getChildsConcern($cordovaSQLite, $state.params.itemId);
+    $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
   };
 
   $scope.findUnsolvedProblem = function(unsolvedProblem) {
@@ -210,6 +207,8 @@ angular.module('starter.controllers', [])
       $scope.itemf = result.rows.item(0);
       $scope.unsolvedProblem.description = $scope.itemf.description;
     });
+    $scope.unsolvedProblem = {};
+    $scope.unsolvedProblem.id = $stateParams.unsolvedProblemId;
   };
 
   $ionicModal.fromTemplateUrl('create-modal.html', {
@@ -240,7 +239,7 @@ angular.module('starter.controllers', [])
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
-    $scope.modalEdit   = modal;
+    $scope.modalEdit = modal;
   });
   $scope.openModalEdit = function() {
     $scope.modalEdit.show();
@@ -253,17 +252,20 @@ angular.module('starter.controllers', [])
     $scope.modalEdit.remove();
   });
   // Execute action on hide modal
-  $scope.$on('modal.hidden', function() {
+  $scope.$on('modalEdit.hidden', function() {
     // Execute action
   });
   // Execute action on remove modal
-  $scope.$on('modal.removed', function() {
+  $scope.$on('modalEdit.removed', function() {
     // Execute action
   });
+
   $scope.editChildsConcern = function(childsConcern){
     $scope.childsConcerntoEdit = childsConcern;
+    $scope.editableChildsConcern = {
+      description: childsConcern.description
+    };
     $scope.openModalEdit();
-
   };
 
   $scope.createChildsConcern = function(){
@@ -279,8 +281,8 @@ angular.module('starter.controllers', [])
   };
 
   $scope.updateChildsConcern = function(){
-    if (!inputFieldIsEmpty($scope.childsConcerntoEdit.description)) {
-      updateChildsConcern($cordovaSQLite, [$scope.childsConcerntoEdit.description,$scope.childsConcerntoEdit.id]);
+    if (!inputFieldIsEmpty($scope.editableChildsConcern.description)) {
+      updateChildsConcern($cordovaSQLite, [$scope.editableChildsConcern.description,$scope.childsConcerntoEdit.id]);
       $scope.modalEdit.hide();
       $scope.childsConcerntoEdit = {};
       $scope.childsConcerns= getChildsConcern($cordovaSQLite,$stateParams.unsolvedProblemId);
