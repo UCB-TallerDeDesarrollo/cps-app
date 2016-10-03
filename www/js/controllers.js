@@ -344,14 +344,13 @@ angular.module('starter.controllers', [])
       description: ""
     };
 
-  $scope.solutions = [{description:"Clean"},{description:"machine"}];//getUnsolvedProblems($cordovaSQLite);
+  $scope.solutions = getSolutions($cordovaSQLite);
 
   $scope.createSolution = function() {
     if (!inputFieldIsEmpty($scope.solution.description)) {
       saveSolution($cordovaSQLite,$scope.solution);
-      $scope.solution = {
-          description: ""
-        };
+      $scope.solution = {};
+      $scope.soluitons = getSolutions($cordovaSQLite);
     }
   };
 });
@@ -389,6 +388,23 @@ function getLaggingSkills(cordovaSQLite){
     });
   return lagging_skills;
 }
+
+function getSolutions(cordovaSQLite) {
+  var solutions = [];
+  var query ="SELECT * FROM solutions";
+  cordovaSQLite.execute(db,query).then(function(result) {
+    var rows = result.rows;
+    if(rows.length) {
+      for(var i=0; i < rows.length; i++){
+        solutions.push(rows.item(i));
+      }
+    }
+    },function(err){
+      console.log(err.message);
+    });
+  return solutions;
+}
+
 function inputFieldIsEmpty(description) {
     return description.length === 0;
 }
