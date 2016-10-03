@@ -135,6 +135,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
+  .state('app.showSolution', {
+    url: '/solutions/show/:solutionId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/showSolution.html',
+        controller: 'SolutionsCtrl'
+      }
+    }
+  })
+  .state('app.editSolution', {
+    url: '/solutions/edit/:solutionId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/editSolution.html',
+        controller: 'SolutionsCtrl'
+      }
+    }
+  })
 
   .state('app.laggingSkills', {
     url: '/laggingSkills',

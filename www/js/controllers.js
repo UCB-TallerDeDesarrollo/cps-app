@@ -339,7 +339,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('SolutionsCtrl', function($scope, $cordovaSQLite, $state) {
+.controller('SolutionsCtrl', function($scope, $cordovaSQLite, $state, $stateParams) {
   $scope.solution = {
       description: ""
     };
@@ -352,6 +352,21 @@ angular.module('starter.controllers', [])
       $scope.solution = {};
       $scope.soluitons = getSolutions($cordovaSQLite);
     }
+  };
+
+  $scope.updateSolution = function() {
+    if (!inputFieldIsEmpty($scope.solution.description)) {
+      updateSolution($cordovaSQLite, [$scope.solution.description,$scope.solution.id]);
+      $state.go('app.newSolution');
+    }
+  };
+
+  $scope.find = function() {
+    var query ="SELECT * FROM solutions where id = ?";
+    $cordovaSQLite.execute(db,query,[$stateParams.solutionId])
+      .then( function(result) {
+        $scope.solution = result.rows.item(0);
+    });
   };
 });
 
@@ -448,6 +463,11 @@ function updateUnsolvedProblem($cordovaSQLite, params){
   else{
     query = "UPDATE unsolved_problems SET description = ? where id = ?";
   }
+  $cordovaSQLite.execute(db, query, params);
+}
+
+function updateSolution($cordovaSQLite, params){
+    query = "UPDATE solutions SET description = ? where id = ?";
   $cordovaSQLite.execute(db, query, params);
 }
 
