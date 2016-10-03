@@ -1,6 +1,17 @@
 <ion-view cache-view="false" view-title="Possible Solutions">
   <ion-content class="padding" ng-controller="SolutionsCtrl">
+    <div class="item item-text-wrap text-center">
+      <h2><b>I wonder if there is a way to help you with...</b></h2>
+        <p>{{childsConcern.description}}</p>
+      <h2><b>So that...</b></h2>
+        <ion-item class="item item-text-wrap item-icon-right" href="#/app/defineTheProblem/{{unsolvedProblem.id}}" ng-repeat="parentsConcern in parentsConcerns">
+          <p>{{parentsConcern.description}}</p>
+        </ion-item>
+      <h2><b>Do you have any Ideas?</b></h2>
+    </div>
+
     <ion-list show-delete="false" can-swipe="true">
+
       <ion-item class="item-text-wrap item-icon-right" ng-repeat="solution in solutions">
         <a href="#/app/solutions/show/{{solution.id}}" class="no-text-decoration"><p>{{solution.description}}</p></a>
         <a href="#/app/solutions/edit/{{solution.id}}" class="button button-light icon ion-edit"></a>

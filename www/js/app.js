@@ -75,6 +75,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('app.invitation', {
+    url: '/invitation/:unsolvedProblemId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/invitation.html',
+        controller: 'InvitationCtrl'
+      }
+    }
+  })
 
   .state('app.newUnsolvedProblem', {
       url: '/unsolvedProblems/new',

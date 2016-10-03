@@ -1,0 +1,26 @@
+<ion-view cache-view="false" view-title="Invitation Step">
+  <div class="bar bar-subheader bar-positive">
+    <h2 class="title">Invitation Step</h2>
+    Unsolved Problem #{{unsolvedProblem.description}}
+  </div>
+
+  <ion-content  ng-init="findUnsolvedProblem(unsolvedProblem)"  class=" has-subheader has-tabs" ng-controller="ChildsConcernsCtrl">
+    <div class="item item-divider item-text-wrap text-center">
+      <p><b>{{unsolvedProblem.description}}</b></p>
+    </div>
+    <div class="item item-text-wrap text-center" ng-init="findChildConcern(unsolvedProblem)">
+      <h2>I wonder if there is a way to help you with <b>{{childConcern.description}}</b>  So that</h2>
+    </div>
+    <div  class="padding">
+      <ion-list can-swipe="true" >
+        <ion-item class="item item-text-wrap item-icon-right" href="#/app/defineTheProblem/{{unsolvedProblem.id}}" ng-repeat="parentsConcern in parentsConcerns">
+          <p>{{parentsConcern.description}}</p>
+        </ion-item>
+      </ion-list>
+      <div class="item item-text-wrap text-center">
+        <h2><b>Do you have any Ideas?</b></h2>
+      </div>
+    </div>
+
+
+</ion-view>
