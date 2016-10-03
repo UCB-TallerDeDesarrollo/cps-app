@@ -385,8 +385,8 @@ angular.module('starter.controllers', [])
   };
 
   $scope.updateSolution = function() {
-    if (!inputFieldIsEmpty($scope.solution.description)) {
-      updateSolution($cordovaSQLite, [$scope.solution.description,$scope.solution.id]);
+    if (!inputFieldIsEmpty($scope.editableSolution.description)) {
+      updateSolution($cordovaSQLite, [$scope.editableSolution.description,$scope.solution.id]);
       $state.go('app.newSolution');
     }
   };
@@ -396,6 +396,7 @@ angular.module('starter.controllers', [])
     $cordovaSQLite.execute(db,query,[$stateParams.solutionId])
       .then( function(result) {
         $scope.solution = result.rows.item(0);
+        $scope.editableSolution = $scope.solution;
     });
   };
 });
