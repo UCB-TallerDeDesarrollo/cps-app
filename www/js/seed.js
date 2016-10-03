@@ -39,12 +39,16 @@ angular.module('starter.seed', [])
   function seedChildsConcerns($cordovaSQLite, db){
     $cordovaSQLite.execute(db,"CREATE TABLE IF NOT EXISTS childs_concerns (id integer primary key autoincrement, description text, unsolved_problem_id integer, FOREIGN KEY (unsolved_problem_id) REFERENCES unsolved_problems (id))");
   }
+  function seedSolutions($cordovaSQLite, db){
+    $cordovaSQLite.execute(db,"CREATE TABLE IF NOT EXISTS solutions (id integer primary key autoincrement, description text)");
+  }
 
   return {
     seed: function($cordovaSQLite, db) {
       seedLaggingSkills($cordovaSQLite, db);
       seedUnsolvedProblems($cordovaSQLite, db);
       seedChildsConcerns($cordovaSQLite,db);
+      seedSolutions($cordovaSQLite,db);
       return;
     },
     deleteSeed: function($cordovaSQLite, db){
