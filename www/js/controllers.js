@@ -437,7 +437,25 @@ angular.module('starter.controllers', [])
       $scope.solutions = getSolutions($cordovaSQLite, $stateParams.adultConcernId);
     }
   };
-
+  $scope.updateSolution = function(){
+    if (!inputFieldIsEmpty($scope.editableSolution.description)) {
+      updateSolution($cordovaSQLite,$scope.editableSolution);
+      $scope.modalEdit.hide();
+      $scope.solutionEdit = {};
+      $scope.solutions = getSolutions($cordovaSQLite,$stateParams.adultConcernId);
+    }
+    else {
+      $scope.emptyInput = true;
+    }
+  };
+  $scope.editSolution = function(solution){
+    $scope.solutionEdit = solution;
+    $scope.editableSolution = {
+      description: solution.description,
+      id: solution.id
+    };
+    $scope.openModalEdit();
+  };
   $ionicModal.fromTemplateUrl('create-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -670,9 +688,9 @@ function updateUnsolvedProblem($cordovaSQLite, params){
   $cordovaSQLite.execute(db, query, params);
 }
 
-function updateSolution($cordovaSQLite, params){
-    query = "UPDATE solutions SET description = ? where id = ?";
-  $cordovaSQLite.execute(db, query, params);
+function updateSolution($cordovaSQLite, solution){
+  var query = "UPDATE solutions SET description = ? where id = ?";
+  $cordovaSQLite.execute(db, query, [solution.description, solution.id]);
 }
 
 function updateChildsConcern($cordovaSQLite, params){
