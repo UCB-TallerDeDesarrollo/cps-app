@@ -53,34 +53,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/browse.html'
         }
       }
-    })
-
-  .state('app.editUnsolvedProblem', {
-    url: '/unsolvedProblems/edit/:unsolvedProblemId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/editUnsolvedProblem.html',
-        controller: 'EditUnsolvedProblemCtrl'
-      }
-    }
   })
 
-  .state('app.showUnsolvedProblem', {
-    url: '/unsolvedProblem/show/:unsolvedProblemId',
+  .state('app.laggingSkills', {
+    url: '/laggingSkills',
     views: {
       'menuContent': {
-        templateUrl: 'templates/showUnsolvedProblem.html',
-        controller: 'EditUnsolvedProblemCtrl'
-      }
-    }
-  })
-
-  .state('app.invitation', {
-    url: '/invitation/:unsolvedProblemId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/invitation.html',
-        controller: 'InvitationCtrl'
+        templateUrl: 'templates/laggingSkills.html',
+        controller: 'LaggingSkillsCtrl'
       }
     }
   })
@@ -94,6 +74,44 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       }
   })
+  .state('app.showUnsolvedProblem', {
+    url: '/unsolvedProblem/show/:unsolvedProblemId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/showUnsolvedProblem.html',
+        controller: 'EditUnsolvedProblemCtrl'
+      }
+    }
+  })
+  .state('app.editUnsolvedProblem', {
+    url: '/unsolvedProblems/edit/:unsolvedProblemId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/editUnsolvedProblem.html',
+        controller: 'EditUnsolvedProblemCtrl'
+      }
+    }
+  })
+
+  .state('app.defineTheProblem', {
+    url: '/defineTheProblem/:childConcernId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/defineTheProblem.html',
+        controller: 'DefineTheProblemCtrl'
+      }
+    }
+  })
+
+  .state('app.invitation', {
+    url: '/invitation/:adultConcernId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/invitation.html',
+        controller: 'InvitationCtrl'
+      }
+    }
+  })
 
   .state('app.helpCategories',{
     url: '/helpCategories',
@@ -104,7 +122,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-
   .state('app.helpCategoryTopics',{
     url: '/helpCategoryTopics/:id_category',
     views: {
@@ -114,7 +131,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-
   .state('app.helpTopicContent', {
     url: '/helpTopicContent/:id_category/:id_topic',
     views: {
@@ -159,16 +175,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       'menuContent': {
         templateUrl: 'templates/editSolution.html',
         controller: 'SolutionsCtrl'
-      }
-    }
-  })
-
-  .state('app.laggingSkills', {
-    url: '/laggingSkills',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/laggingSkills.html',
-        controller: 'LaggingSkillsCtrl'
       }
     }
   });
