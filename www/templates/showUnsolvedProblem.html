@@ -1,24 +1,22 @@
-<ion-view cache-view="false" view-title="Empathy Step">
+<ion-view cache-view="false" view-title="Empathy Step"  ng-controller="ChildsConcernsCtrl">
   <div class="bar bar-subheader bar-positive">
-    <h2 class="title">Unsolved Problem #{{unsolvedProblem.id}} </h2>
+    <h2 class="title">{{unsolvedProblem.description}} </h2>
   </div>
 
-  <ion-content  ng-init="findUnsolvedProblem(unsolvedProblem)"  class=" has-subheader has-tabs" ng-controller="ChildsConcernsCtrl">
+  <ion-content  ng-init="findUnsolvedProblem(unsolvedProblem)"  class=" has-subheader has-tabs">
     <div class="item item-text-wrap text-center">
       <h2>I've noticed that <strong>{{unsolvedProblem.description}}</strong>, what's up?</h2>
     </div>
     <ion-list>
-      <div class="item item-divider item-text-wrap item-icon-right">
-        <p>{{unsolvedProblem.description}}</p>
-        <a ng-click="openModal()" class="watchlist_menu item-button">
-          <i class="icon ion-plus"></i>
-        </a>
-      </div>
+
     </ion-list>
     <div ng-init="updateChildsConcerns()" class="padding">
       <ion-list can-swipe="true" show-reorder="shouldShowReorder">
-        <div align="center" class="item item-text-wrap list-title">
+        <div class="item item-divider item-text-wrap item-icon-right">
           <p><b>List of Child's Concerns</b></p>
+          <a ng-click="openModal()" class="watchlist_menu item-button">
+            <i class="icon ion-plus"></i>
+          </a>
         </div>
         <ion-item class="item item-text-wrap item-icon-right" href="#/app/defineTheProblem/{{childsConcern.id}}" ng-repeat="childsConcern in childsConcerns">
           <p>{{childsConcern.description}} </p>
