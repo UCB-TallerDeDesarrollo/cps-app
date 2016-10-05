@@ -16,21 +16,27 @@
       </div>
     </ion-list>
     <div ng-init="updateChildsConcerns()" class="padding">
-      <ion-list can-swipe="true" >
+      <ion-list can-swipe="true" show-reorder="shouldShowReorder">
         <div align="center" class="item item-text-wrap list-title">
           <p><b>List of Child's Concerns</b></p>
         </div>
         <ion-item class="item item-text-wrap item-icon-right" href="#/app/defineTheProblem/{{childsConcern.id}}" ng-repeat="childsConcern in childsConcerns">
           <p>{{childsConcern.description}}</p>
-          <a ng-click="editChildsConcern(childsConcern)" class="watchlist_menu item-button">
+          <a ng-click="editChildsConcern(childsConcern)" class="watchlist_menu item-button" ng-hide="{{shouldShowReorder}}">
             <i class="button button-light icon ion-edit"></i>
           </a>
           <ion-option-button ng-click="showConfirmChildsConcern(childsConcern)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
+          <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(childsConcern, $fromIndex, $toIndex)">
+          </ion-reorder-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
           <p>No child's concern registered. Please register one above.</p>
         </div>
       </ion-list>
+      <div name="text-center reorder-button-wrapper" class="padding-top">
+        <button class="button button-small button-calm" ng-show="childsConcerns.length > 1 && !shouldShowReorder" ng-click="shouldShowReorder = true">Reorder</button>
+        <button class="button button-small button-balanced" ng-show="childsConcerns.length > 1 && shouldShowReorder" ng-click="shouldShowReorder = false">Done</button>
+      </div>
     </div>
 
     <script id="create-modal.html" type="text/ng-template">

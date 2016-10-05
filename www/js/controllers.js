@@ -273,9 +273,26 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams){
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $stateParams){
   $scope.childsConcern = {
     description: ""
+  };
+  $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
+
+  $scope.shouldShowReorder = false;
+  $scope.moveItem = function(childsConcern, fromIndex, toIndex) {
+    console.log(fromIndex);
+    console.log(toIndex);
+    var timestampAuxiliary = $scope.childsConcerns[fromIndex].sort_timestamp;
+    $scope.childsConcerns[fromIndex].sort_timestamp = $scope.childsConcerns[toIndex].sort_timestamp;
+    $scope.childsConcerns[toIndex].sort_timestamp = timestampAuxiliary;
+    updateChildsConcern($cordovaSQLite, [$scope.childsConcerns[fromIndex].description, $scope.childsConcerns[fromIndex].sort_timestamp, $scope.childsConcerns[fromIndex].id]);
+    updateChildsConcern($cordovaSQLite, [$scope.childsConcerns[toIndex].description, $scope.childsConcerns[toIndex].sort_timestamp, $scope.childsConcerns[toIndex].id]);
+    $scope.childsConcerns.splice(fromIndex, 1);
+    $scope.childsConcerns.splice(toIndex, 0, childsConcern);
+    $scope.childsConcerns.sort(function (a, b) {
+      return (a.sort_timestamp > b.sort_timestamp ? 1 : -1);
+    });
   };
   $scope.updateChildsConcerns = function(){
     $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
@@ -648,7 +665,7 @@ function saveSolution(cordovaSQLite,solution){
 
 function getChildsConcern(cordovaSQLite,unsolvedProblemId){
   var childs_concerns = [];
-  var query ="SELECT * FROM childs_concerns WHERE unsolved_problem_id = ?";
+  var query ="SELECT * FROM childs_concerns WHERE unsolved_problem_id = ? ORDER BY sort_timestamp";
   cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
     var rows = result.rows;
     if(rows.length) {
