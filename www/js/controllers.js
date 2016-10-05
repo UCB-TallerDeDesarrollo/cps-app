@@ -278,17 +278,15 @@ angular.module('starter.controllers', [])
     description: ""
   };
   // $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
+
   $scope.unsolved = $stateParams.unsolvedProblemId;
   $scope.shouldShowReorder = false;
   $scope.moveItem = function(childsConcern, fromIndex, toIndex) {
-    console.log($scope.childsConcerns[fromIndex].unsolved_order );
-    console.log($scope.childsConcerns[toIndex].unsolved_order );
-
     var indexOrder = $scope.childsConcerns[fromIndex].unsolved_order;
     $scope.childsConcerns[fromIndex].unsolved_order = $scope.childsConcerns[toIndex].unsolved_order;
     $scope.childsConcerns[toIndex].unsolved_order = indexOrder;
-    updateChildsConcern($cordovaSQLite, [$scope.childsConcerns[fromIndex].description, $scope.childsConcerns[fromIndex].unsolved_order, $scope.childsConcerns[fromIndex].id]);
-    updateChildsConcern($cordovaSQLite, [$scope.childsConcerns[toIndex].description, $scope.childsConcerns[toIndex].unsolved_order, $scope.childsConcerns[toIndex].id]);
+    updateChildsConcernOrder($cordovaSQLite, [$scope.childsConcerns[fromIndex].unsolved_order.toString(), $scope.childsConcerns[fromIndex].id]);
+    updateChildsConcernOrder($cordovaSQLite, [$scope.childsConcerns[toIndex].unsolved_order.toString(), $scope.childsConcerns[toIndex].id]);
     $scope.childsConcerns.splice(fromIndex, 1);
     $scope.childsConcerns.splice(toIndex, 0, childsConcern);
   };
@@ -710,16 +708,15 @@ function updateSolution($cordovaSQLite, solution){
   $cordovaSQLite.execute(db, query, [solution.description, solution.id]);
 }
 
+function updateChildsConcernOrder($cordovaSQLite,params){
+  var query = "";
+  query = "UPDATE childs_concerns SET unsolved_order = ? where id = ?";
+  $cordovaSQLite.execute(db, query, params);
+}
 function updateChildsConcern($cordovaSQLite, params){
   var query = "";
-  console.log(params);
-  if(params.length > 2){
-    query = "UPDATE childs_concerns SET description = ?, unsolved_order = ? where id = ?";
-  }
-  else{
-    query = "UPDATE childs_concerns SET description = ? where id = ?";
-  }
-  $cordovaSQLite.execute(db, query, params);
+  query = "UPDATE childs_concerns SET description = ? where id = ?";
+  return $cordovaSQLite.execute(db, query, params);
 }
 
 function updateLaggingSkill($cordovaSQLite, params){
