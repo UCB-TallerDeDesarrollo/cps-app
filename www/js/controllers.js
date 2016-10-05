@@ -277,25 +277,23 @@ angular.module('starter.controllers', [])
   $scope.childsConcern = {
     description: ""
   };
-  $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
-
+  // $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
+  $scope.unsolved = $stateParams.unsolvedProblemId;
   $scope.shouldShowReorder = false;
   $scope.moveItem = function(childsConcern, fromIndex, toIndex) {
-    console.log(fromIndex);
-    console.log(toIndex);
-    var timestampAuxiliary = $scope.childsConcerns[fromIndex].sort_timestamp;
-    $scope.childsConcerns[fromIndex].sort_timestamp = $scope.childsConcerns[toIndex].sort_timestamp;
-    $scope.childsConcerns[toIndex].sort_timestamp = timestampAuxiliary;
-    updateChildsConcern($cordovaSQLite, [$scope.childsConcerns[fromIndex].description, $scope.childsConcerns[fromIndex].sort_timestamp, $scope.childsConcerns[fromIndex].id]);
-    updateChildsConcern($cordovaSQLite, [$scope.childsConcerns[toIndex].description, $scope.childsConcerns[toIndex].sort_timestamp, $scope.childsConcerns[toIndex].id]);
+    console.log($scope.childsConcerns[fromIndex].unsolved_order );
+    console.log($scope.childsConcerns[toIndex].unsolved_order );
+
+    var indexOrder = $scope.childsConcerns[fromIndex].unsolved_order;
+    $scope.childsConcerns[fromIndex].unsolved_order = $scope.childsConcerns[toIndex].unsolved_order;
+    $scope.childsConcerns[toIndex].unsolved_order = indexOrder;
+    updateChildsConcern($cordovaSQLite, [$scope.childsConcerns[fromIndex].description, $scope.childsConcerns[fromIndex].unsolved_order, $scope.childsConcerns[fromIndex].id]);
+    updateChildsConcern($cordovaSQLite, [$scope.childsConcerns[toIndex].description, $scope.childsConcerns[toIndex].unsolved_order, $scope.childsConcerns[toIndex].id]);
     $scope.childsConcerns.splice(fromIndex, 1);
     $scope.childsConcerns.splice(toIndex, 0, childsConcern);
-    $scope.childsConcerns.sort(function (a, b) {
-      return (a.sort_timestamp > b.sort_timestamp ? 1 : -1);
-    });
   };
   $scope.updateChildsConcerns = function(){
-    $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
+    $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
   };
 
   $scope.findUnsolvedProblem = function(unsolvedProblem) {
@@ -369,7 +367,7 @@ angular.module('starter.controllers', [])
   $scope.createChildsConcern = function(){
     if (!inputFieldIsEmpty($scope.childsConcern.description))
     {
-      saveChildsConcern($cordovaSQLite,$scope.childsConcern.description, $stateParams.unsolvedProblemId);
+      saveChildsConcern($cordovaSQLite,$scope.childsConcern.description, $stateParams.unsolvedProblemId, $scope.childsConcerns.length);
       $scope.modalCreate.hide();
       $state.go('app.showUnsolvedProblem',{ itemId: $stateParams.unsolvedProblemId});
       $scope.childsConcern.description = "";
@@ -648,9 +646,9 @@ function saveUnsolvedProblem(cordovaSQLite,unsolvedProblem){
   cordovaSQLite.execute(db,query,[unsolvedProblem.description,0]);
 }
 
-function saveChildsConcern(cordovaSQLite,childsConcern,unsolvedProblemId){
-  var query ="INSERT INTO childs_concerns(description,unsolved_problem_id) VALUES (?,?)";
-  cordovaSQLite.execute(db,query,[childsConcern,unsolvedProblemId]);
+function saveChildsConcern(cordovaSQLite,childsConcern,unsolvedProblemId,orderId){
+  var query ="INSERT INTO childs_concerns(description,unsolved_problem_id,unsolved_order) VALUES (?,?,?)";
+  cordovaSQLite.execute(db,query,[childsConcern,unsolvedProblemId,orderId]);
 }
 
 function saveParentsConcern(cordovaSQLite,parentsConcern,childConcernId){
@@ -665,7 +663,8 @@ function saveSolution(cordovaSQLite,solution){
 
 function getChildsConcern(cordovaSQLite,unsolvedProblemId){
   var childs_concerns = [];
-  var query ="SELECT * FROM childs_concerns WHERE unsolved_problem_id = ? ORDER BY sort_timestamp";
+  var query ="SELECT * FROM childs_concerns WHERE unsolved_problem_id = ? ORDER BY unsolved_order";
+  // var query ="SELECT * FROM childs_concerns WHERE unsolved_problem_id = ? ";
   cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
     var rows = result.rows;
     if(rows.length) {
@@ -715,7 +714,7 @@ function updateChildsConcern($cordovaSQLite, params){
   var query = "";
   console.log(params);
   if(params.length > 2){
-    query = "UPDATE childs_concerns SET description = ?, sort_timestamp = ? where id = ?";
+    query = "UPDATE childs_concerns SET description = ?, unsolved_order = ? where id = ?";
   }
   else{
     query = "UPDATE childs_concerns SET description = ? where id = ?";
