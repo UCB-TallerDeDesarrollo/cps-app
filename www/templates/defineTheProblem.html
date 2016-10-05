@@ -30,6 +30,7 @@
  		    </select>
  		  </label>
  		</div>
+
     <div ng-init="updateChildsConcerns()" class="padding">
       <ion-list can-swipe="true" >
         <div align="center" class="item item-text-wrap list-title item-icon-right">
@@ -38,7 +39,7 @@
             <i class="icon ion-plus"></i>
           </a>
         </div>
-        <ion-item class="item item-text-wrap item-icon-right" href="#/app/defineTheProblem/{{unsolvedProblem.id}}" ng-repeat="parentsConcern in parentsConcerns">
+        <ion-item class="item item-text-wrap item-icon-right" href="#/app/invitation/{{parentsConcern.id}}" ng-repeat="parentsConcern in parentsConcerns">
           <p>{{parentsConcern.description}}</p>
           <a ng-click="editChildsConcern(childsConcern)" class="watchlist_menu item-button">
             <i class="button button-light icon ion-edit"></i>

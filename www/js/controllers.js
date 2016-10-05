@@ -350,7 +350,6 @@ angular.module('starter.controllers', [])
   $scope.createChildsConcern = function(){
     if (!inputFieldIsEmpty($scope.childsConcern.description))
     {
-      console.log($stateParams.unsolvedProblemId);
       saveChildsConcern($cordovaSQLite,$scope.childsConcern.description, $stateParams.unsolvedProblemId);
       $scope.modalCreate.hide();
       $state.go('app.showUnsolvedProblem',{ itemId: $stateParams.unsolvedProblemId});
@@ -421,31 +420,39 @@ angular.module('starter.controllers', [])
 })
 
 .controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams){
-  $scope.childsConcerns =getChildsConcern($cordovaSQLite);
-  $scope.parentsConcern =getParentsConcern($cordovaSQLite);
-  $scope.unsolvedProblem = {
-      description: "",
-      id:$stateParams.unsolvedProblemId
+  $scope.solution = null;
+
+  $scope.initialSetUp = function(){
+    findAdultConcern();
+    findChildConcern();
+    findUnsolvedProblem();
+    // query ="SELECT * FROM childs_concerns where id = ?";
+    // $cordovaSQLite.execute(db,query,[$scope.adultConcern.child_concern_id])
+    //   .then( function(result) {
+    //     $scope.childConcern = result.rows.item(0);
+    // });
   };
-  $scope.findUnsolvedProblem = function(unsolvedProblem) {
-    var query ="SELECT * FROM unsolved_problems where id = ?";
-    $cordovaSQLite.execute(db,query,[unsolvedProblem.id]).then(function(result){
-      $scope.itemf = result.rows.item(0);
-      $scope.unsolvedProblem.description = $scope.itemf.description;
-    });
-  };
-  $scope.childConcern = {
-      description: "",
-      id:""
-  };
-  $scope.findChildConcern = function(unsolvedProblem){
-    var query ="SELECT * FROM childs_concerns where unsolved_problem_id = ?";
-    $cordovaSQLite.execute(db,query,[unsolvedProblem.id]).then(function(result){
-      $scope.itemf = result.rows.item(0);
-      $scope.childConcern.description = $scope.itemf.description;
-      $scope.childConcern.id=$scope.itemf.id;
-    });
-  };
+  function findAdultConcern() {
+    var query ="SELECT * FROM adults_concerns where id = ?";
+    $cordovaSQLite.execute(db,query,[$stateParams.adultConcernId])
+      .then( function(result) {
+        $scope.adultConcern = result.rows.item(0);
+    },function(error){console.log(error);});
+  }
+  function findChildConcern() {
+    var query ="SELECT c.id, c.description, c.unsolved_problem_id FROM childs_concerns AS c, adults_concerns AS a WHERE c.id = a.child_concern_id AND a.id = ?";
+    $cordovaSQLite.execute(db,query,[$stateParams.adultConcernId])
+      .then( function(result) {
+        $scope.childConcern = result.rows.item(0);
+    },function(error){console.log(error);});
+  }
+  function findUnsolvedProblem() {
+    var query ="SELECT u.id, u.description FROM unsolved_problems AS u, childs_concerns AS c, adults_concerns AS a WHERE u.id = c.unsolved_problem_id AND c.id = a.child_concern_id AND a.id = ?";
+    $cordovaSQLite.execute(db,query,[$stateParams.adultConcernId])
+      .then( function(result) {
+        $scope.unsolvedProblem = result.rows.item(0);
+    },function(error){console.log(error);});
+  }
 })
 
 .controller('SolutionsCtrl', function($scope, $cordovaSQLite, $state, $stateParams) {
@@ -488,26 +495,13 @@ angular.module('starter.controllers', [])
 
 // OTHER FUNCTIONS
 
-// function getUnsolvedProblemById(unsolvedProblemId,cordovaSQLite) {
-//   var query ="SELECT * FROM unsolved_problems where id = ?";
-//   cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
-//       var unsolvedProblem = result.rows.item(0);
-//   },function(err){
-//       console.log(err.message);
-//     });
-//   return unsolvedProblem;
-// }
-//
-// function getChildConcernById(childConcernId,cordovaSQLite) {
-//   var query ="SELECT * FROM childs_concerns where id = ?";
-//   var childConcern = null;
-//   cordovaSQLite.execute(db,query,[childConcernId]).then(function(result){
-//     childConcern = result.rows.item(0);
-//     // console.log(childConcern);
-//   });
-//   console.log(childConcern);
-//   return childConcern;
-// }
+function getAdultConcernById(cordovaSQLite,adultConcernId){
+  var query ="SELECT * FROM adults_concerns where id = ?";
+  $cordovaSQLite.execute(db,query,[adultConcernId])
+    .then( function(result,callback) {
+      callback(result.rows.item(0));
+  });
+}
 
 function getUnsolvedProblems(cordovaSQLite) {
   var unsolved_problems = [];
