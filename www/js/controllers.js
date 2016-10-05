@@ -195,19 +195,33 @@ angular.module('starter.controllers', [])
 .controller('ParentConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams){
 
   $scope.parentsConcern = { description: ""};
+  $scope.parentsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.childConcernId);
 
-
-  $scope.parentsConcerns = getParentsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
-  $scope.findUnsolvedProblem = function(unsolvedProblem) {
-    var query ="SELECT * FROM unsolved_problems where id = ?;";
-    $cordovaSQLite.execute(db,query,[unsolvedProblem.id]).then(function(result){
-      $scope.itemf = result.rows.item(0);
-      $scope.unsolvedProblem.description = $scope.itemf.description;
+  $scope.findChildConcern = function() {
+    var query ="SELECT * FROM childs_concerns where id = ?";
+    $cordovaSQLite.execute(db,query,[$stateParams.childConcernId])
+      .then( function(result) {
+        $scope.childConcern = result.rows.item(0);
     });
-    $scope.unsolvedProblem = {};
-    $scope.unsolvedProblem.id = $stateParams.unsolvedProblemId;
   };
-
+  $scope.findUnsolvedProblem = function() {
+    var query =" SELECT * FROM childs_concerns,unsolved_problems where unsolved_problems.id = childs_concerns.unsolved_problem_id AND childs_concerns.id = ? ";
+    $cordovaSQLite.execute(db,query,[$stateParams.childConcernId])
+      .then( function(result) {
+        $scope.unsolvedProblem = result.rows.item(0);
+    },function(error){
+      console.log(error);
+    });
+  };
+  $scope.createParentsConcern = function(){
+    if (!inputFieldIsEmpty($scope.parentsConcern.description)) {
+      saveParentsConcern($cordovaSQLite,$scope.parentsConcern.description, $stateParams.childConcernId);
+      $scope.modalCreate.hide();
+      $state.go('app.defineTheProblem');
+      $scope.parentsConcern.description = "";
+      $scope.parentsConcerns= getAdultConcerns($cordovaSQLite,$stateParams.childConcernId);
+    }
+  };
   $ionicModal.fromTemplateUrl('create-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -256,18 +270,6 @@ angular.module('starter.controllers', [])
   $scope.$on('modalEdit.removed', function() {
     // Execute action
   });
-  $scope.createParentsConcern = function(){
-    if (!inputFieldIsEmpty($scope.parentsConcern.description))
-    {
-      console.log($stateParams.unsolvedProblemId);
-      saveParentsConcern($cordovaSQLite,$scope.parentsConcern.description, $stateParams.unsolvedProblemId);
-      $scope.modalCreate.hide();
-      $state.go('app.defineTheProblem',{ itemId: $stateParams.unsolvedProblemId});
-      $scope.parentsConcern.description = "";
-      $scope.parentsConcerns= getParentsConcern($cordovaSQLite,$stateParams.unsolvedProblemId);
-    }
-  };
-
 })
 
 .controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams){
@@ -486,6 +488,27 @@ angular.module('starter.controllers', [])
 
 // OTHER FUNCTIONS
 
+// function getUnsolvedProblemById(unsolvedProblemId,cordovaSQLite) {
+//   var query ="SELECT * FROM unsolved_problems where id = ?";
+//   cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
+//       var unsolvedProblem = result.rows.item(0);
+//   },function(err){
+//       console.log(err.message);
+//     });
+//   return unsolvedProblem;
+// }
+//
+// function getChildConcernById(childConcernId,cordovaSQLite) {
+//   var query ="SELECT * FROM childs_concerns where id = ?";
+//   var childConcern = null;
+//   cordovaSQLite.execute(db,query,[childConcernId]).then(function(result){
+//     childConcern = result.rows.item(0);
+//     // console.log(childConcern);
+//   });
+//   console.log(childConcern);
+//   return childConcern;
+// }
+
 function getUnsolvedProblems(cordovaSQLite) {
   var unsolved_problems = [];
   var query ="SELECT * FROM unsolved_problems ORDER BY sort_timestamp";
@@ -548,9 +571,9 @@ function saveChildsConcern(cordovaSQLite,childsConcern,unsolvedProblemId){
   cordovaSQLite.execute(db,query,[childsConcern,unsolvedProblemId]);
 }
 
-function saveParentsConcern(cordovaSQLite,parentsConcern,unsolvedProblemId){
-  var query ="INSERT INTO parents_concerns(description,unsolved_problem_id) VALUES (?,?)";
-  cordovaSQLite.execute(db,query,[parentsConcern,unsolvedProblemId]);
+function saveParentsConcern(cordovaSQLite,parentsConcern,childConcernId){
+  var query ="INSERT INTO adults_concerns(description,child_concern_id) VALUES (?,?)";
+  cordovaSQLite.execute(db,query,[parentsConcern,childConcernId]);
 }
 
 function saveSolution(cordovaSQLite,solution){
@@ -574,10 +597,10 @@ function getChildsConcern(cordovaSQLite,unsolvedProblemId){
   return childs_concerns;
 }
 
-function getParentsConcern(cordovaSQLite,unsolvedProblemId){
+function getAdultConcerns(cordovaSQLite,childConcernId){
   var parents_concerns = [];
-  var query ="SELECT * FROM parents_concerns WHERE unsolved_problem_id = ?";
-  cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
+  var query ="SELECT * FROM adults_concerns WHERE child_concern_id = ?";
+  cordovaSQLite.execute(db,query,[childConcernId]).then(function(result) {
     var rows = result.rows;
     if(rows.length) {
       for(var i=0; i < rows.length; i++){

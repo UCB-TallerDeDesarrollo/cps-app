@@ -1,12 +1,23 @@
 
 <ion-view cache-view="false" view-title="Define the Problem">
-  <div class="bar bar-subheader bar-positive">
-    <h2 class="title">Unsolved Problem #{{unsolvedProblem.id}} </h2>
-  </div>
 
-  <ion-content  ng-init="findUnsolvedProblem(unsolvedProblem)"  class=" has-subheader has-tabs" ng-controller="ParentConcernsCrtl">
+  <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-tabs" ng-controller="ParentConcernsCrtl">
+    <ion-list>
+      <div class="item item-divider item-text-wrap">
+        <p>Unsolved Problem #{{unsolvedProblem.id}}</p>
+      </div>
+      <div class="item item-divider item-text-wrap">
+        <p>{{unsolvedProblem.description}}</p>
+      </div>
+      <div class="item item-divider item-text-wrap">
+        <p>Child Concern</p>
+      </div>
+      <div class="item item-divider item-text-wrap">
+        <p>{{childConcern.description}}</p>
+      </div>
+    </ion-list>
     <div class="item item-text-wrap text-center">
-      <h2>My worry is....</h2>
+      <h2>As an adult: my worry is....</h2>
     </div>
     <div class="list">
  		  <label class="item item-input item-select">
@@ -19,18 +30,13 @@
  		    </select>
  		  </label>
  		</div>
-    <ion-list>
-      <div class="item item-divider item-text-wrap item-icon-right">
-        <p>{{unsolvedProblem.description}}</p>
-        <a ng-click="openModal()" class="watchlist_menu item-button">
-          <i class="icon ion-plus"></i>
-        </a>
-      </div>
-    </ion-list>
     <div ng-init="updateChildsConcerns()" class="padding">
       <ion-list can-swipe="true" >
-        <div align="center" class="item item-text-wrap list-title">
+        <div align="center" class="item item-text-wrap list-title item-icon-right">
           <p><b>List of Parent's Concerns</b></p>
+          <a ng-click="openModal()" class="watchlist_menu item-button">
+            <i class="icon ion-plus"></i>
+          </a>
         </div>
         <ion-item class="item item-text-wrap item-icon-right" href="#/app/defineTheProblem/{{unsolvedProblem.id}}" ng-repeat="parentsConcern in parentsConcerns">
           <p>{{parentsConcern.description}}</p>

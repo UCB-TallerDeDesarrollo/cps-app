@@ -94,7 +94,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   })
 
   .state('app.defineTheProblem', {
-    url: '/defineTheProblem/:id_unsolved',
+    url: '/defineTheProblem/:childConcernId',
     views: {
       'menuContent': {
         templateUrl: 'templates/defineTheProblem.html',
