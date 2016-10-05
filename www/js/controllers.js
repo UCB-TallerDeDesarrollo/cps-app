@@ -285,8 +285,8 @@ angular.module('starter.controllers', [])
     var indexOrder = $scope.childsConcerns[fromIndex].unsolved_order;
     $scope.childsConcerns[fromIndex].unsolved_order = $scope.childsConcerns[toIndex].unsolved_order;
     $scope.childsConcerns[toIndex].unsolved_order = indexOrder;
-    updateChildsConcernOrder($cordovaSQLite, [$scope.childsConcerns[fromIndex].unsolved_order.toString(), $scope.childsConcerns[fromIndex].id]);
-    updateChildsConcernOrder($cordovaSQLite, [$scope.childsConcerns[toIndex].unsolved_order.toString(), $scope.childsConcerns[toIndex].id]);
+    updateChildsConcernOrder($cordovaSQLite, [toIndex, $scope.childsConcerns[fromIndex].id]);
+    updateChildsConcernOrder($cordovaSQLite, [fromIndex, $scope.childsConcerns[toIndex].id]);
     $scope.childsConcerns.splice(fromIndex, 1);
     $scope.childsConcerns.splice(toIndex, 0, childsConcern);
   };
