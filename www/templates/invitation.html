@@ -5,37 +5,42 @@
       <div class="item item-divider item-text-wrap">
         <p>Unsolved Problem #{{unsolvedProblem.id}}</p>
       </div>
-      <div class="item item-divider item-text-wrap">
+      <div class="item item-text-wrap">
         <p>{{unsolvedProblem.description}}</p>
       </div>
       <div class="item item-divider item-text-wrap">
         <p>Child's'Concern</p>
       </div>
-      <div class="item item-divider item-text-wrap">
+      <div class="item item-text-wrap">
         <p>{{childConcern.description}}</p>
       </div>
       <div class="item item-divider item-text-wrap">
         <p>Adult's Concern</p>
       </div>
-      <div class="item item-divider item-text-wrap">
+      <div class="item item-text-wrap">
         <p>{{adultConcern.description}}</p>
       </div>
     </ion-list>
 
     <div ng-init="" class="padding">
       <ion-list can-swipe="true" >
-        <div align="center" class="item item-text-wrap list-title item-rigth-icon">
-          <p><b>Possible Solution</b></p>
+        <div align="center" class="item item-text-wrap list-title item-icon-right">
+          <p><b>Possible Solutions</b></p>
           <a ng-click="openModal()" class="watchlist_menu item-button">
             <i class="icon ion-plus"></i>
           </a>
         </div>
-        <div class="item item-text-wrap" ng-if="solution === null">
-          <p>Agree upon a solution.</p>
-        </div>
-        <div class="item item-text-wrap" ng-if="solution !== null">
+        <ion-item class="item item-text-wrap item-icon-right" href="#" ng-repeat="solution in solutions">
           <p>{{solution.description}}</p>
+          <a ng-click="editChildsConcern(childsConcern)" class="watchlist_menu item-button">
+            <i class="button button-light icon ion-edit"></i>
+          </a>
+          <ion-option-button ng-click="showConfirmChildsConcern(childsConcern)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
+        </ion-item>
+        <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
+          <p>No parent's concern registered. Please register one above.</p>
         </div>
+        </ion-list>
       </ion-list>
     </div>
 
@@ -60,6 +65,27 @@
             <div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;">
             </div>
           </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+    <script id="edit-modal.html" type="text/ng-template">
+      <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title" style="left: 67px; right: 67px;">Edit Solution</h1>
+          <button class="button button-clear button-primary" ng-click="modalEdit.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding scroll-content ionic-scroll  has-header">
+          <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+            <form>
+              <label class="item item-input">
+                <textarea rows=5 placeholder="Agree upon a solution" ng-model="solution.description">
+                </textarea>
+              </label>
+              <button class="button button-full button-positive" ng-if="!solution.description.length" ng-click="lala()" disabled>Save</button>
+              <button class="button button-full button-positive" ng-if="solution.description.length > 0" ng-click="lala()">Save</button>
+            </form>
+          </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div>
         </ion-content>
       </ion-modal-view>
     </script>

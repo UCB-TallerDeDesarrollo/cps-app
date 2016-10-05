@@ -314,6 +314,7 @@ angular.module('starter.controllers', [])
   $scope.$on('modal.removed', function() {
     // Execute action
   });
+
   $ionicModal.fromTemplateUrl('edit-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -419,19 +420,72 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams){
-  $scope.solution = null;
+.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal){
+
+  $scope.solution = {adultConcernId:$stateParams.adultConcernId};
+  $scope.solutions = getSolutions($cordovaSQLite, $stateParams.adultConcernId);
 
   $scope.initialSetUp = function(){
     findAdultConcern();
     findChildConcern();
     findUnsolvedProblem();
-    // query ="SELECT * FROM childs_concerns where id = ?";
-    // $cordovaSQLite.execute(db,query,[$scope.adultConcern.child_concern_id])
-    //   .then( function(result) {
-    //     $scope.childConcern = result.rows.item(0);
-    // });
   };
+  $scope.createSolution = function() {
+    if (!inputFieldIsEmpty($scope.solution.description)) {
+      saveSolution($cordovaSQLite,$scope.solution);
+      $scope.closeModal();
+      $scope.solutions = getSolutions($cordovaSQLite, $stateParams.adultConcernId);
+    }
+  };
+
+  $ionicModal.fromTemplateUrl('create-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modalCreate = modal;
+  });
+  $scope.openModal = function() {
+    $scope.modalCreate.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modalCreate.hide();
+  };
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modalCreate.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
+  $ionicModal.fromTemplateUrl('edit-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modalEdit = modal;
+  });
+  $scope.openModalEdit = function() {
+    $scope.modalEdit.show();
+  };
+  $scope.closeModalEdit = function() {
+    $scope.modalEdit.hide();
+  };
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modalEdit.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modalEdit.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modalEdit.removed', function() {
+    // Execute action
+  });
   function findAdultConcern() {
     var query ="SELECT * FROM adults_concerns where id = ?";
     $cordovaSQLite.execute(db,query,[$stateParams.adultConcernId])
@@ -535,19 +589,17 @@ function getLaggingSkills(cordovaSQLite){
   return lagging_skills;
 }
 
-function getSolutions(cordovaSQLite) {
+function getSolutions(cordovaSQLite,adultConcerdId) {
   var solutions = [];
-  var query ="SELECT * FROM solutions";
-  cordovaSQLite.execute(db,query).then(function(result) {
+  var query ="SELECT * FROM solutions WHERE adult_concern_id = ?";
+  cordovaSQLite.execute(db,query,[adultConcerdId]).then(function(result) {
     var rows = result.rows;
     if(rows.length) {
       for(var i=0; i < rows.length; i++){
         solutions.push(rows.item(i));
       }
     }
-    },function(err){
-      console.log(err.message);
-    });
+  },function(err){console.log(err.message);});
   return solutions;
 }
 
@@ -571,8 +623,8 @@ function saveParentsConcern(cordovaSQLite,parentsConcern,childConcernId){
 }
 
 function saveSolution(cordovaSQLite,solution){
-  var query ="INSERT INTO solutions(description) VALUES (?)";
-  cordovaSQLite.execute(db,query,[solution.description]);
+  var query ="INSERT INTO solutions(description,adult_concern_id) VALUES (?,?)";
+  console.log(cordovaSQLite.execute(db,query,[solution.description,solution.adultConcernId]));
 }
 
 function getChildsConcern(cordovaSQLite,unsolvedProblemId){
