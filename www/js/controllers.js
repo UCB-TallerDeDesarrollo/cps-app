@@ -1,3 +1,4 @@
+
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
@@ -197,20 +198,11 @@ angular.module('starter.controllers', [])
   $scope.parentsConcern = { description: ""};
   $scope.parentsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.childConcernId);
 
-<<<<<<< HEAD
-  $scope.parentsConcerns = getParentsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
-  $scope.findUnsolvedProblem = function(unsolvedProblem) {
-    var query ="SELECT * FROM unsolved_problems where id = ?;";
-    $cordovaSQLite.execute(db,query,[unsolvedProblem.id]).then(function(result){
-      $scope.itemf = result.rows.item(0);
-      $scope.unsolvedProblem.description = $scope.itemf.description;
-=======
   $scope.findChildConcern = function() {
     var query ="SELECT * FROM childs_concerns where id = ?";
     $cordovaSQLite.execute(db,query,[$stateParams.childConcernId])
       .then( function(result) {
         $scope.childConcern = result.rows.item(0);
->>>>>>> d8af9b0df74254060b40320778b5885edc7a7b9e
     });
   };
   $scope.findUnsolvedProblem = function() {
@@ -279,22 +271,6 @@ angular.module('starter.controllers', [])
   $scope.$on('modalEdit.removed', function() {
     // Execute action
   });
-<<<<<<< HEAD
-  
-  $scope.createParentsConcern = function(){
-    if (!inputFieldIsEmpty($scope.parentsConcern.description))
-    {
-      console.log($stateParams.unsolvedProblemId);
-      saveParentsConcern($cordovaSQLite,$scope.parentsConcern.description, $stateParams.unsolvedProblemId);
-      $scope.modalCreate.hide();
-      $state.go('app.defineTheProblem',{ itemId: $stateParams.unsolvedProblemId});
-      $scope.parentsConcern.description = "";
-      $scope.parentsConcerns= getParentsConcern($cordovaSQLite,$stateParams.unsolvedProblemId);
-    }
-  };
-
-=======
->>>>>>> d8af9b0df74254060b40320778b5885edc7a7b9e
 })
 
 .controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams){
