@@ -15,7 +15,7 @@
     <ion-list show-delete="false" can-swipe="true">
       <ion-item class="item-text-wrap item-icon-right" ng-repeat="solution in solutions">
         <a href="#/app/solutions/show/{{solution.id}}" class="no-text-decoration"><p>{{solution.description}}</p></a>
-        <a href="#/app/solutions/edit/{{solution.id}}" class="button button-light icon ion-edit"></a>
+        <ion-option-button class="button button-balanced ion-edit" ng-click="editSolution(solution)">&nbsp;Edit</ion-option-button>
       </ion-item>
     </ion-list>
     <div class="text-center">

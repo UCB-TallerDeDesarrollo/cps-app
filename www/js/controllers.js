@@ -147,6 +147,10 @@ angular.module('starter.controllers', [])
       $state.go('app.editUnsolvedProblem',{ unsolvedProblemId: unsolvedProblem.id});
     };
 
+    $scope.editSolution = function(solution) {
+      $state.go('app.editSolution',{ solutionId: solution.id});
+    };
+
     $scope.delete = function(item) {
         var query = "DELETE FROM unsolved_problems where id = ?";
         console.log(item);
