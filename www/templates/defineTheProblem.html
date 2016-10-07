@@ -1,15 +1,15 @@
 
 <ion-view cache-view="false" view-title="Define the Problem">
 
-  <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-tabs" ng-controller="ParentConcernsCrtl">
+  <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-tabs" ng-controller="AdultConcernsCrtl">
     <ion-list>
-      <div class="item item-divider item-text-wrap">
-        <p>Unsolved Problem #{{unsolvedProblem.id}}</p>
+      <div class="bar bar-subheader bar-positive">
+        <h2 class="title">Unsolved Problem #{{unsolvedProblem.id}}</h2>
       </div>
-      <div class="item item-text-wrap">
+      <div class="item item-text-wrap text-center">
         <p>{{unsolvedProblem.description}}</p>
       </div>
-      <div class="item item-divider item-text-wrap">
+      <div class="item item-divider item-text-wrap text-center">
         <p>Child's Concern</p>
       </div>
       <div class="item item-text-wrap">
@@ -32,20 +32,20 @@
     <div ng-init="updateChildsConcerns()" class="padding">
       <ion-list can-swipe="true" >
         <div align="center" class="item item-text-wrap list-title item-icon-right">
-          <p><b>List of Parent's Concerns</b></p>
+          <p><b>List of Adult's Concerns</b></p>
           <a ng-click="openModal()" class="watchlist_menu item-button">
             <i class="icon ion-plus"></i>
           </a>
         </div>
-        <ion-item class="item item-text-wrap item-icon-right" href="#/app/invitation/{{parentsConcern.id}}" ng-repeat="parentsConcern in parentsConcerns">
-          <p>{{parentsConcern.description}}</p>
+        <ion-item class="item item-text-wrap item-icon-right" href="#/app/invitation/{{adultsConcern.id}}" ng-repeat="adultsConcern in adultsConcerns">
+          <p>{{adultsConcern.description}}</p>
           <a ng-click="editChildsConcern(childsConcern)" class="watchlist_menu item-button">
             <i class="button button-light icon ion-edit"></i>
           </a>
           <ion-option-button ng-click="showConfirmChildsConcern(childsConcern)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
-          <p>No parent's concern registered. Please register one above.</p>
+          <p>No adult's concern registered. Please register one above.</p>
         </div>
       </ion-list>
     </div>
@@ -53,17 +53,17 @@
     <script id="create-modal.html" type="text/ng-template">
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
         <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title" style="left: 67px; right: 67px;">New parent's concern</h1>
+          <h1 class="title" style="left: 67px; right: 67px;">New adult's concern</h1>
           <button class="button button-clear button-primary" ng-click="modalCreate.hide()">Cancel</button>
         </ion-header-bar>
         <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
           <div class="list">
             <label class="item item-input">
-              <textarea rows=5 placeholder="Type a new parent's concern here." ng-model="parentsConcern.description">
+              <textarea rows=5 placeholder="Type a new adult's concern here." ng-model="adultsConcern.description">
               </textarea>
             </label>
-            <button class="button button-full button-positive" ng-if="!parentsConcern.description.length" ng-click="createParentsConcern()" disabled>Create</button>
-            <button class="button button-full button-positive" ng-if="parentsConcern.description.length > 0" ng-click="createParentsConcern()">Create</button>
+            <button class="button button-full button-positive" ng-if="!adultsConcern.description.length" ng-click="createAdultsConcern()" disabled>Create</button>
+            <button class="button button-full button-positive" ng-if="adultsConcern.description.length > 0" ng-click="createAdultsConcern()">Create</button>
           </div>
         </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
       </ion-modal-view>
@@ -72,7 +72,7 @@
     <script id="edit-modal.html" type="text/ng-template">
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
         <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title" style="left: 67px; right: 67px;">Edit parent's concern</h1>
+          <h1 class="title" style="left: 67px; right: 67px;">Edit adult's concern</h1>
           <button class="button button-clear button-primary" ng-click="modalEdit.hide()">Cancel</button>
         </ion-header-bar>
         <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
