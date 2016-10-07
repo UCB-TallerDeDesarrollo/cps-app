@@ -23,7 +23,9 @@
       <ion-list can-swipe="true" show-reorder="shouldShowReorder">
         <ion-item class="item item-text-wrap item-icon-right" href="#/app/defineTheProblem/{{childsConcern.id}}" ng-repeat="childsConcern in childsConcerns">
           <p>{{childsConcern.description}} </p>
-
+          <a href="#/app/defineTheProblem/{{childsConcern.id}}">
+            <i class="icon dark ion-chevron-right"></i>
+          </a>
           <ion-option-button class="button button-balanced ion-edit" ng-click="editChildsConcern(childsConcern)" ng-hide="{{shouldShowReorder}}">&nbsp;Edit</ion-option-button>
           <ion-option-button ng-click="showConfirmChildsConcern(childsConcern)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
           <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(childsConcern, $fromIndex, $toIndex)">

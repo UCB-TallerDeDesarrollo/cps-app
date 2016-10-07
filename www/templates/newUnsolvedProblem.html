@@ -3,7 +3,7 @@
     <ion-list show-delete="false" can-swipe="true" show-reorder="shouldShowReorder">
       <ion-item class="item-text-wrap item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems">
         <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration"><p>{{unsolvedProblem.description}}</p></a>
-
+        <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}"> <i class="icon dark ion-chevron-right"></i></a>
         <ion-option-button class="button button-balanced ion-edit" ng-click="editUnsolvedProblem(unsolvedProblem)" ng-hide="{{shouldShowReorder}}">&nbsp;Edit</ion-option-button>
         <ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-positive ion-more" ng-click="showActionsheet(unsolvedProblem)">&nbsp;More </ion-option-button>
         <!--ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-assertive ion-trash-a" ng-click="showConfirm(unsolvedProblem)">&nbsp;Delete </ion-option-button-->
