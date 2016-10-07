@@ -143,6 +143,10 @@ angular.module('starter.controllers', [])
       });
     };
 
+    $scope.editUnsolvedProblem = function(unsolvedProblem) {
+      $state.go('app.editUnsolvedProblem',{ unsolvedProblemId: unsolvedProblem.id});
+    };
+
     $scope.delete = function(item) {
         var query = "DELETE FROM unsolved_problems where id = ?";
         console.log(item);
