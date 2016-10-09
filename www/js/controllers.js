@@ -362,6 +362,30 @@ angular.module('starter.controllers', [])
     // Execute action
   });
 
+  $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $scope.unsolvedProblem.id)
+
+  $scope.verifyToGoToStep2 = function() {
+
+    console.log($scope.adultsConcerns);
+    console.log($scope.adultsConcerns.length);
+    if($scope.adultsConcerns.length == 0){
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Going to Step 2: Define the problem',
+        template: "Did you drill enough to get all your child's concerns?"
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+          console.log($scope.unsolvedProblem);
+          $state.go('app.defineTheProblem',{ childConcernId: $stateParams.unsolvedProblemId});
+        }
+      });
+    }
+    else {
+      $state.go('app.defineTheProblem',{ childConcernId: $stateParams.unsolvedProblemId});
+    }
+  };
+
   $scope.editChildsConcern = function(childsConcern){
     $scope.childsConcerntoEdit = childsConcern;
     $scope.editableChildsConcern = {
@@ -375,7 +399,7 @@ angular.module('starter.controllers', [])
     {
       saveChildsConcern($cordovaSQLite,$scope.childsConcern.description, $stateParams.unsolvedProblemId, $scope.childsConcerns.length);
       $scope.modalCreate.hide();
-      $state.go('app.showUnsolvedProblem',{ itemId: $stateParams.unsolvedProblemId});
+      $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: $stateParams.unsolvedProblemId});
       $scope.childsConcern.description = "";
       $scope.childsConcerns= getChildsConcern($cordovaSQLite,$stateParams.unsolvedProblemId);
     }
@@ -658,7 +682,7 @@ function saveChildsConcern(cordovaSQLite,childsConcern,unsolvedProblemId,orderId
 }
 
 function saveAdultsConcern(cordovaSQLite,adultsConcern,childConcernId){
-  var query ="INSERT INTO adults_concerns(description,child_concern_id) VALUES (?,?)";
+  var query ="INSERT INTO adults_concerns(description,unsolved_problem_id) VALUES (?,?)";
   cordovaSQLite.execute(db,query,[adultsConcern,childConcernId]);
 }
 
@@ -684,10 +708,10 @@ function getChildsConcern(cordovaSQLite,unsolvedProblemId){
   return childs_concerns;
 }
 
-function getAdultConcerns(cordovaSQLite,childConcernId){
+function getAdultConcerns(cordovaSQLite,unsolvedProblemId){
   var adults_concerns = [];
-  var query ="SELECT * FROM adults_concerns WHERE child_concern_id = ?";
-  cordovaSQLite.execute(db,query,[childConcernId]).then(function(result) {
+  var query ="SELECT * FROM adults_concerns WHERE unsolved_problem_id = ?";
+  cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
     var rows = result.rows;
     if(rows.length) {
       for(var i=0; i < rows.length; i++){
