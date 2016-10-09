@@ -39,7 +39,10 @@
         </div>
         <ion-item class="item item-text-wrap item-icon-right" href="#/app/invitation/{{adultsConcern.id}}" ng-repeat="adultsConcern in adultsConcerns">
           <p>{{adultsConcern.description}}</p>
-          <ion-option-button class="button button-balanced ion-edit" ng-click="editChildsConcern(childsConcern)">&nbsp;Edit</ion-option-button>
+          <a href="#/app/invitation/{{adultsConcern.id}}">
+            <i class="icon dark ion-chevron-right"></i>
+          </a>
+          <ion-option-button class="button button-balanced ion-edit" ng-click="editChildsConcern(adultsConcern)">&nbsp;Edit</ion-option-button>
           <ion-option-button ng-click="showConfirmChildsConcern(childsConcern)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
