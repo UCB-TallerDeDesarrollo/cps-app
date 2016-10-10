@@ -421,12 +421,12 @@ angular.module('starter.controllers', [])
       confirmPopup.then(function(res) {
         if(res) {
           console.log($scope.unsolvedProblem);
-          $state.go('app.defineTheProblem',{ childConcernId: $stateParams.unsolvedProblemId});
+          $state.go('app.defineTheProblem',{ unsolvedProblemId: $stateParams.unsolvedProblemId});
         }
       });
     }
     else {
-      $state.go('app.defineTheProblem',{ childConcernId: $stateParams.unsolvedProblemId});
+      $state.go('app.defineTheProblem',{ unsolvedProblemId: $stateParams.unsolvedProblemId});
     }
   };
 
@@ -515,7 +515,7 @@ angular.module('starter.controllers', [])
   console.log($scope);
 
   $scope.initialSetUp = function(){
-    findUnsolvedProblem();  
+    findUnsolvedProblem();
     findChildsConcerns();
     findAdultsConcerns();
   };
