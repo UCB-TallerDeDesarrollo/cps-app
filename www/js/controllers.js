@@ -513,11 +513,9 @@ angular.module('starter.controllers', [])
 .controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal){
 
   console.log($scope);
-  $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
-  $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
 
   $scope.initialSetUp = function(){
-    findUnsolvedProblem();
+    findUnsolvedProblem();  
     findChildsConcerns();
     findAdultsConcerns();
   };
@@ -616,7 +614,7 @@ angular.module('starter.controllers', [])
       description: ""
     };
     $scope.childsConcerns =getChildsConcern($cordovaSQLite);
-    $scope.adultsConcern =getAdultsConcern($cordovaSQLite);
+    $scope.adultsConcerns =getAdultsConcern($cordovaSQLite);
     $scope.unsolvedProblem = {
         description: "",
         id:$stateParams.id_unsolved

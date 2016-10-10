@@ -8,3 +8,12 @@
 .no-text-decoration {
   text-decoration: none;
 }
+progress[value] {
+  width: 80%;
+  height: 5px;
+  bottom: -4px;
+  position: absolute;
+}
+progress::-webkit-progress-value {
+    background: #81BEF7;
+}
