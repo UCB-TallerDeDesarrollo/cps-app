@@ -95,7 +95,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   })
 
   .state('app.defineTheProblem', {
-    url: '/defineTheProblem/:childConcernId',
+    url: '/defineTheProblem/:unsolvedProblemId',
     views: {
       'menuContent': {
         templateUrl: 'templates/defineTheProblem.html',
@@ -105,7 +105,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   })
 
   .state('app.invitation', {
-    url: '/invitation/:adultConcernId',
+    url: '/invitation/:unsolvedProblemId',
     views: {
       'menuContent': {
         templateUrl: 'templates/invitation.html',

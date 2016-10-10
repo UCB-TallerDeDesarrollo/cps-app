@@ -9,16 +9,25 @@
         <p>{{unsolvedProblem.description}}</p>
       </div>
       <div class="item item-divider item-text-wrap">
-        <p>Child's'Concern</p>
+        <p>Child's'Concerns</p>
       </div>
       <div class="item item-text-wrap">
-        <p>{{childConcern.description}}</p>
+        <ion-list inset>
+          <ion-item class="item item-text-wrap" ng-repeat="childConcern in childsConcerns">
+            <p>{{childConcern.description}}</p>
+          </ion-item>
+        </ion-list>
       </div>
       <div class="item item-divider item-text-wrap">
-        <p>Adult's Concern</p>
+        <p>Adult's Concerns</p>
       </div>
       <div class="item item-text-wrap">
-        <p>{{adultConcern.description}}</p>
+        <ion-list inset>
+          <ion-item class="item item-text-wrap" ng-repeat="adultConcern in adultsConcerns">
+            <p>{{adultConcern.description}}</p>
+          </ion-item>
+        </ion-list>
+
       </div>
     </ion-list>
 
@@ -40,7 +49,6 @@
         <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
           <p>Agree upon a solution.</p>
         </div>
-        </ion-list>
       </ion-list>
     </div>
 
