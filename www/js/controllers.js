@@ -1,4 +1,3 @@
-
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
@@ -513,9 +512,10 @@ angular.module('starter.controllers', [])
 .controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal){
 
   console.log($scope);
-
+  $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
+  $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.initialSetUp = function(){
-    findUnsolvedProblem();  
+    findUnsolvedProblem();
     findChildsConcerns();
     findAdultsConcerns();
   };
