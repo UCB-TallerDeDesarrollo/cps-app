@@ -104,16 +104,35 @@ angular.module('starter.controllers', [])
     }
   };
 
+
+  $scope.childsConcernsFlag = function(unsolvedProblem){
+      var query ="SELECT COUNT(*) AS childsCount FROM childs_concerns where unsolved_problem_id = ?";
+      $cordovaSQLite.execute(db,query,[unsolvedProblem.id])
+        .then( function(result) {
+          $scope.childsFlag = result.rows.item(0).childsCount;
+      });
+  };
+  $scope.adultsConcernsFlag = function(unsolvedProblem){
+    var query ="SELECT COUNT(*) adultsCount FROM adults_concerns where unsolved_problem_id = ?";
+    $cordovaSQLite.execute(db,query,[unsolvedProblem.id])
+      .then( function(result) {
+        $scope.adultsFlag = result.rows.item(0).adultsCount;
+    });
+  };
   $scope.openUnsolvedProblem = function(unsolvedProblem){
     $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: unsolvedProblem.id});
   };
 
   $scope.openStep2 = function(unsolvedProblem){
-    $state.go('app.defineTheProblem',{ itemId: unsolvedProblem.id});
+    $state.go('app.defineTheProblem',{ childConcernId: unsolvedProblem.id});
   };
 
+  $scope.childsFlag = 0;
+  $scope.adultsFlag = 0;
   $scope.showActionsheet = function(unsolvedProblem) {
-
+    $scope.adultsConcernsFlag(unsolvedProblem);
+    $scope.childsConcernsFlag(unsolvedProblem);
+    console.log($scope);
       $ionicActionSheet.show({
         buttons: [
           { text: 'Step 1: Empathy Step' },
@@ -126,13 +145,39 @@ angular.module('starter.controllers', [])
           $ionicListDelegate.closeOptionButtons();
         },
         buttonClicked: function(index) {
+
           if(index === 0){
             $scope.openUnsolvedProblem(unsolvedProblem);
           }
           if(index == 1){
-            $scope.openStep2(unsolvedProblem);
+            if($scope.childsFlag == 0){
+              var alertPopup = $ionicPopup.alert({
+                 title: 'Step 2 wasn\'t unlocked.',
+                 template: 'You have to finish previous steps to continue.'
+               });
+               alertPopup.then(function(res) {
+                 console.log('Stays at unsolved problems view.');
+               });
+            }else {
+              $scope.openStep2(unsolvedProblem);
+            }
           }
+          if(index==2){
+            if($scope.childsFlag == 0 || $scope.adultsFlag == 0){
+              var alertPopup = $ionicPopup.alert({
+                 title: 'Step 3 wasn\'t unlocked.',
+                 template: 'You have to finish previous steps to continue.'
+               });
+               alertPopup.then(function(res) {
+                 console.log('Stays at unsolved problems view.');
+               });
+            }else {
+            }
+          }
+          $ionicListDelegate.closeOptionButtons();
+
           return true;
+
         },
         destructiveButtonClicked: function() {
           $scope.showConfirm(unsolvedProblem);
@@ -365,9 +410,6 @@ angular.module('starter.controllers', [])
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $scope.unsolvedProblem.id)
 
   $scope.verifyToGoToStep2 = function() {
-
-    console.log($scope.adultsConcerns);
-    console.log($scope.adultsConcerns.length);
     if($scope.adultsConcerns.length == 0){
       var confirmPopup = $ionicPopup.confirm({
         title: 'Going to Step 2: Define the problem',
@@ -725,7 +767,6 @@ function getAdultConcerns(cordovaSQLite,unsolvedProblemId){
     });
   return adults_concerns;
 }
-
 function updateUnsolvedProblem($cordovaSQLite, params){
   var query = "";
   if(params.length > 2){
