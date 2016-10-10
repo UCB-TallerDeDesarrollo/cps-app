@@ -420,12 +420,12 @@ angular.module('starter.controllers', [])
       confirmPopup.then(function(res) {
         if(res) {
           console.log($scope.unsolvedProblem);
-          $state.go('app.defineTheProblem',{ childConcernId: $stateParams.unsolvedProblemId});
+          $state.go('app.defineTheProblem',{ unsolvedProblemId: $stateParams.unsolvedProblemId});
         }
       });
     }
     else {
-      $state.go('app.defineTheProblem',{ childConcernId: $stateParams.unsolvedProblemId});
+      $state.go('app.defineTheProblem',{ unsolvedProblemId: $stateParams.unsolvedProblemId});
     }
   };
 
