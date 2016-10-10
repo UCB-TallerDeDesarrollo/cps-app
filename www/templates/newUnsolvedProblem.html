@@ -1,15 +1,17 @@
 <ion-view cache-view="false" view-title="Unsolved Problems">
   <ion-content class="padding" ng-controller="UnsolvedProblemCtrl">
-    <ion-list show-delete="false" can-swipe="true" show-reorder="shouldShowReorder">
-      <ion-item class="item-text-wrap item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems">
-        <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration"><p>{{unsolvedProblem.description}}</p><progress value={{unsolvedProblem.solved}} max=100></progress></a>
-        <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}"> <i class="icon dark ion-chevron-right"></i></a>
-        <ion-option-button class="button button-balanced ion-edit" ng-click="editUnsolvedProblem(unsolvedProblem)" ng-hide="{{shouldShowReorder}}">&nbsp;Edit</ion-option-button>
-        <ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-positive ion-more" ng-click="showActionsheet(unsolvedProblem)">&nbsp;More </ion-option-button>
-        <!--ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-assertive ion-trash-a" ng-click="showConfirm(unsolvedProblem)">&nbsp;Delete </ion-option-button-->
-        <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(unsolvedProblem, $fromIndex, $toIndex)"> </ion-reorder-button>
-      </ion-item>
-    </ion-list>
+    <div ng-init="updateUnsolvedProblems()">
+      <ion-list show-delete="false" can-swipe="true" show-reorder="shouldShowReorder">
+        <ion-item class="item-text-wrap item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems">
+          <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration"><p>{{unsolvedProblem.description}}</p><progress value={{unsolvedProblem.solved}} max=100></progress></a>
+          <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}"> <i class="icon dark ion-chevron-right"></i></a>
+          <ion-option-button class="button button-balanced ion-edit" ng-click="editUnsolvedProblem(unsolvedProblem)" ng-hide="{{shouldShowReorder}}">&nbsp;Edit</ion-option-button>
+          <ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-positive ion-more" ng-click="showActionsheet(unsolvedProblem)">&nbsp;More </ion-option-button>
+          <!--ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-assertive ion-trash-a" ng-click="showConfirm(unsolvedProblem)">&nbsp;Delete </ion-option-button-->
+          <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(unsolvedProblem, $fromIndex, $toIndex)"> </ion-reorder-button>
+        </ion-item>
+      </ion-list>
+    </div>
     <div name="text-center reorder-button-wrapper" class="padding-top">
       <button class="button button-small button-calm" ng-show="unsolvedProblems.length > 1 && !shouldShowReorder" ng-click="shouldShowReorder = true">Reorder</button>
       <button class="button button-small button-balanced" ng-show="unsolvedProblems.length > 1 && shouldShowReorder" ng-click="shouldShowReorder = false">Done</button>
