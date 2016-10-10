@@ -150,7 +150,7 @@ angular.module('starter.controllers', [])
             $scope.openUnsolvedProblem(unsolvedProblem);
           }
           if(index == 1){
-            if($scope.childsFlag == 0){
+            if($scope.childsFlag === 0){
               var alertPopup = $ionicPopup.alert({
                  title: 'Step 2 wasn\'t unlocked.',
                  template: 'You have to finish previous steps to continue.'
@@ -163,12 +163,12 @@ angular.module('starter.controllers', [])
             }
           }
           if(index==2){
-            if($scope.childsFlag == 0 || $scope.adultsFlag == 0){
-              var alertPopup = $ionicPopup.alert({
+            if($scope.childsFlag === 0 || $scope.adultsFlag === 0){
+              var alertPopupForUnsolved = $ionicPopup.alert({
                  title: 'Step 3 wasn\'t unlocked.',
                  template: 'You have to finish previous steps to continue.'
                });
-               alertPopup.then(function(res) {
+               alertPopupForUnsolved.then(function(res) {
                  console.log('Stays at unsolved problems view.');
                });
             }else {
@@ -407,10 +407,10 @@ angular.module('starter.controllers', [])
     // Execute action
   });
 
-  $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $scope.unsolvedProblem.id)
+  $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $scope.unsolvedProblem.id);
 
   $scope.verifyToGoToStep2 = function() {
-    if($scope.adultsConcerns.length == 0){
+    if($scope.adultsConcerns.length === 0){
       var confirmPopup = $ionicPopup.confirm({
         title: 'Going to Step 2: Define the problem',
         template: "Did you drill enough to get all your child's concerns?",
