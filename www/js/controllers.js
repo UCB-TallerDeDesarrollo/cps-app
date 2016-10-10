@@ -725,8 +725,8 @@ function saveAdultsConcern(cordovaSQLite,adultsConcern,childConcernId){
 }
 
 function saveSolution(cordovaSQLite,solution){
-  var query ="INSERT INTO solutions(description,adult_concern_id) VALUES (?,?)";
-  console.log(cordovaSQLite.execute(db,query,[solution.description,solution.adultConcernId]));
+  var query ="INSERT INTO solutions(description,unsolved_problem_id) VALUES (?,?)";
+  console.log(cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId]));
 }
 
 function getChildsConcern(cordovaSQLite,unsolvedProblemId){
