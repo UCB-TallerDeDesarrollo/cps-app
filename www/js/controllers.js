@@ -159,11 +159,12 @@ angular.module('starter.controllers', [])
     $state.go('app.defineTheProblem',{ childConcernId: unsolvedProblem.id});
   };
 
-  $ionicModal.fromTemplateUrl('create-modal.html', {
+  $ionicModal.fromTemplateUrl('templates/unsolvedProblems/create-unsolved-problem-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modalCreate = modal;
+    $scope.closeModalCreate();
   });
   $scope.openModalCreate = function() {
     $scope.modalCreate.show();
@@ -176,11 +177,12 @@ angular.module('starter.controllers', [])
     $scope.modalCreate.remove();
   });
 
-  $ionicModal.fromTemplateUrl('edit-modal.html', {
+  $ionicModal.fromTemplateUrl('templates/unsolvedProblems/edit-unsolved-problem-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modalEdit = modal;
+    $scope.closeModalEdit();
   });
   $scope.openModalEdit = function() {
     $scope.modalEdit.show();

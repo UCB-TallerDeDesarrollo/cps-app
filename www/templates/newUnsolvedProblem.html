@@ -26,39 +26,4 @@
       </ion-list>
     </div>
   </ion-content>
-  <script id="create-modal.html" type="text/ng-template">
-    <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
-      <ion-header-bar class="bar bar-header bar-positive">
-        <h1 class="title" style="left: 67px; right: 67px;">New unsolved problem</h1>
-        <button class="button button-clear button-primary" ng-click="modalCreate.hide()">Cancel</button>
-      </ion-header-bar>
-      <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
-        <div class="list">
-          <label class="item item-input">
-            <textarea rows=5 placeholder="Type a new unsolved problem here." ng-model="unsolvedProblem.description">
-            </textarea>
-          </label>
-          <button class="button button-full button-positive" ng-disabled="!unsolvedProblem.description.length" ng-click="createUnsolvedProblem()">Create</button>
-        </div>
-      </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
-    </ion-modal-view>
-  </script>
-
-  <script id="edit-modal.html" type="text/ng-template">
-    <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
-      <ion-header-bar class="bar bar-header bar-positive">
-        <h1 class="title" style="left: 67px; right: 67px;">Edit child&apos;s concern</h1>
-        <button class="button button-clear button-primary" ng-click="modalEdit.hide()">Cancel</button>
-      </ion-header-bar>
-      <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
-        <form>
-          <label class="item item-input">
-            <textarea rows=5 placeholder="Type a new child's concern here." ng-model="editableUnsolvedProblem.description">
-            </textarea>
-          </label>
-          <button class="button button-full button-positive" ng-disabled="!editableUnsolvedProblem.description.length" ng-click="saveUnsolvedProblemChanges()">Save</button>
-        </form>
-      </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
-    </ion-modal-view>
-  </script>
 </ion-view>
