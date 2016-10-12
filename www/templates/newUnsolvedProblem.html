@@ -1,38 +1,65 @@
-<ion-view cache-view="false" view-title="Unsolved Problems">
-  <ion-content class="padding" ng-controller="UnsolvedProblemCtrl">
+<ion-view cache-view="false" view-title="Plan B">
+  <ion-content ng-controller="UnsolvedProblemCtrl">
+
     <div ng-init="updateUnsolvedProblems()">
+      <div class="item item-divider item-text-wrap">
+        <a class="watchlist_menu button button-small button-clear button-positive" ng-show="unsolvedProblems.length > 1 && !shouldShowReorder" ng-click="shouldShowReorder = true">  <i class="icon ion-shuffle"></i></a>
+        <a class="watchlist_menu button button-small button-clear button-positive" ng-show="unsolvedProblems.length > 1 && shouldShowReorder" ng-click="shouldShowReorder = false">  <i class="icon ion-archive"></i></a>
+        <a ng-click="openModal()" class="watchlist_menu button button-small button-clear button-positive">
+          <i class="icon ion-plus"></i>
+        </a>
+        <div class="col col-75">
+          <h2><b>Unsolved Problems</b></h2>
+        </div>
+      </div>
       <ion-list show-delete="false" can-swipe="true" show-reorder="shouldShowReorder">
-        <ion-item class="item-text-wrap item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems">
-          <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration"><p>{{unsolvedProblem.description}}</p><progress value={{unsolvedProblem.solved}} max=100></progress></a>
-          <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}"> <i class="icon dark ion-chevron-right"></i></a>
-          <ion-option-button class="button button-balanced ion-edit" ng-click="editUnsolvedProblem(unsolvedProblem)" ng-hide="{{shouldShowReorder}}">&nbsp;Edit</ion-option-button>
-          <ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-positive ion-more" ng-click="showActionsheet(unsolvedProblem)">&nbsp;More </ion-option-button>
-          <!--ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-assertive ion-trash-a" ng-click="showConfirm(unsolvedProblem)">&nbsp;Delete </ion-option-button-->
-          <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(unsolvedProblem, $fromIndex, $toIndex)"> </ion-reorder-button>
-        </ion-item>
+          <ion-item class="item-text-wrap item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems">
+            <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration">
+              <div name="content">
+                <p>{{unsolvedProblem.description}}</p>
+                <i class="icon dark ion-chevron-right"></i>
+              </div>
+            </a>
+            <ion-option-button class="button button-balanced ion-edit" ng-click="editUnsolvedProblem(unsolvedProblem)" ng-hide="{{shouldShowReorder}}">&nbsp;Edit</ion-option-button>
+            <ion-option-button ng-controller="DeleteUnsolvedProblemCtrl" class="button-positive ion-more" ng-click="showActionsheet(unsolvedProblem)">&nbsp;More </ion-option-button>
+            <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(unsolvedProblem, $fromIndex, $toIndex)"> </ion-reorder-button>
+          </ion-item>
       </ion-list>
     </div>
-    <div name="text-center reorder-button-wrapper" class="padding-top">
-      <button class="button button-small button-calm" ng-show="unsolvedProblems.length > 1 && !shouldShowReorder" ng-click="shouldShowReorder = true">Reorder</button>
-      <button class="button button-small button-balanced" ng-show="unsolvedProblems.length > 1 && shouldShowReorder" ng-click="shouldShowReorder = false">Done</button>
-    </div>
-    <div class="text-center">
-      <h4>Enter new unsolved problem</h4>
-    </div>
-    <div class="list card" ng-if="description.length == 0">
-      <a class="item item-icon-left assertive">
-        <i class="icon ion-alert"></i>
-        You cannot save an empty unsolved problem.
-      </a>
-    </div>
-    <form>
-     <label class="item item-input">
-       <textarea rows=5 placeholder="Type a new unsolved problem here" ng-model="unsolvedProblem.description">
-       </textarea>
-     </label>
-     <button class="button button-block button-positive" ng-click="createUnsolvedProblem()" ng-if="!unsolvedProblem.description" disabled="true">Create</button>
-     <button class="button button-block button-positive" ng-click="createUnsolvedProblem()" ng-if="unsolvedProblem.description.length > 0">Create</button>
-
-    </form>
   </ion-content>
+  <script id="create-modal.html" type="text/ng-template">
+    <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title" style="left: 67px; right: 67px;">New unsolved problem</h1>
+        <button class="button button-clear button-primary" ng-click="modalCreate.hide()">Cancel</button>
+      </ion-header-bar>
+      <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+        <div class="list">
+          <label class="item item-input">
+            <textarea rows=5 placeholder="Type a new unsolved problem here." ng-model="unsolvedProblem.description">
+            </textarea>
+          </label>
+          <button class="button button-full button-positive" ng-disabled="!unsolvedProblem.description.length" ng-click="createUnsolvedProblem()">Create</button>
+        </div>
+      </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
+    </ion-modal-view>
+  </script>
+
+  <script id="edit-modal.html" type="text/ng-template">
+    <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title" style="left: 67px; right: 67px;">Edit child&apos;s concern</h1>
+        <button class="button button-clear button-primary" ng-click="modalEdit.hide()">Cancel</button>
+      </ion-header-bar>
+      <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+        <form>
+          <label class="item item-input">
+            <textarea rows=5 placeholder="Type a new child's concern here." ng-model="editableUnsolvedProblem.description">
+            </textarea>
+          </label>
+          <button class="button button-full button-positive" ng-disabled="!editableUnsolvedProblem.description.length" ng-click="saveUnsolvedProblemChanges()">Save</button>
+        </form>
+      </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
+    </ion-modal-view>
+  </script>
 </ion-view>

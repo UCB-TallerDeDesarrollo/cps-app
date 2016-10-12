@@ -79,17 +79,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     url: '/unsolvedProblem/show/:unsolvedProblemId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/showUnsolvedProblem.html',
-        controller: 'EditUnsolvedProblemCtrl'
-      }
-    }
-  })
-  .state('app.editUnsolvedProblem', {
-    url: '/unsolvedProblems/edit/:unsolvedProblemId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/editUnsolvedProblem.html',
-        controller: 'EditUnsolvedProblemCtrl'
+        templateUrl: 'templates/showUnsolvedProblem.html'
       }
     }
   })
