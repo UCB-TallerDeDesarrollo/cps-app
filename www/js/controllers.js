@@ -171,6 +171,10 @@ angular.module('starter.controllers', [])
   $scope.closeModalCreate = function() {
     $scope.modalCreate.hide();
   };
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modalCreate.remove();
+  });
 
   $ionicModal.fromTemplateUrl('edit-modal.html', {
     scope: $scope,
@@ -184,6 +188,10 @@ angular.module('starter.controllers', [])
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
   };
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modalEdit.remove();
+  });
 
   $scope.childsFlag = 0;
   $scope.adultsFlag = 0;
