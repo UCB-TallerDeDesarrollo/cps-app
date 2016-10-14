@@ -346,7 +346,7 @@ angular.module('starter.controllers', [])
  };
 })
 
-.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup){
+.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet){
   $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
   $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.initialSetUp = function(){
@@ -362,6 +362,40 @@ angular.module('starter.controllers', [])
       $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
     }
   };
+  $scope.more = function(solution) {
+    var hideSheet = $ionicActionSheet.show({
+       buttons: [
+         { text: 'Edit Solution' },
+       ],
+       destructiveText: 'Delete Solution',
+       titleText: 'Modify your album',
+       cancelText: 'Cancel',
+       cancel: function() {
+            console.log("cancel");
+        },
+       buttonClicked: function(index) {
+         if(index === 0){
+           $scope.editSolution(solution);
+         }
+        return true;
+       },
+       destructiveButtonClicked: function() {
+         console.log("Should destroy");
+        //  $scope.showConfirm(solution);
+        //  $ionicListDelegate.closeOptionButtons();
+
+         return true;
+       }
+     });
+  };
+  $scope.editSolution = function(solution){
+    $scope.solutionEdit = solution;
+    $scope.editableSolution = {
+      description: solution.description,
+      id: solution.id
+    };
+    $scope.openModalEdit();
+  };
   $scope.updateSolution = function(){
     if (!inputFieldIsEmpty($scope.editableSolution.description)) {
       updateSolution($cordovaSQLite,$scope.editableSolution);
@@ -372,14 +406,6 @@ angular.module('starter.controllers', [])
     else {
       $scope.emptyInput = true;
     }
-  };
-  $scope.editSolution = function(solution){
-    $scope.solutionEdit = solution;
-    $scope.editableSolution = {
-      description: solution.description,
-      id: solution.id
-    };
-    $scope.openModalEdit();
   };
   $ionicModal.fromTemplateUrl('create-modal.html', {
     scope: $scope,
@@ -451,7 +477,7 @@ angular.module('starter.controllers', [])
     buttons: [
       { type: 'button-assertive ion-sad-outline ',
         onTap: function(e) {
-          $scope.showConfirmBestAndWordsRates(solution,1,unsolvedProblem);
+          $scope.showConfirmWorstRate(solution,1,unsolvedProblem);
         }
       },
       { type: 'button-energized ion-heart-broken' ,
@@ -468,27 +494,17 @@ angular.module('starter.controllers', [])
       },
       { type: 'button-calm ion-happy-outline',
         onTap: function(e) {
-          $scope.showConfirmBestAndWordsRates(solution,4,unsolvedProblem);
+          $scope.showConfirmBestRate(solution,4,unsolvedProblem);
         }
       }
     ]
   });
 
-  $scope.showConfirmBestAndWordsRates = function(solution,score,unsolvedProblem) {
-
-    var confirmPopup;
-    if(score == 1){
-        confirmPopup = $ionicPopup.confirm({
-        title: 'Worst Rate for this solution',
-        template: 'Are you sure that this solution dont help to solve the unsolved problem?'
-      });
-    }
-    else{
-        confirmPopup = $ionicPopup.confirm({
-        title: 'Best Rate for this solution',
-        template: 'Are you sure that this solution solved the unsolved problem?'
-      });
-    }
+  $scope.showConfirmBestRate = function(solution,score,unsolvedProblem) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Best Rate for this solution',
+      template: 'Are you sure that this solution solved the unsolved problem?'
+    });
 
     confirmPopup.then(function(res) {
       if(res) {
@@ -497,6 +513,21 @@ angular.module('starter.controllers', [])
       }
     });
   };
+
+  $scope.showConfirmWorstRate = function(solution,score,unsolvedProblem) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Worst Rate for this solution',
+      template: 'Are you sure that this solution dont help to solve the unsolved problem?'
+    });
+
+    confirmPopup.then(function(res) {
+      if(res) {
+        $scope.RateSolution(solution,score);
+        $scope.BestRate(unsolvedProblem);
+      }
+    });
+  };
+
   };
 
 
