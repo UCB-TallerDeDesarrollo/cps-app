@@ -380,13 +380,32 @@ angular.module('starter.controllers', [])
         return true;
        },
        destructiveButtonClicked: function() {
-         console.log("Should destroy");
-        //  $scope.showConfirm(solution);
+
+         $scope.showDeletionConfirm(solution);
         //  $ionicListDelegate.closeOptionButtons();
 
          return true;
        }
      });
+  };
+  $scope.showDeletionConfirm = function(solution) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Delete Solution',
+      template: 'Are you sure you want to delete this solution?'
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        $scope.deleteSolution(solution);
+      }
+    });
+  };
+  $scope.deleteSolution = function (solution) {
+    var query = "DELETE FROM solutions where id = ?";
+    $cordovaSQLite.execute(db, query, [solution.id]).then(function(res) {
+        $scope.solutions.splice($scope.solutions.indexOf(solution), 1);
+    }, function (err) {
+        console.error(err);
+    });
   };
   $scope.editSolution = function(solution){
     $scope.solutionEdit = solution;
