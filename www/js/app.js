@@ -25,6 +25,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
     DataSeed.seed($cordovaSQLite, db);
+    //DataSeed.deleteSeed($cordovaSQLite, db);
   });
 })
 

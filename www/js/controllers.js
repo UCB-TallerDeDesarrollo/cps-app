@@ -346,7 +346,7 @@ angular.module('starter.controllers', [])
  };
 })
 
-.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal){
+.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup){
 
   console.log($scope);
   $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
@@ -358,6 +358,7 @@ angular.module('starter.controllers', [])
   };
   $scope.createSolution = function() {
     if (!inputFieldIsEmpty($scope.solution.description)) {
+      $scope.solution.rating=0;
       saveSolution($cordovaSQLite,$scope.solution);
       $scope.closeModal();
       $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
@@ -444,11 +445,69 @@ angular.module('starter.controllers', [])
   function findAdultsConcerns() {
     $scope.adultsConcerns = getAdultConcerns($cordovaSQLite,$stateParams.unsolvedProblemId);
   }
+  //function here
+  $scope.showScore = function(solution,unsolvedProblem) {
+    var myPopup = $ionicPopup.show({
+    title: 'Rate the Solution',
+    subTitle: 'You can rate it by clicking one of the buttons below',
+    buttons: [
+      { type: 'button-assertive ion-sad-outline ',
+        onTap: function(e) {
+          $scope.RateSolution(solution,1);
+        }
+      },
+      { type: 'button-energized ion-heart-broken' ,
+        onTap: function(e) {
+          $scope.RateSolution(solution,2);
+        }
+      },
+      { type: 'button-balanced ion-heart' ,
+        onTap: function(e) {
+          $scope.RateSolution(solution,3);
+        }
+      },
+      { type: 'button-balanced ion-edit' ,
+        onTap: function(e) {
+          $scope.BestRate(unsolvedProblem);
+        }
+      },
+      { type: 'button-calm ion-happy-outline',
+        onTap: function(e) {
+          $scope.RateSolution(solution,4);
+        }
+      }
+    ]
+  });
+  };
+
+
+  $scope.RateSolution = function(solution, Score){
+    var query = "UPDATE solutions SET rating = ? Where id = ?";
+    $cordovaSQLite.execute(db, query, [Score, solution.id]);
+    $state.go('app.invitation');
+  };
+
+  $scope.BestRate = function(unsolvedProblem){
+    var query = "SELECT MAX(rating) AS 'Rating' FROM solutions Where unsolved_problem_id = ?";
+    var query2 = "UPDATE unsolved_problems SET unsolved_score = ? Where id = ?";
+    $cordovaSQLite.execute(db, query, [unsolvedProblem.id])
+    .then( function(result) {
+      var maxscore= result.rows.item(0);
+      $cordovaSQLite.execute(db, query2, [maxscore.Rating,unsolvedProblem.id]);
+    },function(error){
+    console.log(error);
+    });
+
+  };
+
+
+
 })
 
 .controller('SolutionsCtrl', function($scope, $cordovaSQLite, $state, $stateParams) {
   $scope.solution = {
-      description: ""
+      description: "",
+      rating: 0
     };
     $scope.childsConcerns =getChildsConcern($cordovaSQLite);
     $scope.adultsConcerns =getAdultsConcern($cordovaSQLite);
@@ -545,8 +604,8 @@ function inputFieldIsEmpty(description) {
 }
 
 function saveUnsolvedProblem(cordovaSQLite, unsolvedProblem){
-  var query = "INSERT INTO unsolved_problems(description, solved, unsolved_order) VALUES (?,?,?)";
-  cordovaSQLite.execute(db, query, [unsolvedProblem.description, 0, unsolvedProblem.unsolved_order]);
+  var query = "INSERT INTO unsolved_problems(description, solved, unsolved_order, unsolved_score) VALUES (?,?,?,?)";
+  cordovaSQLite.execute(db, query, [unsolvedProblem.description, 0, unsolvedProblem.unsolved_order,0]);
 }
 
 function saveChildsConcern(cordovaSQLite,childsConcern,unsolvedProblemId,orderId){
@@ -560,8 +619,8 @@ function saveAdultsConcern(cordovaSQLite,adultsConcern,childConcernId){
 }
 
 function saveSolution(cordovaSQLite,solution){
-  var query ="INSERT INTO solutions(description,unsolved_problem_id) VALUES (?,?)";
-  console.log(cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId]));
+  var query ="INSERT INTO solutions(description,unsolved_problem_id,rating) VALUES (?,?,?)";
+  console.log(cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId,solution.rating]));
 }
 
 function getChildsConcern(cordovaSQLite,unsolvedProblemId){

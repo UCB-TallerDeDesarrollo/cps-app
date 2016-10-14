@@ -20,9 +20,9 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       unsolvedProblemOrderModifier = -1;
     }
     for(var i = lesserIndex; i < greaterIndex; i++ ){
-      updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[i].description, i + unsolvedProblemOrderModifier, $scope.unsolvedProblems[i].id]);
+      updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[i].description, i + unsolvedProblemOrderModifier, $scope.unsolvedProblems[i].id,0]);
     }
-    updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[fromIndex].description, toIndex, $scope.unsolvedProblems[fromIndex].id]);
+    updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[fromIndex].description, toIndex, $scope.unsolvedProblems[fromIndex].id,0]);
     $scope.unsolvedProblems.splice(fromIndex, 1);
     $scope.unsolvedProblems.splice(toIndex, 0, unsolvedProblem);
   };
@@ -30,6 +30,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   $scope.createUnsolvedProblem = function() {
     if (!inputFieldIsEmpty($scope.unsolvedProblem.description)) {
       $scope.unsolvedProblem.unsolved_order = $scope.unsolvedProblems.length;
+      $scope.unsolvedProblem.unsolved_score = 0;
       saveUnsolvedProblem($cordovaSQLite,$scope.unsolvedProblem);
       $scope.unsolvedProblem = {};
       $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite);

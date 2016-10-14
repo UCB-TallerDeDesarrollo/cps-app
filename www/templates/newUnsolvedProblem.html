@@ -15,7 +15,7 @@
           <ion-item class="item-text-wrap item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems">
             <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration">
               <div name="content">
-                <p>{{unsolvedProblem.description}}</p>
+                <p>{{unsolvedProblem.unsolved_score}} -- {{unsolvedProblem.description}}</p>
                 <i class="icon dark ion-chevron-right"></i>
               </div>
             </a>

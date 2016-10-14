@@ -42,11 +42,12 @@
           </a>
         </div>
         <ion-item class="item item-text-wrap item-icon-right" href="#" ng-repeat="solution in solutions">
-          <p>{{solution.description}}</p>
+          <p>{{solution.rating}} -- {{solution.description}}</p>
           <a href="#">
             <i class="icon dark ion-chevron-right"></i>
           </a>
           <ion-option-button class="button button-balanced ion-edit" ng-click="editSolution(solution)">&nbsp;Edit</ion-option-button>
+          <ion-option-button class="button button-calm ion-star" ng-click="showScore(solution,unsolvedProblem)">&nbsp;Score</ion-option-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
           <p>Agree upon a solution.</p>
