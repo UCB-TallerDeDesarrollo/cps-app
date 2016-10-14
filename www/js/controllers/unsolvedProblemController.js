@@ -1,9 +1,11 @@
-angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblems, $cordovaSQLite, $state, $ionicActionSheet,$ionicListDelegate, $ionicPopup, $ionicModal, $stateParams) {
+angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblemFactory, $cordovaSQLite, $state, $ionicActionSheet,$ionicListDelegate, $ionicPopup, $ionicModal, $stateParams) {
   $scope.unsolvedProblem = {};
   $scope.shouldShowReorder = false;
 
-  $scope.updateUnsolvedProblems = function(){
-    $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite);
+  $scope.updateUnsolvedProblems = function(callback){
+    UnsolvedProblemFactory.all(function(result){
+      $scope.unsolvedProblems = result;
+    });
   };
 
   $scope.moveItem = function(unsolvedProblem, fromIndex, toIndex) {
@@ -20,9 +22,22 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       unsolvedProblemOrderModifier = -1;
     }
     for(var i = lesserIndex; i < greaterIndex; i++ ){
-      updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[i].description, i + unsolvedProblemOrderModifier, $scope.unsolvedProblems[i].id,0]);
+      UnsolvedProblemFactory.update({
+        description: $scope.unsolvedProblems[i].description,
+        unsolved_order: (i + unsolvedProblemOrderModifier),
+        unsolved_score: $scope.unsolvedProblems[i].id,
+        id: $scope.unsolvedProblems[i].id
+      });
     }
-    updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[fromIndex].description, toIndex, $scope.unsolvedProblems[fromIndex].id,0]);
+    UnsolvedProblemFactory.update({
+      description: $scope.unsolvedProblems[fromIndex].description,
+      unsolved_order: toIndex,
+      unsolved_score: $scope.unsolvedProblems[fromIndex].description,
+      id: $scope.unsolvedProblems[fromIndex].id
+    });
+    //   updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[i].description, i + unsolvedProblemOrderModifier, $scope.unsolvedProblems[i].id,0]);
+    // }
+    // updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[fromIndex].description, toIndex, $scope.unsolvedProblems[fromIndex].id,0]);
     $scope.unsolvedProblems.splice(fromIndex, 1);
     $scope.unsolvedProblems.splice(toIndex, 0, unsolvedProblem);
   };
@@ -31,9 +46,9 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     if (!inputFieldIsEmpty($scope.unsolvedProblem.description)) {
       $scope.unsolvedProblem.unsolved_order = $scope.unsolvedProblems.length;
       $scope.unsolvedProblem.unsolved_score = 0;
-      saveUnsolvedProblem($cordovaSQLite,$scope.unsolvedProblem);
+      UnsolvedProblemFactory.insert($scope.unsolvedProblem);
       $scope.unsolvedProblem = {};
-      $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite);
+      $scope.updateUnsolvedProblems();
       $scope.closeModalCreate();
     }
   };
@@ -46,10 +61,10 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
 
   $scope.saveUnsolvedProblemChanges = function(){
     if (!inputFieldIsEmpty($scope.editableUnsolvedProblem.description)) {
-      updateUnsolvedProblem($cordovaSQLite, [$scope.editableUnsolvedProblem.description, $scope.editableUnsolvedProblem.id]);
+      UnsolvedProblemFactory.update($scope.editableUnsolvedProblem);
       $scope.modalEdit.hide();
       $scope.editableUnsolvedProblem = {};
-      $scope.unsolvedProblems = getUnsolvedProblems($cordovaSQLite,$stateParams.unsolvedProblemId);
+      $scope.updateUnsolvedProblems();
     }
   };
 

@@ -61,20 +61,6 @@ angular.module('starter.services', ['ngCordova'])
   };
 })
 
-.factory('UnsolvedProblems', function() {
-  // Temporary unsolved problem lists
-  var unsolvedProblems = [];
-  return {
-    all: function() {
-      return unsolvedProblems;
-    },
-    insert: function(desc) {
-      unsolvedProblems.push({description:desc});
-    }
-  };
-})
-
-
 .factory('DataSeed', function() {
   return {
     seed: function($cordovaSQLite, db) {
