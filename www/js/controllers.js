@@ -136,7 +136,7 @@ angular.module('starter.controllers', [])
       $scope.adultsConcerns= getAdultConcerns($cordovaSQLite,$stateParams.unsolvedProblemId);
     }
   };
-  $ionicModal.fromTemplateUrl('create-modal.html', {
+  $ionicModal.fromTemplateUrl('templates/adultsConcerns/create-adults-concern-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
@@ -160,7 +160,7 @@ angular.module('starter.controllers', [])
   $scope.$on('modal.removed', function() {
     // Execute action
   });
-  $ionicModal.fromTemplateUrl('edit-modal.html', {
+  $ionicModal.fromTemplateUrl('templates/adultsConcerns/create-adults-concern-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
@@ -220,7 +220,7 @@ angular.module('starter.controllers', [])
     $scope.unsolvedProblem.id = $stateParams.unsolvedProblemId;
   };
 
-  $ionicModal.fromTemplateUrl('templates/childConcerns/create-child-concern-modal.html', {
+  $ionicModal.fromTemplateUrl('templates/childsConcerns/create-child-concern-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
@@ -245,7 +245,7 @@ angular.module('starter.controllers', [])
     // Execute action
   });
 
-  $ionicModal.fromTemplateUrl('templates/childConcerns/edit-child-concern-modal.html', {
+  $ionicModal.fromTemplateUrl('templates/childsConcerns/edit-child-concern-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
