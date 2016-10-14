@@ -451,7 +451,7 @@ angular.module('starter.controllers', [])
     buttons: [
       { type: 'button-assertive ion-sad-outline ',
         onTap: function(e) {
-          $scope.showConfirmWorstRate(solution,1,unsolvedProblem);
+          $scope.showConfirmBestAndWordsRates(solution,1,unsolvedProblem);
         }
       },
       { type: 'button-energized ion-heart-broken' ,
@@ -468,17 +468,27 @@ angular.module('starter.controllers', [])
       },
       { type: 'button-calm ion-happy-outline',
         onTap: function(e) {
-          $scope.showConfirmBestRate(solution,4,unsolvedProblem);
+          $scope.showConfirmBestAndWordsRates(solution,4,unsolvedProblem);
         }
       }
     ]
   });
 
-  $scope.showConfirmBestRate = function(solution,score,unsolvedProblem) {
-    var confirmPopup = $ionicPopup.confirm({
-      title: 'Best Rate for this solution',
-      template: 'Are you sure that this solution solved the unsolved problem?'
-    });
+  $scope.showConfirmBestAndWordsRates = function(solution,score,unsolvedProblem) {
+
+    var confirmPopup;
+    if(score == 1){
+        confirmPopup = $ionicPopup.confirm({
+        title: 'Worst Rate for this solution',
+        template: 'Are you sure that this solution dont help to solve the unsolved problem?'
+      });
+    }
+    else{
+        confirmPopup = $ionicPopup.confirm({
+        title: 'Best Rate for this solution',
+        template: 'Are you sure that this solution solved the unsolved problem?'
+      });
+    }
 
     confirmPopup.then(function(res) {
       if(res) {
@@ -487,21 +497,6 @@ angular.module('starter.controllers', [])
       }
     });
   };
-
-  $scope.showConfirmWorstRate = function(solution,score,unsolvedProblem) {
-    var confirmPopup = $ionicPopup.confirm({
-      title: 'Worst Rate for this solution',
-      template: 'Are you sure that this solution dont help to solve the unsolved problem?'
-    });
-
-    confirmPopup.then(function(res) {
-      if(res) {
-        $scope.RateSolution(solution,score);
-        $scope.BestRate(unsolvedProblem);
-      }
-    });
-  };
-
   };
 
 
