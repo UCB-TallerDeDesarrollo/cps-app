@@ -1,22 +1,18 @@
-
-<ion-view cache-view="false" view-title="Define the Problem">
-
-  <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-tabs" ng-controller="AdultConcernsCrtl">
+<ion-view cache-view="false" view-title="Define the Problem" ng-controller="AdultConcernsCrtl">
+  <div class="bar bar-subheader bar-positive item-text-wrap">
+    <h2 class="title">{{unsolvedProblem.description}}</h2>
+  </div>
+  <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-subheader has-tabs">
+    <br>
     <ion-list>
-      <div class="bar bar-subheader bar-positive">
-        <h2 class="title">Unsolved Problem #{{unsolvedProblem.id}}</h2>
-      </div>
-      <div class="item item-text-wrap text-center">
-        <p>{{unsolvedProblem.description}}</p>
-      </div>
-      <div class="item item-divider item-text-wrap text-center">
-        <p>Child's Concern</p>
+      <div class="item item-text-wrap item-divider">
+        <h2>Child's Concerns</h2>
       </div>
       <div class="item item-text-wrap">
-        <p>{{childConcern.description}}</p>
+        <h3>{{childConcern.description}}</h3>
       </div>
     </ion-list>
-<br>
+    <br>
     <div class="list">
  		  <label class="item item-input item-select">
  		    <div class="input-label">
