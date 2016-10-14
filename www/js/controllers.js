@@ -111,6 +111,8 @@ angular.module('starter.controllers', [])
   $scope.adultsConcern = { description: ""};
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
 
+  $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
+  
   $scope.findChildConcern = function() {
     var query ="SELECT * FROM childs_concerns where id = ?";
     $cordovaSQLite.execute(db,query,[$stateParams.unsolvedProblemId])

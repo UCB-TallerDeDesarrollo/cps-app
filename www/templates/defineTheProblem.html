@@ -8,8 +8,8 @@
       <div class="item item-text-wrap item-divider">
         <h2>Child's Concerns</h2>
       </div>
-      <div class="item item-text-wrap">
-        <h3>{{childConcern.description}}</h3>
+      <div class="item item-text-wrap" ng-repeat="childConcern in childsConcerns">
+        <p>{{childConcern.description}}</p>
       </div>
     </ion-list>
     <br>
