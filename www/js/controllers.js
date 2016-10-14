@@ -452,26 +452,25 @@ angular.module('starter.controllers', [])
       { type: 'button-assertive ion-sad-outline ',
         onTap: function(e) {
           $scope.RateSolution(solution,1);
+          $scope.BestRate(unsolvedProblem);
         }
       },
       { type: 'button-energized ion-heart-broken' ,
         onTap: function(e) {
           $scope.RateSolution(solution,2);
+          $scope.BestRate(unsolvedProblem);
         }
       },
       { type: 'button-balanced ion-heart' ,
         onTap: function(e) {
           $scope.RateSolution(solution,3);
-        }
-      },
-      { type: 'button-balanced ion-edit' ,
-        onTap: function(e) {
           $scope.BestRate(unsolvedProblem);
         }
       },
       { type: 'button-calm ion-happy-outline',
         onTap: function(e) {
           $scope.RateSolution(solution,4);
+          $scope.BestRate(unsolvedProblem);
         }
       }
     ]
@@ -497,7 +496,7 @@ angular.module('starter.controllers', [])
     });
 
   };
-  
+
 });
 
 // OTHER FUNCTIONS
