@@ -497,48 +497,7 @@ angular.module('starter.controllers', [])
     });
 
   };
-
-
-
-})
-
-.controller('SolutionsCtrl', function($scope, $cordovaSQLite, $state, $stateParams) {
-  $scope.solution = {
-      description: "",
-      rating: 0
-    };
-    $scope.childsConcerns =getChildsConcern($cordovaSQLite);
-    $scope.adultsConcerns =getAdultsConcern($cordovaSQLite);
-    $scope.unsolvedProblem = {
-        description: "",
-        id:$stateParams.id_unsolved
-    };
-  $scope.solutions = getSolutions($cordovaSQLite);
-
-
-  $scope.createSolution = function() {
-    if (!inputFieldIsEmpty($scope.solution.description)) {
-      saveSolution($cordovaSQLite,$scope.solution);
-      $scope.solution = {};
-      $scope.solutions = getSolutions($cordovaSQLite);
-    }
-  };
-
-  $scope.updateSolution = function() {
-    if (!inputFieldIsEmpty($scope.editableSolution.description)) {
-      updateSolution($cordovaSQLite, [$scope.editableSolution.description,$scope.solution.id]);
-      $state.go('app.newSolution');
-    }
-  };
-
-  $scope.find = function() {
-    var query ="SELECT * FROM solutions where id = ?";
-    $cordovaSQLite.execute(db,query,[$stateParams.solutionId])
-      .then( function(result) {
-        $scope.solution = result.rows.item(0);
-        $scope.editableSolution = $scope.solution;
-    });
-  };
+  
 });
 
 // OTHER FUNCTIONS
