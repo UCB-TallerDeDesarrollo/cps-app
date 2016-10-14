@@ -25,14 +25,19 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       UnsolvedProblemFactory.update({
         description: $scope.unsolvedProblems[i].description,
         unsolved_order: (i + unsolvedProblemOrderModifier),
+        unsolved_score: $scope.unsolvedProblems[i].id,
         id: $scope.unsolvedProblems[i].id
       });
     }
     UnsolvedProblemFactory.update({
       description: $scope.unsolvedProblems[fromIndex].description,
       unsolved_order: toIndex,
-      id: $scope.unsolvedProblems[i].id
+      unsolved_score: $scope.unsolvedProblems[fromIndex].description,
+      id: $scope.unsolvedProblems[fromIndex].id
     });
+    //   updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[i].description, i + unsolvedProblemOrderModifier, $scope.unsolvedProblems[i].id,0]);
+    // }
+    // updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[fromIndex].description, toIndex, $scope.unsolvedProblems[fromIndex].id,0]);
     $scope.unsolvedProblems.splice(fromIndex, 1);
     $scope.unsolvedProblems.splice(toIndex, 0, unsolvedProblem);
   };
@@ -40,6 +45,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   $scope.createUnsolvedProblem = function() {
     if (!inputFieldIsEmpty($scope.unsolvedProblem.description)) {
       $scope.unsolvedProblem.unsolved_order = $scope.unsolvedProblems.length;
+      $scope.unsolvedProblem.unsolved_score = 0;
       UnsolvedProblemFactory.insert($scope.unsolvedProblem);
       $scope.unsolvedProblem = {};
       $scope.updateUnsolvedProblems();

@@ -25,6 +25,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
     DataSeed.seed($cordovaSQLite, db);
+    //DataSeed.deleteSeed($cordovaSQLite, db);
   });
 })
 
@@ -130,35 +131,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: 'HelpTopicContentCtrl'
       }
     }
-  })
-
-  .state('app.newSolution', {
-    url: '/solutions/new',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/newSolution.html',
-        controller: 'SolutionsCtrl'
-      }
-    }
-  })
-  .state('app.showSolution', {
-    url: '/solutions/show/:solutionId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/showSolution.html',
-        controller: 'SolutionsCtrl'
-      }
-    }
-  })
-  .state('app.editSolution', {
-    url: '/solutions/edit/:solutionId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/editSolution.html',
-        controller: 'SolutionsCtrl'
-      }
-    }
   });
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/laggingSkills');
 })

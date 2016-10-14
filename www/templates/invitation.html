@@ -1,35 +1,26 @@
-<ion-view cache-view="false" view-title="Invitation Step">
-
-  <ion-content  ng-init="initialSetUp()"  class="has-tabs" ng-controller="InvitationCtrl">
+<ion-view cache-view="false" view-title="Invitation Step" ng-controller="InvitationCtrl">
+  <div class="bar bar-subheader bar-positive">
+    <h2 class="title">{{unsolvedProblem.description}}</h2>
+  </div>
+  <ion-content  ng-init="initialSetUp()"  class="has-tabs has-subheader">
+    <br>
     <ion-list>
       <div class="item item-divider item-text-wrap">
-        <p>Unsolved Problem #{{unsolvedProblem.id}}</p>
+        <h2>I wonder if there is a way to help you with</h2>
       </div>
-      <div class="item item-text-wrap">
-        <p>{{unsolvedProblem.description}}</p>
-      </div>
+        <ion-item class="item item-text-wrap" ng-repeat="childConcern in childsConcerns">
+          <p>{{childConcern.description}}</p>
+        </ion-item>
+        <br>
       <div class="item item-divider item-text-wrap">
-        <p>I wonder if there is a way to help you with</p>
+        <h2>So that</h2>
       </div>
-      <div class="item item-text-wrap">
-        <ion-list inset>
-          <ion-item class="item item-text-wrap" ng-repeat="childConcern in childsConcerns">
-            <p>{{childConcern.description}}</p>
-          </ion-item>
-        </ion-list>
-      </div>
+        <ion-item class="item item-text-wrap" ng-repeat="adultConcern in adultsConcerns">
+          <p>{{adultConcern.description}}</p>
+        </ion-item>
+        <br>
       <div class="item item-divider item-text-wrap">
-        <p>So that</p>
-      </div>
-      <div class="item item-text-wrap">
-        <ion-list inset>
-          <ion-item class="item item-text-wrap" ng-repeat="adultConcern in adultsConcerns">
-            <p>{{adultConcern.description}}</p>
-          </ion-item>
-        </ion-list>
-      </div>
-      <div class="item item-divider item-text-wrap">
-        <p>Do you have any ideas?</p>
+        <h2>Do you have any ideas?</h2>
       </div>
     </ion-list>
 
@@ -41,12 +32,13 @@
             <i class="icon ion-plus"></i>
           </a>
         </div>
-        <ion-item class="item item-text-wrap item-icon-right" href="#" ng-repeat="solution in solutions">
-          <p>{{solution.description}}</p>
-          <a href="#">
+        <ion-item class="item item-text-wrap item-icon-right" ng-repeat="solution in solutions">
+          <p>{{solution.rating}} -- {{solution.description}}</p>
+          <a>
             <i class="icon dark ion-chevron-right"></i>
           </a>
           <ion-option-button class="button button-balanced ion-edit" ng-click="editSolution(solution)">&nbsp;Edit</ion-option-button>
+          <ion-option-button class="button button-calm ion-star" ng-click="showScore(solution,unsolvedProblem)">&nbsp;Score</ion-option-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
           <p>Agree upon a solution.</p>

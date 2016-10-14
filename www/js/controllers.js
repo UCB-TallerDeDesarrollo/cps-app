@@ -346,9 +346,7 @@ angular.module('starter.controllers', [])
  };
 })
 
-.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal){
-
-  console.log($scope);
+.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup){
   $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
   $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.initialSetUp = function(){
@@ -358,6 +356,7 @@ angular.module('starter.controllers', [])
   };
   $scope.createSolution = function() {
     if (!inputFieldIsEmpty($scope.solution.description)) {
+      $scope.solution.rating=0;
       saveSolution($cordovaSQLite,$scope.solution);
       $scope.closeModal();
       $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
@@ -444,44 +443,82 @@ angular.module('starter.controllers', [])
   function findAdultsConcerns() {
     $scope.adultsConcerns = getAdultConcerns($cordovaSQLite,$stateParams.unsolvedProblemId);
   }
-})
+  //function here
+  $scope.showScore = function(solution,unsolvedProblem) {
+    var myPopup = $ionicPopup.show({
+    title: 'Rate the Solution',
+    subTitle: 'You can rate it by clicking one of the buttons below',
+    buttons: [
+      { type: 'button-assertive ion-sad-outline ',
+        onTap: function(e) {
+          $scope.showConfirmBestAndWordsRates(solution,1,unsolvedProblem);
+        }
+      },
+      { type: 'button-energized ion-heart-broken' ,
+        onTap: function(e) {
+          $scope.RateSolution(solution,2);
+          $scope.BestRate(unsolvedProblem);
+        }
+      },
+      { type: 'button-balanced ion-heart' ,
+        onTap: function(e) {
+          $scope.RateSolution(solution,3);
+          $scope.BestRate(unsolvedProblem);
+        }
+      },
+      { type: 'button-calm ion-happy-outline',
+        onTap: function(e) {
+          $scope.showConfirmBestAndWordsRates(solution,4,unsolvedProblem);
+        }
+      }
+    ]
+  });
 
-.controller('SolutionsCtrl', function($scope, $cordovaSQLite, $state, $stateParams) {
-  $scope.solution = {
-      description: ""
-    };
-    $scope.childsConcerns =getChildsConcern($cordovaSQLite);
-    $scope.adultsConcerns =getAdultsConcern($cordovaSQLite);
-    $scope.unsolvedProblem = {
-        description: "",
-        id:$stateParams.id_unsolved
-    };
-  $scope.solutions = getSolutions($cordovaSQLite);
+  $scope.showConfirmBestAndWordsRates = function(solution,score,unsolvedProblem) {
 
-
-  $scope.createSolution = function() {
-    if (!inputFieldIsEmpty($scope.solution.description)) {
-      saveSolution($cordovaSQLite,$scope.solution);
-      $scope.solution = {};
-      $scope.solutions = getSolutions($cordovaSQLite);
+    var confirmPopup;
+    if(score == 1){
+        confirmPopup = $ionicPopup.confirm({
+        title: 'Worst Rate for this solution',
+        template: 'Are you sure that this solution dont help to solve the unsolved problem?'
+      });
     }
-  };
-
-  $scope.updateSolution = function() {
-    if (!inputFieldIsEmpty($scope.editableSolution.description)) {
-      updateSolution($cordovaSQLite, [$scope.editableSolution.description,$scope.solution.id]);
-      $state.go('app.newSolution');
+    else{
+        confirmPopup = $ionicPopup.confirm({
+        title: 'Best Rate for this solution',
+        template: 'Are you sure that this solution solved the unsolved problem?'
+      });
     }
-  };
 
-  $scope.find = function() {
-    var query ="SELECT * FROM solutions where id = ?";
-    $cordovaSQLite.execute(db,query,[$stateParams.solutionId])
-      .then( function(result) {
-        $scope.solution = result.rows.item(0);
-        $scope.editableSolution = $scope.solution;
+    confirmPopup.then(function(res) {
+      if(res) {
+        $scope.RateSolution(solution,score);
+        $scope.BestRate(unsolvedProblem);
+      }
     });
   };
+  };
+
+
+  $scope.RateSolution = function(solution, Score){
+    var query = "UPDATE solutions SET rating = ? Where id = ?";
+    $cordovaSQLite.execute(db, query, [Score, solution.id]);
+    $state.go('app.invitation');
+  };
+
+  $scope.BestRate = function(unsolvedProblem){
+    var query = "SELECT MAX(rating) AS 'Rating' FROM solutions Where unsolved_problem_id = ?";
+    var query2 = "UPDATE unsolved_problems SET unsolved_score = ? Where id = ?";
+    $cordovaSQLite.execute(db, query, [unsolvedProblem.id])
+    .then( function(result) {
+      var maxscore= result.rows.item(0);
+      $cordovaSQLite.execute(db, query2, [maxscore.Rating,unsolvedProblem.id]);
+    },function(error){
+    console.log(error);
+    });
+
+  };
+
 });
 
 // OTHER FUNCTIONS
@@ -521,6 +558,7 @@ function inputFieldIsEmpty(description) {
     return description.length === 0;
 }
 
+// Funcion no utilizada en ninguna parte (segun mi buscador de atom :P)
 function getAdultConcernById($cordovaSQLite, adultConcernId){
   var query ="SELECT * FROM adults_concerns where id = ?";
   $cordovaSQLite.execute(db,query,[adultConcernId])
@@ -540,8 +578,8 @@ function saveAdultsConcern(cordovaSQLite,adultsConcern,childConcernId){
 }
 
 function saveSolution(cordovaSQLite,solution){
-  var query ="INSERT INTO solutions(description,unsolved_problem_id) VALUES (?,?)";
-  console.log(cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId]));
+  var query ="INSERT INTO solutions(description,unsolved_problem_id,rating) VALUES (?,?,?)";
+  console.log(cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId,solution.rating]));
 }
 
 function getChildsConcern(cordovaSQLite,unsolvedProblemId){

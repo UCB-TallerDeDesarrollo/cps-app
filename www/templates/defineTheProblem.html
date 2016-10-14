@@ -1,22 +1,18 @@
-
-<ion-view cache-view="false" view-title="Define the Problem">
-
-  <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-tabs" ng-controller="AdultConcernsCrtl">
+<ion-view cache-view="false" view-title="Define the Problem" ng-controller="AdultConcernsCrtl">
+  <div class="bar bar-subheader bar-positive item-text-wrap">
+    <h2 class="title">{{unsolvedProblem.description}}</h2>
+  </div>
+  <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-subheader has-tabs">
+    <br>
     <ion-list>
-      <div class="bar bar-subheader bar-positive">
-        <h2 class="title">Unsolved Problem #{{unsolvedProblem.id}}</h2>
-      </div>
-      <div class="item item-text-wrap text-center">
-        <p>{{unsolvedProblem.description}}</p>
-      </div>
-      <div class="item item-divider item-text-wrap text-center">
-        <p>Child's Concern</p>
+      <div class="item item-text-wrap item-divider">
+        <h2>Child's Concerns</h2>
       </div>
       <div class="item item-text-wrap">
-        <p>{{childConcern.description}}</p>
+        <h3>{{childConcern.description}}</h3>
       </div>
     </ion-list>
-<br>
+    <br>
     <div class="list">
  		  <label class="item item-input item-select">
  		    <div class="input-label">
@@ -54,7 +50,7 @@
     <script id="create-modal.html" type="text/ng-template">
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
         <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title" style="left: 67px; right: 67px;">New adult's concern</h1>
+          <h1 class="title" style="left: 67px; right: 67px;">New adult&apos;s concern</h1>
           <button class="button button-clear button-primary" ng-click="modalCreate.hide()">Cancel</button>
         </ion-header-bar>
         <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
@@ -73,7 +69,7 @@
     <script id="edit-modal.html" type="text/ng-template">
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
         <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title" style="left: 67px; right: 67px;">Edit adult's concern</h1>
+          <h1 class="title" style="left: 67px; right: 67px;">Edit adult&apos;s concern</h1>
           <button class="button button-clear button-primary" ng-click="modalEdit.hide()">Cancel</button>
         </ion-header-bar>
         <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
