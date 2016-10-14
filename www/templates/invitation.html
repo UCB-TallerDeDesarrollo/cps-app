@@ -41,9 +41,9 @@
             <i class="icon ion-plus"></i>
           </a>
         </div>
-        <ion-item class="item item-text-wrap item-icon-right" href="#" ng-repeat="solution in solutions">
+        <ion-item class="item item-text-wrap item-icon-right" ng-repeat="solution in solutions">
           <p>{{solution.rating}} -- {{solution.description}}</p>
-          <a href="#">
+          <a>
             <i class="icon dark ion-chevron-right"></i>
           </a>
           <ion-option-button class="button button-balanced ion-edit" ng-click="editSolution(solution)">&nbsp;Edit</ion-option-button>
