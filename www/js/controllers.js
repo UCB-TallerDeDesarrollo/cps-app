@@ -112,7 +112,11 @@ angular.module('starter.controllers', [])
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
 
   $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
-  
+
+  $scope.updateAdultsConcerns = function(){
+    $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
+  };
+
   $scope.findChildConcern = function() {
     var query ="SELECT * FROM childs_concerns where id = ?";
     $cordovaSQLite.execute(db,query,[$stateParams.unsolvedProblemId])
@@ -138,6 +142,30 @@ angular.module('starter.controllers', [])
       $scope.adultsConcerns= getAdultConcerns($cordovaSQLite,$stateParams.unsolvedProblemId);
     }
   };
+
+
+
+  $scope.editAdultsConcern = function(adultsConcern){
+    $scope.adultsConcerntoEdit = adultsConcern;
+    $scope.editableAdultsConcern = {
+      description: adultsConcern.description
+    };
+    $scope.openModalEdit();
+  };
+
+
+  $scope.updateAdultsConcern = function(){
+    if (!inputFieldIsEmpty($scope.editableAdultsConcern.description)) {
+      updateAdultsConcern($cordovaSQLite, [$scope.editableAdultsConcern.description,$scope.adultsConcerntoEdit.id]);
+      $scope.modalEdit.hide();
+      $scope.adultsConcerntoEdit = {};
+      $scope.adultsConcerns= getAdultsConcern($cordovaSQLite,$stateParams.unsolvedProblemId);
+    }
+    else {
+      $scope.emptyInput = true;
+    }
+  };
+
   $ionicModal.fromTemplateUrl('templates/adultsConcerns/create-adults-concern-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -162,6 +190,9 @@ angular.module('starter.controllers', [])
   $scope.$on('modal.removed', function() {
     // Execute action
   });
+
+
+
   $ionicModal.fromTemplateUrl('templates/adultsConcerns/create-adults-concern-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -186,6 +217,32 @@ angular.module('starter.controllers', [])
   $scope.$on('modalEdit.removed', function() {
     // Execute action
   });
+
+  $ionicModal.fromTemplateUrl('templates/adultsConcerns/edit-adults-concern-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modalEdit = modal;
+  });
+  $scope.openModalEdit = function() {
+    $scope.modalEdit.show();
+  };
+  $scope.closeModalEdit = function() {
+    $scope.modalEdit.hide();
+  };
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modalEdit.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modalEdit.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modalEdit.removed', function() {
+    // Execute action
+  });
+
 })
 
 .controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $stateParams){
@@ -680,6 +737,12 @@ function updateChildsConcernOrder($cordovaSQLite,params){
 function updateChildsConcern($cordovaSQLite, params){
   var query = "";
   query = "UPDATE childs_concerns SET description = ? where id = ?";
+  return $cordovaSQLite.execute(db, query, params);
+}
+
+function updateAdultsConcern($cordovaSQLite, params){
+  var query = "";
+  query = "UPDATE adults_concerns SET description = ? where id = ?";
   return $cordovaSQLite.execute(db, query, params);
 }
 

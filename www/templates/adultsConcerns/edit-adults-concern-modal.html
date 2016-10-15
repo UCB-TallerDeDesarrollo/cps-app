@@ -6,11 +6,11 @@
   <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
     <form>
       <label class="item item-input">
-        <textarea rows=5 placeholder="Type a new child's concern here." ng-model="editableChildsConcern.description">
+        <textarea rows=5 placeholder="Type here." ng-model="editableAdultsConcern.description">
         </textarea>
       </label>
-      <button class="button button-full button-positive" ng-if="!editableChildsConcern.description.length" ng-click="updateChildsConcern()" disabled>Save</button>
-      <button class="button button-full button-positive" ng-if="editableChildsConcern.description.length > 0" ng-click="updateChildsConcern()">Save</button>
+      <button class="button button-full button-positive" ng-if="!editableAdultsConcern.description.length" ng-click="updateAdultsConcern()" disabled>Save</button>
+      <button class="button button-full button-positive" ng-if="editableAdultsConcern.description.length > 0" ng-click="updateAdultsConcern()">Save</button>
     </form>
   </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
 </ion-modal-view>

@@ -25,7 +25,7 @@
  		  </label>
  		</div>
 
-    <div ng-init="updateChildsConcerns()" class="padding">
+    <div ng-init="updateAdultsConcerns()" class="padding">
       <ion-list can-swipe="true" >
         <div align="center" class="item item-text-wrap list-title item-icon-right">
           <p><b>List of Adult's Concerns</b></p>
@@ -38,7 +38,7 @@
           <a href="#/app/invitation/{{adultsConcern.id}}">
             <i class="icon dark ion-chevron-right"></i>
           </a>
-          <ion-option-button class="button button-balanced ion-edit" ng-click="editChildsConcern(adultsConcern)">&nbsp;Edit</ion-option-button>
+          <ion-option-button class="button button-balanced ion-edit" ng-click="editAdultsConcern(adultsConcern)">&nbsp;Edit</ion-option-button>
           <ion-option-button ng-click="showConfirmChildsConcern(childsConcern)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
