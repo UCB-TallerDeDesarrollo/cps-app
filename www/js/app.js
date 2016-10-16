@@ -57,6 +57,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
   })
 
+  .state('app.home', {
+    url: '/home',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/home.html'
+      }
+    }
+  })
+
   .state('app.laggingSkills', {
     url: '/laggingSkills',
     views: {
@@ -134,7 +143,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/laggingSkills');
+  $urlRouterProvider.otherwise('/app/home');
 })
 
 .filter('orderObjectBy', function() {
