@@ -25,13 +25,15 @@
     </ion-list>
 
     <div ng-init="" class="padding">
-      <ion-list>
-        <div align="center" class="item item-text-wrap list-title item-icon-right">
-          <p><b>Possible Solutions</b></p>
-          <a ng-click="openModal()" class="watchlist_menu item-button">
-            <i class="icon ion-plus"></i>
-          </a>
+      <div class="item item-divider item-text-wrap">
+        <a ng-click="openModal()" class="watchlist_menu button button-small button-clear button-positive">
+          <i class="icon ion-plus"></i>
+        </a>
+        <div class="col col-75">
+          <h2><b>List of Possible Solutions</b></h2>
         </div>
+      </div>
+      <ion-list>
         <ion-item class="item item-text-wrap item-icon-right" ng-repeat="solution in solutions">
           <p>{{solution.rating}} -- {{solution.description}}</p>
           <a>
@@ -40,8 +42,8 @@
           <ion-option-button class="button button-positive ion-more" ng-click="more(solution)">&nbsp;More</ion-option-button>
           <ion-option-button class="button button-calm ion-star" ng-click="showScore(solution,unsolvedProblem)">&nbsp;Score</ion-option-button>
         </ion-item>
-        <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
-          <p>Agree upon a solution.</p>
+        <div class="item item-text-wrap" ng-if="solutions.length == 0">
+          <p>No possible solutions registered. Agree upon a solution.</p>
         </div>
       </ion-list>
     </div>
