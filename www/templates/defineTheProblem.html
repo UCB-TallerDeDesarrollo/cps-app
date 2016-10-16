@@ -3,36 +3,35 @@
     <h2 class="title">{{unsolvedProblem.description}}</h2>
   </div>
   <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-subheader has-tabs">
-    <br>
-    <ion-list>
-      <div class="item item-text-wrap item-divider">
-        <h2>Child's Concerns</h2>
-      </div>
-      <div class="item item-text-wrap" ng-repeat="childConcern in childsConcerns">
-        <p>{{childConcern.description}}</p>
-      </div>
-    </ion-list>
-    <br>
     <div class="list">
  		  <label class="item item-input item-select">
  		    <div class="input-label">
  		      My worry is..
  		    </div>
  		    <select>
- 		      <option selected>The child's safety</option>
- 		      <option>How the problem is affecting someone else</option>
+ 		      <option selected>the child's safety</option>
+ 		      <option>how the problem is affecting someone else</option>
  		    </select>
  		  </label>
  		</div>
-
+    <!--ion-list>
+      <div class="item item-text-wrap item-divider">
+        <h2>Child's Concerns</h2>
+      </div>
+      <div class="item item-text-wrap" ng-repeat="childConcern in childsConcerns">
+        <p>{{childConcern.description}}</p>
+      </div>
+    </ion-list-->
     <div ng-init="updateAdultsConcerns()" class="padding">
-      <ion-list can-swipe="true" >
-        <div align="center" class="item item-text-wrap list-title item-icon-right">
-          <p><b>List of Adult's Concerns</b></p>
-          <a ng-click="openModal()" class="watchlist_menu item-button">
-            <i class="icon ion-plus"></i>
-          </a>
+      <div class="item item-divider item-text-wrap">
+        <a ng-click="openModal()" class="watchlist_menu button button-small button-clear button-positive">
+          <i class="icon ion-plus"></i>
+        </a>
+        <div class="col col-75">
+          <h2><b>List of Adult's Concerns</b></h2>
         </div>
+      </div>
+      <ion-list can-swipe="true" >
         <ion-item class="item item-text-wrap item-icon-right" href="#/app/invitation/{{unsolvedProblem.id}}" ng-repeat="adultsConcern in adultsConcerns">
           <p>{{adultsConcern.description}}</p>
           <a href="#/app/invitation/{{adultsConcern.id}}">
@@ -41,7 +40,7 @@
           <ion-option-button class="button button-balanced ion-edit" ng-click="editAdultsConcern(adultsConcern)">&nbsp;Edit</ion-option-button>
           <ion-option-button ng-click="showConfirmChildsConcern(childsConcern)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
         </ion-item>
-        <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
+        <div class="item item-text-wrap" ng-if="adultsConcerns.length == 0">
           <p>No adult's concern registered. Please register one above.</p>
         </div>
       </ion-list>
