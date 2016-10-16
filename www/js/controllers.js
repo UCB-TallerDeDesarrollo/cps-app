@@ -125,7 +125,7 @@ angular.module('starter.controllers', [])
     });
   };
   $scope.findUnsolvedProblem = function() {
-    var query =" SELECT * FROM childs_concerns,unsolved_problems where unsolved_problems.id = childs_concerns.unsolved_problem_id AND childs_concerns.id = ? ";
+    var query =" SELECT * FROM unsolved_problems where id = ? ";
     $cordovaSQLite.execute(db,query,[$stateParams.unsolvedProblemId])
       .then( function(result) {
         $scope.unsolvedProblem = result.rows.item(0);
@@ -343,12 +343,12 @@ angular.module('starter.controllers', [])
       confirmPopup.then(function(res) {
         if(res) {
           console.log($scope.unsolvedProblem);
-          $state.go('app.defineTheProblem',{ unsolvedProblemId: $stateParams.unsolvedProblemId});
+          $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
         }
       });
     }
     else {
-      $state.go('app.defineTheProblem',{ unsolvedProblemId: $stateParams.unsolvedProblemId});
+      $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
     }
   };
 
