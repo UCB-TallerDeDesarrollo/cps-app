@@ -245,7 +245,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $stateParams){
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams){
   $scope.childsConcern = {
     description: ""
   };
