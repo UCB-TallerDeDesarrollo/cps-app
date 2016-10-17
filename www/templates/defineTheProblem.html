@@ -38,7 +38,7 @@
             <i class="icon dark ion-chevron-right"></i>
           </a>
           <ion-option-button class="button button-balanced ion-edit" ng-click="editAdultsConcern(adultsConcern)">&nbsp;Edit</ion-option-button>
-          <ion-option-button ng-click="showConfirmChildsConcern(childsConcern)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
+          <ion-option-button ng-click="showDeleteConfirmationPopup(adultsConcern)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="adultsConcerns.length == 0">
           <p>No adult's concern registered. Please register one above.</p>

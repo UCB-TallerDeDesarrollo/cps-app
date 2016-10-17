@@ -116,13 +116,6 @@ angular.module('starter.controllers', [])
     $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
   };
 
-  $scope.findChildConcern = function() {
-    var query ="SELECT * FROM childs_concerns where id = ?";
-    $cordovaSQLite.execute(db,query,[$stateParams.unsolvedProblemId])
-      .then( function(result) {
-        $scope.childConcern = result.rows.item(0);
-    });
-  };
   $scope.findUnsolvedProblem = function() {
     var query =" SELECT * FROM unsolved_problems where id = ? ";
     $cordovaSQLite.execute(db,query,[$stateParams.unsolvedProblemId])
@@ -164,6 +157,28 @@ angular.module('starter.controllers', [])
       $scope.emptyInput = true;
     }
   };
+
+  $scope.showDeleteConfirmationPopup = function(adultsConcern) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: "Delete Adult's Concern",
+      template: "Are you sure you want to delete this adult's concern?"
+    });
+
+    confirmPopup.then(function(res) {
+      if(res){
+        $scope.deleteAdultsConcern(adultsConcern);
+      }
+    });
+  };
+
+  $scope.deleteAdultsConcern = function(adultsConcern) {
+    var query = "DELETE FROM adults_concerns where id = ?";
+    $cordovaSQLite.execute(db, query, [adultsConcern.id]).then(function(res) {
+        $scope.adultsConcerns.splice($scope.adultsConcerns.indexOf(adultsConcern), 1);
+    }, function (err) {
+        console.error(err);
+    });
+ };
 
   $ionicModal.fromTemplateUrl('templates/adultsConcerns/create-adults-concern-modal.html', {
     scope: $scope,
