@@ -47,15 +47,15 @@
     </div>
 
   </ion-content>
-  <div class="footer">
-    <ion-tabs class="tabs-positive tabs-icon-top" ng-init="selectTabWithIndex(2)">
-      <ion-tab title="Empathy Step" icon-on="ion-help-buoy" icon-off="ion-help-buoy">
+  <div class="footer" >
+    <ion-tabs class="tabs-positive tabs-icon-top" delegate-handle="myTabs" >
+      <ion-tab ng-click="selectTabWithIndex(0)" title="Empathy Step" icon-on="ion-help-buoy" icon-off="ion-help-buoy">
       </ion-tab>
 
-      <ion-tab title="Define the Problem" icon-on="ion-lightbulb" icon-off="ion-lightbulb" >
+      <ion-tab ng-click="selectTabWithIndex(1)" title="Define the Problem" icon-on="ion-lightbulb" icon-off="ion-lightbulb" >
       </ion-tab>
 
-      <ion-tab title="Invitation Step" icon-on="ion-happy" icon-off="ion-happy-outline">
+      <ion-tab ng-click="selectTabWithIndex(2)" title="Invitation Step" icon-on="ion-happy" icon-off="ion-happy-outline">
       </ion-tab>
     </ion-tabs>
   </div>

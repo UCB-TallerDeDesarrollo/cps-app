@@ -106,11 +106,10 @@ angular.module('starter.controllers', [])
  };
 })
 
-.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate){
+.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate, $timeout){
 
   $scope.adultsConcern = { description: ""};
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
-
   $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
 
   $scope.updateAdultsConcerns = function(){
@@ -242,14 +241,47 @@ angular.module('starter.controllers', [])
   $scope.$on('modalEdit.removed', function() {
     // Execute action
   });
+  $scope.selectTabWithIndex = function(index) {
+    if(index === 0){
+      $ionicTabsDelegate.select(index);
+      $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
+    }
+    if(index == 1){
+      if($scope.childsConcerns.length === 0){
+        var alertPopup = $ionicPopup.alert({
+           title: 'Step 2 wasn\'t unlocked.',
+           template: 'You have to finish previous steps to continue.'
+         });
+         alertPopup.then(function(res) {
+         });
+      }else {
+        $ionicTabsDelegate.select(index);
+        $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
+
+      }
+    }
+    if(index==2){
+      if($scope.adultsConcerns.length === 0 || $scope.childsConcerns.length === 0){
+        var alertPopupForUnsolved = $ionicPopup.alert({
+           title: 'Step 3 wasn\'t unlocked.',
+           template: 'You have to finish previous steps to continue.'
+         });
+         alertPopupForUnsolved.then(function(res) {
+         });
+      }else {
+        $state.go('app.invitation',{ unsolvedProblemId: $scope.unsolvedProblem.id});
+        $ionicTabsDelegate.select(index);
+      }
+    }
+  };
+  $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(1,10));});
 
 })
 
-.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams){
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout){
   $scope.childsConcern = {
     description: ""
   };
-
 
   // $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
   $scope.unsolvedProblem = {
@@ -354,6 +386,7 @@ angular.module('starter.controllers', [])
   $scope.selectTabWithIndex = function(index) {
     if(index === 0){
       $ionicTabsDelegate.select(index);
+      $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
     }
     if(index == 1){
       if($scope.childsConcerns.length === 0){
@@ -365,6 +398,8 @@ angular.module('starter.controllers', [])
          });
       }else {
         $ionicTabsDelegate.select(index);
+        $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
+
       }
     }
     if(index==2){
@@ -376,6 +411,7 @@ angular.module('starter.controllers', [])
          alertPopupForUnsolved.then(function(res) {
          });
       }else {
+        $state.go('app.invitation',{ unsolvedProblemId: $scope.unsolvedProblem.id});
         $ionicTabsDelegate.select(index);
       }
     }
@@ -399,6 +435,7 @@ angular.module('starter.controllers', [])
       $scope.childsConcerns= getChildsConcern($cordovaSQLite,$stateParams.unsolvedProblemId);
     }
   };
+  $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(0,10));});
 
   $scope.updateChildsConcern = function(){
     if (!inputFieldIsEmpty($scope.editableChildsConcern.description)) {
@@ -432,9 +469,10 @@ angular.module('starter.controllers', [])
      }
    });
  };
+
 })
 
-.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet,$ionicListDelegate){
+.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout){
   $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
   $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.initialSetUp = function(){
@@ -603,27 +641,23 @@ angular.module('starter.controllers', [])
       { type: 'button-assertive ion-sad-outline ',
         onTap: function(e) {
           $scope.showConfirmWorstRate(solution,1,unsolvedProblem);
-          $ionicListDelegate.closeOptionButtons();
         }
       },
       { type: 'button-energized ion-heart-broken' ,
         onTap: function(e) {
           $scope.RateSolution(solution,2);
           $scope.BestRate(unsolvedProblem);
-          $ionicListDelegate.closeOptionButtons();
         }
       },
       { type: 'button-balanced ion-heart' ,
         onTap: function(e) {
           $scope.RateSolution(solution,3);
           $scope.BestRate(unsolvedProblem);
-          $ionicListDelegate.closeOptionButtons();
         }
       },
       { type: 'button-calm ion-happy-outline',
         onTap: function(e) {
           $scope.showConfirmBestRate(solution,4,unsolvedProblem);
-          $ionicListDelegate.closeOptionButtons();
         }
       }
     ]
@@ -678,6 +712,40 @@ angular.module('starter.controllers', [])
     });
 
   };
+  $scope.selectTabWithIndex = function(index) {
+    if(index === 0){
+      $ionicTabsDelegate.select(index);
+      $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
+    }
+    if(index == 1){
+      if($scope.childsConcerns.length === 0){
+        var alertPopup = $ionicPopup.alert({
+           title: 'Step 2 wasn\'t unlocked.',
+           template: 'You have to finish previous steps to continue.'
+         });
+         alertPopup.then(function(res) {
+         });
+      }else {
+        $ionicTabsDelegate.select(index);
+        $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
+      }
+    }
+    if(index==2){
+      if($scope.adultsConcerns.length === 0 || $scope.childsConcerns.length === 0){
+        var alertPopupForUnsolved = $ionicPopup.alert({
+           title: 'Step 3 wasn\'t unlocked.',
+           template: 'You have to finish previous steps to continue.'
+         });
+         alertPopupForUnsolved.then(function(res) {
+         });
+      }else {
+        $state.go('app.invitation',{ unsolvedProblemId: $scope.unsolvedProblem.id});
+        $ionicTabsDelegate.select(index);
+      }
+    }
+
+  };
+  $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 
 });
 
