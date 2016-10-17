@@ -3,7 +3,7 @@
     <h2 class="title">{{unsolvedProblem.description}} </h2>
   </div>
 
-  <ion-content  ng-init="findUnsolvedProblem(unsolvedProblem)"  class="has-subheader has-tabs">
+  <ion-content  ng-init="findUnsolvedProblem(unsolvedProblem);"  class="has-subheader has-tabs">
     <div class="item item-text-wrap text-center">
       <h2>I've noticed that <strong>{{unsolvedProblem.description}}</strong>, what's up?</h2>
     </div>
@@ -37,15 +37,15 @@
       </ion-list>
     </div>
   </ion-content>
-  <div class="footer" ng-init="selectTabWithIndex(2)">
-    <ion-tabs class="tabs-positive tabs-icon-top">
-      <ion-tab title="Empathy Step" icon-on="ion-help-buoy" icon-off="ion-help-buoy">
+  <div class="footer" >
+    <ion-tabs class="tabs-positive tabs-icon-top" >
+      <ion-tab ng-click="selectTabWithIndex(0)" title="Empathy Step" icon-on="ion-help-buoy" icon-off="ion-help-buoy">
       </ion-tab>
 
-      <ion-tab title="Define the Problem" icon-on="ion-lightbulb" icon-off="ion-lightbulb">
+      <ion-tab ng-click="selectTabWithIndex(1)" title="Define the Problem" icon-on="ion-lightbulb" icon-off="ion-lightbulb" >
       </ion-tab>
 
-      <ion-tab title="Invitation Step" icon-on="ion-happy" icon-off="ion-happy-outline">
+      <ion-tab ng-click="selectTabWithIndex(2)" title="Invitation Step" icon-on="ion-happy" icon-off="ion-happy-outline">
       </ion-tab>
     </ion-tabs>
   </div>

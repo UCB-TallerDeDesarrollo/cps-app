@@ -110,9 +110,7 @@ angular.module('starter.controllers', [])
 
   $scope.adultsConcern = { description: ""};
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
-  $scope.selectTabWithIndex = function(index) {
-    $ionicTabsDelegate.select(index);
-  };
+
   $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
 
   $scope.updateAdultsConcerns = function(){
@@ -251,11 +249,9 @@ angular.module('starter.controllers', [])
   $scope.childsConcern = {
     description: ""
   };
-  console.log($ionicTabsDelegate);
+
+
   // $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
-  $scope.selectTabWithIndex = function(index) {
-    $ionicTabsDelegate.select(index);
-  };
   $scope.unsolvedProblem = {
     description: '',
     id: $stateParams.unsolvedProblemId
@@ -347,7 +343,6 @@ angular.module('starter.controllers', [])
 
       confirmPopup.then(function(res) {
         if(res) {
-          console.log($scope.unsolvedProblem);
           $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
         }
       });
@@ -356,7 +351,36 @@ angular.module('starter.controllers', [])
       $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
     }
   };
+  $scope.selectTabWithIndex = function(index) {
+    if(index === 0){
+      $ionicTabsDelegate.select(index);
+    }
+    if(index == 1){
+      if($scope.childsConcerns.length === 0){
+        var alertPopup = $ionicPopup.alert({
+           title: 'Step 2 wasn\'t unlocked.',
+           template: 'You have to finish previous steps to continue.'
+         });
+         alertPopup.then(function(res) {
+         });
+      }else {
+        $ionicTabsDelegate.select(index);
+      }
+    }
+    if(index==2){
+      if($scope.adultsConcerns.length === 0 || $scope.childsConcerns.length === 0){
+        var alertPopupForUnsolved = $ionicPopup.alert({
+           title: 'Step 3 wasn\'t unlocked.',
+           template: 'You have to finish previous steps to continue.'
+         });
+         alertPopupForUnsolved.then(function(res) {
+         });
+      }else {
+        $ionicTabsDelegate.select(index);
+      }
+    }
 
+  };
   $scope.editChildsConcern = function(childsConcern){
     $scope.childsConcerntoEdit = childsConcern;
     $scope.editableChildsConcern = {
