@@ -212,4 +212,18 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
        }
      });
    };
+   $scope.getRatingIcon = function(unsolvedProblem) {
+     var rating = unsolvedProblem.unsolved_score;
+     if (rating === 0) {
+       return 'ion-help';
+     } else if (rating === 1) {
+       return 'ion-sad';
+     } else if (rating === 2) {
+       return 'ion-heart-broken';
+     } else if (rating === 3) {
+       return 'ion-heart';
+     } else  {
+       return 'ion-happy';
+     }
+   };
 });

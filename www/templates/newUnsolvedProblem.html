@@ -12,10 +12,11 @@
         </div>
       </div>
       <ion-list show-delete="false" can-swipe="true" show-reorder="shouldShowReorder">
-          <ion-item class="item-text-wrap item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems">
+          <ion-item class="item-text-wrap item-icon-left item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems">
             <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration">
               <div name="content">
-                <p>{{unsolvedProblem.unsolved_score}} -- {{unsolvedProblem.description}}</p>
+                <i class="icon dark {{getRatingIcon(unsolvedProblem)}}"></i>
+                <p>{{unsolvedProblem.description}}</p>
                 <i class="icon dark ion-chevron-right"></i>
               </div>
             </a>
