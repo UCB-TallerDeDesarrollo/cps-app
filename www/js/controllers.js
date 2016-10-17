@@ -1,5 +1,9 @@
 angular.module('starter.controllers', [])
 
+.config(function($ionicConfigProvider) {
+  $ionicConfigProvider.tabs.position("bottom");
+})
+
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
@@ -530,7 +534,6 @@ angular.module('starter.controllers', [])
       $scope.solution.rating=0;
       saveSolution($cordovaSQLite,$scope.solution);
       $scope.closeModal();
-      $scope.solution.description = "";
       $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
     }
   };
@@ -725,7 +728,6 @@ angular.module('starter.controllers', [])
   $scope.RateSolution = function(solution, Score){
     var query = "UPDATE solutions SET rating = ? Where id = ?";
     $cordovaSQLite.execute(db, query, [Score, solution.id]);
-    $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
     $state.go('app.invitation');
   };
 
@@ -836,7 +838,7 @@ function saveAdultsConcern(cordovaSQLite,adultsConcern,childConcernId){
 
 function saveSolution(cordovaSQLite,solution){
   var query ="INSERT INTO solutions(description,unsolved_problem_id,rating) VALUES (?,?,?)";
-  cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId,solution.rating]);
+  console.log(cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId,solution.rating]));
 }
 
 function getChildsConcern(cordovaSQLite,unsolvedProblemId){
