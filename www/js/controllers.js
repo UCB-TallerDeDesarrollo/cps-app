@@ -290,14 +290,26 @@ angular.module('starter.controllers', [])
   };
   $scope.shouldShowReorder = false;
   $scope.moveItem = function(childsConcern, fromIndex, toIndex) {
-    var indexOrder = $scope.childsConcerns[fromIndex].unsolved_order;
-    $scope.childsConcerns[fromIndex].unsolved_order = $scope.childsConcerns[toIndex].unsolved_order;
-    $scope.childsConcerns[toIndex].unsolved_order = indexOrder;
+    var greaterIndex, lesserIndex, childConcernOrderModifier;
+    $scope.childsConcerns[fromIndex].unsolved_order = toIndex;
+    if(fromIndex > toIndex){
+      greaterIndex = fromIndex;
+      lesserIndex = toIndex;
+      childConcernOrderModifier = 1;
+    }
+    else{
+      greaterIndex = toIndex + 1;
+      lesserIndex = fromIndex;
+      childConcernOrderModifier = -1;
+    }
+    for(var i = lesserIndex; i < greaterIndex; i++ ){
+      updateChildsConcernOrder($cordovaSQLite, [i+childConcernOrderModifier, $scope.childsConcerns[i].id]);
+    }
     updateChildsConcernOrder($cordovaSQLite, [toIndex, $scope.childsConcerns[fromIndex].id]);
-    updateChildsConcernOrder($cordovaSQLite, [fromIndex, $scope.childsConcerns[toIndex].id]);
     $scope.childsConcerns.splice(fromIndex, 1);
     $scope.childsConcerns.splice(toIndex, 0, childsConcern);
   };
+
   $scope.updateChildsConcerns = function(){
     $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
   };
