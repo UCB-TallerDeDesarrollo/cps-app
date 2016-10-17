@@ -725,11 +725,10 @@ angular.module('starter.controllers', [])
 
   };
 
-
   $scope.RateSolution = function(solution, Score){
     var query = "UPDATE solutions SET rating = ? Where id = ?";
     $cordovaSQLite.execute(db, query, [Score, solution.id]);
-$scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
+    $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
     $state.go('app.invitation');
   };
 
@@ -777,6 +776,21 @@ $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
       }
     }
 
+  };
+
+  $scope.getRatingIcon = function(solution) {
+    var rating = solution.rating;
+    if (rating === 0) {
+      return 'ion-help';
+    } else if (rating === 1) {
+      return 'ion-sad';
+    } else if (rating === 2) {
+      return 'ion-heart-broken';
+    } else if (rating === 3) {
+      return 'ion-heart';
+    } else  {
+      return 'ion-happy';
+    }
   };
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 

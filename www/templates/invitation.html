@@ -38,11 +38,10 @@
         </div>
       </div>
       <ion-list>
-        <ion-item class="item item-text-wrap item-icon-right" ng-repeat="solution in solutions">
-          <p>{{solution.rating}} -- {{solution.description}}</p>
-          <a>
-            <i class="icon dark ion-chevron-right"></i>
-          </a>
+        <ion-item class="item item-text-wrap item-icon-left item-icon-right" ng-repeat="solution in solutions">
+          <i class="icon {{getRatingIcon(solution)}}"></i>
+          <p>{{solution.description}}</p>
+          <i class="icon dark ion-chevron-right"></i>
           <ion-option-button class="button button-positive ion-more" ng-click="more(solution)">&nbsp;More</ion-option-button>
           <ion-option-button class="button button-calm ion-star" ng-click="showScore(solution,unsolvedProblem)">&nbsp;Score</ion-option-button>
         </ion-item>
