@@ -106,11 +106,13 @@ angular.module('starter.controllers', [])
  };
 })
 
-.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams){
+.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate){
 
   $scope.adultsConcern = { description: ""};
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
-
+  $scope.selectTabWithIndex = function(index) {
+    $ionicTabsDelegate.select(index);
+  };
   $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
 
   $scope.updateAdultsConcerns = function(){
@@ -133,6 +135,8 @@ angular.module('starter.controllers', [])
       console.log(error);
     });
   };
+var  number = $ionicTabsDelegate.selectedIndex;
+  console.log(number);
   $scope.createAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.adultsConcern.description)) {
       saveAdultsConcern($cordovaSQLite,$scope.adultsConcern.description, $stateParams.unsolvedProblemId);
@@ -250,7 +254,9 @@ angular.module('starter.controllers', [])
     description: ""
   };
   // $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
-
+  $scope.selectTabWithIndex = function(index) {
+    $ionicTabsDelegate.select(index);
+  };
   $scope.unsolvedProblem = {
     description: '',
     id: $stateParams.unsolvedProblemId
