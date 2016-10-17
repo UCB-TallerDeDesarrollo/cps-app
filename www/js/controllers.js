@@ -135,8 +135,6 @@ angular.module('starter.controllers', [])
       console.log(error);
     });
   };
-var  number = $ionicTabsDelegate.selectedIndex;
-  console.log(number);
   $scope.createAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.adultsConcern.description)) {
       saveAdultsConcern($cordovaSQLite,$scope.adultsConcern.description, $stateParams.unsolvedProblemId);
@@ -253,6 +251,7 @@ var  number = $ionicTabsDelegate.selectedIndex;
   $scope.childsConcern = {
     description: ""
   };
+  console.log($ionicTabsDelegate);
   // $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
   $scope.selectTabWithIndex = function(index) {
     $ionicTabsDelegate.select(index);
