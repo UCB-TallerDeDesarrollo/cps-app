@@ -106,11 +106,13 @@ angular.module('starter.controllers', [])
  };
 })
 
-.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams){
+.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate){
 
   $scope.adultsConcern = { description: ""};
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
-
+  $scope.selectTabWithIndex = function(index) {
+    $ionicTabsDelegate.select(index);
+  };
   $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
 
   $scope.updateAdultsConcerns = function(){
@@ -125,7 +127,7 @@ angular.module('starter.controllers', [])
     });
   };
   $scope.findUnsolvedProblem = function() {
-    var query =" SELECT * FROM childs_concerns,unsolved_problems where unsolved_problems.id = childs_concerns.unsolved_problem_id AND childs_concerns.id = ? ";
+    var query =" SELECT * FROM unsolved_problems where id = ? ";
     $cordovaSQLite.execute(db,query,[$stateParams.unsolvedProblemId])
       .then( function(result) {
         $scope.unsolvedProblem = result.rows.item(0);
@@ -133,6 +135,8 @@ angular.module('starter.controllers', [])
       console.log(error);
     });
   };
+var  number = $ionicTabsDelegate.selectedIndex;
+  console.log(number);
   $scope.createAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.adultsConcern.description)) {
       saveAdultsConcern($cordovaSQLite,$scope.adultsConcern.description, $stateParams.unsolvedProblemId);
@@ -245,12 +249,14 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $stateParams){
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams){
   $scope.childsConcern = {
     description: ""
   };
   // $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
-
+  $scope.selectTabWithIndex = function(index) {
+    $ionicTabsDelegate.select(index);
+  };
   $scope.unsolvedProblem = {
     description: '',
     id: $stateParams.unsolvedProblemId
@@ -343,12 +349,12 @@ angular.module('starter.controllers', [])
       confirmPopup.then(function(res) {
         if(res) {
           console.log($scope.unsolvedProblem);
-          $state.go('app.defineTheProblem',{ unsolvedProblemId: $stateParams.unsolvedProblemId});
+          $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
         }
       });
     }
     else {
-      $state.go('app.defineTheProblem',{ unsolvedProblemId: $stateParams.unsolvedProblemId});
+      $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
     }
   };
 
@@ -405,13 +411,31 @@ angular.module('starter.controllers', [])
  };
 })
 
-.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet){
+.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet,$ionicListDelegate){
   $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
   $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.initialSetUp = function(){
     findUnsolvedProblem();
     findChildsConcerns();
     findAdultsConcerns();
+  };
+  $scope.showChilds=false;
+  $scope.showAdults=false;
+  $scope.toggleChilds= function(){
+    if($scope.showChilds===true){
+      $scope.showChilds=false;
+    }
+    else{
+      $scope.showChilds=true;
+    }
+  };
+  $scope.toggleAdults= function(){
+    if($scope.showAdults===true){
+      $scope.showAdults=false;
+    }
+    else{
+      $scope.showAdults=true;
+    }
   };
   $scope.createSolution = function() {
     if (!inputFieldIsEmpty($scope.solution.description)) {
@@ -556,23 +580,27 @@ angular.module('starter.controllers', [])
       { type: 'button-assertive ion-sad-outline ',
         onTap: function(e) {
           $scope.showConfirmWorstRate(solution,1,unsolvedProblem);
+          $ionicListDelegate.closeOptionButtons();
         }
       },
       { type: 'button-energized ion-heart-broken' ,
         onTap: function(e) {
           $scope.RateSolution(solution,2);
           $scope.BestRate(unsolvedProblem);
+          $ionicListDelegate.closeOptionButtons();
         }
       },
       { type: 'button-balanced ion-heart' ,
         onTap: function(e) {
           $scope.RateSolution(solution,3);
           $scope.BestRate(unsolvedProblem);
+          $ionicListDelegate.closeOptionButtons();
         }
       },
       { type: 'button-calm ion-happy-outline',
         onTap: function(e) {
           $scope.showConfirmBestRate(solution,4,unsolvedProblem);
+          $ionicListDelegate.closeOptionButtons();
         }
       }
     ]

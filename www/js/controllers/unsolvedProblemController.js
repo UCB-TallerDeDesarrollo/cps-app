@@ -89,7 +89,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   };
 
   $scope.openStep2 = function(unsolvedProblem){
-    $state.go('app.defineTheProblem',{ childConcernId: unsolvedProblem.id});
+    $state.go('app.defineTheProblem',{ unsolvedProblemId: unsolvedProblem.id});
   };
 
   $ionicModal.fromTemplateUrl('templates/unsolvedProblems/create-unsolved-problem-modal.html', {
@@ -170,6 +170,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
              alertPopupForUnsolved.then(function(res) {
              });
           }else {
+            $state.go('app.invitation',{ unsolvedProblemId: unsolvedProblem.id});
           }
         }
         $ionicListDelegate.closeOptionButtons();
