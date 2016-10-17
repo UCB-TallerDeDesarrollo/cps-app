@@ -6,19 +6,23 @@
     <br>
     <ion-list>
       <div class="item item-divider item-text-wrap">
-        <h2>I wonder if there is a way to help you with</h2>
+        <h2>I wonder if there is a way to help you with<i ng-class="showChilds ? 'ion-ios-arrow-up': 'ion-ios-arrow-down'" ng-click="toggleChilds()" style="position:absolute; right: 3px; font-size: 30px;top: 2px;"></i></h2>
       </div>
+      <div ng-show="showChilds">
         <ion-item class="item item-text-wrap" ng-repeat="childConcern in childsConcerns">
           <p>{{childConcern.description}}</p>
         </ion-item>
         <br>
-      <div class="item item-divider item-text-wrap">
-        <h2>So that</h2>
       </div>
+      <div class="item item-divider item-text-wrap">
+        <h2>So that<i ng-class="showAdults ? 'ion-ios-arrow-up': 'ion-ios-arrow-down'" ng-click="toggleAdults()" style="position:absolute; right: 3px; font-size: 30px;top: 2px;"></i></h2>
+      </div>
+      <div ng-show="showAdults">
         <ion-item class="item item-text-wrap" ng-repeat="adultConcern in adultsConcerns">
           <p>{{adultConcern.description}}</p>
         </ion-item>
         <br>
+      </div>
       <div class="item item-divider item-text-wrap">
         <h2>Do you have any ideas?</h2>
       </div>

@@ -413,6 +413,24 @@ angular.module('starter.controllers', [])
     findChildsConcerns();
     findAdultsConcerns();
   };
+  $scope.showChilds=false;
+  $scope.showAdults=false;
+  $scope.toggleChilds= function(){
+    if($scope.showChilds===true){
+      $scope.showChilds=false;
+    }
+    else{
+      $scope.showChilds=true;
+    }
+  };
+  $scope.toggleAdults= function(){
+    if($scope.showAdults===true){
+      $scope.showAdults=false;
+    }
+    else{
+      $scope.showAdults=true;
+    }
+  };
   $scope.createSolution = function() {
     if (!inputFieldIsEmpty($scope.solution.description)) {
       $scope.solution.rating=0;
