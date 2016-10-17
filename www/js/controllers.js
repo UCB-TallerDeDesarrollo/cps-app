@@ -411,7 +411,7 @@ var  number = $ionicTabsDelegate.selectedIndex;
  };
 })
 
-.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet){
+.controller('InvitationCtrl',function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet,$ionicListDelegate){
   $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
   $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.initialSetUp = function(){
@@ -580,23 +580,27 @@ var  number = $ionicTabsDelegate.selectedIndex;
       { type: 'button-assertive ion-sad-outline ',
         onTap: function(e) {
           $scope.showConfirmWorstRate(solution,1,unsolvedProblem);
+          $ionicListDelegate.closeOptionButtons();
         }
       },
       { type: 'button-energized ion-heart-broken' ,
         onTap: function(e) {
           $scope.RateSolution(solution,2);
           $scope.BestRate(unsolvedProblem);
+          $ionicListDelegate.closeOptionButtons();
         }
       },
       { type: 'button-balanced ion-heart' ,
         onTap: function(e) {
           $scope.RateSolution(solution,3);
           $scope.BestRate(unsolvedProblem);
+          $ionicListDelegate.closeOptionButtons();
         }
       },
       { type: 'button-calm ion-happy-outline',
         onTap: function(e) {
           $scope.showConfirmBestRate(solution,4,unsolvedProblem);
+          $ionicListDelegate.closeOptionButtons();
         }
       }
     ]
