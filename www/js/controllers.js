@@ -533,6 +533,7 @@ angular.module('starter.controllers', [])
     if (!inputFieldIsEmpty($scope.solution.description)) {
       $scope.solution.rating=0;
       saveSolution($cordovaSQLite,$scope.solution);
+      $scope.solution.description = "";
       $scope.closeModal();
       $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
     }
@@ -728,6 +729,7 @@ angular.module('starter.controllers', [])
   $scope.RateSolution = function(solution, Score){
     var query = "UPDATE solutions SET rating = ? Where id = ?";
     $cordovaSQLite.execute(db, query, [Score, solution.id]);
+$scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
     $state.go('app.invitation');
   };
 
@@ -838,7 +840,7 @@ function saveAdultsConcern(cordovaSQLite,adultsConcern,childConcernId){
 
 function saveSolution(cordovaSQLite,solution){
   var query ="INSERT INTO solutions(description,unsolved_problem_id,rating) VALUES (?,?,?)";
-  console.log(cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId,solution.rating]));
+  cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId,solution.rating]);
 }
 
 function getChildsConcern(cordovaSQLite,unsolvedProblemId){
