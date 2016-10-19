@@ -214,8 +214,6 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
    };
    $scope.getRatingIcon = function(unsolvedProblem) {
      var rating = unsolvedProblem.unsolved_score;
-     console.log(unsolvedProblem);
-     console.log(rating);
      if (rating === 0) {
        return 'ion-help';
      } else if (rating === 1) {
