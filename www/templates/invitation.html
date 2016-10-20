@@ -47,9 +47,9 @@
         <ion-item class="item item-text-wrap item-icon-left item-icon-right" ng-repeat="solution in solutions">
           <i class="icon {{getRatingIcon(solution)}}"></i>
           <p>{{solution.description}}</p>
-          <i class="icon dark ion-chevron-right"></i>
-          <ion-option-button class="button button-positive ion-more" ng-click="more(solution)">&nbsp;More</ion-option-button>
-          <ion-option-button class="button button-calm ion-star" ng-click="showScore(solution,unsolvedProblem)">&nbsp;Score</ion-option-button>
+          <i class="icon ion-star" ng-click="showScore(solution,unsolvedProblem)"></i>
+            <ion-option-button class="button button-balanced ion-edit" ng-click="editSolution(solution)">&nbsp;Edit</ion-option-button>
+          <ion-option-button ng-click="showDeletionConfirm(solution)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="solutions.length == 0">
           <p>No possible solutions registered. Agree upon a solution.</p>
