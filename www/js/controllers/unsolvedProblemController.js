@@ -84,7 +84,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     });
   };
 
-  $scope.openUnsolvedProblem = function(unsolvedProblem){
+  $scope.goToUnsolvedProblem = function(unsolvedProblem){
     $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: unsolvedProblem.id});
   };
 
@@ -99,9 +99,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     $scope.modalCreate = modal;
     $scope.closeModalCreate();
   });
+
   $scope.openModalCreate = function() {
     $scope.modalCreate.show();
   };
+
   $scope.closeModalCreate = function() {
     $scope.modalCreate.hide();
   };
@@ -117,9 +119,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     $scope.modalEdit = modal;
     $scope.closeModalEdit();
   });
+
   $scope.openModalEdit = function() {
     $scope.modalEdit.show();
   };
+
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
   };
@@ -147,7 +151,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       buttonClicked: function(index) {
 
         if(index === 0){
-          $scope.openUnsolvedProblem(unsolvedProblem);
+          $scope.goToUnsolvedProblem(unsolvedProblem);
         }
         if(index == 1){
           if($scope.childsFlag === 0){
@@ -192,11 +196,8 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   };
 
   $scope.delete = function(item) {
-      var query = "DELETE FROM unsolved_problems where id = ?";
-      $cordovaSQLite.execute(db, query, [item.id]).then(function(res) {
-          $scope.unsolvedProblems.splice($scope.unsolvedProblems.indexOf(item), 1);
-      }, function (err) {
-          console.error(err);
+      UnsolvedProblemFactory.delete(item, function(){
+        $scope.unsolvedProblems.splice($scope.unsolvedProblems.indexOf(item), 1);
       });
    };
 
@@ -207,11 +208,12 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
      });
 
      confirmPopup.then(function(res) {
-       if(res) {
-         $scope.delete(item);
-       }
+      if(res) {
+       $scope.delete(item);
+      }
      });
    };
+
    $scope.getRatingIcon = function(unsolvedProblem) {
      var rating = unsolvedProblem.unsolved_score;
      if (rating === 0) {

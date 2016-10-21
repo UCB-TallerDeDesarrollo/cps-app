@@ -85,31 +85,6 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('DeleteUnsolvedProblemCtrl', function($scope, $cordovaSQLite, $ionicPopup){
-
-  $scope.delete = function(item) {
-    var query = "DELETE FROM unsolved_problems where id = ?";
-    $cordovaSQLite.execute(db, query, [item.id]).then(function(res) {
-        $scope.unsolvedProblems.splice($scope.unsolvedProblems.indexOf(item), 1);
-    }, function (err) {
-        console.error(err);
-    });
- };
-
- $scope.showConfirm = function(item) {
-   var confirmPopup = $ionicPopup.confirm({
-     title: 'Delete Unsolved Problem',
-     template: 'Are you sure you want to delete this unsolved problem?'
-   });
-
-   confirmPopup.then(function(res) {
-     if(res) {
-       $scope.delete(item);
-     }
-   });
- };
-})
-
 .controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate, $timeout){
 
   $scope.adultsConcern = { description: ""};
