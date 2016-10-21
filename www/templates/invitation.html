@@ -48,8 +48,8 @@
           <i class="icon {{getRatingIcon(solution)}}"></i>
           <p>{{solution.description}}</p>
           <i class="icon ion-star" ng-click="showScore(solution,unsolvedProblem)"></i>
-            <ion-option-button class="button button-balanced ion-edit" ng-click="editSolution(solution)">&nbsp;Edit</ion-option-button>
-          <ion-option-button ng-click="showDeletionConfirm(solution)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
+            <ion-option-button class="button button-balanced ion-edit" ng-click="editSolution(solution)"></ion-option-button>
+          <ion-option-button ng-click="showDeletionConfirm(solution)" class="button-assertive ion-trash-a" ></ion-option-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="solutions.length == 0">
           <p>No possible solutions registered. Agree upon a solution.</p>
@@ -109,7 +109,7 @@
       <ion-tab ng-click="selectTabWithIndex(0)" title="Empathy Step" icon-on="ion-help-buoy" icon-off="ion-help-buoy">
       </ion-tab>
 
-      <ion-tab ng-click="selectTabWithIndex(1)" title="Define the Problem" icon-on="ion-lightbulb" icon-off="ion-lightbulb" >
+      <ion-tab ng-click="selectTabWithIndex(1)" title="Define Adults Concern" icon-on="ion-lightbulb" icon-off="ion-lightbulb" >
       </ion-tab>
 
       <ion-tab ng-click="selectTabWithIndex(2)" title="Invitation Step" icon-on="ion-happy" icon-off="ion-happy-outline">

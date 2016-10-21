@@ -37,8 +37,8 @@
           <a href="#/app/invitation/{{adultsConcern.id}}">
             <i class="icon dark ion-chevron-right"></i>
           </a>
-          <ion-option-button class="button button-balanced ion-edit" ng-click="editAdultsConcern(adultsConcern)">&nbsp;Edit</ion-option-button>
-          <ion-option-button ng-click="showDeleteConfirmationPopup(adultsConcern)" class="button-assertive ion-trash-a" >&nbsp;Delete </ion-option-button>
+          <ion-option-button class="button button-balanced ion-edit" ng-click="editAdultsConcern(adultsConcern)"></ion-option-button>
+          <ion-option-button ng-click="showDeleteConfirmationPopup(adultsConcern)" class="button-assertive ion-trash-a" ></ion-option-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="adultsConcerns.length == 0">
           <p>No adult's concern registered. Please register one above.</p>
@@ -52,7 +52,7 @@
       <ion-tab ng-click="selectTabWithIndex(0)" title="Empathy Step" icon-on="ion-help-buoy" icon-off="ion-help-buoy">
       </ion-tab>
 
-      <ion-tab ng-click="selectTabWithIndex(1)" title="Define the Problem" icon-on="ion-lightbulb" icon-off="ion-lightbulb" >
+      <ion-tab ng-click="selectTabWithIndex(1)" title="Define Adults Concern" icon-on="ion-lightbulb" icon-off="ion-lightbulb" >
       </ion-tab>
 
       <ion-tab ng-click="selectTabWithIndex(2)" title="Invitation Step" icon-on="ion-happy" icon-off="ion-happy-outline">
