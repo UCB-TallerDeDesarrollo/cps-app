@@ -159,7 +159,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     $scope.adultsConcerns = getAdultConcerns($cordovaSQLite,$stateParams.unsolvedProblemId);
   }
   //function here
-  $scope.showScore = function(solution,unsolvedProblem) {
+  $scope.showRatingPopup = function(solution,unsolvedProblem) {
     var myPopup = $ionicPopup.show({
     title: 'Rate the Solution',
     subTitle: 'You can rate it by clicking one of the buttons below',
@@ -189,7 +189,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     ]
   });
 
-  $scope.showConfirmBestRate = function(solution,score,unsolvedProblem) {
+  $scope.showConfirmBestRate = function(solution,rate,unsolvedProblem) {
     var confirmPopup = $ionicPopup.confirm({
       title: 'Best Rate for this solution',
       template: 'Are you sure that this solution solved the unsolved problem?'
@@ -197,13 +197,13 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
 
     confirmPopup.then(function(res) {
       if(res) {
-        $scope.RateSolution(solution,score);
+        $scope.RateSolution(solution,rate);
         $scope.BestRate(unsolvedProblem);
       }
     });
   };
 
-  $scope.showConfirmWorstRate = function(solution,score,unsolvedProblem) {
+  $scope.showConfirmWorstRate = function(solution,rate,unsolvedProblem) {
     var confirmPopup = $ionicPopup.confirm({
       title: 'Worst Rate for this solution',
       template: 'Are you sure that this solution dont help to solve the unsolved problem?'
@@ -211,7 +211,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
 
     confirmPopup.then(function(res) {
       if(res) {
-        $scope.RateSolution(solution,score);
+        $scope.RateSolution(solution,rate);
         $scope.BestRate(unsolvedProblem);
       }
     });
@@ -219,9 +219,9 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
 
   };
 
-  $scope.RateSolution = function(solution, Score){
+  $scope.RateSolution = function(solution, rate){
     var query = "UPDATE solutions SET rating = ? Where id = ?";
-    $cordovaSQLite.execute(db, query, [Score, solution.id]);
+    $cordovaSQLite.execute(db, query, [rate, solution.id]);
     $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
     $state.go('app.invitation');
   };
@@ -231,8 +231,8 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     var query2 = "UPDATE unsolved_problems SET unsolved_score = ? Where id = ?";
     $cordovaSQLite.execute(db, query, [unsolvedProblem.id])
     .then( function(result) {
-      var maxscore= result.rows.item(0);
-      $cordovaSQLite.execute(db, query2, [maxscore.Rating,unsolvedProblem.id]);
+      var maxRating= result.rows.item(0);
+      $cordovaSQLite.execute(db, query2, [maxRating.Rating,unsolvedProblem.id]);
     },function(error){
     console.log(error);
     });
