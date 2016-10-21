@@ -57,6 +57,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
   })
 
+  .state('app.mainHelp', {
+    url: '/mainHelp',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/mainHelp.html'
+      }
+    }
+  })
+
   .state('app.home', {
     url: '/home',
     views: {
