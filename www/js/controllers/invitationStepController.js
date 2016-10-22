@@ -9,7 +9,25 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.showChilds=false;
   $scope.showAdults=false;
   $scope.shouldShowReorder = false;
-
+  $scope.moveItem = function(childsConcern, fromIndex, toIndex) {
+    var greaterIndex, lesserIndex, childConcernOrderModifier;
+    $scope.childsConcerns[fromIndex].unsolved_order = toIndex;
+    if(fromIndex > toIndex){
+      greaterIndex = fromIndex;
+      lesserIndex = toIndex;
+      childConcernOrderModifier = 1;
+    }
+    else{
+      greaterIndex = toIndex + 1;
+      lesserIndex = fromIndex;
+      childConcernOrderModifier = -1;
+    }
+    for(var i = lesserIndex; i < greaterIndex; i++ ){
+      updateChildsConcernOrder($cordovaSQLite, [i+childConcernOrderModifier, $scope.childsConcerns[i].id]);
+    }
+    updateChildsConcernOrder($cordovaSQLite, [toIndex, $scope.childsConcerns[fromIndex].id]);
+    findChildsConcerns();
+  };
   $scope.toggleChilds= function(){
     if($scope.showChilds===true){
       console.log($scope.shouldShowReorder);
