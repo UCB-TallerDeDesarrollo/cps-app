@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService){
+angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicListDelegate, $ionicTabsDelegate, $timeout, IonicClosePopupService){
   $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
   $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.initialSetUp = function(){
@@ -8,8 +8,11 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   };
   $scope.showChilds=false;
   $scope.showAdults=false;
+  $scope.shouldShowReorder = false;
+
   $scope.toggleChilds= function(){
     if($scope.showChilds===true){
+      console.log($scope.shouldShowReorder);
       $scope.showChilds=false;
     }
     else{
@@ -288,5 +291,4 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     }
   };
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
-
 });
