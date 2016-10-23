@@ -2,7 +2,7 @@
   <div class="bar bar-subheader bar-positive">
     <h2 class="title">{{unsolvedProblem.description}}</h2>
   </div>
-  <ion-content  ng-init="initialSetUp()"  class="has-tabs has-subheader">
+  <ion-content  ng-init="initialSetUp()"  class="has-tabs has-subheader" on-swipe-right="selectTabWithIndex(1)">
     <div class="item item-divider item-text-wrap">
       <div class="row">
         <div class="col col-80">
@@ -36,7 +36,7 @@
             <h2>So that</h2>
           </div>
           <div class="col col-10">
-              <i ng-class="showAdult's? 'ion-ios-arrow-up': 'ion-ios-arrow-down'" ng-click="toggleAdults()"></i>
+              <i ng-class="showAdults? 'ion-ios-arrow-up': 'ion-ios-arrow-down'" ng-click="toggleAdults()"></i>
           </div>
         </div>
       </div>

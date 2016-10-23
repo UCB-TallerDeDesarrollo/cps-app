@@ -2,7 +2,7 @@
   <div class="bar bar-subheader bar-positive item-text-wrap">
     <h2 class="title">{{unsolvedProblem.description}}</h2>
   </div>
-  <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-subheader has-tabs">
+  <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-subheader has-tabs" on-swipe-left="selectTabWithIndex(2)" on-swipe-left="selectTabWithIndex(0)">
     <div class="list">
  		  <label class="item item-input item-select">
  		    <div class="input-label">
@@ -14,14 +14,6 @@
  		    </select>
  		  </label>
  		</div>
-    <!--ion-list>
-      <div class="item item-text-wrap item-divider">
-        <h2>Child's Concerns</h2>
-      </div>
-      <div class="item item-text-wrap" ng-repeat="childConcern in childsConcerns">
-        <p>{{childConcern.description}}</p>
-      </div>
-    </ion-list-->
     <div ng-init="updateAdultsConcerns()" class="padding">
       <div class="item item-divider item-text-wrap">
         <a ng-click="openModal()" class="watchlist_menu button button-small button-clear button-positive">
@@ -52,7 +44,7 @@
       <ion-tab ng-click="selectTabWithIndex(0)" title="Empathy Step" icon-on="ion-help-buoy" icon-off="ion-help-buoy">
       </ion-tab>
 
-      <ion-tab ng-click="selectTabWithIndex(1)" title="Define Adult'sConcern" icon-on="ion-lightbulb" icon-off="ion-lightbulb" >
+      <ion-tab ng-click="selectTabWithIndex(1)" title="Define Adult's Concern" icon-on="ion-lightbulb" icon-off="ion-lightbulb" >
       </ion-tab>
 
       <ion-tab ng-click="selectTabWithIndex(2)" title="Invitation Step" icon-on="ion-happy" icon-off="ion-happy-outline">

@@ -370,7 +370,9 @@ angular.module('starter.controllers', [])
   });
 
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $scope.unsolvedProblem.id);
-
+  $scope.goUnsolvedProblems = function(){
+    $state.go('app.newUnsolvedProblem');
+  };
   $scope.verifyToGoToStep2 = function() {
     if($scope.adultsConcerns.length === 0){
       var confirmPopup = $ionicPopup.confirm({
@@ -406,7 +408,6 @@ angular.module('starter.controllers', [])
       }else {
         $ionicTabsDelegate.select(index);
         $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
-
       }
     }
     if(index==2){
