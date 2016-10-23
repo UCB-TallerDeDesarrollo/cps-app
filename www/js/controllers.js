@@ -235,6 +235,7 @@ angular.module('starter.controllers', [])
   $scope.$on('modalEdit.removed', function() {
     // Execute action
   });
+
   $scope.selectTabWithIndex = function(index) {
     if(index === 0){
       $ionicTabsDelegate.select(index);
@@ -373,7 +374,7 @@ angular.module('starter.controllers', [])
   $scope.verifyToGoToStep2 = function() {
     if($scope.adultsConcerns.length === 0){
       var confirmPopup = $ionicPopup.confirm({
-        title: 'Going to Step 2: Define Adults Concerns',
+        title: "Going to Step 2: Define Adult's Concerns",
         template: "Did you drill enough to get all your child's concerns?",
         cancelText: "No, keep drilling",
         okText: "Yes, I'm sure"

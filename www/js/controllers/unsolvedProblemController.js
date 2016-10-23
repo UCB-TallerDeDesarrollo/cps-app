@@ -140,7 +140,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     $ionicActionSheet.show({
       buttons: [
         { text: 'Step 1: Empathy Step' },
-        { text: 'Step 2: Define Adults Concern' },
+        { text: 'Step 2: Define Adult'sConcern' },
         { text: 'Step 3: Invitation Step' }
       ],
       destructiveText: 'Delete',
