@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicListDelegate, $ionicTabsDelegate, $timeout, IonicClosePopupService){
+angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate){
   $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
   $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.initialSetUp = function(){
@@ -9,6 +9,23 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.showChilds=false;
   $scope.showAdults=false;
   $scope.shouldShowReorder = false;
+
+  $scope.toggleChilds= function(){
+    if($scope.showChilds===true){
+      $scope.showChilds=false;
+    }
+    else{
+      $scope.showChilds=true;
+    }
+  };
+  $scope.toggleAdults= function(){
+    if($scope.showAdults===true){
+      $scope.showAdults=false;
+    }
+    else{
+      $scope.showAdults=true;
+    }
+  };
   $scope.moveItem = function(childsConcern, fromIndex, toIndex) {
     var greaterIndex, lesserIndex, childConcernOrderModifier;
     $scope.childsConcerns[fromIndex].unsolved_order = toIndex;
@@ -28,23 +45,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     updateChildsConcernOrder($cordovaSQLite, [toIndex, $scope.childsConcerns[fromIndex].id]);
     findChildsConcerns();
   };
-  $scope.toggleChilds= function(){
-    if($scope.showChilds===true){
-      console.log($scope.shouldShowReorder);
-      $scope.showChilds=false;
-    }
-    else{
-      $scope.showChilds=true;
-    }
-  };
-  $scope.toggleAdults= function(){
-    if($scope.showAdults===true){
-      $scope.showAdults=false;
-    }
-    else{
-      $scope.showAdults=true;
-    }
-  };
+
   $scope.createSolution = function() {
     if (!inputFieldIsEmpty($scope.solution.description)) {
       $scope.solution.rating=0;
