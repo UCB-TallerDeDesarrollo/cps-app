@@ -2,7 +2,7 @@
   <div class="bar bar-subheader bar-positive item-text-wrap">
     <h2 class="title">{{unsolvedProblem.description}}</h2>
   </div>
-  <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-subheader has-tabs" on-swipe-left="selectTabWithIndex(2)" on-swipe-left="selectTabWithIndex(0)">
+  <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-subheader has-tabs" on-swipe-left="selectTabWithIndex(2)" on-swipe-right="selectTabWithIndex(0)">
     <div class="list">
  		  <label class="item item-input item-select">
  		    <div class="input-label">

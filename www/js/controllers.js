@@ -2,6 +2,7 @@ angular.module('starter.controllers', [])
 
 .config(function($ionicConfigProvider) {
   $ionicConfigProvider.tabs.position("bottom");
+  $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
