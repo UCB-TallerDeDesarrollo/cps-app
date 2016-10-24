@@ -1,0 +1,19 @@
+<ion-view view-title="Challenging Kids F.A.Q">
+  <ion-content ng-controller="FaqCtrl">
+      <ion-list>
+        <div ng-repeat="question in challengingKidsQuestions">
+          <ion-item class="item item-stable item-text-wrap"
+                    ng-click="toggleQuestion(question)"
+                    ng-class="{active: isQuestionShown(question)}">
+              <i class="icon" ng-class="isQuestionShown(question) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            {{question.question}}
+          </ion-item>
+          <ion-item class="item-accordion item-text-wrap"
+                    ng-show="isQuestionShown(question)">
+            {{question.answer}}
+          </ion-item>
+        </div>
+      </ion-list>
+    </ion-content>
+</ion-view>

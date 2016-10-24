@@ -149,8 +149,55 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         controller: 'HelpTopicContentCtrl'
       }
     }
-  });
-
+  })
+  .state('app.faq',{
+      url: '/faq',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/FAQ/FAQ.html',
+        }
+      }
+    })
+  .state('app.faqChallengingKids',{
+      url: '/faq/challengingKids',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/FAQ/challengingKids.html',
+        }
+      }
+    })
+  .state('app.faqModel',{
+      url: '/faq/model',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/FAQ/model.html',
+        }
+      }
+    })
+  .state('app.faqPlans',{
+      url: '/faq/plans',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/FAQ/plans.html',
+        }
+      }
+    })
+  .state('app.faqClassroom',{
+      url: '/faq/classroom',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/FAQ/classroom.html',
+        }
+      }
+    })
+  .state('app.faqPoliciesAndPractices',{
+      url: '/faq/policiesAndPractices',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/FAQ/policiesAndPractices.html',
+        }
+      }
+    });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 })
