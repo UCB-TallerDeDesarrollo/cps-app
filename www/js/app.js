@@ -214,6 +214,14 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
           templateUrl: 'templates/FAQ/policiesAndPractices.html',
         }
       }
+    })
+    .state('app.helpDefineAdultsConcern',{
+      url: '/mainHelp/helpDefineAdultsConcern',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/planBHelp/helpDefineAdultsConcern.html',
+        }
+      }
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
