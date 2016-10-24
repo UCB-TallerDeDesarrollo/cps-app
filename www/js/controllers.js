@@ -75,6 +75,21 @@ angular.module('starter.controllers', [])
   $scope.helpCategories = HelpCategoriesStep1.all();
 })
 
+.controller('HelpCategoryInvitationCtrl', function($scope, HelpCategoriesStep3) {
+  $scope.helpCategoriesInvitation = HelpCategoriesStep3.all();
+  $scope.showTopic = false;
+  $scope.toggleHelp= function(){
+    if($scope.showTopic===true){
+      $scope.showTopic=false;
+
+    }
+    else{
+      $scope.showTopic=true;
+    }
+  };
+
+})
+
 .controller('HelpTopicContentCtrl', function($scope, HelpCategoriesStep1, $stateParams) {
   $scope.topic = HelpCategoriesStep1.getContent($stateParams.id_category, $stateParams.id_topic);
 })

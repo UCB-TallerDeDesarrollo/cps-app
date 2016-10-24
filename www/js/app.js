@@ -132,6 +132,15 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       }
     }
   })
+  .state('app.helpForInvitation',{
+    url: '/helpForInvitation',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/invitationHelp.html',
+        controller: 'HelpCategoryInvitationCtrl'
+      }
+    }
+  })
   .state('app.helpCategoryTopics',{
     url: '/helpCategoryTopics/:id_category',
     views: {
@@ -141,6 +150,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       }
     }
   })
+
   .state('app.helpTopicContent', {
     url: '/helpTopicContent/:id_category/:id_topic',
     views: {
