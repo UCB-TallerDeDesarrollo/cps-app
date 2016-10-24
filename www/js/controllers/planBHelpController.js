@@ -22,4 +22,17 @@ angular.module('starter.controllers')
       content:""
     },
   ];
+
+  $scope.isContentShown = function(content) {
+    return $scope.shownContent === content;
+  };
+
+  $scope.toggleContent = function(content) {
+    if ($scope.isContentShown(content)) {
+      $scope.shownContent = null;
+    }
+    else {
+      $scope.shownContent = content;
+    }
+  };
 });
