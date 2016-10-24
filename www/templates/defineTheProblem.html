@@ -1,6 +1,8 @@
 <ion-view cache-view="false" view-title="Define Adult's Concern" ng-controller="AdultConcernsCrtl">
   <div class="bar bar-subheader bar-positive item-text-wrap">
-    <h2 class="title">{{unsolvedProblem.description}}</h2>
+      <h2 class="title">{{unsolvedProblem.description}}</h2>
+      <a class="button button-icon icon ion-lightbulb button-calm"></a>        
+      </div>
   </div>
   <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-subheader has-tabs" on-swipe-left="selectTabWithIndex(2)" on-swipe-right="selectTabWithIndex(0)">
     <div class="list">
