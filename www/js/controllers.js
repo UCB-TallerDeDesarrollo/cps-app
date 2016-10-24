@@ -96,12 +96,8 @@ angular.module('starter.controllers', [])
   };
 
   $scope.findUnsolvedProblem = function() {
-    var query =" SELECT * FROM unsolved_problems where id = ? ";
-    $cordovaSQLite.execute(db,query,[$stateParams.unsolvedProblemId])
-      .then( function(result) {
-        $scope.unsolvedProblem = result.rows.item(0);
-    },function(error){
-      console.log(error);
+    UnsolvedProblemFactory.find($stateParams.unsolvedProblemId, function(result){
+      $scope.unsolvedProblem = result.rows.item(0);
     });
   };
   $scope.createAdultsConcern = function(){
@@ -272,16 +268,13 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout){
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory){
   $scope.childsConcern = {
     description: ""
   };
 
-  // $scope.childsConcerns = getChildsConcern($cordovaSQLite, $scope.unsolvedProblem.id);
-  $scope.unsolvedProblem = {
-    description: '',
-    id: $stateParams.unsolvedProblemId
-  };
+  $scope.unsolvedProblem = {};
+
   $scope.shouldShowReorder = false;
   $scope.moveItem = function(childsConcern, fromIndex, toIndex) {
     var greaterIndex, lesserIndex, childConcernOrderModifier;
@@ -308,14 +301,10 @@ angular.module('starter.controllers', [])
     $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
   };
 
-  $scope.findUnsolvedProblem = function(unsolvedProblem) {
-    var query ="SELECT * FROM unsolved_problems where id = ?;";
-    $cordovaSQLite.execute(db,query,[unsolvedProblem.id]).then(function(result){
-      $scope.itemf = result.rows.item(0);
-      $scope.unsolvedProblem.description = $scope.itemf.description;
+  $scope.findUnsolvedProblem = function() {
+    UnsolvedProblemFactory.find($stateParams.unsolvedProblemId, function(result){
+      $scope.unsolvedProblem = result.rows.item(0);
     });
-    $scope.unsolvedProblem = {};
-    $scope.unsolvedProblem.id = $stateParams.unsolvedProblemId;
   };
 
   $ionicModal.fromTemplateUrl('templates/childsConcerns/create-child-concern-modal.html', {

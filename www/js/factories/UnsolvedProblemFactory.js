@@ -35,11 +35,11 @@ angular.module('starter.services').factory('UnsolvedProblemFactory', function($c
     });
   }
 
-  function findUnsolvedProblem(unsolvedProblem, callback){
+  function findUnsolvedProblem(unsolvedProblemId, callback){
     var query =" SELECT * FROM unsolved_problems where id = ? ";
-    $cordovaSQLite.execute(db,query,[$stateParams.unsolvedProblemId])
+    $cordovaSQLite.execute(db,query,[unsolvedProblemId])
     .then( function(result) {
-        callback();
+        callback(result);
     },
     function(error){
       console.log(error);
@@ -60,8 +60,8 @@ angular.module('starter.services').factory('UnsolvedProblemFactory', function($c
     delete: function(unsolvedProblem, callback){
       deleteUnsolvedProblem(unsolvedProblem, callback);
     },
-    find: function(unsolvedProblem, callback){
-      findUnsolvedProblem(unsolvedProblem, callback);
+    find: function(unsolvedProblemId, callback){
+      findUnsolvedProblem(unsolvedProblemId, callback);
     }
   };
 });
