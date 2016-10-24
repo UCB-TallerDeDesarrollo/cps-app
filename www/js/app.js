@@ -145,7 +145,6 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     views: {
       'menuContent': {
         templateUrl: 'templates/invitationHelp.html',
-        controller: 'HelpCategoryInvitationCtrl'
       }
     }
   })

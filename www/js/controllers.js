@@ -75,18 +75,43 @@ angular.module('starter.controllers', [])
   $scope.helpCategories = HelpCategoriesStep1.all();
 })
 
-.controller('HelpCategoryInvitationCtrl', function($scope, HelpCategoriesStep3) {
-  $scope.helpCategoriesInvitation = HelpCategoriesStep3.all();
-  $scope.showTopic = false;
-  $scope.toggleHelp= function(){
-    if($scope.showTopic===true){
-      $scope.showTopic=false;
-
+.controller('HelpCategoryInvitationCtrl', function($scope) {
+  $scope.toggleHelp= function(topic){
+    if($scope.isTopicShown(topic)){
+      $scope.shownTopic=null;
     }
     else{
-      $scope.showTopic=true;
+      $scope.shownTopic=topic;
     }
   };
+  $scope.isTopicShown=function(topic){
+    return $scope.shownTopic === topic;
+  };
+
+  $scope.helpCategoriesInvitation =[
+  { description : "Invitation Step | Ingredient/Goal",
+    topics:[{ description: "Generate solutions that are realistic (meaning both parties can do what they are agreeing to) and mutually satisfactory (meaning the solution truly addresses the concerns of both parties)"}]},
+  {description : "Words ",
+    topics:[{ description: "Restate the concerns that were identified in the first two steps, usually beginning with “I wonder if there is a way…"}]},
+  { description : "What you're thinking",
+    topics:[{ description: "Have I summarized both concerns accurately? Have we truly considered whether both parties can do what they’ve agreed to? Does the solution truly address the concerns of both parties? What’s my estimate of the odds of this solution working?"}]},
+  { description : "Don't",
+    topics:[{ description: "Rush through this step either"},
+            { description: "Enter this step with preordained solutions"},
+            { description: "Sign off on solutions that both parties can’t actually perform"},
+            { description: "Sign off on solutions that don’t truly address the concerns of both parties"}
+           ]},
+  { description : "Tips!",
+    topics:[{ description: "Stick as closely to the concerns that were identified in the first two steps"},
+            { description:"While it’s a good idea to give the kid the first opportunity to propose a solution, generating solutions is a team effort"},
+            { description:"It’s a good idea to consider the odds of a given solution actually working …if you think the odds are below 60-70 percent, consider what it is that’s making you skeptical and talk about it" },
+            {description:"This step always ends with agreement to return to Plan B if the first solution doesn’t stand the test of time "}]},
+  { description : "Help Topics",
+    topics:[
+      {description: "I'm not getting it", url:"http://www.blogtalkradio.com/dr-ross-greene/2013/09/16/parenting-your-challenging-child"},
+      {description: "The solution didn’t work", url:"http://www.blogtalkradio.com/dr-ross-greene/2011/03/15/parenting-challenging-kids-collaborative-problem-solving-at-home"}
+    ]}
+];
 
 })
 
