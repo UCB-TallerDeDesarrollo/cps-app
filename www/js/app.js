@@ -123,6 +123,14 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     }
   })
 
+  .state('app.planBHelp',{
+    url: '/planBHelp',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/planBHelp.html',
+      }
+    }
+  })
   .state('app.helpCategories',{
     url: '/helpCategories',
     views: {
