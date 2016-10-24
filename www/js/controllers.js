@@ -2,6 +2,7 @@ angular.module('starter.controllers', [])
 
 .config(function($ionicConfigProvider) {
   $ionicConfigProvider.tabs.position("bottom");
+  $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
@@ -72,6 +73,21 @@ angular.module('starter.controllers', [])
 
 .controller('HelpCategoryCtrl', function($scope, HelpCategoriesStep1) {
   $scope.helpCategories = HelpCategoriesStep1.all();
+})
+
+.controller('HelpCategoryInvitationCtrl', function($scope, HelpCategoriesStep3) {
+  $scope.helpCategoriesInvitation = HelpCategoriesStep3.all();
+  $scope.showTopic = false;
+  $scope.toggleHelp= function(){
+    if($scope.showTopic===true){
+      $scope.showTopic=false;
+
+    }
+    else{
+      $scope.showTopic=true;
+    }
+  };
+
 })
 
 .controller('HelpTopicContentCtrl', function($scope, HelpCategoriesStep1, $stateParams) {
@@ -231,6 +247,7 @@ angular.module('starter.controllers', [])
   $scope.$on('modalEdit.removed', function() {
     // Execute action
   });
+
   $scope.selectTabWithIndex = function(index) {
     if(index === 0){
       $ionicTabsDelegate.select(index);
@@ -358,11 +375,13 @@ angular.module('starter.controllers', [])
   });
 
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $scope.unsolvedProblem.id);
-
+  $scope.goUnsolvedProblems = function(){
+    $state.go('app.newUnsolvedProblem');
+  };
   $scope.verifyToGoToStep2 = function() {
     if($scope.adultsConcerns.length === 0){
       var confirmPopup = $ionicPopup.confirm({
-        title: 'Going to Step 2: Define Adults Concerns',
+        title: "Going to Step 2: Define Adult's Concerns",
         template: "Did you drill enough to get all your child's concerns?",
         cancelText: "No, keep drilling",
         okText: "Yes, I'm sure"
@@ -394,7 +413,6 @@ angular.module('starter.controllers', [])
       }else {
         $ionicTabsDelegate.select(index);
         $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
-
       }
     }
     if(index==2){

@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService){
+angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate){
   $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
   $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.initialSetUp = function(){
@@ -8,6 +8,8 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   };
   $scope.showChilds=false;
   $scope.showAdults=false;
+  $scope.shouldShowReorder = false;
+
   $scope.toggleChilds= function(){
     if($scope.showChilds===true){
       $scope.showChilds=false;
@@ -24,6 +26,26 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       $scope.showAdults=true;
     }
   };
+  $scope.moveItem = function(childsConcern, fromIndex, toIndex) {
+    var greaterIndex, lesserIndex, childConcernOrderModifier;
+    $scope.childsConcerns[fromIndex].unsolved_order = toIndex;
+    if(fromIndex > toIndex){
+      greaterIndex = fromIndex;
+      lesserIndex = toIndex;
+      childConcernOrderModifier = 1;
+    }
+    else{
+      greaterIndex = toIndex + 1;
+      lesserIndex = fromIndex;
+      childConcernOrderModifier = -1;
+    }
+    for(var i = lesserIndex; i < greaterIndex; i++ ){
+      updateChildsConcernOrder($cordovaSQLite, [i+childConcernOrderModifier, $scope.childsConcerns[i].id]);
+    }
+    updateChildsConcernOrder($cordovaSQLite, [toIndex, $scope.childsConcerns[fromIndex].id]);
+    findChildsConcerns();
+  };
+
   $scope.createSolution = function() {
     if (!inputFieldIsEmpty($scope.solution.description)) {
       $scope.solution.rating=0;
@@ -288,5 +310,4 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     }
   };
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
-
 });
