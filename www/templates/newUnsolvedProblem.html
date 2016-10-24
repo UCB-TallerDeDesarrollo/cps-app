@@ -3,7 +3,7 @@
 
     <div ng-init="updateUnsolvedProblems()">
       <div class="item item-divider item-text-wrap">
-        <a class="watchlist_menu button button-small button-clear button-positive" ng-show="unsolvedProblems.length > 1" ng-click="shouldShowReorder = !shouldShowReorder">  <i ng-class="(shouldShowReorder) ? 'icon ion-archive' : 'icon ion-shuffle'"></i></a>
+        <a class="watchlist_menu button button-small button-clear button-positive" ng-show="unsolvedProblems.length > 1" ng-click="shouldShowReorder = !shouldShowReorder">  <i ng-class="(shouldShowReorder) ? 'icon icon-floppy' : 'icon icon-sort-alt-down'"></i></a>
         <a ng-click="openModalCreate()" class="watchlist_menu button button-small button-clear button-positive">
           <i class="icon ion-plus"></i>
         </a>
