@@ -72,6 +72,58 @@ angular.module('starter.services', ['ngCordova'])
     }
   };
 })
+.factory('HelpCategoriesStep3', function() {
+  var helpCategoriesStep3 =[
+  {name : "help_category_01" , description : "Invitation Step | Ingredient/Goal", id:1,
+    topics:[{ description: "Generate solutions that are realistic (meaning both parties can do what they are agreeing to) and mutually satisfactory (meaning the solution truly addresses the concerns of both parties)"}]},
+  {name : "help_category_02" , description : "Words ",id:2,
+    topics:[{ description: "Restate the concerns that were identified in the first two steps, usually beginning with “I wonder if there is a way…"}]},
+  {name: "help_category_03" , description : "What you're thinking",id:3,
+    topics:[{ description: "Have I summarized both concerns accurately? Have we truly considered whether both parties can do what they’ve agreed to? Does the solution truly address the concerns of both parties? What’s my estimate of the odds of this solution working?"}]},
+  {name: "help_category_04" , description : "Don't", id:4,
+    topics:[{ description: "Rush through this step either"},
+            { description: "Enter this step with preordained solutions"},
+            { description: "Sign off on solutions that both parties can’t actually perform"},
+            { description: "Sign off on solutions that don’t truly address the concerns of both parties"}
+           ]},
+  {name: "help_category_05" , description : "Tips!", id:5,
+    topics:[{ description: "Stick as closely to the concerns that were identified in the first two steps"},
+            { description:"While it’s a good idea to give the kid the first opportunity to propose a solution, generating solutions is a team effort"},
+            { description:"It’s a good idea to consider the odds of a given solution actually working …if you think the odds are below 60-70 percent, consider what it is that’s making you skeptical and talk about it" },
+            {description:"This step always ends with agreement to return to Plan B if the first solution doesn’t stand the test of time "}]},
+  {name: "help_category_06" , description : "Help Topics",id:6,
+    topics:[
+      {description: "I'm not getting it", url:"http://www.blogtalkradio.com/dr-ross-greene/2013/09/16/parenting-your-challenging-child"},
+      {description: "The solution didn’t work", url:"http://www.blogtalkradio.com/dr-ross-greene/2011/03/15/parenting-challenging-kids-collaborative-problem-solving-at-home"}
+    ]}
+];
+return {
+  all: function() {
+    return helpCategoriesStep3;
+  },
+  get: function(helpCategoriesForStep3Id) {
+    for (var i = 0; i < helpCategoriesForStep3.length; i++) {
+      if (helpCategoriesStep3[i].id === parseInt(helpCategoriesStep3Id)) {
+        return helpCategoriesStep3[i];
+      }
+    }
+    return null;
+  },
+
+  getContent: function(helpCategoriesStep3Id, contentForTopicsId) {
+    for (var i = 0; i < helpCategoriesForStep1.length; i++) {
+      if (helpCategoriesStep3[i].id === parseInt(helpCategoriesStep3Id)) {
+        var category = helpCategoriesStep1[i].topics;
+        for (var j = 0; j < category.length; j++) {
+          if (category[j].id === contentForTopicsId)
+            return category[j];
+        }
+      }
+    }
+    return null;
+  },
+};
+})
 
 .factory('HelpCategoriesStep1',function(){
   // First Step help categories and data
