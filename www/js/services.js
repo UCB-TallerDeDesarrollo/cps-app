@@ -74,19 +74,19 @@ angular.module('starter.services', ['ngCordova'])
 })
 .factory('HelpCategoriesStep3', function() {
   var helpCategoriesStep3 =[
-  {name : "help_category_01" , description : "Invitation Step | Ingredient/Goal", id:1,
+  { description : "Invitation Step | Ingredient/Goal", id:1,
     topics:[{ description: "Generate solutions that are realistic (meaning both parties can do what they are agreeing to) and mutually satisfactory (meaning the solution truly addresses the concerns of both parties)"}]},
-  {name : "help_category_02" , description : "Words ",id:2,
+  {description : "Words ",id:2,
     topics:[{ description: "Restate the concerns that were identified in the first two steps, usually beginning with “I wonder if there is a way…"}]},
-  {name: "help_category_03" , description : "What you're thinking",id:3,
+  { description : "What you're thinking",id:3,
     topics:[{ description: "Have I summarized both concerns accurately? Have we truly considered whether both parties can do what they’ve agreed to? Does the solution truly address the concerns of both parties? What’s my estimate of the odds of this solution working?"}]},
-  {name: "help_category_04" , description : "Don't", id:4,
+  { description : "Don't", id:4,
     topics:[{ description: "Rush through this step either"},
             { description: "Enter this step with preordained solutions"},
             { description: "Sign off on solutions that both parties can’t actually perform"},
             { description: "Sign off on solutions that don’t truly address the concerns of both parties"}
            ]},
-  {name: "help_category_05" , description : "Tips!", id:5,
+  { description : "Tips!", id:5,
     topics:[{ description: "Stick as closely to the concerns that were identified in the first two steps"},
             { description:"While it’s a good idea to give the kid the first opportunity to propose a solution, generating solutions is a team effort"},
             { description:"It’s a good idea to consider the odds of a given solution actually working …if you think the odds are below 60-70 percent, consider what it is that’s making you skeptical and talk about it" },

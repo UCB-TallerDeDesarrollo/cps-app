@@ -77,24 +77,18 @@ angular.module('starter.controllers', [])
 
 .controller('HelpCategoryInvitationCtrl', function($scope, HelpCategoriesStep3) {
   $scope.helpCategoriesInvitation = HelpCategoriesStep3.all();
-  $scope.showTopic = false;
-  $scope.toggleHelp= function(){
-    if($scope.showTopic===true){
-      $scope.showTopic=false;
-
+  $scope.showTopic = null;
+  $scope.toggleHelp= function(topic){
+    if($scope.isTopicShown===true){
+      $scope.showTopic=null;
     }
     else{
-      $scope.showTopic=true;
+      $scope.showTopic=topic;
     }
   };
-  $scope.toggleAdults= function(){
-    if($scope.showAdults===true){
-      $scope.showAdults=false;
-    }
-    else{
-      $scope.showAdults=true;
-    }
-  };
+  $scope.isTopicShown=function(topic){
+    return $scope.showTopic === topic;
+  }
 })
 
 .controller('HelpTopicContentCtrl', function($scope, HelpCategoriesStep1, $stateParams) {

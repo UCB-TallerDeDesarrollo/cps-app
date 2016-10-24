@@ -17,11 +17,12 @@ progress[value] {
 progress::-webkit-progress-value {
     background: #81BEF7;
 }
+
 .list .item.item-accordion {
-  line-height: 38px;
+  line-height: 25px;
   padding-top: 0;
   padding-bottom: 0;
-  transition: 0.09s all linear;
+  transition: 0.2s all linear;
 }
 .list .item.item-accordion.ng-hide {
   line-height: 0px;

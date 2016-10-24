@@ -3,15 +3,15 @@
     <ion-list>
         <ion-item class="item item-text-wrap "  ng-repeat="helpCategory in helpCategoriesInvitation">
           <h2 ><b>{{helpCategory.description}}</b>
-          <div class="col col-10"><i ng-class="showTopic ? 'ion-minus' : 'ion-plus'" ng-click="toggleHelp()"></i>
+          <div class="col col-10"><i ng-class="{active: isTopicShown(HelpCategory)} ? 'ion-minus' : 'ion-plus'" ng-click="toggleHelp(helpCategory)"></i>
           </div></h2>
+          </ion-item>
           <ion-list ng-repeat="topics in helpCategory.topics">
-            <ion-item class="item-accordion" ng-show="showTopic" ng-repeat='topic in topics'>
+            <ion-item class="item-accordion" ng-show="isTopicShown(HelpCategory)" ng-repeat='topic in topics'>
               {{topic}}
-              {{topic.url}}
             </ion-item>
           </ion-list>
-        </ion-item>
+
 
       </ion-list>
   </ion-content>
