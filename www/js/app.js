@@ -25,11 +25,22 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
     DataSeed.seed($cordovaSQLite, db);
-    //DataSeed.deleteSeed($cordovaSQLite, db);
+    // DataSeed.deleteSeed($cordovaSQLite, db);
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider, $httpProvider) {
+
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+  var defaultOptions = {
+    location: 'no',
+    clearcache: 'no',
+    toolbar: 'yes'
+  };
+  $cordovaInAppBrowserProvider.setDefaultOptions(defaultOptions);
+
   $stateProvider
 
   .state('app', {

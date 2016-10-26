@@ -1,0 +1,9 @@
+<ion-modal-view class="modal slide-in-right ng-enter active ng-enter-active">
+  <ion-header-bar class="bar bar-header">
+    <h6 class="col-offset-10 col-80 browser-link" id="browser-uri">{{title.substring(0, getUriLength(title)) + '...'}}</h6>
+    <button class="col-10 button" ng-click="closeBrowser()"><i class="ion-close"></i></button>
+  </ion-header-bar>
+  <ion-content class="has-header">
+    <iframe src="{{destination}}" width="100%" height="100%" frameborder="0"></iframe>
+  </ion-content>
+</ion-modal-view>

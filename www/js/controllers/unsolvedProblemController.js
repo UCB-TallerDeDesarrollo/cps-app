@@ -8,6 +8,16 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     });
   };
 
+  $scope.openLink = function(){
+    $cordovaInAppBrowser.open('http://google.com', '_self')
+    .then(function(event) {
+      // success
+    })
+    .catch(function(event) {
+      // error
+    });
+  };
+
   $scope.moveItem = function(unsolvedProblem, fromIndex, toIndex) {
     var greaterIndex, lesserIndex, unsolvedProblemOrderModifier;
     $scope.unsolvedProblems[fromIndex].unsolved_order = toIndex;
@@ -35,9 +45,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       unsolved_score: $scope.unsolvedProblems[fromIndex].description,
       id: $scope.unsolvedProblems[fromIndex].id
     });
-    //   updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[i].description, i + unsolvedProblemOrderModifier, $scope.unsolvedProblems[i].id,0]);
-    // }
-    // updateUnsolvedProblem($cordovaSQLite, [$scope.unsolvedProblems[fromIndex].description, toIndex, $scope.unsolvedProblems[fromIndex].id,0]);
+
     $scope.unsolvedProblems.splice(fromIndex, 1);
     $scope.unsolvedProblems.splice(toIndex, 0, unsolvedProblem);
   };
@@ -110,6 +118,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   // Cleanup the modal when we're done with it!
   $scope.$on('$destroy', function() {
     $scope.modalCreate.remove();
+    $scope.modalEdit.remove();
   });
 
   $ionicModal.fromTemplateUrl('templates/unsolvedProblems/edit-unsolved-problem-modal.html', {
@@ -127,10 +136,6 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
   };
-  // Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.modalEdit.remove();
-  });
 
   $scope.childsFlag = 0;
   $scope.adultsFlag = 0;

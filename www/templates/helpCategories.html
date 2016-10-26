@@ -3,7 +3,7 @@
 
     <div class="list">
       <a class="item item-text-wrap item-thumbnail-left" href="#/app/helpCategoryTopics/{{helpCategory.id}}" ng-repeat="helpCategory in helpCategories">
-        <img src="img/help_step_1/{{helpCategory.image}}">
+        <img ng-src="img/help_step_1/{{helpCategory.image}}">
         <h2>{{helpCategory.description}}</h2>
       </a>
     </div>
