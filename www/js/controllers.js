@@ -164,9 +164,10 @@ angular.module('starter.controllers', [])
 })
 
 .controller('DefineTheProblemCtrl', function($scope, $stateParams) {
+  alert($stateParams.unsolvedProblemId);
   $scope.unsolvedProblem = {
       description: "",
-      id:$stateParams.id_unsolved
+      id:$stateParams.unsolvedProblemId
   };
 })
 

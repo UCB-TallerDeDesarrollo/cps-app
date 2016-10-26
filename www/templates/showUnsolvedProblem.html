@@ -10,11 +10,10 @@
 
     <div ng-init="updateChildsConcerns()" class="padding">
         <div class="item item-divider item-text-wrap">
-          <a class="watchlist_menu button button-small button-clear button-positive" ng-show="childsConcerns.length > 1 && !shouldShowReorder" ng-click="shouldShowReorder = true">  <i class="icon ion-shuffle"></i></a>
-          <a class="watchlist_menu button button-small button-clear button-positive" ng-show="childsConcerns.length > 1 && shouldShowReorder" ng-click="shouldShowReorder = false">  <i class="icon ion-archive"></i></a>
           <a ng-click="openModal()" class="watchlist_menu button button-small button-clear button-positive">
             <i class="icon ion-plus"></i>
           </a>
+          <a class="watchlist_menu button button-small button-clear button-positive" ng-show="childsConcerns.length > 1" ng-click="shouldShowReorder = !shouldShowReorder">  <i ng-class="(shouldShowReorder) ? 'icon icon-floppy' : 'icon icon-sort-alt-down'"></i></a>
           <div class="col col-75">
             <h2><b>List of Child's Concerns</b></h2>
           </div>

@@ -1,7 +1,7 @@
 <ion-view cache-view="false" view-title="Define Adult's Concern" ng-controller="AdultConcernsCrtl">
   <div class="bar bar-subheader bar-positive item-text-wrap">
       <h2 class="title">{{unsolvedProblem.description}}</h2>
-      <a class="button button-icon icon ion-lightbulb button-calm" href="#/app/mainHelp/helpDefineAdultsConcern"></a>        
+      <a class="button button-icon icon ion-lightbulb button-calm" href="#/app/mainHelp/helpDefineAdultsConcern"></a>
       </div>
   </div>
   <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-subheader has-tabs" on-swipe-left="selectTabWithIndex(2)" on-swipe-right="selectTabWithIndex(0)">
@@ -28,9 +28,7 @@
       <ion-list can-swipe="true" >
         <ion-item class="item item-text-wrap item-icon-right" href="#/app/invitation/{{unsolvedProblem.id}}" ng-repeat="adultsConcern in adultsConcerns">
           <p>{{adultsConcern.description}}</p>
-          <a href="#/app/invitation/{{adultsConcern.id}}">
-            <i class="icon dark ion-chevron-right"></i>
-          </a>
+          <i class="icon dark ion-chevron-right"></i>
           <ion-option-button class="button button-balanced ion-edit" ng-click="editAdultsConcern(adultsConcern)"></ion-option-button>
           <ion-option-button ng-click="showDeleteConfirmationPopup(adultsConcern)" class="button-assertive ion-trash-a" ></ion-option-button>
         </ion-item>
