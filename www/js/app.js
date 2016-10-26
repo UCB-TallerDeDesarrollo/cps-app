@@ -134,6 +134,14 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     }
   })
 
+  .state('app.planBHelp',{
+    url: '/planBHelp',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/planBHelp.html',
+      }
+    }
+  })
   .state('app.helpCategories',{
     url: '/helpCategories',
     views: {
@@ -148,7 +156,6 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     views: {
       'menuContent': {
         templateUrl: 'templates/invitationHelp.html',
-        controller: 'HelpCategoryInvitationCtrl'
       }
     }
   })
@@ -216,6 +223,14 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       views: {
         'menuContent': {
           templateUrl: 'templates/FAQ/policiesAndPractices.html',
+        }
+      }
+    })
+    .state('app.helpDefineAdultsConcern',{
+      url: '/mainHelp/helpDefineAdultsConcern',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/planBHelp/helpDefineAdultsConcern.html',
         }
       }
     });

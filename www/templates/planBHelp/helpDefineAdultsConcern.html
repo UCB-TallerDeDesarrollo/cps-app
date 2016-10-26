@@ -1,0 +1,17 @@
+<ion-view view-title="Help to Define an Adult's Concern">
+  <ion-content ng-controller="planBHelpCtrl">
+    <ion-list>
+      <div ng-repeat="help in step2helps">
+        <ion-item class="item item-stable item-text-wrap"
+                  ng-click="toggleContent(help)"
+                  ng-class="{active: isContentShown(help)}">
+          {{help.title}}
+        </ion-item>
+        <ion-item class="item-accordion item-text-wrap"
+                  ng-show="isContentShown(help)">
+          {{help.content}}
+        </ion-item>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>
