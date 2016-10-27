@@ -11,11 +11,11 @@
         </ion-nav-buttons>
         <ion-nav-buttons side="right">
           <button class="button button-positive button-clear no-animation"
-                  ng-click="next()" ng-show="slideIndex != 5">
+                  ng-click="next()" ng-show="slideIndex != 7">
             Next
           </button>
           <button class="button button-positive button-clear no-animation"
-                  ng-click="startApp()" ng-show="slideIndex == 5">
+                  ng-click="startApp()" ng-show="slideIndex == 7">
             Start
           </button>
         </ion-nav-buttons>
@@ -32,6 +32,19 @@
             <p>
               Now we were going to show you how you can do that.
             </p>
+          </ion-slide>
+          <ion-slide>
+            <h3>Icons used in this Step</h3>
+
+            <div id="list">
+              <ul>
+                <li><i class="icon ion-plus positive"></i> This icon allow to you to add a new Unsolved Problem to the current list.</li>
+                <li><i class="icon ion-edit balanced"></i> This icon allow to you to edit the current Unsolved Problem.</li>
+                <li><i class="icon ion-trash-a assertive"></i> This icon allow to you to delete the current Unsolved Problem.</li>
+                <li><i class="icon icon-sort-alt-down positive"></i> This icon allow to you prioritize the Unsolved Problems.</li>
+                <li><i class="icon icon-floppy positive"></i> This icon allow to you save the prioritize changes on the Unsolved Problems.</li>
+              </ol>
+            </div>
           </ion-slide>
           <ion-slide>
             <h3>Add an Unsolved Problem</h3>
@@ -67,6 +80,18 @@
                 <li>Swipe to the left to see options.</li>
                 <li>Tap on the <i class="icon ion-trash-a assertive"></i> icon</li>
                 <li>Tap OK in order to confirm the action.</li>
+              </ol>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <h3>Prioritize the Unsolved Problems</h3>
+
+            <div id="list">
+              <h5>Just three steps:</h5>
+              <ol>
+                <li>Tap on <i class="icon icon-sort-alt-down positive"></i> icon to enable the drag & drop option.</li>
+                <li>Tap over <i class="icon ion-navicon-round positive"></i> icon and drag up or down an Unsolved Problem to prioritize it.</li>
+                <li>Tap on <i class="icon icon-floppy positive"></i> icon to save the changes.</li>
               </ol>
             </div>
           </ion-slide>

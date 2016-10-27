@@ -88,8 +88,17 @@ body {
 #list {
   width: 170px;
   margin: 30px auto;
-  font-size: 20px;
+  font-size: 15px;
 }
+
+#list ul {
+  margin-top: 20px;
+}
+#list ul li {
+  text-align: justify;
+  margin: 10px 0px;
+}
+
 #list ol {
   margin-top: 30px;
 }
