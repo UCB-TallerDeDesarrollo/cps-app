@@ -81,7 +81,8 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/home',
     views: {
       'menuContent': {
-        templateUrl: 'templates/home.html'
+        templateUrl: 'templates/home.html',
+        controller: 'TourCtrl'
       }
     }
   })
@@ -226,6 +227,14 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         }
       }
     })
+    .state('app.unsolvedTour',{
+        url: '/unsolvedProblemTour',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/unsolved_tour.html'
+          }
+        }
+      })
     .state('app.helpDefineAdultsConcern',{
       url: '/mainHelp/helpDefineAdultsConcern',
       views: {

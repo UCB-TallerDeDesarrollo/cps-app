@@ -355,6 +355,38 @@ angular.module('starter.controllers', [])
 
 })
 
+.controller('TourCtrl', function($scope, $state, $ionicSlideBoxDelegate,$cordovaSQLite){
+
+  $scope.startApp = function() {
+    $state.go('app.newUnsolvedProblem');
+  };
+  $scope.next = function() {
+    $ionicSlideBoxDelegate.next();
+  };
+  $scope.previous = function() {
+    $ionicSlideBoxDelegate.previous();
+  };
+
+  $scope.slideChanged = function(index) {
+    $scope.slideIndex = index;
+  };
+
+  $scope.UnsolvedProblemsTutorial = function(){
+    var query ="SELECT COUNT(*) AS UnsolvedProblemsCount FROM unsolved_problems";
+    var cont = -1;
+    $cordovaSQLite.execute(db,query).then( function(result){
+      cont = result.rows.item(0).UnsolvedProblemsCount;
+      if(cont === 0)
+      {
+        $state.go('app.unsolvedTour');
+      }
+      else{
+        $state.go('app.newUnsolvedProblem');
+      }
+      });
+  };
+})
+
 .controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory){
   $scope.childsConcern = {
     description: ""
