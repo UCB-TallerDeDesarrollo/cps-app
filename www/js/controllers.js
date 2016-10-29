@@ -681,7 +681,7 @@ function getChilds(cordovaSQLite){
     });
   return childs;
 }
-}
+
 function getAdultConcerns(cordovaSQLite,unsolvedProblemId){
   var adults_concerns = [];
   var query ="SELECT * FROM adults_concerns WHERE unsolved_problem_id = ?";
