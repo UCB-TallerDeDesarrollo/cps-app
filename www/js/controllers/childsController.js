@@ -1,6 +1,9 @@
 angular.module('starter.controllers')
-  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams) {
-
+  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter) {
+    $scope.child = {};
+    $scope.child.first_name="";
+    $scope.child.gender = "Female";
+    $scope.child.birthday = new Date();
     $ionicModal.fromTemplateUrl('templates/child/create-child-modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -26,4 +29,13 @@ angular.module('starter.controllers')
       // Execute action
     });
 
+    $scope.createChild = function(){
+      if (!inputFieldIsEmpty($scope.child.first_name)) {
+        saveChild($cordovaSQLite,$scope.child);
+        $scope.child.first_name = "";
+        $scope.child.gender = "Female";
+        $scope.child.birthday = new Date();
+        $scope.closeModalCreate();
+      }
+    };
 });
