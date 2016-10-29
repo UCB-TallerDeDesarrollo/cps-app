@@ -1,5 +1,6 @@
 angular.module('starter.controllers')
   .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter) {
+    $scope.childs = getChilds($cordovaSQLite);
     $scope.child = {};
     $scope.child.first_name="";
     $scope.child.gender = "Female";
@@ -36,6 +37,7 @@ angular.module('starter.controllers')
         $scope.child.gender = "Female";
         $scope.child.birthday = new Date();
         $scope.closeModalCreate();
+        $scope.childs = getChilds($cordovaSQLite);
       }
     };
 });

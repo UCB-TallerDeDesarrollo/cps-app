@@ -668,8 +668,8 @@ function getChildsConcern(cordovaSQLite,unsolvedProblemId){
 
 function getChilds(cordovaSQLite){
   var childs = [];
-  var query ="SELECT * FROM childs WHERE unsolved_problem_id = ?";
-  cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
+  var query ="SELECT * FROM childs";
+  cordovaSQLite.execute(db,query).then(function(result) {
     var rows = result.rows;
     if(rows.length) {
       for(var i=0; i < rows.length; i++){
