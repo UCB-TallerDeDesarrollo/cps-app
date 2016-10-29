@@ -666,6 +666,22 @@ function getChildsConcern(cordovaSQLite,unsolvedProblemId){
   return childs_concerns;
 }
 
+function getChilds(cordovaSQLite){
+  var childs = [];
+  var query ="SELECT * FROM childs WHERE unsolved_problem_id = ?";
+  cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
+    var rows = result.rows;
+    if(rows.length) {
+      for(var i=0; i < rows.length; i++){
+        childs.push(rows.item(i));
+      }
+    }
+    },function(err){
+      console.log(err.message);
+    });
+  return childs;
+}
+}
 function getAdultConcerns(cordovaSQLite,unsolvedProblemId){
   var adults_concerns = [];
   var query ="SELECT * FROM adults_concerns WHERE unsolved_problem_id = ?";
