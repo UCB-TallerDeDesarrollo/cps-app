@@ -33,6 +33,11 @@ angular.module('starter.seed', [])
         $cordovaSQLite.execute(db, item);
       });
   }
+
+  function seedChilds($cordovaSQLite, db){
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS childs (id integer primary key autoincrement, name text, last_name text, gender text, birthday date);");
+  }
+
   function seedUnsolvedProblems($cordovaSQLite, db){
     $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS unsolved_problems (id integer primary key autoincrement, description text, solved boolean, unsolved_order integer, unsolved_score integer default 0);");
   }
@@ -55,6 +60,7 @@ angular.module('starter.seed', [])
       seedChildsConcerns($cordovaSQLite, db);
       seedAdultsConcerns($cordovaSQLite, db);
       seedSolutions($cordovaSQLite, db);
+      seedChilds($cordovaSQLite,db);
       return;
     },
     deleteSeed: function($cordovaSQLite, db) {
@@ -63,6 +69,8 @@ angular.module('starter.seed', [])
       $cordovaSQLite.execute(db, "DROP TABLE childs_concerns");
       $cordovaSQLite.execute(db, "DROP TABLE adults_concerns");
       $cordovaSQLite.execute(db, "DROP TABLE solutions");
+      $cordovaSQLite.execute(db, "DROP TABLE childs");
+
     }
   };
 });

@@ -1,0 +1,26 @@
+<ion-view cache-view="false" view-title="My Childs">
+  <ion-content ng-controller="ChildsCtrl">
+    <div ng-init="updateUnsolvedProblems()">
+      <div class="item item-divider item-text-wrap">
+        <a ng-click="openModalCreate()" class="watchlist_menu button button-small button-clear button-positive">
+          <i class="icon ion-plus"></i>
+        </a>
+      </div>
+      <!--ion-list show-delete="false" can-swipe="true" show-reorder="shouldShowReorder">
+          <ion-item class="item-text-wrap item-icon-left item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems">
+            <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration">
+              <div name="content">
+                <i class="icon dark {{getRatingIcon(unsolvedProblem)}}"></i>
+                <p>{{unsolvedProblem.description}}</p>
+                <i class="icon dark ion-chevron-right"></i>
+              </div>
+            </a>
+            <ion-option-button class="button button-balanced ion-edit" ng-click="editUnsolvedProblem(unsolvedProblem)" ng-hide="{{shouldShowReorder}}"></ion-option-button>
+            <ion-option-button class="button-assertive ion-trash-a" ng-click="showConfirm(unsolvedProblem)"></ion-option-button>
+            <ion-option-button class="button-positive ion-more" ng-click="showActionsheet(unsolvedProblem)"></ion-option-button>
+            <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(unsolvedProblem, $fromIndex, $toIndex)"> </ion-reorder-button>
+          </ion-item>
+      </ion-list-->
+    </div>
+  </ion-content>
+</ion-view>
