@@ -1,16 +1,16 @@
 angular.module('starter.controllers')
   .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams) {
 
-    $ionicModal.fromTemplateUrl('templates/childs/create-child-modal.html', {
+    $ionicModal.fromTemplateUrl('templates/child/create-child-modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {
       $scope.modalCreate = modal;
     });
-    $scope.openModal = function() {
+    $scope.openModalCreate = function() {
       $scope.modalCreate.show();
     };
-    $scope.closeModal = function() {
+    $scope.closeModalCreate = function() {
       $scope.modalCreate.hide();
     };
     // Cleanup the modal when we're done with it!

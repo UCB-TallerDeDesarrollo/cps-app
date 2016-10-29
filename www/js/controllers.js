@@ -164,14 +164,13 @@ angular.module('starter.controllers', [])
 })
 
 .controller('DefineTheProblemCtrl', function($scope, $stateParams) {
-  alert($stateParams.unsolvedProblemId);
   $scope.unsolvedProblem = {
       description: "",
       id:$stateParams.unsolvedProblemId
   };
 })
 
-.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate, $timeout){
+.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate, $timeout, UnsolvedProblemFactory){
 
   $scope.adultsConcern = { description: ""};
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
@@ -334,7 +333,6 @@ angular.module('starter.controllers', [])
       }else {
         $ionicTabsDelegate.select(index);
         $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
-
       }
     }
     if(index==2){

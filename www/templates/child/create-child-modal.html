@@ -5,16 +5,26 @@
   </ion-header-bar>
   <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
     <div class="list">
-      <label class="item item-input">
-        <input type="text" placeholder="Child's name">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Name</span>
+        <input type="text" placeholder="Type a new childs's name here." ng-model="child.name">
         </input>
       </label>
-      <label class="item item-input">
-        <textarea rows=5 placeholder="Type a new adult's concern here." ng-model="adultsConcern.description">
-        </textarea>
+      <label class="item item-input item-stacked-label item-select">
+        <span class="input-label">Gender</span>
+        <select>
+            <option selected>Male</option>
+            <option selected>Female</option>
+         </select>
+
       </label>
-      <button class="button button-full button-positive" ng-if="!adultsConcern.description.length" ng-click="createAdultsConcern()" disabled>Create</button>
-      <button class="button button-full button-positive" ng-if="adultsConcern.description.length > 0" ng-click="createAdultsConcern()">Create</button>
+      <label class="item item-input item-stacked-label item-select">
+        <span class="input-label">Birthday</span>
+        <input type="date" placeholder="Type a new childs's name here." ng-model="child.name">
+        </input>
+      </label>
+      <button class="button button-full button-positive"  ng-click="createAdultsConcern()" disabled>Create</button>
+      <button class="button button-full button-positive"  ng-click="createAdultsConcern()">Create</button>
     </div>
   </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
 </ion-modal-view>
