@@ -2,7 +2,7 @@ angular.module('starter.seed', [])
 
 .factory('DataSeed', function() {
   function seedLaggingSkills($cordovaSQLite, db){
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS lagging_skills (id integer primary key autoincrement, description text, checked integer)");
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS lagging_skills (id integer primary key autoincrement, description text, checked integer, child_id integer)");
     var sqlLaggingSkills = [
       'INSERT INTO lagging_skills (description,checked) VALUES ( "Difficulty handling transitions, shifting from one mindset or task to another",0)',
       'INSERT INTO lagging_skills (description,checked) VALUES ( "Difficulty doing things in a logical sequence or prescribed order",0)',
