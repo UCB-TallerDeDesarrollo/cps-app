@@ -5,26 +5,25 @@
   </ion-header-bar>
   <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
     <div class="list">
-      <label class="item item-input item-stacked-label">
+      <label class="item item-input item-stacked-label ">
         <span class="input-label">Name</span>
-        <input type="text" placeholder="Type a new childs's name here." ng-model="child.name">
+        <input type="text" placeholder="Type a new childs's name here." ng-model="child.first_name">
         </input>
       </label>
-      <label class="item item-input item-stacked-label item-select">
+      <label class="item item-input item-select">
         <span class="input-label">Gender</span>
-        <select>
-            <option selected>Male</option>
+        <select ng-model="child.gender">
+            <option>Male</option>
             <option selected>Female</option>
          </select>
-
       </label>
-      <label class="item item-input item-stacked-label item-select">
+      <label class="item item-input item-select">
         <span class="input-label">Birthday</span>
-        <input type="date" placeholder="Type a new childs's name here." ng-model="child.name">
+        <input type="date" style="text-align:right;" ng-model="child.birthday">
         </input>
       </label>
-      <button class="button button-full button-positive"  ng-click="createAdultsConcern()" disabled>Create</button>
-      <button class="button button-full button-positive"  ng-click="createAdultsConcern()">Create</button>
+      <button class="button button-full button-positive" ng-if="child.first_name.length == 0" disabled>Create</button>
+      <button class="button button-full button-positive" ng-if="child.first_name.length > 0" ng-click="createChild()">Create</button>
     </div>
   </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
 </ion-modal-view>
