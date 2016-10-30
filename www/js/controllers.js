@@ -48,18 +48,22 @@ angular.module('starter.controllers', [])
 
 .controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate) {
   //$scope.laggingSkills = getLaggingSkills($cordovaSQLite);
-  $scope.laggingSkills = LaggingSkills.all();
+  //$scope.active_child = getActiveChild(cordovaSQLite);
+  $scope.laggingSkills = getLaggingSkills($cordovaSQLite, 1);
   $scope.checkLaggingSkill = function(laggingskillId){
-    //updateLaggingSkill($cordovaSQLite, [laggingskillId]);
-    LaggingSkills.check(laggingskillId);
+    updateLaggingSkill($cordovaSQLite, [laggingskillId]);
+    //LaggingSkills.check(laggingskillId);
     $state.go('app.laggingSkills');
     $ionicListDelegate.closeOptionButtons();
+    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, 1);
+
   };
   $scope.uncheckLaggingSkill = function(laggingskillId){
-    //updateLaggingSkill($cordovaSQLite, [laggingskillId]);
-    LaggingSkills.uncheck(laggingskillId);
+    uncheckLaggingSkill($cordovaSQLite, [laggingskillId]);
+    //LaggingSkills.uncheck(laggingskillId);
     $state.go('app.laggingSkills');
     $ionicListDelegate.closeOptionButtons();
+    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, 1);
   };
 })
 
@@ -588,10 +592,10 @@ angular.module('starter.controllers', [])
 // OTHER FUNCTIONS
 
 
-function getLaggingSkills(cordovaSQLite){
+function getLaggingSkills(cordovaSQLite,child_id){
   var lagging_skills = [];
-  var query ="SELECT * FROM lagging_skills ORDER BY id";
-  cordovaSQLite.execute(db,query).then(function(result) {
+  var query ="SELECT * FROM lagging_skills WHERE child_id = ?";
+  cordovaSQLite.execute(db,query,[child_id]).then(function(result) {
     var rows = result.rows;
     if(rows.length) {
       for(var i=0; i < rows.length; i++){
@@ -604,6 +608,16 @@ function getLaggingSkills(cordovaSQLite){
   return lagging_skills;
 }
 
+function getActiveChild(cordovaSQLite){
+  var active_child = [];
+  var query ="SELECT * FROM childs WHERE active = 1";
+  cordovaSQLite.execute(db,query,[child_id]).then(function(result) {
+    active_child.push(result.rows.item(0));
+    },function(err){
+      console.log(err.message);
+    });
+  return active_child;
+}
 function getSolutions(cordovaSQLite,unsolvedProblemId) {
   var solutions = [];
   var query ="SELECT * FROM solutions WHERE unsolved_problem_id = ?";
@@ -721,7 +735,10 @@ function updateAdultsConcern($cordovaSQLite, params){
   query = "UPDATE adults_concerns SET description = ? where id = ?";
   return $cordovaSQLite.execute(db, query, params);
 }
-
+function uncheckLaggingSkill($cordovaSQLite,params){
+  var query = "UPDATE lagging_skills SET checked = 0 where id = ?";
+  $cordovaSQLite.execute(db,query,params);
+}
 function updateLaggingSkill($cordovaSQLite, params){
   var query = "UPDATE lagging_skills SET checked = 1 where id = ?";
   $cordovaSQLite.execute(db,query,params);

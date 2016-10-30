@@ -6,7 +6,7 @@ angular.module('starter.seed', [])
   }
 
   function seedChilds($cordovaSQLite, db){
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS childs (id integer primary key autoincrement, first_name text, last_name text, gender text, birthday date);");
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS childs (id integer primary key autoincrement, first_name text, last_name text, gender text, birthday date, active integer default 0);");
   }
 
   function seedUnsolvedProblems($cordovaSQLite, db){
