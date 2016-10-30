@@ -5,7 +5,7 @@
         <div class="item item-text-wrap item-icon-right" ng-if="!content.link">
           <h3>{{content.description}}</h3>
         </div>
-        <a class="item item-text-wrap item-icon-right" ng-click="openBrowser(content.link)" ng-if="content.link.length > 0">
+        <a class="item item-text-wrap item-icon-right" ng-click="browserInstance.openBrowser(content.link)" ng-if="content.link.length > 0">
           <h3>{{content.description}}</h3>
           <i class="icon ion-chevron-right"></i>
         </a>
