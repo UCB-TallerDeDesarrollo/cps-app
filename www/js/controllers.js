@@ -5,7 +5,7 @@ angular.module('starter.controllers', [])
   $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -16,7 +16,11 @@ angular.module('starter.controllers', [])
 
   // Form data for the login modal
   $scope.loginData = {};
-
+  // Last active child
+  $timeout( function() {
+    $scope.activeChild = getActiveChild($cordovaSQLite);
+    console.log($scope);
+  });
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -574,13 +578,17 @@ function getLaggingSkills(cordovaSQLite,child_id){
 function getActiveChild(cordovaSQLite){
   var active_child = [];
   var query ="SELECT * FROM childs WHERE active = 1";
-  cordovaSQLite.execute(db,query,[child_id]).then(function(result) {
-    active_child.push(result.rows.item(0));
+  cordovaSQLite.execute(db,query).then(function(result) {
+    var rows = result.rows;
+    if(rows.length) {
+        active_child.push(rows.item(0));
+    }
     },function(err){
       console.log(err.message);
     });
   return active_child;
 }
+
 function getSolutions(cordovaSQLite,unsolvedProblemId) {
   var solutions = [];
   var query ="SELECT * FROM solutions WHERE unsolved_problem_id = ?";
