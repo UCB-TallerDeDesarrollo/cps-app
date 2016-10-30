@@ -49,7 +49,6 @@ angular.module('starter.controllers')
 });
 
 function createLaggingSkills (cordovaSQLite, child_id){
-  console.log(child_id);
   var sqlLaggingSkills = [
     'INSERT INTO lagging_skills (description,checked,child_id) VALUES ( "Difficulty handling transitions, shifting from one mindset or task to another",0,?)',
     'INSERT INTO lagging_skills (description,checked,child_id) VALUES ( "Difficulty doing things in a logical sequence or prescribed order",0,?)',
