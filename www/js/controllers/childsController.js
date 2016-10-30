@@ -32,6 +32,7 @@ angular.module('starter.controllers')
 
     $scope.createChild = function(){
       if (!inputFieldIsEmpty($scope.child.first_name)) {
+        console.log($scope.child);
         saveChild($cordovaSQLite,$scope.child);
         $scope.child.first_name = "";
         $scope.child.gender = "Female";
