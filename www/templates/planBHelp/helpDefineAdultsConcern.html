@@ -1,7 +1,13 @@
 <ion-view view-title="Help to Define an Adult's Concern">
-  <ion-content ng-controller="planBHelpCtrl">
+  <div class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" placeholder="Search" ng-model="searchWord">
+    </label>
+  </div>
+  <ion-content class="has-subheader" ng-controller="planBHelpCtrl">
     <ion-list>
-      <div ng-repeat="help in step2helps">
+      <div ng-repeat="help in step2helps | filter: searchWord">
         <ion-item class="item item-stable item-text-wrap"
                   ng-click="toggleContent(help)"
                   ng-class="{active: isContentShown(help)}">
