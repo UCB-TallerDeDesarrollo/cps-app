@@ -45,6 +45,57 @@ angular.module('starter.controllers')
         $scope.childs = getChilds($cordovaSQLite);
       }
     };
+    $scope.activateChild = function(child){
+      console.log("hola");
+    };
+
+    $scope.showActionsheet = function(child) {
+      $ionicActionSheet.show({
+        buttons: [
+          { text: 'Edit child' }
+        ],
+        cancelText: 'Cancel',
+        cancel: function() {
+          $ionicListDelegate.closeOptionButtons();
+        },
+        destructiveText: 'Delete',
+        destructiveButtonClicked: function() {
+          $scope.showConfirm(child);
+          return true;
+        },
+        buttonClicked: function(index) {
+
+          if(index === 0){
+            $scope.goToUnsolvedProblem(unsolvedProblem);
+          }
+          $ionicListDelegate.closeOptionButtons();
+
+          return true;
+
+        }
+      });
+    };
+
+    $scope.deleteChild = function(item) {
+      var query = "DELETE FROM childs where id = ?";
+      $cordovaSQLite.execute(db, query, [item.id]).then(function(res) {
+          $scope.childs.splice($scope.childs.indexOf(item), 1);
+      }, function (err) {
+          console.error(err);
+      });
+    };
+    $scope.showConfirm = function(item) {
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Delete Child',
+        template: 'Are you sure you want to delete this child?'
+      });
+
+      confirmPopup.then(function(res) {
+       if(res) {
+        $scope.deleteChild(item);
+       }
+      });
+    };
 
 });
 

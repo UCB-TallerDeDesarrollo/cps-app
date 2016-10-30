@@ -20,6 +20,16 @@
                 <!--{{child.gender}}-->
                 <p><b>Birthday:</b> {{convertStringToDate(child.birthday) | date:"dd/MM/yy"}}</p>
               </div>
+              <div class="item item-divider item-text-wrap text-center">
+                <div class="button-bar">
+                  <div class="col col-50 button button-small button-balanced" ng-click="activateChild(child.id)">
+                    <i class="icon ion-arrow-right-b"></i>
+                  </div>
+                  <div class="col col-50 button button-small button-positive" ng-click="showActionsheet(child)">
+                    <i class="icon ion-more"></i>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col col-50" ng-if="childs[$index+1]">
@@ -30,6 +40,16 @@
                 <h2><b>{{childs[$index+1].first_name}}</b></h2>
                 <!--{{childs[$index+1].gender}}-->
                 <p><b>Birthday:</b> {{convertStringToDate(childs[$index+1].birthday) | date:"dd/MM/yy"}}</p>
+              </div>
+              <div class="item item-divider item-text-wrap text-center">
+                <div class="button-bar">
+                  <div class="col col-50 button button-small button-balanced" ng-click="activateChild(childs[$index+1].id)">
+                    <i class="icon ion-arrow-right-b"></i>
+                  </div>
+                  <div class="col col-50 button button-small button-positive" ng-click="showActionsheet(childs[$index+1])">
+                    <i class="icon ion-more"></i>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
