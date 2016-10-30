@@ -22,9 +22,9 @@
         </ion-item>
           <ion-list ng-repeat="topics in helpCategory.topics">
             <ion-item class="item-accordion" ng-show="isTopicShown(helpCategory)" ng-repeat='topic in topics'>
-              {{topic}}
-          </ion-list>
-        </ion-item>
+              <div class="item-text-wrap" >{{topic}}</div>
+          </ion-item>
+        </ion-list>
       </div>
       </ion-list>
   </ion-content>
