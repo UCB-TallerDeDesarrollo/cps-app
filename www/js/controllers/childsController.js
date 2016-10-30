@@ -44,10 +44,12 @@ angular.module('starter.controllers')
         $scope.closeModalCreate();
         if($scope.childs.length !== 0){
           createLaggingSkills($cordovaSQLite, $scope.childs[$scope.childs.length-1].id+1);
-          //activateChild($cordovaSQLite,[$scope.childs[$scope.childs.length-1].id+1]);
+          activateChild($cordovaSQLite,[$scope.childs[$scope.childs.length-1].id+1]);
+          deactivateChildsBut($cordovaSQLite,[$scope.childs[$scope.childs.length-1].id+1]);
         }else{
-          createLaggingSkills($cordovaSQLite, 1);
-          //activateChild($cordovaSQLite,1);
+          createLaggingSkills($cordovaSQLite, [1]);
+          activateChild($cordovaSQLite,[1]);
+          deactivateChildsBut($cordovaSQLite,[1]);
         }
         $scope.childs = getChilds($cordovaSQLite);
       }
@@ -83,7 +85,12 @@ angular.module('starter.controllers')
         }
       });
     };
+    $scope.activateChild = function(item){
+      activateChild($cordovaSQLite,[item.id]);
+      deactivateChildsBut($cordovaSQLite,[item.id]);
+      $scope.childs = getChilds($cordovaSQLite);
 
+    };
     $scope.deleteChild = function(item) {
       var query = "DELETE FROM childs where id = ?";
       $cordovaSQLite.execute(db, query, [item.id]).then(function(res) {
@@ -145,5 +152,10 @@ function activateChild($cordovaSQLite,params){
 }
 function deactivateChild($cordovaSQLite,params){
   var query = "UPDATE childs SET active = 0 where id = ?";
+  $cordovaSQLite.execute(db,query,params);
+}
+
+function deactivateChildsBut($cordovaSQLite,params){
+  var query = "UPDATE childs SET active = 0 where id <> ?";
   $cordovaSQLite.execute(db,query,params);
 }

@@ -17,16 +17,15 @@
                 <img class="full-image" ng-src="img/childs/boy.png" ng-if="child.gender === 'Male'">
                 <img class="full-image" ng-src="img/childs/girl.png" ng-if="child.gender === 'Female'">
                 <h2><b>{{child.first_name}}</b></h2>
-                <!--{{child.gender}}-->
                 <p><b>Birthday:</b> {{convertStringToDate(child.birthday) | date:"dd/MM/yy"}}</p>
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">
-                  <div class="col col-50 button button-small button-positive" ng-click="activateChild(child.id)" ng-if="child.active === 0">
+                  <div class="col col-50 button button-small button-positive" ng-click="activateChild(child)" ng-if="child.active === 0">
                     <i class="icon ion-arrow-right-b"></i>
                   </div>
                   <div class="col col-50 button button-small button-balanced" ng-if="child.active === 1">
-                    <p>ACTIVE</p>
+                    <i class="icon ion-arrow-right-c"></i>
                   </div>
                   <div class="col col-50 button button-small button-calm" ng-click="showActionsheet(child)">
                     <i class="icon ion-more"></i>
@@ -41,16 +40,15 @@
                 <img class="full-image" ng-src="img/childs/boy.png" ng-if="childs[$index+1].gender === 'Male'">
                 <img class="full-image" ng-src="img/childs/girl.png" ng-if="childs[$index+1].gender === 'Female'">
                 <h2><b>{{childs[$index+1].first_name}}</b></h2>
-                <!--{{childs[$index+1].gender}}-->
                 <p><b>Birthday:</b> {{convertStringToDate(childs[$index+1].birthday) | date:"dd/MM/yy"}}</p>
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">
-                  <div class="col col-50 button button-small button-positive" ng-click="activateChild(childs[$index+1].id)" ng-if="child.active === 0">
+                  <div class="col col-50 button button-small button-positive" ng-click="activateChild(childs[$index+1])" ng-if="childs[$index+1].active === 0">
                     <i class="icon ion-arrow-right-b"></i>
                   </div>
-                  <div class="col col-50 button button-small button-balanced" ng-if="child.active === 1">
-                    <p>ACTIVE</p>
+                  <div class="col col-50 button button-small button-balanced" ng-if="childs[$index+1].active === 1">
+                    <i class="icon ion-arrow-right-c"></i>
                   </div>
                   <div class="col col-50 button button-small button-calm" ng-click="showActionsheet(childs[$index+1])">
                     <i class="icon ion-more"></i>
