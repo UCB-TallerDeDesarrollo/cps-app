@@ -630,11 +630,12 @@ function getAdultConcernById($cordovaSQLite, adultConcernId){
       callback(result.rows.item(0));
   });
 }
+
 function saveChild(cordovaSQLite,child){
-  console.log(child);
   var query = "INSERT INTO childs(first_name,gender,birthday) VALUES (?,?,?)";
   cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]);
 }
+
 function saveChildsConcern(cordovaSQLite,childsConcern,unsolvedProblemId,orderId){
   var query ="INSERT INTO childs_concerns(description,unsolved_problem_id,unsolved_order) VALUES (?,?,?)";
   cordovaSQLite.execute(db,query,[childsConcern,unsolvedProblemId,orderId]);
