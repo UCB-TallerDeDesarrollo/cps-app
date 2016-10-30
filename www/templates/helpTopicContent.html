@@ -1,18 +1,7 @@
 <ion-view view-title="{{topic.description}}">
-  <div class="bar bar-subheader item-input-inset">
-    <label class="item-input-wrapper">
-      <i class="icon ion-search placeholder-icon"></i>
-      <input type="search" placeholder="Search" ng-model="searchWord">
-    </label>
-    <button class="button ion-close input-button button-small"
-            ng-click="searchWord = ''"
-            ng-show="searchWord.length">
-        Clear
-    </button>
-  </div>
-  <ion-content class="has-subheader">
+  <ion-content>
     <div class="list">
-      <div ng-repeat="content in topic.contents | filter: searchWord">
+      <div ng-repeat="content in topic.contents">
         <div class="item item-text-wrap item-icon-right" ng-if="!content.link">
           <h3>{{content.description}}</h3>
         </div>
