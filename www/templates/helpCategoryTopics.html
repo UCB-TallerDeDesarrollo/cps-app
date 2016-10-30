@@ -1,7 +1,18 @@
 <ion-view view-title="{{category.description}}">
-  <ion-content>
+  <div class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" placeholder="Search" ng-model="searchWord">
+    </label>
+    <button class="button ion-close input-button button-small"
+            ng-click="searchWord = ''"
+            ng-show="searchWord.length">
+        Clear
+    </button>
+  </div>
+  <ion-content class="has-subheader">
     <div class="list">
-      <div ng-repeat="topic in category.topics">
+      <div ng-repeat="topic in category.topics | filter: searchWord">
           <a class="item item-text-wrap item-icon-right" href="#/app/helpTopicContent/{{category.id}}/{{topic.id}}" ng-if="topic.contents.length > 0 && !topic.link">
             <i class="icon ion-chevron-right"></i>
             <h3>{{topic.description}}</h3>
@@ -10,7 +21,7 @@
             <h3>{{topic.description}}</h3>
           </div>
           <a class="item item-text-wrap item-icon-right" ng-click="browserInstance.openBrowser(topic.link)" ng-if="topic.link.length > 0  && !topic.contents">
-            <i class="icon ion-chevron-right"></i>
+            <i class="icon ion-ios-browsers-outline"></i>
             <h3>{{topic.description}}</h3>
           </a>
       </div>
