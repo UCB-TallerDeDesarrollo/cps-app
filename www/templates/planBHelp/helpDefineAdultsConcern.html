@@ -5,6 +5,7 @@
         <ion-item class="item item-stable item-text-wrap"
                   ng-click="toggleContent(help)"
                   ng-class="{active: isContentShown(help)}">
+          <i class="icon" ng-class="isContentShown(help) ? 'ion-minus' : 'ion-plus'"></i> &nbsp;
           {{help.title}}
         </ion-item>
         <ion-item class="item-accordion item-text-wrap"
