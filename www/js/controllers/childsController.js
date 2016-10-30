@@ -34,6 +34,7 @@ angular.module('starter.controllers')
         return new Date(dateToConvert);
     };
 
+
     $scope.createChild = function(){
       if (!inputFieldIsEmpty($scope.child.first_name)) {
         saveChild($cordovaSQLite,$scope.child);
@@ -41,10 +42,17 @@ angular.module('starter.controllers')
         $scope.child.gender = "Female";
         $scope.child.birthday = new Date();
         $scope.closeModalCreate();
-        createLaggingSkills($cordovaSQLite, $scope.childs.length+1);
+        if($scope.childs.length !== 0){
+          createLaggingSkills($cordovaSQLite, $scope.childs[$scope.childs.length-1].id+1);
+          //activateChild($cordovaSQLite,[$scope.childs[$scope.childs.length-1].id+1]);
+        }else{
+          createLaggingSkills($cordovaSQLite, 1);
+          //activateChild($cordovaSQLite,1);
+        }
         $scope.childs = getChilds($cordovaSQLite);
       }
     };
+
     $scope.activateChild = function(child){
       console.log("hola");
     };
@@ -129,4 +137,13 @@ function createLaggingSkills (cordovaSQLite, child_id){
     sqlLaggingSkills.forEach(function(item){
       cordovaSQLite.execute(db,item,[child_id]);
     });
+}
+
+function activateChild($cordovaSQLite,params){
+  var query = "UPDATE childs SET active = 1 where id = ?";
+  $cordovaSQLite.execute(db,query,params);
+}
+function deactivateChild($cordovaSQLite,params){
+  var query = "UPDATE childs SET active = 0 where id = ?";
+  $cordovaSQLite.execute(db,query,params);
 }
