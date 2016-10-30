@@ -51,8 +51,7 @@ angular.module('starter.controllers', [])
   //$scope.active_child = getActiveChild(cordovaSQLite);
   $scope.laggingSkills = getLaggingSkills($cordovaSQLite, 1);
   $scope.checkLaggingSkill = function(laggingskillId){
-    updateLaggingSkill($cordovaSQLite, [laggingskillId]);
-    //LaggingSkills.check(laggingskillId);
+    checkLaggingSkill($cordovaSQLite, [laggingskillId]);
     $state.go('app.laggingSkills');
     $ionicListDelegate.closeOptionButtons();
     $scope.laggingSkills = getLaggingSkills($cordovaSQLite, 1);
@@ -60,7 +59,6 @@ angular.module('starter.controllers', [])
   };
   $scope.uncheckLaggingSkill = function(laggingskillId){
     uncheckLaggingSkill($cordovaSQLite, [laggingskillId]);
-    //LaggingSkills.uncheck(laggingskillId);
     $state.go('app.laggingSkills');
     $ionicListDelegate.closeOptionButtons();
     $scope.laggingSkills = getLaggingSkills($cordovaSQLite, 1);
@@ -739,7 +737,7 @@ function uncheckLaggingSkill($cordovaSQLite,params){
   var query = "UPDATE lagging_skills SET checked = 0 where id = ?";
   $cordovaSQLite.execute(db,query,params);
 }
-function updateLaggingSkill($cordovaSQLite, params){
+function checkLaggingSkill($cordovaSQLite, params){
   var query = "UPDATE lagging_skills SET checked = 1 where id = ?";
   $cordovaSQLite.execute(db,query,params);
 }
