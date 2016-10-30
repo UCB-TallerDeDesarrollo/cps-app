@@ -1,8 +1,19 @@
 
 <ion-view view-title="Help Categories for Invitation Step" >
-  <ion-content ng-controller="HelpCategoryInvitationCtrl">
+  <div class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" placeholder="Search" ng-model="searchWord">
+    </label>
+    <button class="button ion-close input-button button-small"
+            ng-click="searchWord = ''"
+            ng-show="searchWord.length">
+        Clear
+    </button>
+  </div>
+  <ion-content class="has-subheader" ng-controller="HelpCategoryInvitationCtrl">
     <ion-list>
-    <div ng-repeat="helpCategory in helpCategoriesInvitation">
+    <div ng-repeat="helpCategory in helpCategoriesInvitation | filter: searchWord">
         <ion-item class="item item-stable item-text-wrap" ng-click="toggleHelp(helpCategory)"
           ng-click="toggleHelp(helpCategory)"
           ng-class="{active: isTopicShown(helpCategory)}">
