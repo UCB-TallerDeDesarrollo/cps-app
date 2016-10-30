@@ -22,10 +22,13 @@
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">
-                  <div class="col col-50 button button-small button-balanced" ng-click="activateChild(child.id)">
+                  <div class="col col-50 button button-small button-positive" ng-click="activateChild(child.id)" ng-if="child.active === 0">
                     <i class="icon ion-arrow-right-b"></i>
                   </div>
-                  <div class="col col-50 button button-small button-positive" ng-click="showActionsheet(child)">
+                  <div class="col col-50 button button-small button-balanced" ng-if="child.active === 1">
+                    <p>ACTIVE</p>
+                  </div>
+                  <div class="col col-50 button button-small button-calm" ng-click="showActionsheet(child)">
                     <i class="icon ion-more"></i>
                   </div>
                 </div>
@@ -43,10 +46,13 @@
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">
-                  <div class="col col-50 button button-small button-balanced" ng-click="activateChild(childs[$index+1].id)">
+                  <div class="col col-50 button button-small button-positive" ng-click="activateChild(childs[$index+1].id)" ng-if="child.active === 0">
                     <i class="icon ion-arrow-right-b"></i>
                   </div>
-                  <div class="col col-50 button button-small button-positive" ng-click="showActionsheet(childs[$index+1])">
+                  <div class="col col-50 button button-small button-balanced" ng-if="child.active === 1">
+                    <p>ACTIVE</p>
+                  </div>
+                  <div class="col col-50 button button-small button-calm" ng-click="showActionsheet(childs[$index+1])">
                     <i class="icon ion-more"></i>
                   </div>
                 </div>
