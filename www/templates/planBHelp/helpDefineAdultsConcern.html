@@ -4,6 +4,11 @@
       <i class="icon ion-search placeholder-icon"></i>
       <input type="search" placeholder="Search" ng-model="searchWord">
     </label>
+    <button class="button ion-close input-button button-small"
+            ng-click="searchWord = ''"
+            ng-show="searchWord.length">
+        Clear
+    </button>
   </div>
   <ion-content class="has-subheader" ng-controller="planBHelpCtrl">
     <ion-list>
