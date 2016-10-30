@@ -30,6 +30,10 @@ angular.module('starter.controllers')
       // Execute action
     });
 
+    $scope.convertStringToDate = function(dateToConvert){
+        return new Date(dateToConvert);
+    };
+
     $scope.createChild = function(){
       if (!inputFieldIsEmpty($scope.child.first_name)) {
         console.log($scope.child);
