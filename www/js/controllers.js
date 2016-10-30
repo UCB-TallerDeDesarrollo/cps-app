@@ -69,30 +69,13 @@ angular.module('starter.controllers', [])
   $scope.params = $stateParams;
 })
 
-.controller('HelpCategoryTopicsCtrl', function($scope, HelpCategoriesStep1, $stateParams, $ionicModal, $sce){
+.controller('HelpCategoryTopicsCtrl', function($scope, HelpCategoriesStep1, $stateParams, AppTools){
   $scope.category = HelpCategoriesStep1.get($stateParams.id_category);
-  $ionicModal.fromTemplateUrl('templates/in-app-browser-modal.html', {
+  $scope.browserInstance = {};
+  $scope.browserInstance = AppTools.newBrowser({
     scope: $scope,
     animation: 'slide-in-right'
-  }).then(function(modal) {
-    $scope.browser = modal;
-    $scope.browser.hide();
   });
-
-  $scope.openBrowser = function(link) {
-    $scope.title = link;
-    $scope.destination = $sce.trustAsResourceUrl($scope.title);
-    $scope.browser.show();
-  };
-
-  $scope.closeBrowser = function() {
-    $scope.destination = '';
-    $scope.browser.hide();
-  };
-
-  $scope.getUriLength = function(link){
-    return (document.getElementById('browser-uri').offsetWidth/6)-3;
-  };
 })
 
 .controller('HelpCategoryCtrl', function($scope, HelpCategoriesStep1) {
@@ -139,30 +122,12 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('HelpTopicContentCtrl', function($scope, HelpCategoriesStep1, $stateParams, $ionicModal, $sce) {
+.controller('HelpTopicContentCtrl', function($scope, HelpCategoriesStep1, $stateParams, AppTools) {
   $scope.topic = HelpCategoriesStep1.getContent($stateParams.id_category, $stateParams.id_topic);
-  $ionicModal.fromTemplateUrl('templates/in-app-browser-modal.html', {
+  $scope.browserInstance = AppTools.newBrowser({
     scope: $scope,
     animation: 'slide-in-right'
-  }).then(function(modal) {
-    $scope.browser = modal;
-    $scope.browser.hide();
   });
-
-  $scope.openBrowser = function(link) {
-    $scope.title = link;
-    $scope.destination = $sce.trustAsResourceUrl($scope.title);
-    $scope.browser.show();
-  };
-
-  $scope.closeBrowser = function() {
-    $scope.destination = '';
-    $scope.browser.hide();
-  };
-
-  $scope.getUriLength = function(link){
-    return (document.getElementById('browser-uri').offsetWidth/6)-3;
-  };
 })
 
 .controller('DefineTheProblemCtrl', function($scope, $stateParams) {

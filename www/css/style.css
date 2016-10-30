@@ -55,6 +55,7 @@ progress::-webkit-progress-value {
   -webkit-transition: all ease-in-out 250ms;
   transition: all ease-in-out 250ms;
 }
+/* Animacion slide-in-right utilizada para modals */
 
 .browser-link {
   color: #3975db;
