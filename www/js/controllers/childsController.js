@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout) {
+  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer) {
     $scope.childs = getChilds($cordovaSQLite, function(result) {
        $scope.childs = [];
        var rows = result.rows;
@@ -137,7 +137,21 @@ angular.module('starter.controllers')
        }
       });
     };
-
+    $scope.upload = function() {
+        var options = {
+            fileKey: "avatar",
+            fileName: "image.png",
+            chunkedMode: false,
+            mimeType: "image/png"
+        };
+        $cordovaFileTransfer.upload("http://localhost:8100", "/android_asset/www/img/child.png", options).then(function(result) {
+            console.log("SUCCESS: " + JSON.stringify(result.response));
+        }, function(err) {
+            console.log("ERROR: " + JSON.stringify(err));
+        }, function (progress) {
+            // constant progress updates
+        });
+    };
 });
 
 function createLaggingSkills (cordovaSQLite, child_id){
