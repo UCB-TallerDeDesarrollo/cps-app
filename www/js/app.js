@@ -30,9 +30,11 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       cont = result.rows.item(0).UnsolvedProblemsCount;
       if(cont === 0)
       {
+        console.log("no hay unsolved");
           $state.go('app.home');
       }
       else{
+        console.log("hay unsolved");
           $state.go('app.newUnsolvedProblem');
       }
       });
