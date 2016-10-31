@@ -91,7 +91,8 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/mainHelp',
     views: {
       'menuContent': {
-        templateUrl: 'templates/mainHelp.html'
+        templateUrl: 'templates/mainHelp.html',
+        controller: 'mainHelpController'
       }
     }
   })

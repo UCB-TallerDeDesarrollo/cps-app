@@ -112,3 +112,11 @@ body {
 .button.ng-hide{
   display:none;
 }
+
+.image-icon {
+  margin-left: -8px;
+}
+
+.outside-list{
+  background-color: #f9f9f9;
+}

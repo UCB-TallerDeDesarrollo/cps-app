@@ -1,6 +1,17 @@
 <ion-view view-title="Main Help">
-  <ion-content>
-    <div class="list">
+  <div class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" placeholder="Search" ng-model="searchWord">
+    </label>
+    <button class="button ion-close input-button button-small"
+            ng-click="searchWord = ''"
+            ng-show="searchWord.length">
+        Clear
+    </button>
+  </div>
+  <ion-content class="has-subheader">
+    <div class="list" ng-if="searchWord.length === 0">
       <a class="item item-icon-left" href="#/app/planBHelp">
         <i class="icon ion-happy"></i>
         Plan B
@@ -14,5 +25,69 @@
         F.A.Q.
       </a>
     </div>
+
+    <ion-list ng-if="searchWord.length !== 0">
+      <div name="search-results">
+        <ion-item class="item item-icon-left outside-list">
+          <img class="icon padding image-icon" src="img/mainHelp/icon-helpstep1.png">
+          <b>Empathy Step</b>
+        </ion-item>
+        <ion-list>
+          <div ng-repeat="result in searchResults.step1">
+            <a class="item item-text-wrap item-icon-right" href="#/app/helpTopicContent/{{result.categoryId}}/{{result.topicId}}">
+              <h2>{{result.description}}</h2>
+              <i class="icon ion-chevron-right"></i>
+            </a>
+          </div>
+        </ion-list>
+      </div>
+
+      <div name="search-results">
+        <ion-item class="item item-icon-left outside-list">
+          <img class="icon padding image-icon" src="img/mainHelp/icon-helpStep2.png">
+          <b>Define Adult's Concerns</b>
+        </ion-item>
+        <ion-list>
+          <ion-item ng-repeat="result in searchResults.step2">
+            <h2>{{result.title}}</h2>
+            <p>{{result.content}}</p>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <div name="search-results">
+        <ion-item class="item item-icon-left outside-list">
+          <img class="icon padding image-icon" src="img/mainHelp/icon-helpStep3.png">
+          <b>Invitation Step</b>
+        </ion-item>
+        <ion-list>
+          <ion-item ng-repeat="result in searchResults.step3">
+            <p>{{result}}</p>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <div name="search-results">
+        <ion-item class="item item-icon-left outside-list">
+          <i class="icon ion-thermometer"></i>
+          <b>In the heat of the moment</b>
+        </ion-item>
+      </div>
+
+      <div name="search-results">
+        <ion-item class="item item-icon-left outside-list">
+          <i class="icon ion-ios-help"></i>
+          <b>F.A.Q.</b>
+        </ion-item>
+        <ion-list>
+          <ion-item ng-repeat="result in searchResults.faq">
+            <h2>{{result.question}}</h2>
+            <p>{{result.answer}}</p>
+          </ion-item>
+        </ion-list>
+      </div>
+
+    </ion-list>
+
   </ion-content>
 </ion-view>
