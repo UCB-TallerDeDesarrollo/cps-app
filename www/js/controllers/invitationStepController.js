@@ -9,6 +9,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.showChilds=false;
   $scope.showAdults=false;
   $scope.shouldShowReorder = false;
+  $scope.animatesFirstItem = true;
 
   $scope.toggleChilds= function(){
     if($scope.showChilds===true){
@@ -308,6 +309,9 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     } else  {
       return 'ion-happy';
     }
+  };
+  $scope.unableAnimation = function(){
+    $scope.animatesFirstItem = false;
   };
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 });

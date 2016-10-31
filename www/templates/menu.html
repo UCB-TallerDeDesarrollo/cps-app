@@ -5,7 +5,7 @@
       </ion-nav-back-button>
 
       <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <button class="button button-icon button-clear ion-navicon" ng-click="getActiveChild()" menu-toggle="left">
         </button>
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
@@ -17,7 +17,9 @@
 
   <ion-side-menu side="left">
     <ion-header-bar menu-close class=" bar-stable item-icon-right">
-      <h1 class="title">Menu</h1>
+      <h1 class="title" style="text-align:left;" ng-if="activeChild.length === 0">No active child</h1>
+      <h1 class="title" style="text-align:left;" ng-if="activeChild.length === 1">{{activeChild[0].first_name}}</h1>
+
       <a href="#/app/childs">
         <i class="icon ion-person-stalker"></i>
       </a>
@@ -34,11 +36,11 @@
           <i class="icon ion-home"></i>
           Home
         </ion-item>
-        <ion-item menu-close class="item item-icon-left" href="#/app/laggingSkills">
+        <ion-item menu-close class="item item-icon-left" ng-click="checkActiveToContinue('app.laggingSkills')">
           <i class="icon ion-clipboard"></i>
           Lagging Skills
         </ion-item>
-        <ion-item menu-close class="item item-icon-left" href="#/app/unsolvedProblems/new">
+        <ion-item menu-close class="item item-icon-left" ng-click="checkActiveToContinue('app.newUnsolvedProblem')">
           <i class="icon ion-edit"></i>
           Unsolved Problems
         </ion-item>
