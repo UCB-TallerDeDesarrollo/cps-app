@@ -5,7 +5,7 @@ angular.module('starter.controllers', [])
   $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite,$ionicPopup, $state) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -46,6 +46,19 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+  $scope.checkActiveToContinue = function(route) {
+    if($scope.activeChild.length === 0){
+      var alertForNoActiveChild = $ionicPopup.alert({
+         title: 'No child registered',
+         template: 'You need to register a child to continue.'
+       });
+       alertPopupForUnsolved.then(function(res) {
+       });
+    }else {
+      $state.go(route);
+    }
+  };
+
 })
 
 .controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate) {
@@ -322,8 +335,19 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('TourCtrl', function($scope, $state, $ionicSlideBoxDelegate,$cordovaSQLite){
-
+.controller('TourCtrl', function($scope, $state, $ionicSlideBoxDelegate,$cordovaSQLite, $ionicPopup){
+  $scope.checkActiveToContinue = function(route) {
+    if($scope.activeChild.length === 0){
+      var alertForNoActiveChild = $ionicPopup.alert({
+         title: 'No child registered',
+         template: 'You need to register a child to continue.'
+       });
+       alertPopupForUnsolved.then(function(res) {
+       });
+    }else {
+      $state.go(route);
+    }
+  };
   $scope.startApp = function() {
     $state.go('app.newUnsolvedProblem');
   };
@@ -348,8 +372,8 @@ angular.module('starter.controllers', [])
         $state.go('app.unsolvedTour');
       }
       else{
-        $state.go('app.newUnsolvedProblem');
-      }
+        $scope.checkActiveToContinue('app.newUnsolvedProblem') ;
+          }
       });
   };
 })
