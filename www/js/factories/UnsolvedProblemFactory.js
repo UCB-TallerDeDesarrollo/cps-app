@@ -1,13 +1,13 @@
 angular.module('starter.services').factory('UnsolvedProblemFactory', function($cordovaSQLite) {
   function saveUnsolvedProblem(unsolvedProblem){
-    var query = "INSERT INTO unsolved_problems(description, solved, unsolved_order) VALUES (?,?,?)";
-    $cordovaSQLite.execute(db, query, [unsolvedProblem.description, 0, unsolvedProblem.unsolved_order]);
+    var query = "INSERT INTO unsolved_problems(description, solved, unsolved_order, child_id) VALUES (?,?,?,?)";
+    $cordovaSQLite.execute(db, query, [unsolvedProblem.description, 0, unsolvedProblem.unsolved_order,unsolvedProblem.child_id]);
   }
 
-  function getUnsolvedProblems() {
+  function getUnsolvedProblems(childId) {
     var unsolved_problems = [];
-    var query ="SELECT * FROM unsolved_problems ORDER BY unsolved_order";
-    $cordovaSQLite.execute(db,query).then(function(result) {
+    var query ="SELECT * FROM unsolved_problems WHERE child_id = ? ORDER BY unsolved_order";
+    $cordovaSQLite.execute(db,query,[childId]).then(function(result) {
       var rows = result.rows;
       if(rows.length) {
         for(var i=0; i < rows.length; i++){
@@ -47,8 +47,8 @@ angular.module('starter.services').factory('UnsolvedProblemFactory', function($c
   }
 
   return {
-    all: function(callback) {
-      var result = getUnsolvedProblems();
+    all: function(childId,callback) {
+      var result = getUnsolvedProblems(childId);
       callback(result);
     },
     insert: function(unsolvedProblem) {
