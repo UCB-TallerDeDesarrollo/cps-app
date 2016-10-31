@@ -643,7 +643,7 @@ function getAdultConcernById($cordovaSQLite, adultConcernId){
 }
 
 function saveChild(cordovaSQLite,child){
-  var query = "INSERT INTO childs(first_name,gender,birthday) VALUES (?,?,?)";
+  var query = "INSERT INTO childs(first_name,gender,birthday,active) VALUES (?,?,?,1)";
   cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]);
 }
 

@@ -61,10 +61,11 @@ angular.module('starter.controllers')
            }
            var lastChild = childs.pop();
            createLaggingSkills($cordovaSQLite,[lastChild.id]);
-           activateChild($cordovaSQLite,[lastChild.id]);
            deactivateChildsBut($cordovaSQLite,[lastChild.id]);
-           $scope.activeChild[0] = $scope.childs[$scope.childs.length-1];
-           $scope.childs[$scope.childs.length-1].active = 1;
+           $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
+              $scope.activeChild=[];
+              $scope.activeChild[0]=result.rows.item(0);
+            });
          });
       }
     };
