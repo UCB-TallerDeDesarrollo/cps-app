@@ -1,6 +1,7 @@
 angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblemFactory, $cordovaSQLite, $state, $ionicActionSheet,$ionicListDelegate, $ionicPopup, $ionicModal, $stateParams) {
   $scope.unsolvedProblem = {};
   $scope.shouldShowReorder = false;
+  $scope.animatesFirstItem = true;
   $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
     $scope.activeChild=[];
     $scope.activeChild[0]=result.rows.item(0);
@@ -234,5 +235,8 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
      } else  {
        return 'ion-happy';
      }
+   };
+   $scope.unableAnimation = function(){
+     $scope.animatesFirstItem = false;
    };
 });

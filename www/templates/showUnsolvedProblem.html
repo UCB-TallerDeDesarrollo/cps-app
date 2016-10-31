@@ -1,4 +1,4 @@
-<ion-view cache-view="false" view-title="Empathy Step"  ng-controller="ChildsConcernsCtrl">
+<ion-view cache-view="false" view-title="Empathy Step" on-tap="unableAnimation()" ng-controller="ChildsConcernsCtrl">
   <div class="bar bar-subheader bar-positive">
     <h2 class="title">{{unsolvedProblem.description}} </h2>
   </div>
@@ -20,7 +20,11 @@
         </div>
 
       <ion-list can-swipe="true" show-reorder="shouldShowReorder">
-        <ion-item class="item item-text-wrap item-icon-right" ng-click="verifyToGoToStep2()" ng-repeat="childsConcern in childsConcerns">
+        <div ng-hide="{{childsConcerns.size == 0 || !animatesFirstItem }}" class="fake-buttons">
+          <button class="item-options item fake-button button button-balanced ion-edit"></button>
+          <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
+        </div>
+        <ion-item class="item item-text-wrap item-icon-right" ng-click="verifyToGoToStep2()" ng-repeat="childsConcern in childsConcerns" ng-class="{slidein:$first && animatesFirstItem}">
           <p>{{childsConcern.description}} </p>
           <a>
             <i class="icon dark ion-chevron-right"></i>

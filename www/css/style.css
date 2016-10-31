@@ -134,3 +134,49 @@ body {
   background-image: url('/img/mainHelp/icon-step3-tabs.png');
   background-size:contain;
 }
+
+@-webkit-keyframes slideIn {
+  50% {
+    left: -50%;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@-webkit-keyframes slideInSmooth {
+  0% {
+    -webkit-transform: translate3d(-100%,0,0);
+  }
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+
+.slidein{
+   -webkit-animation: slideInSmooth ease-in 1;
+  animation: slideInSmooth ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 750ms;
+  animation-duration: 750ms;
+}
+
+.fake-buttons{
+  position:absolute;
+  top:0px;
+  right:0px;
+  margin:0px;
+  padding:0px;
+  z-index: -1px;
+}
+
+.fake-button{
+  font-size:16px;
+  border: none;
+  border-radius: 0px;
+  height: 100%;
+  padding: 7px;
+  margin-left: -3px;
+  margin-right: -1px;
+}

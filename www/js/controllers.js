@@ -165,6 +165,7 @@ angular.module('starter.controllers', [])
   $scope.adultsConcern = { description: ""};
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
+  $scope.animatesFirstItem = true;
 
   $scope.updateAdultsConcerns = function(){
     $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
@@ -339,6 +340,9 @@ angular.module('starter.controllers', [])
       }
     }
   };
+  $scope.unableAnimation = function(){
+    $scope.animatesFirstItem = false;
+  };
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(1,10));});
 
 })
@@ -392,7 +396,7 @@ angular.module('starter.controllers', [])
   };
 
   $scope.unsolvedProblem = {};
-
+  $scope.animatesFirstItem = true;
   $scope.shouldShowReorder = false;
   $scope.moveItem = function(childsConcern, fromIndex, toIndex) {
     var greaterIndex, lesserIndex, childConcernOrderModifier;
@@ -583,7 +587,9 @@ angular.module('starter.controllers', [])
      }
    });
  };
-
+ $scope.unableAnimation = function(){
+   $scope.animatesFirstItem = false;
+ };
 });
 
 // OTHER FUNCTIONS

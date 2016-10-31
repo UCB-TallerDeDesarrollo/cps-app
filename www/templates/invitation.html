@@ -1,4 +1,4 @@
-<ion-view cache-view="false" view-title="Invitation Step" ng-controller="InvitationCtrl">
+<ion-view cache-view="false" view-title="Invitation Step" ng-controller="InvitationCtrl" on-tap="unableAnimation()">
   <div class="bar bar-subheader bar-positive">
     <h2 class="title">{{unsolvedProblem.description}}</h2>
   </div>
@@ -65,7 +65,11 @@
         </div>
       </div>
       <ion-list>
-        <ion-item class="item item-text-wrap item-icon-left item-icon-right" ng-repeat="solution in solutions">
+        <div ng-hide="{{solutions.size == 0 || !animatesFirstItem }}" class="fake-buttons">
+          <button class="item-options item fake-button button button-balanced ion-edit"></button>
+          <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
+        </div>
+        <ion-item class="item item-text-wrap item-icon-left item-icon-right" ng-repeat="solution in solutions"  ng-class="{ slidein: $first && animatesFirstItem}">
           <i class="icon {{getRatingIcon(solution)}}"></i>
           <p>{{solution.description}}</p>
           <i class="icon ion-star" ng-click="showRatingPopup(solution,unsolvedProblem)"></i>
