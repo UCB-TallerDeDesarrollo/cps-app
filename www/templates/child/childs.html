@@ -35,10 +35,13 @@
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">
-                  <div class="col col-50 button button-small button-positive" ng-click="activateChild(child)" ng-if="child.active === 0">
+                  <div class="col col-50 button button-small button-positive" ng-click="activateChild(child)" ng-if="child.active === 0 ">
                     <i class="icon ion-arrow-right-b"></i>
                   </div>
-                  <div class="col col-50 button button-small button-balanced" ng-if="child.active === 1">
+                  <div class="col col-50 button button-small button-balanced" ng-click="goTo('app.laggingSkills')" ng-if="child.active === 1 && problems.length === 0">
+                    <i class="icon ion-arrow-right-c"></i>
+                  </div>
+                  <div class="col col-50 button button-small button-balanced" ng-click="goTo('app.newUnsolvedProblem')" ng-if="child.active === 1 && problems.length>0">
                     <i class="icon ion-arrow-right-c"></i>
                   </div>
                   <div class="col col-50 button button-small button-calm" ng-click="showActionsheet(child)">
@@ -61,7 +64,10 @@
                   <div class="col col-50 button button-small button-positive" ng-click="activateChild(childs[$index+1])" ng-if="childs[$index+1].active === 0">
                     <i class="icon ion-arrow-right-b"></i>
                   </div>
-                  <div class="col col-50 button button-small button-balanced" ng-if="childs[$index+1].active === 1">
+                  <div class="col col-50 button button-small button-balanced" ng-click="goTo('app.laggingSkills')" ng-if="childs[$index+1].active === 1 && problems.length === 0">
+                    <i class="icon ion-arrow-right-c"></i>
+                  </div>
+                  <div class="col col-50 button button-small button-balanced" ng-click="goTo('app.newUnsolvedProblem')" ng-if="childs[$index+1].active === 1 && problems.length > 0">
                     <i class="icon ion-arrow-right-c"></i>
                   </div>
                   <div class="col col-50 button button-small button-calm" ng-click="showActionsheet(childs[$index+1])">

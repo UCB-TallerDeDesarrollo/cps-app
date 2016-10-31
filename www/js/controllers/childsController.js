@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer) {
+  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer, UnsolvedProblemFactory) {
     $scope.childs = getChilds($cordovaSQLite, function(result) {
        $scope.childs = [];
        var rows = result.rows;
@@ -110,9 +110,23 @@ angular.module('starter.controllers')
       $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
          $scope.activeChild=[];
          $scope.activeChild[0]=result.rows.item(0);
+         UnsolvedProblemFactory.all($scope.activeChild[0].id,function(result){
+           $scope.problems = result;
+         });
        });
     };
 
+    $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
+      $scope.activeChild=[];
+      $scope.activeChild[0]=result.rows.item(0);
+      UnsolvedProblemFactory.all($scope.activeChild[0].id,function(result){
+        $scope.problems = result;
+      });
+     });
+
+    $scope.goTo = function(route){
+      $state.go(route);
+    };
     $scope.deleteChild = function(item) {
       if(item.active === 1){
         $scope.activeChild=[];
