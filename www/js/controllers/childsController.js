@@ -48,7 +48,7 @@ angular.module('starter.controllers')
         $scope.child.gender = "Female";
         $scope.child.birthday = new Date();
         $scope.closeModalCreate();
-        getChilds($cordovaSQLite, function(result) {
+        $scope.childs = getChilds($cordovaSQLite, function(result) {
            var childs = [];
            $scope.childs = [];
            var rows = result.rows;
@@ -56,7 +56,6 @@ angular.module('starter.controllers')
              for(var i=0; i < rows.length; i++){
                childs.push(rows.item(i));
                $scope.childs.push(rows.item(i));
-               $scope.childs[$scope.childs.length-1].active = 0;
              }
            }
            var lastChild = childs.pop();
@@ -66,6 +65,7 @@ angular.module('starter.controllers')
               $scope.activeChild=[];
               $scope.activeChild[0]=result.rows.item(0);
             });
+            $state.go('app.laggingSkills');
          });
       }
     };
@@ -119,10 +119,12 @@ angular.module('starter.controllers')
 
     $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
       $scope.activeChild=[];
-      $scope.activeChild[0]=result.rows.item(0);
-      UnsolvedProblemFactory.all($scope.activeChild[0].id,function(result){
-        $scope.problems = result;
-      });
+      if(result.rows.length > 0){
+        $scope.activeChild[0]=result.rows.item(0);
+        UnsolvedProblemFactory.all($scope.activeChild[0].id,function(result){
+          $scope.problems = result;
+        });
+      }
      });
 
     $scope.goTo = function(route){
