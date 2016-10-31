@@ -1,6 +1,14 @@
 angular.module('starter.controllers')
   .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout) {
-    $scope.childs = getChilds($cordovaSQLite);
+    $scope.childs = getChilds($cordovaSQLite, function(result) {
+       $scope.childs = [];
+       var rows = result.rows;
+       if(rows.length) {
+         for(var i=0; i < rows.length; i++){
+           $scope.childs.push(rows.item(i));
+         }
+       }
+     });
     $scope.child = {};
     $scope.child.first_name="";
     $scope.child.gender = "Female";
@@ -33,8 +41,6 @@ angular.module('starter.controllers')
     $scope.convertStringToDate = function(dateToConvert){
         return new Date(dateToConvert);
     };
-
-
     $scope.createChild = function(){
       if (!inputFieldIsEmpty($scope.child.first_name)) {
         saveChild($cordovaSQLite,$scope.child);
@@ -42,21 +48,25 @@ angular.module('starter.controllers')
         $scope.child.gender = "Female";
         $scope.child.birthday = new Date();
         $scope.closeModalCreate();
-        if($scope.childs.length !== 0){
-          createLaggingSkills($cordovaSQLite, $scope.childs[$scope.childs.length-1].id+1);
-          activateChild($cordovaSQLite,[$scope.childs[$scope.childs.length-1].id+1]);
-          deactivateChildsBut($cordovaSQLite,[$scope.childs[$scope.childs.length-1].id+1]);
-        }else{
-          createLaggingSkills($cordovaSQLite, [1]);
-          activateChild($cordovaSQLite,[1]);
-          deactivateChildsBut($cordovaSQLite,[1]);
-        }
-        $scope.childs = getChilds($cordovaSQLite);
+        getChilds($cordovaSQLite, function(result) {
+           var childs = [];
+           $scope.childs = [];
+           var rows = result.rows;
+           if(rows.length) {
+             for(var i=0; i < rows.length; i++){
+               childs.push(rows.item(i));
+               $scope.childs.push(rows.item(i));
+               $scope.childs[$scope.childs.length-1].active = 0;
+             }
+           }
+           var lastChild = childs.pop();
+           createLaggingSkills($cordovaSQLite,[lastChild.id]);
+           activateChild($cordovaSQLite,[lastChild.id]);
+           deactivateChildsBut($cordovaSQLite,[lastChild.id]);
+           $scope.activeChild[0] = lastChild;
+           $scope.childs[$scope.childs.length-1].active = 1;
+         });
       }
-    };
-
-    $scope.activateChild = function(child){
-      console.log("hola");
     };
 
     $scope.showActionsheet = function(child) {
@@ -88,8 +98,15 @@ angular.module('starter.controllers')
     $scope.activateChild = function(item){
       activateChild($cordovaSQLite,[item.id]);
       deactivateChildsBut($cordovaSQLite,[item.id]);
-      $scope.childs = getChilds($cordovaSQLite);
-
+      $scope.childs = getChilds($cordovaSQLite, function(result) {
+         $scope.childs = [];
+         var rows = result.rows;
+         if(rows.length) {
+           for(var i=0; i < rows.length; i++){
+             $scope.childs.push(rows.item(i));
+           }
+         }
+       });
     };
     $scope.deleteChild = function(item) {
       var query = "DELETE FROM childs where id = ?";
@@ -98,6 +115,8 @@ angular.module('starter.controllers')
       }, function (err) {
           console.error(err);
       });
+
+      $scope.activeChild.pop();
     };
     $scope.showConfirm = function(item) {
       var confirmPopup = $ionicPopup.confirm({

@@ -16,10 +16,8 @@ angular.module('starter.controllers', [])
 
   // Form data for the login modal
   $scope.loginData = {};
-  // Last active child
   $timeout( function() {
     $scope.activeChild = getActiveChild($cordovaSQLite);
-    console.log($scope);
   });
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -653,20 +651,17 @@ function getChildsConcern(cordovaSQLite,unsolvedProblemId){
   return childs_concerns;
 }
 
-function getChilds(cordovaSQLite){
-  var childs = [];
-  var query ="SELECT * FROM childs";
-  cordovaSQLite.execute(db,query).then(function(result) {
-    var rows = result.rows;
-    if(rows.length) {
-      for(var i=0; i < rows.length; i++){
-        childs.push(rows.item(i));
-      }
-    }
-    },function(err){
-      console.log(err.message);
-    });
-  return childs;
+
+function getChilds(cordovaSQLite, callback){
+ var childs = [];
+ var query ="SELECT * FROM childs";
+ cordovaSQLite.execute(db,query).then(function(result){
+   callback(result);
+ },
+   function(err){
+     console.log(err.message);
+   });
+ return childs;
 }
 
 function getAdultConcerns(cordovaSQLite,unsolvedProblemId){

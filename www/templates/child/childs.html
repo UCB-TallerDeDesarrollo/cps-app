@@ -6,8 +6,22 @@
           <i class="icon ion-plus"></i>
         </a>
         <div class="col col-75">
-          <h2><b>My Childs</b></h2>
+          <h2><b>My Children</b></h2>
         </div>
+      </div>
+      <div class="row" ng-if="childs.length === 0">
+        <div class = "col">
+          <div class="card">
+            <div class="item item-text-wrap text-center" >
+              <h2>
+                You don't have any child registrated.
+                <br> <b>REGISTER ONE ABOVE
+                </b>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
       <div ng-repeat="child in childs">
         <div ng-if="$index%2==0" class="row">

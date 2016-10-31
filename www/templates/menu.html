@@ -17,8 +17,8 @@
 
   <ion-side-menu side="left">
     <ion-header-bar menu-close class=" bar-stable item-icon-right">
-      <h1 class="title" ng-if="activeChild[0].first_name.length === 0">Menu</h1>
-      <h1 class="title positive" ng-if="activeChild[0].first_name.length != 0">{{activeChild[0].first_name}}</h1>
+      <h1 class="title" style="text-align:left;" ng-if="activeChild.length === 0">Menu</h1>
+      <h1 class="title" style="text-align:left;" ng-if="activeChild.length === 1">{{activeChild[0].first_name}}</h1>
 
       <a href="#/app/childs">
         <i class="icon ion-person-stalker"></i>
