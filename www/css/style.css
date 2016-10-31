@@ -188,3 +188,7 @@ body {
 .outside-list{
   background-color: #f9f9f9;
 }
+
+.pull-right{
+  float: right;
+}

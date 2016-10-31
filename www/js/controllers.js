@@ -105,7 +105,7 @@ angular.module('starter.controllers', [])
   $scope.helpCategories = HelpCategoriesStep1.all();
 })
 
-.controller('HelpCategoryInvitationCtrl', function($scope) {
+.controller('HelpCategoryInvitationCtrl', function($scope, AppTools) {
   $scope.toggleHelp= function(topic){
     if($scope.isTopicShown(topic)){
       $scope.shownTopic=null;
@@ -124,9 +124,10 @@ angular.module('starter.controllers', [])
     animation: 'slide-in-right'
   });
 
-  $scope.helpCategoriesInvitation =[
+  $scope.helpCategoriesInvitation = [
   { description : "Invitation Step | Ingredient/Goal",
-    topics:[{ description: "Generate solutions that are realistic (meaning both parties can do what they are agreeing to) and mutually satisfactory (meaning the solution truly addresses the concerns of both parties)"}]},
+    topics:[{ description: "Generate solutions that are realistic (meaning both parties can do what they are agreeing to) and mutually satisfactory (meaning the solution truly addresses the concerns of both parties)"}]
+  },
   {description : "Words ",
     topics:[{ description: "Restate the concerns that were identified in the first two steps, usually beginning with “I wonder if there is a way…"}]},
   { description : "What you're thinking",
