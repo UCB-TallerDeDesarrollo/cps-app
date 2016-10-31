@@ -4,7 +4,7 @@
   </div>
   <ion-content class="has-subheader">
     <ion-list>
-      <ion-item class="item item-text-wrap item-icon-right" ng-repeat="laggingSkill in laggingSkills" href="#/app/unsolvedProblems/new">
+      <ion-item class="item item-text-wrap item-icon-right" ng-repeat="laggingSkill in laggingSkills" href="#/app/unsolvedProblems/new/{{laggingSkillsId}}">
           <div class="positive" ng-if="laggingSkill.checked">
             {{laggingSkill.description}}
           </div>
