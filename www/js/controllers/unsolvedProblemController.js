@@ -10,7 +10,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
       $scope.activeChild=[];
       $scope.activeChild[0]=result.rows.item(0);
-      UnsolvedProblemFactory.all($scope.activeChild[0],function(result){
+      UnsolvedProblemFactory.all($scope.activeChild[0].id,function(result){
         $scope.unsolvedProblems = result;
       });
     });
