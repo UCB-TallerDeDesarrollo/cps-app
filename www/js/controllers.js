@@ -16,9 +16,11 @@ angular.module('starter.controllers', [])
 
   // Form data for the login modal
   $scope.loginData = {};
-  $timeout( function() {
-    $scope.activeChild = getActiveChild($cordovaSQLite);
+  $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
+      $scope.activeChild=[];
+      $scope.activeChild[0]=result.rows.item(0);
   });
+
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -63,20 +65,22 @@ angular.module('starter.controllers', [])
 
 .controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate) {
   //$scope.laggingSkills = getLaggingSkills($cordovaSQLite);
-  //$scope.active_child = getActiveChild(cordovaSQLite);
-  $scope.laggingSkills = getLaggingSkills($cordovaSQLite, 1);
+  $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
+    $scope.activeChild=[];
+    $scope.activeChild[0]=result.rows.item(0);
+    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild[0].id);
+  });
   $scope.checkLaggingSkill = function(laggingskillId){
     checkLaggingSkill($cordovaSQLite, [laggingskillId]);
     $state.go('app.laggingSkills');
     $ionicListDelegate.closeOptionButtons();
-    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, 1);
-
+    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild[0].id);
   };
   $scope.uncheckLaggingSkill = function(laggingskillId){
     uncheckLaggingSkill($cordovaSQLite, [laggingskillId]);
     $state.go('app.laggingSkills');
     $ionicListDelegate.closeOptionButtons();
-    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, 1);
+    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild[0].id);
   };
 })
 
@@ -597,18 +601,14 @@ function getLaggingSkills(cordovaSQLite,child_id){
   return lagging_skills;
 }
 
-function getActiveChild(cordovaSQLite){
+function getActiveChild(cordovaSQLite,callback){
   var active_child = [];
   var query ="SELECT * FROM childs WHERE active = 1";
   cordovaSQLite.execute(db,query).then(function(result) {
-    var rows = result.rows;
-    if(rows.length) {
-        active_child.push(rows.item(0));
-    }
+    callback(result);
     },function(err){
       console.log(err.message);
     });
-  return active_child;
 }
 
 function getSolutions(cordovaSQLite,unsolvedProblemId) {
