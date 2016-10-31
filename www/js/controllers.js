@@ -118,6 +118,12 @@ angular.module('starter.controllers', [])
     return $scope.shownTopic === topic;
   };
 
+  $scope.browserInstance = {};
+  $scope.browserInstance = AppTools.newBrowser({
+    scope: $scope,
+    animation: 'slide-in-right'
+  });
+
   $scope.helpCategoriesInvitation =[
   { description : "Invitation Step | Ingredient/Goal",
     topics:[{ description: "Generate solutions that are realistic (meaning both parties can do what they are agreeing to) and mutually satisfactory (meaning the solution truly addresses the concerns of both parties)"}]},
