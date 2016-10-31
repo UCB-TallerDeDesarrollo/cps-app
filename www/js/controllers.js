@@ -5,7 +5,7 @@ angular.module('starter.controllers', [])
   $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite,$ionicPopup, $state) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -16,11 +16,15 @@ angular.module('starter.controllers', [])
 
   // Form data for the login modal
   $scope.loginData = {};
-  // Last active child
-  $timeout( function() {
-    $scope.activeChild = getActiveChild($cordovaSQLite);
-    console.log($scope);
-  });
+  $scope.getActiveChild = function(){
+    $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
+        $scope.activeChild=[];
+        if(result.rows.length > 0){
+        $scope.activeChild[0]=result.rows.item(0);
+        }
+    });
+  };
+
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -48,24 +52,39 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+  $scope.checkActiveToContinue = function(route) {
+    if($scope.activeChild.length === 0){
+      var alertForNoActiveChild = $ionicPopup.alert({
+         title: 'No child registered',
+         template: 'You need to register a child to continue.'
+       });
+       alertForNoActiveChild.then(function(res) {
+       });
+    }else {
+      $state.go(route);
+    }
+  };
+
 })
 
 .controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate) {
   //$scope.laggingSkills = getLaggingSkills($cordovaSQLite);
-  //$scope.active_child = getActiveChild(cordovaSQLite);
-  $scope.laggingSkills = getLaggingSkills($cordovaSQLite, 1);
+  $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
+    $scope.activeChild=[];
+    $scope.activeChild[0]=result.rows.item(0);
+    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild[0].id);
+  });
   $scope.checkLaggingSkill = function(laggingskillId){
     checkLaggingSkill($cordovaSQLite, [laggingskillId]);
     $state.go('app.laggingSkills');
     $ionicListDelegate.closeOptionButtons();
-    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, 1);
-
+    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild[0].id);
   };
   $scope.uncheckLaggingSkill = function(laggingskillId){
     uncheckLaggingSkill($cordovaSQLite, [laggingskillId]);
     $state.go('app.laggingSkills');
     $ionicListDelegate.closeOptionButtons();
-    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, 1);
+    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild[0].id);
   };
 })
 
@@ -324,8 +343,19 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('TourCtrl', function($scope, $state, $ionicSlideBoxDelegate,$cordovaSQLite){
-
+.controller('TourCtrl', function($scope, $state, $ionicSlideBoxDelegate,$cordovaSQLite, $ionicPopup){
+  $scope.checkActiveToContinue = function(route) {
+    if($scope.activeChild.length === 0){
+      var alertForNoActiveChild = $ionicPopup.alert({
+         title: 'No child registered',
+         template: 'You need to register a child to continue.'
+       });
+       alertForNoActiveChild.then(function(res) {
+       });
+    }else {
+      $state.go(route);
+    }
+  };
   $scope.startApp = function() {
     $state.go('app.newUnsolvedProblem');
   };
@@ -350,8 +380,8 @@ angular.module('starter.controllers', [])
         $state.go('app.unsolvedTour');
       }
       else{
-        $state.go('app.newUnsolvedProblem');
-      }
+        $scope.checkActiveToContinue('app.newUnsolvedProblem') ;
+          }
       });
   };
 })
@@ -575,18 +605,14 @@ function getLaggingSkills(cordovaSQLite,child_id){
   return lagging_skills;
 }
 
-function getActiveChild(cordovaSQLite){
+function getActiveChild(cordovaSQLite,callback){
   var active_child = [];
   var query ="SELECT * FROM childs WHERE active = 1";
   cordovaSQLite.execute(db,query).then(function(result) {
-    var rows = result.rows;
-    if(rows.length) {
-        active_child.push(rows.item(0));
-    }
+    callback(result);
     },function(err){
       console.log(err.message);
     });
-  return active_child;
 }
 
 function getSolutions(cordovaSQLite,unsolvedProblemId) {
@@ -653,20 +679,17 @@ function getChildsConcern(cordovaSQLite,unsolvedProblemId){
   return childs_concerns;
 }
 
-function getChilds(cordovaSQLite){
-  var childs = [];
-  var query ="SELECT * FROM childs";
-  cordovaSQLite.execute(db,query).then(function(result) {
-    var rows = result.rows;
-    if(rows.length) {
-      for(var i=0; i < rows.length; i++){
-        childs.push(rows.item(i));
-      }
-    }
-    },function(err){
-      console.log(err.message);
-    });
-  return childs;
+
+function getChilds(cordovaSQLite, callback){
+ var childs = [];
+ var query ="SELECT * FROM childs";
+ cordovaSQLite.execute(db,query).then(function(result){
+   callback(result);
+ },
+   function(err){
+     console.log(err.message);
+   });
+ return childs;
 }
 
 function getAdultConcerns(cordovaSQLite,unsolvedProblemId){

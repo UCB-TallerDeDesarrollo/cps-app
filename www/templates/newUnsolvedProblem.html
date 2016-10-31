@@ -1,5 +1,8 @@
 <ion-view cache-view="false" view-title="Plan B">
-  <ion-content ng-controller="UnsolvedProblemCtrl">
+  <div class="bar bar-subheader bar-positive item-text-wrap">
+    <h2 class="title">{{activeChild[0].first_name}}</h2>
+  </div>
+  <ion-content class="has-subheader" ng-controller="UnsolvedProblemCtrl">
     <div ng-init="updateUnsolvedProblems()">
       <div class="item item-divider item-text-wrap">
         <a ng-click="openModalCreate()" class="watchlist_menu button button-small button-clear button-positive">
@@ -24,6 +27,9 @@
             <ion-option-button class="button-positive ion-more" ng-click="showActionsheet(unsolvedProblem)"></ion-option-button>
             <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(unsolvedProblem, $fromIndex, $toIndex)"> </ion-reorder-button>
           </ion-item>
+          <div class="item item-text-wrap" ng-if="unsolvedProblems.length === 0">
+            <p>No unsolved problems registered. Please register one above.</p>
+          </div>
       </ion-list>
     </div>
   </ion-content>

@@ -22,8 +22,8 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     }
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
-    DataSeed.seed($cordovaSQLite, db);
-    // DataSeed.deleteSeed($cordovaSQLite, db);
+      DataSeed.seed($cordovaSQLite, db);
+      //DataSeed.deleteSeed($cordovaSQLite, db);
       var query ="SELECT COUNT(*) AS UnsolvedProblemsCount FROM unsolved_problems";
       var cont = -1;
       $cordovaSQLite.execute(db,query).then( function(result){
@@ -117,7 +117,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   })
 
   .state('app.newUnsolvedProblem', {
-      url: '/unsolvedProblems/new',
+      url: '/unsolvedProblems/new/:laggingSkillsId',
       views: {
         'menuContent': {
           templateUrl: 'templates/newUnsolvedProblem.html',

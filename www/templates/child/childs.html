@@ -6,8 +6,22 @@
           <i class="icon ion-plus"></i>
         </a>
         <div class="col col-75">
-          <h2><b>My Childs</b></h2>
+          <h2><b>My Children</b></h2>
         </div>
+      </div>
+      <div class="row" ng-if="childs.length === 0">
+        <div class = "col">
+          <div class="card">
+            <div class="item item-text-wrap text-center" >
+              <h2>
+                You don't have any child registered.
+                <br> <b>REGISTER ONE ABOVE
+                </b>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
       <div ng-repeat="child in childs">
         <div ng-if="$index%2==0" class="row">
@@ -21,10 +35,13 @@
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">
-                  <div class="col col-50 button button-small button-positive" ng-click="activateChild(child)" ng-if="child.active === 0">
+                  <div class="col col-50 button button-small button-positive" ng-click="activateChild(child)" ng-if="child.active === 0 ">
                     <i class="icon ion-arrow-right-b"></i>
                   </div>
-                  <div class="col col-50 button button-small button-balanced" ng-if="child.active === 1">
+                  <div class="col col-50 button button-small button-balanced" ng-click="goTo('app.laggingSkills')" ng-if="child.active === 1 && problems.length === 0">
+                    <i class="icon ion-arrow-right-c"></i>
+                  </div>
+                  <div class="col col-50 button button-small button-balanced" ng-click="goTo('app.newUnsolvedProblem')" ng-if="child.active === 1 && problems.length>0">
                     <i class="icon ion-arrow-right-c"></i>
                   </div>
                   <div class="col col-50 button button-small button-calm" ng-click="showActionsheet(child)">
@@ -47,7 +64,10 @@
                   <div class="col col-50 button button-small button-positive" ng-click="activateChild(childs[$index+1])" ng-if="childs[$index+1].active === 0">
                     <i class="icon ion-arrow-right-b"></i>
                   </div>
-                  <div class="col col-50 button button-small button-balanced" ng-if="childs[$index+1].active === 1">
+                  <div class="col col-50 button button-small button-balanced" ng-click="goTo('app.laggingSkills')" ng-if="childs[$index+1].active === 1 && problems.length === 0">
+                    <i class="icon ion-arrow-right-c"></i>
+                  </div>
+                  <div class="col col-50 button button-small button-balanced" ng-click="goTo('app.newUnsolvedProblem')" ng-if="childs[$index+1].active === 1 && problems.length > 0">
                     <i class="icon ion-arrow-right-c"></i>
                   </div>
                   <div class="col col-50 button button-small button-calm" ng-click="showActionsheet(childs[$index+1])">
