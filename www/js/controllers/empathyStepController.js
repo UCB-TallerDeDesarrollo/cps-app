@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory){
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory, ChildConcernFactory){
   $scope.childsConcern = {
     description: ""
   };
@@ -29,7 +29,9 @@ angular.module('starter.controllers')
   };
 
   $scope.updateChildsConcerns = function(){
-    $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
+    ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
+      $scope.childsConcerns = childConcerns;
+    });
   };
 
   $scope.findUnsolvedProblem = function() {
