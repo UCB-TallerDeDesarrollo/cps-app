@@ -4,7 +4,7 @@ angular.module('starter.controllers')
   $scope.adultsConcern = { description: ""};
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
-  $scope.firstItemAnimationShown = true;
+  $scope.firstItemAnimationShown = false;
 
   $scope.updateAdultsConcerns = function(){
     $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
@@ -180,8 +180,12 @@ angular.module('starter.controllers')
     }
   };
   $scope.unableAnimation = function(){
-    $scope.firstItemAnimationShown = false;
+    $scope.firstItemAnimationShown = true;
   };
+  $scope.hideFakeButtons = function() {
+    return ( $scope.adultsConcerns.length === 0 || $scope.firstItemAnimationShown );
+  };
+
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(1,10));});
 
 });

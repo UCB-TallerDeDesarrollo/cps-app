@@ -9,7 +9,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.showChilds=false;
   $scope.showAdults=false;
   $scope.shouldShowReorder = false;
-  $scope.firstItemAnimationShown = true;
+  $scope.firstItemAnimationShown = false;
 
   $scope.toggleChilds= function(){
     if($scope.showChilds===true){
@@ -311,7 +311,10 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     }
   };
   $scope.unableAnimation = function(){
-    $scope.firstItemAnimationShown = false;
+    $scope.firstItemAnimationShown = true;
+  };
+  $scope.hideFakeButtons = function() {
+    return ( $scope.solutions.length === 0 || $scope.firstItemAnimationShown );
   };
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 });

@@ -65,11 +65,11 @@
         </div>
       </div>
       <ion-list>
-        <div ng-hide="{{solutions.size == 0 || !firstItemAnimationShown }}" class="fake-buttons">
+        <div ng-hide="hideFakeButtons()" class="fake-buttons">
           <button class="item-options item fake-button button button-balanced ion-edit"></button>
           <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
         </div>
-        <ion-item class="item item-text-wrap item-icon-left item-icon-right" ng-repeat="solution in solutions"  ng-class="{ slidein: $first && firstItemAnimationShown}">
+        <ion-item class="item item-text-wrap item-icon-left item-icon-right" ng-repeat="solution in solutions"  ng-class="{ slidein: $first && !firstItemAnimationShown}">
           <i class="icon {{getRatingIcon(solution)}}"></i>
           <p>{{solution.description}}</p>
           <i class="icon ion-star" ng-click="showRatingPopup(solution,unsolvedProblem)"></i>

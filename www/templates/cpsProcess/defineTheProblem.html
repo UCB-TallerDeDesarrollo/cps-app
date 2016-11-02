@@ -26,11 +26,11 @@
         </div>
       </div>
       <ion-list can-swipe="true">
-        <div ng-hide="{{childsConcerns.size == 0 || !firstItemAnimationShown }}" class="fake-buttons">
+        <div ng-hide="hideFakeButtons()" class="fake-buttons">
           <button class="item-options item fake-button button button-balanced ion-edit"></button>
           <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
         </div>
-        <ion-item class="item item-text-wrap item-icon-right" href="#/app/invitation/{{unsolvedProblem.id}}" ng-repeat="adultsConcern in adultsConcerns" ng-class="{slidein:$first && firstItemAnimationShown}">
+        <ion-item class="item item-text-wrap item-icon-right" href="#/app/invitation/{{unsolvedProblem.id}}" ng-repeat="adultsConcern in adultsConcerns" ng-class="{ slidein: $first && !firstItemAnimationShown}">
           <p>{{adultsConcern.description}}</p>
           <i class="icon dark ion-chevron-right"></i>
           <ion-option-button class="button button-balanced ion-edit" ng-click="editAdultsConcern(adultsConcern)"></ion-option-button>

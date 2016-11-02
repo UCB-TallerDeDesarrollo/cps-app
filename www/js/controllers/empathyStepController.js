@@ -202,7 +202,7 @@ angular.module('starter.controllers')
  $scope.unableAnimation = function() {
    $scope.firstItemAnimationShown = true;
  };
- $scope.hfb = function() {
+ $scope.hideFakeButtons = function() {
    return ( $scope.childsConcerns.length === 0 || $scope.firstItemAnimationShown );
  };
 });
