@@ -4,7 +4,7 @@ angular.module('starter.controllers')
   $scope.adultsConcern = { description: ""};
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.childsConcerns = getChildsConcern($cordovaSQLite, $stateParams.unsolvedProblemId);
-  $scope.animatesFirstItem = true;
+  $scope.firstItemAnimationShown = true;
 
   $scope.updateAdultsConcerns = function(){
     $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
@@ -180,7 +180,7 @@ angular.module('starter.controllers')
     }
   };
   $scope.unableAnimation = function(){
-    $scope.animatesFirstItem = false;
+    $scope.firstItemAnimationShown = false;
   };
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(1,10));});
 

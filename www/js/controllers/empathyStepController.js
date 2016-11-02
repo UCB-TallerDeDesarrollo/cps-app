@@ -5,7 +5,8 @@ angular.module('starter.controllers')
   };
 
   $scope.unsolvedProblem = {};
-  $scope.animatesFirstItem = true;
+  $scope.childsConcerns = [];
+  $scope.firstItemAnimationShown = false;
   $scope.shouldShowReorder = false;
   $scope.moveItem = function(childsConcern, fromIndex, toIndex) {
     var greaterIndex, lesserIndex, childConcernOrderModifier;
@@ -198,7 +199,10 @@ angular.module('starter.controllers')
      }
    });
  };
- $scope.unableAnimation = function(){
-   $scope.animatesFirstItem = false;
+ $scope.unableAnimation = function() {
+   $scope.firstItemAnimationShown = true;
+ };
+ $scope.hfb = function() {
+   return ( $scope.childsConcerns.length === 0 || $scope.firstItemAnimationShown );
  };
 });

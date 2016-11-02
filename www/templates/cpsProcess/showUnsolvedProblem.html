@@ -20,11 +20,11 @@
         </div>
 
       <ion-list can-swipe="true" show-reorder="shouldShowReorder">
-        <div ng-hide="{{childsConcerns.size == 0 || !animatesFirstItem }}" class="fake-buttons">
+        <div ng-hide="hfb()" class="fake-buttons">
           <button class="item-options item fake-button button button-balanced ion-edit"></button>
           <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
         </div>
-        <ion-item class="item item-text-wrap item-icon-right" ng-click="verifyToGoToStep2()" ng-repeat="childsConcern in childsConcerns" ng-class="{slidein:$first && animatesFirstItem}">
+        <ion-item class="item item-text-wrap item-icon-right" ng-click="verifyToGoToStep2()" ng-repeat="childsConcern in childsConcerns" ng-class="{ slidein: $first && !firstItemAnimationShown }">
           <p>{{childsConcern.description}} </p>
           <a>
             <i class="icon dark ion-chevron-right"></i>

@@ -130,7 +130,8 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/unsolvedProblem/show/:unsolvedProblemId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/cpsProcess/showUnsolvedProblem.html'
+        templateUrl: 'templates/cpsProcess/showUnsolvedProblem.html',
+        controller: 'ChildsConcernsCtrl'
       }
     }
   })
