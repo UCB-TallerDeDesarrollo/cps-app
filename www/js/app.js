@@ -65,7 +65,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/search',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/defaultUtilities/search.html'
       }
     }
   })
@@ -74,7 +74,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       url: '/browse',
       views: {
         'menuContent': {
-          templateUrl: 'templates/browse.html'
+          templateUrl: 'templates/defaultUtilities/browse.html'
         }
       }
   })
@@ -91,7 +91,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/mainHelp',
     views: {
       'menuContent': {
-        templateUrl: 'templates/mainHelp.html',
+        templateUrl: 'templates/appHelps/mainHelp.html',
         controller: 'mainHelpController'
       }
     }
@@ -111,7 +111,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/laggingSkills',
     views: {
       'menuContent': {
-        templateUrl: 'templates/laggingSkills.html',
+        templateUrl: 'templates/laggingSkills/laggingSkills.html',
         controller: 'LaggingSkillsCtrl'
       }
     }
@@ -121,7 +121,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       url: '/unsolvedProblems/new/:laggingSkillsId',
       views: {
         'menuContent': {
-          templateUrl: 'templates/newUnsolvedProblem.html',
+          templateUrl: 'templates/cpsProcess/newUnsolvedProblem.html',
           controller: 'UnsolvedProblemCtrl'
         }
       }
@@ -130,7 +130,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/unsolvedProblem/show/:unsolvedProblemId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/showUnsolvedProblem.html'
+        templateUrl: 'templates/cpsProcess/showUnsolvedProblem.html'
       }
     }
   })
@@ -139,7 +139,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/defineTheProblem/:unsolvedProblemId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/defineTheProblem.html',
+        templateUrl: 'templates/cpsProcess/defineTheProblem.html',
         controller: 'DefineTheProblemCtrl'
       }
     }
@@ -149,7 +149,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/invitation/:unsolvedProblemId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/invitation.html',
+        templateUrl: 'templates/cpsProcess/invitation.html',
         controller: 'InvitationCtrl'
       }
     }
@@ -159,7 +159,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/planBHelp',
     views: {
       'menuContent': {
-        templateUrl: 'templates/planBHelp.html',
+        templateUrl: 'templates/appHelps/planBHelp.html',
       }
     }
   })
@@ -167,7 +167,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/helpCategories',
     views: {
       'menuContent': {
-        templateUrl: 'templates/helpCategories.html',
+        templateUrl: 'templates/appHelps/helpCategories.html',
         controller: 'HelpCategoryCtrl'
       }
     }
@@ -176,7 +176,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/helpForInvitation',
     views: {
       'menuContent': {
-        templateUrl: 'templates/invitationHelp.html',
+        templateUrl: 'templates/appHelps/invitationHelp.html',
       }
     }
   })
@@ -184,7 +184,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/helpCategoryTopics/:id_category',
     views: {
       'menuContent': {
-        templateUrl: 'templates/helpCategoryTopics.html',
+        templateUrl: 'templates/appHelps/helpCategoryTopics.html',
         controller: 'HelpCategoryTopicsCtrl'
       }
     }
@@ -194,7 +194,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/helpTopicContent/:id_category/:id_topic',
     views: {
       'menuContent': {
-        templateUrl: 'templates/helpTopicContent.html',
+        templateUrl: 'templates/appHelps/helpTopicContent.html',
         controller: 'HelpTopicContentCtrl'
       }
     }
@@ -251,7 +251,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         url: '/unsolvedProblemTour',
         views: {
           'menuContent': {
-            templateUrl: 'templates/unsolved_tour.html'
+            templateUrl: 'templates/appTutorials/unsolved_tour.html'
           }
         }
       })
