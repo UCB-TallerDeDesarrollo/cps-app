@@ -22,10 +22,11 @@ angular.module('starter.services').factory('ChildConcernFactory', function($cord
     $cordovaSQLite.execute(db,query,[childsConcern.description,childsConcern.unsolvedProblemId,childsConcern.unsolvedOrder]);
   }
 
-  // ============== COMO USAR EL METODO
-  // ChildConcernFactory.all(unsolvedProblemID,function(result){
-  //   $scope.childConcerns = result;
-  // });
+  function updateChildsConcern(childsConcern){
+    var query = "";
+    query = "UPDATE childs_concerns SET description = ?, unsolved_order = ? where id = ?";
+    $cordovaSQLite.execute(db, query, [childsConcern.description, childsConcern.unsolved_order, childsConcern.id]);
+  }
 
   return {
     all: function(unsolvedProblemId,callback) {
@@ -35,7 +36,7 @@ angular.module('starter.services').factory('ChildConcernFactory', function($cord
       insertChildsConcern(childConcern);
     },
     update: function(childConcern) {
-      updateChildConcern(childConcern);
+      updateChildsConcern(childConcern);
     },
     delete: function(childConcernId, callback) {
       deleteChildConcern(childConcern, callback);
@@ -45,3 +46,8 @@ angular.module('starter.services').factory('ChildConcernFactory', function($cord
     }
   };
 });
+
+// ============== COMO USAR EL METODO
+// ChildConcernFactory.all(unsolvedProblemID,function(result){
+//   $scope.childConcerns = result;
+// });

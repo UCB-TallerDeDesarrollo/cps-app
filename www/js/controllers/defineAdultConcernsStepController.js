@@ -2,6 +2,9 @@ angular.module('starter.controllers')
 .controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory){
 
   $scope.adultsConcern = { description: ""};
+  ChildConcernFactory.all($stateParams.unsolvedProblemId,function(result){
+    $scope.childsConcerns = result;
+  });
   $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.firstItemAnimationShown = false;
 

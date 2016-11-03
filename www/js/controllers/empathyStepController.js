@@ -22,9 +22,11 @@ angular.module('starter.controllers')
       childConcernOrderModifier = -1;
     }
     for(var i = lesserIndex; i < greaterIndex; i++ ){
-      updateChildsConcernOrder($cordovaSQLite, [i+childConcernOrderModifier, $scope.childsConcerns[i].id]);
+      $scope.childsConcerns[i].unsolved_order =i+childConcernOrderModifier;
+      ChildConcernFactory.update($scope.childsConcerns[i]);
     }
-    updateChildsConcernOrder($cordovaSQLite, [toIndex, $scope.childsConcerns[fromIndex].id]);
+    $scope.childsConcerns[fromIndex].unsolved_order = toIndex;
+    ChildConcernFactory.update($scope.childsConcerns[fromIndex]);
     $scope.childsConcerns.splice(fromIndex, 1);
     $scope.childsConcerns.splice(toIndex, 0, childsConcern);
   };
@@ -90,8 +92,8 @@ angular.module('starter.controllers')
   $scope.$on('modalEdit.removed', function() {
     // Execute action
   });
+  $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
 
-  $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $scope.unsolvedProblem.id);
   $scope.goUnsolvedProblems = function(){
     $state.go('app.newUnsolvedProblem');
   };
@@ -148,17 +150,13 @@ angular.module('starter.controllers')
 
   };
   $scope.editChildsConcern = function(childsConcern){
-    $scope.childsConcerntoEdit = childsConcern;
-    $scope.editableChildsConcern = {
-      description: childsConcern.description
-    };
+    $scope.editableChildsConcern = angular.copy(childsConcern);
     $scope.openModalEdit();
   };
 
   $scope.createChildsConcern = function(){
     if (!inputFieldIsEmpty($scope.childsConcern.description))
     {
-      // saveChildsConcern($cordovaSQLite,$scope.childsConcern.description, $stateParams.unsolvedProblemId, $scope.childsConcerns.length);
       $scope.childsConcern.unsolvedProblemId = $stateParams.unsolvedProblemId;
       $scope.childsConcern.unsolvedOrder = $scope.childsConcerns.length;
       ChildConcernFactory.insert($scope.childsConcern);
@@ -174,7 +172,8 @@ angular.module('starter.controllers')
 
   $scope.updateChildsConcern = function(){
     if (!inputFieldIsEmpty($scope.editableChildsConcern.description)) {
-      updateChildsConcern($cordovaSQLite, [$scope.editableChildsConcern.description,$scope.childsConcerntoEdit.id]);
+      ChildConcernFactory.update($scope.editableChildsConcern);
+      // updateChildsConcern($cordovaSQLite, [$scope.editableChildsConcern.description,$scope.childsConcerntoEdit.id]);
       $scope.modalEdit.hide();
       $scope.childsConcerntoEdit = {};
       ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){

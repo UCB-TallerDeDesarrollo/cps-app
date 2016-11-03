@@ -41,9 +41,11 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       childConcernOrderModifier = -1;
     }
     for(var i = lesserIndex; i < greaterIndex; i++ ){
-      updateChildsConcernOrder($cordovaSQLite, [i+childConcernOrderModifier, $scope.childsConcerns[i].id]);
+      $scope.childsConcerns[i].unsolved_order =i+childConcernOrderModifier;
+      ChildConcernFactory.update($scope.childsConcerns[i]);
     }
-    updateChildsConcernOrder($cordovaSQLite, [toIndex, $scope.childsConcerns[fromIndex].id]);
+    $scope.childsConcerns[fromIndex].unsolved_order = toIndex;
+    ChildConcernFactory.update($scope.childsConcerns[fromIndex]);
     findChildsConcerns();
   };
 

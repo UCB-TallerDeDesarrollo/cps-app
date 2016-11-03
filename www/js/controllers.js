@@ -272,11 +272,6 @@ function saveChild(cordovaSQLite,child){
   cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]);
 }
 
-// function saveChildsConcern(cordovaSQLite,childsConcern,unsolvedProblemId,orderId){
-//   var query ="INSERT INTO childs_concerns(description,unsolved_problem_id,unsolved_order) VALUES (?,?,?)";
-//   cordovaSQLite.execute(db,query,[childsConcern,unsolvedProblemId,orderId]);
-// }
-
 function saveAdultsConcern(cordovaSQLite,adultsConcern,childConcernId){
   var query ="INSERT INTO adults_concerns(description,unsolved_problem_id) VALUES (?,?)";
   cordovaSQLite.execute(db,query,[adultsConcern,childConcernId]);
@@ -300,12 +295,14 @@ function getChilds(cordovaSQLite, callback){
 }
 
 function getAdultConcerns(cordovaSQLite,unsolvedProblemId){
+  console.log(unsolvedProblemId);
   var adults_concerns = [];
   var query ="SELECT * FROM adults_concerns WHERE unsolved_problem_id = ?";
   cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
     var rows = result.rows;
     if(rows.length) {
       for(var i=0; i < rows.length; i++){
+        console.log(rows.item(i));
         adults_concerns.push(rows.item(i));
       }
     }
@@ -318,17 +315,6 @@ function getAdultConcerns(cordovaSQLite,unsolvedProblemId){
 function updateSolution($cordovaSQLite, solution){
   var query = "UPDATE solutions SET description = ? where id = ?";
   $cordovaSQLite.execute(db, query, [solution.description, solution.id]);
-}
-
-function updateChildsConcernOrder($cordovaSQLite,params){
-  var query = "";
-  query = "UPDATE childs_concerns SET unsolved_order = ? where id = ?";
-  $cordovaSQLite.execute(db, query, params);
-}
-function updateChildsConcern($cordovaSQLite, params){
-  var query = "";
-  query = "UPDATE childs_concerns SET description = ? where id = ?";
-  return $cordovaSQLite.execute(db, query, params);
 }
 
 function updateAdultsConcern($cordovaSQLite, params){
