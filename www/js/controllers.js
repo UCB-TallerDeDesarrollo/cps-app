@@ -277,33 +277,15 @@ function saveChildsConcern(cordovaSQLite,childsConcern,unsolvedProblemId,orderId
   cordovaSQLite.execute(db,query,[childsConcern,unsolvedProblemId,orderId]);
 }
 
-function saveAdultsConcern(cordovaSQLite,adultsConcern,childConcernId){
-  var query ="INSERT INTO adults_concerns(description,unsolved_problem_id) VALUES (?,?)";
-  cordovaSQLite.execute(db,query,[adultsConcern,childConcernId]);
-}
+// function saveAdultsConcern(cordovaSQLite,adultsConcern,childConcernId){
+//   var query ="INSERT INTO adults_concerns(description,unsolved_problem_id) VALUES (?,?)";
+//   cordovaSQLite.execute(db,query,[adultsConcern,childConcernId]);
+// }
 
 function saveSolution(cordovaSQLite,solution){
   var query ="INSERT INTO solutions(description,unsolved_problem_id,rating) VALUES (?,?,?)";
   cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId,solution.rating]);
 }
-
-function getChildsConcern(cordovaSQLite,unsolvedProblemId){
-  var childs_concerns = [];
-  var query ="SELECT * FROM childs_concerns WHERE unsolved_problem_id = ? ORDER BY unsolved_order";
-  // var query ="SELECT * FROM childs_concerns WHERE unsolved_problem_id = ? ";
-  cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
-    var rows = result.rows;
-    if(rows.length) {
-      for(var i=0; i < rows.length; i++){
-        childs_concerns.push(rows.item(i));
-      }
-    }
-    },function(err){
-      console.log(err.message);
-    });
-  return childs_concerns;
-}
-
 
 function getChilds(cordovaSQLite, callback){
  var childs = [];

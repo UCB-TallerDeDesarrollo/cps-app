@@ -162,7 +162,9 @@ angular.module('starter.controllers')
       $scope.modalCreate.hide();
       $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: $stateParams.unsolvedProblemId});
       $scope.childsConcern.description = "";
-      $scope.childsConcerns= getChildsConcern($cordovaSQLite,$stateParams.unsolvedProblemId);
+      ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
+        $scope.childsConcerns = childConcerns;
+      });
     }
   };
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(0,10));});
@@ -172,7 +174,9 @@ angular.module('starter.controllers')
       updateChildsConcern($cordovaSQLite, [$scope.editableChildsConcern.description,$scope.childsConcerntoEdit.id]);
       $scope.modalEdit.hide();
       $scope.childsConcerntoEdit = {};
-      $scope.childsConcerns= getChildsConcern($cordovaSQLite,$stateParams.unsolvedProblemId);
+      ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
+        $scope.childsConcerns = childConcerns;
+      });
     }
     else {
       $scope.emptyInput = true;
