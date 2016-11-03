@@ -49,14 +49,6 @@ angular.module('starter.services').factory('ChildConcernFactory', function($cord
     },
     delete: function(childsConcern, callback) {
       deleteChildsConcern(childsConcern, callback);
-    },
-    find: function(childConcernId, callback){
-      findChildConcern(childConcernId, callback);
     }
   };
 });
-
-// ============== COMO USAR EL METODO
-// ChildConcernFactory.all(unsolvedProblemID,function(result){
-//   $scope.childConcerns = result;
-// });
