@@ -28,6 +28,15 @@ angular.module('starter.services').factory('ChildConcernFactory', function($cord
     $cordovaSQLite.execute(db, query, [childsConcern.description, childsConcern.unsolved_order, childsConcern.id]);
   }
 
+  function deleteChildsConcern(childConcern, callback) {
+    var query = "DELETE FROM childs_concerns where id = ?";
+    $cordovaSQLite.execute(db, query, [childConcern.id]).then(function(res) {
+      callback();
+    }, function (err) {
+        console.error(err);
+    });
+  }
+
   return {
     all: function(unsolvedProblemId,callback) {
       getChildConcerns(unsolvedProblemId,callback);
@@ -38,8 +47,8 @@ angular.module('starter.services').factory('ChildConcernFactory', function($cord
     update: function(childConcern) {
       updateChildsConcern(childConcern);
     },
-    delete: function(childConcernId, callback) {
-      deleteChildConcern(childConcern, callback);
+    delete: function(childsConcern, callback) {
+      deleteChildsConcern(childsConcern, callback);
     },
     find: function(childConcernId, callback){
       findChildConcern(childConcernId, callback);

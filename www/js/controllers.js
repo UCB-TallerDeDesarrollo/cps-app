@@ -295,14 +295,12 @@ function getChilds(cordovaSQLite, callback){
 }
 
 function getAdultConcerns(cordovaSQLite,unsolvedProblemId){
-  console.log(unsolvedProblemId);
   var adults_concerns = [];
   var query ="SELECT * FROM adults_concerns WHERE unsolved_problem_id = ?";
   cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
     var rows = result.rows;
     if(rows.length) {
       for(var i=0; i < rows.length; i++){
-        console.log(rows.item(i));
         adults_concerns.push(rows.item(i));
       }
     }

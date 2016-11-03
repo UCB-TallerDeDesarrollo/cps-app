@@ -184,12 +184,9 @@ angular.module('starter.controllers')
       $scope.emptyInput = true;
     }
   };
-  $scope.deleteChildsConcern = function(item) {
-    var query = "DELETE FROM childs_concerns where id = ?";
-    $cordovaSQLite.execute(db, query, [item.id]).then(function(res) {
-        $scope.childsConcerns.splice($scope.childsConcerns.indexOf(item), 1);
-    }, function (err) {
-        console.error(err);
+  $scope.deleteChildsConcern = function(childConcern) {
+    ChildConcernFactory.delete(childConcern,function(){
+      $scope.childsConcerns.splice($scope.childsConcerns.indexOf(childConcern), 1);
     });
  };
 
