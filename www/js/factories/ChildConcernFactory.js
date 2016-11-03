@@ -16,6 +16,12 @@ angular.module('starter.services').factory('ChildConcernFactory', function($cord
         console.log(err.message);
     });
   }
+
+  function insertChildsConcern(childsConcern){
+    var query ="INSERT INTO childs_concerns(description,unsolved_problem_id,unsolved_order) VALUES (?,?,?)";
+    $cordovaSQLite.execute(db,query,[childsConcern.description,childsConcern.unsolvedProblemId,childsConcern.unsolvedOrder]);
+  }
+
   // ============== COMO USAR EL METODO
   // ChildConcernFactory.all(unsolvedProblemID,function(result){
   //   $scope.childConcerns = result;
@@ -26,7 +32,7 @@ angular.module('starter.services').factory('ChildConcernFactory', function($cord
       getChildConcerns(unsolvedProblemId,callback);
     },
     insert: function(childConcern) {
-      saveChildConcern(childConcern);
+      insertChildsConcern(childConcern);
     },
     update: function(childConcern) {
       updateChildConcern(childConcern);

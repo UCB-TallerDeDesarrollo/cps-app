@@ -158,7 +158,10 @@ angular.module('starter.controllers')
   $scope.createChildsConcern = function(){
     if (!inputFieldIsEmpty($scope.childsConcern.description))
     {
-      saveChildsConcern($cordovaSQLite,$scope.childsConcern.description, $stateParams.unsolvedProblemId, $scope.childsConcerns.length);
+      // saveChildsConcern($cordovaSQLite,$scope.childsConcern.description, $stateParams.unsolvedProblemId, $scope.childsConcerns.length);
+      $scope.childsConcern.unsolvedProblemId = $stateParams.unsolvedProblemId;
+      $scope.childsConcern.unsolvedOrder = $scope.childsConcerns.length;
+      ChildConcernFactory.insert($scope.childsConcern);
       $scope.modalCreate.hide();
       $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: $stateParams.unsolvedProblemId});
       $scope.childsConcern.description = "";
