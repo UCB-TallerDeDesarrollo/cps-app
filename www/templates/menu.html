@@ -9,7 +9,7 @@
         </button>
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
-        <a class="button button-icon button-clear ion-home" href="#/app/home"></a>
+        <a class="button button-icon button-clear ion-person-stalker" href="#/app/childs"></a>
       </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
@@ -20,9 +20,6 @@
       <h1 class="title" style="text-align:left;" ng-if="activeChild.length === 0">No active child</h1>
       <h1 class="title" style="text-align:left;" ng-if="activeChild.length === 1">{{activeChild[0].first_name}}</h1>
 
-      <a href="#/app/childs">
-        <i class="icon ion-person-stalker"></i>
-      </a>
     </ion-header-bar>
     <ion-content>
       <ion-list>
