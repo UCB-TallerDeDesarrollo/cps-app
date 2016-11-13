@@ -16,6 +16,10 @@ angular.module('starter.services').factory('AdultConcernFactory', function($cord
       });
   }
 
+  function insertAdultsConcern(adultsConcern){
+    var query ="INSERT INTO adults_concerns(description,unsolved_problem_id) VALUES (?,?)";
+    $cordovaSQLite.execute(db,query,[adultsConcern.description,adultsConcern.unsolvedProblemId]);
+  }
 
   return {
     all: function(unsolvedProblemId,callback) {

@@ -1,6 +1,7 @@
 angular.module('starter.controllers')
 .controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory, AdultConcernFactory){
   $scope.adultsConcerns = {};
+  $scope.adultsConcern = {description:""};
   ChildConcernFactory.all($stateParams.unsolvedProblemId,function(result){
     $scope.childsConcerns = result;
   });
@@ -23,7 +24,8 @@ angular.module('starter.controllers')
   };
   $scope.createAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.adultsConcern.description)) {
-      saveAdultsConcern($cordovaSQLite,$scope.adultsConcern.description, $stateParams.unsolvedProblemId);
+      $scope.adultsConcern.unsolvedProblemId = $stateParams.unsolvedProblemId;
+      AdultConcernFactory.insert($scope.adultsConcern);
       $scope.modalCreate.hide();
       $state.go('app.defineTheProblem');
       $scope.adultsConcern.description = "";
