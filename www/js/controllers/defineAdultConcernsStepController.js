@@ -1,6 +1,7 @@
 angular.module('starter.controllers')
 .controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory, AdultConcernFactory){
   $scope.adultsConcerns = {};
+  $scope.adultsConcern = {description:""};
   ChildConcernFactory.all($stateParams.unsolvedProblemId,function(result){
     $scope.childsConcerns = result;
   });
@@ -23,7 +24,8 @@ angular.module('starter.controllers')
   };
   $scope.createAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.adultsConcern.description)) {
-      saveAdultsConcern($cordovaSQLite,$scope.adultsConcern.description, $stateParams.unsolvedProblemId);
+      $scope.adultsConcern.unsolvedProblemId = $stateParams.unsolvedProblemId;
+      AdultConcernFactory.insert($scope.adultsConcern);
       $scope.modalCreate.hide();
       $state.go('app.defineTheProblem');
       $scope.adultsConcern.description = "";
@@ -36,17 +38,14 @@ angular.module('starter.controllers')
 
 
   $scope.editAdultsConcern = function(adultsConcern){
-    $scope.adultsConcerntoEdit = adultsConcern;
-    $scope.editableAdultsConcern = {
-      description: adultsConcern.description
-    };
+    $scope.editableAdultsConcern = angular.copy(adultsConcern);
     $scope.openModalEdit();
   };
 
 
   $scope.updateAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.editableAdultsConcern.description)) {
-      updateAdultsConcern($cordovaSQLite, [$scope.editableAdultsConcern.description,$scope.adultsConcerntoEdit.id]);
+      AdultConcernFactory.update($scope.editableAdultsConcern);
       $scope.modalEdit.hide();
       $scope.adultsConcerntoEdit = {};
       AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
@@ -72,13 +71,10 @@ angular.module('starter.controllers')
   };
 
   $scope.deleteAdultsConcern = function(adultsConcern) {
-    var query = "DELETE FROM adults_concerns where id = ?";
-    $cordovaSQLite.execute(db, query, [adultsConcern.id]).then(function(res) {
-        $scope.adultsConcerns.splice($scope.adultsConcerns.indexOf(adultsConcern), 1);
-    }, function (err) {
-        console.error(err);
+    AdultConcernFactory.delete(adultsConcern,function(){
+      $scope.adultsConcerns.splice($scope.adultsConcerns.indexOf(adultsConcern), 1);
     });
- };
+  };
 
   $ionicModal.fromTemplateUrl('templates/adultsConcerns/create-adults-concern-modal.html', {
     scope: $scope,

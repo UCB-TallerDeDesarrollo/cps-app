@@ -258,23 +258,10 @@ function inputFieldIsEmpty(description) {
     return description.length === 0;
 }
 
-// Funcion no utilizada en ninguna parte (segun mi buscador de atom :P)
-function getAdultConcernById($cordovaSQLite, adultConcernId){
-  var query ="SELECT * FROM adults_concerns where id = ?";
-  $cordovaSQLite.execute(db,query,[adultConcernId])
-    .then( function(result,callback) {
-      callback(result.rows.item(0));
-  });
-}
 
 function saveChild(cordovaSQLite,child){
   var query = "INSERT INTO childs(first_name,gender,birthday,active) VALUES (?,?,?,1)";
   cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]);
-}
-
-function saveAdultsConcern(cordovaSQLite,adultsConcern,childConcernId){
-  var query ="INSERT INTO adults_concerns(description,unsolved_problem_id) VALUES (?,?)";
-  cordovaSQLite.execute(db,query,[adultsConcern,childConcernId]);
 }
 
 function saveSolution(cordovaSQLite,solution){
@@ -300,11 +287,6 @@ function updateSolution($cordovaSQLite, solution){
   $cordovaSQLite.execute(db, query, [solution.description, solution.id]);
 }
 
-function updateAdultsConcern($cordovaSQLite, params){
-  var query = "";
-  query = "UPDATE adults_concerns SET description = ? where id = ?";
-  return $cordovaSQLite.execute(db, query, params);
-}
 function uncheckLaggingSkill($cordovaSQLite,params){
   var query = "UPDATE lagging_skills SET checked = 0 where id = ?";
   $cordovaSQLite.execute(db,query,params);

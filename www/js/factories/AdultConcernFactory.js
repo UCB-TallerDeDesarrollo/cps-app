@@ -16,6 +16,25 @@ angular.module('starter.services').factory('AdultConcernFactory', function($cord
       });
   }
 
+  function insertAdultsConcern(adultsConcern){
+    var query ="INSERT INTO adults_concerns(description,unsolved_problem_id) VALUES (?,?)";
+    $cordovaSQLite.execute(db,query,[adultsConcern.description,adultsConcern.unsolvedProblemId]);
+  }
+
+  function updateAdultsConcern(adultsConcern){
+    var query = "";
+    query = "UPDATE adults_concerns SET description = ? where id = ?";
+    return $cordovaSQLite.execute(db, query, [adultsConcern.description, adultsConcern.id]);
+  }
+
+  function deleteAdultsConcern(adultsConcern, callback) {
+    var query = "DELETE FROM adults_concerns where id = ?";
+    $cordovaSQLite.execute(db, query, [adultsConcern.id]).then(function(res) {
+        callback();
+    }, function (err) {
+        console.error(err);
+    });
+  }
 
   return {
     all: function(unsolvedProblemId,callback) {
