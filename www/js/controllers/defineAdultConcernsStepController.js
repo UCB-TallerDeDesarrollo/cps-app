@@ -71,13 +71,10 @@ angular.module('starter.controllers')
   };
 
   $scope.deleteAdultsConcern = function(adultsConcern) {
-    var query = "DELETE FROM adults_concerns where id = ?";
-    $cordovaSQLite.execute(db, query, [adultsConcern.id]).then(function(res) {
-        $scope.adultsConcerns.splice($scope.adultsConcerns.indexOf(adultsConcern), 1);
-    }, function (err) {
-        console.error(err);
+    AdultConcernFactory.delete(adultsConcern,function(){
+      $scope.adultsConcerns.splice($scope.adultsConcerns.indexOf(adultsConcern), 1);
     });
- };
+  };
 
   $ionicModal.fromTemplateUrl('templates/adultsConcerns/create-adults-concern-modal.html', {
     scope: $scope,

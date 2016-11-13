@@ -27,6 +27,15 @@ angular.module('starter.services').factory('AdultConcernFactory', function($cord
     return $cordovaSQLite.execute(db, query, [adultsConcern.description, adultsConcern.id]);
   }
 
+  function deleteAdultsConcern(adultsConcern, callback) {
+    var query = "DELETE FROM adults_concerns where id = ?";
+    $cordovaSQLite.execute(db, query, [adultsConcern.id]).then(function(res) {
+        callback();
+    }, function (err) {
+        console.error(err);
+    });
+  }
+
   return {
     all: function(unsolvedProblemId,callback) {
       getAdultsConcerns(unsolvedProblemId,callback);

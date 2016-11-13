@@ -258,14 +258,6 @@ function inputFieldIsEmpty(description) {
     return description.length === 0;
 }
 
-// Funcion no utilizada en ninguna parte (segun mi buscador de atom :P)
-function getAdultConcernById($cordovaSQLite, adultConcernId){
-  var query ="SELECT * FROM adults_concerns where id = ?";
-  $cordovaSQLite.execute(db,query,[adultConcernId])
-    .then( function(result,callback) {
-      callback(result.rows.item(0));
-  });
-}
 
 function saveChild(cordovaSQLite,child){
   var query = "INSERT INTO childs(first_name,gender,birthday,active) VALUES (?,?,?,1)";
