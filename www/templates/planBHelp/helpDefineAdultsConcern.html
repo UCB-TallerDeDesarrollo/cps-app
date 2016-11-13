@@ -20,13 +20,21 @@
           <b>{{help.title}}</b>
         </ion-item>
         <ion-list>
-          <ion-item ng-repeat="topic in help.topics"
-                    class="item-accordion item-text-wrap"
-                    ng-show="isContentShown(help)"
-                    ng-click="browserInstance.openBrowser(topic.url)">
-              {{topic.content}}
-              <i ng-show="topic.url" class="icon ion-ios-browsers-outline pull-right"></i>
-          </ion-item>
+          <div ng-repeat="topic in help.topics">
+            <ion-item
+                      ng-if="topic.title && topic.title.length > 0"
+                      ng-click="toggleContent(help)"
+                      ng-show="isContentShown(help)"
+                      class="item item-stable item-text-wrap">
+                {{topic.title}}
+            </ion-item>
+            <ion-item class="item-accordion item-text-wrap"
+                      ng-show="isContentShown(help)"
+                      ng-click="browserInstance.openBrowser(topic.url)">
+                {{topic.content}}
+                <i ng-show="topic.url" class="icon ion-ios-browsers-outline pull-right"></i>
+            </ion-item>
+          </div>
         </ion-list>
       </div>
     </ion-list>
