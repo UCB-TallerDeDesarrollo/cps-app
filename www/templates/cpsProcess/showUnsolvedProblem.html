@@ -5,7 +5,7 @@
 
   <ion-content  ng-init="findUnsolvedProblem(unsolvedProblem);"  class="has-subheader has-tabs" on-swipe-left="selectTabWithIndex(1)" on-swipe-right="goUnsolvedProblems()">
     <div class="item item-text-wrap text-center">
-      <h2>I've noticed that <strong>{{unsolvedProblem.description}}</strong>, what's up?</h2>
+      <h2>I've noticed that you've been having <strong>{{unsolvedProblem.description}}</strong>, what's up?</h2>
     </div>
 
     <div ng-init="updateChildsConcerns()" class="padding">
