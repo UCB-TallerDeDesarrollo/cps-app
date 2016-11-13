@@ -8,7 +8,7 @@
 var db = null;
 angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 'starter.services', 'starter.seed', 'ngCordova'])
 
-.run(function($ionicPlatform, $cordovaSQLite, DataSeed, $state) {
+.run(function($ionicPlatform, $cordovaSQLite, DataSeed) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -24,19 +24,6 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
       DataSeed.seed($cordovaSQLite, db);
       //DataSeed.deleteSeed($cordovaSQLite, db);
-      var query ="SELECT COUNT(*) AS UnsolvedProblemsCount FROM unsolved_problems";
-      var cont = -1;
-      $cordovaSQLite.execute(db,query).then( function(result){
-      cont = result.rows.item(0).UnsolvedProblemsCount;
-      if(cont === 0)
-      {
-          $state.go('app.home');
-      }
-      else{
-          $state.go('app.newUnsolvedProblem');
-      }
-      });
-
   });
 
 })
@@ -274,7 +261,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     }
   });
   // if none of the above states are matched, use this as the fallback
-  //$urlRouterProvider.otherwise('/app/home');
+  $urlRouterProvider.otherwise('/app/childs');
 })
 
 .filter('orderObjectBy', function() {
