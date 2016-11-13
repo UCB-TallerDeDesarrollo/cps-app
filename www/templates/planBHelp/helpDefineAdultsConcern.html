@@ -17,12 +17,17 @@
                   ng-click="toggleContent(help)"
                   ng-class="{active: isContentShown(help)}">
           <i class="icon" ng-class="isContentShown(help) ? 'ion-minus' : 'ion-plus'"></i> &nbsp;
-          {{help.title}}
+          <b>{{help.title}}</b>
         </ion-item>
-        <ion-item class="item-accordion item-text-wrap"
-                  ng-show="isContentShown(help)">
-          {{help.content}}
-        </ion-item>
+        <ion-list>
+          <ion-item ng-repeat="topic in help.topics"
+                    class="item-accordion item-text-wrap"
+                    ng-show="isContentShown(help)"
+                    ng-click="browserInstance.openBrowser(topic.url)">
+              {{topic.content}}
+              <i ng-show="topic.url" class="icon ion-ios-browsers-outline pull-right"></i>
+          </ion-item>
+        </ion-list>
       </div>
     </ion-list>
   </ion-content>

@@ -6,7 +6,7 @@ angular.module('starter.controllers')
     scope: $scope,
     animation: 'slide-in-right'
   });
-  
+
   $scope.alsupHelpDir = [
     {
       title: "Audio: How to use the ALSUP",
@@ -21,11 +21,11 @@ angular.module('starter.controllers')
       url:"http://livesinthebalance.org/sites/default/files/ALSUP%20Guide%209-16-14_1.pdf"
     },
     {
-      title: "Help with the wording of unsolved problems",
+      title: "Help with the wording of unsolved problems [1]",
       url:"http://www.blogtalkradio.com/dr-ross-greene/2012/10/15/parenting-your-challenging-child"
     },
     {
-      title: "Help with the wording of unsolved problems",
+      title: "Help with the wording of unsolved problems [2]",
       url:"http://www.blogtalkradio.com/dr-ross-greene/2012/05/15/parenting-your-challenging-child"
     },
     {
