@@ -1,15 +1,19 @@
 angular.module('starter.controllers')
-.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory){
-
-  $scope.adultsConcern = { description: ""};
+.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory, AdultConcernFactory){
+  $scope.adultsConcerns = {};
   ChildConcernFactory.all($stateParams.unsolvedProblemId,function(result){
     $scope.childsConcerns = result;
   });
-  $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
+  AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
+    $scope.adultsConcerns = result;
+  });
+
   $scope.firstItemAnimationShown = false;
 
   $scope.updateAdultsConcerns = function(){
-    $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
+    AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
+      $scope.adultsConcerns = result;
+    });
   };
 
   $scope.findUnsolvedProblem = function() {
@@ -23,7 +27,9 @@ angular.module('starter.controllers')
       $scope.modalCreate.hide();
       $state.go('app.defineTheProblem');
       $scope.adultsConcern.description = "";
-      $scope.adultsConcerns= getAdultConcerns($cordovaSQLite,$stateParams.unsolvedProblemId);
+      AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
+        $scope.adultsConcerns = result;
+      });
     }
   };
 
@@ -43,7 +49,9 @@ angular.module('starter.controllers')
       updateAdultsConcern($cordovaSQLite, [$scope.editableAdultsConcern.description,$scope.adultsConcerntoEdit.id]);
       $scope.modalEdit.hide();
       $scope.adultsConcerntoEdit = {};
-      $scope.adultsConcerns= getAdultConcerns($cordovaSQLite,$stateParams.unsolvedProblemId);
+      AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
+        $scope.adultsConcerns = result;
+      });
     }
     else {
       $scope.emptyInput = true;
@@ -184,6 +192,7 @@ angular.module('starter.controllers')
   $scope.unableAnimation = function(){
     $scope.firstItemAnimationShown = true;
   };
+
   $scope.hideFakeButtons = function() {
     return ( $scope.adultsConcerns.length === 0 || $scope.firstItemAnimationShown );
   };

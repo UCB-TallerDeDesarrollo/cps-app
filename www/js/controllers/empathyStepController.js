@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory, ChildConcernFactory){
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory, ChildConcernFactory,AdultConcernFactory){
   $scope.childsConcern = {
     description: ""
   };
@@ -31,9 +31,16 @@ angular.module('starter.controllers')
     $scope.childsConcerns.splice(toIndex, 0, childsConcern);
   };
 
-  $scope.updateChildsConcerns = function(){
+  AdultConcernFactory.all($stateParams.unsolvedProblemId,function(adultConcerns){
+    $scope.adultsConcerns = adultConcerns;
+  });
+
+  $scope.updateInformation = function(){
     ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
       $scope.childsConcerns = childConcerns;
+      AdultConcernFactory.all($stateParams.unsolvedProblemId,function(adultConcerns){
+        $scope.adultsConcerns = adultConcerns;
+      });
     });
   };
 
@@ -92,7 +99,6 @@ angular.module('starter.controllers')
   $scope.$on('modalEdit.removed', function() {
     // Execute action
   });
-  $scope.adultsConcerns = getAdultConcerns($cordovaSQLite, $stateParams.unsolvedProblemId);
 
   $scope.goUnsolvedProblems = function(){
     $state.go('app.newUnsolvedProblem');

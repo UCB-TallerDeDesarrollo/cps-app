@@ -294,21 +294,6 @@ function getChilds(cordovaSQLite, callback){
  return childs;
 }
 
-function getAdultConcerns(cordovaSQLite,unsolvedProblemId){
-  var adults_concerns = [];
-  var query ="SELECT * FROM adults_concerns WHERE unsolved_problem_id = ?";
-  cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
-    var rows = result.rows;
-    if(rows.length) {
-      for(var i=0; i < rows.length; i++){
-        adults_concerns.push(rows.item(i));
-      }
-    }
-    },function(err){
-      console.log(err.message);
-    });
-  return adults_concerns;
-}
 
 function updateSolution($cordovaSQLite, solution){
   var query = "UPDATE solutions SET description = ? where id = ?";
