@@ -21,6 +21,12 @@ angular.module('starter.services').factory('AdultConcernFactory', function($cord
     $cordovaSQLite.execute(db,query,[adultsConcern.description,adultsConcern.unsolvedProblemId]);
   }
 
+  function updateAdultsConcern(adultsConcern){
+    var query = "";
+    query = "UPDATE adults_concerns SET description = ? where id = ?";
+    return $cordovaSQLite.execute(db, query, [adultsConcern.description, adultsConcern.id]);
+  }
+
   return {
     all: function(unsolvedProblemId,callback) {
       getAdultsConcerns(unsolvedProblemId,callback);

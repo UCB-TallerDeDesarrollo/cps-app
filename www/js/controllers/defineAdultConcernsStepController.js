@@ -38,17 +38,14 @@ angular.module('starter.controllers')
 
 
   $scope.editAdultsConcern = function(adultsConcern){
-    $scope.adultsConcerntoEdit = adultsConcern;
-    $scope.editableAdultsConcern = {
-      description: adultsConcern.description
-    };
+    $scope.editableAdultsConcern = angular.copy(adultsConcern);
     $scope.openModalEdit();
   };
 
 
   $scope.updateAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.editableAdultsConcern.description)) {
-      updateAdultsConcern($cordovaSQLite, [$scope.editableAdultsConcern.description,$scope.adultsConcerntoEdit.id]);
+      AdultConcernFactory.update($scope.editableAdultsConcern);
       $scope.modalEdit.hide();
       $scope.adultsConcerntoEdit = {};
       AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){

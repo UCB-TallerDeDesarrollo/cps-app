@@ -272,11 +272,6 @@ function saveChild(cordovaSQLite,child){
   cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]);
 }
 
-function saveAdultsConcern(cordovaSQLite,adultsConcern,childConcernId){
-  var query ="INSERT INTO adults_concerns(description,unsolved_problem_id) VALUES (?,?)";
-  cordovaSQLite.execute(db,query,[adultsConcern,childConcernId]);
-}
-
 function saveSolution(cordovaSQLite,solution){
   var query ="INSERT INTO solutions(description,unsolved_problem_id,rating) VALUES (?,?,?)";
   cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId,solution.rating]);
@@ -300,11 +295,6 @@ function updateSolution($cordovaSQLite, solution){
   $cordovaSQLite.execute(db, query, [solution.description, solution.id]);
 }
 
-function updateAdultsConcern($cordovaSQLite, params){
-  var query = "";
-  query = "UPDATE adults_concerns SET description = ? where id = ?";
-  return $cordovaSQLite.execute(db, query, params);
-}
 function uncheckLaggingSkill($cordovaSQLite,params){
   var query = "UPDATE lagging_skills SET checked = 0 where id = ?";
   $cordovaSQLite.execute(db,query,params);

@@ -179,7 +179,6 @@ angular.module('starter.controllers')
   $scope.updateChildsConcern = function(){
     if (!inputFieldIsEmpty($scope.editableChildsConcern.description)) {
       ChildConcernFactory.update($scope.editableChildsConcern);
-      // updateChildsConcern($cordovaSQLite, [$scope.editableChildsConcern.description,$scope.childsConcerntoEdit.id]);
       $scope.modalEdit.hide();
       $scope.childsConcerntoEdit = {};
       ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
