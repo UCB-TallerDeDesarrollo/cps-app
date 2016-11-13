@@ -1,13 +1,13 @@
 angular.module('starter.controllers')
 .controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory, AdultConcernFactory){
-
-  $scope.adultsConcern = { description: ""};
+  $scope.adultsConcerns = {};
   ChildConcernFactory.all($stateParams.unsolvedProblemId,function(result){
     $scope.childsConcerns = result;
   });
   AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
     $scope.adultsConcerns = result;
   });
+
   $scope.firstItemAnimationShown = false;
 
   $scope.updateAdultsConcerns = function(){
@@ -192,6 +192,7 @@ angular.module('starter.controllers')
   $scope.unableAnimation = function(){
     $scope.firstItemAnimationShown = true;
   };
+
   $scope.hideFakeButtons = function() {
     return ( $scope.adultsConcerns.length === 0 || $scope.firstItemAnimationShown );
   };

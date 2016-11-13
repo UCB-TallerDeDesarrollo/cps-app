@@ -3,7 +3,7 @@ angular.module('starter.services').factory('AdultConcernFactory', function($cord
   function getAdultsConcerns(unsolvedProblemId,callback){
     var adultConcerns = [];
     var query ="SELECT * FROM adults_concerns WHERE unsolved_problem_id = ?";
-    cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
+    $cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
       var rows = result.rows;
       if(rows.length) {
         for(var i=0; i < rows.length; i++){
