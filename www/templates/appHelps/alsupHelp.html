@@ -1,0 +1,12 @@
+<ion-view title="ALSUP Help">
+	<ion-content ng-controller="AlsupCtrl">
+    <ion-list>
+      <div ng-repeat="help in alsupHelpDir">
+        <ion-item class="item item-text-wrap" ng-click="browserInstance.openBrowser(help.url)">
+          {{help.title}}
+					<i class="icon ion-ios-browsers-outline pull-right"></i>
+        </ion-item>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

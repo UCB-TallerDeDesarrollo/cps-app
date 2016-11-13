@@ -248,22 +248,31 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         }
       }
     })
-    .state('app.unsolvedTour',{
-        url: '/unsolvedProblemTour',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/appTutorials/unsolved_tour.html'
-          }
+  .state('app.unsolvedTour',{
+      url: '/unsolvedProblemTour',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/appTutorials/unsolved_tour.html'
         }
-      })
-    .state('app.helpDefineAdultsConcern',{
+      }
+    })
+  .state('app.helpDefineAdultsConcern',{
       url: '/mainHelp/helpDefineAdultsConcern',
       views: {
         'menuContent': {
           templateUrl: 'templates/planBHelp/helpDefineAdultsConcern.html',
         }
       }
-    });
+    })
+
+  .state('app.alsupHelp',{
+    url: '/alsupHelp',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/appHelps/alsupHelp.html'
+      }
+    }
+  });
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/app/home');
 })
