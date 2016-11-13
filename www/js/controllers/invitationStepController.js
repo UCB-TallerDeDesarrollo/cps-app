@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory){
+angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory){
   $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
   $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
   $scope.initialSetUp = function(){
@@ -183,7 +183,9 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     });
   }
   function findAdultsConcerns() {
-    $scope.adultsConcerns = getAdultConcerns($cordovaSQLite,$stateParams.unsolvedProblemId);
+    AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
+      $scope.adultsConcerns = result;
+    });
   }
   //function here
   $scope.showRatingPopup = function(solution,unsolvedProblem) {
