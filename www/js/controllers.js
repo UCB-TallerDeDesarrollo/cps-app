@@ -16,6 +16,7 @@ angular.module('starter.controllers', [])
 
   // Form data for the login modal
   $scope.loginData = {};
+  $scope.activeChild={first_name:""};
   $scope.getActiveChild = function(){
     ChildrenFactory.active(function(active_child){
       $scope.activeChild = active_child;

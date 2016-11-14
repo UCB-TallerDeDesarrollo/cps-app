@@ -7,6 +7,7 @@ angular.module('starter.controllers')
     ChildrenFactory.all(function(children){
       $scope.childs = children;
     });
+    $scope.activeChild={first_name:""};
     $ionicModal.fromTemplateUrl('templates/child/create-child-modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -46,11 +47,15 @@ angular.module('starter.controllers')
           $scope.childs = children;
           var lastChild = children.pop();
           createLaggingSkills($cordovaSQLite,[lastChild.id]);
-          deactivateChildsBut($cordovaSQLite,[lastChild.id]);
-          ChildrenFactory.active(function(active_child){
-            $scope.activeChild = active_child;
+          ChildrenFactory.activate(lastChild.id,function(){
+            ChildrenFactory.active(function(active_child){
+              $scope.activeChild = active_child;
+              ChildrenFactory.all(function(children){
+                $scope.childs = children;
+                //$state.go('app.laggingSkills');
+              });
+            });
           });
-          $state.go('app.laggingSkills');
         });
       }
     };
@@ -82,17 +87,18 @@ angular.module('starter.controllers')
       });
     };
     $scope.activateChild = function(item){
-      activateChild($cordovaSQLite,[item.id]);
-      deactivateChildsBut($cordovaSQLite,[item.id]);
-      ChildrenFactory.all(function(children){
-        $scope.childs = children;
-        ChildrenFactory.active(function(active_child){
-          $scope.activeChild = active_child;
-          UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
-            $scope.problems = result;
+      ChildrenFactory.activate(item.id,function(){
+        ChildrenFactory.all(function(children){
+          $scope.childs = children;
+          ChildrenFactory.active(function(active_child){
+            $scope.activeChild = active_child;
+            UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
+              $scope.problems = result;
+            });
           });
         });
       });
+
     };
 
     ChildrenFactory.active(function(active_child){
@@ -106,18 +112,19 @@ angular.module('starter.controllers')
     $scope.goTo = function(route){
       $state.go(route);
     };
-    $scope.deleteChild = function(item) {
-      if(item.active === 1){
-        $scope.activeChild=[];
+
+    $scope.deleteChild = function(child) {
+      if(child.active === 1){
+        $scope.activeChild={first_name:""};
       }
-      var query = "DELETE FROM childs where id = ?";
-      $cordovaSQLite.execute(db, query, [item.id]).then(function(res) {
-          $scope.childs.splice($scope.childs.indexOf(item), 1);
-      }, function (err) {
-          console.error(err);
+      ChildrenFactory.delete(child,function(){
+        $scope.childs.splice($scope.childs.indexOf(child), 1);
+        ChildrenFactory.active(function(active_child){
+          $scope.activeChild = active_child;
+        });
       });
     };
-    $scope.showConfirm = function(item) {
+    $scope.showConfirm = function(child) {
       var confirmPopup = $ionicPopup.confirm({
         title: 'Delete Child',
         template: 'Are you sure you want to delete this child?'
@@ -125,7 +132,7 @@ angular.module('starter.controllers')
 
       confirmPopup.then(function(res) {
        if(res) {
-        $scope.deleteChild(item);
+        $scope.deleteChild(child);
         $state.go('app.childs');
        }
       });
@@ -177,18 +184,4 @@ function createLaggingSkills (cordovaSQLite, child_id){
     sqlLaggingSkills.forEach(function(item){
       cordovaSQLite.execute(db,item,[child_id]);
     });
-}
-
-function activateChild($cordovaSQLite,params){
-  var query = "UPDATE childs SET active = 1 where id = ?";
-  $cordovaSQLite.execute(db,query,params);
-}
-function deactivateChild($cordovaSQLite,params){
-  var query = "UPDATE childs SET active = 0 where id = ?";
-  $cordovaSQLite.execute(db,query,params);
-}
-
-function deactivateChildsBut($cordovaSQLite,params){
-  var query = "UPDATE childs SET active = 0 where id <> ?";
-  $cordovaSQLite.execute(db,query,params);
 }
