@@ -1,9 +1,12 @@
 angular.module('starter.services').factory('ChildrenFactory', function($cordovaSQLite) {
-  // function saveUnsolvedProblem(unsolvedProblem){
-  //   var query = "INSERT INTO unsolved_problems(description, solved, unsolved_order, child_id) VALUES (?,?,?,?)";
-  //   $cordovaSQLite.execute(db, query, [unsolvedProblem.description, 0, unsolvedProblem.unsolved_order,unsolvedProblem.child_id]);
-  // }
 
+
+  function saveChild(child,callback){
+    var query = "INSERT INTO childs(first_name,gender,birthday,active) VALUES (?,?,?,1)";
+    $cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]).then(function(){
+      callback();
+    });
+  }
   function getChildren(callback) {
     var children = [];
     var query ="SELECT * FROM childs";
@@ -75,6 +78,9 @@ angular.module('starter.services').factory('ChildrenFactory', function($cordovaS
   return {
     all: function(callback) {
       getChildren(callback);
+    },
+    insert: function(child,callback){
+      saveChild(child,callback);
     },
     active: function(callback){
       getActiveChild(callback);

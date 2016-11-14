@@ -228,16 +228,6 @@ function getLaggingSkills(cordovaSQLite,child_id){
   return lagging_skills;
 }
 
-function getActiveChild(cordovaSQLite,callback){
-  var active_child = [];
-  var query ="SELECT * FROM childs WHERE active = 1";
-  cordovaSQLite.execute(db,query).then(function(result) {
-    callback(result);
-    },function(err){
-      console.log(err.message);
-    });
-}
-
 function getSolutions(cordovaSQLite,unsolvedProblemId) {
   var solutions = [];
   var query ="SELECT * FROM solutions WHERE unsolved_problem_id = ?";
@@ -254,12 +244,6 @@ function getSolutions(cordovaSQLite,unsolvedProblemId) {
 
 function inputFieldIsEmpty(description) {
     return description.length === 0;
-}
-
-
-function saveChild(cordovaSQLite,child){
-  var query = "INSERT INTO childs(first_name,gender,birthday,active) VALUES (?,?,?,1)";
-  cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]);
 }
 
 function saveSolution(cordovaSQLite,solution){

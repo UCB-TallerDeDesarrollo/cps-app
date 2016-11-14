@@ -38,21 +38,22 @@ angular.module('starter.controllers')
     };
     $scope.createChild = function(){
       if (!inputFieldIsEmpty($scope.child.first_name)) {
-        saveChild($cordovaSQLite,$scope.child);
-        $scope.child.first_name = "";
-        $scope.child.gender = "Female";
-        $scope.child.birthday = new Date();
-        $scope.closeModalCreate();
-        ChildrenFactory.all(function(children){
-          $scope.childs = children;
-          var lastChild = children.pop();
-          createLaggingSkills($cordovaSQLite,[lastChild.id]);
-          ChildrenFactory.activate(lastChild.id,function(){
-            ChildrenFactory.active(function(active_child){
-              $scope.activeChild = active_child;
-              ChildrenFactory.all(function(children){
-                $scope.childs = children;
-                //$state.go('app.laggingSkills');
+        ChildrenFactory.insert($scope.child,function(){
+          $scope.child.first_name = "";
+          $scope.child.gender = "Female";
+          $scope.child.birthday = new Date();
+          $scope.closeModalCreate();
+          ChildrenFactory.all(function(children){
+            $scope.childs = children;
+            var lastChild = children.pop();
+            createLaggingSkills($cordovaSQLite,[lastChild.id]);
+            ChildrenFactory.activate(lastChild.id,function(){
+              ChildrenFactory.active(function(active_child){
+                $scope.activeChild = active_child;
+                ChildrenFactory.all(function(children){
+                  $scope.childs = children;
+                  //$state.go('app.laggingSkills');
+                });
               });
             });
           });
