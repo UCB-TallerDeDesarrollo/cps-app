@@ -5,7 +5,7 @@ angular.module('starter.controllers', [])
   $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -51,6 +51,17 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+
+  $scope.UnsolvedProblemsTutorial = function(){
+    UnsolvedProblemFactory.all($scope.activeChild.id,function(unsolvedProblems){
+      if(unsolvedProblems.length === 0 ){
+        $state.go('app.unsolvedTour');
+      }else{
+        $state.go('app.newUnsolvedProblem');
+      }
+    });
+  };
+
   $scope.checkActiveToContinue = function(route) {
     if($scope.activeChild.first_name === ''){
       var alertForNoActiveChild = $ionicPopup.alert({
