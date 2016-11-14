@@ -41,11 +41,17 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       childConcernOrderModifier = -1;
     }
     for(var i = lesserIndex; i < greaterIndex; i++ ){
-      $scope.childsConcerns[i].unsolved_order =i+childConcernOrderModifier;
-      ChildConcernFactory.update($scope.childsConcerns[i]);
+      ChildConcernFactory.update({
+        description: $scope.childsConcerns[i].description,
+        unsolved_order: (i + childConcernOrderModifier),
+        id: $scope.childsConcerns[i].id
+      });
     }
-    $scope.childsConcerns[fromIndex].unsolved_order = toIndex;
-    ChildConcernFactory.update($scope.childsConcerns[fromIndex]);
+    ChildConcernFactory.update({
+      description: $scope.childsConcerns[fromIndex].description,
+      unsolved_order: toIndex,
+      id: $scope.childsConcerns[fromIndex].id
+    });
     findChildsConcerns();
   };
 

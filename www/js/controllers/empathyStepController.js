@@ -22,11 +22,17 @@ angular.module('starter.controllers')
       childConcernOrderModifier = -1;
     }
     for(var i = lesserIndex; i < greaterIndex; i++ ){
-      $scope.childsConcerns[i].unsolved_order =i+childConcernOrderModifier;
-      ChildConcernFactory.update($scope.childsConcerns[i]);
+      ChildConcernFactory.update({
+        description: $scope.childsConcerns[i].description,
+        unsolved_order: (i + childConcernOrderModifier),
+        id: $scope.childsConcerns[i].id
+      });
     }
-    $scope.childsConcerns[fromIndex].unsolved_order = toIndex;
-    ChildConcernFactory.update($scope.childsConcerns[fromIndex]);
+    ChildConcernFactory.update({
+      description: $scope.childsConcerns[fromIndex].description,
+      unsolved_order: toIndex,
+      id: $scope.childsConcerns[fromIndex].id
+    });
     $scope.childsConcerns.splice(fromIndex, 1);
     $scope.childsConcerns.splice(toIndex, 0, childsConcern);
   };

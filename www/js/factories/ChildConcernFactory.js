@@ -44,8 +44,8 @@ angular.module('starter.services').factory('ChildConcernFactory', function($cord
     insert: function(childConcern) {
       insertChildsConcern(childConcern);
     },
-    update: function(childConcern) {
-      updateChildsConcern(childConcern);
+    update: function(childsConcern) {
+      updateChildsConcern(childsConcern);
     },
     delete: function(childsConcern, callback) {
       deleteChildsConcern(childsConcern, callback);
