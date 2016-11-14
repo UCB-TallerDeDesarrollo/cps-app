@@ -18,6 +18,7 @@ angular.module('starter.controllers', [])
   $scope.loginData = {};
   $scope.activeChild={first_name:""};
   $scope.getActiveChild = function(){
+    $scope.activeChild={first_name:""};
     ChildrenFactory.active(function(active_child){
       $scope.activeChild = active_child;
     });
