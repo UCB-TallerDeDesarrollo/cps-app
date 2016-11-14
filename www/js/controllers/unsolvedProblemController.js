@@ -226,7 +226,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
    $scope.getRatingIcon = function(unsolvedProblem) {
      var rating = unsolvedProblem.unsolved_score;
      if (rating === 0) {
-       return 'ion-help';
+       return 'ion-android-radio-button-off';
      } else if (rating === 1) {
        return 'ion-sad';
      } else if (rating === 2) {
