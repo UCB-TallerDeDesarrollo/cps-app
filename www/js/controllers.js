@@ -165,18 +165,24 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('TourCtrl', function($scope, $state, $ionicSlideBoxDelegate,$cordovaSQLite, $ionicPopup){
+.controller('TourCtrl', function($scope, $state, $ionicSlideBoxDelegate,$cordovaSQLite, $ionicPopup, ChildrenFactory, UnsolvedProblemFactory){
+  ChildrenFactory.active(function(active_child){
+    $scope.activeChild = active_child;
+  });
   $scope.checkActiveToContinue = function(route) {
-    if($scope.activeChild.first_name === ''){
-      var alertForNoActiveChild = $ionicPopup.alert({
-         title: 'No child registered',
-         template: 'You need to register a child to continue.'
-       });
-       alertForNoActiveChild.then(function(res) {
-       });
-    }else {
-      $state.go(route);
-    }
+    ChildrenFactory.active(function(active_child){
+      $scope.activeChild = active_child;
+      if($scope.activeChild.first_name === ''){
+        var alertForNoActiveChild = $ionicPopup.alert({
+           title: 'No child registered',
+           template: 'You need to register a child to continue.'
+         });
+         alertForNoActiveChild.then(function(res) {
+         });
+      }else {
+        $state.go(route);
+      }
+    });
   };
   $scope.startApp = function() {
     $state.go('app.newUnsolvedProblem');
@@ -193,18 +199,13 @@ angular.module('starter.controllers', [])
   };
 
   $scope.UnsolvedProblemsTutorial = function(){
-    var query ="SELECT COUNT(*) AS UnsolvedProblemsCount FROM unsolved_problems";
-    var cont = -1;
-    $cordovaSQLite.execute(db,query).then( function(result){
-      cont = result.rows.item(0).UnsolvedProblemsCount;
-      if(cont === 0)
-      {
+    UnsolvedProblemFactory.all($scope.activeChild.id,function(unsolvedProblems){
+      if(unsolvedProblems.length === 0 ){
         $state.go('app.unsolvedTour');
+      }else{
+        $state.go('app.newUnsolvedProblem');
       }
-      else{
-        $scope.checkActiveToContinue('app.newUnsolvedProblem') ;
-          }
-      });
+    });
   };
 });
 
