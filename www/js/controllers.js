@@ -53,13 +53,22 @@ angular.module('starter.controllers', [])
   };
 
   $scope.UnsolvedProblemsTutorial = function(){
-    UnsolvedProblemFactory.all($scope.activeChild.id,function(unsolvedProblems){
-      if(unsolvedProblems.length === 0 ){
-        $state.go('app.unsolvedTour');
-      }else{
-        $state.go('app.newUnsolvedProblem');
-      }
-    });
+    if($scope.activeChild.first_name === ''){
+      var alertForNoActiveChild = $ionicPopup.alert({
+         title: 'No child registered',
+         template: 'You need to register a child to continue.'
+       });
+       alertForNoActiveChild.then(function(res) {
+       });
+    }else {
+      UnsolvedProblemFactory.all($scope.activeChild.id,function(unsolvedProblems){
+        if(unsolvedProblems.length === 0 ){
+          $state.go('app.unsolvedTour');
+        }else{
+          $state.go('app.newUnsolvedProblem');
+        }
+      });
+    }
   };
 
   $scope.checkActiveToContinue = function(route) {
