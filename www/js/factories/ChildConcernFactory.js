@@ -22,10 +22,10 @@ angular.module('starter.services').factory('ChildConcernFactory', function($cord
     $cordovaSQLite.execute(db,query,[childsConcern.description,childsConcern.unsolvedProblemId,childsConcern.unsolvedOrder]);
   }
 
-  function updateChildsConcern(childsConcern){
+  function updateChildsConcern(childConcern){
     var query = "";
     query = "UPDATE childs_concerns SET description = ?, unsolved_order = ? where id = ?";
-    $cordovaSQLite.execute(db, query, [childsConcern.description, childsConcern.unsolved_order, childsConcern.id]);
+    $cordovaSQLite.execute(db, query, [childConcern.description, childConcern.unsolved_order, childConcern.id]);
   }
 
   function deleteChildsConcern(childConcern, callback) {
