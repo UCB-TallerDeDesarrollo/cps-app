@@ -37,6 +37,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       // }
       // });
       $state.go('app.childs');
+
   });
 
 })
