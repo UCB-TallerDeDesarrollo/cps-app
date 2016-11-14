@@ -1,18 +1,18 @@
-angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblemFactory, $cordovaSQLite, $state, $ionicActionSheet,$ionicListDelegate, $ionicPopup, $ionicModal, $stateParams) {
+angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblemFactory, $cordovaSQLite, $state, $ionicActionSheet,$ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, ChildrenFactory) {
   $scope.unsolvedProblem = {};
   $scope.shouldShowReorder = false;
   $scope.firstItemAnimationShown = false;
   $scope.unsolvedProblems = [];
-  $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
-    $scope.activeChild=[];
-    $scope.activeChild[0]=result.rows.item(0);
-    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild[0].id);
-  });
+
+  ChildrenFactory.active(function(active_child){
+    $scope.activeChild = active_child;
+    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild.id);
+    });
+
   $scope.updateUnsolvedProblems = function(callback){
-    $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
-      $scope.activeChild=[];
-      $scope.activeChild[0]=result.rows.item(0);
-      UnsolvedProblemFactory.all($scope.activeChild[0].id,function(result){
+    ChildrenFactory.active(function(active_child){
+      $scope.activeChild = active_child;
+      UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
         $scope.unsolvedProblems = result;
       });
     });
@@ -64,7 +64,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     if (!inputFieldIsEmpty($scope.unsolvedProblem.description)) {
       $scope.unsolvedProblem.unsolved_order = $scope.unsolvedProblems.length;
       $scope.unsolvedProblem.unsolved_score = 0;
-      $scope.unsolvedProblem.child_id = $scope.activeChild[0].id;
+      $scope.unsolvedProblem.child_id = $scope.activeChild.id;
       UnsolvedProblemFactory.insert($scope.unsolvedProblem);
       $scope.unsolvedProblem = {};
       $scope.updateUnsolvedProblems();

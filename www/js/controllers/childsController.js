@@ -1,18 +1,12 @@
 angular.module('starter.controllers')
-  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer, UnsolvedProblemFactory) {
-    $scope.childs = getChilds($cordovaSQLite, function(result) {
-       $scope.childs = [];
-       var rows = result.rows;
-       if(rows.length) {
-         for(var i=0; i < rows.length; i++){
-           $scope.childs.push(rows.item(i));
-         }
-       }
-     });
+  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer, UnsolvedProblemFactory, ChildrenFactory) {
     $scope.child = {};
     $scope.child.first_name="";
     $scope.child.gender = "Female";
     $scope.child.birthday = new Date();
+    ChildrenFactory.all(function(children){
+      $scope.childs = children;
+    });
     $ionicModal.fromTemplateUrl('templates/child/create-child-modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -48,25 +42,16 @@ angular.module('starter.controllers')
         $scope.child.gender = "Female";
         $scope.child.birthday = new Date();
         $scope.closeModalCreate();
-        $scope.childs = getChilds($cordovaSQLite, function(result) {
-           var childs = [];
-           $scope.childs = [];
-           var rows = result.rows;
-           if(rows.length) {
-             for(var i=0; i < rows.length; i++){
-               childs.push(rows.item(i));
-               $scope.childs.push(rows.item(i));
-             }
-           }
-           var lastChild = childs.pop();
-           createLaggingSkills($cordovaSQLite,[lastChild.id]);
-           deactivateChildsBut($cordovaSQLite,[lastChild.id]);
-           $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
-              $scope.activeChild=[];
-              $scope.activeChild[0]=result.rows.item(0);
-            });
-            $state.go('app.laggingSkills');
-         });
+        ChildrenFactory.all(function(children){
+          $scope.childs = children;
+          var lastChild = children.pop();
+          createLaggingSkills($cordovaSQLite,[lastChild.id]);
+          deactivateChildsBut($cordovaSQLite,[lastChild.id]);
+          ChildrenFactory.active(function(active_child){
+            $scope.activeChild = active_child;
+          });
+          $state.go('app.laggingSkills');
+        });
       }
     };
 
@@ -99,33 +84,23 @@ angular.module('starter.controllers')
     $scope.activateChild = function(item){
       activateChild($cordovaSQLite,[item.id]);
       deactivateChildsBut($cordovaSQLite,[item.id]);
-      $scope.childs = getChilds($cordovaSQLite, function(result) {
-         $scope.childs = [];
-         var rows = result.rows;
-         if(rows.length) {
-           for(var i=0; i < rows.length; i++){
-             $scope.childs.push(rows.item(i));
-           }
-         }
-       });
-      $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
-         $scope.activeChild=[];
-         $scope.activeChild[0]=result.rows.item(0);
-         UnsolvedProblemFactory.all($scope.activeChild[0].id,function(result){
-           $scope.problems = result;
-         });
-       });
+      ChildrenFactory.all(function(children){
+        ChildrenFactory.active(function(active_child){
+          $scope.activeChild = active_child;
+          UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
+            $scope.problems = result;
+          });
+        });
+      });
     };
 
-    $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
-      $scope.activeChild=[];
-      if(result.rows.length > 0){
-        $scope.activeChild[0]=result.rows.item(0);
-        UnsolvedProblemFactory.all($scope.activeChild[0].id,function(result){
-          $scope.problems = result;
-        });
-      }
-     });
+    ChildrenFactory.active(function(active_child){
+      $scope.activeChild = active_child;
+      UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
+        $scope.problems = result;
+      });
+  });
+
 
     $scope.goTo = function(route){
       $state.go(route);

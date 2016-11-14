@@ -5,7 +5,7 @@ angular.module('starter.controllers', [])
   $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -17,11 +17,8 @@ angular.module('starter.controllers', [])
   // Form data for the login modal
   $scope.loginData = {};
   $scope.getActiveChild = function(){
-    $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
-        $scope.activeChild=[];
-        if(result.rows.length > 0){
-        $scope.activeChild[0]=result.rows.item(0);
-        }
+    ChildrenFactory.active(function(active_child){
+      $scope.activeChild = active_child;
     });
   };
 
@@ -69,22 +66,21 @@ angular.module('starter.controllers', [])
 
 .controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate) {
   //$scope.laggingSkills = getLaggingSkills($cordovaSQLite);
-  $scope.activeChild = getActiveChild($cordovaSQLite, function(result){
-    $scope.activeChild=[];
-    $scope.activeChild[0]=result.rows.item(0);
-    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild[0].id);
+  ChildrenFactory.active(function(active_child){
+    $scope.activeChild = active_child;
+    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild.id);
   });
   $scope.checkLaggingSkill = function(laggingskillId){
     checkLaggingSkill($cordovaSQLite, [laggingskillId]);
     $state.go('app.laggingSkills');
     $ionicListDelegate.closeOptionButtons();
-    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild[0].id);
+    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild.id);
   };
   $scope.uncheckLaggingSkill = function(laggingskillId){
     uncheckLaggingSkill($cordovaSQLite, [laggingskillId]);
     $state.go('app.laggingSkills');
     $ionicListDelegate.closeOptionButtons();
-    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild[0].id);
+    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild.id);
   };
 })
 
@@ -268,19 +264,6 @@ function saveSolution(cordovaSQLite,solution){
   var query ="INSERT INTO solutions(description,unsolved_problem_id,rating) VALUES (?,?,?)";
   cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId,solution.rating]);
 }
-
-function getChilds(cordovaSQLite, callback){
- var childs = [];
- var query ="SELECT * FROM childs";
- cordovaSQLite.execute(db,query).then(function(result){
-   callback(result);
- },
-   function(err){
-     console.log(err.message);
-   });
- return childs;
-}
-
 
 function updateSolution($cordovaSQLite, solution){
   var query = "UPDATE solutions SET description = ? where id = ?";
