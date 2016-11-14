@@ -64,7 +64,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate) {
+.controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate, ChildrenFactory) {
   //$scope.laggingSkills = getLaggingSkills($cordovaSQLite);
   ChildrenFactory.active(function(active_child){
     $scope.activeChild = active_child;
@@ -165,7 +165,7 @@ angular.module('starter.controllers', [])
 
 .controller('TourCtrl', function($scope, $state, $ionicSlideBoxDelegate,$cordovaSQLite, $ionicPopup){
   $scope.checkActiveToContinue = function(route) {
-    if($scope.activeChild.length === 0){
+    if($scope.activeChild.first_name === ''){
       var alertForNoActiveChild = $ionicPopup.alert({
          title: 'No child registered',
          template: 'You need to register a child to continue.'

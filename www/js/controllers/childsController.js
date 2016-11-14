@@ -85,6 +85,7 @@ angular.module('starter.controllers')
       activateChild($cordovaSQLite,[item.id]);
       deactivateChildsBut($cordovaSQLite,[item.id]);
       ChildrenFactory.all(function(children){
+        $scope.childs = children;
         ChildrenFactory.active(function(active_child){
           $scope.activeChild = active_child;
           UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
