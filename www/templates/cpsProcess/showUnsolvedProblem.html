@@ -1,6 +1,7 @@
 <ion-view cache-view="false" view-title="Empathy Step" on-tap="unableAnimation()" ng-controller="ChildsConcernsCtrl">
   <div class="bar bar-subheader bar-positive">
     <h2 class="title">{{unsolvedProblem.description}} </h2>
+    <a class="button button-icon icon ion-ios-help-outline button-calm" href="#/app/helpCategories"></a>
   </div>
 
   <ion-content  ng-init="findUnsolvedProblem(unsolvedProblem);"  class="has-subheader has-tabs" on-swipe-left="selectTabWithIndex(1)" on-swipe-right="goUnsolvedProblems()">
