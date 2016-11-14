@@ -1,7 +1,7 @@
 <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
   <ion-header-bar class="bar bar-header bar-positive">
     <h1 class="title" style="left: 67px; right: 67px;">New child</h1>
-    <button class="button button-clear button-primary" ng-click="modalCreate.hide()">Cancel</button>
+    <button class="button button-clear button-primary" ng-click="modalEdit.hide()">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
     <div class="list">
@@ -23,9 +23,8 @@
         </input>
       </label>
         <button class="button" ng-click="upload()">Upload From Assets</button>
-
-      <button class="button button-full button-positive" ng-if="editableChild.first_name.length == 0" disabled>Create</button>
-      <button class="button button-full button-positive" ng-if="editableChild.first_name.length > 0" ng-click="createChild()">Create</button>
+        <button class="button button-full button-positive" ng-if="editableChild.first_name.length == 0" disabled>Create</button>
+        <button class="button button-full button-positive" ng-if="editableChild.first_name.length > 0" ng-click="createChild()">Create</button>
     </div>
   </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
 </ion-modal-view>

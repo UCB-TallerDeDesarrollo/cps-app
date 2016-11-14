@@ -33,6 +33,32 @@ angular.module('starter.controllers')
       // Execute action
     });
 
+
+    $ionicModal.fromTemplateUrl('templates/child/edit-child-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modalEdit = modal;
+    });
+    $scope.openModalEdit = function() {
+      $scope.modalEdit.show();
+    };
+    $scope.closeModalEdit = function() {
+      $scope.modalEdit.hide();
+    };
+    // Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+      $scope.modalEdit.remove();
+    });
+    // Execute action on hide modal
+    $scope.$on('modalEdit.hidden', function() {
+      // Execute action
+    });
+    // Execute action on remove modal
+    $scope.$on('modalEdit.removed', function() {
+      // Execute action
+    });
+
     $scope.convertStringToDate = function(dateToConvert){
         return new Date(dateToConvert);
     };
@@ -52,7 +78,6 @@ angular.module('starter.controllers')
                 $scope.activeChild = active_child;
                 ChildrenFactory.all(function(children){
                   $scope.childs = children;
-                  //$state.go('app.laggingSkills');
                 });
               });
             });
@@ -76,9 +101,9 @@ angular.module('starter.controllers')
           return true;
         },
         buttonClicked: function(index) {
-
           if(index === 0){
-            $scope.goToUnsolvedProblem(unsolvedProblem);
+            $scope.editableChild = angular.copy(child);
+            $scope.openModalEdit();
           }
           $ionicListDelegate.closeOptionButtons();
 

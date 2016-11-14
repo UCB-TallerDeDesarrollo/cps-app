@@ -52,7 +52,7 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
   $scope.checkActiveToContinue = function(route) {
-    if($scope.activeChild.length === 0){
+    if($scope.activeChild.first_name === ''){
       var alertForNoActiveChild = $ionicPopup.alert({
          title: 'No child registered',
          template: 'You need to register a child to continue.'
