@@ -219,12 +219,15 @@ angular.module('starter.controllers', [])
   };
 
   $scope.UnsolvedProblemsTutorial = function(){
-    UnsolvedProblemFactory.all($scope.activeChild.id,function(unsolvedProblems){
-      if(unsolvedProblems.length === 0 ){
-        $state.go('app.unsolvedTour');
-      }else{
-        $state.go('app.newUnsolvedProblem');
-      }
+    ChildrenFactory.active(function(active_child){
+      $scope.activeChild = active_child;
+      UnsolvedProblemFactory.all($scope.activeChild.id,function(unsolvedProblems){
+        if(unsolvedProblems.length === 0 ){
+          $state.go('app.unsolvedTour');
+        }else{
+          $state.go('app.newUnsolvedProblem');
+        }
+      });
     });
   };
 });
