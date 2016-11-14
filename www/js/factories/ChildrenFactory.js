@@ -58,22 +58,13 @@ angular.module('starter.services').factory('ChildrenFactory', function($cordovaS
         console.error(err);
     });
   }
-  // function updateUnsolvedProblem(unsolvedProblem){
-  //   var query = "UPDATE unsolved_problems SET description = ?, unsolved_order = ? where id = ?";
-  //   var params = [unsolvedProblem.description, unsolvedProblem.unsolved_order, unsolvedProblem.id];
-  //   $cordovaSQLite.execute(db, query, params);
-  // }
 
-  // function findUnsolvedProblem(unsolvedProblemId, callback){
-  //   var query =" SELECT * FROM unsolved_problems where id = ? ";
-  //   $cordovaSQLite.execute(db,query,[unsolvedProblemId])
-  //   .then( function(result) {
-  //       callback(result);
-  //   },
-  //   function(error){
-  //     console.log(error);
-  //   });
-  // }
+
+  function updateChild(child){
+    var query = "UPDATE childs SET first_name = ?, gender = ? , birthday = ? where id = ?";
+    var params = [child.first_name, child.gender, child.birthday, child.id];
+    $cordovaSQLite.execute(db, query, params);
+  }
 
   return {
     all: function(callback) {
@@ -92,18 +83,9 @@ angular.module('starter.services').factory('ChildrenFactory', function($cordovaS
     },
     delete:  function(child,callback){
       deleteChild(child,callback);
-    // },
-    // insert: function(unsolvedProblem) {
-    //   saveUnsolvedProblem(unsolvedProblem);
-    // },
-    // update: function(unsolvedProblem){
-    //   updateUnsolvedProblem(unsolvedProblem);
-    // },
-    // delete: function(unsolvedProblem, callback){
-    //   deleteUnsolvedProblem(unsolvedProblem, callback);
-    // },
-    // find: function(unsolvedProblemId, callback){
-    //   findUnsolvedProblem(unsolvedProblemId, callback);
+    },
+    update: function(child){
+      updateChild(child);
     }
   };
 });

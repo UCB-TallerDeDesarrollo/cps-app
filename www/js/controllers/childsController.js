@@ -85,6 +85,18 @@ angular.module('starter.controllers')
         });
       }
     };
+    $scope.updateChild = function(){
+      if (!inputFieldIsEmpty($scope.editableChild.first_name)) {
+        ChildrenFactory.update($scope.editableChild);
+        $scope.editableChild.first_name = "";
+        $scope.editableChild.gender = "Female";
+        $scope.editableChild.birthday = new Date();
+        $scope.closeModalEdit();
+        ChildrenFactory.all(function(children){
+          $scope.childs = children;
+        });
+      }
+    };
 
     $scope.showActionsheet = function(child) {
       $ionicActionSheet.show({
@@ -103,6 +115,7 @@ angular.module('starter.controllers')
         buttonClicked: function(index) {
           if(index === 0){
             $scope.editableChild = angular.copy(child);
+            $scope.editableChild.birthday = $scope.convertStringToDate(child.birthday);
             $scope.openModalEdit();
           }
           $ionicListDelegate.closeOptionButtons();
