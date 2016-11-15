@@ -273,7 +273,17 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         templateUrl: 'templates/appHelps/alsupHelp.html'
       }
     }
+  })
+
+  .state('app.inTheHeatOfTheMoment',{
+    url: '/inTheHeatOfTheMoment',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/appHelps/inTheHeatOfTheMoment.html'
+      }
+    }
   });
+
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/app/childs');
 })

@@ -1,0 +1,30 @@
+<ion-view title="In The Heat Of The Moment">
+	<ion-content ng-controller="HeatMomentCtrl">
+    <ion-list>
+      <div ng-repeat="moment in heatMoments">
+        <ion-item class="item item-text-wrap" ng-if="!moment.topics && !moment.url">
+          {{moment.title}}
+        </ion-item>
+        <ion-item class="item item-text-wrap item-icon-right"
+                  ng-if="moment.url"
+                  ng-click="browserInstance.openBrowser(moment.url)">
+          {{moment.title}}
+          <i class="icon ion-ios-browsers-outline" style="font-size:21px"></i>
+        </ion-item>
+        <ion-item class="item item-stable item-text-wrap"
+                  ng-click="toggleContent(moment)"
+                  ng-class="{active: isContentShown(moment)}"
+                  ng-if="moment.topics">
+            <i class="icon" ng-if="moment.topics" ng-class="isContentShown(moment) ? 'ion-minus' : 'ion-plus'"></i> &nbsp;
+            <b>{{moment.title}}</b>
+        </ion-item>
+        <div ng-repeat="topic in moment.topics">
+          <ion-item class="item item-accordion item-text-wrap"
+                    ng-show="isContentShown(moment)">
+            {{topic.content}}
+          </ion-item>
+        </div>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>
