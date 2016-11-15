@@ -26,7 +26,7 @@ angular.module('starter.controllers')
       title: "Remember that, in order to help, you need to first understand.",
       topics: [
         { content: "Emergency Plan B: You seem upset about ________. What's up?" },
-        { content: "Add reassurance -- I'm not mad at you. You are not in trouble. I'm just trying to understand." }
+        { content: "Add reassurance: \n- I'm not mad at you. \n- You are not in trouble. \n- I'm just trying to understand." }
       ]
     },
     {
