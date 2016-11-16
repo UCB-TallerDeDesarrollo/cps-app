@@ -23,6 +23,11 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
+    <script type="text/javascript">
+      var db = null;
+      db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
+    </script>
+
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>

@@ -13,6 +13,7 @@ angular.module('starter.controllers')
       animation: 'slide-in-up'
     }).then(function(modal) {
       $scope.modalCreate = modal;
+      $scope.modalCreate.hide();
     });
     $scope.openModalCreate = function() {
       $scope.modalCreate.show();
