@@ -6,15 +6,17 @@
   </div>
   <ion-content  ng-init="findChildConcern();findUnsolvedProblem();"  class="has-subheader has-tabs" on-swipe-left="selectTabWithIndex(2)" on-swipe-right="selectTabWithIndex(0)">
     <div class="list">
- 		  <label class="item item-input item-select">
- 		    <div class="input-label">
- 		      My worry is..
- 		    </div>
- 		    <select>
- 		      <option selected>how the problem is affecting the child</option>
- 		      <option>how the problem is affecting someone else</option>
- 		    </select>
- 		  </label>
+        <div class="item item-divider">
+          Mo worry is..
+        </div>
+        <div class="item item-text-wrap item-icon-left">
+          <i class="icon ion-ios-body"></i>
+          How the problem is affecting the child
+        </div>
+        <div class="item item-text-wrap item-icon-left">
+          <i class="icon ion-ios-people"></i>
+          How the problem is affecting someone else
+        </div>
  		</div>
     <div ng-init="updateAdultsConcerns()" class="padding">
       <div class="item item-divider item-text-wrap">
