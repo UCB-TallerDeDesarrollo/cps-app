@@ -1,7 +1,6 @@
 <ion-view view-title="Home" ng-controller="TourCtrl">
   <div class="bar bar-subheader bar-positive item-text-wrap">
     <h2 class="title">ALSUP</h2>
-    <a class="button button-icon ion-help-circled" href="#/app/alsupHelp"></a>
   </div>
   <ion-content class="has-subheader">
     <div class="list">
@@ -9,7 +8,7 @@
         <img src="img/home/laggingskills-icon.png">
         Lagging Skills
       </a>
-      <a class="item item-thumbnail-left" href="#/app/unsolvedProblems/new">
+      <a class="item item-thumbnail-left" ng-click="checkActiveToContinue('app.newUnsolvedProblem')">
         <img src="img/home/unsolvedproblem-icon.png">
         Unsolved Problems
       </a>
