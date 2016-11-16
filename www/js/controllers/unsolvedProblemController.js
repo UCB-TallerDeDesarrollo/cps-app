@@ -66,6 +66,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       $scope.unsolvedProblem.unsolved_score = 0;
       $scope.unsolvedProblem.child_id = $scope.activeChild.id;
       UnsolvedProblemFactory.insert($scope.unsolvedProblem);
+      checkLaggingSkill($cordovaSQLite, [$state.params.laggingSkillsId]);
       $scope.unsolvedProblem = {};
       $scope.updateUnsolvedProblems();
       $scope.closeModalCreate();
