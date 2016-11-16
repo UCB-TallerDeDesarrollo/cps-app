@@ -1,7 +1,6 @@
 <ion-view cache-view="false" view-title="Invitation Step" ng-controller="InvitationCtrl" on-tap="unableAnimation()">
   <div class="bar bar-subheader bar-positive">
     <h2 class="title">{{unsolvedProblem.description}}</h2>
-    <a class="button button-icon icon ion-help-circled button-calm" href="#/app/helpForInvitation"></a>
   </div>
   <ion-content  ng-init="initialSetUp()"  class="has-tabs has-subheader" on-swipe-right="selectTabWithIndex(1)">
     <div class="item item-divider item-text-wrap">
@@ -61,6 +60,7 @@
         <a ng-click="openModal()" class="watchlist_menu button button-small button-clear button-positive">
           <i class="icon ion-plus"></i>
         </a>
+        <a class="watchlist_menu button button-small button-clear button-positive icon ion-help-circled" href="#/app/helpForInvitation"></a>
         <div class="col col-75">
           <h2><b>List of Possible Solutions</b></h2>
         </div>
@@ -69,13 +69,15 @@
         <div ng-hide="hideFakeButtons()" class="fake-buttons">
           <button class="item-options item fake-button button button-balanced ion-edit"></button>
           <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
+          <button class="item-options item fake-button button button-positive ion-eye"></button>
         </div>
         <ion-item class="item item-text-wrap item-icon-left item-icon-right" ng-repeat="solution in solutions"  ng-class="{ slidein: $first && !firstItemAnimationShown}">
           <i class="icon {{getRatingIcon(solution)}}"></i>
           <p>{{solution.description}}</p>
           <i class="icon ion-star" ng-click="showRatingPopup(solution,unsolvedProblem)"></i>
-            <ion-option-button class="button button-balanced ion-edit" ng-click="editSolution(solution)"></ion-option-button>
+          <ion-option-button class="button button-balanced ion-edit" ng-click="editSolution(solution)"></ion-option-button>
           <ion-option-button ng-click="showDeletionConfirm(solution)" class="button-assertive ion-trash-a" ></ion-option-button>
+          <ion-option-button ng-click="goToSolution(solution)" class="button-positive ion-eye" ></ion-option-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="solutions.length == 0">
           <p>No possible solutions registered. Agree upon a solution.</p>

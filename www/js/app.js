@@ -20,6 +20,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       StatusBar.styleDefault();
     }
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
+<<<<<<< HEAD
     DataSeed.seed($cordovaSQLite, db);
     //DataSeed.deleteSeed($cordovaSQLite, db);
     // var query ="SELECT COUNT(*) AS UnsolvedProblemsCount FROM unsolved_problems";
@@ -36,6 +37,24 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     // });
     $state.go('app.childs');
 
+=======
+    db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
+      DataSeed.seed($cordovaSQLite, db);
+      // DataSeed.deleteSeed($cordovaSQLite, db);
+      // var query ="SELECT COUNT(*) AS UnsolvedProblemsCount FROM unsolved_problems";
+      // var cont = 1;
+      // $cordovaSQLite.execute(db,query).then( function(result){
+      // cont = result.rows.item(0).UnsolvedProblemsCount;
+      // if(cont === 0)
+      // {
+      //     $state.go('app.home');
+      // }
+      // else{
+      //     $state.go('app.newUnsolvedProblem');
+      // }
+      // });
+      $state.go('app.childs');
+>>>>>>> e3c9c305f3d45fb17ebfe381c75a5ea0a66e3419
   });
 
 })
@@ -155,6 +174,15 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     }
   })
 
+  .state('app.solution', {
+    url: '/solutions/:solutionId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/solutions/showSolution.html'
+      }
+    }
+  })
+
   .state('app.planBHelp',{
     url: '/planBHelp',
     views: {
@@ -255,6 +283,14 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         }
       }
     })
+    .state('app.helpTour',{
+        url: '/helpAccessTour',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/appTutorials/help_tour.html'
+          }
+        }
+      })
   .state('app.helpDefineAdultsConcern',{
       url: '/mainHelp/helpDefineAdultsConcern',
       views: {
@@ -283,7 +319,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   });
 
   // if none of the above states are matched, use this as the fallback
-  //$urlRouterProvider.otherwise('/app/childs');
+  // $urlRouterProvider.otherwise('/app/childs');
 })
 
 .filter('orderObjectBy', function() {
