@@ -23,7 +23,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
       DataSeed.seed($cordovaSQLite, db);
-      //DataSeed.deleteSeed($cordovaSQLite, db);
+      // DataSeed.deleteSeed($cordovaSQLite, db);
       // var query ="SELECT COUNT(*) AS UnsolvedProblemsCount FROM unsolved_problems";
       // var cont = 1;
       // $cordovaSQLite.execute(db,query).then( function(result){
@@ -36,8 +36,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       //     $state.go('app.newUnsolvedProblem');
       // }
       // });
-      $state.go('app.childs');
-
+      // $state.go('app.childs');
   });
 
 })
@@ -153,6 +152,15 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       'menuContent': {
         templateUrl: 'templates/cpsProcess/invitation.html',
         controller: 'InvitationCtrl'
+      }
+    }
+  })
+
+  .state('app.solution', {
+    url: '/solutions/:solutionId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/solutions/showSolution.html'
       }
     }
   })
@@ -285,7 +293,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   });
 
   // if none of the above states are matched, use this as the fallback
-  //$urlRouterProvider.otherwise('/app/childs');
+  $urlRouterProvider.otherwise('/app/childs');
 })
 
 .filter('orderObjectBy', function() {

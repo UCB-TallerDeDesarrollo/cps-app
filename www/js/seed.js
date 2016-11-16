@@ -22,6 +22,7 @@ angular.module('starter.seed', [])
 
   function seedSolutions($cordovaSQLite, db){
     $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS solutions (id integer primary key autoincrement, description text, unsolved_problem_id integer, rating integer, FOREIGN KEY (unsolved_problem_id) REFERENCES adults_concerns (id))");
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS solution_comments (id integer primary key autoincrement, description text, commented_at date, solution_id integer, FOREIGN KEY (solution_id) REFERENCES solutions (id))");
   }
 
   return {
@@ -40,8 +41,8 @@ angular.module('starter.seed', [])
       $cordovaSQLite.execute(db, "DROP TABLE childs_concerns");
       $cordovaSQLite.execute(db, "DROP TABLE adults_concerns");
       $cordovaSQLite.execute(db, "DROP TABLE solutions");
+      $cordovaSQLite.execute(db, "DROP TABLE solution_comments");
       $cordovaSQLite.execute(db, "DROP TABLE childs");
-
     }
   };
 });

@@ -26,9 +26,7 @@
         </div>
         <ion-item class="item item-text-wrap item-icon-right" ng-click="verifyToGoToStep2()" ng-repeat="childsConcern in childsConcerns" ng-class="{ slidein: $first && !firstItemAnimationShown }">
           <p>{{childsConcern.description}}</p>
-          <a>
-            <i class="icon dark ion-chevron-right"></i>
-          </a>
+          <i class="icon dark ion-chevron-right"></i>
           <ion-option-button class="button button-balanced ion-edit" ng-click="editChildsConcern(childsConcern)" ng-hide="{{shouldShowReorder}}"></ion-option-button>
           <ion-option-button ng-click="showConfirmChildsConcern(childsConcern)" class="button-assertive ion-trash-a" ></ion-option-button>
           <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(childsConcern, $fromIndex, $toIndex)">

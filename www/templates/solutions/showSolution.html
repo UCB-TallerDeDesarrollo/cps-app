@@ -1,0 +1,49 @@
+<ion-view cache-view="false" title="Solution's Info" ng-controller="SolutionsCtrl">
+    <div class="bar bar-subheader bar-positive">
+      <h2 class="title">{{solution.description}}</h2>
+    </div>
+
+    <ion-content class="has-subheader">
+      <div class="padding">
+        <ion-list>
+          <ion-item class="item item-divider item-icon-right">
+            <h2><b>List of Comments</b></h2>
+            <a ng-click="openModal()">
+              <i class="icon ion-plus"></i>
+            </a>
+          </ion-item>
+          <ion-item class="item item-text-wrap" ng-repeat="item in comments">
+            {{item.description}}
+            -
+            <b>{{parseDate(item.commented_at)}}</b>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <script id="create-modal.html" type="text/ng-template">
+        <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+          <ion-header-bar class="bar bar-header bar-positive">
+            <h1 class="title" style="left: 67px; right: 67px;">New comment</h1>
+            <button class="button button-clear button-primary" ng-click="modalCreate.hide()">Cancel</button>
+          </ion-header-bar>
+          <ion-content class="padding scroll-content ionic-scroll  has-header">
+            <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+              <div class="list">
+                <label class="item item-input">
+                  <textarea rows=5 placeholder="Write a comment about this solution." ng-model="comment.description">
+                  </textarea>
+                </label>
+                <button class="button button-full button-positive" ng-if="!comment.description.length" disabled>Create</button>
+                <button class="button button-full button-positive" ng-if="comment.description.length > 0" ng-click="createComment()">Create</button>
+              </div>
+            </div>
+            <div class="scroll-bar scroll-bar-v">
+              <div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;">
+              </div>
+            </div>
+          </ion-content>
+        </ion-modal-view>
+      </script>
+
+    </ion-content>
+</ion-view>

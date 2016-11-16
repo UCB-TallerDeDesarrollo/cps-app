@@ -64,31 +64,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
     }
   };
-  $scope.more = function(solution) {
-    var hideSheet = $ionicActionSheet.show({
-       buttons: [
-         { text: 'Edit Solution' },
-       ],
-       destructiveText: 'Delete Solution',
-       titleText: 'Modify your album',
-       cancelText: 'Cancel',
-       cancel: function() {
-        },
-       buttonClicked: function(index) {
-         if(index === 0){
-           $scope.editSolution(solution);
-         }
-        return true;
-       },
-       destructiveButtonClicked: function() {
 
-         $scope.showDeletionConfirm(solution);
-        //  $ionicListDelegate.closeOptionButtons();
-
-         return true;
-       }
-     });
-  };
   $scope.showDeletionConfirm = function(solution) {
     var confirmPopup = $ionicPopup.confirm({
       title: 'Delete Solution',
@@ -328,5 +304,11 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.hideFakeButtons = function() {
     return ( $scope.solutions.length === 0 || $scope.firstItemAnimationShown );
   };
+
+  $scope.goToSolution = function(solution){
+    console.log(solution.id);
+    $state.go('app.solution',{solutionId:solution.id});
+  };
+
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 });
