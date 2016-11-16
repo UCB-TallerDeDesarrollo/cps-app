@@ -265,6 +265,14 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         }
       }
     })
+    .state('app.helpTour',{
+        url: '/helpAccessTour',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/appTutorials/help_tour.html'
+          }
+        }
+      })
   .state('app.helpDefineAdultsConcern',{
       url: '/mainHelp/helpDefineAdultsConcern',
       views: {

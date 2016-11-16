@@ -13,7 +13,7 @@ angular.module('starter.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-
+  $scope.firstTimeHelp=false;
   // Form data for the login modal
   $scope.loginData = {};
   $scope.activeChild={first_name:""};
@@ -184,7 +184,52 @@ angular.module('starter.controllers', [])
       id:$stateParams.unsolvedProblemId
   };
 })
+.controller('HelpTourCtrl', function($scope, $state, $ionicSlideBoxDelegate,$cordovaSQLite, $ionicPopup, ChildrenFactory, UnsolvedProblemFactory){
+  ChildrenFactory.active(function(active_child){
+    $scope.activeChild = active_child;
+  });
+  // $scope.checkActiveToContinue = function(route) {
+  //   ChildrenFactory.active(function(active_child){
+  //     $scope.activeChild = active_child;
+  //     if($scope.activeChild.first_name === ''){
+  //       var alertForNoActiveChild = $ionicPopup.alert({
+  //          title: 'No child registered',
+  //          template: 'You need to register a child to continue.'
+  //        });
+  //        alertForNoActiveChild.then(function(res) {
+  //        });
+  //     }else {
+  //       $state.go(route);
+  //     }
+  //   });
+  // };
+  $scope.startApp = function() {
+    $state.go('app.home');
+  };
+  $scope.next = function() {
+    $ionicSlideBoxDelegate.next();
+  };
+  $scope.previous = function() {
+    $ionicSlideBoxDelegate.previous();
+  };
 
+  $scope.slideChanged = function(index) {
+    $scope.slideIndex = index;
+  };
+
+  $scope.helpTutorial = function(){
+    ChildrenFactory.active(function(active_child){
+      $scope.activeChild = active_child;
+      UnsolvedProblemFactory.all($scope.activeChild.id,function(unsolvedProblems){
+        if(unsolvedProblems.length === 0 ){
+          $state.go('app.helpTour');
+        }else{
+          $state.go('app.mainHelp');
+        }
+      });
+    });
+  };
+})
 .controller('TourCtrl', function($scope, $state, $ionicSlideBoxDelegate,$cordovaSQLite, $ionicPopup, ChildrenFactory, UnsolvedProblemFactory){
   ChildrenFactory.active(function(active_child){
     $scope.activeChild = active_child;

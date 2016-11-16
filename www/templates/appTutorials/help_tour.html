@@ -1,0 +1,93 @@
+<ion-view view-title="Tutorial" ng-controller="HelpTourCtrl">
+        <ion-nav-buttons side="left">
+          <button class="button button-positive button-clear no-animation"
+                  ng-click="startApp()" ng-show="!slideIndex">
+            Skip Intro
+          </button>
+          <button class="button button-positive button-clear no-animation"
+                  ng-click="previous()" ng-show="slideIndex > 0">
+            Previous
+          </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+          <button class="button button-positive button-clear no-animation"
+                  ng-click="next()" ng-show="slideIndex != 4">
+            Next
+          </button>
+          <button class="button button-positive button-clear no-animation"
+                  ng-click="startApp()" ng-show="slideIndex == 4">
+            Start
+          </button>
+        </ion-nav-buttons>
+
+        <ion-slide-box on-slide-changed="slideChanged(index)">
+          <ion-slide>
+            <h3>Welcome to the Main Help!</h3>
+            <div id="logo">
+              <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+            </div>
+            <p>
+              At some part you may need help.
+            </p>
+            <p>
+              Now we are going to explain you how to access to our helps.
+            </p>
+          </ion-slide>
+          <ion-slide>
+            <h3>Icons used in this Step</h3>
+
+            <div id="list">
+              <ul>
+                <li><i class="button button-icon ion-help-circled"></i> This icon is at all our app.
+                You can access our help, everytime you want with this button.
+                and it shows you the help for every step you're working </li>
+
+              </ol>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <h3>Getting into topics</h3>
+
+            <div id="list">
+              <h5>One way to do it:</h5>
+              <ol>
+                <li>Tap on the <i class="button button-icon ion-help-circled "></i>  icon</li>
+                <li>Search the topic you are in trouble</li>
+                <li>If the solution its not here, maybe at our main page Dr. Green could explain you how it works </li>
+              </ol>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <h3>Getting into topics:</h3>
+
+            <div id="list">
+              <h5>Other way to do it:</h5>
+              <ol>
+                <li>Swipe to the left to see options.</li>
+                <li>Tap on the Main Help option</li>
+                <li>Choose at wich part are you getting troubles.</li>
+                <li>Get into</li>
+                <li>Look at all our the topics we can help you with</li>
+                <li>Choose the one you need</li>
+              </ol>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <h3>Using the search bar</h3>
+
+            <div id="list">
+              <h5>Look faster to your needed topic</h5>
+              <ol>
+                <li>Swipe to the left to see options.</li>
+                <li>Tap on the Main Help option</li>
+                <li> This bar will help you <label class="item-input-wrapper">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input type="search" placeholder="Search">
+                  </label>
+                  to search specifically the topic you need
+                </li>
+              </ol>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+      </ion-view>
