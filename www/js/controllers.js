@@ -204,7 +204,7 @@ angular.module('starter.controllers', [])
   //   });
   // };
   $scope.startApp = function() {
-    $state.go('app.home');
+    $state.go('app.childs');
   };
   $scope.next = function() {
     $ionicSlideBoxDelegate.next();
@@ -250,7 +250,7 @@ angular.module('starter.controllers', [])
     });
   };
   $scope.startApp = function() {
-    $state.go('app.newUnsolvedProblem');
+    $state.go('app.childs');
   };
   $scope.next = function() {
     $ionicSlideBoxDelegate.next();
