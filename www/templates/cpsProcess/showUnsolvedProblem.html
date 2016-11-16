@@ -1,20 +1,19 @@
 <ion-view cache-view="false" view-title="Empathy Step" on-tap="unableAnimation()" ng-controller="ChildsConcernsCtrl">
   <div class="bar bar-subheader bar-positive">
     <h2 class="title">{{unsolvedProblem.description}} </h2>
-    <a class="button button-icon icon ion-help-circled button-calm" href="#/app/helpCategories"></a>
   </div>
 
   <ion-content  ng-init="findUnsolvedProblem(unsolvedProblem);"  class="has-subheader has-tabs" on-swipe-left="selectTabWithIndex(1)" on-swipe-right="goUnsolvedProblems()">
     <div class="item item-text-wrap text-center">
       <h2>I've noticed that you've been having <strong>{{unsolvedProblem.description}}</strong>, what's up?</h2>
     </div>
-
     <div ng-init="updateInformation()" class="padding">
         <div class="item item-divider item-text-wrap">
           <a ng-click="openModal()" class="watchlist_menu button button-small button-clear button-positive">
             <i class="icon ion-plus"></i>
           </a>
           <a class="watchlist_menu button button-small button-clear button-positive" ng-show="childsConcerns.length > 1" ng-click="shouldShowReorder = !shouldShowReorder">  <i ng-class="(shouldShowReorder) ? 'icon icon-floppy' : 'icon icon-sort-alt-down'"></i></a>
+          <a class="watchlist_menu button button-small button-clear button-positive icon ion-help-circled" href="#/app/helpCategories"></a>
           <div class="col col-75">
             <h2><b>List of Child's Concerns</b></h2>
           </div>
