@@ -1,4 +1,4 @@
-<ion-view view-title="Home" ng-controller="AppCtrl">
+<ion-view view-title="Home" ng-controller="TourCtrl">
   <div class="bar bar-subheader bar-positive item-text-wrap">
     <h2 class="title">ALSUP</h2>
   </div>
@@ -8,7 +8,7 @@
         <img src="img/home/laggingskills-icon.png">
         Lagging Skills
       </a>
-      <a class="item item-thumbnail-left" href="#/app/newUnsolvedProblem">
+      <a class="item item-thumbnail-left" ng-click="checkActiveToContinue('app.newUnsolvedProblem')">
         <img src="img/home/unsolvedproblem-icon.png">
         Unsolved Problems
       </a>
