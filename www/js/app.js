@@ -23,19 +23,6 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
       DataSeed.seed($cordovaSQLite, db);
-      // DataSeed.deleteSeed($cordovaSQLite, db);
-      // var query ="SELECT COUNT(*) AS UnsolvedProblemsCount FROM unsolved_problems";
-      // var cont = 1;
-      // $cordovaSQLite.execute(db,query).then( function(result){
-      // cont = result.rows.item(0).UnsolvedProblemsCount;
-      // if(cont === 0)
-      // {
-      //     $state.go('app.home');
-      // }
-      // else{
-      //     $state.go('app.newUnsolvedProblem');
-      // }
-      // });
       $state.go('app.childs');
   });
 
@@ -277,7 +264,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         url: '/tours',
         views: {
           'menuContent': {
-            templateUrl: 'templates/appTutorials/tours.html',
+            templateUrl: 'templates/appTutorials/tours.html'
           }
         }
       })
