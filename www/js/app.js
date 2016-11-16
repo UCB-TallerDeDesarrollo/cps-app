@@ -115,6 +115,16 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     }
   })
 
+  .state('app.newUnsolvedProblems', {
+      url: '/unsolvedProblems/new',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/cpsProcess/newUnsolvedProblem.html',
+          controller: 'UnsolvedProblemCtrl'
+        }
+      }
+  })
+
   .state('app.newUnsolvedProblem', {
       url: '/unsolvedProblems/new/:laggingSkillsId',
       views: {
@@ -124,6 +134,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         }
       }
   })
+
   .state('app.showUnsolvedProblem', {
     url: '/unsolvedProblem/show/:unsolvedProblemId',
     views: {

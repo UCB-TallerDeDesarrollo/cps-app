@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblemFactory, $cordovaSQLite, $state, $ionicActionSheet,$ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, ChildrenFactory) {
+angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblemFactory, $cordovaSQLite, $state, $ionicActionSheet,$ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, ChildrenFactory, LaggingSkills) {
   $scope.unsolvedProblem = {};
   $scope.shouldShowReorder = false;
   $scope.firstItemAnimationShown = false;
@@ -6,8 +6,10 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
 
   ChildrenFactory.active(function(active_child){
     $scope.activeChild = active_child;
-    $scope.laggingSkills = getLaggingSkills($cordovaSQLite, $scope.activeChild.id);
+    LaggingSkills.all($scope.activeChild.id, function(res){
+      $scope.laggingSkills = res;
     });
+  });
 
   $scope.updateUnsolvedProblems = function(callback){
     ChildrenFactory.active(function(active_child){
@@ -66,7 +68,9 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       $scope.unsolvedProblem.unsolved_score = 0;
       $scope.unsolvedProblem.child_id = $scope.activeChild.id;
       UnsolvedProblemFactory.insert($scope.unsolvedProblem);
-      checkLaggingSkill($cordovaSQLite, [$state.params.laggingSkillsId]);
+      if($state.params.laggingSkillsId){
+        LaggingSkills.check([$state.params.laggingSkillsId]);
+      }
       $scope.unsolvedProblem = {};
       $scope.updateUnsolvedProblems();
       $scope.closeModalCreate();
