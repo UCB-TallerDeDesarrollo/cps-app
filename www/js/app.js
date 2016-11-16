@@ -36,7 +36,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       //     $state.go('app.newUnsolvedProblem');
       // }
       // });
-      // $state.go('app.childs');
+      $state.go('app.childs');
   });
 
 })
@@ -293,7 +293,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/childs');
+  // $urlRouterProvider.otherwise('/app/childs');
 })
 
 .filter('orderObjectBy', function() {

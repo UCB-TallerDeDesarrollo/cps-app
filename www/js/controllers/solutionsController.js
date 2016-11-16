@@ -1,5 +1,4 @@
 angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $cordovaSQLite){
-  console.log($scope);
   $scope.comment = { solutionId: $stateParams.solutionId };
 
   getSolution($stateParams.solutionId,$cordovaSQLite,function(solution){
