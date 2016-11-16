@@ -306,7 +306,6 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   };
 
   $scope.goToSolution = function(solution){
-    console.log(solution.id);
     $state.go('app.solution',{solutionId:solution.id});
   };
 

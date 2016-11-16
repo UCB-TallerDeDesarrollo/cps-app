@@ -5,16 +5,7 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
     $scope.solution = solution;
   });
 
-  // $scope.comments = [{
-  //     description:"comment1",commented_at:"2008-11-11 13:23:44"
-  //   },{
-  //     description:"comment2",commented_at:"2008-11-11 13:23:44"
-  //   },{
-  //     description:"comment3",commented_at:"2008-11-11 13:23:44"
-  //   },{
-  //     description:"comment4",commented_at:"2008-11-11 13:23:44"
-  //   }
-  // ];
+  $scope.comments = [];
   getComments($stateParams.solutionId,$cordovaSQLite,function(comments){
     $scope.comments = comments;
   });

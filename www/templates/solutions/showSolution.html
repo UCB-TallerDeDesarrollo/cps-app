@@ -12,6 +12,9 @@
               <i class="icon ion-plus"></i>
             </a>
           </ion-item>
+          <div class="item item-text-wrap" ng-if="comments.length == 0">
+            <p>No comments registered.</p>
+          </div>
           <ion-item class="item item-text-wrap" ng-repeat="item in comments">
             {{item.description}}
             -
