@@ -5,7 +5,6 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var db = null;
 angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 'starter.services', 'starter.seed', 'ngCordova'])
 
 .run(function($ionicPlatform, $cordovaSQLite, DataSeed, $state) {
@@ -21,22 +20,21 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       StatusBar.styleDefault();
     }
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
-    db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
-      DataSeed.seed($cordovaSQLite, db);
-      //DataSeed.deleteSeed($cordovaSQLite, db);
-      // var query ="SELECT COUNT(*) AS UnsolvedProblemsCount FROM unsolved_problems";
-      // var cont = 1;
-      // $cordovaSQLite.execute(db,query).then( function(result){
-      // cont = result.rows.item(0).UnsolvedProblemsCount;
-      // if(cont === 0)
-      // {
-      //     $state.go('app.home');
-      // }
-      // else{
-      //     $state.go('app.newUnsolvedProblem');
-      // }
-      // });
-      $state.go('app.childs');
+    DataSeed.seed($cordovaSQLite, db);
+    //DataSeed.deleteSeed($cordovaSQLite, db);
+    // var query ="SELECT COUNT(*) AS UnsolvedProblemsCount FROM unsolved_problems";
+    // var cont = 1;
+    // $cordovaSQLite.execute(db,query).then( function(result){
+    // cont = result.rows.item(0).UnsolvedProblemsCount;
+    // if(cont === 0)
+    // {
+    //     $state.go('app.home');
+    // }
+    // else{
+    //     $state.go('app.newUnsolvedProblem');
+    // }
+    // });
+    $state.go('app.childs');
 
   });
 
