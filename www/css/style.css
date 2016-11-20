@@ -117,21 +117,21 @@ body {
   background-repeat: no-repeat;
   background-position: 50%;
   height: 70%;
-  background-image: url('/img/mainHelp/icon-step1-tabs.png');
+  background-image: url('../img/mainHelp/icon-step1-tabs.png');
   background-size:contain;
 }
 .tabs .tab-item .icon.step2 {
   background-repeat: no-repeat;
   background-position: 50%;
   height: 70%;
-  background-image: url('/img/mainHelp/icon-step2-tabs.png');
+  background-image: url('../img/mainHelp/icon-step2-tabs.png');
   background-size:contain;
 }
 .tabs .tab-item .icon.step3 {
   background-repeat: no-repeat;
   background-position: 50%;
   height: 70%;
-  background-image: url('/img/mainHelp/icon-step3-tabs.png');
+  background-image: url('../img/mainHelp/icon-step3-tabs.png');
   background-size:contain;
 }
 
