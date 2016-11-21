@@ -19,6 +19,8 @@
             {{item.description}}
             -
             <b>{{parseDate(item.commented_at)}}</b>
+            <ion-option-button class="button button-balanced ion-edit" ng-click="editComment(item)"></ion-option-button>
+            <ion-option-button class="button button-assertive ion-trash-a" ng-click="showDeletionConfirm(item)" ></ion-option-button>
           </ion-item>
         </ion-list>
       </div>
@@ -44,6 +46,27 @@
               <div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;">
               </div>
             </div>
+          </ion-content>
+        </ion-modal-view>
+      </script>
+
+      <script id="edit-modal.html" type="text/ng-template">
+        <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+          <ion-header-bar class="bar bar-header bar-positive">
+            <h1 class="title" style="left: 67px; right: 67px;">Edit Comment</h1>
+            <button class="button button-clear button-primary" ng-click="modalEdit.hide()">Cancel</button>
+          </ion-header-bar>
+          <ion-content class="padding scroll-content ionic-scroll has-header">
+            <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+              <form>
+                <label class="item item-input">
+                  <textarea rows=5 placeholder="What can you say about this solution." ng-model="editableComment.description">
+                  </textarea>
+                </label>
+                <button class="button button-full button-positive" ng-if="!editableComment.description.length" ng-click="updateComment()" disabled>Save</button>
+                <button class="button button-full button-positive" ng-if="editableComment.description.length > 0" ng-click="updateComment()">Save</button>
+              </form>
+            </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div>
           </ion-content>
         </ion-modal-view>
       </script>

@@ -22,7 +22,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
       DataSeed.seed($cordovaSQLite, db);
-      $state.go('app.childs');
+      // $state.go('app.childs');
   });
 
 })
