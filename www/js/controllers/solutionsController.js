@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $cordovaSQLite){
+angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $cordovaSQLite, $ionicPopup ){
   $scope.comment = { solutionId: $stateParams.solutionId };
 
   getSolution($stateParams.solutionId,$cordovaSQLite,function(solution){
@@ -22,6 +22,17 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
   };
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
+  };
+
+  $scope.createComment = function(){
+    if (!inputFieldIsEmpty($scope.comment.description)) {
+      saveComment($cordovaSQLite,$scope.comment);
+      getComments($stateParams.solutionId,$cordovaSQLite,function(comments){
+        $scope.comments = comments;
+      });
+      $scope.comment.description = "";
+      $scope.closeModal();
+    }
   };
 
   $ionicModal.fromTemplateUrl('edit-modal.html', {
@@ -66,15 +77,21 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
     }
   };
 
-  $scope.createComment = function(){
-    if (!inputFieldIsEmpty($scope.comment.description)) {
-      saveComment($cordovaSQLite,$scope.comment);
-      getComments($stateParams.solutionId,$cordovaSQLite,function(comments){
-        $scope.comments = comments;
-      });
-      $scope.comment.description = "";
-      $scope.closeModal();
-    }
+  $scope.showDeletionConfirm = function(comment) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Delete comment',
+      template: 'Are you sure you want to delete this comment?'
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        var query = "DELETE FROM solution_comments where id = ?";
+        $cordovaSQLite.execute(db, query, [comment.id]).then(function(res) {
+            $scope.comments.splice($scope.comments.indexOf(comment), 1);
+        }, function (err) {
+            console.error(err);
+        });
+      }
+    });
   };
 
   $scope.parseDate = function(commented_at){
@@ -127,7 +144,7 @@ function saveComment(cordovaSQLite,comment){
   cordovaSQLite.execute(db,query,[comment.description,now,comment.solutionId]);
 }
 
-function updateComment($cordovaSQLite, comment){
+function updateComment(cordovaSQLite, comment){
   var query = "UPDATE solution_comments SET description = ? where id = ?";
-  $cordovaSQLite.execute(db, query, [comment.description, comment.id]);
+  cordovaSQLite.execute(db, query, [comment.description, comment.id]);
 }
