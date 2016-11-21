@@ -52,9 +52,12 @@
           <b>Define Adult's Concerns</b>
         </ion-item>
         <ion-list>
-          <ion-item ng-repeat="result in searchResults.step2">
-            <h2>{{result.title}}</h2>
-            <p>{{result.content}}</p>
+          <ion-item class="item item-text-wrap item-icon-right" ng-repeat="result in searchResults.step2">
+            <div ng-click="goToHelpStep2(searchWord)">
+              <h2>{{result.title}}</h2>
+              <p>{{result.content}}</p>
+              <i class="icon ion-chevron-right"></i>
+            </div>
           </ion-item>
         </ion-list>
       </div>

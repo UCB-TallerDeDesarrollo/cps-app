@@ -1,11 +1,14 @@
 angular.module('starter.controllers')
-.controller('mainHelpController', function($scope){
+.controller('mainHelpController', function($scope, $state){
   $scope.searchWord = '';
   $scope.searchResults = {
       step1: [],
       step2: [],
       step3: [],
       faq: [],
+  };
+  $scope.goToHelpStep2 = function(searchWord){
+    $state.go('app.helpDefineAdultsConcern', {searchWord: searchWord});
   };
   var step1Help = [
     {

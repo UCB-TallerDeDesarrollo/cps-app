@@ -1,5 +1,6 @@
 angular.module('starter.controllers')
-.controller('planBHelpCtrl', function($scope, AppTools){
+.controller('planBHelpCtrl', function($scope, AppTools, $stateParams){
+  $scope.searchWord = '';
   $scope.step2helps = [
     {
       title:"DEFINE THE PROBLEM STEP | INGREDIENT/GOAL",
@@ -39,6 +40,12 @@ angular.module('starter.controllers')
       ]
     }
   ];
+
+  $scope.searchInit = function(){
+    if($stateParams.searchWord){
+      $scope.searchWord = $stateParams.searchWord;
+    }
+  };
 
   $scope.isContentShown = function(content) {
     return $scope.shownContent === content;

@@ -1,4 +1,4 @@
-<ion-view view-title="Help to Define an Adult's Concern">
+<ion-view cache-view="false" view-title="Help to Define an Adult's Concern"  ng-controller="planBHelpCtrl">
   <div class="bar bar-subheader item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-search placeholder-icon"></i>
@@ -10,8 +10,8 @@
         Clear
     </button>
   </div>
-  <ion-content class="has-subheader" ng-controller="planBHelpCtrl">
-    <ion-list>
+  <ion-content class="has-subheader">
+    <ion-list ng-init="searchInit()">
       <div ng-repeat="help in step2helps | filter: searchWord">
         <ion-item class="item item-stable item-text-wrap"
                   ng-click="toggleContent(help)"
@@ -30,7 +30,7 @@
             <ion-item class="item item-stable item-text-wrap item-icon-right"
                       ng-show="isContentShown(help)"
                       ng-if="topic.url"
-                      ng-click="browserInstance.openBrowser(topic.title)">
+                      ng-click="browserInstance.openBrowser(topic.url)">
                 <b>{{topic.title}}</b>
                 <i class="icon ion-ios-browsers-outline" style="font-size:21px"></i>
             </ion-item>

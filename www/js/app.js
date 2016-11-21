@@ -269,7 +269,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         }
       })
   .state('app.helpDefineAdultsConcern',{
-      url: '/mainHelp/helpDefineAdultsConcern',
+      url: '/mainHelp/helpDefineAdultsConcern/:searchWord',
       views: {
         'menuContent': {
           templateUrl: 'templates/planBHelp/helpDefineAdultsConcern.html',
