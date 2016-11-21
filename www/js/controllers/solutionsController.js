@@ -15,6 +15,7 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modalCreate = modal;
+    $scope.modalCreate.hide();
   });
   $scope.openModal = function() {
     $scope.modalCreate.show();

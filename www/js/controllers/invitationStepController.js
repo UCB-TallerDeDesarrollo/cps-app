@@ -133,6 +133,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modalEdit = modal;
+    $scope.modalEdit.hide();
   });
   $scope.openModalEdit = function() {
     $scope.modalEdit.show();

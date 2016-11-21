@@ -81,6 +81,7 @@ angular.module('starter.controllers')
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modalCreate = modal;
+    $scope.modalCreate.hide();
   });
   $scope.openModal = function() {
     $scope.modalCreate.show();
@@ -108,6 +109,7 @@ angular.module('starter.controllers')
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modalEdit = modal;
+    $scope.modalEdit.hide();
   });
   $scope.openModalEdit = function() {
     $scope.modalEdit.show();
@@ -133,6 +135,7 @@ angular.module('starter.controllers')
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modalEdit = modal;
+    $scope.modalEdit.hide();
   });
   $scope.openModalEdit = function() {
     $scope.modalEdit.show();

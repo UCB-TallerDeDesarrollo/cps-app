@@ -40,6 +40,7 @@ angular.module('starter.controllers')
       animation: 'slide-in-up'
     }).then(function(modal) {
       $scope.modalEdit = modal;
+      $scope.modalEdit.hide();
     });
     $scope.openModalEdit = function() {
       $scope.modalEdit.show();
