@@ -145,7 +145,8 @@ angular.module('starter.controllers')
          });
       }else {
         $ionicTabsDelegate.select(index);
-        $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
+        $scope.verifyToGoToStep2();
+        // $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
       }
     }
     if(index==2){
