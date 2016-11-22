@@ -289,7 +289,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.getRatingIcon = function(solution) {
     var rating = solution.rating;
     if (rating === 0) {
-      return 'ion-help';
+      return 'ion-android-radio-button-off';
     } else if (rating === 1) {
       return 'ion-sad';
     } else if (rating === 2) {
