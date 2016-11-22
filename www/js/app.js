@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 'starter.services', 'starter.seed', 'ngCordova'])
 
-.run(function($ionicPlatform, $cordovaSQLite, DataSeed, $state) {
+.run(function($ionicPlatform, $cordovaSQLite, DataSeed, $state, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -23,7 +23,9 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
       DataSeed.seed($cordovaSQLite, db);
       $state.go('app.childs');
-  });
+  })
+
+  $rootScope.state = $state;
 
 })
 
