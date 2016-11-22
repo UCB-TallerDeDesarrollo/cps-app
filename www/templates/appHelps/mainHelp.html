@@ -68,7 +68,7 @@
           <b>Invitation Step</b>
         </ion-item>
         <ion-list>
-          <ion-item ng-repeat="result in searchResults.step3">
+          <ion-item class="item item-text-wrap" ng-repeat="result in searchResults.step3">
             <p>{{result}}</p>
           </ion-item>
         </ion-list>
@@ -87,7 +87,7 @@
           <b>F.A.Q.</b>
         </ion-item>
         <ion-list>
-          <ion-item ng-repeat="result in searchResults.faq">
+          <ion-item class="item item-text-wrap" ng-repeat="result in searchResults.faq">
             <h2>{{result.question}}</h2>
             <p>{{result.answer}}</p>
           </ion-item>
