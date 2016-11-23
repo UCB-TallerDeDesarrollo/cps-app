@@ -22,8 +22,8 @@
         <input type="date" style="text-align:right;" ng-model="editableChild.birthday">
         </input>
       </label>
-        <button class="button button-full button-positive" ng-if="editableChild.first_name.length == 0" disabled>Save</button>
-        <button class="button button-full button-positive" ng-if="editableChild.first_name.length > 0" ng-click="updateChild()">Save</button>
+        <button class="button button-full button-positive" ng-if="editableChild.first_name.length == 0 || child.birthday === null || !child.birthday" disabled>Save</button>
+        <button class="button button-full button-positive" ng-if="editableChild.first_name.length > 0 && child.birthday" ng-click="updateChild()">Save</button>
     </div>
   </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-content>
 </ion-modal-view>
