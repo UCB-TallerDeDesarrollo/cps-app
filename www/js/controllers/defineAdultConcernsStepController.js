@@ -7,15 +7,8 @@ angular.module('starter.controllers')
   });
   AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
     $scope.adultsConcerns = result;
+    $scope.firstItemAnimationShown = false;
   });
-
-  $scope.firstItemAnimationShown = false;
-
-  $scope.updateAdultsConcerns = function(){
-    AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
-      $scope.adultsConcerns = result;
-    });
-  };
 
   $scope.findUnsolvedProblem = function() {
     UnsolvedProblemFactory.find($stateParams.unsolvedProblemId, function(result){
@@ -35,13 +28,10 @@ angular.module('starter.controllers')
     }
   };
 
-
-
   $scope.editAdultsConcern = function(adultsConcern){
     $scope.editableAdultsConcern = angular.copy(adultsConcern);
     $scope.openModalEdit();
   };
-
 
   $scope.updateAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.editableAdultsConcern.description)) {
@@ -99,34 +89,6 @@ angular.module('starter.controllers')
   });
   // Execute action on remove modal
   $scope.$on('modal.removed', function() {
-    // Execute action
-  });
-
-
-
-  $ionicModal.fromTemplateUrl('templates/adultsConcerns/create-adults-concern-modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modalEdit = modal;
-    $scope.modalEdit.hide();
-  });
-  $scope.openModalEdit = function() {
-    $scope.modalEdit.show();
-  };
-  $scope.closeModalEdit = function() {
-    $scope.modalEdit.hide();
-  };
-  // Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.modalEdit.remove();
-  });
-  // Execute action on hide modal
-  $scope.$on('modalEdit.hidden', function() {
-    // Execute action
-  });
-  // Execute action on remove modal
-  $scope.$on('modalEdit.removed', function() {
     // Execute action
   });
 
