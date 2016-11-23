@@ -8,7 +8,7 @@ angular.module('starter.controllers')
       faq: [],
   };
   $scope.goToHelpStep2 = function(searchWord){
-    $state.go('app.helpDefineAdultsConcern', {searchWord: searchWord});
+    $state.go('app.helpDefineAdultsConcernSearch', {searchWord: searchWord});
   };
   var step1Help = [
     {

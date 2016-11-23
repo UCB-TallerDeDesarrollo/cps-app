@@ -23,7 +23,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
       DataSeed.seed($cordovaSQLite, db);
       $state.go('app.childs');
-  })
+  });
 
   $rootScope.state = $state;
 
@@ -270,13 +270,21 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
           }
         }
       })
-  .state('app.helpDefineAdultsConcern',{
-      url: '/mainHelp/helpDefineAdultsConcern/:searchWord',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/planBHelp/helpDefineAdultsConcern.html',
+    .state('app.helpDefineAdultsConcern',{
+        url: '/mainHelp/helpDefineAdultsConcern',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/planBHelp/helpDefineAdultsConcern.html',
+          }
         }
-      }
+      })
+    .state('app.helpDefineAdultsConcernSearch',{
+        url: '/mainHelp/helpDefineAdultsConcern/:searchWord',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/planBHelp/helpDefineAdultsConcern.html',
+          }
+        }
     })
 
   .state('app.alsupHelp',{
