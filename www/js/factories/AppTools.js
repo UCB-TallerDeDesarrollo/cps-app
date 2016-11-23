@@ -1,25 +1,33 @@
 angular.module('starter.services')
-.factory('AppTools', function($sce, $ionicModal, $window) {
+.factory('AppTools', function($sce, $ionicModal, $window ,$cordovaInAppBrowser) {
   function createNewBrowser(options){
     var browserInstance = {
       title: '',
       destination: ''
     };
-    $ionicModal.fromTemplateUrl('templates/in-app-browser-modal.html', options)
-    .then(function(modal) {
-      browserInstance.browser = modal;
-      browserInstance.browser.hide();
-    });
+    // $ionicModal.fromTemplateUrl('templates/in-app-browser-modal.html', options)
+    // .then(function(modal) {
+    //   browserInstance.browser = modal;
+    //   browserInstance.browser.hide();
+    // });
 
     browserInstance.openBrowser = function(link) {
       this.title = link;
-      this.destination = $sce.trustAsResourceUrl(link);
-      this.browser.show();
+      // this.destination = $sce.trustAsResourceUrl(link);
+      // this.browser.show();
+      $cordovaInAppBrowser.open(link, '_blank')
+      .then(function(event) {
+        // success
+      })
+      .catch(function(event) {
+        // error
+      });
     };
 
     browserInstance.closeBrowser = function() {
-      this.destination = '';
-      this.browser.hide();
+      // this.destination = '';
+      // this.browser.hide();
+      $cordovaInAppBrowser.close();
     };
 
     browserInstance.getUriLength = function(){
