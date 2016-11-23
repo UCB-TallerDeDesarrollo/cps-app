@@ -1,8 +1,7 @@
 angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblemFactory, $cordovaSQLite, $state, $ionicActionSheet,$ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, ChildrenFactory, LaggingSkills) {
   $scope.unsolvedProblem = {};
   $scope.shouldShowReorder = false;
-  $scope.firstItemAnimationShown = false;
-  $scope.unsolvedProblems = [];
+  $scope.unsolvedProblems = {};
 
   ChildrenFactory.active(function(active_child){
     $scope.activeChild = active_child;
@@ -11,14 +10,16 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     });
   });
 
-  $scope.updateUnsolvedProblems = function(callback){
+  $scope.updateUnsolvedProblems = function(){
     ChildrenFactory.active(function(active_child){
       $scope.activeChild = active_child;
       UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
         $scope.unsolvedProblems = result;
+        $scope.firstItemAnimationShown = false;
       });
     });
   };
+  $scope.updateUnsolvedProblems();
 
   $scope.openLink = function(){
     $cordovaInAppBrowser.open('http://google.com', '_self')
@@ -129,6 +130,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   };
 
   $scope.closeModalCreate = function() {
+    $ionicListDelegate.closeOptionButtons();
     $scope.modalCreate.hide();
   };
   // Cleanup the modal when we're done with it!
@@ -151,6 +153,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
 
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
+    $ionicListDelegate.closeOptionButtons();
   };
 
   $scope.childsFlag = 0;

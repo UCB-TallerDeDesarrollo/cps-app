@@ -1,7 +1,21 @@
-angular.module('starter.services').factory('ChildrenFactory', function($cordovaSQLite) {
+angular.module('starter.services').factory('ChildrenFactory', function($cordovaSQLite, $ionicPopup) {
 
+  showAlert = function() {
+  var alertPopup = $ionicPopup.alert({
+    title: 'The name is too big!!',
+    template: 'please try again.'
+  });
+
+  alertPopup.then(function(res) {
+    
+  });
+};
 
   function saveChild(child,callback){
+    if (child.first_name.length > 60) {
+      showAlert();
+      return;
+    }
     var query = "INSERT INTO childs(first_name,gender,birthday,active) VALUES (?,?,?,1)";
     $cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]).then(function(){
       callback();

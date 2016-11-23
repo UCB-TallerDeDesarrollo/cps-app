@@ -1,11 +1,11 @@
-angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $cordovaSQLite, $ionicPopup ){
+angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $ionicListDelegate,$cordovaSQLite, $ionicPopup ){
   $scope.comment = { solutionId: $stateParams.solutionId };
 
   getSolution($stateParams.solutionId,$cordovaSQLite,function(solution){
     $scope.solution = solution;
   });
 
-  $scope.comments = [];
+  $scope.comments = {};
   getComments($stateParams.solutionId,$cordovaSQLite,function(comments){
     $scope.comments = comments;
   });
@@ -22,6 +22,7 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
   };
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
+    $ionicListDelegate.closeOptionButtons();
   };
 
   $scope.createComment = function(){
@@ -47,6 +48,7 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
   };
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
+    $ionicListDelegate.closeOptionButtons();
   };
 
   $scope.$on('$destroy', function() {

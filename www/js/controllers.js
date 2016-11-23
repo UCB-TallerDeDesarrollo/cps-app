@@ -305,6 +305,7 @@ angular.module('starter.controllers', [])
 //   return lagging_skills;
 // }
 
+
 // function getSolutions(cordovaSQLite,unsolvedProblemId) {
 //   var solutions = [];
 //   var query ="SELECT * FROM solutions WHERE unsolved_problem_id = ?";
@@ -318,6 +319,22 @@ angular.module('starter.controllers', [])
 //   },function(err){console.log(err.message);});
 //   return solutions;
 // }
+
+// function getSolutions(cordovaSQLite,unsolvedProblemId,callback) {
+//   var solutions = [];
+//   var query ="SELECT * FROM solutions WHERE unsolved_problem_id = ?";
+//   cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
+//     var rows = result.rows;
+//     if(rows.length) {
+//       for(var i=0; i < rows.length; i++){
+//         solutions.push(rows.item(i));
+//       }
+//       callback();
+//     }
+//   },function(err){console.log(err.message);});
+//   return solutions;
+// }
+
 
 function inputFieldIsEmpty(description) {
     return description.length === 0;

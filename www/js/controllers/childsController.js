@@ -7,6 +7,7 @@ angular.module('starter.controllers')
     ChildrenFactory.all(function(children){
       $scope.childs = children;
     });
+    console.log($scope.child);
     $scope.activeChild={first_name:""};
     $ionicModal.fromTemplateUrl('templates/child/create-child-modal.html', {
       scope: $scope,
@@ -20,6 +21,7 @@ angular.module('starter.controllers')
     };
     $scope.closeModalCreate = function() {
       $scope.modalCreate.hide();
+      $ionicListDelegate.closeOptionButtons();
     };
     // Cleanup the modal when we're done with it!
     $scope.$on('$destroy', function() {
@@ -47,6 +49,8 @@ angular.module('starter.controllers')
     };
     $scope.closeModalEdit = function() {
       $scope.modalEdit.hide();
+      $ionicListDelegate.closeOptionButtons();
+
     };
     // Cleanup the modal when we're done with it!
     $scope.$on('$destroy', function() {
@@ -109,7 +113,7 @@ angular.module('starter.controllers')
         cancel: function() {
           $ionicListDelegate.closeOptionButtons();
         },
-        destructiveText: 'Delete',
+        destructiveText: 'Delete child',
         destructiveButtonClicked: function() {
           $scope.showConfirm(child);
           return true;

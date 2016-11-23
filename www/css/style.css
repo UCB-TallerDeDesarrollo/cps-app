@@ -192,3 +192,8 @@ body {
 .pull-right{
   float: right;
 }
+
+/*input[type="date"]::-webkit-clear-button {
+ -webkit-appearance: none;
+  display: none;
+}*/

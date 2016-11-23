@@ -3,6 +3,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.solutions = [];
   PossibleSolutionFactory.all($stateParams.unsolvedProblemId, function(res){
     $scope.solutions = res;
+    $scope.firstItemAnimationShown = false;
   });
   $scope.initialSetUp = function(){
     findUnsolvedProblem();
@@ -12,7 +13,6 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.showChilds=false;
   $scope.showAdults=false;
   $scope.shouldShowReorder = false;
-  $scope.firstItemAnimationShown = false;
 
   $scope.toggleChilds= function(){
     if($scope.showChilds===true){
@@ -119,6 +119,8 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   };
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
+    $ionicListDelegate.closeOptionButtons();
+
   };
   // Cleanup the modal when we're done with it!
   $scope.$on('$destroy', function() {
@@ -144,6 +146,8 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   };
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
+    $ionicListDelegate.closeOptionButtons();
+
   };
   // Cleanup the modal when we're done with it!
   $scope.$on('$destroy', function() {
