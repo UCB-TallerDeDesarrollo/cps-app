@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory, AdultConcernFactory){
+.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicListDelegate,$ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory, AdultConcernFactory){
   $scope.adultsConcerns = {};
   $scope.adultsConcern = {description:""};
   ChildConcernFactory.all($stateParams.unsolvedProblemId,function(result){
@@ -78,6 +78,8 @@ angular.module('starter.controllers')
   };
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
+    $ionicListDelegate.closeOptionButtons();
+
   };
   // Cleanup the modal when we're done with it!
   $scope.$on('$destroy', function() {
@@ -104,6 +106,8 @@ angular.module('starter.controllers')
   };
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
+    $ionicListDelegate.closeOptionButtons();
+
   };
   // Cleanup the modal when we're done with it!
   $scope.$on('$destroy', function() {

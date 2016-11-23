@@ -115,6 +115,8 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   };
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
+    $ionicListDelegate.closeOptionButtons();
+
   };
   // Cleanup the modal when we're done with it!
   $scope.$on('$destroy', function() {
@@ -140,6 +142,8 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   };
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
+    $ionicListDelegate.closeOptionButtons();
+
   };
   // Cleanup the modal when we're done with it!
   $scope.$on('$destroy', function() {

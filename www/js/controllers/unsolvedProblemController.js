@@ -129,6 +129,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   };
 
   $scope.closeModalCreate = function() {
+    $ionicListDelegate.closeOptionButtons();
     $scope.modalCreate.hide();
   };
   // Cleanup the modal when we're done with it!
@@ -151,6 +152,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
 
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
+    $ionicListDelegate.closeOptionButtons();
   };
 
   $scope.childsFlag = 0;
