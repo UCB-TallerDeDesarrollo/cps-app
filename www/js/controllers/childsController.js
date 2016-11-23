@@ -7,6 +7,7 @@ angular.module('starter.controllers')
     ChildrenFactory.all(function(children){
       $scope.childs = children;
     });
+    console.log($scope.child);
     $scope.activeChild={first_name:""};
     $ionicModal.fromTemplateUrl('templates/child/create-child-modal.html', {
       scope: $scope,
