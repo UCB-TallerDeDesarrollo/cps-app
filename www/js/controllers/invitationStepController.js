@@ -1,15 +1,21 @@
-angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory){
+angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory){
   $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
-  $scope.solutions = [];
+  $scope.solutions = {};
   PossibleSolutionFactory.all($stateParams.unsolvedProblemId, function(res){
     $scope.solutions = res;
     $scope.firstItemAnimationShown = false;
   });
-  $scope.initialSetUp = function(){
-    findUnsolvedProblem();
-    findChildsConcerns();
-    findAdultsConcerns();
-  };
+  UnsolvedProblemFactory.find($stateParams.unsolvedProblemId,function(unsolvedProblem){
+    $scope.unsolvedProblem = unsolvedProblem;
+  });
+  ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
+    $scope.childsConcerns = childConcerns;
+  });
+  AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
+    $scope.adultsConcerns = result;
+  });
+
+
   $scope.showChilds=false;
   $scope.showAdults=false;
   $scope.shouldShowReorder = false;
@@ -169,16 +175,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
         $scope.unsolvedProblem = result.rows.item(0);
     },function(error){console.log(error);});
   }
-  function findChildsConcerns() {
-    ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
-      $scope.childsConcerns = childConcerns;
-    });
-  }
-  function findAdultsConcerns() {
-    AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
-      $scope.adultsConcerns = result;
-    });
-  }
+
   //function here
   $scope.showRatingPopup = function(solution,unsolvedProblem) {
     var myPopup = $ionicPopup.show({
