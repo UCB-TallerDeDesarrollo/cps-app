@@ -212,7 +212,7 @@ angular.module('starter.controllers', [])
     });
   };
   $scope.startApp = function() {
-    $state.go('app.childs');
+    $state.go('app.tours');
   };
   $scope.next = function() {
     $ionicSlideBoxDelegate.next();
@@ -258,7 +258,7 @@ angular.module('starter.controllers', [])
     });
   };
   $scope.startApp = function() {
-    $state.go('app.childs');
+    $state.go('app.tours');
   };
   $scope.next = function() {
     $ionicSlideBoxDelegate.next();
