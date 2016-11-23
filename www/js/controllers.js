@@ -305,33 +305,33 @@ angular.module('starter.controllers', [])
 //   return lagging_skills;
 // }
 
-function getSolutions(cordovaSQLite,unsolvedProblemId) {
-  var solutions = [];
-  var query ="SELECT * FROM solutions WHERE unsolved_problem_id = ?";
-  cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
-    var rows = result.rows;
-    if(rows.length) {
-      for(var i=0; i < rows.length; i++){
-        solutions.push(rows.item(i));
-      }
-    }
-  },function(err){console.log(err.message);});
-  return solutions;
-}
+// function getSolutions(cordovaSQLite,unsolvedProblemId) {
+//   var solutions = [];
+//   var query ="SELECT * FROM solutions WHERE unsolved_problem_id = ?";
+//   cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
+//     var rows = result.rows;
+//     if(rows.length) {
+//       for(var i=0; i < rows.length; i++){
+//         solutions.push(rows.item(i));
+//       }
+//     }
+//   },function(err){console.log(err.message);});
+//   return solutions;
+// }
 
 function inputFieldIsEmpty(description) {
     return description.length === 0;
 }
 
-function saveSolution(cordovaSQLite,solution){
-  var query ="INSERT INTO solutions(description,unsolved_problem_id,rating) VALUES (?,?,?)";
-  cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId,solution.rating]);
-}
+// function saveSolution(cordovaSQLite,solution){
+//   var query ="INSERT INTO solutions(description,unsolved_problem_id,rating) VALUES (?,?,?)";
+//   cordovaSQLite.execute(db,query,[solution.description,solution.unsolvedProblemId,solution.rating]);
+// }
 
-function updateSolution($cordovaSQLite, solution){
-  var query = "UPDATE solutions SET description = ? where id = ?";
-  $cordovaSQLite.execute(db, query, [solution.description, solution.id]);
-}
+// function updateSolution($cordovaSQLite, solution){
+//   var query = "UPDATE solutions SET description = ? where id = ?";
+//   $cordovaSQLite.execute(db, query, [solution.description, solution.id]);
+// }
 
 // function uncheckLaggingSkill($cordovaSQLite,params){
 //   var query = "UPDATE lagging_skills SET checked = 0 where id = ?";

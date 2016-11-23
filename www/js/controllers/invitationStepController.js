@@ -1,6 +1,9 @@
-angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory){
-  $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
-  $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
+angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory){
+  $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
+  $scope.solutions = [];
+  PossibleSolutionFactory.all($stateParams.unsolvedProblemId, function(res){
+    $scope.solutions = res;
+  });
   $scope.initialSetUp = function(){
     findUnsolvedProblem();
     findChildsConcerns();
@@ -58,10 +61,12 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.createSolution = function() {
     if (!inputFieldIsEmpty($scope.solution.description)) {
       $scope.solution.rating=0;
-      saveSolution($cordovaSQLite,$scope.solution);
+      PossibleSolutionFactory.insert($scope.solution);
       $scope.solution.description = "";
       $scope.closeModal();
-      $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
+      PossibleSolutionFactory.all($stateParams.unsolvedProblemId, function(res){
+        $scope.solutions = res;
+      });
     }
   };
 
@@ -77,11 +82,8 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     });
   };
   $scope.deleteSolution = function (solution) {
-    var query = "DELETE FROM solutions where id = ?";
-    $cordovaSQLite.execute(db, query, [solution.id]).then(function(res) {
-        $scope.solutions.splice($scope.solutions.indexOf(solution), 1);
-    }, function (err) {
-        console.error(err);
+    PossibleSolutionFactory.delete(solution.id, function(){
+      $scope.solutions.splice($scope.solutions.indexOf(solution), 1);
     });
   };
   $scope.editSolution = function(solution){
@@ -94,10 +96,12 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   };
   $scope.updateSolution = function(){
     if (!inputFieldIsEmpty($scope.editableSolution.description)) {
-      updateSolution($cordovaSQLite,$scope.editableSolution);
+      PossibleSolutionFactory.update($scope.editableSolution);
       $scope.modalEdit.hide();
       $scope.solutionEdit = {};
-      $scope.solutions = getSolutions($cordovaSQLite,$stateParams.unsolvedProblemId);
+      PossibleSolutionFactory.all($stateParams.unsolvedProblemId, function(res){
+        $scope.solutions = res;
+      });
     }
     else {
       $scope.emptyInput = true;
@@ -236,7 +240,9 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.RateSolution = function(solution, rate){
     var query = "UPDATE solutions SET rating = ? Where id = ?";
     $cordovaSQLite.execute(db, query, [rate, solution.id]);
-    $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
+    PossibleSolutionFactory.all($stateParams.unsolvedProblemId, function(res){
+      $scope.solutions = res;
+    });
     $state.go('app.invitation');
   };
 
@@ -308,7 +314,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   };
 
   $scope.goToSolution = function(solution){
-    $state.go('app.solution',{solutionId:solution.id});
+    $state.go('app.solution', {solutionId:solution.id});
   };
 
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
