@@ -5,8 +5,7 @@ angular.module('starter.controllers')
   };
 
   $scope.unsolvedProblem = {};
-  $scope.childsConcerns = [];
-  $scope.firstItemAnimationShown = false;
+  $scope.childsConcerns = {};
   $scope.shouldShowReorder = false;
   $scope.moveItem = function(childsConcern, fromIndex, toIndex) {
     var greaterIndex, lesserIndex, childConcernOrderModifier;
@@ -44,6 +43,7 @@ angular.module('starter.controllers')
   $scope.updateInformation = function(){
     ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
       $scope.childsConcerns = childConcerns;
+      $scope.firstItemAnimationShown = false;
       AdultConcernFactory.all($stateParams.unsolvedProblemId,function(adultConcerns){
         $scope.adultsConcerns = adultConcerns;
       });

@@ -1,6 +1,9 @@
 angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory){
   $scope.solution = { unsolvedProblemId:$stateParams.unsolvedProblemId };
-  $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
+  $scope.solutions ={};
+  $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId, function(){
+    $scope.firstItemAnimationShown = false;
+  });
   $scope.initialSetUp = function(){
     findUnsolvedProblem();
     findChildsConcerns();
@@ -9,7 +12,6 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.showChilds=false;
   $scope.showAdults=false;
   $scope.shouldShowReorder = false;
-  $scope.firstItemAnimationShown = false;
 
   $scope.toggleChilds= function(){
     if($scope.showChilds===true){
@@ -61,7 +63,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       saveSolution($cordovaSQLite,$scope.solution);
       $scope.solution.description = "";
       $scope.closeModal();
-      $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
+      $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId, function(){});
     }
   };
 
@@ -97,7 +99,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       updateSolution($cordovaSQLite,$scope.editableSolution);
       $scope.modalEdit.hide();
       $scope.solutionEdit = {};
-      $scope.solutions = getSolutions($cordovaSQLite,$stateParams.unsolvedProblemId);
+      $scope.solutions = getSolutions($cordovaSQLite,$stateParams.unsolvedProblemId, function(){});
     }
     else {
       $scope.emptyInput = true;
@@ -240,7 +242,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.RateSolution = function(solution, rate){
     var query = "UPDATE solutions SET rating = ? Where id = ?";
     $cordovaSQLite.execute(db, query, [rate, solution.id]);
-    $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId);
+    $scope.solutions = getSolutions($cordovaSQLite, $stateParams.unsolvedProblemId, function(){});
     $state.go('app.invitation');
   };
 
