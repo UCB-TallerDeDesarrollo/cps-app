@@ -305,7 +305,7 @@ angular.module('starter.controllers', [])
 //   return lagging_skills;
 // }
 
-function getSolutions(cordovaSQLite,unsolvedProblemId) {
+function getSolutions(cordovaSQLite,unsolvedProblemId,callback) {
   var solutions = [];
   var query ="SELECT * FROM solutions WHERE unsolved_problem_id = ?";
   cordovaSQLite.execute(db,query,[unsolvedProblemId]).then(function(result) {
@@ -314,6 +314,7 @@ function getSolutions(cordovaSQLite,unsolvedProblemId) {
       for(var i=0; i < rows.length; i++){
         solutions.push(rows.item(i));
       }
+      callback();
     }
   },function(err){console.log(err.message);});
   return solutions;

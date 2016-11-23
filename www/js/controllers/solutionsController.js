@@ -5,7 +5,7 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
     $scope.solution = solution;
   });
 
-  $scope.comments = [];
+  $scope.comments = {};
   getComments($stateParams.solutionId,$cordovaSQLite,function(comments){
     $scope.comments = comments;
   });
