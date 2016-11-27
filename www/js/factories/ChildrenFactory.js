@@ -1,25 +1,48 @@
 angular.module('starter.services').factory('ChildrenFactory', function($cordovaSQLite, $ionicPopup) {
 
-  showAlert = function() {
+  showNameAlert = function() {
   var alertPopup = $ionicPopup.alert({
     title: 'The name is too big!!',
     template: 'please try again.'
   });
 
   alertPopup.then(function(res) {
-    
+
   });
 };
 
+
+showDateAlert = function() {
+var alertPopup = $ionicPopup.alert({
+  title: 'Invalid birthday!!',
+  template: 'please try again.'
+});
+
+alertPopup.then(function(res) {
+
+});
+};
+
+var date = new Date();
+
   function saveChild(child,callback){
     if (child.first_name.length > 60) {
-      showAlert();
+      showNameAlert();
       return;
     }
-    var query = "INSERT INTO childs(first_name,gender,birthday,active) VALUES (?,?,?,1)";
-    $cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]).then(function(){
-      callback();
-    });
+
+    if (child.birthday > date) {
+      showDateAlert();
+      return;
+    }
+
+    if (child.birthday < date) {
+      var query = "INSERT INTO childs(first_name,gender,birthday,active) VALUES (?,?,?,1)";
+      $cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]).then(function(){
+        callback();
+      });
+    }
+
   }
   function getChildren(callback) {
     var children = [];

@@ -15,7 +15,7 @@ angular.module('starter.services')
       this.title = link;
       // this.destination = $sce.trustAsResourceUrl(link);
       // this.browser.show();
-      $cordovaInAppBrowser.open(link, '_blank')
+      $cordovaInAppBrowser.open(link, '_self')
       .then(function(event) {
         // success
       })

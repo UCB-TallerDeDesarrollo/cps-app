@@ -21,8 +21,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     }
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
-      DataSeed.seed($cordovaSQLite, db);
-      $state.go('app.childs');
+    DataSeed.seed($cordovaSQLite, db);
   });
 
   $rootScope.state = $state;
@@ -36,7 +35,8 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   var defaultOptions = {
     location: 'no',
     clearcache: 'no',
-    toolbar: 'yes'
+    toolbar: 'yes',
+    closebuttoncaption: 'Done'
   };
   $cordovaInAppBrowserProvider.setDefaultOptions(defaultOptions);
 
@@ -306,7 +306,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   });
 
   // if none of the above states are matched, use this as the fallback
-  // $urlRouterProvider.otherwise('/app/childs');
+  $urlRouterProvider.otherwise('/app/childs');
 })
 
 .filter('orderObjectBy', function() {
