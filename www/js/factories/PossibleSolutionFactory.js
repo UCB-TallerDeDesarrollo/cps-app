@@ -1,13 +1,12 @@
 angular.module('starter.services').factory('PossibleSolutionFactory', function($cordovaSQLite) {
 
-  function findSolutionByID(solutionId, callback){
+  function findSolution(solutionId, callback){
     var solution = {};
     var query ="SELECT * FROM solutions WHERE id = ?";
     $cordovaSQLite.execute(db,query,[solutionId]).then(function(result){
       solution = result.rows.item(0);
       callback(solution);
-    },
-    function(err){
+    },function(err){
       console.log(err.message);
     });
   }
@@ -54,14 +53,14 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     insert: function(possibleSolution){
       insertSolution(possibleSolution);
     },
-    find: function(callback){
-      findSolutionByID(callback);
+    update: function(possibleSolution){
+      updateSolution(possibleSolution);
     },
     delete:  function(solutionId, callback){
       deleteSolution(solutionId, callback);
     },
-    update: function(possibleSolution){
-      updateSolution(possibleSolution);
+    find: function(solutionId, callback){
+      findSolution(solutionId, callback);
     }
   };
 });

@@ -1,11 +1,15 @@
-angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $ionicListDelegate,$cordovaSQLite, $ionicPopup ){
+angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $ionicListDelegate,$cordovaSQLite, $ionicPopup, PossibleSolutionFactory ){
   $scope.comment = { solutionId: $stateParams.solutionId };
 
-  getSolution($stateParams.solutionId,$cordovaSQLite,function(solution){
+  // getSolution($stateParams.solutionId,$cordovaSQLite,function(solution){
+  //   $scope.solution = solution;
+  // });
+
+  PossibleSolutionFactory.find($stateParams.solutionId,function(solution){
     $scope.solution = solution;
   });
 
-  $scope.comments = {};
+  $scope.comments = [];
   getComments($stateParams.solutionId,$cordovaSQLite,function(comments){
     $scope.comments = comments;
   });
@@ -117,14 +121,14 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
   };
 });
 
-function getSolution(solutionId,cordovaSQLite,callback){
-  var solution;
-  var query ="SELECT * FROM solutions WHERE id = ?";
-  cordovaSQLite.execute(db,query,[solutionId]).then(function(result){
-    solution = result.rows.item(0);
-    callback(solution);
-  },function(err){console.log(err.message);});
-}
+// function getSolution(solutionId,cordovaSQLite,callback){
+//   var solution;
+//   var query ="SELECT * FROM solutions WHERE id = ?";
+//   cordovaSQLite.execute(db,query,[solutionId]).then(function(result){
+//     solution = result.rows.item(0);
+//     callback(solution);
+//   },function(err){console.log(err.message);});
+// }
 
 function getComments(solutionId,cordovaSQLite,callback){
   var comments = [];
