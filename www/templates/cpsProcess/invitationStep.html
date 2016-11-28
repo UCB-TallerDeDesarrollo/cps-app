@@ -79,7 +79,7 @@
           <ion-option-button ng-click="goToSolution(solution)" class="button-positive ion-eye" ></ion-option-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="solutions.length == 0">
-          <p>No possible solutions registered. Agree upon a solution.</p>
+          <p>No possible solutions registered. Please register one above, once you gree upon a solution.</p>
         </div>
       </ion-list>
     </div>
@@ -87,7 +87,7 @@
     <script id="create-modal.html" type="text/ng-template">
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
         <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title">New possible solution</h1>
+          <h1 class="title">New Possible Solution</h1>
           <button class="button button-clear button-primary" ng-click="modalCreate.hide()">Cancel</button>
         </ion-header-bar>
         <ion-content class="padding scroll-content ionic-scroll  has-header">
