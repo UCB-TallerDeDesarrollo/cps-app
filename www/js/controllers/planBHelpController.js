@@ -65,4 +65,5 @@ angular.module('starter.controllers')
     scope: $scope,
     animation: 'slide-in-right'
   });
+  $scope.searchInit();
 });

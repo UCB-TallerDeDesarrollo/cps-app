@@ -254,37 +254,32 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         }
       }
     })
-    .state('app.helpTour',{
-        url: '/helpAccessTour',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/appTutorials/help_tour.html'
-          }
+  .state('app.helpTour',{
+      url: '/helpAccessTour',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/appTutorials/help_tour.html'
         }
-      })
-    .state('app.tours', {
-        url: '/tours',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/appTutorials/tours.html'
-          }
+      }
+    })
+  .state('app.tours', {
+      url: '/tours',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/appTutorials/tours.html'
         }
-      })
-    .state('app.helpDefineAdultsConcern',{
-        url: '/mainHelp/helpDefineAdultsConcern',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/planBHelp/helpDefineAdultsConcern.html',
-          }
+      }
+    })
+  .state('app.helpDefineAdultsConcern',{
+      url: '/mainHelp/helpDefineAdultsConcern',
+      params: {
+        searchWord: null
+      },
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/planBHelp/helpDefineAdultsConcern.html',
         }
-      })
-    .state('app.helpDefineAdultsConcernSearch',{
-        url: '/mainHelp/helpDefineAdultsConcern/:searchWord',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/planBHelp/helpDefineAdultsConcern.html',
-          }
-        }
+      }
     })
 
   .state('app.alsupHelp',{

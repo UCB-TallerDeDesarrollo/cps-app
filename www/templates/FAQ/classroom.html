@@ -1,7 +1,18 @@
-<ion-view view-title="Questions about solving the problems in the classroom">
-  <ion-content ng-controller="FaqCtrl">
+<ion-view view-title="Questions about solving the problems in the classroom" ng-controller="FaqCtrl">
+  <div class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" placeholder="Search" ng-model="searchWord">
+    </label>
+    <button class="button ion-close input-button button-small"
+            ng-click="searchWord = ''"
+            ng-show="searchWord.length">
+        Clear
+    </button>
+  </div>
+  <ion-content class="has-subheader">
       <ion-list>
-        <div ng-repeat="question in classroomQuestions">
+        <div ng-repeat="question in classroomQuestions | filter: searchWord">
           <ion-item class="item item-stable item-text-wrap"
                     ng-click="toggleQuestion(question)"
                     ng-class="{active: isQuestionShown(question)}">

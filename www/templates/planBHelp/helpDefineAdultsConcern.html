@@ -11,7 +11,7 @@
     </button>
   </div>
   <ion-content class="has-subheader">
-    <ion-list ng-init="searchInit()">
+    <ion-list>
       <div ng-repeat="help in step2helps | filter: searchWord">
         <ion-item class="item item-stable item-text-wrap"
                   ng-click="toggleContent(help)"

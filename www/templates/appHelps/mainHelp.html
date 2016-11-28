@@ -31,14 +31,14 @@
     </div>
 
     <ion-list ng-if="searchWord.length !== 0">
-      <div name="search-results">
+      <div name="search-results-step1" ng-if="searchResults.step1.length !== 0">
         <ion-item class="item item-icon-left outside-list">
           <img class="icon padding image-icon" src="img/mainHelp/icon-helpstep1.png">
           <b>Empathy Step</b>
         </ion-item>
         <ion-list>
           <div ng-repeat="result in searchResults.step1">
-            <a class="item item-text-wrap item-icon-right" href="#/app/helpTopicContent/{{result.categoryId}}/{{result.topicId}}">
+            <a class="item  item-icon-right" href="#/app/helpTopicContent/{{result.categoryId}}/{{result.topicId}}">
               <h2>{{result.description}}</h2>
               <i class="icon ion-chevron-right"></i>
             </a>
@@ -46,7 +46,7 @@
         </ion-list>
       </div>
 
-      <div name="search-results">
+      <div name="search-results-step2" ng-if="searchResults.step2.length !== 0">
         <ion-item class="item item-icon-left outside-list">
           <img class="icon padding image-icon" src="img/mainHelp/icon-helpStep2.png">
           <b>Define Adult's Concerns</b>
@@ -62,7 +62,7 @@
         </ion-list>
       </div>
 
-      <div name="search-results">
+      <div name="search-results-step3" ng-if="searchResults.step3.length !== 0">
         <ion-item class="item item-icon-left outside-list">
           <img class="icon padding image-icon" src="img/mainHelp/icon-helpStep3.png">
           <b>Invitation Step</b>
@@ -81,7 +81,7 @@
         </ion-item>
       </div>
 
-      <div name="search-results">
+      <div name="search-results-faq" ng-if="searchResults.faq.length !== 0">
         <ion-item class="item item-icon-left outside-list">
           <i class="icon ion-ios-help"></i>
           <b>F.A.Q.</b>
