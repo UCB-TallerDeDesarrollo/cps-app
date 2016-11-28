@@ -8,7 +8,9 @@
         <a ng-click="openModalCreate()" class="watchlist_menu button button-small button-clear button-positive">
           <i class="icon ion-plus"></i>
         </a>
-        <a class="watchlist_menu button button-small button-clear button-positive" ng-show="unsolvedProblems.length > 1" ng-click="shouldShowReorder = !shouldShowReorder">  <i ng-class="(shouldShowReorder) ? 'icon icon-floppy' : 'icon icon-sort-alt-down'"></i></a>
+        <a class="watchlist_menu button button-small button-clear button-positive" ng-show="unsolvedProblems.length > 1" ng-click="shouldShowReorder = !shouldShowReorder">
+          <i ng-class="(shouldShowReorder) ? 'icon icon-floppy' : 'icon icon-sort-alt-down'"></i>
+        </a>
         <div class="col col-75">
           <h2><b>Unsolved Problems</b></h2>
         </div>
