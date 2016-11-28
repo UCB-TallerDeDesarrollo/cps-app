@@ -79,7 +79,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/mainHelp',
     views: {
       'menuContent': {
-        templateUrl: 'templates/appHelps/mainHelp.html',
+        templateUrl: 'templates/appHelps/helpMain.html',
         controller: 'mainHelpController'
       }
     }
@@ -109,7 +109,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       url: '/unsolvedProblems/new/:laggingSkillsId',
       views: {
         'menuContent': {
-          templateUrl: 'templates/cpsProcess/newUnsolvedProblem.html',
+          templateUrl: 'templates/unsolvedProblems/newUnsolvedProblem.html',
           controller: 'UnsolvedProblemCtrl'
         }
       }
@@ -119,7 +119,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/unsolvedProblem/show/:unsolvedProblemId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/cpsProcess/showUnsolvedProblem.html',
+        templateUrl: 'templates/cpsProcess/empathyStep.html',
         controller: 'ChildsConcernsCtrl'
       }
     }
@@ -129,7 +129,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/defineTheProblem/:unsolvedProblemId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/cpsProcess/defineTheProblem.html',
+        templateUrl: 'templates/cpsProcess/defineAdultConcern.html',
         controller: 'DefineTheProblemCtrl'
       }
     }
@@ -139,7 +139,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/invitation/:unsolvedProblemId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/cpsProcess/invitation.html',
+        templateUrl: 'templates/cpsProcess/invitationStep.html',
         controller: 'InvitationCtrl'
       }
     }
@@ -149,7 +149,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/solutions/:solutionId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/solutions/showSolution.html'
+        templateUrl: 'templates/solutionComments/showSolution.html'
       }
     }
   })
@@ -158,7 +158,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/planBHelp',
     views: {
       'menuContent': {
-        templateUrl: 'templates/appHelps/planBHelp.html',
+        templateUrl: 'templates/appHelps/helpCPS.html',
       }
     }
   })
@@ -175,7 +175,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/helpForInvitation',
     views: {
       'menuContent': {
-        templateUrl: 'templates/appHelps/invitationHelp.html',
+        templateUrl: 'templates/appHelps/helpInvitation.html',
       }
     }
   })
@@ -277,7 +277,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       },
       views: {
         'menuContent': {
-          templateUrl: 'templates/planBHelp/helpDefineAdultsConcern.html',
+          templateUrl: 'templates/appHelps/helpDefineAdultsConcern.html',
         }
       }
     })
@@ -286,7 +286,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     url: '/alsupHelp',
     views: {
       'menuContent': {
-        templateUrl: 'templates/appHelps/alsupHelp.html'
+        templateUrl: 'templates/appHelps/helpAlsup.html'
       }
     }
   })

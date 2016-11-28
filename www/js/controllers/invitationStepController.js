@@ -1,20 +1,19 @@
 angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory){
   $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
   $scope.solutions = {};
-  PossibleSolutionFactory.all($stateParams.unsolvedProblemId, function(res){
-    $scope.solutions = res;
-    $scope.firstItemAnimationShown = false;
+  UnsolvedProblemFactory.find($stateParams.unsolvedProblemId,function(result){
+    $scope.unsolvedProblem = result.rows.item(0);
+    ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
+      $scope.childsConcerns = childConcerns;
+    });
+    AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
+      $scope.adultsConcerns = result;
+    });
+    PossibleSolutionFactory.all($stateParams.unsolvedProblemId, function(res){
+      $scope.solutions = res;
+      $scope.firstItemAnimationShown = false;
+    });
   });
-  UnsolvedProblemFactory.find($stateParams.unsolvedProblemId,function(unsolvedProblem){
-    $scope.unsolvedProblem = unsolvedProblem;
-  });
-  ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
-    $scope.childsConcerns = childConcerns;
-  });
-  AdultConcernFactory.all($stateParams.unsolvedProblemId,function(result){
-    $scope.adultsConcerns = result;
-  });
-
 
   $scope.showChilds=false;
   $scope.showAdults=false;
