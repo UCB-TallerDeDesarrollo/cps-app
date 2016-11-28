@@ -1,13 +1,12 @@
 angular.module('starter.services').factory('PossibleSolutionFactory', function($cordovaSQLite) {
 
-  function findSolutionByID(solutionId, callback){
+  function findSolution(solutionId, callback){
     var solution = {};
     var query ="SELECT * FROM solutions WHERE id = ?";
     $cordovaSQLite.execute(db,query,[solutionId]).then(function(result){
       solution = result.rows.item(0);
       callback(solution);
-    },
-    function(err){
+    },function(err){
       console.log(err.message);
     });
   }
@@ -28,6 +27,7 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     });
     return solutions;
   }
+
   function insertSolution(solution){
     var query ="INSERT INTO solutions(description,unsolved_problem_id,rating) VALUES (?,?,?)";
     $cordovaSQLite.execute(db,query,[solution.description, solution.unsolvedProblemId, solution.rating]);
@@ -42,26 +42,58 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     var query = "DELETE FROM solutions where id = ?";
     $cordovaSQLite.execute(db, query, [solutionId]).then(function(res) {
         callback();
-    }, function (err) {
-        console.error(err);
-    });
+    }, function (err) {console.error(err);});
+  }
+
+  function getCommentsForSolution(solutionId,callback){
+    var comments = [];
+    var query ="SELECT * FROM solution_comments WHERE solution_id = ? ORDER BY commented_at DESC";
+    $cordovaSQLite.execute(db,query,[solutionId]).then(function(result){
+      var rows = result.rows;
+      if(rows.length) {
+        for(var i=0; i < rows.length; i++){
+          comments.push(rows.item(i));
+        }
+        callback(comments);
+      }
+    },function(err){console.log(err.message);});
+  }
+
+  function insertComment(comment){
+    var now = new Date();
+    var query ="INSERT INTO solution_comments(description,commented_at,solution_id) VALUES (?,?,?)";
+    $cordovaSQLite.execute(db,query,[comment.description,now,comment.solutionId]);
+  }
+
+  function updateComment(comment){
+    var query = "UPDATE solution_comments SET description = ? where id = ?";
+    $cordovaSQLite.execute(db, query, [comment.description, comment.id]);
   }
 
   return {
-    all: function(unsolvedProblemId, callback) {
+    all: function(unsolvedProblemId, callback){
       getAllSolutions(unsolvedProblemId, callback);
     },
     insert: function(possibleSolution){
       insertSolution(possibleSolution);
     },
-    find: function(callback){
-      findSolutionByID(callback);
+    update: function(possibleSolution){
+      updateSolution(possibleSolution);
     },
     delete:  function(solutionId, callback){
       deleteSolution(solutionId, callback);
     },
-    update: function(possibleSolution){
-      updateSolution(possibleSolution);
+    find: function(solutionId, callback){
+      findSolution(solutionId, callback);
+    },
+    getComments: function(solutionId, callback){
+      getCommentsForSolution(solutionId, callback);
+    },
+    insertComment: function(comment){
+      insertComment(comment);
+    },
+    updateComment: function(comment){
+      updateComment(comment);
     }
   };
 });
