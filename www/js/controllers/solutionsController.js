@@ -31,7 +31,7 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
 
   $scope.createComment = function(){
     if (!inputFieldIsEmpty($scope.comment.description)) {
-      saveComment($cordovaSQLite,$scope.comment);
+      PossibleSolutionFactory.insertComment($scope.comment);
       PossibleSolutionFactory.getComments($stateParams.solutionId,function(comments){
         $scope.comments = comments;
       });
@@ -71,10 +71,10 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
 
   $scope.updateComment = function(){
     if (!inputFieldIsEmpty($scope.editableComment.description)) {
-      updateComment($cordovaSQLite,$scope.editableComment);
+      PossibleSolutionFactory.updateComment($scope.editableComment);
       $scope.modalEdit.hide();
       $scope.commentEdit = {};
-      getComments($stateParams.solutionId,$cordovaSQLite,function(comments){
+      PossibleSolutionFactory.getComments($stateParams.solutionId,function(comments){
         $scope.comments = comments;
       });
     }
@@ -120,14 +120,3 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
     }
   };
 });
-
-function saveComment(cordovaSQLite,comment){
-  var now = new Date();
-  var query ="INSERT INTO solution_comments(description,commented_at,solution_id) VALUES (?,?,?)";
-  cordovaSQLite.execute(db,query,[comment.description,now,comment.solutionId]);
-}
-
-function updateComment(cordovaSQLite, comment){
-  var query = "UPDATE solution_comments SET description = ? where id = ?";
-  cordovaSQLite.execute(db, query, [comment.description, comment.id]);
-}

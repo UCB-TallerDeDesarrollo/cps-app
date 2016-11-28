@@ -59,8 +59,19 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     },function(err){console.log(err.message);});
   }
 
+  function insertComment(comment){
+    var now = new Date();
+    var query ="INSERT INTO solution_comments(description,commented_at,solution_id) VALUES (?,?,?)";
+    $cordovaSQLite.execute(db,query,[comment.description,now,comment.solutionId]);
+  }
+
+  function updateComment(comment){
+    var query = "UPDATE solution_comments SET description = ? where id = ?";
+    $cordovaSQLite.execute(db, query, [comment.description, comment.id]);
+  }
+
   return {
-    all: function(unsolvedProblemId, callback) {
+    all: function(unsolvedProblemId, callback){
       getAllSolutions(unsolvedProblemId, callback);
     },
     insert: function(possibleSolution){
@@ -77,6 +88,12 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     },
     getComments: function(solutionId, callback){
       getCommentsForSolution(solutionId, callback);
+    },
+    insertComment: function(comment){
+      insertComment(comment);
+    },
+    updateComment: function(comment){
+      updateComment(comment);
     }
   };
 });
