@@ -119,7 +119,7 @@ angular.module('starter.controllers')
     if($scope.adultsConcerns.length === 0){
       var confirmPopup = $ionicPopup.confirm({
         title: "Going to Step 2: Define Adult's Concerns",
-        template: "Did you drill enough to get all your child's concerns?",
+        template: "Have you drilled enough to get all your child's concerns?",
         cancelText: "No, keep drilling",
         okText: "Yes, I'm sure"
       });
