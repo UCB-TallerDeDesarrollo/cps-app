@@ -1,18 +1,18 @@
 angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $ionicListDelegate,$cordovaSQLite, $ionicPopup, PossibleSolutionFactory ){
   $scope.comment = { solutionId: $stateParams.solutionId };
 
-  // getSolution($stateParams.solutionId,$cordovaSQLite,function(solution){
-  //   $scope.solution = solution;
-  // });
-
   PossibleSolutionFactory.find($stateParams.solutionId,function(solution){
     $scope.solution = solution;
   });
 
   $scope.comments = [];
-  getComments($stateParams.solutionId,$cordovaSQLite,function(comments){
+  PossibleSolutionFactory.getComments($stateParams.solutionId,function(comments){
     $scope.comments = comments;
   });
+
+  // getComments($stateParams.solutionId,$cordovaSQLite,function(comments){
+  //   $scope.comments = comments;
+  // });
 
   $ionicModal.fromTemplateUrl('create-modal.html', {
     scope: $scope,
@@ -32,7 +32,7 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
   $scope.createComment = function(){
     if (!inputFieldIsEmpty($scope.comment.description)) {
       saveComment($cordovaSQLite,$scope.comment);
-      getComments($stateParams.solutionId,$cordovaSQLite,function(comments){
+      PossibleSolutionFactory.getComments($stateParams.solutionId,function(comments){
         $scope.comments = comments;
       });
       $scope.comment.description = "";
@@ -120,29 +120,6 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
     }
   };
 });
-
-// function getSolution(solutionId,cordovaSQLite,callback){
-//   var solution;
-//   var query ="SELECT * FROM solutions WHERE id = ?";
-//   cordovaSQLite.execute(db,query,[solutionId]).then(function(result){
-//     solution = result.rows.item(0);
-//     callback(solution);
-//   },function(err){console.log(err.message);});
-// }
-
-function getComments(solutionId,cordovaSQLite,callback){
-  var comments = [];
-  var query ="SELECT * FROM solution_comments WHERE solution_id = ? ORDER BY commented_at DESC";
-  cordovaSQLite.execute(db,query,[solutionId]).then(function(result){
-    var rows = result.rows;
-    if(rows.length) {
-      for(var i=0; i < rows.length; i++){
-        comments.push(rows.item(i));
-      }
-      callback(comments);
-    }
-  },function(err){console.log(err.message);});
-}
 
 function saveComment(cordovaSQLite,comment){
   var now = new Date();

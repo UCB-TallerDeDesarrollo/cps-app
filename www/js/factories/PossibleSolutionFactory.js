@@ -27,6 +27,7 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     });
     return solutions;
   }
+
   function insertSolution(solution){
     var query ="INSERT INTO solutions(description,unsolved_problem_id,rating) VALUES (?,?,?)";
     $cordovaSQLite.execute(db,query,[solution.description, solution.unsolvedProblemId, solution.rating]);
@@ -41,9 +42,21 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     var query = "DELETE FROM solutions where id = ?";
     $cordovaSQLite.execute(db, query, [solutionId]).then(function(res) {
         callback();
-    }, function (err) {
-        console.error(err);
-    });
+    }, function (err) {console.error(err);});
+  }
+
+  function getCommentsForSolution(solutionId,callback){
+    var comments = [];
+    var query ="SELECT * FROM solution_comments WHERE solution_id = ? ORDER BY commented_at DESC";
+    $cordovaSQLite.execute(db,query,[solutionId]).then(function(result){
+      var rows = result.rows;
+      if(rows.length) {
+        for(var i=0; i < rows.length; i++){
+          comments.push(rows.item(i));
+        }
+        callback(comments);
+      }
+    },function(err){console.log(err.message);});
   }
 
   return {
@@ -61,6 +74,9 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     },
     find: function(solutionId, callback){
       findSolution(solutionId, callback);
+    },
+    getComments: function(solutionId, callback){
+      getCommentsForSolution(solutionId, callback);
     }
   };
 });
