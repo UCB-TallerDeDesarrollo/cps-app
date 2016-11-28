@@ -1,5 +1,6 @@
 angular.module('starter.controllers')
 .controller('FaqCtrl', function($scope) {
+  $scope.searchWord = '';
 
   $scope.toggleQuestion = function(question) {
     if ($scope.isQuestionShown(question)) {
@@ -76,7 +77,7 @@ angular.module('starter.controllers')
     }
   ];
   $scope.plansQuestions = [
-  {
+    {
     	question:"Isn’t this model really just a sophisticated form of battle picking?",
     	answer:"Not at all. Prior to learning about Plan B, many adults thought they had only two options:  impose their will or drop their expectations.  If those are your only options, then picking your battles is precisely what you’re doing.  Plan B isn’t a choice between battling and not battling.  It’s about getting concerns identified and addressed, solving problems, teaching skills, reducing challenging behavior, and forming a helping relationship."
     },{
