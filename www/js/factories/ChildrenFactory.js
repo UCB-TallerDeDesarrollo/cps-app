@@ -14,8 +14,8 @@ angular.module('starter.services').factory('ChildrenFactory', function($cordovaS
 
 showDateAlert = function() {
 var alertPopup = $ionicPopup.alert({
-  title: 'Invalid birthday!!',
-  template: 'please try again.'
+  title: 'Invalid Birth date!!',
+  template: 'Please insert a date prior to today&#39;s date.'
 });
 
 alertPopup.then(function(res) {
