@@ -54,7 +54,7 @@
                 <img class="full-image" ng-src="img/childs/boy.png" ng-if="childs[$index+1].gender === 'Male'">
                 <img class="full-image" ng-src="img/childs/girl.png" ng-if="childs[$index+1].gender === 'Female'">
                 <h2><b>{{childs[$index+1].first_name}}</b></h2>
-                <p><b>Birthday:</b> {{convertStringToDate(childs[$index+1].birthday) | date:"dd/MM/yy"}}</p>
+                <p><b>Birth date:</b> {{convertStringToDate(childs[$index+1].birthday) | date:"dd/MM/yy"}}</p>
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">
