@@ -98,6 +98,10 @@ var date = new Date();
 
 
   function updateChild(child){
+    if (child.birthday > date) {
+      showDateAlert();
+      return;
+    }
     var query = "UPDATE childs SET first_name = ?, gender = ? , birthday = ? where id = ?";
     var params = [child.first_name, child.gender, child.birthday, child.id];
     $cordovaSQLite.execute(db, query, params);
