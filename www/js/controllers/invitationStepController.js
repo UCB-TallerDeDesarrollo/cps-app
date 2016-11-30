@@ -127,7 +127,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
     $ionicListDelegate.closeOptionButtons();
-
+    $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
   };
   // Cleanup the modal when we're done with it!
   $scope.$on('$destroy', function() {

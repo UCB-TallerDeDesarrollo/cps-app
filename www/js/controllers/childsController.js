@@ -20,6 +20,9 @@ angular.module('starter.controllers')
     };
     $scope.closeModalCreate = function() {
       $scope.modalCreate.hide();
+      $scope.child.first_name="";
+      $scope.child.gender = "Female";
+      $scope.child.birthday = new Date();
       $ionicListDelegate.closeOptionButtons();
     };
     // Cleanup the modal when we're done with it!

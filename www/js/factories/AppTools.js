@@ -5,29 +5,29 @@ angular.module('starter.services')
       title: '',
       destination: ''
     };
-    // $ionicModal.fromTemplateUrl('templates/in-app-browser-modal.html', options)
-    // .then(function(modal) {
-    //   browserInstance.browser = modal;
-    //   browserInstance.browser.hide();
-    // });
+    $ionicModal.fromTemplateUrl('templates/in-app-browser-modal.html', options)
+    .then(function(modal) {
+      browserInstance.browser = modal;
+      browserInstance.browser.hide();
+    });
 
     browserInstance.openBrowser = function(link) {
       this.title = link;
-      // this.destination = $sce.trustAsResourceUrl(link);
-      // this.browser.show();
-      $cordovaInAppBrowser.open(link, '_self')
-      .then(function(event) {
-        // success
-      })
-      .catch(function(event) {
-        // error
-      });
+      this.destination = $sce.trustAsResourceUrl(link);
+      this.browser.show();
+      // $cordovaInAppBrowser.open(link, '_self')
+      // .then(function(event) {
+      //   // success
+      // })
+      // .catch(function(event) {
+      //   // error
+      // });
     };
 
     browserInstance.closeBrowser = function() {
-      // this.destination = '';
-      // this.browser.hide();
-      $cordovaInAppBrowser.close();
+      this.destination = '';
+      this.browser.hide();
+      // $cordovaInAppBrowser.close();
     };
 
     browserInstance.getUriLength = function(){

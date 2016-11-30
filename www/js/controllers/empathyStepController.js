@@ -69,7 +69,9 @@ angular.module('starter.controllers')
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
     $ionicListDelegate.closeOptionButtons();
-
+    $scope.childsConcern = {
+      description: ""
+    };
   };
   // Cleanup the modal when we're done with it!
   $scope.$on('$destroy', function() {
