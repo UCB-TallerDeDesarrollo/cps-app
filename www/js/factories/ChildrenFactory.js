@@ -30,8 +30,8 @@ var date = new Date();
       showNameAlert();
       return;
     }
-
-    if (child.birthday >= date) {
+    date.setDate(date.getDate() + 1);
+    if (child.birthday > date  ) {
       showDateAlert();
       return;
     }
@@ -98,7 +98,7 @@ var date = new Date();
 
 
   function updateChild(child){
-    if (child.birthday >= date) {
+    if (child.birthday > date) {
       showDateAlert();
       return;
     }
