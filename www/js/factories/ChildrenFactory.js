@@ -31,12 +31,12 @@ var date = new Date();
       return;
     }
 
-    if (child.birthday > date) {
+    if (child.birthday >= date) {
       showDateAlert();
       return;
     }
 
-    if (child.birthday < date) {
+    if (child.birthday <= date) {
       var query = "INSERT INTO childs(first_name,gender,birthday,active) VALUES (?,?,?,1)";
       $cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]).then(function(){
         callback();
@@ -98,6 +98,10 @@ var date = new Date();
 
 
   function updateChild(child){
+    if (child.birthday >= date) {
+      showDateAlert();
+      return;
+    }
     var query = "UPDATE childs SET first_name = ?, gender = ? , birthday = ? where id = ?";
     var params = [child.first_name, child.gender, child.birthday, child.id];
     $cordovaSQLite.execute(db, query, params);
