@@ -32,7 +32,7 @@
             <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
           </ion-header-bar>
           <ion-content class="padding scroll-content ionic-scroll  has-header">
-            <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+            <div class="scroll modal-animation">
               <div class="list">
                 <label class="item item-input">
                   <textarea rows=5 placeholder="Write a comment about this solution." ng-model="comment.description">
@@ -43,7 +43,7 @@
               </div>
             </div>
             <div class="scroll-bar scroll-bar-v">
-              <div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;">
+              <div class="scroll-bar-indicator scroll-bar-fade-out modal-animation">
               </div>
             </div>
           </ion-content>
@@ -57,7 +57,7 @@
             <button class="button button-clear button-primary" ng-click="closeModalEdit()">Cancel</button>
           </ion-header-bar>
           <ion-content class="padding scroll-content ionic-scroll has-header">
-            <div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+            <div class="scroll modal-animation">
               <form>
                 <label class="item item-input">
                   <textarea rows=5 placeholder="What can you say about this solution." ng-model="editableComment.description">
@@ -66,7 +66,7 @@
                 <button class="button button-full button-positive" ng-if="!editableComment.description.length" ng-click="updateComment()" disabled>Save</button>
                 <button class="button button-full button-positive" ng-if="editableComment.description.length > 0" ng-click="updateComment()">Save</button>
               </form>
-            </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div>
+            </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out modal-animation"></div></div>
           </ion-content>
         </ion-modal-view>
       </script>
