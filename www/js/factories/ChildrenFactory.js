@@ -31,7 +31,7 @@ var date = new Date();
       return;
     }
 
-    if (child.birthday > date) {
+    if (child.birthday >= date) {
       showDateAlert();
       return;
     }
@@ -98,7 +98,7 @@ var date = new Date();
 
 
   function updateChild(child){
-    if (child.birthday <= date) {
+    if (child.birthday >= date) {
       showDateAlert();
       return;
     }
