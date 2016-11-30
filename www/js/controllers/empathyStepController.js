@@ -1,6 +1,7 @@
 angular.module('starter.controllers')
-.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory, ChildConcernFactory,AdultConcernFactory){
-  $scope.childsConcern = {
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory, ChildConcernFactory,AdultConcernFactory,$ionicSideMenuDelegate){
+  $ionicSideMenuDelegate.canDragContent(false);
+    $scope.childsConcern = {
     description: ""
   };
 

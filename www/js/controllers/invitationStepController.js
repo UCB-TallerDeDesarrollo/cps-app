@@ -1,4 +1,5 @@
-angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory){
+angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory, $ionicSideMenuDelegate){
+  $ionicSideMenuDelegate.canDragContent(false);
   $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
   $scope.solutions = [];
   UnsolvedProblemFactory.find($stateParams.unsolvedProblemId,function(result){
