@@ -60,7 +60,9 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       unsolved_order: toIndex,
       id: $scope.childsConcerns[fromIndex].id
     });
-    findChildsConcerns();
+    ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
+      $scope.childsConcerns = childConcerns;
+    });
   };
 
   $scope.createSolution = function() {
