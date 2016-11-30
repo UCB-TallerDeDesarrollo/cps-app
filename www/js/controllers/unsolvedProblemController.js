@@ -131,6 +131,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
 
   $scope.closeModalCreate = function() {
     $ionicListDelegate.closeOptionButtons();
+    $scope.unsolvedProblem = {};
     $scope.modalCreate.hide();
   };
   // Cleanup the modal when we're done with it!

@@ -3,7 +3,7 @@
     <h6 class="col-90 browser-link">{{browserInstance.title.substring(0, browserInstance.getUriLength()) + '...'}}</h6>
     <button class="col-10 button" ng-click="browserInstance.closeBrowser()"><i class="ion-close"></i></button>
   </ion-header-bar>
-  <ion-content class="has-header">
-    <iframe src="{{browserInstance.destination}}" width="100%" height="100%" frameborder="0"></iframe>
+  <ion-content class="has-header scroll-content ionic-scroll " overflow-scroll="true">
+    <iframe src="{{browserInstance.destination}}" width="100%" height="100%" frameborder="0" ></iframe>
   </ion-content>
 </ion-modal-view>
