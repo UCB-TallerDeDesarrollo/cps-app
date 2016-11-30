@@ -181,6 +181,12 @@ body {
   margin-right: -1px;
 }
 
+.icon-size{
+  width: 35px;
+  height:35px;
+  top:10px;
+}
+
 .image-icon {
   margin-left: -8px;
 }
@@ -205,6 +211,11 @@ body {
   transform: translate3d(0px, 0px, 0px) scaleY(1);
   height: 0px;
 }
+
+.pre-wrap{
+  white-space:pre-wrap;
+}
+
 
 /*input[type="date"]::-webkit-clear-button {
  -webkit-appearance: none;
