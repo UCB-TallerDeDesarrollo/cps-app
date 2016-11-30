@@ -27,6 +27,7 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
     $ionicListDelegate.closeOptionButtons();
+    $scope.comment = { solutionId: $stateParams.solutionId };
   };
 
   $scope.createComment = function(){
