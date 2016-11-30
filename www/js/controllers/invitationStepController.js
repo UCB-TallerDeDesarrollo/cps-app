@@ -227,7 +227,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.showConfirmWorstRate = function(solution,rate,unsolvedProblem) {
     var confirmPopup = $ionicPopup.confirm({
       title: 'Worst Rate for this solution',
-      template: 'Are you sure that this solution dont help to solve the unsolved problem?'
+      template: 'Are you sure that this solution doesn&#39;t help to solve the unsolved problem?'
     });
 
     confirmPopup.then(function(res) {
