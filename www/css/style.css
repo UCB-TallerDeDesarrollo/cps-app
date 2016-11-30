@@ -193,6 +193,14 @@ body {
   float: right;
 }
 
+.font-21{
+  font-size:21px;
+}
+
+.text-align-right{
+  text-align:right;
+}
+
 /*input[type="date"]::-webkit-clear-button {
  -webkit-appearance: none;
   display: none;
