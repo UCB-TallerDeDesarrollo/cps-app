@@ -21,12 +21,19 @@
           <b>{{helpCategory.description}}</b>
         </ion-item>
         <ion-list ng-repeat="topic in helpCategory.topics">
-          <ion-item class="item-accordion" ng-show="isTopicShown(helpCategory)" ng-click="browserInstance.openBrowser(topic.url)">
+          <ion-item class="item-accordion" ng-show="isTopicShown(helpCategory)"  ng-if="!topic.url">
             <div class="item-text-wrap" >
               {{topic.description}}
               <i ng-show="topic.url" class="icon ion-ios-browsers-outline pull-right"></i>
             </div>
           </ion-item>
+          <ion-item class="item-accordion" ng-show="isTopicShown(helpCategory)" ng-click="browserInstance.openBrowser(topic.url)" ng-if="topic.url.length > 0">
+            <div class="item-text-wrap" >
+              {{topic.description}}
+              <i ng-show="topic.url" class="icon ion-ios-browsers-outline pull-right"></i>
+            </div>
+          </ion-item>
+
         </ion-list>
       </div>
       </ion-list>
