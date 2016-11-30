@@ -201,6 +201,11 @@ body {
   text-align:right;
 }
 
+.modal-animation{
+  transform: translate3d(0px, 0px, 0px) scaleY(1);
+  height: 0px;
+}
+
 /*input[type="date"]::-webkit-clear-button {
  -webkit-appearance: none;
   display: none;
