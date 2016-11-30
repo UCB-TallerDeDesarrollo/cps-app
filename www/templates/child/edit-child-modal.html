@@ -7,7 +7,7 @@
     <div class="list">
       <label class="item item-input item-stacked-label ">
         <span class="input-label">Name</span>
-        <input type="text" placeholder="Type a new childs's name here." ng-model="editableChild.first_name">
+        <input type="text" placeholder="Type a new child's name here." ng-model="editableChild.first_name">
         </input>
       </label>
       <label class="item item-input item-select">
@@ -19,7 +19,7 @@
       </label>
       <label class="item item-input item-select">
         <span class="input-label">Birthday</span>
-        <input type="date" style="text-align:right;" ng-model="editableChild.birthday">
+        <input type="date" class="text-align-right" ng-model="editableChild.birthday">
         </input>
       </label>
         <button class="button button-full button-positive" ng-if="editableChild.first_name.length == 0 || child.birthday === null || !child.birthday" disabled>Save</button>
