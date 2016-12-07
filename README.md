@@ -20,6 +20,6 @@ The version 1.0.3 of the application is available to free download at:
 
 ### Team
 
-This application was developed for Systems Engineering students at the [Universidad Católica Boliviana San Pablo](https://www.ucbcba.edu.bo/)
+This application was developed by Systems Engineering students at the [Universidad Católica Boliviana San Pablo](https://www.ucbcba.edu.bo/)
 
 2016 - Cochabamba, Bolivia
