@@ -22,7 +22,7 @@
           <button class="item-options item fake-button button button-positive ion-more"></button>
         </div>
           <ion-item class="item-text-wrap item-icon-left item-icon-right" ng-click="verifyToGoToStep1()" ng-repeat="unsolvedProblem in unsolvedProblems" ng-class="{ slidein: $first && !firstItemAnimationShown}">
-            <a href="" class="no-text-decoration">
+            <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration">
               <div name="content">
                 <i class="icon dark {{getRatingIcon(unsolvedProblem)}}"></i>
                 <p>{{unsolvedProblem.description}}</p>
