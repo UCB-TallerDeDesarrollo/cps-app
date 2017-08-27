@@ -181,7 +181,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   //function here
   $scope.showRatingPopup = function(solution,unsolvedProblem) {
     var myPopup = $ionicPopup.show({
-    title: 'Rate the Solution',
+    title: 'Is the solution working?',
     subTitle: 'You can rate it by clicking one of the buttons below',
     buttons: [
       { type: 'button-assertive ion-sad-outline ',

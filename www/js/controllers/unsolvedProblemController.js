@@ -93,6 +93,23 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     }
   };
 
+  $scope.verifyToGoToStep1 = function() {
+
+      var confirmPopup = $ionicPopup.confirm({
+        title: "Going to Step 1: Empathy Step",
+        template: "Did you list all of the examples that come to mind when you think of your child having difficulty with this lagging skill?",
+        cancelText: "No, keep drilling",
+        okText: "Yes, I'm sure"
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+            $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
+        }
+      });
+
+  };
+
   $scope.childsConcernsFlag = function(unsolvedProblem){
       var query ="SELECT COUNT(*) AS childsCount FROM childs_concerns where unsolved_problem_id = ?";
       $cordovaSQLite.execute(db,query,[unsolvedProblem.id])
