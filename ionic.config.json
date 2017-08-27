@@ -1,4 +1,7 @@
 {
   "name": "cps-app",
-  "app_id": "0a1ad100"
+  "app_id": "0a1ad100",
+  "integrations": {},
+  "type": "ionic1",
+  "watchPatterns": []
 }
