@@ -3,5 +3,7 @@
   "app_id": "0a1ad100",
   "integrations": {},
   "type": "ionic1",
-  "watchPatterns": []
+  "watchPatterns": [
+    "scss/**/*"
+  ]
 }
