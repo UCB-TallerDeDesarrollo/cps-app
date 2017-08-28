@@ -229,4 +229,12 @@ angular.module('starter.controllers')
  $scope.hideFakeButtons = function() {
    return ( $scope.childsConcerns.length === 0 || $scope.firstItemAnimationShown );
  };
+ $scope.showHint = function() {
+   if(localStorage.getItem("showHint") === null){
+       localStorage.setItem("showHint", true);
+       var confirmPopup = $ionicPopup.alert({
+         title: "After you identify all of your child's concerns, click the arrow to move on to adult concerns step"
+       });
+     }
+   };
 });
