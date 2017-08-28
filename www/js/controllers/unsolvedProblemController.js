@@ -273,4 +273,21 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
    $scope.hideFakeButtons = function() {
      return ( $scope.unsolvedProblems.size === 0 || $scope.firstItemAnimationShown );
    };
+   $scope.unsolvedProblemHint = function(){
+       $scope.openModalHint();
+     };
+   $scope.openModalHint = function() {
+       $scope.modalHint.show();
+     };
+   $ionicModal.fromTemplateUrl('templates/unsolvedProblems/unsolvedProblemsHints.html', {
+         scope: $scope,
+         animation: 'slide-in-up'
+       }).then(function(modal) {
+         $scope.modalHint = modal;
+         $scope.closeModalEdit();
+     });
+   $scope.closeModalHint = function() {
+       $scope.modalHint.hide();
+       $ionicListDelegate.closeOptionButtons();
+     };
 });
