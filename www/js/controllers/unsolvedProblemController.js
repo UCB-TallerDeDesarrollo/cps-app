@@ -93,7 +93,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     }
   };
 
-  $scope.verifyToGoToStep1 = function() {
+  $scope.verifyToGoToStep1 = function(id) {
     if($scope.unsolvedProblems.length > 0){
       var confirmPopup = $ionicPopup.confirm({
         title: "Going to Step 1: Empathy Step",
@@ -104,12 +104,13 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
 
       confirmPopup.then(function(res) {
       if(res) {
-       $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
+       $state.go('app.showUnsolvedProblem',{ unsolvedProblemId:id});
       }
+      
       });
     }
     else {
-      $state.go('app.newUnsolvedProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
+      $state.go('app.newUnsolvedProblem',{ unsolvedProblemId:id});
     }
   };
 
