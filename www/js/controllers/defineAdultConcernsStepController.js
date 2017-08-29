@@ -16,6 +16,14 @@ angular.module('starter.controllers')
       $scope.unsolvedProblem = result.rows.item(0);
     });
   };
+  $scope.showAdultsConcernHint = function() {
+    if(localStorage.getItem("showAdultsConcernHint") === null){
+        localStorage.setItem("showAdultsConcernHint", true);
+        var confirmPopup = $ionicPopup.alert({
+          title: "After you've listed all of your concerns, click the arrow to move on to the invitation step"
+        });
+     }
+    };
   $scope.createAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.adultsConcern.description)) {
       $scope.adultsConcern.unsolvedProblemId = $stateParams.unsolvedProblemId;
