@@ -113,20 +113,20 @@ angular.module('starter.controllers', [])
     });
   };
   $scope.laggingSkillsHint = function(){
-    $scope.openModalHintSkills();
+    $scope.openModalHint();
   };
-  $scope.openModalHintSkills = function() {
-    $scope.modalHintSkills.show();
+  $scope.openModalHint = function() {
+    $scope.modalHint.show();
   };
   $ionicModal.fromTemplateUrl('templates/laggingSkills/laggingSkillsHints.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
-    $scope.modalHintSkills = modal;
-    $scope.closeModalEditSkills();
+    $scope.modalHint = modal;
+    $scope.closeModalEdit();
   });
-  $scope.closeModalHintSkills = function() {
-  $scope.modalHintSkills.hide();
+  $scope.closeModalHint = function() {
+  $scope.modalHint.hide();
   $ionicListDelegate.closeOptionButtons();
   };
 })
