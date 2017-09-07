@@ -89,7 +89,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate, ChildrenFactory) {
+.controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate, ChildrenFactory, $ionicModal) {
   ChildrenFactory.active(function(active_child){
     $scope.activeChild = active_child;
      LaggingSkills.all($scope.activeChild.id, function(res){
@@ -111,6 +111,23 @@ angular.module('starter.controllers', [])
     LaggingSkills.all($scope.activeChild.id, function(res){
       $scope.laggingSkills = res;
     });
+  };
+  $scope.laggingSkillsHint = function(){
+    $scope.openModalHint();
+  };
+  $scope.openModalHint = function() {
+    $scope.modalHint.show();
+  };
+  $ionicModal.fromTemplateUrl('templates/laggingSkills/laggingSkillsHints.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modalHint = modal;
+    $scope.closeModalEdit();
+  });
+  $scope.closeModalHint = function() {
+  $scope.modalHint.hide();
+  $ionicListDelegate.closeOptionButtons();
   };
 })
 
