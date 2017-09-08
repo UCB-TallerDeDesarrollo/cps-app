@@ -12,7 +12,7 @@
           <i ng-show="childsConcerns.length > 1 && showChilds" ng-click="shouldShowReorder = !shouldShowReorder" ng-class="(shouldShowReorder) ? 'icon-floppy' : 'icon-sort-alt-down' ;"></i>
         </div>
         <div class="col col-10">
-          <i ng-if = "childsConcerns.length > 1" ng-class="showChilds ? 'ion-ios-arrow-dropup': 'ion-ios-arrow-dropdown'" ng-click="toggleChilds()"></i>
+            <i ng-if = "childsConcerns.length > 1" ng-class="showChilds ? 'ion-chevron-up': 'ion-chevron-down'" ng-click="toggleChilds()"></i>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
             <h2>and also do something about...</h2>
           </div>
           <div class="col col-10">
-              <i ng-if = "adultsConcerns.length > 1" ng-class="showAdults? 'ion-ios-arrow-up': 'ion-ios-arrow-down'" ng-click="toggleAdults()"></i>
+              <i ng-if = "adultsConcerns.length > 1" ng-class="showAdults? 'ion-chevron-up': 'ion-chevron-down'" ng-click="toggleAdults()"></i>
           </div>
         </div>
       </div>
