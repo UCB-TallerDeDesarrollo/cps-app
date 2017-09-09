@@ -128,6 +128,13 @@ angular.module('starter.controllers', [])
   $scope.modalHint.hide();
   $ionicListDelegate.closeOptionButtons();
   };
+  $scope.googleAnalyticsView = function() {
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Lagging Skills view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+  }
 })
 
 .controller('HelpCategoryCtrl', function($scope, $stateParams) {
