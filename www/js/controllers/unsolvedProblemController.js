@@ -300,4 +300,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
        $scope.modalHint.hide();
        $ionicListDelegate.closeOptionButtons();
      };
+    $scope.googleAnalyticsView = function() {
+     if(typeof analytics !== 'undefined') {
+       analytics.trackView('Unsolved Problems view');
+     } else {
+         console.log("Google Analytics Unavailable");
+     }
+   };
 });
