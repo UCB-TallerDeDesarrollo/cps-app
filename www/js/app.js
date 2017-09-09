@@ -22,6 +22,12 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     // db = $cordovaSQLite.openDB({ name: "my.db" }); // plaftorm specific
     db = window.openDatabase("CPSdatabase","1.0","Demo",2000);
     DataSeed.seed($cordovaSQLite, db);
+ //    if(typeof analytics !== undefined) {
+ // +        analytics.startTrackerWithId("UA-105821683-1");
+ // +        analytics.trackView('Inicio de la app');
+ // +    } else {
+ // +        console.log("Google Analytics Unavailable");
+ // +    }
   });
 
   $rootScope.state = $state;
