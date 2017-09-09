@@ -204,7 +204,6 @@ angular.module('starter.controllers')
             // constant progress updates
         });
     };
-<<<<<<< HEAD
 
     $scope.showIntroductionPage = function(childs) {
       if(childs == 0){
@@ -248,7 +247,7 @@ angular.module('starter.controllers')
         });
       }
     };
-=======
+  
     $scope.googleAnalyticsView = function() {
      if(typeof analytics !== 'undefined') {
        analytics.trackView('Manage Children view');
@@ -256,7 +255,6 @@ angular.module('starter.controllers')
          console.log("Google Analytics Unavailable");
      }
    };
->>>>>>> 25f664ef37065fcc9804b5bacd6d2b7aeb2abbea
 });
 
 function createLaggingSkills (cordovaSQLite, child_id){
