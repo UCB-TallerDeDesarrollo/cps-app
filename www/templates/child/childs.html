@@ -1,6 +1,6 @@
 <ion-view cache-view="false" view-title="Manage Children">
   <ion-content ng-controller="ChildsCtrl">
-    <div ng-init="updateUnsolvedProblems(); showIntroductionPage();">
+    <div ng-init="updateUnsolvedProblems();">
       <div class="item item-divider item-text-wrap">
         <a ng-click="openModalCreate()" class="watchlist_menu button button-small button-clear button-positive">
           <i class="icon ion-plus"></i>
@@ -10,6 +10,8 @@
         </div>
       </div>
       <div class="row" ng-if="childs.length === 0">
+          <div ng-init="showIntroductionPage(childs);">
+            </div>
         <div class = "col">
           <div class="card">
             <div class="item item-text-wrap text-center" >
@@ -23,6 +25,7 @@
         </div>
       </div>
       </div>
+        
       <div ng-repeat="child in childs">
         <div ng-if="$index%2==0" class="row">
           <div class="col col-50">

@@ -200,7 +200,9 @@ angular.module('starter.controllers')
         });
     };
 
-    $scope.showIntroductionPage = function() {
+    $scope.showIntroductionPage = function(childs) {
+      if(childs == 0){
+
         var myPopup = $ionicPopup.show({
         title: 'Welcome to Lens Changer',
         subTitle: 'You can choose a option!',
@@ -226,50 +228,19 @@ angular.module('starter.controllers')
               $window.open('https://visitor.constantcontact.com/manage/optin?v=001DFTCDgfTjagIuIbRq2pgrG8ZVHSiKAKz7c-CMCvU_l22aSgjxedUQV-Irm8JNXt17JXGXj5O1MaEkvyw53H3fs3le1gcsNGw', '_system', 'location=yes');
             }
           },
-          { type: 'button-balanced' ,
-            text: '<div class = ""><b><font size="2">Ready</font></b></div>',
-            cssClass: 'after-box',
+          { type: 'button-balanced',
+            text: '<div><b><font size="2">Ready</font></b></div>',
             onTap: function(e) {
-              
+              myPopup.close();
             }
           }
-        ]
-      });
+          ]
+        });
 
-      myPopup.then(function(res) {
+        myPopup.then(function(res) {
         // Custom functionality....
-      });
-    
-      // IonicClosePopupService.register(myPopup);
-    
-      // $scope.showConfirmBestRate = function(solution,rate,unsolvedProblem) {
-      //   var confirmPopup = $ionicPopup.confirm({
-      //     title: 'Best Rate for this solution',
-      //     template: 'Are you sure that this solution solved the unsolved problem?'
-      //   });
-    
-      //   confirmPopup.then(function(res) {
-      //     if(res) {
-      //       $scope.RateSolution(solution,rate);
-      //       $scope.BestRate(unsolvedProblem);
-      //     }
-      //   });
-      // };
-  
-      // $scope.showConfirmWorstRate = function(solution,rate,unsolvedProblem) {
-      //   var confirmPopup = $ionicPopup.confirm({
-      //     title: 'Worst Rate for this solution',
-      //     template: 'Are you sure that this solution doesn&#39;t help to solve the unsolved problem?'
-      //   });
-    
-      //   confirmPopup.then(function(res) {
-      //     if(res) {
-      //       $scope.RateSolution(solution,rate);
-      //       $scope.BestRate(unsolvedProblem);
-      //     }
-      //   });
-      // };
-  
+        });
+      }
     };
 });
 

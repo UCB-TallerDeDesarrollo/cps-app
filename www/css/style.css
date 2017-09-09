@@ -231,6 +231,22 @@ body {
   border: 3px solid red;  
 }
 
+.popup-buttons {
+	@include flex-wrap(wrap);
+
+	.button.button-block {
+    clear: left;
+		@include flex(none);
+		width: 100% !important;
+		margin-top: 0px;
+
+		&:last-child {
+			margin-right: 0px;
+			margin-bottom: 0px;
+		}
+	}
+}
+
 
 /*input[type="date"]::-webkit-clear-button {
  -webkit-appearance: none;
