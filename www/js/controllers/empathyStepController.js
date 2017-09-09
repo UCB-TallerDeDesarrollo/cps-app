@@ -187,6 +187,13 @@ angular.module('starter.controllers')
   $scope.editChildsConcern = function(childsConcern){
     $scope.editableChildsConcern = angular.copy(childsConcern);
     $scope.openModalEdit();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackEvent('Child Concern', 'Edit')
+    } else {
+      console.log("Google Analytics Unavailable");
+    }
+
+
   };
 
   $scope.createChildsConcern = function(){
