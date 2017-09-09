@@ -17,6 +17,11 @@ angular.module('starter.controllers')
     });
     $scope.openModalCreate = function() {
       $scope.modalCreate.show();
+      if(typeof analytics !== 'undefined') {
+        analytics.trackView('Create child view');
+      } else {
+          console.log("Google Analytics Unavailable");
+      }
     };
     $scope.closeModalCreate = function() {
       $scope.modalCreate.hide();

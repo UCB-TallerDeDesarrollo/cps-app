@@ -24,7 +24,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     DataSeed.seed($cordovaSQLite, db);
     if(typeof analytics !== 'undefined') {
          analytics.startTrackerWithId("UA-105821683-1");
-         analytics.trackEvent('Start', 'Application started')
+         analytics.trackEvent('App', 'Start')
     } else {
          console.log("Google Analytics Unavailable");
      }
