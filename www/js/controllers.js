@@ -138,7 +138,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('HelpCategoryCtrl', function($scope, $stateParams) {
-  $scope.params = $stateParams;
+  $scope.params = $stateParams;     
 })
 
 .controller('HelpCategoryTopicsCtrl', function($scope, HelpCategoriesStep1, $stateParams, AppTools){
@@ -152,6 +152,13 @@ angular.module('starter.controllers', [])
 
 .controller('HelpCategoryCtrl', function($scope, HelpCategoriesStep1) {
   $scope.helpCategories = HelpCategoriesStep1.all();
+  $scope.googleAnalyticsForHelpCategoriesStep1 = function() {
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Help Categories for step 1 view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+  }; 
 })
 
 .controller('HelpCategoryInvitationCtrl', function($scope, AppTools) {
