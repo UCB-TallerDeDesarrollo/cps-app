@@ -11,7 +11,15 @@ angular.module('starter.controllers')
   };
   $scope.isQuestionShown = function(question) {
     return $scope.shownQuestion === question;
-  };
+	};
+	
+	$scope.googleAnalyticsViewChallengingKids = function() {
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Challenging Kids F.A.Q view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+  }
 
   $scope.challengingKidsQuestions = [
     {
