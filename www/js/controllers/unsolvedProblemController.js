@@ -90,6 +90,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       $scope.modalEdit.hide();
       $scope.editableUnsolvedProblem = {};
       $scope.updateUnsolvedProblems();
+      if(typeof analytics !== 'undefined') {
+        analytics.trackView('Edit unsolved problem view');
+      } else {
+          console.log("Google Analytics Unavailable");
+      }
     }
   };
 
