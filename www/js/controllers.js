@@ -299,6 +299,14 @@ angular.module('starter.controllers', [])
     $scope.slideIndex = index;
   };
 
+  $scope.googleAnalyticsViewAppTutorial = function() {
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('App Tutorial view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+  };
+  
   $scope.UnsolvedProblemsTutorial = function(){
     ChildrenFactory.active(function(active_child){
       $scope.activeChild = active_child;

@@ -192,23 +192,43 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       { type: 'button-assertive ion-sad-outline ',
         onTap: function(e) {
           $scope.showConfirmWorstRate(solution,1,unsolvedProblem);
+          if(typeof analytics !== 'undefined') {
+            analytics.trackEvent('Child solution rate', 'Worst')
+          } else {
+            console.log("Google Analytics Unavailable");
+          }
         }
       },
       { type: 'button-energized ion-heart-broken' ,
         onTap: function(e) {
           $scope.RateSolution(solution,2);
           $scope.BestRate(unsolvedProblem);
+          if(typeof analytics !== 'undefined') {
+            analytics.trackEvent('Child solution rate', 'Broken heart')
+          } else {
+            console.log("Google Analytics Unavailable");
+          }          
         }
       },
       { type: 'button-balanced ion-heart' ,
         onTap: function(e) {
           $scope.RateSolution(solution,3);
           $scope.BestRate(unsolvedProblem);
+          if(typeof analytics !== 'undefined') {
+            analytics.trackEvent('Child solution rate', 'Heart')
+          } else {
+            console.log("Google Analytics Unavailable");
+          }         
         }
       },
       { type: 'button-calm ion-happy-outline',
         onTap: function(e) {
           $scope.showConfirmBestRate(solution,4,unsolvedProblem);
+          if(typeof analytics !== 'undefined') {
+            analytics.trackEvent('Child solution rate', 'Happy')
+          } else {
+            console.log("Google Analytics Unavailable");
+          }          
         }
       }
     ]
