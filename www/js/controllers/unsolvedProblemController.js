@@ -260,6 +260,13 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       if(res) {
        $scope.delete(item);
       }
+
+      if(typeof analytics !== 'undefined') {
+        analytics.trackEvent('Unsolved problem Hint', 'Delete')
+      } else {
+        console.log("Google Analytics Unavailable");
+      }
+
      });
    };
 
