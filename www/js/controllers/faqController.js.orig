@@ -2,15 +2,16 @@ angular.module('starter.controllers')
     .controller('FaqCtrl', function($scope) {
         $scope.searchWord = '';
 
-        $scope.toggleQuestion = function(question) {
-            if ($scope.isQuestionShown(question)) {
-                $scope.shownQuestion = null;
-            } else {
-                $scope.shownQuestion = question;
-            }
-        };
-        $scope.isQuestionShown = function(question) {
-            return $scope.shownQuestion === question;
+<<<<<<< HEAD
+  $scope.toggleQuestion = function(question) {
+    if ($scope.isQuestionShown(question)) {
+      $scope.shownQuestion = null;
+    } else {
+      $scope.shownQuestion = question;
+    }
+  };
+  $scope.isQuestionShown = function(question) {
+    return $scope.shownQuestion === question;
 	};
 	
 	$scope.googleAnalyticsViewChallengingKids = function() {
@@ -37,6 +38,18 @@ angular.module('starter.controllers')
     }
   };
 
+=======
+        $scope.toggleQuestion = function(question) {
+            if ($scope.isQuestionShown(question)) {
+                $scope.shownQuestion = null;
+            } else {
+                $scope.shownQuestion = question;
+            }
+        };
+        $scope.isQuestionShown = function(question) {
+            return $scope.shownQuestion === question;
+        };
+>>>>>>> e2c23e59c1d13fe3972bad8d44e1d6d295ece11e
 
         $scope.challengingKidsQuestions = [{
             question: "Why are challenging kids challenging?",
