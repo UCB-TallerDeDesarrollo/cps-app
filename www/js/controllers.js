@@ -305,7 +305,8 @@ angular.module('starter.controllers', [])
     } else {
         console.log("Google Analytics Unavailable");
     }
-  }
+  };
+  
   $scope.UnsolvedProblemsTutorial = function(){
     ChildrenFactory.active(function(active_child){
       $scope.activeChild = active_child;

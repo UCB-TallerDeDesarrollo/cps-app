@@ -19,7 +19,7 @@ angular.module('starter.controllers')
     } else {
         console.log("Google Analytics Unavailable");
     }
-  }
+  };
 
   $scope.googleAnalyticsViewFAQ = function() {
     if(typeof analytics !== 'undefined') {
@@ -27,7 +27,15 @@ angular.module('starter.controllers')
     } else {
         console.log("Google Analytics Unavailable");
     }
-  }
+  };
+  
+  $scope.googleAnalyticsViewCPSModelFAQ = function() {
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('CPS Model FAQ');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+  };
 
 
   $scope.challengingKidsQuestions = [
