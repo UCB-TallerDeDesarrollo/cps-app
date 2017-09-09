@@ -24,14 +24,11 @@ angular.module('starter.controllers')
   $scope.googleAnalyticsViewFAQ = function() {
     if(typeof analytics !== 'undefined') {
       analytics.trackView('F.A.Q view');
-    } else {
-        console.log("Google Analytics Unavailable");
-    }
+        } else {
+            console.log("Google Analytics Unavailable");
+        }
     };
-=======
-  
-  
->>>>>>> b21ed0c6d194af190b9d33dd2b39acb216c7b534
+    
   $scope.modelQuestions = [
     {
     	question: "A major premise of CPS approach is that challenging behavior is a form of developmental delay. What research supports this idea?",
