@@ -140,6 +140,14 @@ angular.module('starter.controllers')
             question: "Are there kids Plan B won’t help?  Who need to be placed in programs outside of public schools?",
             answer: "There are kids who might, despite our best efforts, need to be placed in such programs.  But it would be interesting to see how the numbers of those kids would change if more schools were incorporating the model into their practices for assessing and addressing the needs of kids with behavioral challenges (studies examining this question are currently in progress).  In several current projects, researchers are examining the degree to which implementation of the  model reduces not only challenging behavior but also special ed costs and referrals, the use of suspension, detention, and expulsion, and placement in programs outside of their home schools."
         }];
+
+        $scope.googleAnalyticsViewclassroomQuestions = function() {
+            if (typeof analytics !== 'undefined') {
+                analytics.trackView('Question about the problems in the classroom view');
+            } else {
+                console.log("Google Analytics Unavailable");
+            }
+        };
         $scope.classroomQuestions = [{
             question: "Doesn’t helping kids with behavioral challenges take a lot of time?",
             answer: "Yes, helping – especially the kind that involves teaching skills and solving problems durably – does take time.  But perpetually dealing with kids’ challenges in ways that aren’t working takes more.  And don’t forget, Proactive Plan B is taking place at opportune moments, not under emergent conditions."
