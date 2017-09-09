@@ -28,6 +28,11 @@ angular.module('starter.controllers')
     if (!inputFieldIsEmpty($scope.adultsConcern.description)) {
       $scope.adultsConcern.unsolvedProblemId = $stateParams.unsolvedProblemId;
       AdultConcernFactory.insert($scope.adultsConcern);
+      if(typeof analytics !== 'undefined') {
+        analytics.trackEvent('Unsolved problem', 'create')
+      } else {
+        console.log("Google Analytics Unavailable");
+      }
       $scope.modalCreate.hide();
       $state.go('app.defineTheProblem');
       $scope.adultsConcern.description = "";
