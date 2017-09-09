@@ -11,7 +11,7 @@
         Clear
     </button>
   </div>
-  <ion-content class="has-subheader" ng-controller="HelpCategoryInvitationCtrl">
+  <ion-content ng-init="googleAnalyticsView();" class="has-subheader" ng-controller="HelpCategoryInvitationCtrl">
     <ion-list>
     <div ng-repeat="helpCategory in helpCategoriesInvitation | filter: searchWord">
         <ion-item class="item item-stable item-text-wrap" ng-click="toggleHelp(helpCategory)"

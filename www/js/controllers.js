@@ -143,6 +143,7 @@ angular.module('starter.controllers', [])
   });
 })
 
+
 .controller('HelpCategoryCtrl', function($scope, HelpCategoriesStep1) {
   $scope.helpCategories = HelpCategoriesStep1.all();
 })
@@ -165,6 +166,14 @@ angular.module('starter.controllers', [])
       scope: $scope,
       animation: 'slide-in-right'
     });
+
+    $scope.googleAnalyticsView = function() {
+      if(typeof analytics !== 'undefined') {
+        analytics.trackView('Invitation step view');
+      } else {
+          console.log("Google Analytics Unavailable");
+      }
+    };
 
   $scope.helpCategoriesInvitation = [
     { description : "Invitation Step | Ingredient/Goal",
