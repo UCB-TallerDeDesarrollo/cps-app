@@ -61,6 +61,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
 
     $scope.unsolvedProblems.splice(fromIndex, 1);
     $scope.unsolvedProblems.splice(toIndex, 0, unsolvedProblem);
+    if(typeof analytics !== 'undefined') {
+      analytics.trackEvent('Unsolved Problems', 'Change order')
+    } else {
+      console.log("Google Analytics Unavailable");
+    }
   };
 
   $scope.createUnsolvedProblem = function() {
@@ -260,6 +265,13 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       if(res) {
        $scope.delete(item);
       }
+
+      if(typeof analytics !== 'undefined') {
+        analytics.trackEvent('Unsolved problem Hint', 'Delete')
+      } else {
+        console.log("Google Analytics Unavailable");
+      }
+
      });
    };
 
