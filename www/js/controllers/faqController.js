@@ -21,6 +21,15 @@ angular.module('starter.controllers')
     }
   }
 
+  $scope.googleAnalyticsViewFAQ = function() {
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('F.A.Q view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+  }
+
+
   $scope.challengingKidsQuestions = [
     {
       question:"Why are challenging kids challenging?",
