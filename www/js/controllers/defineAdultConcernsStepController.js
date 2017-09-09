@@ -181,6 +181,14 @@ angular.module('starter.controllers')
     return ( $scope.adultsConcerns.length === 0 || $scope.firstItemAnimationShown );
   };
 
+  $scope.googleAnalyticsView = function() {
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView("Define adult's concerns view");
+    }else {
+      console.log("Google Analytics Unavailable");
+    }
+  };
+
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(1,10));});
 
 });
