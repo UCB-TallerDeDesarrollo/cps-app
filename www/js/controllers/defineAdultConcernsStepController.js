@@ -84,6 +84,11 @@ angular.module('starter.controllers')
   });
   $scope.openModal = function() {
     $scope.modalCreate.show();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Create adult concern view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
   };
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
@@ -112,6 +117,11 @@ angular.module('starter.controllers')
   });
   $scope.openModalEdit = function() {
     $scope.modalEdit.show();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Edit adult concern view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
   };
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
