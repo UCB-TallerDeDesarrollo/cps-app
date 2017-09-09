@@ -96,6 +96,11 @@ angular.module('starter.controllers')
   });
   $scope.openModalEdit = function() {
     $scope.modalEdit.show();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Edit child concern view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
   };
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
