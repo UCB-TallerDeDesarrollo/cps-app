@@ -10,7 +10,7 @@
         Clear
     </button>
   </div>
-  <ion-content class="has-subheader">
+  <ion-content ng-init="googleAnalyticsView();" class="has-subheader">
     <ion-list>
       <div ng-repeat="help in step2helps | filter: searchWord">
         <ion-item class="item item-stable item-text-wrap"
