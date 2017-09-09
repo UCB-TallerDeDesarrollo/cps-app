@@ -66,6 +66,14 @@ angular.module('starter.controllers')
   });
   $scope.openModal = function() {
     $scope.modalCreate.show();
+
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Create childs concern view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+
+
   };
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
