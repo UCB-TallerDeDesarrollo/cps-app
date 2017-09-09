@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer, UnsolvedProblemFactory, ChildrenFactory) {
+  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $window, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer, UnsolvedProblemFactory, ChildrenFactory) {
     $scope.child = {};
     $scope.child.first_name="";
     $scope.child.gender = "Female";
@@ -198,6 +198,78 @@ angular.module('starter.controllers')
         }, function (progress) {
             // constant progress updates
         });
+    };
+
+    $scope.showIntroductionPage = function() {
+        var myPopup = $ionicPopup.show({
+        title: 'Welcome to Lens Changer',
+        subTitle: 'You can choose a option!',
+        cssClass: 'popup-intro',
+        
+        buttons: [
+          { type: 'button-assertive',
+            text: '<b><font size="2">Parent</font></b>',
+            cssClass: 'button-popup_red',
+            onTap: function(e) {
+              $window.open('http://livesinthebalance.org/walking-tour-parents', '_system', 'location=yes');
+            }
+          },
+          { type: 'button-energized' ,
+            text: '<b><font size="2">Educator</font></b>',
+            onTap: function(e) {
+              $window.open('http://livesinthebalance.org/workshopstraining', '_system', 'location=yes');
+            }
+          },
+          { type: 'button-calm' ,
+            text: '<b><font size="2">Sign in</font></b>',
+            onTap: function(e) {
+              $window.open('https://visitor.constantcontact.com/manage/optin?v=001DFTCDgfTjagIuIbRq2pgrG8ZVHSiKAKz7c-CMCvU_l22aSgjxedUQV-Irm8JNXt17JXGXj5O1MaEkvyw53H3fs3le1gcsNGw', '_system', 'location=yes');
+            }
+          },
+          { type: 'button-balanced' ,
+            text: '<div class = ""><b><font size="2">Ready</font></b></div>',
+            cssClass: 'after-box',
+            onTap: function(e) {
+              
+            }
+          }
+        ]
+      });
+
+      myPopup.then(function(res) {
+        // Custom functionality....
+      });
+    
+      // IonicClosePopupService.register(myPopup);
+    
+      // $scope.showConfirmBestRate = function(solution,rate,unsolvedProblem) {
+      //   var confirmPopup = $ionicPopup.confirm({
+      //     title: 'Best Rate for this solution',
+      //     template: 'Are you sure that this solution solved the unsolved problem?'
+      //   });
+    
+      //   confirmPopup.then(function(res) {
+      //     if(res) {
+      //       $scope.RateSolution(solution,rate);
+      //       $scope.BestRate(unsolvedProblem);
+      //     }
+      //   });
+      // };
+  
+      // $scope.showConfirmWorstRate = function(solution,rate,unsolvedProblem) {
+      //   var confirmPopup = $ionicPopup.confirm({
+      //     title: 'Worst Rate for this solution',
+      //     template: 'Are you sure that this solution doesn&#39;t help to solve the unsolved problem?'
+      //   });
+    
+      //   confirmPopup.then(function(res) {
+      //     if(res) {
+      //       $scope.RateSolution(solution,rate);
+      //       $scope.BestRate(unsolvedProblem);
+      //     }
+      //   });
+      // };
+  
     };
 });
 

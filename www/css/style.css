@@ -217,6 +217,21 @@ body {
 }
 
 
+.popup-intro .popup {
+  width: 300px;
+  height: 200px;
+}
+
+.popup-intro-button-one{
+  width: 300px;
+}
+
+.after-box{
+  clear: left;
+  border: 3px solid red;  
+}
+
+
 /*input[type="date"]::-webkit-clear-button {
  -webkit-appearance: none;
   display: none;
