@@ -65,5 +65,14 @@ angular.module('starter.controllers')
     scope: $scope,
     animation: 'slide-in-right'
   });
+
+  $scope.googleAnalyticsView = function() {
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Help Adult Concerns step view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+  };
+
   $scope.searchInit();
 });
