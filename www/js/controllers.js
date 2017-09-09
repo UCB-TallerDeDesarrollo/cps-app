@@ -123,7 +123,6 @@ angular.module('starter.controllers', [])
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modalHint = modal;
-    $scope.closeModalEdit();
   });
   $scope.closeModalHint = function() {
   $scope.modalHint.hide();
