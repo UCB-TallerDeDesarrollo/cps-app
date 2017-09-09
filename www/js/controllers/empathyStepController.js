@@ -237,4 +237,11 @@ angular.module('starter.controllers')
        });
      }
    };
+  $scope.googleAnalyticsView = function() {
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Empathy step view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+  }
 });

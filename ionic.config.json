@@ -1,7 +1,9 @@
 {
   "name": "cps-app",
   "app_id": "0a1ad100",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic1",
   "watchPatterns": [
     "scss/**/*"

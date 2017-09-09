@@ -90,6 +90,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       $scope.modalEdit.hide();
       $scope.editableUnsolvedProblem = {};
       $scope.updateUnsolvedProblems();
+      if(typeof analytics !== 'undefined') {
+        analytics.trackView('Edit unsolved problem view');
+      } else {
+          console.log("Google Analytics Unavailable");
+      }
     }
   };
 
@@ -106,7 +111,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       if(res) {
        $state.go('app.showUnsolvedProblem',{ unsolvedProblemId:id});
       }
-      
+
       });
     }
     else {
@@ -275,6 +280,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
    };
    $scope.unsolvedProblemHint = function(){
        $scope.openModalHint();
+       if(typeof analytics !== 'undefined') {
+           analytics.trackEvent('Unsolved problem Hint', 'Open')
+       } else {
+           console.log("Google Analytics Unavailable");
+       }
      };
    $scope.openModalHint = function() {
        $scope.modalHint.show();

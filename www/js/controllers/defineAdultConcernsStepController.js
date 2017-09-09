@@ -16,6 +16,14 @@ angular.module('starter.controllers')
       $scope.unsolvedProblem = result.rows.item(0);
     });
   };
+  $scope.showAdultsConcernHint = function() {
+    if(localStorage.getItem("showAdultsConcernHint") === null){
+        localStorage.setItem("showAdultsConcernHint", true);
+        var confirmPopup = $ionicPopup.alert({
+          title: "After you've listed all of your concerns, click the arrow to move on to the invitation step"
+        });
+     }
+    };
   $scope.createAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.adultsConcern.description)) {
       $scope.adultsConcern.unsolvedProblemId = $stateParams.unsolvedProblemId;
@@ -76,6 +84,11 @@ angular.module('starter.controllers')
   });
   $scope.openModal = function() {
     $scope.modalCreate.show();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Create adult concern view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
   };
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
@@ -104,6 +117,11 @@ angular.module('starter.controllers')
   });
   $scope.openModalEdit = function() {
     $scope.modalEdit.show();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Edit adult concern view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
   };
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
