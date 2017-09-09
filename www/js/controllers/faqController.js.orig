@@ -2,15 +2,16 @@ angular.module('starter.controllers')
     .controller('FaqCtrl', function($scope) {
         $scope.searchWord = '';
 
-        $scope.toggleQuestion = function(question) {
-            if ($scope.isQuestionShown(question)) {
-                $scope.shownQuestion = null;
-            } else {
-                $scope.shownQuestion = question;
-            }
-        };
-        $scope.isQuestionShown = function(question) {
-            return $scope.shownQuestion === question;
+<<<<<<< HEAD
+  $scope.toggleQuestion = function(question) {
+    if ($scope.isQuestionShown(question)) {
+      $scope.shownQuestion = null;
+    } else {
+      $scope.shownQuestion = question;
+    }
+  };
+  $scope.isQuestionShown = function(question) {
+    return $scope.shownQuestion === question;
 	};
 	
 	$scope.googleAnalyticsViewChallengingKids = function() {
@@ -27,49 +28,6 @@ angular.module('starter.controllers')
     } else {
         console.log("Google Analytics Unavailable");
     }
-<<<<<<< HEAD
-  ];
-  $scope.modelQuestions = [
-    {
-    	question: "A major premise of CPS approach is that challenging behavior is a form of developmental delay. What research supports this idea?",
-    	answer: "Much of the research is, for better or worse (mostly worse) tied to specific diagnoses, but the link between lagging skills and challenging behavior is unequivocal.  For example, the association between ADHD and lagging executive skills (e.g., difficulty shifting cognitive set, doing things in a logical sequence, having a sense of time, maintaining focus, controlling one’s impulses) is well-established.  Equally well-established is the fact that kids with ADHD are at subsequent increased risk for other diagnoses (and much more serious challenging behavior), such as oppositional defiant disorder (temper outbursts, arguing with adults, and defiance) and conduct disorder (bullying, threatening, intimidating, fighting, physical aggression, stealing, destroying property, lying, truancy). There are also convincing data documenting increased rates of oppositional defiant disorder (ODD) and conduct disorder (CD) in kids with mood disorders (i.e.. those who have difficulty with skills related to the regulating of one’s emotions, including managing one’s emotional response to frustration so as to think rationally [separation of affect]), and in kids who are socially impaired (including skills such as accurately interpreting social cues, seeking attention in appropriate ways, appreciating how one’s behavior is affecting others, empathizing, and appreciating how one is being perceived by others).  The research literature has increasingly shown that kids with language processing delays (including skills such as considering a range of solutions to a problem; expressing concerns, needs, or thoughts in words; and understanding what is being said) are at significantly greater risk for ODD and CD as well. And there is a persuasive and growing literature documenting the very challenging behaviors that can accompany autism spectrum disorders and non-verbal learning disability (and the black-and-white, concrete, literal thinking that typifies these disorders). We’ve learned a lot about children’s brains in the last 30 years.  We now know how challenging kids come to be challenging. It’s time for our actions to reflect our knowledge."
-    },{
-    	question: "In Lost at School, you point out that kids with behavioral challenges aren’t usually challenging every second of every waking hour. Some kids are challenging at home and not at school, others at school and not at home, and others in both places. If it’s true that the kid is lacking skills, then why would he be lacking them in one place and not another? Isn’t the discrepancy in behavior between home and school proof that he’s choosing to behave one way in one place and another way in the other? Isn’t that a sign that the kid is doing well only when he wants to?",
-    	answer: "Actually, it’s proof that challenging behavior is specific to certain conditions. Under what conditions does challenging behavior occur?  Those where skills are being required of the kid that he does not yet sufficiently possess or where problems arise that he hasn’t been able to solve.  But precisely where and when those conditions are present differs from kid to kid. Especially in cases where a kid is more challenging at home than school, it’s common for people to explain the disparity as the result of poor parenting.  That’s usually not true.  The school environment may have advantages that reduce the likelihood of challenging behavior in some kids.  School environments tend to be more structured and predictable than home environments, and this can reduce the likelihood of challenging behavior in some (but by no means all) challenging kids.  Often medicines that are helpful for reducing challenging behavior at school have worn off by the time the kid arrives at home.  And some kids are able to stay tightly wrapped during the school day and then completely unravel – some would say decompensate – the minute they’re back at home.  Of course, most of us look a lot better when we’re outside the home than when we’re inside it! Even when the reverse is true – if a kid’s challenges are greater at school than at home – it’s not uncommon for the finger to be pointed at parents (“Sure, the parents just let him do what he wants at home.  No wonder he doesn’t act up with them.”).  The more plausible and productive explanation is that the school is placing demands on the kid – for focused learning, organizing, sustained effort, and getting along with others – that may not be nearly as intense at home. This presents another opportunity for adults to stop pointing and start identifying lagging skills and unsolved problems."
-    },{
-    	question: "In Lost at School, you say that this model doesn’t require that adults suspend all of their expectations so a kid won’t exhibit challenging behavior. Care to say more about that?",
-    	answer: "Sure thing. It would be impossible to teach, parent, or help kids without having expectations.  CPS Model does not involve dropping all expectations. But since you can’t fix everything at once, it makes sense to eliminate some low priority expectations (in other words, use Plan C) so the kid is more “available” to work on the higher priority expectations and problems that remain.  Just because you’re eliminating a given expectation now doesn’t mean you won’t come back to it once some higher priority expectations have been met. You will want to consider whether your expectations for each kid are truly realistic, and grade level and chronological age typically are not great indicators of a kid’s developmental readiness for a particular expectation.  We often place expectations on kids that we know they can’t meet, and then punish them when they handle our expectations as poorly as we suspected they would.  An unrealistic expectation is a challenging behavior waiting to happen."
-    },{
-    	question: "Do you believe in holding kids accountable for their actions?",
-    	answer: "It depends on what you mean by “accountable.”  For some folks, holding a kid accountable for his actions simply means making sure he pays the price for his challenging behavior.  In the Dr. Greene&#8217;s model, holding a kid accountable means that the kid is participating in a process in which he’s identifying and articulating his own concerns or perspectives, taking yours into account, and working toward a realistic and mutually satisfactory solution.  One could make the case that Plan B is actually more effective at holding a kid accountable than Plan A, since the kid is participating in and actually thinking about a plan to reduce his challenging behavior (and taking your concerns into account) rather than merely being on the receiving end of imposed adult will and endless adult ingenuity."
-    },{
-    	question: "Shouldn’t I still be using consequences for challenging behavior – even if I don’t think they’re working – so the other kids know I’m taking the challenging behavior seriously?",
-    	answer: "It’s your choice, but you don’t need to use consequences for the other kids to notice that you’re taking the problem seriously.  They need to see that you’ve got a handle on the challenging kid’s lagging skills and unsolved problems and that, slowly but surely, his challenging behaviors are decreasing.  You don’t improve your credibility by continuing to intervene in a way that isn’t working or is making things worse.  Consequences are useful for two things:  (1) teaching basic lessons about right and wrong and (2) giving kids the incentive to do well.  You’ll want to use consequences if you think one or both of these things are coming into play.  But kids with behavioral challenges already know the basic lessons about right and wrong and, because kids do well if they can, they already have the incentive to do well."
-    },{
-    	question: "Is it really fair to expect teachers – who are not trained as mental health professionals – to solve problems collaboratively?",
-    	answer: "I don’t know what’s fair. I do know that teachers already have a lot on their plates.  I know that an astounding number of challenging kids are needlessly slipping through the cracks and losing their futures.  And I know that a mental health degree is not a prerequisite for solving problems collaboratively. Teachers have always taught non-academic skills to their students, skills related to handling life’s social, emotional, and behavioral challenges.  It’s just that some kids and some challenges require that teachers have a different mind-set and skill-set.  What are the key qualifications for helping kids with behavioral challenges?  An open mind, a willingness to reflect on one’s current practices and try on new lenses, the courage to experiment with new practices, and the patience and resolve to become comfortable assessing lagging skills and unsolved problems and using Plan B.  If it makes you feel any better, most mental health professionals don’t have training in solving problems collaboratively either."
-    },{
-    	question: "It seems like you think teachers should be all things to all kids.",
-    	answer: "Not so, but kids with social, emotional, and behavior challenges could really use your help."
-    },{
-    	question: "Aren’t there some challenging kids who need meds?",
-    	answer: "Yes, though nowhere near as many as are actually on meds.  The over-medicating of kids flows from an over-emphasis on diagnoses, the ease with which medications are prescribed, a lack of awareness of the true factors underlying kids’ challenging behavior, the failure to achieve a comprehensive understanding of a kid’s challenges, and a lack of knowledge of Plan B.  That said, there are some kids for whom psychotropic medication is an indispensable component of treatment and whose participation in Plan B is impossible without medication.  It’s crucial to differentiate between the things psychotropic medicine does well and the things psychotropic medicine does not do well lest, as is commonly the case, medicine be prescribed for things medicine does not do well.  Medicine is effective at reducing hyperactivity and poor impulse control; improving attention span; enhancing mood; reducing obsessive-compulsive behaviors and general anxiety; reducing tics; inducing sleep; and helping volatile, aggressive kids be less reactive.  Medicine does not teach skills.  Medicine does not help kids solve problems.  But it can help kids be more “available” to learn skills and solve problems."
-    },{
-    	question: "In the research literature, training cognitive skills to kids with challenging behavior often hasn’t fared very well. How is this model different?",
-    	answer: "In the research literature (and in real life) cognitive skills training has often been conducted outside the environments in which a kid is having the greatest difficulty and by people the kid isn’t having difficulty with; for example, in the office of a guidance counselor, principal, or mental health professional; or in a researcher’s lab.  Skills taught in these artificial environments often haven’t generalized to the environments in which the kid was having difficulty.  In addition, the training has been done in a rote, circumscribed fashion using skills-training modules or curriculum that were not tailored to the specific lagging skills or unsolved problems of individual kids."
-    },{
-    	question: "Does this model help with kids on the autism spectrum?",
-    	answer: "It’s often assumed that this model has no application to these kids, and that well-known applied behavior analysis methodology is really the only option. I beg to differ. “Autism spectrum” doesn’t say anything about the kid’s general cognitive functioning, and unless you’re ready to throw in the towel on teaching the kid lagging skills or helping him learn to solve problems – and hopefully, you’re not – then this model may well have a role to play. The most common obstacle is linguistic skills. As described above, you’ll want to focus first on helping the kid develop the skills to communicate his concerns (often through pictures or hand signals) in a very rudimentary manner. Then, if possible, you’ll want to focus (if it’s feasible) on helping the kid express these same concerns verbally. Along the way, you’ll be watching closely to see if there is some mechanism for the kid to participate in generating solutions."
-    },{
-    	question: "How does this model differ from other crisis management programs?",
-    	answer: "While this model can help defuse a crisis, it’s not primarily a crisis management program. It’s a crisis prevention program. In other words, it’s good to know how to defuse and de-escalate during a crisis, but it’s far better to know how to prevent crises from occurring in the first place. No other learning disability is handled in crisis mode, and a crisis is clearly not the best time to address the lagging skills and unsolved problems underlying social, emotional, and behavioral challenges."
-    },{
-    	question: "How do poverty and culture impact the effectiveness of CPS Model?",
-    	answer: "At the risk of seeming insensitive, I think poverty is over-rated as an explanation for challenging behavior in kids (in his seminal book, Schools Without Failure, Dr. William Glasser agreed). There are kids from impoverished circumstances who succeed. There are kids from wealthy backgrounds who don’t. Those who come from wealth often have parents who will stop at nothing to access good care and have the resources and wherewithal to find and pay for it. Some receive very poor care anyway. Data suggest that socioeconomic status is not a predictor of success with the model. I do think that people from similar backgrounds sometimes have an easier time connecting with and communicating with each other. But I’ve yet to run into an ethnic group whose members don’t value having their concerns heard and addressed. In fact, look any place in the world where there’s conflict right now and you’ll see one people whose concerns are being disregarded and another imposing its will. It’s very reliable."
-    },{
-    	question: "Does the this model apply to kids who shoot people in our schools?",
-    	answer: "Kids who act on the idea of shooting people at school are clearly having difficulty coming up with more adaptive solutions to problems they’ve been unable to solve. In many instances where kids have resorted to extreme violence, people were surprised that the kid went to such extremes. But we all have what might be called a “threshold of adversity,” and we all have different levels of skill in dealing with adversity. When a person’s threshold of adversity exceeds their skills, the likelihood of violence is heightened. That’s why it’s crucial to keep the lines of communication open with every kid so you’re aware of his lagging skills and unsolved problems. Create a helping relationship. Work collaboratively toward solving the problems so the kid learns the skills."
-=======
   };
   
   $scope.googleAnalyticsViewCPSModelFAQ = function() {
@@ -77,10 +35,21 @@ angular.module('starter.controllers')
       analytics.trackView('CPS Model FAQ');
     } else {
         console.log("Google Analytics Unavailable");
->>>>>>> 25f664ef37065fcc9804b5bacd6d2b7aeb2abbea
     }
   };
 
+=======
+        $scope.toggleQuestion = function(question) {
+            if ($scope.isQuestionShown(question)) {
+                $scope.shownQuestion = null;
+            } else {
+                $scope.shownQuestion = question;
+            }
+        };
+        $scope.isQuestionShown = function(question) {
+            return $scope.shownQuestion === question;
+        };
+>>>>>>> e2c23e59c1d13fe3972bad8d44e1d6d295ece11e
 
         $scope.challengingKidsQuestions = [{
             question: "Why are challenging kids challenging?",

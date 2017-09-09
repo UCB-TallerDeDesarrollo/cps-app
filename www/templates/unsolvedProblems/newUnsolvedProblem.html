@@ -3,7 +3,7 @@
       <h2 class="title">{{activeChild.first_name}}</h2>
       <a class=" button button-small button-clear button-white icon ion-help-circled" ng-click = "unsolvedProblemHint()"></a>
     </div>
-  <ion-content class="has-subheader" ng-controller="UnsolvedProblemCtrl" on-tap="unableAnimation()">
+  <ion-content class="has-subheader" ng-controller="UnsolvedProblemCtrl" ng-init="googleAnalyticsView()" on-tap="unableAnimation()">
     <div >
       <div class="item item-divider item-text-wrap">
         <a ng-click="openModalCreate()" class="watchlist_menu button button-small button-clear button-positive">

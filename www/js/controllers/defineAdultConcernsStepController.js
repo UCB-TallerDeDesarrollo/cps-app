@@ -183,11 +183,19 @@ angular.module('starter.controllers')
 
   $scope.googleAnalyticsView = function() {
     if(typeof analytics !== 'undefined') {
+<<<<<<< HEAD
       analytics.trackView('Empathy step view');
     } else {
         console.log("Google Analytics Unavailable");
     }
   }
+=======
+      analytics.trackView("Define adult's concerns view");
+    }else {
+      console.log("Google Analytics Unavailable");
+    }
+  };
+>>>>>>> 25f664ef37065fcc9804b5bacd6d2b7aeb2abbea
 
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(1,10));});
 

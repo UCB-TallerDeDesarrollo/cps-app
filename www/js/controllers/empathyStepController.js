@@ -96,6 +96,11 @@ angular.module('starter.controllers')
   });
   $scope.openModalEdit = function() {
     $scope.modalEdit.show();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Edit child concern view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
   };
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
@@ -219,7 +224,12 @@ angular.module('starter.controllers')
 
    confirmPopup.then(function(res) {
      if(res) {
-       $scope.deleteChildsConcern(item);
+        $scope.deleteChildsConcern(item);
+        if(typeof analytics !== 'undefined') {
+          analytics.trackEvent('Child Concern', 'Delete')
+        } else {
+          console.log("Google Analytics Unavailable");
+        }
      }
    });
  };
