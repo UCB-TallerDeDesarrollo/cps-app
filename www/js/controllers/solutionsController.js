@@ -23,6 +23,11 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
   });
   $scope.openModal = function() {
     $scope.modalCreate.show();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('New possible solution view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
   };
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
