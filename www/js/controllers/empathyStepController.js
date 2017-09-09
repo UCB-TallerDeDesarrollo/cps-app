@@ -224,7 +224,12 @@ angular.module('starter.controllers')
 
    confirmPopup.then(function(res) {
      if(res) {
-       $scope.deleteChildsConcern(item);
+        $scope.deleteChildsConcern(item);
+        if(typeof analytics !== 'undefined') {
+          analytics.trackEvent('Child Concern', 'Delete')
+        } else {
+          console.log("Google Analytics Unavailable");
+        }
      }
    });
  };
