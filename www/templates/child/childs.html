@@ -1,6 +1,7 @@
 <ion-view cache-view="false" view-title="Manage Children">
   <ion-content ng-controller="ChildsCtrl">
-    <div ng-init="updateUnsolvedProblems();">
+
+    <div ng-init="updateUnsolvedProblems(); googleAnalyticsView()">
       <div class="item item-divider item-text-wrap">
         <a ng-click="openModalCreate()" class="watchlist_menu button button-small button-clear button-positive">
           <i class="icon ion-plus"></i>

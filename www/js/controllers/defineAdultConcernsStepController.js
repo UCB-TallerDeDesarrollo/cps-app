@@ -28,6 +28,11 @@ angular.module('starter.controllers')
     if (!inputFieldIsEmpty($scope.adultsConcern.description)) {
       $scope.adultsConcern.unsolvedProblemId = $stateParams.unsolvedProblemId;
       AdultConcernFactory.insert($scope.adultsConcern);
+      if(typeof analytics !== 'undefined') {
+        analytics.trackEvent('Unsolved problem', 'create')
+      } else {
+        console.log("Google Analytics Unavailable");
+      }
       $scope.modalCreate.hide();
       $state.go('app.defineTheProblem');
       $scope.adultsConcern.description = "";
@@ -183,11 +188,11 @@ angular.module('starter.controllers')
 
   $scope.googleAnalyticsView = function() {
     if(typeof analytics !== 'undefined') {
-      analytics.trackView('Empathy step view');
-    } else {
-        console.log("Google Analytics Unavailable");
+      analytics.trackView("Define adult's concerns view");
+    }else {
+      console.log("Google Analytics Unavailable");
     }
-  }
+  };
 
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(1,10));});
 

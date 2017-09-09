@@ -3,7 +3,7 @@
     <h2 class="title">{{activeChild.first_name}}</h2>
     <a class=" button button-small button-clear button-white icon ion-help-circled" ng-click = "laggingSkillsHint()"></a>
   </div>
-  <ion-content class="has-subheader">
+  <ion-content class="has-subheader" ng-init="googleAnalyticsView()">
     <ion-list>
       <ion-item class="item item-text-wrap item-icon-right" ng-repeat="laggingSkill in laggingSkills" href="#/app/unsolvedProblems/new/{{laggingSkill.id}}">
           <div class="positive" ng-if="laggingSkill.checked">

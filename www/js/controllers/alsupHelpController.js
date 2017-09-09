@@ -17,7 +17,13 @@ angular.module('starter.controllers')
     scope: $scope,
     animation: 'slide-in-right'
   });
-
+  $scope.googleAnalyticsView = function() {
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('ALSUP Help view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+  }
   $scope.alsupHelpDir = [
     {
       title: "Audio: How to use the ALSUP",

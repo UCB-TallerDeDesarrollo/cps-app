@@ -247,6 +247,14 @@ angular.module('starter.controllers')
         });
       }
     };
+  
+    $scope.googleAnalyticsView = function() {
+     if(typeof analytics !== 'undefined') {
+       analytics.trackView('Manage Children view');
+     } else {
+         console.log("Google Analytics Unavailable");
+     }
+   };
 });
 
 function createLaggingSkills (cordovaSQLite, child_id){
