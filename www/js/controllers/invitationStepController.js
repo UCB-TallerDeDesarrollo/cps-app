@@ -72,6 +72,11 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       PossibleSolutionFactory.insert($scope.solution);
       $scope.solution.description = "";
       $scope.closeModal();
+      if(typeof analytics !== 'undefined') {
+           analytics.trackEvent('Child solution', 'New')
+      } else {
+           console.log("Google Analytics Unavailable");
+         }
       PossibleSolutionFactory.all($stateParams.unsolvedProblemId, function(res){
         $scope.solutions = res;
       });
