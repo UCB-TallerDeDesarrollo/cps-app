@@ -175,6 +175,11 @@ angular.module('starter.controllers')
           $scope.activeChild = active_child;
         });
       });
+      if(typeof analytics !== 'undefined') {
+        analytics.trackEvent('Child', 'Delete')
+      } else {
+        console.log("Google Analytics Unavailable");
+      }
     };
     $scope.showConfirm = function(child) {
       var confirmPopup = $ionicPopup.confirm({
@@ -218,7 +223,7 @@ angular.module('starter.controllers')
             '<b><font size="2">Sign in</font></b>'+
             '</a>'+
          '<div>';
-  
+
       if(childs == 0){
         var myPopup = $ionicPopup.show({
         title: 'Welcome to Lens Changer',
@@ -226,7 +231,7 @@ angular.module('starter.controllers')
         template: buttonsTemplate,
         cssClass: 'popup-intro',
         buttons: [
-            { 
+            {
               type: 'button button-balanced',
               text: '<div><b><font size="2">Ready</font></b></div>',
               onTap: function(e) {
@@ -242,13 +247,13 @@ angular.module('starter.controllers')
         $scope.educatorPage = function(){
             $window.open('', '_system', 'location=yes');
         }
-       
+
         $scope.sign_inPage = function(){
           $window.open('', '_system', 'location=yes');
         }
       }
     };
-  
+
     $scope.googleAnalyticsView = function() {
      if(typeof analytics !== 'undefined') {
        analytics.trackView('Manage Children view');
@@ -289,8 +294,3 @@ function createLaggingSkills (cordovaSQLite, child_id){
       cordovaSQLite.execute(db,item,[child_id]);
     });
 }
-
-
-
-
-
