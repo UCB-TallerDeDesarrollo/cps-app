@@ -206,45 +206,46 @@ angular.module('starter.controllers')
     };
 
     $scope.showIntroductionPage = function(childs) {
+      var buttonsTemplate =
+         '<div class="button-bar">'+
+            '<a href="http://livesinthebalance.org/walking-tour-parents" class="button button-assertive">'+
+            '<b><font size="2">Parent</font></b>'+
+            '</a>'+
+            '<a href="http://livesinthebalance.org/workshopstraining" class="button ng-binding button-energized">'+
+            '<b><font size="2">Educator</font></b>'+
+            '</a>'+
+            '<a href="https://visitor.constantcontact.com/manage/optin?v=001DFTCDgfTjagIuIbRq2pgrG8ZVHSiKAKz7c-CMCvU_l22aSgjxedUQV-Irm8JNXt17JXGXj5O1MaEkvyw53H3fs3le1gcsNGw" class="button ng-binding button-calm">'+
+            '<b><font size="2">Sign in</font></b>'+
+            '</a>'+
+         '<div>';
+  
       if(childs == 0){
-
         var myPopup = $ionicPopup.show({
         title: 'Welcome to Lens Changer',
         subTitle: 'You can choose a option!',
+        template: buttonsTemplate,
         cssClass: 'popup-intro',
-        
         buttons: [
-          { type: 'button-assertive',
-            text: '<b><font size="2">Parent</font></b>',
-            cssClass: 'button-popup_red',
-            onTap: function(e) {
-              $window.open('http://livesinthebalance.org/walking-tour-parents', '_system', 'location=yes');
-            }
-          },
-          { type: 'button-energized' ,
-            text: '<b><font size="2">Educator</font></b>',
-            onTap: function(e) {
-              $window.open('http://livesinthebalance.org/workshopstraining', '_system', 'location=yes');
-            }
-          },
-          { type: 'button-calm' ,
-            text: '<b><font size="2">Sign in</font></b>',
-            onTap: function(e) {
-              $window.open('https://visitor.constantcontact.com/manage/optin?v=001DFTCDgfTjagIuIbRq2pgrG8ZVHSiKAKz7c-CMCvU_l22aSgjxedUQV-Irm8JNXt17JXGXj5O1MaEkvyw53H3fs3le1gcsNGw', '_system', 'location=yes');
-            }
-          },
-          { type: 'button-balanced',
-            text: '<div><b><font size="2">Ready</font></b></div>',
-            onTap: function(e) {
+            { 
+              type: 'button button-balanced',
+              text: '<div><b><font size="2">Ready</font></b></div>',
+              onTap: function(e) {
               myPopup.close();
             }
-          }
-          ]
+          }]
         });
 
-        myPopup.then(function(res) {
-        // Custom functionality....
-        });
+        function parentsPage(){
+            $window.open('', '_system', 'location=yes');
+        }
+
+        $scope.educatorPage = function(){
+            $window.open('', '_system', 'location=yes');
+        }
+       
+        $scope.sign_inPage = function(){
+          $window.open('', '_system', 'location=yes');
+        }
       }
     };
   
@@ -288,3 +289,8 @@ function createLaggingSkills (cordovaSQLite, child_id){
       cordovaSQLite.execute(db,item,[child_id]);
     });
 }
+
+
+
+
+
