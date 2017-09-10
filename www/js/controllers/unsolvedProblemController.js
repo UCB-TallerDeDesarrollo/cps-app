@@ -80,7 +80,12 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       $scope.unsolvedProblem = {};
       $scope.updateUnsolvedProblems();
       $scope.closeModalCreate();
-    }
+      if(typeof analytics !== 'undefined') {
+        analytics.trackEvent('Unsolved Problem event', 'New')
+        } else {
+            console.log("Google Analytics Unavailable");
+          }
+      }
   };
 
   $scope.editUnsolvedProblem = function(unsolvedProblem){
