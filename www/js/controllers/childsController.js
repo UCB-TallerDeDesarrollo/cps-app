@@ -82,6 +82,11 @@ angular.module('starter.controllers')
           $scope.child.gender = "Female";
           $scope.child.birthday = new Date();
           $scope.closeModalCreate();
+          if(typeof analytics !== 'undefined') {
+            analytics.trackEvent('Child', 'Create')
+          } else {
+            console.log("Google Analytics Unavailable");
+          }
           ChildrenFactory.all(function(children){
             $scope.childs = children;
             var lastChild = children.pop();
