@@ -66,6 +66,14 @@ angular.module('starter.controllers')
   });
   $scope.openModal = function() {
     $scope.modalCreate.show();
+
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Create childs concern view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+
+
   };
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
@@ -179,6 +187,13 @@ angular.module('starter.controllers')
   $scope.editChildsConcern = function(childsConcern){
     $scope.editableChildsConcern = angular.copy(childsConcern);
     $scope.openModalEdit();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackEvent('Child Concern', 'Edit')
+    } else {
+      console.log("Google Analytics Unavailable");
+    }
+
+
   };
 
   $scope.createChildsConcern = function(){

@@ -1,5 +1,5 @@
 <ion-view view-title="Help Categories for Step 1">
-  <ion-content>
+  <ion-content ng-init="googleAnalyticsForHelpCategoriesStep1()">
 
     <div class="list">
       <a class="item item-text-wrap item-thumbnail-left" href="#/app/helpCategoryTopics/{{helpCategory.id}}" ng-repeat="helpCategory in helpCategories">
