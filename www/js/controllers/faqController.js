@@ -99,11 +99,11 @@ angular.module('starter.controllers')
   $scope.googleAnalyticsViewFAQ = function() {
     if(typeof analytics !== 'undefined') {
       analytics.trackView('F.A.Q view');
-    } else {
-        console.log("Google Analytics Unavailable");
-    }
-  };
-  
+        } else {
+            console.log("Google Analytics Unavailable");
+        }
+    };
+    
   $scope.modelQuestions = [
     {
     	question: "A major premise of CPS approach is that challenging behavior is a form of developmental delay. What research supports this idea?",
@@ -144,7 +144,7 @@ angular.module('starter.controllers')
     },{
     	question: "Does the this model apply to kids who shoot people in our schools?",
     	answer: "Kids who act on the idea of shooting people at school are clearly having difficulty coming up with more adaptive solutions to problems they’ve been unable to solve. In many instances where kids have resorted to extreme violence, people were surprised that the kid went to such extremes. But we all have what might be called a “threshold of adversity,” and we all have different levels of skill in dealing with adversity. When a person’s threshold of adversity exceeds their skills, the likelihood of violence is heightened. That’s why it’s crucial to keep the lines of communication open with every kid so you’re aware of his lagging skills and unsolved problems. Create a helping relationship. Work collaboratively toward solving the problems so the kid learns the skills."
-  };
+  }];
   
   $scope.googleAnalyticsViewCPSModelFAQ = function() {
     if(typeof analytics !== 'undefined') {

@@ -158,6 +158,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
 
   $scope.openModalCreate = function() {
     $scope.modalCreate.show();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('New Unsolved Problem view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
   };
 
   $scope.closeModalCreate = function() {

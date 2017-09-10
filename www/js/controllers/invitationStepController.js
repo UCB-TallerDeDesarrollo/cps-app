@@ -271,6 +271,11 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     PossibleSolutionFactory.all($stateParams.unsolvedProblemId, function(res){
       $scope.solutions = res;
     });
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Rating a solution view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
     $state.go('app.invitation');
   };
 

@@ -29,6 +29,14 @@ angular.module('starter.controllers')
       faq = helpInfo;
     });
   };
+  $scope.googleAnalyticsForMainHelp = function() {
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Main Help view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+  };
+
   $scope.getHelpInfo();
 
   $scope.goToHelpStep2 = function(searchWord){
