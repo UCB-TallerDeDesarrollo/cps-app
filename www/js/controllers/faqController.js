@@ -95,7 +95,7 @@ angular.module('starter.controllers')
     },{
     	question:"You’ve written that simply communicating an expectation to a kid is not the same thing as using Plan A.  Can you explain that further?",
     	answer:"You’re not using any Plan when you’re communicating or reminding a kid of an expectation.  The three Plans represent your options for dealing with unmet expectations.  That said, there’s definitely such a thing as “style points” in how adults go about communicating or reminding a kid of their expectations.  In other words, it’s possible to communicate expectations in a way that will send some of the more reactive kids right over the edge."
-
+}];
   $scope.googleAnalyticsViewFAQ = function() {
     if(typeof analytics !== 'undefined') {
       analytics.trackView('F.A.Q view');
