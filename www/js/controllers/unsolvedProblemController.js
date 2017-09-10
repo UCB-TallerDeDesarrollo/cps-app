@@ -89,7 +89,8 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     $scope.openModalEdit();
     if(typeof analytics !== 'undefined') {
       analytics.trackEvent('Unsolved Problem event edit', 'New')
-    } else {
+    } 
+    else {
       console.log("Google Analytics Unavailable");
     }
   };
