@@ -108,6 +108,11 @@ angular.module('starter.controllers')
         ChildrenFactory.all(function(children){
           $scope.childs = children;
         });
+        if(typeof analytics !== 'undefined') {
+          analytics.trackEvent('Child', 'Edit')
+        } else {
+          console.log("Google Analytics Unavailable");
+        }
       }
     };
 
