@@ -220,8 +220,10 @@ angular.module('starter.controllers')
         });
     };
 
-    $scope.showIntroductionPage = function(childs) {
-      var buttonsTemplate =
+    $scope.showIntroductionPage = function() {
+      if(localStorage.getItem("pop_up_first_time") === null){
+            localStorage.setItem("pop_up_first_time", true);
+               var buttonsTemplate =
          '<div class="button-bar">'+
             '<a href="http://livesinthebalance.org/walking-tour-parents" class="button button-assertive">'+
             '<b><font size="2">Parent</font></b>'+
@@ -233,8 +235,6 @@ angular.module('starter.controllers')
             '<b><font size="2">Sign in</font></b>'+
             '</a>'+
          '<div>';
-
-      if(childs == 0){
         var myPopup = $ionicPopup.show({
         title: 'Welcome to Lens Changer',
         subTitle: 'You can choose a option!',
@@ -260,8 +260,8 @@ angular.module('starter.controllers')
 
         $scope.sign_inPage = function(){
           $window.open('', '_system', 'location=yes');
-        }
-      }
+        } 
+          }   
     };
 
     $scope.googleAnalyticsView = function() {
