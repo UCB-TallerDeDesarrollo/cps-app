@@ -1,5 +1,5 @@
 <ion-view view-title="Tutorial" ng-controller="TutorialCtrl">
-          
+
             <ion-nav-buttons side="right">
               <button class="button button-positive button-clear no-animation"
                       ng-click="next()" ng-show="slideIndex != 9">
@@ -11,7 +11,7 @@
               </button>
             </ion-nav-buttons>
 
-        <ion-slide-box on-slide-changed="slideChanged(index)">
+        <ion-slide-box class="tutorialSlide"on-slide-changed="slideChanged(index)">
           <ion-slide>
               <img src="img/appTutorial/1.png">
           </ion-slide>

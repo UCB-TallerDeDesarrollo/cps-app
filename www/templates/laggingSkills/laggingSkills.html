@@ -12,7 +12,7 @@
           <div class="dark" ng-if="!laggingSkill.checked">
             {{laggingSkill.description}}
           </div>
-          <a href="#/app/unsolvedProblems/new">
+          <a href="#/app/unsolvedProblems/new/{{laggingSkill.id}}">
             <i class="icon dark ion-chevron-right" ng-if="laggingSkill.checked === 0"></i>
             <i class="icon positive ion-chevron-right" ng-if="laggingSkill.checked === 1"></i>
           </a>
