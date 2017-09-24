@@ -276,6 +276,14 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         }
       }
     })
+  .state('app.tutorial',{
+    url: '/tutorial',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/appTutorials/mainTutorial.html'
+      }
+    }
+  })
   .state('app.helpDefineAdultsConcern',{
       url: '/mainHelp/helpDefineAdultsConcern',
       params: {

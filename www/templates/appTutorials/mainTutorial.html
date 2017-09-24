@@ -1,0 +1,46 @@
+<ion-view view-title="Tutorial" ng-controller="TutorialCtrl">
+          
+            <ion-nav-buttons side="right">
+              <button class="button button-positive button-clear no-animation"
+                      ng-click="next()" ng-show="slideIndex != 9">
+                Next
+              </button>
+              <button class="button button-positive button-clear no-animation"
+                      ng-click="startApp()" ng-show="slideIndex == 9">
+                Finish
+              </button>
+            </ion-nav-buttons>
+
+        <ion-slide-box on-slide-changed="slideChanged(index)">
+          <ion-slide>
+              <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+          </ion-slide>
+          <ion-slide>
+              <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+          </ion-slide>
+          <ion-slide>
+              <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+          </ion-slide>
+          <ion-slide>
+              <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+          </ion-slide>
+          <ion-slide>
+              <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+          </ion-slide>
+          <ion-slide>
+            <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+        </ion-slide>
+        <ion-slide>
+            <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+        </ion-slide>
+        <ion-slide>
+            <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+        </ion-slide>
+        <ion-slide>
+            <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+        </ion-slide>
+        <ion-slide>
+            <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+        </ion-slide>
+        </ion-slide-box>
+      </ion-view>
