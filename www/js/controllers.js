@@ -341,8 +341,24 @@ angular.module('starter.controllers', [])
                 });
             });
         };
-    });
+    })
 
+    .controller('TutorialCtrl', function($scope, $state, $ionicSlideBoxDelegate, $cordovaSQLite, $ionicPopup) {
+        
+        $scope.startApp = function() {
+            $state.go('app.childs');
+        };
+        $scope.next = function() {
+            $ionicSlideBoxDelegate.next();
+        };
+        $scope.previous = function() {
+            $ionicSlideBoxDelegate.previous();
+        };
+
+        $scope.slideChanged = function(index) {
+            $scope.slideIndex = index;
+        };
+    });
 
 // OTHER FUNCTIONS
 
