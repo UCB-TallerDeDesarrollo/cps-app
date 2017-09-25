@@ -1,5 +1,5 @@
 angular.module('starter.services')
-.factory('AppTools', function($sce, $ionicModal, $window ,$cordovaInAppBrowser) {
+.factory('AppTools', function($sce, $ionicModal, $window ,$cordovaInAppBrowser, $ionicPlatform) {
   function createNewBrowser(options){
     var browserInstance = {
       title: '',
@@ -29,6 +29,10 @@ angular.module('starter.services')
       this.browser.hide();
       // $cordovaInAppBrowser.close();
     };
+
+      $ionicPlatform.onHardwareBackButton(function() {
+         browserInstance.closeBrowser();
+      });
 
     browserInstance.getUriLength = function(){
       return (($window.innerWidth * 0.9)/6)-3;
