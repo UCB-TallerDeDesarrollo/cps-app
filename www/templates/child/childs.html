@@ -1,6 +1,6 @@
 <ion-view cache-view="false" view-title="Manage Children">
   <ion-content ng-controller="ChildsCtrl">
-    <div ng-init="showTutorial(); updateUnsolvedProblems(); googleAnalyticsView();">
+    <div ng-init="updateUnsolvedProblems(); googleAnalyticsView();showIntroductionPage();">
       <div  class="item item-divider item-text-wrap">
         <a ng-click="openModalCreate()" class="watchlist_menu button button-small button-clear button-positive">
           <i class="icon ion-plus"></i>
@@ -25,7 +25,7 @@
         </div>
       </div>
       </div>
-
+        
       <div ng-repeat="child in childs">
         <div ng-if="$index%2==0" class="row">
           <div class="col col-50">
@@ -40,12 +40,15 @@
                 <div class="button-bar">
                   <div class="col col-50 button button-small button-positive" ng-click="activateChild(child)" ng-if="child.active === 0 ">
                     <i class="icon ion-arrow-right-b"></i>
-                  </div>
+                  </div>                  
                   <div class="col col-50 button button-small button-balanced" ng-click="goTo('app.home')" ng-if="child.active === 1 ">
                     <i class="icon ion-arrow-right-c"></i>
                   </div>
                   <div class="col col-50 button button-small button-calm" ng-click="showActionsheet(child)">
                     <i class="icon ion-more"></i>
+                  </div>
+                  <div class="col col-50 button button-small button-positive" ng-click = "ALSUPbutton(child)">
+                    <i class="icon ion-social-pinterest-outline"></i>
                   </div>
                 </div>
               </div>
@@ -63,12 +66,15 @@
                 <div class="button-bar">
                   <div class="col col-50 button button-small button-positive" ng-click="activateChild(childs[$index+1])" ng-if="childs[$index+1].active === 0">
                     <i class="icon ion-arrow-right-b"></i>
-                  </div>
+                  </div>                  
                   <div class="col col-50 button button-small button-balanced" ng-click="goTo('app.home')" ng-if="childs[$index+1].active === 1">
                     <i class="icon ion-arrow-right-c"></i>
                   </div>
                   <div class="col col-50 button button-small button-calm" ng-click="showActionsheet(childs[$index+1])">
                     <i class="icon ion-more"></i>
+                  </div>
+                  <div class="col col-50 button button-small button-positive" ng-click = "ALSUPbutton(childs[$index+1])">
+                    <i class="icon ion-social-pinterest-outline"></i>
                   </div>
                 </div>
               </div>

@@ -175,6 +175,26 @@ angular.module('starter.controllers')
       $state.go(route);
     };
 
+    $scope.ALSUPbutton = function(child){
+      if(child.active === 0){
+        $scope.activateChild(child);
+      }
+      var confirmPopup = $ionicPopup.confirm({
+        template: 'Are you finished with the ALSUP?',
+        cancelText: 'No',
+        okText: 'Yes'
+      });
+
+      confirmPopup.then(function(res) {
+       if(res) {
+        $state.go('app.newUnsolvedProblem');
+       } else{
+        $state.go('app.laggingSkills');
+       }
+      });
+
+    };
+
     $scope.deleteChild = function(child) {
       if(child.active === 1){
         $scope.activeChild={first_name:""};
@@ -221,7 +241,7 @@ angular.module('starter.controllers')
     };
 
     $scope.showIntroductionPage = function() {
-      if(localStorage.getItem("pop_up_first_time") === null && localStorage.getItem("tutorial_first_time") != null){
+      if(localStorage.getItem("pop_up_first_time") === null){
             localStorage.setItem("pop_up_first_time", true);
                var buttonsTemplate =
          '<div class="button-bar">'+
@@ -260,19 +280,8 @@ angular.module('starter.controllers')
 
         $scope.sign_inPage = function(){
           $window.open('', '_system', 'location=yes');
-        }
-          }
-    };
-
-    $scope.showTutorial = function() {
-$scope.showIntroductionPage();
-     if(localStorage.getItem("tutorial_first_time") === null ){
-
-       localStorage.setItem("tutorial_first_time", true);
-      $state.go('app.tutorial');
-          }
-
-
+        } 
+          }   
     };
 
     $scope.googleAnalyticsView = function() {
