@@ -221,7 +221,7 @@ angular.module('starter.controllers')
     };
 
     $scope.showIntroductionPage = function() {
-      if(localStorage.getItem("pop_up_first_time") === null){
+      if(localStorage.getItem("pop_up_first_time") === null && localStorage.getItem("tutorial_first_time") != null){
             localStorage.setItem("pop_up_first_time", true);
                var buttonsTemplate =
          '<div class="button-bar">'+
@@ -260,8 +260,19 @@ angular.module('starter.controllers')
 
         $scope.sign_inPage = function(){
           $window.open('', '_system', 'location=yes');
-        } 
-          }   
+        }
+          }
+    };
+
+    $scope.showTutorial = function() {
+$scope.showIntroductionPage();
+     if(localStorage.getItem("tutorial_first_time") === null ){
+
+       localStorage.setItem("tutorial_first_time", true);
+      $state.go('app.tutorial');
+          }
+
+
     };
 
     $scope.googleAnalyticsView = function() {
