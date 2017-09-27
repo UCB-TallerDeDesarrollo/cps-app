@@ -175,6 +175,26 @@ angular.module('starter.controllers')
       $state.go(route);
     };
 
+    $scope.ALSUPbutton = function(child){
+      if(child.active === 0){
+        $scope.activateChild(child);
+      }
+      var confirmPopup = $ionicPopup.confirm({
+        template: 'Are you finished with the ALSUP?',
+        cancelText: 'No',
+        okText: 'Yes'
+      });
+
+      confirmPopup.then(function(res) {
+       if(res) {
+        $state.go('app.newUnsolvedProblem');
+       } else{
+        $state.go('app.laggingSkills');
+       }
+      });
+
+    };
+
     $scope.deleteChild = function(child) {
       if(child.active === 1){
         $scope.activeChild={first_name:""};
