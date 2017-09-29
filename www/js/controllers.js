@@ -344,7 +344,7 @@ angular.module('starter.controllers', [])
     })
 
     .controller('TutorialCtrl', function($scope, $state, $ionicSlideBoxDelegate, $cordovaSQLite, $ionicPopup) {
-        
+
         $scope.startApp = function() {
             $state.go('app.childs');
         };
