@@ -93,6 +93,27 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     }
   };
 
+  $scope.verifyToGoToStep1 = function(id) {
+    if($scope.unsolvedProblems.length > 0){
+      var confirmPopup = $ionicPopup.confirm({
+        title: "Going to Step 1: Empathy Step",
+        template: "Did you list all of the examples that come to mind when you think of your child having difficulty with this lagging skill?",
+        cancelText: "No, keep drilling",
+        okText: "Yes, I'm sure"
+      });
+
+      confirmPopup.then(function(res) {
+      if(res) {
+       $state.go('app.showUnsolvedProblem',{ unsolvedProblemId:id});
+      }
+      
+      });
+    }
+    else {
+      $state.go('app.newUnsolvedProblem',{ unsolvedProblemId:id});
+    }
+  };
+
   $scope.childsConcernsFlag = function(unsolvedProblem){
       var query ="SELECT COUNT(*) AS childsCount FROM childs_concerns where unsolved_problem_id = ?";
       $cordovaSQLite.execute(db,query,[unsolvedProblem.id])
@@ -252,4 +273,21 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
    $scope.hideFakeButtons = function() {
      return ( $scope.unsolvedProblems.size === 0 || $scope.firstItemAnimationShown );
    };
+   $scope.unsolvedProblemHint = function(){
+       $scope.openModalHint();
+     };
+   $scope.openModalHint = function() {
+       $scope.modalHint.show();
+     };
+   $ionicModal.fromTemplateUrl('templates/unsolvedProblems/unsolvedProblemsHints.html', {
+         scope: $scope,
+         animation: 'slide-in-up'
+       }).then(function(modal) {
+         $scope.modalHint = modal;
+         $scope.closeModalEdit();
+     });
+   $scope.closeModalHint = function() {
+       $scope.modalHint.hide();
+       $ionicListDelegate.closeOptionButtons();
+     };
 });

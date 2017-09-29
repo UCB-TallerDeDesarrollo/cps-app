@@ -1,7 +1,8 @@
-<ion-view cache-view="false" view-title="Plan B" >
+<ion-view cache-view="false" view-title="Plan B" ng-controller="UnsolvedProblemCtrl" >
   <div class="bar bar-subheader bar-positive item-text-wrap">
-    <h2 class="title">{{activeChild.first_name}}</h2>
-  </div>
+      <h2 class="title">{{activeChild.first_name}}</h2>
+      <a class=" button button-small button-clear button-white icon ion-help-circled" ng-click = "unsolvedProblemHint()"></a>
+    </div>
   <ion-content class="has-subheader" ng-controller="UnsolvedProblemCtrl" on-tap="unableAnimation()">
     <div >
       <div class="item item-divider item-text-wrap">
@@ -21,14 +22,14 @@
           <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
           <button class="item-options item fake-button button button-positive ion-more"></button>
         </div>
-          <ion-item class="item-text-wrap item-icon-left item-icon-right" ng-repeat="unsolvedProblem in unsolvedProblems" ng-class="{ slidein: $first && !firstItemAnimationShown}">
-            <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration">
+          <ion-item class="item-text-wrap item-icon-left item-icon-right" ng-click="verifyToGoToStep1({{unsolvedProblem.id}})" ng-repeat="unsolvedProblem in unsolvedProblems" ng-class="{ slidein: $first && !firstItemAnimationShown}">
+            <!-- <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration"> -->
               <div name="content">
                 <i class="icon dark {{getRatingIcon(unsolvedProblem)}}"></i>
                 <p>{{unsolvedProblem.description}}</p>
                 <i class="icon dark ion-chevron-right"></i>
               </div>
-            </a>
+            <!-- </a> -->
             <ion-option-button class="button button-balanced ion-edit" ng-click="editUnsolvedProblem(unsolvedProblem)" ng-hide="{{shouldShowReorder}}"></ion-option-button>
             <ion-option-button class="button-assertive ion-trash-a" ng-click="showConfirm(unsolvedProblem)"></ion-option-button>
             <ion-option-button class="button-positive ion-more" ng-click="showActionsheet(unsolvedProblem)"></ion-option-button>
