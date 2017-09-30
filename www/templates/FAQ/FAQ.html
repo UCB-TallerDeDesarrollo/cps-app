@@ -10,14 +10,14 @@
         Clear
     </button>
   </div>
-  <ion-content class="has-subheader">
+  <ion-content ng-init="googleAnalyticsViewFAQ()" class="has-subheader">
 
     <ion-list ng-if="searchWord === ''">
       <ion-item class="item item-text-wrap" href="#/app/faq/challengingKids">
         Challenging Kids
       </ion-item>
       <ion-item class="item item-text-wrap" href="#/app/faq/model">
-        General questions about CPS Model
+        General questions about CPS
       </ion-item>
       <ion-item class="item item-text-wrap" href="#/app/faq/plans">
         Questions about the plans

@@ -16,10 +16,23 @@ angular.module('starter.controllers')
       $scope.unsolvedProblem = result.rows.item(0);
     });
   };
+  $scope.showAdultsConcernHint = function() {
+    if(localStorage.getItem("showAdultsConcernHint") === null){
+        localStorage.setItem("showAdultsConcernHint", true);
+        var confirmPopup = $ionicPopup.alert({
+          title: "After you've listed all of your concerns, click the arrow to move on to the invitation step"
+        });
+     }
+    };
   $scope.createAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.adultsConcern.description)) {
       $scope.adultsConcern.unsolvedProblemId = $stateParams.unsolvedProblemId;
       AdultConcernFactory.insert($scope.adultsConcern);
+      if(typeof analytics !== 'undefined') {
+        analytics.trackEvent('Unsolved problem', 'create')
+      } else {
+        console.log("Google Analytics Unavailable");
+      }
       $scope.modalCreate.hide();
       $state.go('app.defineTheProblem');
       $scope.adultsConcern.description = "";
@@ -76,6 +89,11 @@ angular.module('starter.controllers')
   });
   $scope.openModal = function() {
     $scope.modalCreate.show();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Create adult concern view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
   };
   $scope.closeModal = function() {
     $scope.modalCreate.hide();
@@ -104,6 +122,11 @@ angular.module('starter.controllers')
   });
   $scope.openModalEdit = function() {
     $scope.modalEdit.show();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('Edit adult concern view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
   };
   $scope.closeModalEdit = function() {
     $scope.modalEdit.hide();
@@ -161,6 +184,14 @@ angular.module('starter.controllers')
 
   $scope.hideFakeButtons = function() {
     return ( $scope.adultsConcerns.length === 0 || $scope.firstItemAnimationShown );
+  };
+
+  $scope.googleAnalyticsView = function() {
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView("Define adult's concerns view");
+    }else {
+      console.log("Google Analytics Unavailable");
+    }
   };
 
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(1,10));});

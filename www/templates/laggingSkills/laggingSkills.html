@@ -1,8 +1,9 @@
 <ion-view cache-view="false" view-title="Lagging Skills">
   <div class="bar bar-subheader bar-positive item-text-wrap">
     <h2 class="title">{{activeChild.first_name}}</h2>
+    <a class=" button button-small button-clear button-white icon ion-help-circled" ng-click = "laggingSkillsHint()"></a>
   </div>
-  <ion-content class="has-subheader">
+  <ion-content class="has-subheader" ng-init="googleAnalyticsView()">
     <ion-list>
       <ion-item class="item item-text-wrap item-icon-right" ng-repeat="laggingSkill in laggingSkills" href="#/app/unsolvedProblems/new/{{laggingSkill.id}}">
           <div class="positive" ng-if="laggingSkill.checked">
@@ -11,7 +12,7 @@
           <div class="dark" ng-if="!laggingSkill.checked">
             {{laggingSkill.description}}
           </div>
-          <a href="#/app/unsolvedProblems/new">
+          <a href="#/app/unsolvedProblems/new/{{laggingSkill.id}}">
             <i class="icon dark ion-chevron-right" ng-if="laggingSkill.checked === 0"></i>
             <i class="icon positive ion-chevron-right" ng-if="laggingSkill.checked === 1"></i>
           </a>

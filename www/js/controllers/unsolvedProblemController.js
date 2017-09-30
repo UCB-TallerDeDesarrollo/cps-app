@@ -61,6 +61,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
 
     $scope.unsolvedProblems.splice(fromIndex, 1);
     $scope.unsolvedProblems.splice(toIndex, 0, unsolvedProblem);
+    if(typeof analytics !== 'undefined') {
+      analytics.trackEvent('Unsolved Problems', 'Change order')
+    } else {
+      console.log("Google Analytics Unavailable");
+    }
   };
 
   $scope.createUnsolvedProblem = function() {
@@ -75,13 +80,23 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       $scope.unsolvedProblem = {};
       $scope.updateUnsolvedProblems();
       $scope.closeModalCreate();
-    }
+      if(typeof analytics !== 'undefined') {
+        analytics.trackEvent('Unsolved Problem event', 'New')
+        } else {
+            console.log("Google Analytics Unavailable");
+          }
+      }
   };
 
   $scope.editUnsolvedProblem = function(unsolvedProblem){
     $scope.unsolvedProblemToEdit = unsolvedProblem;
     $scope.editableUnsolvedProblem = angular.copy(unsolvedProblem);
     $scope.openModalEdit();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackEvent('Unsolved Problem event edit', 'New')
+    }else {
+      console.log("Google Analytics Unavailable");
+    }
   };
 
   $scope.saveUnsolvedProblemChanges = function(){
@@ -90,6 +105,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       $scope.modalEdit.hide();
       $scope.editableUnsolvedProblem = {};
       $scope.updateUnsolvedProblems();
+      if(typeof analytics !== 'undefined') {
+        analytics.trackView('Edit unsolved problem view');
+      } else {
+          console.log("Google Analytics Unavailable");
+      }
     }
   };
 
@@ -106,7 +126,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       if(res) {
        $state.go('app.showUnsolvedProblem',{ unsolvedProblemId:id});
       }
-      
+
       });
     }
     else {
@@ -148,6 +168,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
 
   $scope.openModalCreate = function() {
     $scope.modalCreate.show();
+    if(typeof analytics !== 'undefined') {
+      analytics.trackView('New Unsolved Problem view');
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
   };
 
   $scope.closeModalCreate = function() {
@@ -250,6 +275,13 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       if(res) {
        $scope.delete(item);
       }
+
+      if(typeof analytics !== 'undefined') {
+        analytics.trackEvent('Unsolved problem Hint', 'Delete')
+      } else {
+        console.log("Google Analytics Unavailable");
+      }
+
      });
    };
 
@@ -275,6 +307,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
    };
    $scope.unsolvedProblemHint = function(){
        $scope.openModalHint();
+       if(typeof analytics !== 'undefined') {
+           analytics.trackEvent('Unsolved problem Hint', 'Open')
+       } else {
+           console.log("Google Analytics Unavailable");
+       }
      };
    $scope.openModalHint = function() {
        $scope.modalHint.show();
@@ -290,4 +327,11 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
        $scope.modalHint.hide();
        $ionicListDelegate.closeOptionButtons();
      };
+    $scope.googleAnalyticsView = function() {
+     if(typeof analytics !== 'undefined') {
+       analytics.trackView('Unsolved Problems view');
+     } else {
+         console.log("Google Analytics Unavailable");
+     }
+   };
 });

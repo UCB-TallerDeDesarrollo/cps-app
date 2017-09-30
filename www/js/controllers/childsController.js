@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer, UnsolvedProblemFactory, ChildrenFactory) {
+  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $window, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer, UnsolvedProblemFactory, ChildrenFactory) {
     $scope.child = {};
     $scope.child.first_name="";
     $scope.child.gender = "Female";
@@ -17,6 +17,11 @@ angular.module('starter.controllers')
     });
     $scope.openModalCreate = function() {
       $scope.modalCreate.show();
+      if(typeof analytics !== 'undefined') {
+        analytics.trackView('Create child view');
+      } else {
+          console.log("Google Analytics Unavailable");
+      }
     };
     $scope.closeModalCreate = function() {
       $scope.modalCreate.hide();
@@ -77,6 +82,11 @@ angular.module('starter.controllers')
           $scope.child.gender = "Female";
           $scope.child.birthday = new Date();
           $scope.closeModalCreate();
+          if(typeof analytics !== 'undefined') {
+            analytics.trackEvent('Child', 'Create')
+          } else {
+            console.log("Google Analytics Unavailable");
+          }
           ChildrenFactory.all(function(children){
             $scope.childs = children;
             var lastChild = children.pop();
@@ -103,6 +113,11 @@ angular.module('starter.controllers')
         ChildrenFactory.all(function(children){
           $scope.childs = children;
         });
+        if(typeof analytics !== 'undefined') {
+          analytics.trackEvent('Child', 'Edit')
+        } else {
+          console.log("Google Analytics Unavailable");
+        }
       }
     };
 
@@ -160,6 +175,26 @@ angular.module('starter.controllers')
       $state.go(route);
     };
 
+    $scope.ALSUPbutton = function(child){
+      if(child.active === 0){
+        $scope.activateChild(child);
+      }
+      var confirmPopup = $ionicPopup.confirm({
+        template: 'Are you finished with the ALSUP?',
+        cancelText: 'No',
+        okText: 'Yes'
+      });
+
+      confirmPopup.then(function(res) {
+       if(res) {
+        $state.go('app.newUnsolvedProblem');
+       } else{
+        $state.go('app.laggingSkills');
+       }
+      });
+
+    };
+
     $scope.deleteChild = function(child) {
       if(child.active === 1){
         $scope.activeChild={first_name:""};
@@ -170,6 +205,11 @@ angular.module('starter.controllers')
           $scope.activeChild = active_child;
         });
       });
+      if(typeof analytics !== 'undefined') {
+        analytics.trackEvent('Child', 'Delete')
+      } else {
+        console.log("Google Analytics Unavailable");
+      }
     };
     $scope.showConfirm = function(child) {
       var confirmPopup = $ionicPopup.confirm({
@@ -199,6 +239,69 @@ angular.module('starter.controllers')
             // constant progress updates
         });
     };
+
+    $scope.showIntroductionPage = function() {
+      if(localStorage.getItem("pop_up_first_time") === null && localStorage.getItem("tutorial_first_time") != null){
+            localStorage.setItem("pop_up_first_time", true);
+               var buttonsTemplate =
+         '<div class="button-bar">'+
+            '<a href="http://livesinthebalance.org/walking-tour-parents" class="button button-assertive">'+
+            '<b><font size="2">Parent</font></b>'+
+            '</a>'+
+            '<a href="http://livesinthebalance.org/workshopstraining" class="button ng-binding button-energized">'+
+            '<b><font size="2">Educator</font></b>'+
+            '</a>'+
+            '<a href="https://visitor.constantcontact.com/manage/optin?v=001DFTCDgfTjagIuIbRq2pgrG8ZVHSiKAKz7c-CMCvU_l22aSgjxedUQV-Irm8JNXt17JXGXj5O1MaEkvyw53H3fs3le1gcsNGw" class="button ng-binding button-calm">'+
+            '<b><font size="2">Sign in</font></b>'+
+            '</a>'+
+         '<div>';
+        var myPopup = $ionicPopup.show({
+        title: 'Welcome to Lens Changer',
+        subTitle: 'You can choose a option!',
+        template: buttonsTemplate,
+        cssClass: 'popup-intro',
+        buttons: [
+            {
+              type: 'button button-balanced',
+              text: '<div><b><font size="2">Ready</font></b></div>',
+              onTap: function(e) {
+              myPopup.close();
+            }
+          }]
+        });
+
+        function parentsPage(){
+            $window.open('', '_system', 'location=yes');
+        }
+
+        $scope.educatorPage = function(){
+            $window.open('', '_system', 'location=yes');
+        }
+
+        $scope.sign_inPage = function(){
+          $window.open('', '_system', 'location=yes');
+        }
+          }
+    };
+
+    $scope.showTutorialFirstTime = function() {
+          $scope.showIntroductionPage();
+         if(localStorage.getItem("tutorial_first_time") === null ){
+
+           localStorage.setItem("tutorial_first_time", true);
+          $state.go('app.tutorial');
+              }
+
+
+        };
+
+    $scope.googleAnalyticsView = function() {
+     if(typeof analytics !== 'undefined') {
+       analytics.trackView('Manage Children view');
+     } else {
+         console.log("Google Analytics Unavailable");
+     }
+   };
 });
 
 function createLaggingSkills (cordovaSQLite, child_id){

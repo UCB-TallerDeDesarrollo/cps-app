@@ -1,4 +1,4 @@
-<ion-view view-title="CPS Model FAQ" ng-controller="FaqCtrl">
+<ion-view view-title="CPS FAQ" ng-controller="FaqCtrl">
   <div class="bar bar-subheader item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-search placeholder-icon"></i>
@@ -10,6 +10,7 @@
         Clear
     </button>
   </div>
+  <div ng-init="googleAnalyticsViewCPSModelFAQ()">
   <ion-content class="has-subheader">
       <ion-list>
         <div ng-repeat="question in modelQuestions | filter: searchWord">
@@ -27,4 +28,5 @@
         </div>
       </ion-list>
   </ion-content>
+</div>
 </ion-view>
