@@ -1,11 +1,17 @@
-angular.module('starter.controllers', [])
-
+var app = angular.module('starter.controllers', ['pascalprecht.translate']);
+app
 .config(function($ionicConfigProvider) {
     $ionicConfigProvider.tabs.position("bottom");
     $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory) {
+.config(['$translateProvider', function ($translateProvider) {  
+    $translateProvider.translations('en', $translations_en); 
+    $translateProvider.translations('es', $translations_es); 
+    $translateProvider.preferredLanguage('en');      
+}])
+
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory, $translate) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -23,6 +29,18 @@ angular.module('starter.controllers', [])
             $scope.activeChild = active_child;
         });
     };
+
+    //Changes the language of translation
+    $scope.ChangeLanguage = function(lang){
+        $translate.use(lang);
+    }
+
+    //Modal for language options    
+    $ionicModal.fromTemplateUrl('templates/languageOptionsModal.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.languageOptionsModal = modal;
+    });   
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/defaultUtilities/login.html', {
