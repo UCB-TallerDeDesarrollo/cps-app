@@ -1,29 +1,29 @@
 <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
   <ion-header-bar class="bar bar-header bar-positive">
-    <h1 class="title">Edit Child</h1>
+    <h1 class="title">{{'EditChildTitle' | translate }}</h1>
     <button class="button button-clear button-primary" ng-click="modalEdit.hide()">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll modal-animation">
     <div class="list">
       <label class="item item-input item-stacked-label ">
-        <span class="input-label">Name</span>
+        <span class="input-label">{{'NameTitle' | translate }}</span>
         <input type="text" placeholder="Type a new child's name here." ng-model="editableChild.first_name">
         </input>
       </label>
       <label class="item item-input item-select">
-        <span class="input-label">Gender</span>
+        <span class="input-label">{{'GenderTitle' | translate }}</span>
         <select ng-model="editableChild.gender">
-            <option>Male</option>
-            <option selected>Female</option>
+          <option value="Male">{{'MaleTitle' | translate }}</option>
+          <option selected value="Female">{{'FemaleTitle' | translate }}</option>
          </select>
       </label>
       <label class="item item-input item-select">
-        <span class="input-label">Birth date</span>
+        <span class="input-label">{{'BirthDateTitle' | translate }}</span>
         <input type="date" class="text-align-right" ng-model="editableChild.birthday">
         </input>
       </label>
-        <button class="button button-full button-positive" ng-if="editableChild.first_name.length == 0 || child.birthday === null || !child.birthday" disabled>Save</button>
-        <button class="button button-full button-positive" ng-if="editableChild.first_name.length > 0 && child.birthday" ng-click="updateChild()">Save</button>
+        <button class="button button-full button-positive" ng-if="editableChild.first_name.length == 0 || child.birthday === null || !child.birthday" disabled>{{'SaveTitle' | translate }}</button>
+        <button class="button button-full button-positive" ng-if="editableChild.first_name.length > 0 && child.birthday" ng-click="updateChild()">{{'SaveTitle' | translate }}</button>
     </div>
   </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out modal-animation"></div></div></ion-content>
 </ion-modal-view>
