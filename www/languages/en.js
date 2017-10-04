@@ -7,6 +7,21 @@ var $translations_en = {
     LaggingSkillsTitle: 'Lagging Skills',
     UnsolvedProblemsTitle: 'Unsolved Problems',
     MainHelpTitle: 'Main Help',
-    AppTutorialTitle: 'App Tutorial'
-    
+    AppTutorialTitle: 'App Tutorial',
+    MyChildrenTitle: 'My Children',
+    HavntRegisteredAChildAlert: " You haven't registered a child. ",
+    RegisterChildMessage: 'PLEASE REGISTER ONE ABOVE',
+    BirthDateTitle: 'Birt Date: ',
+    NewChildTitle: 'New Child',
+    NameTitle: 'Name',
+    TypeChildNameTitle: "Type a new child's name here.",
+    GenderTitle: "Gender",
+    MaleTitle: 'Male',
+    FemaleTitle: 'Female',
+    CreateTitle: 'Create',
+    EditChildTitle: 'Edit Child',
+    DeleteChildTitle: 'Delete Child',
+    SaveTitle: 'Save',
+    CancelOption: 'Canel'
+
 };
