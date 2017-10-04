@@ -175,7 +175,38 @@ angular.module('starter.controllers')
       $state.go(route);
     };
 
-    $scope.ALSUPbutton = function(child){
+    $scope.UpButtonConfirm = function(child){
+      var UPcount = $scope.UnsolvedProblemsCount(child);
+      var LScount = $scope.laggingSkillsCheckCount(child);
+      if (UPcount === 1 && LScount === 0 ) {
+        return 0;
+      }else{ 
+        return 1;
+      }
+    };
+
+    $scope.UnsolvedProblemsCount = function(child){
+      return child.id;
+    };
+
+    $scope.laggingSkillsCheckCount = function(child){
+      return 0;
+    };    
+
+    $scope.childUnsolvedProblemsCount = function(child){
+      var query ="SELECT * FROM unsolved_problems WHERE child_id = ? ORDER BY unsolved_order";
+      $cordovaSQLite.execute(db,query,[child.id]).then(function(result) {
+      var rows = result.rows;
+      callback(rows);
+      },function(err){
+        console.log(err.message);
+      });
+      return rows.length;
+    };
+
+   
+
+    $scope.UPbutton = function(child){
       if(child.active === 0){
         $scope.activateChild(child);
       }
