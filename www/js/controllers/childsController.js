@@ -176,35 +176,28 @@ angular.module('starter.controllers')
     };
 
     $scope.UpButtonConfirm = function(child){
-      var UPcount = $scope.UnsolvedProblemsCount(child);
+      //var UPcount = $scope.UnsolvedProblemsCount(child);
       var LScount = $scope.laggingSkillsCheckCount(child);
-      if (UPcount === 1 && LScount === 0 ) {
+      if (false ) {
         return 0;
       }else{ 
         return 1;
       }
     };
 
-    $scope.UnsolvedProblemsCount = function(child){
+    $scope.laggingSkillsCheckCount = function(child){
       return child.id;
     };
 
-    $scope.laggingSkillsCheckCount = function(child){
-      return 0;
-    };    
-
-    $scope.childUnsolvedProblemsCount = function(child){
-      var query ="SELECT * FROM unsolved_problems WHERE child_id = ? ORDER BY unsolved_order";
-      $cordovaSQLite.execute(db,query,[child.id]).then(function(result) {
-      var rows = result.rows;
-      callback(rows);
-      },function(err){
-        console.log(err.message);
-      });
-      return rows.length;
-    };
-
-   
+    $scope.UnsolvedProblemsCount = function(child){
+      var child_id = child.id;
+      var count = 0;
+      var query ="SELECT COUNT(*) FROM unsolved_problems";
+      $cordovaSQLite.execute(db,query,[child_id]).then(function(result) {
+        count = result;
+        });     
+      return count;
+    };      
 
     $scope.UPbutton = function(child){
       if(child.active === 0){
