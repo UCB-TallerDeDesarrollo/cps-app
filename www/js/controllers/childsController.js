@@ -176,9 +176,9 @@ angular.module('starter.controllers')
     };
 
     $scope.UpButtonConfirm = function(child){
-      //var UPcount = $scope.UnsolvedProblemsCount(child);
-      var LScount = $scope.laggingSkillsCheckCount(child);
-      if (false ) {
+      var UPcount = $scope.UnsolvedProblemsCount(child); 
+      //var LScount = $scope.laggingSkillsCheckCount(child);
+      if(UPcount>0){
         return 0;
       }else{ 
         return 1;
@@ -190,12 +190,9 @@ angular.module('starter.controllers')
     };
 
     $scope.UnsolvedProblemsCount = function(child){
-      var child_id = child.id;
-      var count = 0;
-      var query ="SELECT COUNT(*) FROM unsolved_problems";
-      $cordovaSQLite.execute(db,query,[child_id]).then(function(result) {
-        count = result;
-        });     
+      UnsolvedProblemFactory.all(child.id,function(result){
+        count = result.length;
+      });
       return count;
     };      
 

@@ -35,7 +35,9 @@
                 <img class="full-image" ng-src="img/childs/girl.png" ng-if="child.gender === 'Female'">
                 <h2><b>{{child.first_name}}</b></h2>
                 <p><b>{{'BirthDateTitle' | translate }}</b> {{convertStringToDate(child.birthday) | date:"dd/MM/yy"}}</p>
-                <p>HOLA {{UnsolvedProblemsCount(child)}}</p>                
+
+                <p>Unsolved Problems: {{UnsolvedProblemsCount(child)}}</p>
+              
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">
@@ -62,7 +64,9 @@
                 <img class="full-image" ng-src="img/childs/girl.png" ng-if="childs[$index+1].gender === 'Female'">
                 <h2><b>{{childs[$index+1].first_name}}</b></h2>
                 <p><b>{{'BirthDateTitle' | translate }}</b> {{convertStringToDate(childs[$index+1].birthday) | date:"dd/MM/yy"}}</p>
-                <p>HOLA {{UnsolvedProblemsCount(childs[$index+1])}}</p>
+
+                <p>Unsolved Problems: {{UnsolvedProblemsCount(childs[$index+1])}}</p>           
+
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">
