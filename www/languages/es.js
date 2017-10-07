@@ -22,5 +22,9 @@ var $translations_es = {
     EditChildTitle: 'Editar Niño',
     DeleteChildTitle: 'Eliminar Niño',
     SaveTitle: 'Guardar',
-    CancelOption: 'Canelar'
+    CancelOption: 'Canelar',
+    ALSUPHelpOption: 'Ayuda ALSUP',
+    InTheHeatMomentOption: 'En el calor del momento',
+    OptionClear: 'Limpiar',
+    SearchText: 'Buscar'
 }

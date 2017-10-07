@@ -22,6 +22,11 @@ var $translations_en = {
     EditChildTitle: 'Edit Child',
     DeleteChildTitle: 'Delete Child',
     SaveTitle: 'Save',
-    CancelOption: 'Canel'
+    CancelOption: 'Cancel',
+    ALSUPHelpOption: 'ALSUP Help',
+    InTheHeatMomentOption: 'In the heat of the moment',
+    OptionClear:'Clear',
+    SearchText: 'Search'
+
 
 };
