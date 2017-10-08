@@ -131,7 +131,7 @@ angular.module('starter.controllers')
           cancel: function() {
             $ionicListDelegate.closeOptionButtons();
           },
-          destructiveText: 'Delete child',
+          destructiveText: translations.DeleteChildTitle,
           destructiveButtonClicked: function() {
             $scope.showConfirm(child);
             return true;
@@ -238,9 +238,12 @@ angular.module('starter.controllers')
       }
     };
     $scope.showConfirm = function(child) {
+      $translate(['DeleteChildTitle','ConfirmDeleteChildMessage','YesMessage']).then (function(translations){
       var confirmPopup = $ionicPopup.confirm({
-        title: 'Delete Child',
-        template: 'Are you sure you want to delete this child?'
+        title: translations.DeleteChildTitle,
+        template: translations.ConfirmDeleteChildMessage,
+        cancelText: 'No',
+        okText: translations.YesMessage
       });
 
       confirmPopup.then(function(res) {
@@ -249,6 +252,7 @@ angular.module('starter.controllers')
         $state.go('app.childs');
        }
       });
+    });
     };
     $scope.upload = function() {
         var options = {

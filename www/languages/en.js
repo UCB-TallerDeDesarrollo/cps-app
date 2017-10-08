@@ -26,7 +26,11 @@ var $translations_en = {
     ALSUPHelpOption: 'ALSUP Help',
     InTheHeatMomentOption: 'In the heat of the moment',
     OptionClear:'Clear',
-    SearchText: 'Search'
+    SearchText: 'Search',
+    ConfirmDeleteChildMessage: 'Are you sure you want to delete this child?',
+    YesMessage: 'Yes'
+
+
 
 
 };
