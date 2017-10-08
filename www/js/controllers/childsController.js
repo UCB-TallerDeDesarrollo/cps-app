@@ -176,9 +176,8 @@ angular.module('starter.controllers')
     };
 
     $scope.UpButtonConfirm = function(child){
-      var UPcount = $scope.UnsolvedProblemsCount(child);
       //var LScount = $scope.laggingSkillsCheckCount(child);
-      if(UPcount>0){
+      if(child.unsolved_problems>0){
         return 0;
       }else{
         return 1;
@@ -192,8 +191,8 @@ angular.module('starter.controllers')
     $scope.UnsolvedProblemsCount = function(child){
       UnsolvedProblemFactory.all(child.id,function(result){
        child.unsolvedProblemsCounter = result.length;
+       $scope.child.push(child);
       });
-      return child.unsolvedProblemsCounter
     };
 
     $scope.UPbutton = function(child){
