@@ -37,7 +37,7 @@
                 <p><b>{{'BirthDateTitle' | translate }}</b> {{convertStringToDate(child.birthday) | date:"dd/MM/yy"}}</p>
 
                 <p>Unsolved Problems: {{UnsolvedProblemsCount(child)}}</p>
-              
+
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">
@@ -49,10 +49,10 @@
                   </div>
                   <div class="col col-50 button button-small button-calm" ng-click="showActionsheet(child)">
                     <i class="icon ion-more"></i>
-                  </div>                
+                  </div>
                   <div class="col col-50 button button-small button-positive" ng-click = "UPbutton(child)" ng-if="UpButtonConfirm(child) === 0" >
                     <i class="icon ion-social-pinterest-outline"></i>
-                  </div>            
+                  </div>
                 </div>
               </div>
             </div>
@@ -65,7 +65,7 @@
                 <h2><b>{{childs[$index+1].first_name}}</b></h2>
                 <p><b>{{'BirthDateTitle' | translate }}</b> {{convertStringToDate(childs[$index+1].birthday) | date:"dd/MM/yy"}}</p>
 
-                <p>Unsolved Problems: {{UnsolvedProblemsCount(childs[$index+1])}}</p>           
+                <p>Unsolved Problems: {{UnsolvedProblemsCount(childs[$index+1])}}</p>
 
               </div>
               <div class="item item-divider item-text-wrap text-center">
@@ -78,10 +78,10 @@
                   </div>
                   <div class="col col-50 button button-small button-calm" ng-click="showActionsheet(childs[$index+1])">
                     <i class="icon ion-more"></i>
-                  </div>                
+                  </div>
                   <div class="col col-50 button button-small button-positive" ng-click = "UPbutton(childs[$index+1])" ng-if="UpButtonConfirm(childs[$index+1]) === 0" >
                     <i class="icon ion-social-pinterest-outline"></i>
-                  </div>              
+                  </div>
                 </div>
               </div>
             </div>
