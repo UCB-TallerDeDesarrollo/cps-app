@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $window, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer, UnsolvedProblemFactory, ChildrenFactory) {
+  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $window, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer, UnsolvedProblemFactory, ChildrenFactory,$translate) {
     $scope.child = {};
     $scope.child.first_name="";
     $scope.child.gender = "Female";
@@ -122,31 +122,33 @@ angular.module('starter.controllers')
     };
 
     $scope.showActionsheet = function(child) {
-      $ionicActionSheet.show({
-        buttons: [
-          { text: 'Edit child' }
-        ],
-        cancelText: 'Cancel',
-        cancel: function() {
-          $ionicListDelegate.closeOptionButtons();
-        },
-        destructiveText: 'Delete child',
-        destructiveButtonClicked: function() {
-          $scope.showConfirm(child);
-          return true;
-        },
-        buttonClicked: function(index) {
-          if(index === 0){
-            $scope.editableChild = angular.copy(child);
-            $scope.editableChild.birthday = $scope.convertStringToDate(child.birthday);
-            $scope.openModalEdit();
+      $translate(['EditChildTitle','CancelOption','DeleteChildTitle']).then (function(translations){
+        $ionicActionSheet.show({
+          buttons: [
+            { text: translations.EditChildTitle }
+          ],
+          cancelText: translations.CancelOption,
+          cancel: function() {
+            $ionicListDelegate.closeOptionButtons();
+          },
+          destructiveText: 'Delete child',
+          destructiveButtonClicked: function() {
+            $scope.showConfirm(child);
+            return true;
+          },
+          buttonClicked: function(index) {
+            if(index === 0){
+              $scope.editableChild = angular.copy(child);
+              $scope.editableChild.birthday = $scope.convertStringToDate(child.birthday);
+              $scope.openModalEdit();
+            }
+            $ionicListDelegate.closeOptionButtons();
+  
+            return true;
+  
           }
-          $ionicListDelegate.closeOptionButtons();
-
-          return true;
-
-        }
-      });
+        });
+      });      
     };
     $scope.activateChild = function(item){
       ChildrenFactory.activate(item.id,function(){

@@ -8,7 +8,7 @@ app
 .config(['$translateProvider', function ($translateProvider) {  
     $translateProvider.translations('en', $translations_en); 
     $translateProvider.translations('es', $translations_es); 
-    $translateProvider.preferredLanguage('en');      
+    $translateProvider.preferredLanguage('es');      
     $translateProvider.useSanitizeValueStrategy('escapeParameters');
 }])
 
