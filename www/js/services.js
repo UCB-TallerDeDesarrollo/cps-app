@@ -20,7 +20,7 @@ angular.module('starter.services', ['ngCordova'])
   function uncheckLaggingSkill(lagginSkillId,child_id){
     var query = "UPDATE lagging_skills SET checked = 0 where id = ?";
     $cordovaSQLite.execute(db,query,lagginSkillId);
-    
+
   }
   function checkLaggingSkill(lagginSkillId,child_id){
     var query = "UPDATE lagging_skills SET checked = 1 where id = ?";
@@ -42,8 +42,8 @@ angular.module('starter.services', ['ngCordova'])
       }
       return null;
     },
-    check: function(laggingskillId){
-      checkLaggingSkill(laggingskillId);
+    check: function(laggingskillId, child_id){
+      checkLaggingSkill(laggingskillId, child_id);
     },
     uncheck: function(laggingskillId){
       uncheckLaggingSkill(laggingskillId);

@@ -5,10 +5,10 @@ app
     $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
-.config(['$translateProvider', function ($translateProvider) {  
-    $translateProvider.translations('en', $translations_en); 
-    $translateProvider.translations('es', $translations_es); 
-    $translateProvider.preferredLanguage('en');      
+.config(['$translateProvider', function ($translateProvider) {
+    $translateProvider.translations('en', $translations_en);
+    $translateProvider.translations('es', $translations_es);
+    $translateProvider.preferredLanguage('en');
 }])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory, $translate) {
@@ -35,12 +35,12 @@ app
         $translate.use(lang);
     }
 
-    //Modal for language options    
+    //Modal for language options
     $ionicModal.fromTemplateUrl('templates/languageOptionsModal.html', {
             scope: $scope
         }).then(function(modal) {
             $scope.languageOptionsModal = modal;
-    });   
+    });
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/defaultUtilities/login.html', {
@@ -113,7 +113,7 @@ app
         });
     });
     $scope.checkLaggingSkill = function(laggingskillId,child_id) {
-        LaggingSkills.check([laggingskillId]);
+        LaggingSkills.check([laggingskillId], [child_id]);
         $state.go('app.laggingSkills');
         console.log("Controller Child id:" + child_id);
         $ionicListDelegate.closeOptionButtons();
