@@ -377,6 +377,10 @@ app
         $scope.slideChanged = function(index) {
             $scope.slideIndex = index;
         };
+
+        $scope.closeTutorial = function(){
+            $state.go('app.childs');
+        }
     });
 
 // OTHER FUNCTIONS
