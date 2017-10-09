@@ -127,8 +127,9 @@ app
         }
     };
     $scope.uncheckLaggingSkill = function(laggingskillId,child_id) {
-        LaggingSkills.uncheck([laggingskillId]);
+        LaggingSkills.uncheck([laggingskillId], [child_id]);
         $state.go('app.laggingSkills');
+        console.log("Controller out Child id:" + child_id);
         $ionicListDelegate.closeOptionButtons();
         LaggingSkills.all($scope.activeChild.id, function(res) {
             $scope.laggingSkills = res;

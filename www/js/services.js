@@ -18,15 +18,18 @@ angular.module('starter.services', ['ngCordova'])
       });
   }
   function uncheckLaggingSkill(lagginSkillId,child_id){
+    console.log("Controller out Child id:" + child_id);
     var query = "UPDATE lagging_skills SET checked = 0 where id = ?";
     $cordovaSQLite.execute(db,query,lagginSkillId);
+    var query2 = "UPDATE childs SET lagging_skills_check = lagging_skills_check - 1 where id = ?";
+    $cordovaSQLite.execute(db,query2,child_id);
 
   }
   function checkLaggingSkill(lagginSkillId,child_id){
     var query = "UPDATE lagging_skills SET checked = 1 where id = ?";
     $cordovaSQLite.execute(db,query,lagginSkillId);
     console.log("Services Child id: " + child_id);
-    var query2 = "UPDATE childs SET lagging_skills_check = 1 where id = ?";
+    var query2 = "UPDATE childs SET lagging_skills_check = lagging_skills_check + 1 where id = ?";
     $cordovaSQLite.execute(db,query2,child_id);
   }
 
@@ -45,8 +48,8 @@ angular.module('starter.services', ['ngCordova'])
     check: function(laggingskillId, child_id){
       checkLaggingSkill(laggingskillId, child_id);
     },
-    uncheck: function(laggingskillId){
-      uncheckLaggingSkill(laggingskillId);
+    uncheck: function(laggingskillId, child_id){
+      uncheckLaggingSkill(laggingskillId, child_id);
     }
   };
 })

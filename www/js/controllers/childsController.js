@@ -176,16 +176,11 @@ angular.module('starter.controllers')
     };
 
     $scope.UpButtonConfirm = function(child){
-      //var LScount = $scope.laggingSkillsCheckCount(child);
       if(child.unsolved_problems>0 && child.lagging_skills_check > 0){
         return 0;
       }else{
         return 1;
       }
-    };
-
-    $scope.laggingSkillsCheckCount = function(child){
-      return child.id;
     };
 
     $scope.UnsolvedProblemsCount = function(child){
