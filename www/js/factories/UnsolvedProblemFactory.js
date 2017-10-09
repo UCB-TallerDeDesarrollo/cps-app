@@ -2,6 +2,21 @@ angular.module('starter.services').factory('UnsolvedProblemFactory', function($c
   function saveUnsolvedProblem(unsolvedProblem){
     var query = "INSERT INTO unsolved_problems(description, solved, unsolved_order, child_id) VALUES (?,?,?,?)";
     $cordovaSQLite.execute(db, query, [unsolvedProblem.description, 0, unsolvedProblem.unsolved_order,unsolvedProblem.child_id]);
+    var query2 = "UPDATE childs SET unsolved_problems = unsolved_problems + 1 where id = ?";
+    $cordovaSQLite.execute(db,query2,[unsolvedProblem.child_id]);
+/*  
+    var query_unsolved_problems ="SELECT unsolved_problems FROM childs WHERE id = ?";
+    params_child_id = [unsolvedProblem.child_id];
+    $cordovaSQLite.execute(db,query_unsolved_problems, params_child_id).then(function(result) {
+      if(result.rows.length > 0){
+        child_unsolved_problems = result.rows.item(0).unsolved_problems;
+        child_unsolved_problems = child_unsolved_problems + 1;
+        var query_update_child = "UPDATE childs SET unsolved_problems = ? where id = ?";
+        var params = [child_unsolved_problems, unsolvedProblem.child_id];
+        $cordovaSQLite.execute(db,query_update_child,params);
+      }
+    });
+*/
   }
 
   function getUnsolvedProblems(childId,callback) {
@@ -34,6 +49,9 @@ angular.module('starter.services').factory('UnsolvedProblemFactory', function($c
     }, function (err) {
         console.error(err.message);
     });
+
+    var query2 = "UPDATE childs SET unsolved_problems = unsolved_problems - 1 where id = ?";
+    $cordovaSQLite.execute(db,query2,[unsolvedProblem.child_id]);
   }
 
   function findUnsolvedProblem(unsolvedProblemId, callback){
