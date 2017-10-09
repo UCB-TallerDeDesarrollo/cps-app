@@ -37,6 +37,7 @@
                 <p><b>{{'BirthDateTitle' | translate }}</b> {{convertStringToDate(child.birthday) | date:"dd/MM/yy"}}</p>
 
                 <p>Unsolved Problems: {{child.unsolved_problems}}</p>
+                <p>Lagging skills: {{child.lagging_skills_check}}</p>
 
               </div>
               <div class="item item-divider item-text-wrap text-center">
@@ -66,7 +67,7 @@
                 <p><b>{{'BirthDateTitle' | translate }}</b> {{convertStringToDate(childs[$index+1].birthday) | date:"dd/MM/yy"}}</p>
 
                   <p>Unsolved Problems: {{childs[$index+1].unsolved_problems}}</p>
-
+                  <p>Lagging skills: {{child.lagging_skills_check}}</p>
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">

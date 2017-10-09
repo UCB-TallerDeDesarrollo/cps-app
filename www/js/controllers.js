@@ -112,9 +112,10 @@ app
             $scope.laggingSkills = res;
         });
     });
-    $scope.checkLaggingSkill = function(laggingskillId) {
+    $scope.checkLaggingSkill = function(laggingskillId,child_id) {
         LaggingSkills.check([laggingskillId]);
         $state.go('app.laggingSkills');
+        console.log("Controller Child id:" + child_id);
         $ionicListDelegate.closeOptionButtons();
         LaggingSkills.all($scope.activeChild.id, function(res) {
             $scope.laggingSkills = res;
@@ -125,7 +126,7 @@ app
             console.log("Google Analytics Unavailable");
         }
     };
-    $scope.uncheckLaggingSkill = function(laggingskillId) {
+    $scope.uncheckLaggingSkill = function(laggingskillId,child_id) {
         LaggingSkills.uncheck([laggingskillId]);
         $state.go('app.laggingSkills');
         $ionicListDelegate.closeOptionButtons();
