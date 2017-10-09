@@ -5,11 +5,10 @@ app
     $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
-.config(['$translateProvider', function ($translateProvider) {  
-    $translateProvider.translations('en', $translations_en); 
-    $translateProvider.translations('es', $translations_es); 
-    $translateProvider.preferredLanguage('es');      
-    $translateProvider.useSanitizeValueStrategy('escapeParameters');
+.config(['$translateProvider', function ($translateProvider) {
+    $translateProvider.translations('en', $translations_en);
+    $translateProvider.translations('es', $translations_es);
+    $translateProvider.preferredLanguage('en');
 }])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory, $translate) {
@@ -36,12 +35,12 @@ app
         $translate.use(lang);
     }
 
-    //Modal for language options    
+    //Modal for language options
     $ionicModal.fromTemplateUrl('templates/languageOptionsModal.html', {
             scope: $scope
         }).then(function(modal) {
             $scope.languageOptionsModal = modal;
-    });   
+    });
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/defaultUtilities/login.html', {
@@ -113,9 +112,10 @@ app
             $scope.laggingSkills = res;
         });
     });
-    $scope.checkLaggingSkill = function(laggingskillId) {
-        LaggingSkills.check([laggingskillId]);
+    $scope.checkLaggingSkill = function(laggingskillId,child_id) {
+        LaggingSkills.check([laggingskillId], [child_id]);
         $state.go('app.laggingSkills');
+        console.log("Controller Child id:" + child_id);
         $ionicListDelegate.closeOptionButtons();
         LaggingSkills.all($scope.activeChild.id, function(res) {
             $scope.laggingSkills = res;
@@ -126,9 +126,10 @@ app
             console.log("Google Analytics Unavailable");
         }
     };
-    $scope.uncheckLaggingSkill = function(laggingskillId) {
-        LaggingSkills.uncheck([laggingskillId]);
+    $scope.uncheckLaggingSkill = function(laggingskillId,child_id) {
+        LaggingSkills.uncheck([laggingskillId], [child_id]);
         $state.go('app.laggingSkills');
+        console.log("Controller out Child id:" + child_id);
         $ionicListDelegate.closeOptionButtons();
         LaggingSkills.all($scope.activeChild.id, function(res) {
             $scope.laggingSkills = res;
