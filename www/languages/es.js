@@ -1,6 +1,6 @@
 var $translations_es = {     
     LanguageOptionSpanish:'Español' ,
-    LanguageOptionEnglish:'Ingles' ,
+    LanguageOptionEnglish:'Inglés' ,
     LanguageTitle: 'Idioma',
     CloseOption: 'Cerrar',
     ManageChildrenTitle: 'Gestionar Niños',
@@ -28,5 +28,11 @@ var $translations_es = {
     OptionClear: 'Limpiar',
     SearchText: 'Buscar',
     ConfirmDeleteChildMessage: '¿Seguro de que quieres eliminar este niño?',
-    YesMessage: 'Si'
+    YesMessage: 'Si',
+    WelcomeMessage: 'Bienvenido a Lens Changer',
+    ChooseAnOptionMessage: '¡Puedes elegir una opción!',
+    ParentOption: "Padre",
+    EducatorOption: "Educador",
+    SignInOption: "Registrarse",
+    ReadyOption: "Listo"
 }

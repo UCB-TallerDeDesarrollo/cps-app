@@ -9,6 +9,7 @@ app
     $translateProvider.translations('en', $translations_en);
     $translateProvider.translations('es', $translations_es);
     $translateProvider.preferredLanguage('en');
+    $translateProvider.useSanitizeValueStrategy('escapeParameters'); 
 }])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory, $translate) {

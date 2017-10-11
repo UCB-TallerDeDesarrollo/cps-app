@@ -28,7 +28,13 @@ var $translations_en = {
     OptionClear:'Clear',
     SearchText: 'Search',
     ConfirmDeleteChildMessage: 'Are you sure you want to delete this child?',
-    YesMessage: 'Yes'
+    YesMessage: 'Yes',
+    WelcomeMessage: 'Welcome to Lens Changer',
+    ChooseAnOptionMessage: 'You can choose a option!',
+    ParentOption: "Parent",
+    EducatorOption: "Educator",
+    SignInOption: "Sign in",
+    ReadyOption: "Ready"
 
 
 
