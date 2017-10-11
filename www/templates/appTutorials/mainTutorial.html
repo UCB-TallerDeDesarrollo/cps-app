@@ -1,5 +1,11 @@
 <ion-view cache-view="false" view-title="App Tutorial" ng-controller="TutorialCtrl">
-        <ion-content><div class="chat-bubble right" ng-click="closeTutorial()">Close</div>
+            <ion-nav-buttons side="right">
+            <button class="button button-positive button-clear no-animation"
+              ng-click="closeTutorial()">
+                Close
+            </button>
+            </ion-nav-buttons>    
+
         <ion-slide-box class="tutorialSlide"on-slide-changed="slideChanged(index)">
           <ion-slide>
               <img src="img/appTutorial/1.png">

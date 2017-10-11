@@ -235,29 +235,7 @@ body {
         width: auto;
     }
   }
-.chat-bubble {
-  border-radius: 5px;
-  display: inline-block;
-  padding: 10px 18px;
-  position: relative;
-  margin: 10px;
-  max-width: 80%
-}
-.chat-bubble.right:before {
-  content: "\00a0";
-  display: block;
-  height: 16px;
-  width: 9px;
-  position: absolute;
-  bottom: -7.5 px;
-}
 
-.chat-bubble.right {
-  background-color: #e42012;
-  color: #fff;
-  float: right;
-  margin-right: 55px;
-}
 /*input[type="date"]::-webkit-clear-button {
  -webkit-appearance: none;
   display: none;
