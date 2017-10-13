@@ -9,7 +9,7 @@ app
     $translateProvider.translations('en', $translations_en);
     $translateProvider.translations('es', $translations_es);
     $translateProvider.preferredLanguage('en');
-    $translateProvider.useSanitizeValueStrategy('escapeParameters'); 
+    $translateProvider.useSanitizeValueStrategy('escapeParameters');
 }])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory, $translate) {
@@ -433,6 +433,16 @@ app
 
 function inputFieldIsEmpty(description) {
     return description.length === 0;
+}
+
+function signupFieldsAreEmpty(name, last_name, phone, email, password, password_confirmation) {
+    name_is_empty = inputFieldIsEmpty(name);
+    last_name_is_empty = inputFieldIsEmpty(last_name);
+    phone_is_empty = inputFieldIsEmpty(phone);
+    email_is_empty = inputFieldIsEmpty(email);
+    password_is_empty = inputFieldIsEmpty(password);
+    password_confirmation_is_empty = inputFieldIsEmpty(password_confirmation);
+    return (name_is_empty || last_name_is_empty || phone_is_empty || email_is_empty || password_is_empty || password_confirmation_is_empty);
 }
 
 // function saveSolution(cordovaSQLite,solution){
