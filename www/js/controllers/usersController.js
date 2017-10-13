@@ -28,7 +28,7 @@ angular.module('starter.controllers')
     };
     $scope.closeModalSignup = function() {
       $scope.modalSignup.hide();
-      $scope.user.name="";
+      $scope.user.names="";
       $scope.user.last_name="";
       $scope.user.phone="";
       $scope.user.email="";
@@ -71,11 +71,15 @@ angular.module('starter.controllers')
         data: data
       })
       .then(function(response) {
-        console.log(response);
+        console.log(response.data.message);
+        var alertForAccountCreated = $ionicPopup.alert({
+            title: 'Success!',
+            template: 'Your account has been crated.'
+        });
       },
       function(response) {
         console.log(response.data.message);
-        console.log(data);
       });
+      $scope.closeModalSignup();
     };
 });
