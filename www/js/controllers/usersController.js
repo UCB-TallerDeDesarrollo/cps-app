@@ -1,3 +1,4 @@
+var link = "http://localhost:3000/signup";
 angular.module('starter.controllers')
   .controller('UserCtrl', function($scope, $cordovaSQLite, $state, $window, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout, $cordovaFileTransfer, $translate, $http) {
     $scope.user = {};
@@ -49,44 +50,32 @@ angular.module('starter.controllers')
       // Execute action
     });
     $scope.signup = function(){
-      $scope.user.names="Samuel";
-      $scope.user.last_name="Veizaga";
-      $scope.user.phone= 67429995 ;
-      $scope.user.email="samuel@hotmail.com";
-      $scope.user.password="password";
-      $scope.user.password_confirmation="password";
       var number = $scope.user.phone.toString();
-      var link = "http://localhost:3000/signup";
-      var data = JSON.stringify({name : $scope.user.names,
-                  last_name : $scope.user.last_name,
-                  email : $scope.user.email,
-                  phone : number,
-                  password : $scope.user.password,
-                  password_confirmation : $scope.user.password
-                });
-      $http.post(link, data)
-      .then(function (res){
-         console.log(res);
-       });
-      // $http({
-      //   url: 'http://localhost:3000/signup',
-      //   method: "POST",
-      //   dataType: 'JSON',
-      //   data: JSON.stringify({
-      //     'name' : $scope.user.names,
-      //     'last_name' : $scope.user.last_name,
-      //     'email' : $scope.user.email,
-      //     'phone' : number,
-      //     'password' : $scope.user.password,
-      //     'password_confirmation' : $scope.user.password
-      //   })
-      // })
-      // .then(function(response) {
-      //   console.log(response);
-      // },
-      // function(response) { // optional
-      //   console.log(response);
-      // });
+      var data = {name:$scope.user.names,
+                  last_name:$scope.user.last_name,
+                  email:$scope.user.email,
+                  phone:number,
+                  password:$scope.user.password,
+                  password_confirmation:$scope.user.password
+                };
+      $http({
+        method: 'POST',
+        url: link,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+        },
+        data: data
+      })
+      .then(function(response) {
+        console.log(response);
+      },
+      function(response) {
+        console.log(response.data.message);
+        console.log(data);
+      });
     };
-
 });

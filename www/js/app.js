@@ -41,7 +41,6 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   $httpProvider.defaults.headers.patch = {};
   $httpProvider.defaults.useXDomain = true;
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
   var defaultOptions = {
     location: 'no',
     clearcache: 'no',
