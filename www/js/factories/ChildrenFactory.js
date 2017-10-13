@@ -52,6 +52,17 @@ var date = new Date();
       var rows = result.rows;
       if(rows.length) {
         for(var i=0; i < rows.length; i++){
+          var childID = rows.item(i).id;
+          updateUnsolvedProblemCount(childID);
+          updateLaggingSkillsCheckCount(childID);
+        }
+      }
+    });
+    $cordovaSQLite.execute(db,query)
+    .then(function(result) {
+      var rows = result.rows;
+      if(rows.length) {
+        for(var i=0; i < rows.length; i++){
           children.push(rows.item(i));
         }
       }
@@ -59,6 +70,42 @@ var date = new Date();
     },function(err) {
         console.log(err.message);
     });
+  }
+
+  function updateUnsolvedProblemCount(childID){
+    var queryUP ="SELECT * FROM unsolved_problems WHERE child_id =?";
+          $cordovaSQLite.execute(db, queryUP, [childID]).then(function(res) {
+              var UP = res.rows;
+              if (UP.length>0){
+                  child_ID_ID = childID;
+                 // console.log("childdren: " +child_ID_ID+" UP: "+ UP.length);
+                  var queryUpdateUP = "UPDATE childs SET unsolved_problems = ? where id = ?";
+                  $cordovaSQLite.execute(db,queryUpdateUP,[UP.length,child_ID_ID]);
+              }else{
+                  child_ID_ID = childID;
+                  //console.log("childdren: " +child_ID_ID+" UP: "+ UP.length);               
+                  var queryUpdateUP = "UPDATE childs SET unsolved_problems = ? where id = ?";
+                  $cordovaSQLite.execute(db,queryUpdateUP,[UP.length,child_ID_ID]);                
+              }           
+          });
+  }
+
+  function updateLaggingSkillsCheckCount(childID){
+    var queryLS ="SELECT * FROM lagging_skills WHERE child_id =? AND checked =1 ";
+          $cordovaSQLite.execute(db, queryLS, [childID]).then(function(res) {
+              var LS = res.rows;
+              if (LS.length>0){
+                  child_ID_ID = LS.item(0).child_id;
+                  //console.log("childdren: " +child_ID_ID+" LS: "+ LS.length);
+                  var queryUpdateLS = "UPDATE childs SET lagging_skills_check = ? where id = ?";
+                  $cordovaSQLite.execute(db,queryUpdateLS,[LS.length,child_ID_ID]);
+              }else{
+                  child_ID_ID = childID;
+                  //console.log("childdren: " +child_ID_ID+" LS: "+ LS.length);
+                  var queryUpdateLS = "UPDATE childs SET lagging_skills_check = ? where id = ?";
+                  $cordovaSQLite.execute(db,queryUpdateLS,[LS.length,child_ID_ID]);            
+              }           
+          });
   }
 
   function getActiveChild(callback){
