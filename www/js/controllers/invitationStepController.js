@@ -131,7 +131,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     $scope.modalToChooseAdultConcernToChildConcern.show();
   };
   $scope.closeModalToChooseAdultConcernToChildConcern = function() {
-    $scope.modalCreate.hide();
+    $scope.modalToChooseAdultConcernToChildConcern.hide();
     $ionicListDelegate.closeOptionButtons();
     $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
   };
