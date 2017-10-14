@@ -10,7 +10,7 @@ angular.module('starter.controllers')
     $scope.user.password_confirmation="";
     $scope.emailRegularExpression = /\S+@\S+\.\S+/;
     $scope.anyStringRegExpression = /\S+/;
-    $scope.passwordRegularExpression = /(?=\w*[A-Z])(?=\w*[a-z])\S{5,}/;
+    $scope.passwordRegularExpression = /(?=\w*[A-Z])(?=\w*[a-z])(?=\w*[0-9])\S{8,}/;
     $ionicModal.fromTemplateUrl('templates/users/users-signup-modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -82,4 +82,14 @@ angular.module('starter.controllers')
       });
       $scope.closeModalSignup();
     };
+
+    $scope.passwordInfoAlert = function(){
+      var alertForNoActiveChild = $ionicPopup.alert({
+          title: 'Password information',
+          template: "Your password must have at least: "
+                   + "<br><br>  - 8 caracters. "
+                   + "<br>  - One capital letter. "
+                   + "<br>  - One lower case letter. ",
+      });
+    }
 });

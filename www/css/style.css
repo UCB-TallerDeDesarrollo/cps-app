@@ -236,6 +236,12 @@ body {
     }
   }
 
+  .tiny{
+    color: #387ef5 !important;
+    font-size: 20px !important;
+    position: absolute;
+    top: -2px;
+  }
 /*input[type="date"]::-webkit-clear-button {
  -webkit-appearance: none;
   display: none;
