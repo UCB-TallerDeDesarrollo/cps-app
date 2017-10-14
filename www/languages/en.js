@@ -42,14 +42,32 @@ var $translations_en = {
     SearchText: 'Search',
     ConfirmDeleteChildMessage: 'Are you sure you want to delete this child?',
     YesMessage: 'Yes',
+    NoMessage: "No",
     WelcomeMessage: 'Welcome to Lens Changer',
     ChooseAnOptionMessage: 'You can choose a option!',
     ParentOption: "Parent",
     EducatorOption: "Educator",
     SignInOption: "Sign in",
-    ReadyOption: "Ready"
-
-
-
+    ReadyOption: "Ready",
+    planB: 'Plan B',  
+    NoUnsolvedProblems: 'No unsolved problems registered. Please register one above.',
+    NewUnsolvedProblem: 'New Unsolved Problem',
+    EditUnsolvedProblem: 'Edit Unsolved Problem',
+    DeleteUnsolvedProblemTitle: "Delete Unsolved Problem",
+    DeleteUnsolvedProblemBody: "Are you sure you want to delete this unsolved problem?",
+    TypeUnsolvedProblemPlaceholder: "Type a new child's concern here.",
+    UnsolvedProblemHintTitle: "Unsolved problem hint",
+    UnsolvedProblemHintBody: "An unsolved problem is an expectation your child is having difficulty reliably meeting. You can write in more than 1 unsolved problem for a given lagging skill, but you don't need to type the same unsolved problem in more than once. After you've made a comprehensive list of unsolved problems, click on the arrow next to the one you want to solve first.",
+    Got_It: "Got it",
+    goingTo: "Going to",
+    EmpathyStep: "Empathy Step",
+    DefineAdultsConcern: "Define Adult's Concern",
+    InvitationStep: "Invitation Step",
+    Step: "Step",
+    wasntUnlock: "wasn\'t unlocked",
+    haveToFinishSteps: "You have to finish previous steps to continue." ,
+    step1VerifyBody: "Did you list all of the examples that come to mind when you think of your child having difficulty with this lagging skill?",
+    imSure: "I'm sure",
+    keepDrilling: "keep drilling"
 
 };

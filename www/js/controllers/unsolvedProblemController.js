@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblemFactory, $cordovaSQLite, $state, $ionicActionSheet,$ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, ChildrenFactory, LaggingSkills) {
+angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function($scope, UnsolvedProblemFactory, $cordovaSQLite, $state, $ionicActionSheet,$ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, ChildrenFactory, LaggingSkills,$translate) {
   $scope.unsolvedProblem = {};
   $scope.shouldShowReorder = false;
   $scope.unsolvedProblems = {};
@@ -114,12 +114,13 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   };
 
   $scope.verifyToGoToStep1 = function(id) {
+    $translate(['goingTo','Step', 'EmpathyStep','NoMessage','YesMessage','keepDrilling','step1VerifyBody','imSure']).then (function(translations){
     if($scope.unsolvedProblems.length > 0){
       var confirmPopup = $ionicPopup.confirm({
-        title: "Going to Step 1: Empathy Step",
-        template: "Did you list all of the examples that come to mind when you think of your child having difficulty with this lagging skill?",
-        cancelText: "No, keep drilling",
-        okText: "Yes, I'm sure"
+        title: translations.goingTo +" "+ translations.Step + " 1: " +translations.EmpathyStep,
+        template: translations.step1VerifyBody,
+        cancelText: translations.NoMessage+", " + translations.keepDrilling,
+        okText: translations.YesMessage + ", "+ translations.imSure
       });
 
       confirmPopup.then(function(res) {
@@ -132,6 +133,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     else {
       $state.go('app.newUnsolvedProblem',{ unsolvedProblemId:id});
     }
+   });
   };
 
   $scope.childsConcernsFlag = function(unsolvedProblem){
@@ -206,15 +208,16 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   $scope.childsFlag = 0;
   $scope.adultsFlag = 0;
   $scope.showActionsheet = function(unsolvedProblem) {
+    $translate(['CancelOption','Step','EmpathyStep','DefineAdultsConcern','InvitationStep','wasntUnlock','haveToFinishSteps']).then (function(translations){ 
     $scope.adultsConcernsFlag(unsolvedProblem);
     $scope.childsConcernsFlag(unsolvedProblem);
     $ionicActionSheet.show({
       buttons: [
-        { text: 'Step 1: Empathy Step' },
-        { text: "Step 2: Define Adult's Concern" },
-        { text: 'Step 3: Invitation Step' }
+        { text: translations.Step + " 1: " + translations.EmpathyStep },
+        { text: translations.Step + " 2: " + translations.DefineAdultsConcern },
+        { text: translations.Step + " 3: " + translations.InvitationStep }
       ],
-      cancelText: 'Cancel',
+      cancelText: translations.CancelOption,
       cancel: function() {
         $ionicListDelegate.closeOptionButtons();
       },
@@ -226,8 +229,8 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
         if(index == 1){
           if($scope.childsFlag === 0){
             var alertPopup = $ionicPopup.alert({
-               title: 'Step 2 wasn\'t unlocked.',
-               template: 'You have to finish previous steps to continue.'
+               title: translations.Step + " 2 "+ translations.wasntUnlock,
+               template: translations.haveToFinishSteps
              });
              alertPopup.then(function(res) {
              });
@@ -238,8 +241,8 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
         if(index==2){
           if($scope.childsFlag === 0 || $scope.adultsFlag === 0){
             var alertPopupForUnsolved = $ionicPopup.alert({
-               title: 'Step 3 wasn\'t unlocked.',
-               template: 'You have to finish previous steps to continue.'
+               title: translations.Step + " 3 "+ translations.wasntUnlock,
+               template: translations.haveToFinishSteps
              });
              alertPopupForUnsolved.then(function(res) {
              });
@@ -253,6 +256,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
 
       }
     });
+   });
   };
 
   $scope.editSolution = function(solution) {
@@ -266,9 +270,12 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
    };
 
    $scope.showConfirm = function(item) {
+    $translate(['DeleteUnsolvedProblemTitle','DeleteUnsolvedProblemBody', 'CancelOption','YesMessage']).then (function(translations){
      var confirmPopup = $ionicPopup.confirm({
-       title: 'Delete Unsolved Problem',
-       template: 'Are you sure you want to delete this unsolved problem?'
+       title: translations.DeleteUnsolvedProblemTitle,
+       template: translations.DeleteUnsolvedProblemBody,
+       cancelText: translations.CancelOption,
+       okText: translations.YesMessage
      });
 
      confirmPopup.then(function(res) {
@@ -283,6 +290,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       }
 
      });
+    });   
    };
 
    $scope.getRatingIcon = function(unsolvedProblem) {
