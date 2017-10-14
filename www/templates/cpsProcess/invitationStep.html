@@ -127,25 +127,31 @@
           <div class="scroll modal-animation">
                  <p>aqui van los radiobutton</p>
 
-                 <div class="list" [(ngModel)]="relationship" >
+                 <ion-list radio-group  >
                     <div class=" item item-divider">
                         Child's concerns
                     </div>
-                    <ion-radio  name="a" ng-model = "radioModel.value"  value="friends" ng-repeat="childConcern in childsConcerns"  >{{childConcern.description}}</ion-radio>
+                    <ion-radio  name="a" ng-model="radioModel.value" ng-value="childConcern.description" ng-repeat="childConcern in childsConcerns" ng-checked="true"  >{{childConcern.description}}</ion-radio>
+                </ion-list>
 
 
-                </div>
                 <div class="list">
 
                    <div class=" item item-divider">
                          Adult's concerns
                    </div>
-                   <ion-radio name="b" ng-repeat="adultConcern in adultsConcerns" checked>{{adultConcern.description}}</ion-radio>
+                   <ion-radio name="b" ng-model="radioModel.value2" ng-value="adultConcern.description" ng-repeat="adultConcern in adultsConcerns" ng-checked="true">{{adultConcern.description}}</ion-radio>
 
 
                </div>
 
 
+               <div padding>
+                <code><b>seleccionado de child concern:</b> {{radioModel.value}}</code>
+                </div>
+                <div padding>
+                 <code><b>seleccionado de adult concern:</b> {{radioModel.value2}}</code>
+                 </div>
                  <button class="button button-full button-positive"  ng-click="capt(radioModel)" >Save</button>
 
           </div>

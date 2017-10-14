@@ -20,6 +20,14 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.showAdults=false;
   $scope.shouldShowReorder = false;
 
+  
+  $scope.radioModel={
+    value:"",
+    value2:"",
+
+  };
+
+
   $scope.toggleChilds= function(){
     if($scope.showChilds===true){
       $scope.showChilds=false;
