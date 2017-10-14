@@ -87,7 +87,7 @@ angular.module('starter.controllers')
       var alertForNoActiveChild = $ionicPopup.alert({
           title: 'Password information',
           template: "Your password must have at least: "
-                   + "<br><br>  - 8 caracters. "
+                   + "<br><br>  - 8 characters. "
                    + "<br>  - One capital letter. "
                    + "<br>  - One lower case letter. ",
       });
