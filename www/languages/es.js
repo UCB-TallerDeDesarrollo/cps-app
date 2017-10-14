@@ -57,7 +57,7 @@ var $translations_es = {
     DeleteUnsolvedProblemBody: "¿Estás seguro de que quieres borrar este Problema Sin Resolver?",
     TypeUnsolvedProblemPlaceholder: "Escriba un nuevo problema sin resolver.",
     UnsolvedProblemHintTitle: "Consejo de Problema Sin Resolver",
-    UnsolvedProblemHintBody: "Un problema sin resuelver es una expectativa que su hijo tiene dificultades para reunirse de manera confiable. Puedes escribir más de 1 problema sin resolver para una habilidad de retraso determinada, pero no necesita escribir el mismo problema sin resolver en más de una vez. Después de haber hecho una lista completa de problemas sin resolver, haga clic en la flecha al lado del que desea resolver primero. Después de haber hecho una lista completa de problemas sin resueltos, haga clic en la flecha al lado del que desea resolver primero",
+    UnsolvedProblemHintBody: "Un problema sin resuelver es una expectativa que su hijo tiene dificultades para reunirse de manera confiable. Puedes escribir más de 1 problema sin resolver para una habilidad de retraso determinada, pero no necesita escribir el mismo problema sin resolver en más de una vez. Después de haber hecho una lista completa de problemas sin resolver, haga clic en la flecha al lado del que desea resolver primero. Después de haber hecho una lista completa de problemas sin resolver, haga click en la flecha a lado del que desea resolver primero",
     Got_It: "Lo tengo",
     goingTo: "Ir a",
     EmpathyStep: "Paso de empatía",
