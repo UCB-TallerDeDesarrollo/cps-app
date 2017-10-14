@@ -120,6 +120,23 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       $scope.emptyInput = true;
     }
   };
+  $ionicModal.fromTemplateUrl('choose-AdultConcern-To-ChildConcern.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modalToChooseAdultConcernToChildConcern = modal;
+    $scope.modalToChooseAdultConcernToChildConcern.hide();
+  });
+  $scope.openModalToChooseAdultConcernToChildConcern = function() {
+    $scope.modalToChooseAdultConcernToChildConcern.show();
+  };
+  $scope.closeModalToChooseAdultConcernToChildConcern = function() {
+    $scope.modalCreate.hide();
+    $ionicListDelegate.closeOptionButtons();
+    $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
+  };
+
+
   $ionicModal.fromTemplateUrl('create-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -207,7 +224,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
             analytics.trackEvent('Child solution rate', 'Broken heart')
           } else {
             console.log("Google Analytics Unavailable");
-          }          
+          }
         }
       },
       { type: 'button-balanced ion-heart' ,
@@ -218,7 +235,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
             analytics.trackEvent('Child solution rate', 'Heart')
           } else {
             console.log("Google Analytics Unavailable");
-          }         
+          }
         }
       },
       { type: 'button-calm ion-happy-outline',
@@ -228,7 +245,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
             analytics.trackEvent('Child solution rate', 'Happy')
           } else {
             console.log("Google Analytics Unavailable");
-          }          
+          }
         }
       }
     ]

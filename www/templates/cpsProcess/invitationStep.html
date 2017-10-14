@@ -93,6 +93,9 @@
         <ion-content class="padding scroll-content ionic-scroll  has-header">
           <div class="scroll modal-animation">
             <div class="list">
+              <button class = "button button-small button-positive right" ng-click="openModalToChooseAdultConcernToChildConcern()">
+                        Related to ...
+                </button>
               <label class="item item-input">
                 <textarea rows=5 placeholder="Agree upon a solution." ng-model="solution.description">
                 </textarea>
@@ -108,6 +111,52 @@
         </ion-content>
       </ion-modal-view>
     </script>
+
+
+    <!--  PARA ELEGIR EL NINO Y EL CONCERN-->
+    <script id="choose-AdultConcern-To-ChildConcern.html" type="text/ng-template">
+      <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">Related to ...</h1>
+          <button class="button button-clear button-primary" ng-click="closeModalToChooseAdultConcernToChildConcern()">Cancel</button>
+        </ion-header-bar>
+
+        <ion-content class="padding scroll-content ionic-scroll  has-header">
+
+
+          <div class="scroll modal-animation">
+                 <p>aqui van los radiobutton</p>
+
+                 <div class="list" [(ngModel)]="relationship" >
+                    <div class=" item item-divider">
+                        Child's concerns
+                    </div>
+                    <ion-radio  name="a" ng-model = "radioModel.value"  value="friends" ng-repeat="childConcern in childsConcerns"  >{{childConcern.description}}</ion-radio>
+
+
+                </div>
+                <div class="list">
+
+                   <div class=" item item-divider">
+                         Adult's concerns
+                   </div>
+                   <ion-radio name="b" ng-repeat="adultConcern in adultsConcerns" checked>{{adultConcern.description}}</ion-radio>
+
+
+               </div>
+
+
+                 <button class="button button-full button-positive"  ng-click="capt(radioModel)" >Save</button>
+
+          </div>
+          <div class="scroll-bar scroll-bar-v">
+            <div class="scroll-bar-indicator scroll-bar-fade-out modal-animation">
+            </div>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+    <!--  FIN PARA ELEGIR EL NINO Y EL CONCERN-->
 
     <script id="edit-modal.html" type="text/ng-template">
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
