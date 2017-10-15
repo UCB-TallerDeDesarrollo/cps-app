@@ -68,7 +68,14 @@ var $translations_es = {
     haveToFinishSteps: "Tienes que terminar los pasos anteriores para continuar.", 
     step1VerifyBody: "¿Enlistó todos los ejemplos que le vienen a la mente cuando piensa que su hijo tiene dificultades con esta habilidad rezagada?",
     imSure: "estoy seguro",
-    keepDrilling: "seguir enlistando"
+    keepDrilling: "seguir enlistando",
+
+    //Para Laggin Skills
+    CheckButton: "Marcar",
+    UncheckButton: "Desmarcar",
+    LaggingskillhintTitle: "Seleccionar dificultades",
+    LaggingskillhintText: "Seleccione una dificultad que se aplique a su hijo, posteriormente ingrese una idea que le viene a la mente cuando piensa en el porque su hijo esta teniendo esta dificultad.",
+    GotItButton: "Entendido!"
 
 
 

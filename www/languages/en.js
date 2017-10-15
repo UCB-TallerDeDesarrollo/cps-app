@@ -68,6 +68,13 @@ var $translations_en = {
     haveToFinishSteps: "You have to finish previous steps to continue." ,
     step1VerifyBody: "Did you list all of the examples that come to mind when you think of your child having difficulty with this lagging skill?",
     imSure: "I'm sure",
-    keepDrilling: "keep drilling"
+    keepDrilling: "keep drilling",
+
+    //For Laggin Skills
+    CheckButton: "Check",
+    UncheckButton: "Uncheck",
+    LaggingskillhintTitle: "Lagging skill hint",
+    LaggingskillhintText: "Click on a lagging skill that applies to your child and then type in an expectation your child is having difficulty reliably meeting that comes to mind when you think of that lagging skill.",
+    GotItButton: "Got it!"
 
 };
