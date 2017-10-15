@@ -2,6 +2,10 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $ionicSideMenuDelegate.canDragContent(false);
   $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
   $scope.solutions = [];
+
+
+      $scope.pair = { solutionId:$stateParams.unsolvedProblemId  };
+
   UnsolvedProblemFactory.find($stateParams.unsolvedProblemId,function(result){
     $scope.unsolvedProblem = result.rows.item(0);
     ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
@@ -20,12 +24,6 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.showAdults=false;
   $scope.shouldShowReorder = false;
 
-  
-  $scope.radioModel={
-    value:"",
-    value2:"",
-
-  };
 
 
   $scope.toggleChilds= function(){
@@ -88,6 +86,15 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       PossibleSolutionFactory.all($stateParams.unsolvedProblemId, function(res){
         $scope.solutions = res;
       });
+    }
+  };
+
+  $scope.createPair = function(){
+    if (!inputFieldIsEmpty($scope.pair.description)) {
+      PossibleSolutionFactory.insertPair($scope.pair);
+        $scope.pair.description = "";
+        $scope.closeModalToChooseAdultConcernToChildConcern();
+    
     }
   };
 

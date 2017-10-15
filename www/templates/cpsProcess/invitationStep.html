@@ -62,6 +62,7 @@
         <a class="watchlist_menu button button-small button-clear button-positive icon ion-help-circled" href="#/app/helpForInvitation"></a>
         <div class="col col-75">
           <h2><b>List of Possible Solutions</b></h2>
+
         </div>
       </div>
       <ion-list>
@@ -70,7 +71,9 @@
           <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
           <button class="item-options item fake-button button button-positive ion-eye"></button>
         </div>
+
         <ion-item class="item item-text-wrap item-icon-left item-icon-right" ng-repeat="solution in solutions"  ng-class="{ slidein: $first && !firstItemAnimationShown}">
+
           <i class="icon {{getRatingIcon(solution)}}"></i>
           <p>{{solution.description}}</p>
           <i class="icon ion-star" ng-click="showRatingPopup(solution,unsolvedProblem)"></i>
@@ -123,37 +126,23 @@
 
         <ion-content class="padding scroll-content ionic-scroll  has-header">
 
-
           <div class="scroll modal-animation">
-                 <p>aqui van los radiobutton</p>
-
                  <ion-list radio-group  >
                     <div class=" item item-divider">
                         Child's concerns
                     </div>
-                    <ion-radio  name="a" ng-model="radioModel.value" ng-value="childConcern.description" ng-repeat="childConcern in childsConcerns" ng-checked="true"  >{{childConcern.description}}</ion-radio>
+                    <ion-radio  name="a"  ng-model="pair.description" ng-value="childConcern.description" ng-repeat="childConcern in childsConcerns" ng-checked="true"  >{{childConcern.description}}</ion-radio>
                 </ion-list>
 
-
-                <div class="list">
-
+                 <ion-list radio-group  >
                    <div class=" item item-divider">
                          Adult's concerns
                    </div>
-                   <ion-radio name="b" ng-model="radioModel.value2" ng-value="adultConcern.description" ng-repeat="adultConcern in adultsConcerns" ng-checked="true">{{adultConcern.description}}</ion-radio>
+                   <ion-radio name="b" ng-model="pair.description2" ng-value="adultConcern.description" ng-repeat="adultConcern in adultsConcerns" ng-checked="true">{{adultConcern.description}}</ion-radio>
+                 </ion-list>
 
-
-               </div>
-
-
-               <div padding>
-                <code><b>seleccionado de child concern:</b> {{radioModel.value}}</code>
-                </div>
-                <div padding>
-                 <code><b>seleccionado de adult concern:</b> {{radioModel.value2}}</code>
-                 </div>
-                 <button class="button button-full button-positive"  ng-click="capt(radioModel)" >Save</button>
-
+                 <button class="button button-full button-positive" ng-if="!pair.description.length || !pair.description2.length"  ng-click="createPair()" disabled>Save</button>
+                 <button class="button button-full button-positive" ng-if="pair.description.length> 0 && pair.description2.length> 0"  ng-click="createPair()" >Save</button>
           </div>
           <div class="scroll-bar scroll-bar-v">
             <div class="scroll-bar-indicator scroll-bar-fade-out modal-animation">

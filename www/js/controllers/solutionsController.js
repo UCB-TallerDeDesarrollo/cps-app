@@ -1,11 +1,21 @@
 angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $ionicListDelegate,$cordovaSQLite, $ionicPopup, PossibleSolutionFactory ){
   $scope.comment = { solutionId: $stateParams.solutionId };
 
+  $scope.pair = { solutionId: $stateParams.solutionId };
+
+
   PossibleSolutionFactory.find($stateParams.solutionId,function(solution){
     $scope.solution = solution;
   });
 
+
   $scope.comments = [];
+    $scope.pairs = [];
+
+    PossibleSolutionFactory.findPair($stateParams.solutionId,function(pairs){
+      $scope.pairs = pairs;
+    });
+
   PossibleSolutionFactory.getComments($stateParams.solutionId,function(comments){
     $scope.comments = comments;
   });
@@ -45,6 +55,7 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
       $scope.closeModal();
     }
   };
+
 
   $ionicModal.fromTemplateUrl('edit-modal.html', {
     scope: $scope,

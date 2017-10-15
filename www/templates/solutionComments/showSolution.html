@@ -4,7 +4,16 @@
     </div>
 
     <ion-content class="has-subheader">
+      <div class="item item-divider item-text-wrap">
+      <h2>Related to: </h2>
+    </div>
+      <ion-item class="item item-text-wrap" >
+        {{pairs.description}}  <br> {{pairs.description2}}
+
+      </ion-item>
+
       <div class="padding">
+
         <ion-list>
           <ion-item class="item item-divider item-icon-right">
             <h2><b>List of Comments</b></h2>
@@ -15,6 +24,8 @@
           <div class="item item-text-wrap" ng-if="comments.length == 0">
             <p>No comments registered. Please register one above. </p>
           </div>
+
+
           <ion-item class="item item-text-wrap" ng-repeat="item in comments">
             {{item.description}}
             -
