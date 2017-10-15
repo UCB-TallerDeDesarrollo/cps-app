@@ -52,6 +52,8 @@ app
             if (res) {
                 localStorage.removeItem("auth_token");
                 localStorage.removeItem("email");
+                localStorage.removeItem("user_name");
+                
                 var alertForAccountCreated = $ionicPopup.alert({
                     title: 'Success!',
                     template: 'Log out Succesfull!.'
