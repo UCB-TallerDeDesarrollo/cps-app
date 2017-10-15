@@ -75,7 +75,8 @@ var $translations_es = {
     UncheckButton: "Desmarcar",
     LaggingskillhintTitle: "Seleccionar dificultades",
     LaggingskillhintText: "Seleccione una dificultad que se aplique a su hijo, posteriormente ingrese una idea que le viene a la mente cuando piensa en el porque su hijo esta teniendo esta dificultad.",
-    GotItButton: "Entendido!"
+    GotItButton: "Entendido!",
+    LaggingSkill_1: "Dificultad para realizar transiciones, para pasar de un estado de ánimo a otro o de una tarea a otra"
 
 
 

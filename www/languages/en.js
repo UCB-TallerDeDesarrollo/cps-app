@@ -75,6 +75,7 @@ var $translations_en = {
     UncheckButton: "Uncheck",
     LaggingskillhintTitle: "Lagging skill hint",
     LaggingskillhintText: "Click on a lagging skill that applies to your child and then type in an expectation your child is having difficulty reliably meeting that comes to mind when you think of that lagging skill.",
-    GotItButton: "Got it!"
+    GotItButton: "Got it!",
+    LaggingSkill_1: "Difficulty handling transitions, shifting from one mindset or task to another"
 
 };
