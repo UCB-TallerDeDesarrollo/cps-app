@@ -47,7 +47,10 @@ var $translations_en = {
     ParentOption: "Parent",
     EducatorOption: "Educator",
     SignInOption: "Sign in",
-    ReadyOption: "Ready"
+    ReadyOption: "Ready",
+    SyncupTitle: "Sync up",
+    UploadChildTitle: "Upload child",
+    DownloadChildTitle: "Download child"
 
 
 

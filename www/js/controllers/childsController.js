@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $window, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer, UnsolvedProblemFactory, ChildrenFactory,$translate) {
+  .controller('ChildsCtrl', function($scope, $cordovaSQLite, $state, $window, $ionicActionSheet, $ionicListDelegate, $ionicPopup, $ionicModal, $stateParams, $filter, $timeout,$cordovaFileTransfer, UnsolvedProblemFactory, ChildrenFactory, $translate, $http) {
     $scope.child = {};
     $scope.child.first_name="";
     $scope.child.gender = "Female";
@@ -8,6 +8,11 @@ angular.module('starter.controllers')
       $scope.childs = children;
     });
     $scope.activeChild={first_name:""};
+    $ionicModal.fromTemplateUrl('templates/child/sync-child-modal.html', {
+      scope: $scope
+    }).then(function(modal) {
+      $scope.syncChildModal = modal;
+    });     
     $ionicModal.fromTemplateUrl('templates/child/create-child-modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -119,6 +124,22 @@ angular.module('starter.controllers')
           console.log("Google Analytics Unavailable");
         }
       }
+    };
+
+    $scope.uploadChild = function(){  
+      $scope.child.first_name = "NINO";    
+      $scope.child.gender = "Male";
+      $scope.child.birthday = new Date();
+      var link = "http://localhost:3000/createChild";
+      var data = JSON.stringify({
+                  name : $scope.child.first_name,
+                  gender : $scope.child.gender,
+                  birthday : $scope.child.birthday,          
+                });
+      $http.post(link, data)
+      .then(function (res){
+         console.log(res);
+       });
     };
 
     $scope.showActionsheet = function(child) {

@@ -1,0 +1,32 @@
+<ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+    <style>
+        #buttonbar{
+            padding-bottom:50px; 
+            padding-top:50px;            
+        }            
+    </style>
+    <ion-header-bar class="bar bar-header bar-positive">        
+        <h1 class="title">{{'SyncupTitle' | translate}}</h1>             
+    </ion-header-bar>
+    <ion-content>   
+        <div class="list">   
+            <label class="item">             
+                <div class="button-bar" id="buttonbar">                    
+                    <button class="col col-50 button button-small button-stable" id="botones" ng-click="uploadChild()" >                    
+                        <i class="icon ion-ios-cloud-upload-outline"></i>  </br>
+                        {{'UploadChildTitle'  | translate }}
+                    </button>                    
+                    <button class="col col-50 button button-small button-stable" ng-click="downloadChild()">                    
+                        <i class="icon ion-ios-cloud-download-outline"></i> </br>
+                        {{'DownloadChildTitle'  | translate }}
+                    </button>                    
+                </div>                      
+            </label>
+            <label class="item" style="border: 0px">                         
+                <button class="button button-block button-positive" ng-click="syncChildModal.hide()">
+                    {{'CloseOption' | translate}}
+                </button>
+            </label>
+        </div>
+    </ion-content>
+</ion-modal-view>
