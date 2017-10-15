@@ -76,6 +76,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     if (!inputFieldIsEmpty($scope.solution.description)) {
       $scope.solution.rating=0;
       PossibleSolutionFactory.insert($scope.solution);
+      createPair($cordovaSQLite, [$scope.solution.id]);
       $scope.solution.description = "";
       $scope.closeModal();
       if(typeof analytics !== 'undefined') {
@@ -144,7 +145,7 @@ $scope.auxiliar=[];
    if (!inputFieldIsEmpty($scope.editablePair.description)) {
      PossibleSolutionFactory.updatePair($scope.editablePair);
      $scope.modalEditToChooseAdultConcernToChildConcern.hide();
-    
+
    }
    else {
      $scope.emptyInput = true;
@@ -430,6 +431,17 @@ $scope.auxiliar=[];
   $scope.goToSolution = function(solution){
     $state.go('app.solution', {solutionId:solution.id});
   };
+
+
+  function createPair(cordovaSQLite,solution_id) {
+    var sqlPairtoRelate = [
+      'INSERT INTO pair_childConcerntoadultConcern (description, description2,solution_id) VALUES ("You have not related this","solution to any concern",?)'
+
+    ];
+    sqlPairtoRelate.forEach(function(item) {
+      cordovaSQLite.execute(db, item, [solution_id]);
+    });
+  }
 
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 });
