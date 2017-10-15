@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="true">
+<ion-side-menus enable-menu-with-back-views="true" ng-init="get_user_info()">
   <ion-side-menu-content>
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button>
@@ -52,11 +52,21 @@
           <i class="icon ion-earth"></i>
           {{'LanguageTitle' | translate }}
         </ion-item>
-        <ion-item menu-close class="item item-icon-left"  href="#/app/login">
+        <ion-item ng-if="isUserLogged()" menu-close class="item item-icon-left"  href="#/app/login">
           <i class="icon ion-log-in"></i>
           {{'LoginTitle' | translate }}
         </ion-item>
+        <ion-item ng-if="!isUserLogged()" menu-close class="item item-icon-left" >
+          <i class="icon ion-log-in"></i>
+          Log out
+        </ion-item>
       </ion-list>
+      <!-- <ion-footer-bar class="bar bar-footer bar">
+        <h3>  <i class="icon ion-user"></i> Gabriel</h3>
+      </ion-footer-bar> -->
+      <div ng-if="!isUserLogged()" class="bar bar-footer bar-balanced">
+        <div class="title">{{user_name}}</div>
+      </div>
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>
