@@ -12,7 +12,7 @@ app
     $translateProvider.useSanitizeValueStrategy('escapeParameters');
 }])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory, $translate,$http) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory, $translate,$http, $ionicSideMenuDelegate) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -23,29 +23,16 @@ app
     $scope.firstTimeHelp = false;
     // Form data for the login modal
     $scope.loginData = {};
-    $scope.user_name = "";
-    $scope.get_user_info = function(){
-        var email = localStorage.getItem("email")
-        console.log('email:' + email)
-        $http.get('http://localhost:3000/me?email='+'email', 
-            { params: { "email": email } }
-        , 
-        {
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          transformRequest: function(obj) {
-                  var str = [];
-                  for(var p in obj)
-                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                  return str.join("&");
-              },
-        })
-        .then(data => {
-            $scope.user_name = data.data.name + ' ' + data.data.last_name;
-        }).catch(error => {
-          console.log(error.status);
-        }); 
-                
-    }
+    $scope.user_name = localStorage.getItem("user_name");
+    $scope.$watch(function () {
+        return $ionicSideMenuDelegate.isOpenLeft();
+       },
+       function (isOpen) {
+         if (isOpen){
+            $scope.user_name = localStorage.getItem("user_name");
+         } else{
+         }
+      });
     $scope.isUserLogged = function(){
         if(localStorage.getItem("auth_token") !== null ){
             return false;

@@ -18,6 +18,28 @@ angular.module('starter.controllers')
       $scope.modalSignup = modal;
       $scope.modalSignup.hide();
     });
+    $scope.get_user_info = function(){
+      var email = localStorage.getItem("email")
+      $http.get('http://localhost:3000/me?email='+'email', 
+          { params: { "email": email } }
+      , 
+      {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+      })
+      .then(data => {
+          if(data.data!=null)
+           localStorage.setItem("user_name",data.data.name + ' ' + data.data.last_name);
+      }).catch(error => {
+        console.log(error.status);
+      }); 
+              
+  }
     $scope.openModalSignup = function() {
       $scope.modalSignup.show();
       if(typeof analytics !== 'undefined') {
@@ -106,6 +128,7 @@ angular.module('starter.controllers')
                 title: 'Success!',
                 template: 'Your account has been crated.'
             });
+        $scope.get_user_info();
       }).catch(error => {
         console.log(error.status);
       });
@@ -140,6 +163,7 @@ angular.module('starter.controllers')
                 title: 'Login successful!',
                 template: 'Welcome Back!.'
             });
+            $scope.get_user_info();
       }).catch(error => {
         console.log(error.status);
       });
