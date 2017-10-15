@@ -10,17 +10,17 @@
     </ion-header-bar>
     <ion-content>   
         <div class="list">   
-            <label class="item">             
-                <div class="button-bar" id="buttonbar">                    
-                    <button class="col col-50 button button-small button-stable" id="botones" ng-click="uploadChild()" >                    
+            <label class="item" >                
+                    <button class="col col-50 button button-small button-stable" ng-click="uploadChild()">                    
                         <i class="icon ion-ios-cloud-upload-outline"></i>  </br>
                         {{'UploadChildTitle'  | translate }}
-                    </button>                    
-                    <button class="col col-50 button button-small button-stable" ng-click="downloadChild()">                    
+                    </button>                                                                                        
+            </label>
+            <label class="item">             
+                <button class="col col-50 button button-small button-stable" ng-click="downloadChild()">                    
                         <i class="icon ion-ios-cloud-download-outline"></i> </br>
                         {{'DownloadChildTitle'  | translate }}
-                    </button>                    
-                </div>                      
+                </button>                    
             </label>
             <label class="item" style="border: 0px">                         
                 <button class="button button-block button-positive" ng-click="syncChildModal.hide()">
