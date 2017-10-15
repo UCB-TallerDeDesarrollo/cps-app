@@ -80,6 +80,7 @@
           <ion-option-button class="button button-balanced ion-edit" ng-click="editSolution(solution)"></ion-option-button>
           <ion-option-button ng-click="showDeletionConfirm(solution)" class="button-assertive ion-trash-a" ></ion-option-button>
           <ion-option-button ng-click="goToSolution(solution)" class="button-positive ion-eye" ></ion-option-button>
+
         </ion-item>
         <div class="item item-text-wrap" ng-if="solutions.length == 0">
           <p> Identifying a solution doesn't meant you are done!. You still have to discuss whether the solution is truly realistic and truly mutually satisfactory.</p>
@@ -153,6 +154,45 @@
     </script>
     <!--  FIN PARA ELEGIR EL NINO Y EL CONCERN-->
 
+
+
+
+    <script id="edit-AdultConcern-To-ChildConcern.html" type="text/ng-template">
+    <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Edit Related to ...</h1>
+        <button class="button button-clear button-primary" ng-click="closeModalEditToChooseAdultConcernToChildConcern()">Cancel</button>
+      </ion-header-bar>
+
+      <ion-content class="padding scroll-content ionic-scroll  has-header">
+
+        <div class="scroll modal-animation">
+               <ion-list radio-group  >
+                  <div class=" item item-divider">
+                      Child's concerns
+                  </div>
+                  <ion-radio  name="a"  ng-model="editablePair.description" ng-value="childConcern.description" ng-repeat="childConcern in childsConcerns" ng-checked="true"  >{{childConcern.description}}</ion-radio>
+              </ion-list>
+
+               <ion-list radio-group  >
+                 <div class=" item item-divider">
+                       Adult's concerns
+                 </div>
+                 <ion-radio name="b" ng-model="editablePair.description2" ng-value="adultConcern.description" ng-repeat="adultConcern in adultsConcerns" ng-checked="true">{{adultConcern.description}}</ion-radio>
+               </ion-list>
+
+               <button class="button button-full button-positive" ng-if="!editablePair.description.length || !editablePair.description2.length"  ng-click="updatePair()" disabled>Save</button>
+               <button class="button button-full button-positive" ng-if="editablePair.description.length> 0 && editablePair.description2.length> 0"  ng-click="updatePair()" >Save</button>
+        </div>
+        <div class="scroll-bar scroll-bar-v">
+          <div class="scroll-bar-indicator scroll-bar-fade-out modal-animation">
+          </div>
+        </div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+
+
     <script id="edit-modal.html" type="text/ng-template">
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
         <ion-header-bar class="bar bar-header bar-positive">
@@ -161,7 +201,11 @@
         </ion-header-bar>
         <ion-content class="padding scroll-content ionic-scroll  has-header">
           <div class="scroll modal-animation">
+            <button class = "button button-small button-positive right" ng-click="openModaEditToChooseAdultConcernToChildConcern(editableSolution)">
+                      Related to ...
+              </button>
             <form>
+
               <label class="item item-input">
                 <textarea rows=5 placeholder="Agree upon a solution" ng-model="editableSolution.description">
                 </textarea>
@@ -169,6 +213,8 @@
               <button class="button button-full button-positive" ng-if="!editableSolution.description.length" ng-click="updateSolution()" disabled>Save</button>
               <button class="button button-full button-positive" ng-if="editableSolution.description.length > 0" ng-click="updateSolution()">Save</button>
             </form>
+
+
           </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out modal-animation"></div></div>
         </ion-content>
       </ion-modal-view>

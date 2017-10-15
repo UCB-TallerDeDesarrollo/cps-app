@@ -7,7 +7,11 @@
       <div class="item item-divider item-text-wrap">
       <h2>Related to: </h2>
     </div>
-      <ion-item class="item item-text-wrap" >
+    <ion-item class="item item-text-wrap" ng-if="!pairs.description.length" >
+      <p>You haven't related this solution to any concern. </p>
+      </ion-item>
+
+      <ion-item class="item item-text-wrap"   ng-if="pairs.description.length > 0">
         {{pairs.description}}  <br> {{pairs.description2}}
 
       </ion-item>

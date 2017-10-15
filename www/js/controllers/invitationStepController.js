@@ -94,7 +94,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       PossibleSolutionFactory.insertPair($scope.pair);
         $scope.pair.description = "";
         $scope.closeModalToChooseAdultConcernToChildConcern();
-    
+
     }
   };
 
@@ -109,6 +109,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       }
     });
   };
+
   $scope.deleteSolution = function (solution) {
     PossibleSolutionFactory.delete(solution.id, function(){
       $scope.solutions.splice($scope.solutions.indexOf(solution), 1);
@@ -122,7 +123,37 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     };
     $scope.openModalEdit();
   };
+
+
+
+
+
+$scope.editablePair=[];
+$scope.auxiliar=[];
+  $scope.openModaEditToChooseAdultConcernToChildConcern = function(editableSolution) {
+
+    PossibleSolutionFactory.findPair(editableSolution.id,function(pairsEdit){
+      $scope.editablePair = pairsEdit;
+
+    });
+
+    $scope.modalEditToChooseAdultConcernToChildConcern.show();
+  };
+
+  $scope.updatePair = function(){
+   if (!inputFieldIsEmpty($scope.editablePair.description)) {
+     PossibleSolutionFactory.updatePair($scope.editablePair);
+     $scope.modalEditToChooseAdultConcernToChildConcern.hide();
+    
+   }
+   else {
+     $scope.emptyInput = true;
+   }
+ };
+
+
   $scope.updateSolution = function(){
+
     if (!inputFieldIsEmpty($scope.editableSolution.description)) {
       PossibleSolutionFactory.update($scope.editableSolution);
       $scope.modalEdit.hide();
@@ -150,6 +181,24 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     $ionicListDelegate.closeOptionButtons();
     $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
   };
+
+  $ionicModal.fromTemplateUrl('edit-AdultConcern-To-ChildConcern.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modalEditToChooseAdultConcernToChildConcern = modal;
+      $scope.modalEditToChooseAdultConcernToChildConcern.hide();
+    });
+
+
+
+
+    $scope.closeModalEditToChooseAdultConcernToChildConcern = function() {
+      $scope.modalEditToChooseAdultConcernToChildConcern.hide();
+      $ionicListDelegate.closeOptionButtons();
+      $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
+    };
+
 
 
   $ionicModal.fromTemplateUrl('create-modal.html', {
