@@ -29,7 +29,7 @@
       </label>
       <label class="item item-input item-stacked-label ">
         <span class="input-label">{{'PasswordTitle' | translate }}
-          <label class="assertive" ng-if="!passwordRegularExpression.test(user.password) && anyStringRegExpression.test(user.password)"> *Invalid password. Tap for more info.</label>
+          <label class="assertive" ng-if="!passwordRegularExpression.test(user.password) && anyStringRegExpression.test(user.password)"> *Invalid password. Tap "i" for more.</label>
           <label class="button button-icon ion-information-circled tiny" ng-click="passwordInfoAlert()"></label>
         </span>
         <input type="password" placeholder=" {{'TypeYourPasswordTitle' | translate }} "ng-model="user.password">
