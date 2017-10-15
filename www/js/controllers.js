@@ -50,9 +50,28 @@ app
         if(localStorage.getItem("auth_token") !== null ){
             return false;
         }else 
-        return true;
-            
+        return true;     
     }
+    $scope.logout = function(){
+        
+        var confirmPopup = $ionicPopup.confirm({
+            title: "Log out",
+            template: "Are you sure you want to log out?",
+            cancelText: "No",
+            okText: "yes"
+          });
+  
+          confirmPopup.then(function(res) {
+            if (res) {
+                localStorage.removeItem("auth_token");
+                localStorage.removeItem("email");
+                var alertForAccountCreated = $ionicPopup.alert({
+                    title: 'Success!',
+                    template: 'Log out Succesfull!.'
+                });
+            }
+          });
+    };
     $scope.activeChild = { first_name: "" };
     $scope.getActiveChild = function() {
         $scope.activeChild = { first_name: "" };

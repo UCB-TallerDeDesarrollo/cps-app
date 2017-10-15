@@ -113,7 +113,7 @@ angular.module('starter.controllers')
       $ionicHistory.nextViewOptions({
         disableBack: true
       });
-      $state.go('app.childs');
+      $state.go('app.childs',{reload: true});
     };
     
     $scope.login = function(){
@@ -147,7 +147,7 @@ angular.module('starter.controllers')
       $ionicHistory.nextViewOptions({
         disableBack: true
       });
-      $state.go('app.childs');
+      $state.go('app.childs',{reload: true});
       
     };
 
