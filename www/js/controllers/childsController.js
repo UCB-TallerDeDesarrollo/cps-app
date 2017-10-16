@@ -153,35 +153,40 @@ angular
     }
 
     $scope.uploadChild = function(){
-      var link = "http://localhost:3000/createChild";
-      var data = {
+      var user_id = localStorage.getItem("user_id");           
+      $http.post("http://localhost:3000/users/"+user_id+"/children", 
+      { 
         name: $scope.child.first_name,
         gender: $scope.child.gender,
-        birthday: $scope.child.birthday          
-      };
-      $http({
-        method: 'POST',
-        url: link,
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        birthday: $scope.child.birthday,                    
+      }, 
+      {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         transformRequest: function(obj) {
-          var str = [];
-          for(var p in obj)
-          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-          return str.join("&");
-        },
-        data: data
+                var str = [];
+                for(var p in obj)
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
       })
-      .then(function(response) {
-        console.log(response.data.message);
+      .then(data => {
+        console.log("Child created");
         var alertForAccountCreated = $ionicPopup.alert({
-            title: 'Success!',
-            template: 'Child uploaded.'
-        });
-      },
-      function(response) {
-        console.log(response.data.message);
-      });      
-    };    
+          title: 'Success!',
+          template: 'Child uploaded.'
+        });        
+      }).catch(error => {
+        console.log(error.status);
+      })};
+      
+      
+      
+
+
+
+
+
+      
 
     $scope.downloadChild = function(){        
       var link = "http://localhost:3000/getChild?child_id=";
