@@ -113,6 +113,13 @@ body {
   display:none;
 }
 
+.button.right{
+  width:90px;
+  height: 5px;
+  bottom: 2px;
+  right: -250px;
+}
+
 .tabs .tab-item .icon.step1 {
   background-repeat: no-repeat;
   background-position: 50%;
@@ -234,6 +241,13 @@ body {
         min-height: 110%;
         width: auto;
     }
+  }
+
+  .tiny{
+    color: #387ef5 !important;
+    font-size: 20px !important;
+    position: absolute;
+    top: -2px;
   }
 /*input[type="date"]::-webkit-clear-button {
  -webkit-appearance: none;

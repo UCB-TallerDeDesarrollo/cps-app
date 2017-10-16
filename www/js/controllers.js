@@ -1,11 +1,18 @@
-angular.module('starter.controllers', [])
-
+var app = angular.module('starter.controllers', ['pascalprecht.translate']);
+app
 .config(function($ionicConfigProvider) {
     $ionicConfigProvider.tabs.position("bottom");
     $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory) {
+.config(['$translateProvider', function ($translateProvider) {
+    $translateProvider.translations('en', $translations_en);
+    $translateProvider.translations('es', $translations_es);
+    $translateProvider.preferredLanguage('en');
+    $translateProvider.useSanitizeValueStrategy('escapeParameters');
+}])
+
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory, $translate,$http, $ionicSideMenuDelegate) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -16,6 +23,44 @@ angular.module('starter.controllers', [])
     $scope.firstTimeHelp = false;
     // Form data for the login modal
     $scope.loginData = {};
+    $scope.user_name = localStorage.getItem("user_name");
+    $scope.$watch(function () {
+        return $ionicSideMenuDelegate.isOpenLeft();
+       },
+       function (isOpen) {
+         if (isOpen){
+            $scope.user_name = localStorage.getItem("user_name");
+         } else{
+         }
+      });
+    $scope.isUserLogged = function(){
+        if(localStorage.getItem("auth_token") !== null ){
+            return false;
+        }else 
+        return true;     
+    }
+    $scope.logout = function(){
+        
+        var confirmPopup = $ionicPopup.confirm({
+            title: "Log out",
+            template: "Are you sure you want to log out?",
+            cancelText: "No",
+            okText: "yes"
+          });
+  
+          confirmPopup.then(function(res) {
+            if (res) {
+                localStorage.removeItem("auth_token");
+                localStorage.removeItem("email");
+                localStorage.removeItem("user_name");
+                
+                var alertForAccountCreated = $ionicPopup.alert({
+                    title: 'Success!',
+                    template: 'Log out Succesfull!.'
+                });
+            }
+          });
+    };
     $scope.activeChild = { first_name: "" };
     $scope.getActiveChild = function() {
         $scope.activeChild = { first_name: "" };
@@ -23,6 +68,18 @@ angular.module('starter.controllers', [])
             $scope.activeChild = active_child;
         });
     };
+
+    //Changes the language of translation
+    $scope.ChangeLanguage = function(lang){
+        $translate.use(lang);
+    }
+
+    //Modal for language options
+    $ionicModal.fromTemplateUrl('templates/languageOptionsModal.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.languageOptionsModal = modal;
+    });
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/defaultUtilities/login.html', {
@@ -94,9 +151,10 @@ angular.module('starter.controllers', [])
             $scope.laggingSkills = res;
         });
     });
-    $scope.checkLaggingSkill = function(laggingskillId) {
-        LaggingSkills.check([laggingskillId]);
+    $scope.checkLaggingSkill = function(laggingskillId,child_id) {
+        LaggingSkills.check([laggingskillId], [child_id]);
         $state.go('app.laggingSkills');
+        console.log("Controller Child id:" + child_id);
         $ionicListDelegate.closeOptionButtons();
         LaggingSkills.all($scope.activeChild.id, function(res) {
             $scope.laggingSkills = res;
@@ -107,9 +165,10 @@ angular.module('starter.controllers', [])
             console.log("Google Analytics Unavailable");
         }
     };
-    $scope.uncheckLaggingSkill = function(laggingskillId) {
-        LaggingSkills.uncheck([laggingskillId]);
+    $scope.uncheckLaggingSkill = function(laggingskillId,child_id) {
+        LaggingSkills.uncheck([laggingskillId], [child_id]);
         $state.go('app.laggingSkills');
+        console.log("Controller out Child id:" + child_id);
         $ionicListDelegate.closeOptionButtons();
         LaggingSkills.all($scope.activeChild.id, function(res) {
             $scope.laggingSkills = res;
@@ -343,9 +402,13 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('TutorialCtrl', function($scope, $state, $ionicSlideBoxDelegate, $cordovaSQLite, $ionicPopup) {
+    .controller('TutorialCtrl', function($scope, $state, $ionicSlideBoxDelegate, $cordovaSQLite, $ionicPopup,$ionicHistory) {
 
         $scope.startApp = function() {
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+              });
+              $state.go('app.home');
             $state.go('app.childs');
         };
         $scope.next = function() {
@@ -412,6 +475,16 @@ angular.module('starter.controllers', [])
 
 function inputFieldIsEmpty(description) {
     return description.length === 0;
+}
+
+function signupFieldsAreEmpty(name, last_name, phone, email, password, password_confirmation) {
+    name_is_empty = inputFieldIsEmpty(name);
+    last_name_is_empty = inputFieldIsEmpty(last_name);
+    phone_is_empty = inputFieldIsEmpty(phone);
+    email_is_empty = inputFieldIsEmpty(email);
+    password_is_empty = inputFieldIsEmpty(password);
+    password_confirmation_is_empty = inputFieldIsEmpty(password_confirmation);
+    return (name_is_empty || last_name_is_empty || phone_is_empty || email_is_empty || password_is_empty || password_confirmation_is_empty);
 }
 
 // function saveSolution(cordovaSQLite,solution){

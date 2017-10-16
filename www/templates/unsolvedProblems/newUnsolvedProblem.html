@@ -1,6 +1,7 @@
-<ion-view cache-view="false" view-title="Plan B" ng-controller="UnsolvedProblemCtrl" >
+<ion-view cache-view="false" view-title="{{'planB' | translate }}" ng-controller="UnsolvedProblemCtrl" >
   <div class="bar bar-subheader bar-positive item-text-wrap">
       <h2 class="title">{{activeChild.first_name}}</h2>
+      <a class=" button button-small button-clear button-white icon ion-android-cloud" ng-click = "send_UP_API()"></a>
       <a class=" button button-small button-clear button-white icon ion-help-circled" ng-click = "unsolvedProblemHint()"></a>
     </div>
   <ion-content class="has-subheader" ng-controller="UnsolvedProblemCtrl" ng-init="googleAnalyticsView()" on-tap="unableAnimation()">
@@ -13,7 +14,7 @@
           <i ng-class="(shouldShowReorder) ? 'icon icon-floppy' : 'icon icon-sort-alt-down'"></i>
         </a>
         <div class="col col-75">
-          <h2><b>Unsolved Problems</b></h2>
+          <h2><b>{{'UnsolvedProblemsTitle' | translate }}</b></h2>
         </div>
       </div>
       <ion-list show-delete="false" can-swipe="true" show-reorder="shouldShowReorder">
@@ -36,7 +37,7 @@
             <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(unsolvedProblem, $fromIndex, $toIndex)"> </ion-reorder-button>
           </ion-item>
           <div class="item item-text-wrap" ng-if="unsolvedProblems.length === 0">
-            <p>No unsolved problems registered. Please register one above.</p>
+            <p>{{'NoUnsolvedProblems' | translate }}</p>
           </div>
       </ion-list>
     </div>

@@ -1,13 +1,13 @@
-<ion-view view-title="Main Help">
+<ion-view view-title= "{{'MainHelpTitle' | translate }}">
   <div class="bar bar-subheader item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-search placeholder-icon"></i>
-      <input type="search" placeholder="Search" ng-model="searchWord">
+      <input type="search" placeholder="{{'SearchText' | translate }}" ng-model="searchWord">
     </label>
     <button class="button ion-close input-button button-small"
             ng-click="searchWord = ''"
             ng-show="searchWord.length">
-        Clear
+            {{'OptionClear' | translate }}
     </button>
   </div>
   <ion-content class="has-subheader" ng-init="googleAnalyticsForMainHelp()">
@@ -15,7 +15,7 @@
 
       <a class="item item-thumbnail-left" href="#/app/alsupHelp">
         <img src="img/mainHelp/icon-alsup-help.png">
-        ALSUP Help
+        {{'ALSUPHelpOption' | translate }}
       </a>
       <a class="item item-thumbnail-left" href="#/app/planBHelp">
         <img src="img/mainHelp/lives_in_the_balance.jpg">
@@ -23,11 +23,11 @@
       </a>
       <a class="item item-thumbnail-left" href="#/app/faq">
         <img src="img/mainHelp/faq.png">
-        F.A.Q.
+        {{'FAQOption' | translate}}
       </a>
       <a class="item item-thumbnail-left" href="#/app/inTheHeatOfTheMoment">
         <img src="img/mainHelp/thermometer.png">
-        In the heat of the moment
+        {{'InTheHeatMomentOption'| translate}}
       </a>      
     </div>
 
