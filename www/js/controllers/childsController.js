@@ -226,8 +226,11 @@ angular
         // location.reload();   
         $scope.syncChildModal.hide();
         
-      }      
-      )};
+        })
+
+        $scope.downloadLaggingSkill();   
+    
+    };
 
       $scope.uploadLaggingSkillsChecked = function(){
         
@@ -252,6 +255,7 @@ angular
         var user_id = localStorage.getItem("user_id");
         $http.post("http://localhost:3000/users/"+user_id+"/children/"+$scope.activeChild.id+"/lagging_skill", 
         { 
+          id: activeLaggingSkill.id,
           description: activeLaggingSkill.description,
           checked: activeLaggingSkill.checked,
           child_id: $scope.child.id
@@ -271,9 +275,49 @@ angular
         function(response) {
           console.log(response.data.message);
         });
-      
-             
+          
       };
+
+      $scope.downloadLaggingSkill  = function(){        
+        var user_id = localStorage.getItem("user_id")
+        var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.activeChild.id+"/getLaggingSkills";
+        var data = {        
+        };
+        $http.get(link).then(data => {        
+          $scope.list = data.data;
+          console.log($scope.list);
+          //console.log(data.data.name);
+          // console.log($scope.s_child.birthday);
+          // console.log($scope.child.birthday);    
+          
+          // for(var i=0; i < $scope.list.length; i++)
+          // {
+          //   var query = "UPDATE lagging_skills SET description = ?, checked = ? , child_id = ? where id = ?";
+          //   var params = [$scope.list[i].description, $scope.list[i].checked,$scope.list[i].id, $scope.list[i].id];
+          //   $cordovaSQLite.execute(db, query, params);
+          // }
+
+            angular.forEach($scope.list,function(laggingSkill){
+              var query = "UPDATE lagging_skills SET description = ?, checked = ? , child_id = ? where id = ?";
+              var params = [laggingSkill.description, laggingSkill.checked,$scope.child.id, laggingSkill.id];
+              $cordovaSQLite.execute(db, query, params);
+            })
+            
+            console.log("LaggingSkills Updated");  
+          })
+                   
+          // ChildrenFactory.all(function(children){
+          //   $scope.childs = children;
+          // });        
+          // var alertForAccountCreated = $ionicPopup.alert({            
+          //   title: " Success!",
+          //   template: 'Child downloaded'
+          // });    
+          
+          // location.reload();   
+          //$scope.syncChildModal.hide();
+          
+        }      
 
 
     $scope.showActionsheet = function(child) {
