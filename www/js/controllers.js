@@ -144,7 +144,8 @@ app
 
 })
 
-.controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate, ChildrenFactory, $ionicModal) {
+.controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate, ChildrenFactory, $ionicModal, $http) {
+    $scope.activeLaggingSkill = {};
     ChildrenFactory.active(function(active_child) {
         $scope.activeChild = active_child;
         LaggingSkills.all($scope.activeChild.id, function(res) {
@@ -153,6 +154,7 @@ app
     });
     $scope.checkLaggingSkill = function(laggingskillId,child_id) {
         LaggingSkills.check([laggingskillId], [child_id]);
+        $scope.uploadLaggingSkill(laggingskillId);
         $state.go('app.laggingSkills');
         console.log("Controller Child id:" + child_id);
         $ionicListDelegate.closeOptionButtons();
@@ -197,6 +199,45 @@ app
             console.log("Google Analytics Unavailable");
         }
     }
+
+    $scope.uploadLaggingSkill = function(laggingskillId){
+        console.log("lg_id: "+laggingskillId);
+        // $scope.activeLaggingSkill = LaggingSkills.get(laggingskillId);
+        console.log($scope.laggingSkills);
+        console.log("paso la carga");
+        var link = "http://localhost:3000/createLaggingSkill";
+        var data = {
+        //   description: laggingSkill.description,
+        //   checked: laggingSkill.checked,
+        //   child_id: 1 //$scope.activeChild.id
+          
+          description: 'desde ionic',
+          checked: 1,
+          child_id: 1
+        };
+        $http({
+          method: 'POST',
+          url: link,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+          },
+          data: data
+        })
+        .then(function(response) {
+          console.log(response.data.message);
+        //   var alertForAccountCreated = $ionicPopup.alert({
+        //       title: 'Success!',
+        //       template: 'LaggingSkill uploaded.'
+        //   });
+        },
+        function(response) {
+          console.log(response.data.message);
+        });      
+      };
 })
 
 .controller('HelpCategoryCtrl', function($scope, $stateParams) {
