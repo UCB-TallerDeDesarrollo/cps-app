@@ -154,13 +154,13 @@ app
     });
     $scope.checkLaggingSkill = function(laggingskillId,child_id) {
         LaggingSkills.check([laggingskillId], [child_id]);
-        $scope.uploadLaggingSkill(laggingskillId);
         $state.go('app.laggingSkills');
         console.log("Controller Child id:" + child_id);
         $ionicListDelegate.closeOptionButtons();
         LaggingSkills.all($scope.activeChild.id, function(res) {
             $scope.laggingSkills = res;
         });
+        $scope.uploadLaggingSkill($scope.laggingSkills,laggingskillId);
         if (typeof analytics !== 'undefined') {
             analytics.trackEvent('Lagging Skill', 'check');
         } else {
@@ -200,20 +200,15 @@ app
         }
     }
 
-    $scope.uploadLaggingSkill = function(laggingskillId){
-        console.log("lg_id: "+laggingskillId);
-        // $scope.activeLaggingSkill = LaggingSkills.get(laggingskillId);
-        console.log($scope.laggingSkills);
+    $scope.uploadLaggingSkill = function(laggingskillList,laggingskillId){
+        $scope.activeLaggingSkill = LaggingSkills.get(laggingskillList,laggingskillId);
+        console.log($scope.activeChild.id);
         console.log("paso la carga");
         var link = "http://localhost:3000/createLaggingSkill";
         var data = {
-        //   description: laggingSkill.description,
-        //   checked: laggingSkill.checked,
-        //   child_id: 1 //$scope.activeChild.id
-          
-          description: 'desde ionic',
-          checked: 1,
-          child_id: 1
+           description: $scope.activeLaggingSkill.description,
+           checked: $scope.activeLaggingSkill.checked,
+           child_id: $scope.activeChild.id
         };
         $http({
           method: 'POST',
