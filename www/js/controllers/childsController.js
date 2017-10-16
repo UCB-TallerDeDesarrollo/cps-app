@@ -153,43 +153,43 @@ angular
     }
 
     $scope.uploadChild = function(){
-      var link = "http://localhost:3000/createChild";
-      var data = {
+      var user_id = localStorage.getItem("user_id");           
+      $http.post("http://localhost:3000/users/"+user_id+"/children", 
+      { 
+        id: $scope.child.id,
         name: $scope.child.first_name,
         gender: $scope.child.gender,
-        birthday: $scope.child.birthday          
-      };
-      $http({
-        method: 'POST',
-        url: link,
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        birthday: $scope.child.birthday
+      }, 
+      {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         transformRequest: function(obj) {
-          var str = [];
-          for(var p in obj)
-          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-          return str.join("&");
-        },
-        data: data
+                var str = [];
+                for(var p in obj)
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
       })
-      .then(function(response) {
-        console.log(response.data.message);
+      .then(data => {
+        console.log(user_id);
+        console.log("Child created");
         var alertForAccountCreated = $ionicPopup.alert({
-            title: 'Success!',
-            template: 'Child uploaded.'
-        });
-      },
-      function(response) {
-        console.log(response.data.message);
-      });      
-    };    
+          title: 'Success!',
+          template: 'Child uploaded.'
+        });        
+      }).catch(error => {
+        console.log(user_id);
+        console.log(error.status);
+      })};
 
     $scope.downloadChild = function(){        
-      var link = "http://localhost:3000/getChild?child_id=";
+      var user_id = localStorage.getItem("user_id")
+      var link = "http://localhost:3000/users/"+user_id+"/children/";
       var data = {        
       };
-      $http.get(link+$scope.child.id).then(function(response) {        
-        $scope.s_child = response.data[0];
-        console.log(response.data[0].name);
+      $http.get(link+$scope.child.id).then(data => {        
+        $scope.s_child = data.data;
+        console.log(data.data.name);
         console.log($scope.s_child.birthday);
         console.log($scope.child.birthday);               
         var query = "UPDATE childs SET first_name = ?, gender = ? , birthday = ? where id = ?";
@@ -203,7 +203,9 @@ angular
           template: 'Child downloaded'
         });    
         console.log("Child updated");  
-        location.reload();                      
+        // location.reload();   
+        $scope.syncChildModal.hide();
+        
       }      
       )};
 

@@ -402,9 +402,13 @@ app
         };
     })
 
-    .controller('TutorialCtrl', function($scope, $state, $ionicSlideBoxDelegate, $cordovaSQLite, $ionicPopup) {
+    .controller('TutorialCtrl', function($scope, $state, $ionicSlideBoxDelegate, $cordovaSQLite, $ionicPopup,$ionicHistory) {
 
         $scope.startApp = function() {
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+              });
+              $state.go('app.home');
             $state.go('app.childs');
         };
         $scope.next = function() {
