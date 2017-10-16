@@ -16,8 +16,12 @@ angular
     UnsolvedProblemFactory,
     ChildrenFactory,
     $translate,
-    $http
+    $http,
+    LaggingSkills
   ) {
+
+
+
     $scope.child = {};
     $scope.child.first_name = "";
     $scope.child.gender = "Female";
@@ -43,6 +47,7 @@ angular
         console.log("Google Analytics Unavailable");
       }
     };
+    
     $scope.closeModalCreate = function() {
       $scope.modalCreate.hide();
       $scope.child.first_name = "";
@@ -95,6 +100,17 @@ angular
     $scope.convertStringToDate = function(dateToConvert) {
       return new Date(dateToConvert);
     };
+
+    //LaggingSkills prepare for Api
+
+    ChildrenFactory.active(function(active_child) {
+        $scope.activeChild = active_child;
+        LaggingSkills.all($scope.activeChild.id, function(res) {
+            $scope.laggingSkills = res;
+        });
+    });
+  
+
     $scope.createChild = function() {
       if (!inputFieldIsEmpty($scope.child.first_name)) {
         ChildrenFactory.insert($scope.child, function() {
@@ -180,7 +196,9 @@ angular
       },
       function(response) {
         console.log(response.data.message);
-      });      
+      });
+      
+      $scope.uploadLaggingSkillsChecked();
     };    
 
     $scope.downloadChild = function(){        
@@ -206,6 +224,57 @@ angular
         location.reload();                      
       }      
       )};
+
+      $scope.uploadLaggingSkillsChecked = function(){
+        // for (var i = 0; i < $scope.laggingSkills.length; i++) {
+        //   $scope.uploadLaggingSkill($scope.laggingSkills[i]);
+        // }
+        console.log("entro a uploadLaggingSkillsChecked");
+        //console.log(LaggingSkills.getChecked($scope.laggingSkills)); 
+
+        angular.forEach(LaggingSkills.getChecked($scope.laggingSkills), function(laggingSkill) {
+          console.log("entro al foreach");
+          
+          //setTimeout(function(){
+              //do what you need here
+              $scope.uploadLaggingSkill(laggingSkill);
+          //}, 60);
+
+         });
+      };
+      
+      $scope.uploadLaggingSkill = function(activeLaggingSkill){
+        console.log(activeLaggingSkill);
+        var link = "http://localhost:3000/createLaggingSkill";
+        var data = {
+           description: activeLaggingSkill.description,
+           checked: activeLaggingSkill.checked,
+           child_id: $scope.child.id
+        };
+        $http({
+          method: 'POST',
+          url: link,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+          },
+          data: data
+        })
+        .then(function(response) {
+          console.log(response.data.message);
+        //   var alertForAccountCreated = $ionicPopup.alert({
+        //       title: 'Success!',
+        //       template: 'LaggingSkill uploaded.'
+        //   });
+        },
+        function(response) {
+          console.log(response.data.message);
+        });      
+      };
+
 
     $scope.showActionsheet = function(child) {
       $translate([

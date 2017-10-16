@@ -50,6 +50,15 @@ angular.module('starter.services', ['ngCordova'])
     },
     uncheck: function(laggingskillId, child_id){
       uncheckLaggingSkill(laggingskillId, child_id);
+    },
+    getChecked: function(laggingSkillList){
+        var laggingSkillsCheckedList = [];
+        for (var i = 0; i < laggingSkillList.length; i++) {
+          if (laggingSkillList[i].checked === 1) {
+            laggingSkillsCheckedList.push(laggingSkillList[i]);
+          }
+        }
+        return laggingSkillsCheckedList;
     }
   };
 })

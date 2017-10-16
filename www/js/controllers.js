@@ -160,7 +160,7 @@ app
         LaggingSkills.all($scope.activeChild.id, function(res) {
             $scope.laggingSkills = res;
         });
-        $scope.uploadLaggingSkill($scope.laggingSkills,laggingskillId);
+        //$scope.uploadLaggingSkill($scope.laggingSkills,laggingskillId);
         if (typeof analytics !== 'undefined') {
             analytics.trackEvent('Lagging Skill', 'check');
         } else {
@@ -202,7 +202,7 @@ app
 
     $scope.uploadLaggingSkill = function(laggingskillList,laggingskillId){
         $scope.activeLaggingSkill = LaggingSkills.get(laggingskillList,laggingskillId);
-        console.log($scope.activeChild.id);
+        console.log($scope.activeLaggingSkill.checked);
         console.log("paso la carga");
         var link = "http://localhost:3000/createLaggingSkill";
         var data = {
