@@ -176,6 +176,7 @@ $scope.auxiliar=[];
   });
   $scope.openModalToChooseAdultConcernToChildConcern = function() {
     $scope.modalToChooseAdultConcernToChildConcern.show();
+    $scope.showHint();
   };
   $scope.closeModalToChooseAdultConcernToChildConcern = function() {
     $scope.modalToChooseAdultConcernToChildConcern.hide();
@@ -431,6 +432,16 @@ $scope.auxiliar=[];
   $scope.goToSolution = function(solution){
     $state.go('app.solution', {solutionId:solution.id});
   };
+
+  $scope.showHint = function() {
+    if(localStorage.getItem("showInfo") === null){
+        localStorage.setItem("showInfo", true);
+        var confirmPopup = $ionicPopup.alert({
+          title: "Solving too many concerns at once doesn't usually go well, so for now, just pick 1 adult concern and 1 child concern to solve"
+        });
+      }
+    };
+
 
 
   function createPair(cordovaSQLite,solution_id) {

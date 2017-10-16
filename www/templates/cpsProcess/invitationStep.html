@@ -119,15 +119,18 @@
 
     <!--  PARA ELEGIR EL NINO Y EL CONCERN-->
     <script id="choose-AdultConcern-To-ChildConcern.html" type="text/ng-template">
-      <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+
+      <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active" >
+
         <ion-header-bar class="bar bar-header bar-positive">
           <h1 class="title">Related to ...</h1>
           <button class="button button-clear button-primary" ng-click="closeModalToChooseAdultConcernToChildConcern()">Cancel</button>
         </ion-header-bar>
 
-        <ion-content class="padding scroll-content ionic-scroll  has-header">
+        <ion-content  class="padding scroll-content ionic-scroll  has-header"  >
 
           <div class="scroll modal-animation">
+
                  <ion-list radio-group  >
                     <div class=" item item-divider">
                         Child's concerns
@@ -144,6 +147,7 @@
 
                  <button class="button button-full button-positive" ng-if="!pair.description.length || !pair.description2.length"  ng-click="createPair()" disabled>Save</button>
                  <button class="button button-full button-positive" ng-if="pair.description.length> 0 && pair.description2.length> 0"  ng-click="createPair()" >Save</button>
+
           </div>
           <div class="scroll-bar scroll-bar-v">
             <div class="scroll-bar-indicator scroll-bar-fade-out modal-animation">
@@ -151,6 +155,7 @@
           </div>
         </ion-content>
       </ion-modal-view>
+
     </script>
     <!--  FIN PARA ELEGIR EL NINO Y EL CONCERN-->
 
