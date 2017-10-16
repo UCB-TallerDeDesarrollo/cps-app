@@ -10,6 +10,7 @@ var $translations_en = {
     UnsolvedProblemsTitle: 'Unsolved Problems',
     MainHelpTitle: 'Main Help',
     AppTutorialTitle: 'App Tutorial',
+    FAQOption:'F.A.Q.',
     MyChildrenTitle: 'My Children',
     HavntRegisteredAChildAlert: " You haven't registered a child. ",
     RegisterChildMessage: 'PLEASE REGISTER ONE ABOVE',
