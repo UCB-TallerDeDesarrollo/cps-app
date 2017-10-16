@@ -49,6 +49,11 @@ var $translations_es = {
     EducatorOption: "Educador",
     SignInOption: "Registrarse",
     ReadyOption: "Listo",
+
+    SyncupTitle: "Sincronizar",
+    UploadChildTitle: "Guardar datos",
+    DownloadChildTitle: "Descargar datos",
+
     planB: 'Plan B',  
     NoUnsolvedProblems: 'No se registró ningun problema sin resolver. Por favor registrar uno arriba', 
     NewUnsolvedProblem: 'Nuevo Problema Sin Resolver',
@@ -101,4 +106,5 @@ var $translations_es = {
     LaggingSkill_22:"Dificultad para valorar la percepción propia y la forma en que la perciben los demás",
     LaggingSkill_23:"Dificulatades sensonriales/motoras"
 };
+
 

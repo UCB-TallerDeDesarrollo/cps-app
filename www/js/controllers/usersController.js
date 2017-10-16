@@ -126,7 +126,7 @@ angular.module('starter.controllers')
         localStorage.setItem("email",email);
         var alertForAccountCreated = $ionicPopup.alert({
                 title: 'Success!',
-                template: 'Your account has been crated.'
+                template: 'Your account has been created'
             });
         $scope.get_user_info();
       }).catch(error => {

@@ -65,10 +65,36 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     $cordovaSQLite.execute(db,query,[comment.description,now,comment.solutionId]);
   }
 
+
+  function insertPair(pair){
+
+    var query ="INSERT INTO pair_childConcerntoadultConcern(description,description2,solution_id) VALUES (?,?,?)";
+    $cordovaSQLite.execute(db,query,[pair.description,pair.description2,pair.solutionId]);
+  }
+
+
+  function findPair(solutionId, callback){
+    var pair = {};
+    var query ="SELECT * FROM pair_childConcerntoadultConcern WHERE id = ?";
+    $cordovaSQLite.execute(db,query,[solutionId]).then(function(result){
+      pair = result.rows.item(0);
+      callback(pair);
+    },function(err){
+      console.log(err.message);
+    });
+  }
+
+
+
   function updateComment(comment){
     var query = "UPDATE solution_comments SET description = ? where id = ?";
     $cordovaSQLite.execute(db, query, [comment.description, comment.id]);
   }
+  function updatePair(pair){
+     var query = "UPDATE pair_childConcerntoadultConcern SET description = ?, description2 = ? where id = ?";
+     $cordovaSQLite.execute(db, query, [pair.description,pair.description2, pair.id]);
+   }
+
 
   return {
     all: function(unsolvedProblemId, callback){
@@ -91,6 +117,15 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     },
     insertComment: function(comment){
       insertComment(comment);
+    },
+    insertPair: function(pair){
+      insertPair(pair);
+    },
+    findPair: function(solutionId, callback){
+      findPair(solutionId, callback);
+    },
+    updatePair: function(pair){
+      updatePair(pair);
     },
     updateComment: function(comment){
       updateComment(comment);

@@ -113,6 +113,13 @@ body {
   display:none;
 }
 
+.button.right{
+  width:90px;
+  height: 5px;
+  bottom: 2px;
+  right: -250px;
+}
+
 .tabs .tab-item .icon.step1 {
   background-repeat: no-repeat;
   background-position: 50%;

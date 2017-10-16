@@ -15,7 +15,8 @@ angular
     $cordovaFileTransfer,
     UnsolvedProblemFactory,
     ChildrenFactory,
-    $translate
+    $translate,
+    $http
   ) {
     $scope.child = {};
     $scope.child.first_name = "";
@@ -139,6 +140,72 @@ angular
         }
       }
     };
+
+    $ionicModal.fromTemplateUrl('templates/child/sync-child-modal.html', {
+      scope: $scope
+    }).then(function(modal) {
+      $scope.syncChildModal = modal;
+    }); 
+
+    $scope.showSyncModal = function(child){
+        $scope.child = child;
+        $scope.syncChildModal.show();
+    }
+
+    $scope.uploadChild = function(){
+      var link = "http://localhost:3000/createChild";
+      var data = {
+        name: $scope.child.first_name,
+        gender: $scope.child.gender,
+        birthday: $scope.child.birthday          
+      };
+      $http({
+        method: 'POST',
+        url: link,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        transformRequest: function(obj) {
+          var str = [];
+          for(var p in obj)
+          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          return str.join("&");
+        },
+        data: data
+      })
+      .then(function(response) {
+        console.log(response.data.message);
+        var alertForAccountCreated = $ionicPopup.alert({
+            title: 'Success!',
+            template: 'Child uploaded.'
+        });
+      },
+      function(response) {
+        console.log(response.data.message);
+      });      
+    };    
+
+    $scope.downloadChild = function(){        
+      var link = "http://localhost:3000/getChild?child_id=";
+      var data = {        
+      };
+      $http.get(link+$scope.child.id).then(function(response) {        
+        $scope.s_child = response.data[0];
+        console.log(response.data[0].name);
+        console.log($scope.s_child.birthday);
+        console.log($scope.child.birthday);               
+        var query = "UPDATE childs SET first_name = ?, gender = ? , birthday = ? where id = ?";
+        var params = [$scope.s_child.name, $scope.s_child.gender,$scope.s_child.birthday, $scope.s_child.id];
+        $cordovaSQLite.execute(db, query, params);         
+        ChildrenFactory.all(function(children){
+          $scope.childs = children;
+        });        
+        var alertForAccountCreated = $ionicPopup.alert({            
+          title: " Success!",
+          template: 'Child downloaded'
+        });    
+        console.log("Child updated");  
+        location.reload();                      
+      }      
+      )};
 
     $scope.showActionsheet = function(child) {
       $translate([
