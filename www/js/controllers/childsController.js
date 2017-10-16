@@ -246,35 +246,30 @@ angular
       };
       
       $scope.uploadLaggingSkill = function(activeLaggingSkill){
-        //console.log(activeLaggingSkill);
-        var link = "http://localhost:3000/createLaggingSkill";
-        var data = {
-           description: activeLaggingSkill.description,
-           checked: activeLaggingSkill.checked,
-           child_id: $scope.child.id
-        };
-        $http({
-          method: 'POST',
-          url: link,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        var user_id = localStorage.getItem("user_id");
+        $http.post("http://localhost:3000/users/"+user_id+"/children/"+$scope.activeChild.id+"/lagging_skill", 
+        { 
+          description: activeLaggingSkill.description,
+          checked: activeLaggingSkill.checked,
+          child_id: $scope.child.id
+        }, 
+        {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           transformRequest: function(obj) {
-            var str = [];
-            for(var p in obj)
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            return str.join("&");
-          },
-          data: data
-        })
-        .then(function(response) {
-          console.log(response.data.message);
-        //   var alertForAccountCreated = $ionicPopup.alert({
-        //       title: 'Success!',
-        //       template: 'LaggingSkill uploaded.'
-        //   });
+                  var str = [];
+                  for(var p in obj)
+                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                  return str.join("&");
+              },
+        }).then(data => {
+          console.log(user_id);
+          console.log("Child created");
         },
         function(response) {
           console.log(response.data.message);
-        });      
+        });
+      
+             
       };
 
 
