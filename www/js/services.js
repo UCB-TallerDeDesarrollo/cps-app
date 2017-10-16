@@ -37,10 +37,10 @@ angular.module('starter.services', ['ngCordova'])
     all: function(callback, childId) {
       getLaggingSkills(callback, childId);
     },
-    get: function(laggingSkillsId) {
-      for (var i = 0; i < laggingSkills.length; i++) {
-        if (laggingSkillss[i].id === parseInt(laggingSkillsId)) {
-          return laggingSkillss[i];
+    get: function(laggingSkillList,laggingSkillsId) {
+      for (var i = 0; i < laggingSkillList.length; i++) {
+        if (laggingSkillList[i].id === parseInt(laggingSkillsId)) {
+          return laggingSkillList[i];
         }
       }
       return null;
@@ -50,7 +50,27 @@ angular.module('starter.services', ['ngCordova'])
     },
     uncheck: function(laggingskillId, child_id){
       uncheckLaggingSkill(laggingskillId, child_id);
-    }
+    },
+    getChecked: function(laggingSkillList){
+        var laggingSkillsCheckedList = [];
+        for (var i = 0; i < laggingSkillList.length; i++) {
+          if (laggingSkillList[i].checked === 1) {
+            laggingSkillsCheckedList.push(laggingSkillList[i]);
+          }
+        }
+        return laggingSkillsCheckedList;
+    },
+    getCheckedCount: function(laggingSkillList){
+      var laggingSkillsCheckedCount = 0;
+      
+      for (var i = 0; i < laggingSkillList.length; i++) {
+        if (laggingSkillList[i].checked === 1) {
+          laggingSkillsCheckedCount = laggingSkillsCheckedCount + 1;
+        }
+      }
+      return laggingSkillsCheckedCount;
+  }
+
   };
 })
 

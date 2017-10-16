@@ -16,8 +16,13 @@ angular
     UnsolvedProblemFactory,
     ChildrenFactory,
     $translate,
-    $http
+    $http,
+    LaggingSkills,
+    $timeout
   ) {
+
+
+
     $scope.child = {};
     $scope.child.first_name = "";
     $scope.child.gender = "Female";
@@ -43,6 +48,7 @@ angular
         console.log("Google Analytics Unavailable");
       }
     };
+    
     $scope.closeModalCreate = function() {
       $scope.modalCreate.hide();
       $scope.child.first_name = "";
@@ -95,6 +101,17 @@ angular
     $scope.convertStringToDate = function(dateToConvert) {
       return new Date(dateToConvert);
     };
+
+    //LaggingSkills prepare for Api
+
+    ChildrenFactory.active(function(active_child) {
+        $scope.activeChild = active_child;
+        LaggingSkills.all($scope.activeChild.id, function(res) {
+            $scope.laggingSkills = res;
+        });
+    });
+  
+
     $scope.createChild = function() {
       if (!inputFieldIsEmpty($scope.child.first_name)) {
         ChildrenFactory.insert($scope.child, function() {
@@ -174,13 +191,16 @@ angular
         console.log(user_id);
         console.log("Child created");
         var alertForAccountCreated = $ionicPopup.alert({
-          title: 'Success!',
-          template: 'Child uploaded.'
-        });        
-      }).catch(error => {
-        console.log(user_id);
-        console.log(error.status);
-      })};
+            title: 'Success!',
+            template: 'Child uploaded.'
+        });
+      },
+      function(response) {
+        console.log(response.data.message);
+      });
+      
+      $scope.uploadLaggingSkillsChecked();
+    };    
 
     $scope.downloadChild = function(){        
       var user_id = localStorage.getItem("user_id")
@@ -208,6 +228,53 @@ angular
         
       }      
       )};
+
+      $scope.uploadLaggingSkillsChecked = function(){
+        
+          var list = {};
+          list = LaggingSkills.getChecked($scope.laggingSkills);
+          var timeInMs = 0;
+          var countUp = function() {
+            if(timeInMs== LaggingSkills.getCheckedCount($scope.laggingSkills)){
+              $timeout.cancel(countUp);
+            }else{
+              $scope.uploadLaggingSkill(list[timeInMs]);
+              timeInMs++;
+              //console.log(timeInMs);
+              $timeout(countUp, 1000);
+            }
+          }
+      
+          $timeout(countUp, 1000);
+      };
+      
+      $scope.uploadLaggingSkill = function(activeLaggingSkill){
+        var user_id = localStorage.getItem("user_id");
+        $http.post("http://localhost:3000/users/"+user_id+"/children/"+$scope.activeChild.id+"/lagging_skill", 
+        { 
+          description: activeLaggingSkill.description,
+          checked: activeLaggingSkill.checked,
+          child_id: $scope.child.id
+        }, 
+        {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          transformRequest: function(obj) {
+                  var str = [];
+                  for(var p in obj)
+                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                  return str.join("&");
+              },
+        }).then(data => {
+          console.log(user_id);
+          console.log("Child created");
+        },
+        function(response) {
+          console.log(response.data.message);
+        });
+      
+             
+      };
+
 
     $scope.showActionsheet = function(child) {
       $translate([

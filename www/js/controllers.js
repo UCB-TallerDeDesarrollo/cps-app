@@ -144,7 +144,8 @@ app
 
 })
 
-.controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate, ChildrenFactory, $ionicModal) {
+.controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate, ChildrenFactory, $ionicModal, $http) {
+    $scope.activeLaggingSkill = {};
     ChildrenFactory.active(function(active_child) {
         $scope.activeChild = active_child;
         LaggingSkills.all($scope.activeChild.id, function(res) {
@@ -159,6 +160,7 @@ app
         LaggingSkills.all($scope.activeChild.id, function(res) {
             $scope.laggingSkills = res;
         });
+        //$scope.uploadLaggingSkill($scope.laggingSkills,laggingskillId);
         if (typeof analytics !== 'undefined') {
             analytics.trackEvent('Lagging Skill', 'check');
         } else {
@@ -197,6 +199,40 @@ app
             console.log("Google Analytics Unavailable");
         }
     }
+
+    $scope.uploadLaggingSkill = function(laggingskillList,laggingskillId){
+        $scope.activeLaggingSkill = LaggingSkills.get(laggingskillList,laggingskillId);
+        console.log($scope.activeLaggingSkill.checked);
+        console.log("paso la carga");
+        var link = "http://localhost:3000/createLaggingSkill";
+        var data = {
+           description: $scope.activeLaggingSkill.description,
+           checked: $scope.activeLaggingSkill.checked,
+           child_id: $scope.activeChild.id
+        };
+        $http({
+          method: 'POST',
+          url: link,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+          },
+          data: data
+        })
+        .then(function(response) {
+          console.log(response.data.message);
+        //   var alertForAccountCreated = $ionicPopup.alert({
+        //       title: 'Success!',
+        //       template: 'LaggingSkill uploaded.'
+        //   });
+        },
+        function(response) {
+          console.log(response.data.message);
+        });      
+      };
 })
 
 .controller('HelpCategoryCtrl', function($scope, $stateParams) {
