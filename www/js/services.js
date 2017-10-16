@@ -59,7 +59,18 @@ angular.module('starter.services', ['ngCordova'])
           }
         }
         return laggingSkillsCheckedList;
-    }
+    },
+    getCheckedCount: function(laggingSkillList){
+      var laggingSkillsCheckedCount = 0;
+      
+      for (var i = 0; i < laggingSkillList.length; i++) {
+        if (laggingSkillList[i].checked === 1) {
+          laggingSkillsCheckedCount = laggingSkillsCheckedCount + 1;
+        }
+      }
+      return laggingSkillsCheckedCount;
+  }
+
   };
 })
 

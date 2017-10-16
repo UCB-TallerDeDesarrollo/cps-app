@@ -17,7 +17,8 @@ angular
     ChildrenFactory,
     $translate,
     $http,
-    LaggingSkills
+    LaggingSkills,
+    $timeout
   ) {
 
 
@@ -226,25 +227,26 @@ angular
       )};
 
       $scope.uploadLaggingSkillsChecked = function(){
-        // for (var i = 0; i < $scope.laggingSkills.length; i++) {
-        //   $scope.uploadLaggingSkill($scope.laggingSkills[i]);
-        // }
-        console.log("entro a uploadLaggingSkillsChecked");
-        //console.log(LaggingSkills.getChecked($scope.laggingSkills)); 
-
-        angular.forEach(LaggingSkills.getChecked($scope.laggingSkills), function(laggingSkill) {
-          console.log("entro al foreach");
-          
-          //setTimeout(function(){
-              //do what you need here
-              $scope.uploadLaggingSkill(laggingSkill);
-          //}, 60);
-
-         });
+        
+          var list = {};
+          list = LaggingSkills.getChecked($scope.laggingSkills);
+          var timeInMs = 0;
+          var countUp = function() {
+            if(timeInMs== LaggingSkills.getCheckedCount($scope.laggingSkills)){
+              $timeout.cancel(countUp);
+            }else{
+              $scope.uploadLaggingSkill(list[timeInMs]);
+              timeInMs++;
+              //console.log(timeInMs);
+              $timeout(countUp, 1000);
+            }
+          }
+      
+          $timeout(countUp, 1000);
       };
       
       $scope.uploadLaggingSkill = function(activeLaggingSkill){
-        console.log(activeLaggingSkill);
+        //console.log(activeLaggingSkill);
         var link = "http://localhost:3000/createLaggingSkill";
         var data = {
            description: activeLaggingSkill.description,
