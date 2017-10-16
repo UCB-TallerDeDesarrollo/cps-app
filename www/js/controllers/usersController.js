@@ -30,12 +30,13 @@ angular.module('starter.controllers')
                 for(var p in obj)
                 str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                 return str.join("&");
-            },
+            }
       })
       .then(data => {
-          if(data.data!=null)
+          if(data.data!=null){
            localStorage.setItem("user_name",data.data.name + ' ' + data.data.last_name);
            localStorage.setItem("user_id",data.data.id);
+          }
       }).catch(error => {
         console.log(error.status);
       }); 

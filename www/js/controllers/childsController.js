@@ -156,9 +156,10 @@ angular
       var user_id = localStorage.getItem("user_id");           
       $http.post("http://localhost:3000/users/"+user_id+"/children", 
       { 
+        id: $scope.child.id,
         name: $scope.child.first_name,
         gender: $scope.child.gender,
-        birthday: $scope.child.birthday,                    
+        birthday: $scope.child.birthday
       }, 
       {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -170,12 +171,14 @@ angular
             },
       })
       .then(data => {
+        console.log(user_id);
         console.log("Child created");
         var alertForAccountCreated = $ionicPopup.alert({
           title: 'Success!',
           template: 'Child uploaded.'
         });        
       }).catch(error => {
+        console.log(user_id);
         console.log(error.status);
       })};
       
@@ -189,7 +192,7 @@ angular
       
 
     $scope.downloadChild = function(){        
-      var link = "http://localhost:3000/getChild?child_id=";
+      var link = "http://localhost:3000/users/1/children/";
       var data = {        
       };
       $http.get(link+$scope.child.id).then(function(response) {        
