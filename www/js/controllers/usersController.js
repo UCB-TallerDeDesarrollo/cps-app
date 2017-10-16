@@ -176,12 +176,14 @@ angular.module('starter.controllers')
     };
 
     $scope.passwordInfoAlert = function(){
+    $translate(['passwordInfo','passwordMustHave','passwordCondition1','passwordCondition2','passwordCondition3']).then (function(translations){    
       var alertForNoActiveChild = $ionicPopup.alert({
-          title: 'Password information',
-          template: "Your password must have at least: "
-                   + "<br><br>  - 8 characters. "
-                   + "<br>  - One capital letter. "
-                   + "<br>  - One lower case letter. ",
+          title: translations.passwordInfo,
+          template: translations.passwordMustHave
+                   + "<br><br>  - 8 " + translations.passwordCondition1
+                   + "<br>  - " + translations.passwordCondition2
+                   + "<br>  - " + translations.passwordCondition3,
       });
+    });
     }
 });
