@@ -181,23 +181,15 @@ angular
         console.log(user_id);
         console.log(error.status);
       })};
-      
-      
-      
-
-
-
-
-
-      
 
     $scope.downloadChild = function(){        
-      var link = "http://localhost:3000/users/1/children/";
+      var user_id = localStorage.getItem("user_id")
+      var link = "http://localhost:3000/users/"+user_id+"/children/";
       var data = {        
       };
-      $http.get(link+$scope.child.id).then(function(response) {        
-        $scope.s_child = response.data[0];
-        console.log(response.data[0].name);
+      $http.get(link+$scope.child.id).then(data => {        
+        $scope.s_child = data.data;
+        console.log(data.data.name);
         console.log($scope.s_child.birthday);
         console.log($scope.child.birthday);               
         var query = "UPDATE childs SET first_name = ?, gender = ? , birthday = ? where id = ?";
@@ -211,7 +203,9 @@ angular
           template: 'Child downloaded'
         });    
         console.log("Child updated");  
-        location.reload();                      
+        // location.reload();   
+        $scope.syncChildModal.hide();
+        
       }      
       )};
 
