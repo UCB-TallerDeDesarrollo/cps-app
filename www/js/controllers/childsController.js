@@ -15,7 +15,8 @@ angular
     $cordovaFileTransfer,
     UnsolvedProblemFactory,
     ChildrenFactory,
-    $translate
+    $translate,
+    $http
   ) {
     $scope.child = {};
     $scope.child.first_name = "";
@@ -139,6 +140,12 @@ angular
         }
       }
     };
+
+    $ionicModal.fromTemplateUrl('templates/child/sync-child-modal.html', {
+      scope: $scope
+    }).then(function(modal) {
+      $scope.syncChildModal = modal;
+    }); 
 
     $scope.showSyncModal = function(child){
         $scope.child = child;
