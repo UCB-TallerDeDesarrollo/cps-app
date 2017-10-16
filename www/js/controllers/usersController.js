@@ -30,11 +30,13 @@ angular.module('starter.controllers')
                 for(var p in obj)
                 str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                 return str.join("&");
-            },
+            }
       })
       .then(data => {
-          if(data.data!=null)
+          if(data.data!=null){
            localStorage.setItem("user_name",data.data.name + ' ' + data.data.last_name);
+           localStorage.setItem("user_id",data.data.id);
+          }
       }).catch(error => {
         console.log(error.status);
       }); 
@@ -126,7 +128,7 @@ angular.module('starter.controllers')
         localStorage.setItem("email",email);
         var alertForAccountCreated = $ionicPopup.alert({
                 title: 'Success!',
-                template: 'Your account has been crated.'
+                template: 'Your account has been created'
             });
         $scope.get_user_info();
       }).catch(error => {
