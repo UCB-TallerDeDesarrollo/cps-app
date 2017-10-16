@@ -39,6 +39,7 @@ var $translations_es = {
     ALSUPHelpOption: 'Ayuda ALSUP',
     InTheHeatMomentOption: 'En el calor del momento',
     OptionClear: 'Limpiar',
+    FAQOption:"Preguntas frecuentes",
     SearchText: 'Buscar',
     ConfirmDeleteChildMessage: '¿Seguro de que quieres eliminar este niño?',
     YesMessage: 'Si',
