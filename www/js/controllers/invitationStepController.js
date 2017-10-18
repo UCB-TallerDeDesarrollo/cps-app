@@ -5,6 +5,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
 
 
       $scope.pair = { solutionId:$stateParams.unsolvedProblemId  };
+      $scope.pair.description = "";
 
   UnsolvedProblemFactory.find($stateParams.unsolvedProblemId,function(result){
     $scope.unsolvedProblem = result.rows.item(0);
@@ -76,9 +77,16 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     if (!inputFieldIsEmpty($scope.solution.description)) {
       $scope.solution.rating=0;
       PossibleSolutionFactory.insert($scope.solution);
-      createPair($cordovaSQLite, [$scope.solution.id]);
+
+     if (inputFieldIsEmpty($scope.pair.description)) {
+      createPairDefault($cordovaSQLite, [$scope.solution.id]);
+        $scope.pair.description = "";
+      }
+
+
       $scope.solution.description = "";
       $scope.closeModal();
+
       if(typeof analytics !== 'undefined') {
            analytics.trackEvent('Child solution', 'New')
       } else {
@@ -93,7 +101,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.createPair = function(){
     if (!inputFieldIsEmpty($scope.pair.description)) {
       PossibleSolutionFactory.insertPair($scope.pair);
-        $scope.pair.description = "";
+     //  $scope.pair.description = "";
         $scope.closeModalToChooseAdultConcernToChildConcern();
 
     }
@@ -444,7 +452,7 @@ $scope.auxiliar=[];
 
 
 
-  function createPair(cordovaSQLite,solution_id) {
+  function createPairDefault(cordovaSQLite,solution_id) {
     var sqlPairtoRelate = [
       'INSERT INTO pair_childConcerntoadultConcern (description, description2,solution_id) VALUES ("You have not related this","solution to any concern",?)'
 
