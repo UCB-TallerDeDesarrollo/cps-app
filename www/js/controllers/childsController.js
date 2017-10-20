@@ -170,13 +170,15 @@ angular
     }
 
     $scope.uploadChild = function(){
-      var user_id = localStorage.getItem("user_id");           
+      var user_id = localStorage.getItem("user_id");   
+      $scope.formattedDate =   $filter('date')($scope.child.birthday, "yyyy-MM-dd");        
       $http.post("http://localhost:3000/users/"+user_id+"/children", 
       { 
         id: $scope.child.id,
+        child_id: $scope.child.id,
         name: $scope.child.first_name,
         gender: $scope.child.gender,
-        birthday: $scope.child.birthday
+        birthday: $scope.formattedDate
       }, 
       {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -188,7 +190,7 @@ angular
             },
       })
       .then(data => {
-        console.log(user_id);
+        console.log($scope.child.id);
         console.log("Child created");
         var alertForAccountCreated = $ionicPopup.alert({
             title: 'Success!',
@@ -205,15 +207,13 @@ angular
     $scope.downloadChild = function(){        
       var user_id = localStorage.getItem("user_id")
       var link = "http://localhost:3000/users/"+user_id+"/children/";
-      var data = {        
+      var data = {                  
       };
       $http.get(link+$scope.child.id).then(data => {        
-        $scope.s_child = data.data;
-        console.log(data.data.name);
-        console.log($scope.s_child.birthday);
-        console.log($scope.child.birthday);               
+        $scope.s_child = data.data;                
+        console.log($scope.s_child.child_id);               
         var query = "UPDATE childs SET first_name = ?, gender = ? , birthday = ? where id = ?";
-        var params = [$scope.s_child.name, $scope.s_child.gender,$scope.s_child.birthday, $scope.s_child.id];
+        var params = [$scope.s_child.name, $scope.s_child.gender,$scope.s_child.birthday, $scope.s_child.child_id];
         $cordovaSQLite.execute(db, query, params);         
         ChildrenFactory.all(function(children){
           $scope.childs = children;
