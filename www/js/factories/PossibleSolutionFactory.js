@@ -75,7 +75,6 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
 
   function getLast(unsolved_problem_id,callback){
     var solutionLate = [];
-    console.log(unsolved_problem_id);
     var query ="SELECT *FROM solutions WHERE unsolved_problem_id = ? ORDER BY id DESC LIMIT 1";
   $cordovaSQLite.execute(db,query,[unsolved_problem_id]).then(function(result) {
       var rows = result.rows;
@@ -89,21 +88,22 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
   }
 
 
-  function findPair(solutionId, callback){
-    var pair = {};
+ function findPair(solutionId, callback){
+    var pair=null;
     var query ="SELECT * FROM pair_childConcerntoadultConcern WHERE solution_id = ?";
     $cordovaSQLite.execute(db,query,[solutionId]).then(function(result){
       var rows = result.rows;
          if(rows.length) {
          pair = result.rows.item(0);
-         callback(pair);
        }
+       callback(pair);
+
     },function(err){
       console.log(err.message);
+
     });
+
   }
-
-
 
   function updateComment(comment){
     var query = "UPDATE solution_comments SET description = ? where id = ?";
@@ -140,8 +140,8 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     insertPair: function(pair,solution_id){
       insertPair(pair,solution_id);
     },
-    findPair: function(solutionId, callback){
-      findPair(solutionId, callback);
+    findPair: function(solutionId,callback){
+      findPair(solutionId,callback);
     },
     updatePair: function(pair){
       updatePair(pair);
