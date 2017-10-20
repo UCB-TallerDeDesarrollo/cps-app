@@ -145,8 +145,8 @@
                    <ion-radio name="b" ng-model="pair.description2" ng-value="adultConcern.description" ng-repeat="adultConcern in adultsConcerns" ng-checked="true">{{adultConcern.description}}</ion-radio>
                  </ion-list>
 
-                 <button class="button button-full button-positive" ng-if="!pair.description.length || !pair.description2.length"  ng-click="createPair()" disabled>Save</button>
-                 <button class="button button-full button-positive" ng-if="pair.description.length> 0 && pair.description2.length> 0"  ng-click="createPair()" >Save</button>
+                 <button class="button button-full button-positive" ng-if="!pair.description.length || !pair.description2.length"  ng-click="closeModalToChooseAdultConcernToChildConcern()" disabled>Save</button>
+                 <button class="button button-full button-positive" ng-if="pair.description.length> 0 && pair.description2.length> 0"  ng-click="closeModalToChooseAdultConcernToChildConcern()" >Save</button>
 
           </div>
           <div class="scroll-bar scroll-bar-v">

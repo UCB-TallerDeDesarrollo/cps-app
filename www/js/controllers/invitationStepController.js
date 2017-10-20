@@ -1,4 +1,5 @@
 angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory, $ionicSideMenuDelegate){
+  $scope.pairExist = false;
   $ionicSideMenuDelegate.canDragContent(false);
   $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
   $scope.solutions = [];
@@ -78,11 +79,11 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       $scope.solution.rating=0;
       PossibleSolutionFactory.insert($scope.solution);
 
-     if (inputFieldIsEmpty($scope.pair.description)) {
-      createPairDefault($cordovaSQLite, [$scope.solution.id]);
-        $scope.pair.description = "";
-      }
+      PossibleSolutionFactory.getLast($scope.solution.unsolvedProblemId,function(idLast){
+        $scope.idSolutionAlfin = idLast;
+         $scope.createPair($scope.idSolutionAlfin.id);
 
+      });
 
       $scope.solution.description = "";
       $scope.closeModal();
@@ -98,13 +99,11 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     }
   };
 
-  $scope.createPair = function(){
+  $scope.createPair = function(idSolutionAlfin){
     if (!inputFieldIsEmpty($scope.pair.description)) {
-      PossibleSolutionFactory.insertPair($scope.pair);
-     //  $scope.pair.description = "";
-        $scope.closeModalToChooseAdultConcernToChildConcern();
-
-    }
+        PossibleSolutionFactory.insertPair($scope.pair,idSolutionAlfin);
+         $scope.pair.description = "";
+     }
   };
 
   $scope.showDeletionConfirm = function(solution) {
@@ -133,32 +132,53 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     $scope.openModalEdit();
   };
 
-
-
-
-
-$scope.editablePair=[];
-$scope.auxiliar=[];
-  $scope.openModaEditToChooseAdultConcernToChildConcern = function(editableSolution) {
-
-    PossibleSolutionFactory.findPair(editableSolution.id,function(pairsEdit){
-      $scope.editablePair = pairsEdit;
-
-    });
-
-    $scope.modalEditToChooseAdultConcernToChildConcern.show();
-  };
-
   $scope.updatePair = function(){
+
    if (!inputFieldIsEmpty($scope.editablePair.description)) {
+         console.log($scope.editablePair);
      PossibleSolutionFactory.updatePair($scope.editablePair);
      $scope.modalEditToChooseAdultConcernToChildConcern.hide();
+    }
 
-   }
+
    else {
      $scope.emptyInput = true;
    }
- };
+  };
+
+$scope.editablePair=[];
+//$scope.existePares=false;
+  $scope.openModaEditToChooseAdultConcernToChildConcern = function(editableSolution) {
+    //$scope.existePares=false;
+    localStorage.setItem("hayPares", false);
+    PossibleSolutionFactory.findPair(editableSolution.id,function(pairsEdit){
+    $scope.editablePair = pairsEdit;
+    //$scope.pairExist=pairsEdit;
+    if(!inputFieldIsEmpty($scope.editablePair.description)){
+          $scope.pairExist=true;
+        //localStorage.setItem("hayPares", true);
+        //$scope.existePares=true;
+        //console.log($scope.pairExist);
+
+        console.log("si hay");
+    }
+    else{
+       $scope.pairExist=false;
+       console.log("no si hay");
+
+      //  console.log($scope.pairExist);
+    }
+
+
+    });
+      console.log($scope.pairExist);
+
+
+    $scope.modalEditToChooseAdultConcernToChildConcern.show();
+
+  };
+
+
 
 
   $scope.updateSolution = function(){
@@ -452,7 +472,7 @@ $scope.auxiliar=[];
 
 
 
-  function createPairDefault(cordovaSQLite,solution_id) {
+  /*function createPairDefault(cordovaSQLite,solution_id) {
     var sqlPairtoRelate = [
       'INSERT INTO pair_childConcerntoadultConcern (description, description2,solution_id) VALUES ("You have not related this","solution to any concern",?)'
 
@@ -460,7 +480,6 @@ $scope.auxiliar=[];
     sqlPairtoRelate.forEach(function(item) {
       cordovaSQLite.execute(db, item, [solution_id]);
     });
-  }
-
+  }*/
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 });
