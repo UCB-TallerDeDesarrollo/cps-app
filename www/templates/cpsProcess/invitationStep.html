@@ -145,8 +145,8 @@
                    <ion-radio name="b" ng-model="pair.description2" ng-value="adultConcern.description" ng-repeat="adultConcern in adultsConcerns" ng-checked="true">{{adultConcern.description}}</ion-radio>
                  </ion-list>
 
-                 <button class="button button-full button-positive" ng-if="!pair.description.length || !pair.description2.length"  ng-click="createPair()" disabled>Save</button>
-                 <button class="button button-full button-positive" ng-if="pair.description.length> 0 && pair.description2.length> 0"  ng-click="createPair()" >Save</button>
+                 <button class="button button-full button-positive" ng-if="!pair.description.length || !pair.description2.length"  ng-click="closeModalToChooseAdultConcernToChildConcern()" disabled>Save</button>
+                 <button class="button button-full button-positive" ng-if="pair.description.length> 0 && pair.description2.length> 0"  ng-click="closeModalToChooseAdultConcernToChildConcern()" >Save</button>
 
           </div>
           <div class="scroll-bar scroll-bar-v">
@@ -197,6 +197,49 @@
     </ion-modal-view>
   </script>
 
+  <!--  PARA CREAR LOS PARES CUANDO EXISTE UNA SOLUCION-->
+<script id="choose-AdultConcern-To-ChildConcern-After-creating-solution-without-pairs.html" type="text/ng-template">
+
+    <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active" >
+
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Related to ...</h1>
+        <button class="button button-clear button-primary" ng-click="closeModalToChooseAdultConcernToChildConcernAfterCreatingSolution()">Cancel</button>
+      </ion-header-bar>
+
+      <ion-content  class="padding scroll-content ionic-scroll  has-header"  >
+
+        <div class="scroll modal-animation">
+
+               <ion-list radio-group  >
+                  <div class=" item item-divider">
+                      Child's concerns
+                  </div>
+                  <ion-radio  name="a"  ng-model="pair.description" ng-value="childConcern.description" ng-repeat="childConcern in childsConcerns" ng-checked="true"  >{{childConcern.description}}</ion-radio>
+              </ion-list>
+
+               <ion-list radio-group  >
+                 <div class=" item item-divider">
+                       Adult's concerns
+                 </div>
+                 <ion-radio name="b" ng-model="pair.description2" ng-value="adultConcern.description" ng-repeat="adultConcern in adultsConcerns" ng-checked="true">{{adultConcern.description}}</ion-radio>
+               </ion-list>
+
+               <button class="button button-full button-positive" ng-if="!pair.description.length || !pair.description2.length"  ng-click="updatePair()" disabled>Save</button>
+               <button class="button button-full button-positive" ng-if="pair.description.length> 0 && pair.description2.length> 0"  ng-click="updatePair()" >Save</button>
+
+        </div>
+        <div class="scroll-bar scroll-bar-v">
+          <div class="scroll-bar-indicator scroll-bar-fade-out modal-animation">
+          </div>
+        </div>
+      </ion-content>
+    </ion-modal-view>
+
+  </script>
+  <!--  FIN PARA ELEGIR EL NINO Y EL CONCERN-->
+
+
 
     <script id="edit-modal.html" type="text/ng-template">
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
@@ -206,7 +249,7 @@
         </ion-header-bar>
         <ion-content class="padding scroll-content ionic-scroll  has-header">
           <div class="scroll modal-animation">
-            <button class = "button button-small button-positive right" ng-click="openModaEditToChooseAdultConcernToChildConcern(editableSolution)">
+            <button class = "button button-small button-positive right" ng-click="editPair(editableSolution)">
                       Related to ...
               </button>
             <form>
