@@ -199,7 +199,8 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   };
 
   $scope.goToUnsolvedProblem = function(unsolvedProblem){
-    $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: unsolvedProblem.id});
+    $state.go('app.showUnsolvedProblem',
+      );
   };
 
   $scope.openStep2 = function(unsolvedProblem){
@@ -261,7 +262,8 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       buttons: [
         { text: translations.Step + " 1: " + translations.EmpathyStep },
         { text: translations.Step + " 2: " + translations.DefineAdultsConcern },
-        { text: translations.Step + " 3: " + translations.InvitationStep }
+        { text: translations.Step + " 3: " + translations.InvitationStep },
+        { text: "Update Unsolved Problem" }
       ],
       cancelText: translations.CancelOption,
       cancel: function() {
@@ -296,6 +298,9 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
             $state.go('app.invitation',{ unsolvedProblemId: unsolvedProblem.id});
           }
         }
+        if(index ==3){
+          $scope.uploadUnsolvedProblem(unsolvedProblem);
+        }
         $ionicListDelegate.closeOptionButtons();
 
         return true;
@@ -303,6 +308,65 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       }
     });
    });
+  };
+
+  $scope.uploadUnsolvedProblem = function(unsolvedProblem) {
+    $scope.unsolvedProblem = unsolvedProblem
+    var user_id = localStorage.getItem("user_id");   
+    //$scope.formattedDate =   $filter('date')($scope.child.birthday, "yyyy-MM-dd");        
+    var up_solved = true;
+    if( $scope.unsolvedProblem.solved===0){
+      up_solved = false;
+    }
+
+
+    console.log("Unsolved problem: " + 
+        $scope.unsolvedProblem.id+ " "+
+        $scope.unsolvedProblem.description+ " "+
+        $scope.unsolvedProblem.solved+ " "+
+        $scope.unsolvedProblem.unsolved_order+ " "+
+        $scope.unsolvedProblem.unsolved_score+ " "+
+        $scope.unsolvedProblem.child_id+ " "+
+        user_id     
+        );
+    $http.post("http://localhost:3000/unsolved_problem/new", 
+    { 
+      //id: $scope.unsolvedProblem.id,
+      description: $scope.unsolvedProblem.description,
+      solved: $scope.unsolvedProblem.solved,
+      unsolved_order: $scope.unsolvedProblem.unsolved_order,
+      unsolved_score: $scope.unsolved_score,
+      user_id: user_id,
+      child_id: 1
+
+/*
+        "description": "BANARNEOR sabpee",
+        "solved": true,
+        "unsolved_order": 1,
+        "unsolved_score": 1,
+        "user_id": 1,
+        "child_id": 1
+ */   
+    }, 
+    {
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+    })
+    .then(data => {
+        var alertForAccountCreated = $ionicPopup.alert({
+            title: 'Success!',
+            template: 'Unsolved Problem uploaded.'
+        });
+    },
+      function(response) {
+        console.log(response.data.message);
+    }); 
+
   };
 
   $scope.editSolution = function(solution) {
