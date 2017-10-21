@@ -11,6 +11,50 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     });
   });
 
+  $scope.send_UP_API = function(){
+      var link = "http://localhost:3000/unsolved_problems";
+      var data = [];
+      var query ="SELECT * FROM unsolved_problems";
+      $cordovaSQLite.execute(db,query)
+      .then(function(result) {
+        var rows = result.rows;
+        if(rows.length) {
+          for(var i=0; i < rows.length; i++){
+            var childID = rows.item(i).description;
+            data.push(rows.item(i));
+            console.log("UN:" + childID);
+          }
+        }
+        console.log (data);
+      },function(err) {
+          console.log(err.message);
+      });
+      console.log(data);
+
+      $http({
+        method: 'POST',
+        url: link,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+        },
+        data: data
+      })
+      .then(function(response) {
+        console.log(response.data.message);
+        var alertForAccountCreated = $ionicPopup.alert({
+            title: 'Success!',
+            template: 'You send your data to the cloud'
+        });
+      },
+      function(response) {
+        console.log(response.data.message);
+      });
+
+    };
 
   $scope.updateUnsolvedProblems = function(){
     ChildrenFactory.active(function(active_child){
@@ -265,56 +309,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     });
    });
   };
-
-  $scope.uploadUnsolvedProblem = function(unsolvedProblem) {
-    $scope.unsolvedProblem = unsolvedProblem
-    var user_id = localStorage.getItem("user_id");   
-    var up_solved = true;
-    if( $scope.unsolvedProblem.solved===0){
-      up_solved = false;
-    }
-
-
-    console.log("Unsolved problem: " + 
-        $scope.unsolvedProblem.id+ " "+
-        $scope.unsolvedProblem.description+ " "+
-        $scope.unsolvedProblem.solved+ " "+
-        $scope.unsolvedProblem.unsolved_order+ " "+
-        $scope.unsolvedProblem.unsolved_score+ " "+
-        $scope.unsolvedProblem.child_id+ " "+
-        user_id     
-        );
-    $http.post("http://localhost:3000/unsolved_problem/new", 
-    { 
-      description: $scope.unsolvedProblem.description,
-      solved: $scope.unsolvedProblem.solved,
-      unsolved_order: $scope.unsolvedProblem.unsolved_order,
-      unsolved_score: $scope.unsolved_score,
-      user_id: user_id,
-      child_id: $scope.unsolvedProblem.child_id
- 
-    }, 
-    {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      transformRequest: function(obj) {
-                var str = [];
-                for(var p in obj)
-                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                return str.join("&");
-            },
-    })
-    .then(data => {
-        var alertForAccountCreated = $ionicPopup.alert({
-            title: 'Success!',
-            template: 'Unsolved Problem uploaded.'
-        });
-    },
-      function(response) {
-        console.log(response.data.message);
-    }); 
-
-  };
-
+  
   $scope.editSolution = function(solution) {
     $state.go('app.editSolution',{ solutionId: solution.id});
   };
