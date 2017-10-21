@@ -201,7 +201,7 @@ angular
         console.log(response.data.message);
       });
       
-      $scope.uploadLaggingSkillsChecked();
+      //$scope.uploadLaggingSkillsChecked();
     };    
 
     $scope.downloadChild = function(){        
@@ -254,7 +254,8 @@ angular
       
       $scope.uploadLaggingSkill = function(activeLaggingSkill){
         var user_id = localStorage.getItem("user_id");
-        //falta enviar el array data 
+        var data = []
+        data = LaggingSkills.getChecked($scope.laggingSkills);
         $http.post("http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/lagging_skill", 
         {
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -265,7 +266,7 @@ angular
                   return str.join("&");
               },
               data: data
-              
+
         }).then(data => {
           console.log(user_id);
           console.log("LaggingSkill created");
