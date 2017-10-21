@@ -8,13 +8,12 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
     $scope.solution = solution;
   });
 
+  PossibleSolutionFactory.findPair($stateParams.solutionId,function(pairs){
+    $scope.pairs = pairs;
+  });
 
   $scope.comments = [];
     $scope.pairs = [];
-
-    PossibleSolutionFactory.findPair($stateParams.solutionId,function(pairs){
-      $scope.pairs = pairs;
-    });
 
   PossibleSolutionFactory.getComments($stateParams.solutionId,function(comments){
     $scope.comments = comments;

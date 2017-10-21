@@ -113,11 +113,8 @@ body {
   display:none;
 }
 
-.button.right{
-  width:90px;
-  height: 5px;
-  bottom: 2px;
-  right: -250px;
+.right{
+ text-align: right;
 }
 
 .tabs .tab-item .icon.step1 {

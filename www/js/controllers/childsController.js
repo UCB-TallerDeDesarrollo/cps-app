@@ -18,6 +18,8 @@ angular
     $translate,
     $http,
     LaggingSkills,
+    $timeout,
+    UnsolvedProblemFactory,
     $timeout
   ) {
 
@@ -140,6 +142,43 @@ angular
         });
       }
     };
+    $scope.uploadUnsolvedProblem = function(unsolvedProblem) {
+      $scope.unsolvedProblems = {};
+      UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
+        var data = result;
+        console.log(data)
+        var user_id = localStorage.getItem("user_id"); 
+        
+      $http.post("http://localhost:3000/unsolved_problem/new", 
+      { 
+        data: angular.toJson(data),
+        user_id: user_id
+      }, 
+      {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        transformRequest: function(obj) {
+                  var str = [];
+                  for(var p in obj)
+                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                  return str.join("&");
+              },
+      })
+      .then(data => {
+          var alertForAccountCreated = $ionicPopup.alert({
+              title: 'Success!',
+              template: 'Unsolved Problem uploaded.'
+          });
+      },
+        function(response) {
+          console.log(response.data.message);
+      }); 
+      $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
+        
+      });
+
+      
+  
+    };
     $scope.updateChild = function() {
       if (!inputFieldIsEmpty($scope.editableChild.first_name)) {
         ChildrenFactory.update($scope.editableChild);
@@ -167,14 +206,18 @@ angular
     $scope.showSyncModal = function(child){
         $scope.child = child;
         $scope.syncChildModal.show();
-    }
+    };
+    $scope.uploadData = function(){
+      $scope.uploadChild();
+      $scope.uploadUnsolvedProblem();
 
+    };
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");   
       $scope.formattedDate =   $filter('date')($scope.child.birthday, "yyyy-MM-dd");        
       $http.post("http://localhost:3000/users/"+user_id+"/children", 
       { 
-        id: $scope.child.id,
+        //id: $scope.child.id,
         child_id: $scope.child.id,
         name: $scope.child.first_name,
         gender: $scope.child.gender,
@@ -201,8 +244,7 @@ angular
         console.log(response.data.message);
       });
       
-      //$scope.uploadLaggingSkillsChecked();
-      $scope.uploadLaggingSkill();
+      // $scope.uploadLaggingSkillsChecked();
     };    
 
     $scope.downloadChild = function(){        
@@ -215,6 +257,7 @@ angular
         console.log($scope.s_child.child_id);               
         var query = "UPDATE childs SET first_name = ?, gender = ? , birthday = ? where id = ?";
         var params = [$scope.s_child.name, $scope.s_child.gender,$scope.s_child.birthday, $scope.s_child.child_id];
+        console.log("Nombre: "+ $scope.s_child.name);
         $cordovaSQLite.execute(db, query, params);         
         ChildrenFactory.all(function(children){
           $scope.childs = children;

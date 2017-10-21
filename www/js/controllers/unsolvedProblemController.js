@@ -10,52 +10,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       $scope.laggingSkills = res;
     });
   });
-
-  $scope.send_UP_API = function(){
-      var link = "http://localhost:3000/unsolved_problems";
-      var data = [];
-      var query ="SELECT * FROM unsolved_problems";
-      $cordovaSQLite.execute(db,query)
-      .then(function(result) {
-        var rows = result.rows;
-        if(rows.length) {
-          for(var i=0; i < rows.length; i++){
-            var childID = rows.item(i).description;
-            data.push(rows.item(i));
-            console.log("UN:" + childID);
-          }
-        }
-        console.log (data);
-      },function(err) {
-          console.log(err.message);
-      });
-      console.log(data);
-
-      $http({
-        method: 'POST',
-        url: link,
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        transformRequest: function(obj) {
-            var str = [];
-            for(var p in obj)
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            return str.join("&");
-        },
-        data: data
-      })
-      .then(function(response) {
-        console.log(response.data.message);
-        var alertForAccountCreated = $ionicPopup.alert({
-            title: 'Success!',
-            template: 'You send your data to the cloud'
-        });
-      },
-      function(response) {
-        console.log(response.data.message);
-      });
-
-    };
-
+  
   $scope.updateUnsolvedProblems = function(){
     ChildrenFactory.active(function(active_child){
       $scope.activeChild = active_child;
@@ -199,7 +154,8 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   };
 
   $scope.goToUnsolvedProblem = function(unsolvedProblem){
-    $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: unsolvedProblem.id});
+    $state.go('app.showUnsolvedProblem',
+      );
   };
 
   $scope.openStep2 = function(unsolvedProblem){
@@ -304,7 +260,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     });
    });
   };
-
+  
   $scope.editSolution = function(solution) {
     $state.go('app.editSolution',{ solutionId: solution.id});
   };
