@@ -262,8 +262,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       buttons: [
         { text: translations.Step + " 1: " + translations.EmpathyStep },
         { text: translations.Step + " 2: " + translations.DefineAdultsConcern },
-        { text: translations.Step + " 3: " + translations.InvitationStep },
-        { text: "Update Unsolved Problem" }
+        { text: translations.Step + " 3: " + translations.InvitationStep }
       ],
       cancelText: translations.CancelOption,
       cancel: function() {
@@ -297,9 +296,6 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
           }else {
             $state.go('app.invitation',{ unsolvedProblemId: unsolvedProblem.id});
           }
-        }
-        if(index ==3){
-          $scope.uploadUnsolvedProblem(unsolvedProblem);
         }
         $ionicListDelegate.closeOptionButtons();
 

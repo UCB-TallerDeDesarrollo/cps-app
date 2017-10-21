@@ -217,7 +217,7 @@ angular
       $scope.formattedDate =   $filter('date')($scope.child.birthday, "yyyy-MM-dd");        
       $http.post("http://localhost:3000/users/"+user_id+"/children", 
       { 
-        id: $scope.child.id,
+        //id: $scope.child.id,
         child_id: $scope.child.id,
         name: $scope.child.first_name,
         gender: $scope.child.gender,
