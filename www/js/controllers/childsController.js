@@ -258,20 +258,26 @@ angular
         var data = [];
         data = LaggingSkills.getChecked($scope.laggingSkills);
         console.log(data);
-        $http.post("http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/lagging_skill", 
-        {
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          transformRequest: function(obj) {
-                  var str = [];
-                  for(var p in obj)
-                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                  return str.join("&");
-              },
-              data: data
+        var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/lagging_skill";
 
-        }).then(data => {
-          console.log(user_id);
-          console.log("LaggingSkill created");
+        $http({
+          method: 'POST',
+          url: link,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          transformRequest: function(obj) {
+              var str = [];
+              for(var p in obj)
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+              return str.join("&");
+          },
+          data: data
+        })
+        .then(function(response) {
+          console.log(response.data.message);
+          var alertForAccountCreated = $ionicPopup.alert({
+              title: 'Success!',
+              template: 'You send your data to the cloud'
+          });
         },
         function(response) {
           console.log(response.data.message);
