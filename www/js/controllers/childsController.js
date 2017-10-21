@@ -244,13 +244,13 @@ angular
         })
       };
 
-      $scope.uploadUnsolvedProblem = function(unsolvedProblem) {
+      $scope.uploadUnsolvedProblem = function() {
         var user_id = localStorage.getItem("user_id")
-        var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.activeChild.id+"/unsolved_problem";
+        var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
         $scope.unsolvedProblems = {};
-        UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
+        UnsolvedProblemFactory.all($scope.child.id,function(result){
           var data = result;
-          console.log(data)
+          console.log(data);
           var user_id = localStorage.getItem("user_id"); 
           
         $http.post(link, 
@@ -283,7 +283,7 @@ angular
 
       $scope.downloadUnsolvedProblems = function(){
         var user_id = localStorage.getItem("user_id")
-        var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.activeChild.id+"/unsolved_problem";
+        var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
         $scope.unsolvedProblems ;
         $http.get(link).then(data => {        
           $scope.unsolvedProblems = data.data;                
