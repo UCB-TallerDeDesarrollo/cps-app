@@ -181,6 +181,7 @@ angular
     $scope.downloadData = function(){
       $scope.downloadChild();
       $scope.downloadUnsolvedProblems();
+      $scope.downloadLaggingSkill();  
     }
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");   
@@ -241,9 +242,6 @@ angular
         $scope.syncChildModal.hide();
         
         })
-
-        $scope.downloadLaggingSkill();   
-    
       };
 
       $scope.uploadUnsolvedProblem = function(unsolvedProblem) {
@@ -302,26 +300,6 @@ angular
         console.log("Child's unssolved problems updated");  
           })
       };
-
-      $scope.uploadLaggingSkillsChecked = function(){
-        
-          var list = {};
-          list = LaggingSkills.getChecked($scope.laggingSkills);
-          console.log(list);
-          var timeInMs = 0;
-          var countUp = function() {
-            if(timeInMs== LaggingSkills.getCheckedCount($scope.laggingSkills)){
-              $timeout.cancel(countUp);
-            }else{
-              $scope.uploadLaggingSkill(list[timeInMs]);
-              timeInMs++;
-              //console.log(timeInMs);
-              $timeout(countUp, 1000);
-            }
-          }
-      
-          $timeout(countUp, 1000);
-      };
       
       $scope.uploadLaggingSkill = function(activeLaggingSkill){
         var user_id = localStorage.getItem("user_id");
@@ -343,10 +321,7 @@ angular
                 },
         })
         .then(data => {
-            // var alertForAccountCreated = $ionicPopup.alert({
-            //     title: 'Success!',
-            //     template: 'Unsolved Problem uploaded.'
-            // });
+          console.log("LaggingSkill uploated");
         },
           function(response) {
             console.log(response.data.message);
