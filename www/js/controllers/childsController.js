@@ -175,11 +175,13 @@ angular
     $scope.uploadData = function(){
       $scope.uploadChild();
       $scope.uploadUnsolvedProblem();
+      $scope.uploadLaggingSkill();
 
     };
     $scope.downloadData = function(){
       $scope.downloadChild();
       $scope.downloadUnsolvedProblems();
+      $scope.downloadLaggingSkill();  
     }
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");   
@@ -240,9 +242,6 @@ angular
         $scope.syncChildModal.hide();
         
         })
-
-        $scope.downloadLaggingSkill();   
-    
       };
 
       $scope.uploadUnsolvedProblem = function(unsolvedProblem) {
@@ -301,71 +300,43 @@ angular
         console.log("Child's unssolved problems updated");  
           })
       };
-
-      $scope.uploadLaggingSkillsChecked = function(){
-        
-          var list = {};
-          list = LaggingSkills.getChecked($scope.laggingSkills);
-          var timeInMs = 0;
-          var countUp = function() {
-            if(timeInMs== LaggingSkills.getCheckedCount($scope.laggingSkills)){
-              $timeout.cancel(countUp);
-            }else{
-              $scope.uploadLaggingSkill(list[timeInMs]);
-              timeInMs++;
-              //console.log(timeInMs);
-              $timeout(countUp, 1000);
-            }
-          }
-      
-          $timeout(countUp, 1000);
-      };
       
       $scope.uploadLaggingSkill = function(activeLaggingSkill){
         var user_id = localStorage.getItem("user_id");
-        $http.post("http://localhost:3000/users/"+user_id+"/children/"+$scope.activeChild.id+"/lagging_skill", 
+        var data = [];
+        data = LaggingSkills.getChecked($scope.laggingSkills);
+        console.log(data);
+        
+        $http.post("http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/lagging_skill", 
         { 
-          id: activeLaggingSkill.id,
-          description: activeLaggingSkill.description,
-          checked: activeLaggingSkill.checked,
-          child_id: $scope.child.id
+          data: angular.toJson(data)
         }, 
         {
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           transformRequest: function(obj) {
-                  var str = [];
-                  for(var p in obj)
-                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                  return str.join("&");
-              },
-        }).then(data => {
-          console.log(user_id);
-          console.log("Child created");
+                    var str = [];
+                    for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+        })
+        .then(data => {
+          console.log("LaggingSkill uploated");
         },
-        function(response) {
-          console.log(response.data.message);
-        });
+          function(response) {
+            console.log(response.data.message);
+        }); 
           
       };
 
       $scope.downloadLaggingSkill  = function(){        
         var user_id = localStorage.getItem("user_id")
-        var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.activeChild.id+"/getLaggingSkills";
+        var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/getLaggingSkills";
         var data = {        
         };
         $http.get(link).then(data => {        
           $scope.list = data.data;
           console.log($scope.list);
-          //console.log(data.data.name);
-          // console.log($scope.s_child.birthday);
-          // console.log($scope.child.birthday);    
-          
-          // for(var i=0; i < $scope.list.length; i++)
-          // {
-          //   var query = "UPDATE lagging_skills SET description = ?, checked = ? , child_id = ? where id = ?";
-          //   var params = [$scope.list[i].description, $scope.list[i].checked,$scope.list[i].id, $scope.list[i].id];
-          //   $cordovaSQLite.execute(db, query, params);
-          // }
 
             angular.forEach($scope.list,function(laggingSkill){
               var query = "UPDATE lagging_skills SET description = ?, checked = ? , child_id = ? where id = ?";
@@ -375,18 +346,6 @@ angular
             
             console.log("LaggingSkills Updated");  
           })
-                   
-          // ChildrenFactory.all(function(children){
-          //   $scope.childs = children;
-          // });        
-          // var alertForAccountCreated = $ionicPopup.alert({            
-          //   title: " Success!",
-          //   template: 'Child downloaded'
-          // });    
-          
-          // location.reload();   
-          //$scope.syncChildModal.hide();
-          
         }      
 
 
