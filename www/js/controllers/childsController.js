@@ -210,6 +210,7 @@ angular
     $scope.uploadData = function(){
       $scope.uploadChild();
       $scope.uploadUnsolvedProblem();
+      $scope.uploadLaggingSkill();
 
     };
     $scope.uploadChild = function(){
@@ -301,30 +302,29 @@ angular
         var data = [];
         data = LaggingSkills.getChecked($scope.laggingSkills);
         console.log(data);
-        var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/lagging_skill";
-
-        $http({
-          method: 'POST',
-          url: link,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        
+        $http.post("http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/lagging_skill", 
+        { 
+          data: angular.toJson(data)
+        }, 
+        {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           transformRequest: function(obj) {
-              var str = [];
-              for(var p in obj)
-              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-              return str.join("&");
-          },
-          data: data
+                    var str = [];
+                    for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
         })
-        .then(function(response) {
-          console.log(response.data.message);
-          var alertForAccountCreated = $ionicPopup.alert({
-              title: 'Success!',
-              template: 'You send your data to the cloud'
-          });
+        .then(data => {
+            // var alertForAccountCreated = $ionicPopup.alert({
+            //     title: 'Success!',
+            //     template: 'Unsolved Problem uploaded.'
+            // });
         },
-        function(response) {
-          console.log(response.data.message);
-        });
+          function(response) {
+            console.log(response.data.message);
+        }); 
           
       };
 
