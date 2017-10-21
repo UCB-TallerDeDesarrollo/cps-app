@@ -20,7 +20,8 @@ angular
     LaggingSkills,
     $timeout,
     UnsolvedProblemFactory,
-    $timeout
+    $timeout,
+    UnsolvedProblemFactory
   ) {
 
 
@@ -176,6 +177,10 @@ angular
       $scope.uploadUnsolvedProblem();
 
     };
+    $scope.downloadData = function(){
+      $scope.downloadChild();
+      $scope.downloadUnsolvedProblems();
+    }
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");   
       $scope.formattedDate =   $filter('date')($scope.child.birthday, "yyyy-MM-dd");        
@@ -228,7 +233,7 @@ angular
         });        
         var alertForAccountCreated = $ionicPopup.alert({            
           title: " Success!",
-          template: 'Child downloaded'
+          template: 'Child info downloaded'
         });    
         console.log("Child updated");  
         // location.reload();   
@@ -276,9 +281,27 @@ angular
           
         }); 
       };
-      $scope.downloadUnsolvedProblems = function(){
 
+      $scope.downloadUnsolvedProblems = function(){
+        var user_id = localStorage.getItem("user_id")
+        var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.activeChild.id+"/unsolved_problem";
+        $scope.unsolvedProblems ;
+        $http.get(link).then(data => {        
+          $scope.unsolvedProblems = data.data;                
+          angular.forEach($scope.unsolvedProblems, function(value, key){
+            var query = "UPDATE unsolved_problems SET description = ?, unsolved_order = ? where id = ?";
+            var params = [value.description, value.unsolved_order, value.unsolved_problem_id_app];
+            console.log(value)
+            $cordovaSQLite.execute(db, query, params);
+         });
+         var alertForAccountCreated = $ionicPopup.alert({            
+          title: " Success!",
+          template: "Child's unsovled problems updated"
+        });    
+        console.log("Child's unssolved problems updated");  
+          })
       };
+
       $scope.uploadLaggingSkillsChecked = function(){
         
           var list = {};
