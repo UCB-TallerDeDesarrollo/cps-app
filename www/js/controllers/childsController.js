@@ -20,7 +20,8 @@ angular
     LaggingSkills,
     $timeout,
     UnsolvedProblemFactory,
-    $timeout
+    $timeout,
+    UnsolvedProblemFactory
   ) {
 
 
@@ -142,43 +143,7 @@ angular
         });
       }
     };
-    $scope.uploadUnsolvedProblem = function(unsolvedProblem) {
-      $scope.unsolvedProblems = {};
-      UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
-        var data = result;
-        console.log(data)
-        var user_id = localStorage.getItem("user_id"); 
-        
-      $http.post("http://localhost:3000/unsolved_problem/new", 
-      { 
-        data: angular.toJson(data),
-        user_id: user_id
-      }, 
-      {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        transformRequest: function(obj) {
-                  var str = [];
-                  for(var p in obj)
-                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                  return str.join("&");
-              },
-      })
-      .then(data => {
-          var alertForAccountCreated = $ionicPopup.alert({
-              title: 'Success!',
-              template: 'Unsolved Problem uploaded.'
-          });
-      },
-        function(response) {
-          console.log(response.data.message);
-      }); 
-      $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
-        
-      });
-
-      
-  
-    };
+    
     $scope.updateChild = function() {
       if (!inputFieldIsEmpty($scope.editableChild.first_name)) {
         ChildrenFactory.update($scope.editableChild);
@@ -213,6 +178,10 @@ angular
       $scope.uploadLaggingSkill();
 
     };
+    $scope.downloadData = function(){
+      $scope.downloadChild();
+      $scope.downloadUnsolvedProblems();
+    }
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");   
       $scope.formattedDate =   $filter('date')($scope.child.birthday, "yyyy-MM-dd");        
@@ -265,7 +234,7 @@ angular
         });        
         var alertForAccountCreated = $ionicPopup.alert({            
           title: " Success!",
-          template: 'Child downloaded'
+          template: 'Child info downloaded'
         });    
         console.log("Child updated");  
         // location.reload();   
@@ -275,7 +244,64 @@ angular
 
         $scope.downloadLaggingSkill();   
     
-    };
+      };
+
+      $scope.uploadUnsolvedProblem = function(unsolvedProblem) {
+        var user_id = localStorage.getItem("user_id")
+        var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.activeChild.id+"/unsolved_problem";
+        $scope.unsolvedProblems = {};
+        UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
+          var data = result;
+          console.log(data)
+          var user_id = localStorage.getItem("user_id"); 
+          
+        $http.post(link, 
+        { 
+          data: angular.toJson(data),
+          user_id: user_id
+        }, 
+        {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          transformRequest: function(obj) {
+                    var str = [];
+                    for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+        })
+        .then(data => {
+            var alertForAccountCreated = $ionicPopup.alert({
+                title: 'Success!',
+                template: 'Unsolved Problem uploaded.'
+            });
+        },
+          function(response) {
+            console.log(response.data.message);
+        }); 
+        $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
+          
+        }); 
+      };
+
+      $scope.downloadUnsolvedProblems = function(){
+        var user_id = localStorage.getItem("user_id")
+        var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.activeChild.id+"/unsolved_problem";
+        $scope.unsolvedProblems ;
+        $http.get(link).then(data => {        
+          $scope.unsolvedProblems = data.data;                
+          angular.forEach($scope.unsolvedProblems, function(value, key){
+            var query = "UPDATE unsolved_problems SET description = ?, unsolved_order = ? where id = ?";
+            var params = [value.description, value.unsolved_order, value.unsolved_problem_id_app];
+            console.log(value)
+            $cordovaSQLite.execute(db, query, params);
+         });
+         var alertForAccountCreated = $ionicPopup.alert({            
+          title: " Success!",
+          template: "Child's unsovled problems updated"
+        });    
+        console.log("Child's unssolved problems updated");  
+          })
+      };
 
       $scope.uploadLaggingSkillsChecked = function(){
         
