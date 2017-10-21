@@ -174,7 +174,7 @@ angular
       $scope.formattedDate =   $filter('date')($scope.child.birthday, "yyyy-MM-dd");        
       $http.post("http://localhost:3000/users/"+user_id+"/children", 
       { 
-        id: $scope.child.id,
+        //id: $scope.child.id,
         child_id: $scope.child.id,
         name: $scope.child.first_name,
         gender: $scope.child.gender,
@@ -214,6 +214,7 @@ angular
         console.log($scope.s_child.child_id);               
         var query = "UPDATE childs SET first_name = ?, gender = ? , birthday = ? where id = ?";
         var params = [$scope.s_child.name, $scope.s_child.gender,$scope.s_child.birthday, $scope.s_child.child_id];
+        console.log("Nombre: "+ $scope.s_child.name);
         $cordovaSQLite.execute(db, query, params);         
         ChildrenFactory.all(function(children){
           $scope.childs = children;
