@@ -182,7 +182,7 @@ angular
     $scope.uploadData = function(){
       $scope.uploadChild();
       // $scope.uploadUnsolvedProblem();
-      $scope.uploadLaggingSkill();
+      //$scope.uploadLaggingSkill();
       $scope.uploadAdultConcern();
 
 
@@ -220,6 +220,7 @@ angular
             template: 'Child uploaded.'
         });
         $scope.uploadUnsolvedProblem();
+        $scope.uploadLaggingSkill();
       },
       function(response) {
         console.log(response.data.message);
