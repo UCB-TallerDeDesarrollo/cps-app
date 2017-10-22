@@ -223,11 +223,7 @@ angular
         $cordovaSQLite.execute(db, query, params);         
         ChildrenFactory.all(function(children){
           $scope.childs = children;
-        });        
-        var alertForAccountCreated = $ionicPopup.alert({            
-          title: " Success!",
-          template: 'Child info downloaded'
-        });    
+        });            
         console.log("Child updated");  
         // location.reload();   
         $scope.syncChildModal.hide();
@@ -259,11 +255,6 @@ angular
                 },
         })
         .then(data => {
-            var alertForAccountCreated = $ionicPopup.alert({
-                title: 'Success!',
-                template: "Child's unsolved problems uploaded."
-            });
-
             $scope.uploadAdultConcern();
         },
           function(response) {
