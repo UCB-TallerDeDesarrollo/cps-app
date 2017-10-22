@@ -352,19 +352,14 @@ angular
         }      
 
         $scope.uploadAdultConcern = function() {    
-          //var user_id = localStorage.getItem("user_id")
-          //var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
+          
           $scope.unsolvedProblems = {};
           UnsolvedProblemFactory.all($scope.child.id,function(result){
             var dataUP = result;
-            console.log("********UP-Adult*******");
-            console.log(dataUP);
             var user_id = localStorage.getItem("user_id"); 
             
             angular.forEach(dataUP,function(unsolvedProblem){
               var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
-              console.log(link);
-
               AdultConcernFactory.all(unsolvedProblem.id,function(result){
                 var data = result;
                 console.log(data)
@@ -383,17 +378,15 @@ angular
                           },
                   })
                   .then(data => {
-                    var alertForAccountCreated = $ionicPopup.alert({
-                        title: 'Success!',
-                        template: 'Adult Concern uploaded.'
-                    });
                     console.log(data)
+                    console.log("Adult Concern uploated")
                   },
                   function(response) {
                     console.log(response.data.message);
                 }); 
                 $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
               })
+              
             });
             
           }); 
