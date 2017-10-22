@@ -18,6 +18,7 @@ angular
     $translate,
     $http,
     LaggingSkills,
+    AdultConcernFactory
   ) {
 
 
@@ -112,10 +113,12 @@ angular
 
     //UnsolvedProblems prepare for Api
 
-  
+    ChildrenFactory.active(function(active_child) {
+      $scope.activeChild = active_child;
       UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
-        $scope.unsolvedProblemsList = result;
+      $scope.unsolvedProblemsList = result;
       });
+    });
   
   
 
@@ -181,6 +184,7 @@ angular
       $scope.uploadUnsolvedProblem();
       $scope.uploadLaggingSkill();
       $scope.uploadAdultConcern();
+
 
     };
     $scope.downloadData = function(){
@@ -353,13 +357,14 @@ angular
           })
         }      
 
-        $scope.uploadAdultConcern = function(adultConcern) {
+        $scope.uploadAdultConcern = function() {
           var user_id = localStorage.getItem("user_id")
           var link;
-          console.log("UnsolvedP "+$scope.unsolvedProblemsList)
+          console.log("AdultConcern "+$scope.unsolvedProblemsList)
           angular.forEach($scope.unsolvedProblemsList,function(unsolvedProblem){
+            console.log("foreach")
             link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
-            AdultConcernFactory.getAdultConcern($scope.child.id,function(result){
+            AdultConcernFactory.getAdultsConcerns($scope.child.id,function(result){
               var data = result;
               console.log("AdultConcern "+data)
 
