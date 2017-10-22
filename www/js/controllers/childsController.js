@@ -172,8 +172,8 @@ angular
       $scope.downloadChild();
       $scope.downloadUnsolvedProblems();
       $scope.downloadLaggingSkill();  
-      $scope.downloadAdultConcern();
       $scope.downloadChildConcerns();
+      $scope.downloadAdultConcern();
     }
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");   
@@ -430,10 +430,6 @@ angular
                           },
                   })
                   .then(data => {
-                    var alertForAccountCreated = $ionicPopup.alert({
-                        title: 'Success!',
-                        template: 'Child Concern uploaded.'
-                    });
                     console.log(data)
                   },
                   function(response) {
@@ -456,7 +452,7 @@ angular
         $http.get(linkUPData).then(data => {        
           $scope.unsolvedProblems = data.data;                
           angular.forEach($scope.unsolvedProblems, function(valueUP, key){
-            var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/child_concern";
+            var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/getChildConcern";
             $http.get(link).then(data => {        
               $scope.childConcerns = data.data;                
               angular.forEach($scope.childConcerns, function(value, key){
