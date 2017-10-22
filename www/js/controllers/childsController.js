@@ -179,7 +179,8 @@ angular
     $scope.downloadData = function(){
       $scope.downloadChild();
       $scope.downloadUnsolvedProblems();
-      $scope.downloadLaggingSkill();  
+      //$scope.downloadLaggingSkill();  
+      $scope.downloadAdultConcern();
     }
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");   
@@ -386,12 +387,39 @@ angular
                 }); 
                 $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
               })
-              
+
             });
             
           }); 
 
           $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
+        };
+
+        $scope.downloadAdultConcern = function(){
+          var user_id = localStorage.getItem("user_id")
+
+          var linkUPData = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
+          
+          $scope.unsolvedProblems ;
+          $http.get(linkUPData).then(data => {        
+            $scope.unsolvedProblems = data.data;                
+            angular.forEach($scope.unsolvedProblems, function(valueUP, key){
+              var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/myAdultConcerns";
+              $http.get(link).then(data => {        
+                $scope.adultConcerns = data.data;                
+                angular.forEach($scope.adultConcerns, function(value, key){
+                  var query = "UPDATE adults_concerns SET description = ?, unsolved_problem_id = ? where id = ?";
+                  var params = [value.description, value.unsolved_problem_id, value.id];
+                  console.log(value)
+                  $cordovaSQLite.execute(db, query, params);
+               });
+                 
+                console.log("AdultConcerns from UnsolvedProblem downloaded");  
+              })
+           });
+
+            console.log("Unsolved problems downloaded");  
+          })
         };
 
     $scope.showActionsheet = function(child) {
