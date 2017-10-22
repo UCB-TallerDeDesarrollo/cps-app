@@ -460,12 +460,12 @@ angular
         $http.get(linkUPData).then(data => {        
           $scope.unsolvedProblems = data.data;                
           angular.forEach($scope.unsolvedProblems, function(valueUP, key){
-            var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/myChildConcerns";
+            var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/child_concern";
             $http.get(link).then(data => {        
               $scope.childConcerns = data.data;                
               angular.forEach($scope.childConcerns, function(value, key){
                 var query = "UPDATE child_concerns SET description = ?, unsolved_problem_id = ?, unsolved_order = ?, where id = ?";
-                var params = [childConcern.description, childConcern.unsolved_problem_id, childConcern.unsolved_order, childConcern.id];
+                var params = [value.description, value.unsolved_problem_id, value.unsolved_order, value.id];
                 console.log(value)
                 $cordovaSQLite.execute(db, query, params);
               });
