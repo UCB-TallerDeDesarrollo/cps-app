@@ -18,10 +18,6 @@ angular
     $translate,
     $http,
     LaggingSkills,
-    $timeout,
-    UnsolvedProblemFactory,
-    $timeout,
-    UnsolvedProblemFactory
   ) {
 
 
@@ -184,6 +180,7 @@ angular
       $scope.uploadChild();
       $scope.uploadUnsolvedProblem();
       $scope.uploadLaggingSkill();
+      $scope.uploadAdultConcern();
 
     };
     $scope.downloadData = function(){
@@ -359,17 +356,16 @@ angular
         $scope.uploadAdultConcern = function(adultConcern) {
           var user_id = localStorage.getItem("user_id")
           var link;
+          console.log("UnsolvedP "+$scope.unsolvedProblemsList)
           angular.forEach($scope.unsolvedProblemsList,function(unsolvedProblem){
             link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
-            AdultConcernFactory.getAdultConcern($scope.activeChild.id,function(result){
+            AdultConcernFactory.getAdultConcern($scope.child.id,function(result){
               var data = result;
-              console.log(data)
-              var user_id = localStorage.getItem("user_id");
+              console.log("AdultConcern "+data)
 
               $http.post(link, 
                 { 
-                  data: angular.toJson(data),
-                  user_id: user_id
+                  data: angular.toJson(data)
                 }, 
                 {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
