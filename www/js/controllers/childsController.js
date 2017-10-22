@@ -308,10 +308,6 @@ angular
                 },
         })
         .then(data => {
-          var alertForAccountCreated = $ionicPopup.alert({
-              title: 'Success!',
-              template: "Lagging Skills uploaded."
-          });
           console.log("LaggingSkill uploated");
         },
           function(response) {
