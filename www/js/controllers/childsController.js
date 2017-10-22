@@ -102,14 +102,6 @@ angular
       return new Date(dateToConvert);
     };
 
-    //LaggingSkills prepare for Api
-
-    ChildrenFactory.active(function(active_child) {
-        $scope.activeChild = active_child;
-        LaggingSkills.all($scope.activeChild.id, function(res) {
-            $scope.laggingSkills = res;
-        });
-    });
 
     $scope.createChild = function() {
       if (!inputFieldIsEmpty($scope.child.first_name)) {
@@ -167,19 +159,18 @@ angular
     $scope.showSyncModal = function(child){
         $scope.child = child;
         $scope.syncChildModal.show();
+        LaggingSkills.all($scope.child.id, function(res) {
+          $scope.laggingSkills = res;
+        });
     };
     $scope.uploadData = function(){
       $scope.uploadChild();
-      // $scope.uploadUnsolvedProblem();
-      //$scope.uploadLaggingSkill();
-      //$scope.uploadAdultConcern();
-
-
     };
+
     $scope.downloadData = function(){
       $scope.downloadChild();
       $scope.downloadUnsolvedProblems();
-      //$scope.downloadLaggingSkill();  
+      $scope.downloadLaggingSkill();  
       $scope.downloadAdultConcern();
     }
     $scope.uploadChild = function(){
@@ -210,14 +201,12 @@ angular
             template: 'Child uploaded.'
         });
         $scope.uploadUnsolvedProblem();
-        //$scope.uploadLaggingSkill();
-        
+        $scope.uploadLaggingSkill();
       },
       function(response) {
         console.log(response.data.message);
       });
       
-      // $scope.uploadLaggingSkillsChecked();
     };    
 
     $scope.downloadChild = function(){        
@@ -325,6 +314,10 @@ angular
                 },
         })
         .then(data => {
+          var alertForAccountCreated = $ionicPopup.alert({
+              title: 'Success!',
+              template: "Lagging Skills uploaded."
+          });
           console.log("LaggingSkill uploated");
         },
           function(response) {
