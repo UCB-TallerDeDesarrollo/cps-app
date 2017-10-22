@@ -181,7 +181,7 @@ angular
     };
     $scope.uploadData = function(){
       $scope.uploadChild();
-      $scope.uploadUnsolvedProblem();
+      // $scope.uploadUnsolvedProblem();
       $scope.uploadLaggingSkill();
       $scope.uploadAdultConcern();
 
@@ -219,6 +219,7 @@ angular
             title: 'Success!',
             template: 'Child uploaded.'
         });
+        $scope.uploadUnsolvedProblem();
       },
       function(response) {
         console.log(response.data.message);
@@ -279,7 +280,7 @@ angular
         .then(data => {
             var alertForAccountCreated = $ionicPopup.alert({
                 title: 'Success!',
-                template: 'Unsolved Problem uploaded.'
+                template: "Child's unsolved problems uploaded."
             });
         },
           function(response) {
@@ -304,9 +305,9 @@ angular
          });
          var alertForAccountCreated = $ionicPopup.alert({            
           title: " Success!",
-          template: "Child's unsovled problems updated"
+          template: "Child's unsovled problems downloaded"
         });    
-        console.log("Child's unssolved problems updated");  
+        console.log("Child's unssolved problems downloaded");  
           })
       };
       
