@@ -113,6 +113,14 @@ angular
             $scope.laggingSkills = res;
         });
     });
+
+    //UnsolvedProblems prepare for Api
+
+  
+      UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
+        $scope.unsolvedProblemsList = result;
+      });
+  
   
 
     $scope.createChild = function() {
@@ -348,6 +356,42 @@ angular
           })
         }      
 
+        $scope.uploadAdultConcern = function(adultConcern) {
+          var user_id = localStorage.getItem("user_id")
+          var link;
+          angular.forEach($scope.unsolvedProblemsList,function(unsolvedProblem){
+            link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
+            AdultConcernFactory.getAdultConcern($scope.activeChild.id,function(result){
+              var data = result;
+              console.log(data)
+              var user_id = localStorage.getItem("user_id");
+
+              $http.post(link, 
+                { 
+                  data: angular.toJson(data),
+                  user_id: user_id
+                }, 
+                {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  transformRequest: function(obj) {
+                            var str = [];
+                            for(var p in obj)
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                            return str.join("&");
+                        },
+                })
+                .then(data => {
+                  var alertForAccountCreated = $ionicPopup.alert({
+                      title: 'Success!',
+                      template: 'Adult Concern uploaded.'
+                  });
+                },
+                function(response) {
+                  console.log(response.data.message);
+              }); 
+            })
+          })
+        };
 
     $scope.showActionsheet = function(child) {
       $translate([
