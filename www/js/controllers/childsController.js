@@ -111,17 +111,6 @@ angular
         });
     });
 
-    //UnsolvedProblems prepare for Api
-
-    // ChildrenFactory.active(function(active_child) {
-    //   $scope.activeChild = active_child;
-    //   UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
-    //   $scope.unsolvedProblems = result;
-    //   });
-    // });
-  
-  
-
     $scope.createChild = function() {
       if (!inputFieldIsEmpty($scope.child.first_name)) {
         ChildrenFactory.insert($scope.child, function() {
@@ -362,66 +351,52 @@ angular
           })
         }      
 
-        $scope.uploadAdultConcern = function() {
-            $scope.unsolvedProblemsList = {};
-            var data = [];
-            UnsolvedProblemFactory.all($scope.child.id,function(result){
-            data = result;
-            console.log("first Result UP "+data)
-            // let keys = Object.keys(data);
-            // console.log(keys)
-            // console.log(data[0].data)
+        $scope.uploadAdultConcern = function() {    
+          //var user_id = localStorage.getItem("user_id")
+          //var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
+          $scope.unsolvedProblems = {};
+          UnsolvedProblemFactory.all($scope.child.id,function(result){
+            var dataUP = result;
+            console.log("********UP-Adult*******");
+            console.log(dataUP);
+            var user_id = localStorage.getItem("user_id"); 
             
+            angular.forEach(dataUP,function(unsolvedProblem){
+              var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
+              console.log(link);
+
+              AdultConcernFactory.all(unsolvedProblem.id,function(result){
+                var data = result;
+                console.log(data)
+  
+                $http.post(link, 
+                  { 
+                    data: angular.toJson(data)
+                  }, 
+                  {
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    transformRequest: function(obj) {
+                              var str = [];
+                              for(var p in obj)
+                              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                              return str.join("&");
+                          },
+                  })
+                  .then(data => {
+                    var alertForAccountCreated = $ionicPopup.alert({
+                        title: 'Success!',
+                        template: 'Adult Concern uploaded.'
+                    });
+                    console.log(data)
+                  },
+                  function(response) {
+                    console.log(response.data.message);
+                }); 
+                $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
+              })
             });
             
-          var user_id = localStorage.getItem("user_id")
-          var link;
-          var upData = {};
-          var up_data = {};
-          upData = angular.toJson($scope.unsolvedProblemsList);
-          console.log("AdultConcern "+ upData)
-          angular.forEach(upData,function(unsolvedProblem){
-            let keys = Object.keys(unsolvedProblem);
-            console.log(keys)
-            
-
-
-            console.log("foreach")
-            up_data = angular.toJson(unsolvedProblem);
-            console.log(up_data)
-            link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
-            AdultConcernFactory.all($scope.child.id,function(result){
-              var data = result;
-              console.log(data.config)
-
-              $http.post(link, 
-                { 
-                  data: angular.toJson(data)
-                }, 
-                {
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                  transformRequest: function(obj) {
-                            var str = [];
-                            for(var p in obj)
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                            return str.join("&");
-                        },
-                })
-                .then(data => {
-                  var alertForAccountCreated = $ionicPopup.alert({
-                      title: 'Success!',
-                      template: 'Adult Concern uploaded.'
-                  });
-                  console.log(data)
-                },
-                function(response) {
-                  console.log(response.data.message);
-              }); 
-              $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
-            })
-            
-
-          });
+          }); 
 
           $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
         };
