@@ -18,7 +18,8 @@ angular
     $translate,
     $http,
     LaggingSkills,
-    AdultConcernFactory
+    AdultConcernFactory,
+    ChildConcernFactory
   ) {
 
 
@@ -265,6 +266,7 @@ angular
             });
 
             $scope.uploadAdultConcern();
+            $scope.uploadChildConcern();
         },
           function(response) {
             console.log(response.data.message);
@@ -414,6 +416,50 @@ angular
             console.log("Unsolved problems downloaded");  
           })
         };
+        $scope.uploadChildConcern = function() {
+          $scope.unsolvedProblems = {};
+          UnsolvedProblemFactory.all($scope.child.id,function(result){
+            var dataUP = result;
+            console.log(dataUP);
+            var user_id = localStorage.getItem("user_id");             
+            angular.forEach(dataUP,function(unsolvedProblem){
+              var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/child_concern";
+              console.log(link);
+              ChildConcernFactory.all(unsolvedProblem.id,function(result){
+                var data = result;
+                console.log(data)
+                $http.post(link, 
+                  { 
+                    data: angular.toJson(data)
+                  }, 
+                  {
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    transformRequest: function(obj) {
+                              var str = [];
+                              for(var p in obj)
+                              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                              return str.join("&");
+                          },
+                  })
+                  .then(data => {
+                    var alertForAccountCreated = $ionicPopup.alert({
+                        title: 'Success!',
+                        template: 'Child Concern uploaded.'
+                    });
+                    console.log(data)
+                  },
+                  function(response) {
+                    console.log(response.data.message);
+                }); 
+                $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
+              })
+            });
+            
+          }); 
+
+          $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
+        };
+
 
     $scope.showActionsheet = function(child) {
       $translate([
