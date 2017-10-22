@@ -113,12 +113,12 @@ angular
 
     //UnsolvedProblems prepare for Api
 
-    ChildrenFactory.active(function(active_child) {
-      $scope.activeChild = active_child;
-      UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
-      $scope.unsolvedProblemsList = result;
-      });
-    });
+    // ChildrenFactory.active(function(active_child) {
+    //   $scope.activeChild = active_child;
+    //   UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
+    //   $scope.unsolvedProblemsList = result;
+    //   });
+    // });
   
   
 
@@ -310,7 +310,7 @@ angular
           })
       };
       
-      $scope.uploadLaggingSkill = function(activeLaggingSkill){
+      $scope.uploadLaggingSkill = function(){
         var user_id = localStorage.getItem("user_id");
         var data = [];
         data = LaggingSkills.getChecked($scope.laggingSkills);
@@ -335,7 +335,7 @@ angular
           function(response) {
             console.log(response.data.message);
         }); 
-          
+        $timeout(function() { $scope.displayErrorMsg = false;}, 4000); 
       };
 
       $scope.downloadLaggingSkill  = function(){        
@@ -358,13 +358,20 @@ angular
         }      
 
         $scope.uploadAdultConcern = function() {
+            $scope.unsolvedProblemsList = {};
+            UnsolvedProblemFactory.all($scope.child.id,function(result){
+            $scope.unsolvedProblemsList = result;
+            });
+            
           var user_id = localStorage.getItem("user_id")
           var link;
-          console.log("AdultConcern "+$scope.unsolvedProblemsList)
-          angular.forEach($scope.unsolvedProblemsList,function(unsolvedProblem){
+          var upData = [];
+          var upData = angular.toJson($scope.unsolvedProblemsList);
+          console.log("AdultConcern "+angular.toJson($scope.unsolvedProblemsList))
+          angular.forEach(upData,function(unsolvedProblem){
             console.log("foreach")
             link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
-            AdultConcernFactory.getAdultsConcerns($scope.child.id,function(result){
+            AdultConcernFactory.all($scope.child.id,function(result){
               var data = result;
               console.log("AdultConcern "+data)
 
@@ -391,7 +398,9 @@ angular
                   console.log(response.data.message);
               }); 
             })
-          })
+          });
+
+          $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
         };
 
     $scope.showActionsheet = function(child) {
