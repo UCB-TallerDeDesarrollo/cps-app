@@ -116,7 +116,7 @@ angular
     // ChildrenFactory.active(function(active_child) {
     //   $scope.activeChild = active_child;
     //   UnsolvedProblemFactory.all($scope.activeChild.id,function(result){
-    //   $scope.unsolvedProblemsList = result;
+    //   $scope.unsolvedProblems = result;
     //   });
     // });
   
@@ -183,7 +183,7 @@ angular
       $scope.uploadChild();
       // $scope.uploadUnsolvedProblem();
       //$scope.uploadLaggingSkill();
-      $scope.uploadAdultConcern();
+      //$scope.uploadAdultConcern();
 
 
     };
@@ -220,7 +220,8 @@ angular
             template: 'Child uploaded.'
         });
         $scope.uploadUnsolvedProblem();
-        $scope.uploadLaggingSkill();
+        //$scope.uploadLaggingSkill();
+        
       },
       function(response) {
         console.log(response.data.message);
@@ -283,6 +284,8 @@ angular
                 title: 'Success!',
                 template: "Child's unsolved problems uploaded."
             });
+
+            $scope.uploadAdultConcern();
         },
           function(response) {
             console.log(response.data.message);
@@ -361,21 +364,35 @@ angular
 
         $scope.uploadAdultConcern = function() {
             $scope.unsolvedProblemsList = {};
+            var data = [];
             UnsolvedProblemFactory.all($scope.child.id,function(result){
-            $scope.unsolvedProblemsList = result;
+            data = result;
+            console.log("first Result UP "+data)
+            // let keys = Object.keys(data);
+            // console.log(keys)
+            // console.log(data[0].data)
+            
             });
             
           var user_id = localStorage.getItem("user_id")
           var link;
-          var upData = [];
-          var upData = angular.toJson($scope.unsolvedProblemsList);
-          console.log("AdultConcern "+angular.toJson($scope.unsolvedProblemsList))
+          var upData = {};
+          var up_data = {};
+          upData = angular.toJson($scope.unsolvedProblemsList);
+          console.log("AdultConcern "+ upData)
           angular.forEach(upData,function(unsolvedProblem){
+            let keys = Object.keys(unsolvedProblem);
+            console.log(keys)
+            
+
+
             console.log("foreach")
+            up_data = angular.toJson(unsolvedProblem);
+            console.log(up_data)
             link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
             AdultConcernFactory.all($scope.child.id,function(result){
               var data = result;
-              console.log("AdultConcern "+data)
+              console.log(data.config)
 
               $http.post(link, 
                 { 
@@ -395,11 +412,15 @@ angular
                       title: 'Success!',
                       template: 'Adult Concern uploaded.'
                   });
+                  console.log(data)
                 },
                 function(response) {
                   console.log(response.data.message);
               }); 
+              $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
             })
+            
+
           });
 
           $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
