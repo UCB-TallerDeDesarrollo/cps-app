@@ -18,10 +18,7 @@ angular
     $translate,
     $http,
     LaggingSkills,
-    $timeout,
-    UnsolvedProblemFactory,
-    $timeout,
-    UnsolvedProblemFactory
+    AdultConcernFactory
   ) {
 
 
@@ -105,15 +102,6 @@ angular
       return new Date(dateToConvert);
     };
 
-    //LaggingSkills prepare for Api
-
-    ChildrenFactory.active(function(active_child) {
-        $scope.activeChild = active_child;
-        LaggingSkills.all($scope.activeChild.id, function(res) {
-            $scope.laggingSkills = res;
-        });
-    });
-  
 
     $scope.createChild = function() {
       if (!inputFieldIsEmpty($scope.child.first_name)) {
@@ -171,17 +159,19 @@ angular
     $scope.showSyncModal = function(child){
         $scope.child = child;
         $scope.syncChildModal.show();
+        LaggingSkills.all($scope.child.id, function(res) {
+          $scope.laggingSkills = res;
+        });
     };
     $scope.uploadData = function(){
       $scope.uploadChild();
-      // $scope.uploadUnsolvedProblem();
-      $scope.uploadLaggingSkill();
-
     };
+
     $scope.downloadData = function(){
       $scope.downloadChild();
       $scope.downloadUnsolvedProblems();
       $scope.downloadLaggingSkill();  
+      $scope.downloadAdultConcern();
     }
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");   
@@ -211,12 +201,12 @@ angular
             template: 'Child uploaded.'
         });
         $scope.uploadUnsolvedProblem();
+        $scope.uploadLaggingSkill();
       },
       function(response) {
         console.log(response.data.message);
       });
       
-      // $scope.uploadLaggingSkillsChecked();
     };    
 
     $scope.downloadChild = function(){        
@@ -273,6 +263,8 @@ angular
                 title: 'Success!',
                 template: "Child's unsolved problems uploaded."
             });
+
+            $scope.uploadAdultConcern();
         },
           function(response) {
             console.log(response.data.message);
@@ -302,7 +294,7 @@ angular
           })
       };
       
-      $scope.uploadLaggingSkill = function(activeLaggingSkill){
+      $scope.uploadLaggingSkill = function(){
         var user_id = localStorage.getItem("user_id");
         var data = [];
         data = LaggingSkills.getChecked($scope.laggingSkills);
@@ -322,12 +314,16 @@ angular
                 },
         })
         .then(data => {
+          var alertForAccountCreated = $ionicPopup.alert({
+              title: 'Success!',
+              template: "Lagging Skills uploaded."
+          });
           console.log("LaggingSkill uploated");
         },
           function(response) {
             console.log(response.data.message);
         }); 
-          
+        $timeout(function() { $scope.displayErrorMsg = false;}, 4000); 
       };
 
       $scope.downloadLaggingSkill  = function(){        
@@ -349,6 +345,75 @@ angular
           })
         }      
 
+        $scope.uploadAdultConcern = function() {    
+          
+          $scope.unsolvedProblems = {};
+          UnsolvedProblemFactory.all($scope.child.id,function(result){
+            var dataUP = result;
+            var user_id = localStorage.getItem("user_id"); 
+            
+            angular.forEach(dataUP,function(unsolvedProblem){
+              var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
+              AdultConcernFactory.all(unsolvedProblem.id,function(result){
+                var data = result;
+                console.log(data)
+  
+                $http.post(link, 
+                  { 
+                    data: angular.toJson(data)
+                  }, 
+                  {
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    transformRequest: function(obj) {
+                              var str = [];
+                              for(var p in obj)
+                              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                              return str.join("&");
+                          },
+                  })
+                  .then(data => {
+                    console.log(data)
+                    console.log("Adult Concern uploated")
+                  },
+                  function(response) {
+                    console.log(response.data.message);
+                }); 
+                $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
+              })
+
+            });
+            
+          }); 
+
+          $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
+        };
+
+        $scope.downloadAdultConcern = function(){
+          var user_id = localStorage.getItem("user_id")
+
+          var linkUPData = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
+          
+          $scope.unsolvedProblems ;
+          $http.get(linkUPData).then(data => {        
+            $scope.unsolvedProblems = data.data;                
+            angular.forEach($scope.unsolvedProblems, function(valueUP, key){
+              var link = "http://localhost:3000/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/myAdultConcerns";
+              $http.get(link).then(data => {        
+                $scope.adultConcerns = data.data;                
+                angular.forEach($scope.adultConcerns, function(value, key){
+                  var query = "UPDATE adults_concerns SET description = ?, unsolved_problem_id = ? where id = ?";
+                  var params = [value.description, value.unsolved_problem_id, value.id];
+                  console.log(value)
+                  $cordovaSQLite.execute(db, query, params);
+               });
+                 
+                console.log("AdultConcerns from UnsolvedProblem downloaded");  
+              })
+           });
+
+            console.log("Unsolved problems downloaded");  
+          })
+        };
 
     $scope.showActionsheet = function(child) {
       $translate([
