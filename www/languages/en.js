@@ -69,8 +69,18 @@ var $translations_en = {
     UnsolvedProblemHintBody: "An unsolved problem is an expectation your child is having difficulty reliably meeting. You can write in more than one unsolved problem for a given lagging skill, but you don't need to type the same unsolved problem in more than once. After you've made a comprehensive list of unsolved problems, click on the arrow next to the one you want to solve first.",
     Got_It: "Got it",
     goingTo: "Going to",
+
+    //For Empathy Step
     EmpathyStep: "Empathy Step",
+    NewChildsConcern: "New Child's Concern",
+    TypeChildsConcernPlaceholder: "Type a new child's concern here.",
+    EditChildsConcern: "Edit Child's Concern",
     DefineAdultsConcern: "Define Adult's Concern",
+    EmpathyStepMessage: "I've noticed that you been having ",
+    EmpathyStepMessageContinue: ", what's up? ",
+    ListChildsConcerns: "List of Child's Concerns",
+    DeleteChildsConcernTitle: "Delete Child's Concern",
+    DeleteChildsConcernBody: "Are you sure you want to delete this child's concern?",
     InvitationStep: "Invitation Step",
     Step: "Step",
     wasntUnlock: "wasn\'t unlocked",
