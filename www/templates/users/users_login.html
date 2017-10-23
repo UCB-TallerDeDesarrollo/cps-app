@@ -1,10 +1,17 @@
-<ion-view cache-view="false" view-title="{{'LoginTitle' | translate }}">
+
+<ion-view class="modal slide-in-up ng-enter active ng-enter-active" cache-view="false" view-title="{{'LoginTitle' | translate }}">
   <ion-content>
-      <div class="col col-50 button button-small button-positive" ng-click="openModalLogin()">
-          <i>Log in</i>
-        </div>
-    <div class="col col-50 button button-small button-positive" ng-click="openModalSignup()">
-      <i>{{'SignupTitle' | translate }}</i>
-    </div>
+      <div class="list">               
+          <label class="item" id="languageOptions">
+            <div class="button button-block button-positive" ng-click="openModalLogin()">
+              <i>Log in</i>
+            </div>
+          </label>
+          <label class="item" id="languageOptions">          
+            <div class="button button-block button-positive" ng-click="openModalSignup()">
+              <i>{{'SignupTitle' | translate }}</i>
+            </div>
+          </label>
+      </div>
   </ion-content>
 </ion-view>
