@@ -204,7 +204,7 @@ app
         $scope.activeLaggingSkill = LaggingSkills.get(laggingskillList,laggingskillId);
         console.log($scope.activeLaggingSkill.checked);
         console.log("paso la carga");
-        var link = "http://localhost:3000/createLaggingSkill";
+        var link = "http://cpsapi.herokuapp.com/createLaggingSkill";
         var data = {
            description: $scope.activeLaggingSkill.description,
            checked: $scope.activeLaggingSkill.checked,
