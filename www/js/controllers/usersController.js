@@ -167,6 +167,10 @@ angular.module('starter.controllers')
             });
             $scope.get_user_info();
       }).catch(error => {
+        var alertForAccountCreated = $ionicPopup.alert({
+          title: 'Error!',
+          template: 'Incorrect username or password.'
+        });
         console.log(error.status);
       });
       $scope.closeModalLogin();
