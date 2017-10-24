@@ -35,9 +35,12 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
 })
 
 .config(function($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider, $httpProvider) {
+  $httpProvider.defaults.headers.common = {};
+  $httpProvider.defaults.headers.post = {};
+  $httpProvider.defaults.headers.put = {};
+  $httpProvider.defaults.headers.patch = {};
   $httpProvider.defaults.useXDomain = true;
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
   var defaultOptions = {
     location: 'no',
     clearcache: 'no',
@@ -281,6 +284,16 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     views: {
       'menuContent': {
         templateUrl: 'templates/appTutorials/mainTutorial.html'
+      }
+    }
+  })
+  .state('app.login',{
+    url: '/login',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/users/users_login.html',
+        controller: 'UserCtrl'
+
       }
     }
   })

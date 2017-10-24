@@ -37,7 +37,7 @@ var date = new Date();
     }
 
     if (child.birthday <= date) {
-      var query = "INSERT INTO childs(first_name,gender,birthday,active) VALUES (?,?,?,1)";
+      var query = "INSERT INTO childs(first_name,gender,birthday,active, unsolved_problems, lagging_skills_check) VALUES (?,?,?,1,0,0)";
       $cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]).then(function(){
         callback();
       });

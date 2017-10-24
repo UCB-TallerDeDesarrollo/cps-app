@@ -33,6 +33,7 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     $cordovaSQLite.execute(db,query,[solution.description, solution.unsolvedProblemId, solution.rating]);
   }
 
+
   function updateSolution(solution){
     var query = "UPDATE solutions SET description = ? where id = ?";
     $cordovaSQLite.execute(db, query, [solution.description, solution.id]);
@@ -65,10 +66,54 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     $cordovaSQLite.execute(db,query,[comment.description,now,comment.solutionId]);
   }
 
+
+  function insertPair(pair,solution_id){
+
+    var query ="INSERT INTO pair_childConcerntoadultConcern(description,description2,solution_id) VALUES (?,?,?)";
+    $cordovaSQLite.execute(db,query,[pair.description,pair.description2,solution_id]);
+  }
+
+  function getLast(unsolved_problem_id,callback){
+    var solutionLate = [];
+    var query ="SELECT *FROM solutions WHERE unsolved_problem_id = ? ORDER BY id DESC LIMIT 1";
+  $cordovaSQLite.execute(db,query,[unsolved_problem_id]).then(function(result) {
+      var rows = result.rows;
+         if(rows.length) {
+           var solutionLate = result.rows.item(0);
+           callback(solutionLate);
+       }
+    },function(err){
+      console.log(err.message);
+    });
+  }
+
+
+ function findPair(solutionId, callback){
+    var pair=null;
+    var query ="SELECT * FROM pair_childConcerntoadultConcern WHERE solution_id = ?";
+    $cordovaSQLite.execute(db,query,[solutionId]).then(function(result){
+      var rows = result.rows;
+         if(rows.length) {
+         pair = result.rows.item(0);
+       }
+       callback(pair);
+
+    },function(err){
+      console.log(err.message);
+
+    });
+
+  }
+
   function updateComment(comment){
     var query = "UPDATE solution_comments SET description = ? where id = ?";
     $cordovaSQLite.execute(db, query, [comment.description, comment.id]);
   }
+  function updatePair(pair){
+     var query = "UPDATE pair_childConcerntoadultConcern SET description = ?, description2 = ? where id = ?";
+     $cordovaSQLite.execute(db, query, [pair.description,pair.description2, pair.id]);
+   }
+
 
   return {
     all: function(unsolvedProblemId, callback){
@@ -91,6 +136,18 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     },
     insertComment: function(comment){
       insertComment(comment);
+    },
+    insertPair: function(pair,solution_id){
+      insertPair(pair,solution_id);
+    },
+    findPair: function(solutionId,callback){
+      findPair(solutionId,callback);
+    },
+    updatePair: function(pair){
+      updatePair(pair);
+    },
+    getLast: function(solution,callback){
+      getLast(solution,callback);
     },
     updateComment: function(comment){
       updateComment(comment);

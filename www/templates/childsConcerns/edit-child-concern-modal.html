@@ -1,16 +1,16 @@
 <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
   <ion-header-bar class="bar bar-header bar-positive">
-    <h1 class="title">Edit Child's Concern</h1>
-    <button class="button button-clear button-primary" ng-click="closeModalEdit()">Cancel</button>
+    <h1 class="title">{{'EditChildsConcern' | translate }}</h1>
+    <button class="button button-clear button-primary" ng-click="closeModalEdit()">{{'CancelOption' | translate }}</button>
   </ion-header-bar>
   <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll modal-animation">
     <form>
       <label class="item item-input">
-        <textarea rows=5 placeholder="Type a new child's concern here." ng-model="editableChildsConcern.description">
+        <textarea rows=5 placeholder="{{'TypeChildsConcernPlaceholder' | translate }}" ng-model="editableChildsConcern.description">
         </textarea>
       </label>
-      <button class="button button-full button-positive" ng-if="!editableChildsConcern.description.length" ng-click="updateChildsConcern()" disabled>Save</button>
-      <button class="button button-full button-positive" ng-if="editableChildsConcern.description.length > 0" ng-click="updateChildsConcern()">Save</button>
+      <button class="button button-full button-positive" ng-if="!editableChildsConcern.description.length" ng-click="updateChildsConcern()" disabled>{{'SaveTitle' | translate }}</button>
+      <button class="button button-full button-positive" ng-if="editableChildsConcern.description.length > 0" ng-click="updateChildsConcern()">{{'SaveTitle' | translate }}</button>
     </form>
   </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out modal-animation"></div></div></ion-content>
 </ion-modal-view>

@@ -17,33 +17,60 @@ angular.module('starter.services', ['ngCordova'])
         console.log(err.message);
       });
   }
-  function uncheckLaggingSkill(lagginSkillId){
+  function uncheckLaggingSkill(lagginSkillId,child_id){
+    console.log("Controller out Child id:" + child_id);
     var query = "UPDATE lagging_skills SET checked = 0 where id = ?";
     $cordovaSQLite.execute(db,query,lagginSkillId);
+    var query2 = "UPDATE childs SET lagging_skills_check = lagging_skills_check - 1 where id = ?";
+    $cordovaSQLite.execute(db,query2,child_id);
+
   }
-  function checkLaggingSkill(lagginSkillId){
+  function checkLaggingSkill(lagginSkillId,child_id){
     var query = "UPDATE lagging_skills SET checked = 1 where id = ?";
     $cordovaSQLite.execute(db,query,lagginSkillId);
+    console.log("Services Child id: " + child_id);
+    var query2 = "UPDATE childs SET lagging_skills_check = lagging_skills_check + 1 where id = ?";
+    $cordovaSQLite.execute(db,query2,child_id);
   }
 
   return {
     all: function(callback, childId) {
       getLaggingSkills(callback, childId);
     },
-    get: function(laggingSkillsId) {
-      for (var i = 0; i < laggingSkills.length; i++) {
-        if (laggingSkillss[i].id === parseInt(laggingSkillsId)) {
-          return laggingSkillss[i];
+    get: function(laggingSkillList,laggingSkillsId) {
+      for (var i = 0; i < laggingSkillList.length; i++) {
+        if (laggingSkillList[i].id === parseInt(laggingSkillsId)) {
+          return laggingSkillList[i];
         }
       }
       return null;
     },
-    check: function(laggingskillId){
-      checkLaggingSkill(laggingskillId);
+    check: function(laggingskillId, child_id){
+      checkLaggingSkill(laggingskillId, child_id);
     },
-    uncheck: function(laggingskillId){
-      uncheckLaggingSkill(laggingskillId);
-    }
+    uncheck: function(laggingskillId, child_id){
+      uncheckLaggingSkill(laggingskillId, child_id);
+    },
+    getChecked: function(laggingSkillList){
+        var laggingSkillsCheckedList = [];
+        for (var i = 0; i < laggingSkillList.length; i++) {
+          if (laggingSkillList[i].checked === 1) {
+            laggingSkillsCheckedList.push(laggingSkillList[i]);
+          }
+        }
+        return laggingSkillsCheckedList;
+    },
+    getCheckedCount: function(laggingSkillList){
+      var laggingSkillsCheckedCount = 0;
+      
+      for (var i = 0; i < laggingSkillList.length; i++) {
+        if (laggingSkillList[i].checked === 1) {
+          laggingSkillsCheckedCount = laggingSkillsCheckedCount + 1;
+        }
+      }
+      return laggingSkillsCheckedCount;
+  }
+
   };
 })
 
