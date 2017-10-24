@@ -20,7 +20,7 @@ angular.module('starter.controllers')
     });
     $scope.get_user_info = function(){
       var email = localStorage.getItem("email")
-      $http.get('http://localhost:3000/me?email='+'email', 
+      $http.get('http://cpsapi.herokuapp.com/me?email='+'email', 
           { params: { "email": email } }
       , 
       {
@@ -103,7 +103,7 @@ angular.module('starter.controllers')
     $scope.signup = function(){
       var number = $scope.user.phone.toString();
       var email = $scope.user.email;
-      $http.post('http://localhost:3000/signup', 
+      $http.post('http://cpsapi.herokuapp.com/signup', 
       { 
         name:$scope.user.names,
         last_name:$scope.user.last_name,
@@ -143,7 +143,7 @@ angular.module('starter.controllers')
     
     $scope.login = function(){
       var email = $scope.user.email;
-      $http.post('http://localhost:3000/auth/login', 
+      $http.post('http://cpsapi.herokuapp.com/auth/login', 
       { 
         email:$scope.user.email,
         password:$scope.user.password,
