@@ -1,18 +1,11 @@
-var app = angular.module('starter.controllers', ['pascalprecht.translate']);
-app
+angular.module('starter.controllers', [])
+
 .config(function($ionicConfigProvider) {
     $ionicConfigProvider.tabs.position("bottom");
     $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
-.config(['$translateProvider', function ($translateProvider) {
-    $translateProvider.translations('en', $translations_en);
-    $translateProvider.translations('es', $translations_es);
-    $translateProvider.preferredLanguage('en');
-    $translateProvider.useSanitizeValueStrategy('escapeParameters');
-}])
-
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory, $translate,$http, $ionicSideMenuDelegate) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaSQLite, $ionicPopup, $state, ChildrenFactory, UnsolvedProblemFactory) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -23,44 +16,6 @@ app
     $scope.firstTimeHelp = false;
     // Form data for the login modal
     $scope.loginData = {};
-    $scope.user_name = localStorage.getItem("user_name");
-    $scope.$watch(function () {
-        return $ionicSideMenuDelegate.isOpenLeft();
-       },
-       function (isOpen) {
-         if (isOpen){
-            $scope.user_name = localStorage.getItem("user_name");
-         } else{
-         }
-      });
-    $scope.isUserLogged = function(){
-        if(localStorage.getItem("auth_token") !== null ){
-            return false;
-        }else 
-        return true;     
-    }
-    $scope.logout = function(){
-        
-        var confirmPopup = $ionicPopup.confirm({
-            title: "Log out",
-            template: "Are you sure you want to log out?",
-            cancelText: "No",
-            okText: "yes"
-          });
-  
-          confirmPopup.then(function(res) {
-            if (res) {
-                localStorage.removeItem("auth_token");
-                localStorage.removeItem("email");
-                localStorage.removeItem("user_name");
-                
-                var alertForAccountCreated = $ionicPopup.alert({
-                    title: 'Success!',
-                    template: 'Log out Succesfull!.'
-                });
-            }
-          });
-    };
     $scope.activeChild = { first_name: "" };
     $scope.getActiveChild = function() {
         $scope.activeChild = { first_name: "" };
@@ -68,18 +23,6 @@ app
             $scope.activeChild = active_child;
         });
     };
-
-    //Changes the language of translation
-    $scope.ChangeLanguage = function(lang){
-        $translate.use(lang);
-    }
-
-    //Modal for language options
-    $ionicModal.fromTemplateUrl('templates/languageOptionsModal.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.languageOptionsModal = modal;
-    });
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/defaultUtilities/login.html', {
@@ -144,33 +87,29 @@ app
 
 })
 
-.controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate, ChildrenFactory, $ionicModal, $http) {
-    $scope.activeLaggingSkill = {};
+.controller('LaggingSkillsCtrl', function($scope, LaggingSkills, $cordovaSQLite, $state, $ionicListDelegate, ChildrenFactory, $ionicModal) {
     ChildrenFactory.active(function(active_child) {
         $scope.activeChild = active_child;
         LaggingSkills.all($scope.activeChild.id, function(res) {
             $scope.laggingSkills = res;
         });
     });
-    $scope.checkLaggingSkill = function(laggingskillId,child_id) {
-        LaggingSkills.check([laggingskillId], [child_id]);
+    $scope.checkLaggingSkill = function(laggingskillId) {
+        LaggingSkills.check([laggingskillId]);
         $state.go('app.laggingSkills');
-        console.log("Controller Child id:" + child_id);
         $ionicListDelegate.closeOptionButtons();
         LaggingSkills.all($scope.activeChild.id, function(res) {
             $scope.laggingSkills = res;
         });
-        //$scope.uploadLaggingSkill($scope.laggingSkills,laggingskillId);
         if (typeof analytics !== 'undefined') {
             analytics.trackEvent('Lagging Skill', 'check');
         } else {
             console.log("Google Analytics Unavailable");
         }
     };
-    $scope.uncheckLaggingSkill = function(laggingskillId,child_id) {
-        LaggingSkills.uncheck([laggingskillId], [child_id]);
+    $scope.uncheckLaggingSkill = function(laggingskillId) {
+        LaggingSkills.uncheck([laggingskillId]);
         $state.go('app.laggingSkills');
-        console.log("Controller out Child id:" + child_id);
         $ionicListDelegate.closeOptionButtons();
         LaggingSkills.all($scope.activeChild.id, function(res) {
             $scope.laggingSkills = res;
@@ -199,40 +138,6 @@ app
             console.log("Google Analytics Unavailable");
         }
     }
-
-    $scope.uploadLaggingSkill = function(laggingskillList,laggingskillId){
-        $scope.activeLaggingSkill = LaggingSkills.get(laggingskillList,laggingskillId);
-        console.log($scope.activeLaggingSkill.checked);
-        console.log("paso la carga");
-        var link = "http://localhost:3000/createLaggingSkill";
-        var data = {
-           description: $scope.activeLaggingSkill.description,
-           checked: $scope.activeLaggingSkill.checked,
-           child_id: $scope.activeChild.id
-        };
-        $http({
-          method: 'POST',
-          url: link,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          transformRequest: function(obj) {
-            var str = [];
-            for(var p in obj)
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            return str.join("&");
-          },
-          data: data
-        })
-        .then(function(response) {
-          console.log(response.data.message);
-        //   var alertForAccountCreated = $ionicPopup.alert({
-        //       title: 'Success!',
-        //       template: 'LaggingSkill uploaded.'
-        //   });
-        },
-        function(response) {
-          console.log(response.data.message);
-        });      
-      };
 })
 
 .controller('HelpCategoryCtrl', function($scope, $stateParams) {
@@ -438,13 +343,9 @@ app
         };
     })
 
-    .controller('TutorialCtrl', function($scope, $state, $ionicSlideBoxDelegate, $cordovaSQLite, $ionicPopup,$ionicHistory) {
+    .controller('TutorialCtrl', function($scope, $state, $ionicSlideBoxDelegate, $cordovaSQLite, $ionicPopup) {
 
         $scope.startApp = function() {
-            $ionicHistory.nextViewOptions({
-                disableBack: true
-              });
-              $state.go('app.home');
             $state.go('app.childs');
         };
         $scope.next = function() {
@@ -511,16 +412,6 @@ app
 
 function inputFieldIsEmpty(description) {
     return description.length === 0;
-}
-
-function signupFieldsAreEmpty(name, last_name, phone, email, password, password_confirmation) {
-    name_is_empty = inputFieldIsEmpty(name);
-    last_name_is_empty = inputFieldIsEmpty(last_name);
-    phone_is_empty = inputFieldIsEmpty(phone);
-    email_is_empty = inputFieldIsEmpty(email);
-    password_is_empty = inputFieldIsEmpty(password);
-    password_confirmation_is_empty = inputFieldIsEmpty(password_confirmation);
-    return (name_is_empty || last_name_is_empty || phone_is_empty || email_is_empty || password_is_empty || password_confirmation_is_empty);
 }
 
 // function saveSolution(cordovaSQLite,solution){

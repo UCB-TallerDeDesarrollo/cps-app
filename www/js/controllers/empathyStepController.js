@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory, ChildConcernFactory,AdultConcernFactory,$ionicSideMenuDelegate, $translate){
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory, ChildConcernFactory,AdultConcernFactory,$ionicSideMenuDelegate){
   $ionicSideMenuDelegate.canDragContent(false);
     $scope.childsConcern = {
     description: ""
@@ -132,13 +132,12 @@ angular.module('starter.controllers')
     $state.go('app.newUnsolvedProblem');
   };
   $scope.verifyToGoToStep2 = function() {
-    $translate(['goingTo','Step', 'DefineAdultsConcern','NoMessage','YesMessage','keepDrilling','step2VerifyBody','imSure']).then (function(translations){
     if($scope.adultsConcerns.length === 0){
       var confirmPopup = $ionicPopup.confirm({
-        title: translations.goingTo + " "+ translations.Step + " 2: " + translations.DefineAdultsConcern,
-        template: translations.step2VerifyBody,
-        cancelText: translations.NoMessage+", " + translations.keepDrilling,
-        okText: translations.YesMessage + ", "+ translations.imSure
+        title: "Going to Step 2: Define Adult's Concerns",
+        template: "Have you drilled enough to get all your child's concerns?",
+        cancelText: "No, keep drilling",
+        okText: "Yes, I'm sure"
       });
 
       confirmPopup.then(function(res) {
@@ -150,10 +149,8 @@ angular.module('starter.controllers')
     else {
       $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
     }
-  });
   };
   $scope.selectTabWithIndex = function(index) {
-    $translate(['CancelOption','Step','EmpathyStep','DefineAdultsConcern','InvitationStep','wasntUnlock','haveToFinishSteps']).then (function(translations){ 
     if(index === 0){
       $ionicTabsDelegate.select(index);
       $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
@@ -161,8 +158,8 @@ angular.module('starter.controllers')
     if(index == 1){
       if($scope.childsConcerns.length === 0){
         var alertPopup = $ionicPopup.alert({
-          title: translations.Step + " 2 "+ translations.wasntUnlock,
-          template: translations.haveToFinishSteps
+           title: 'Step 2 wasn\'t unlocked.',
+           template: 'You have to finish previous steps to continue.'
          });
          alertPopup.then(function(res) {
          });
@@ -175,8 +172,8 @@ angular.module('starter.controllers')
     if(index==2){
       if($scope.adultsConcerns.length === 0 || $scope.childsConcerns.length === 0){
         var alertPopupForUnsolved = $ionicPopup.alert({
-          title: translations.Step + " 3 "+ translations.wasntUnlock,
-          template: translations.haveToFinishSteps
+           title: 'Step 3 wasn\'t unlocked.',
+           template: 'You have to finish previous steps to continue.'
          });
          alertPopupForUnsolved.then(function(res) {
          });
@@ -185,7 +182,7 @@ angular.module('starter.controllers')
         $ionicTabsDelegate.select(index);
       }
     }
-  });
+
   };
   $scope.editChildsConcern = function(childsConcern){
     $scope.editableChildsConcern = angular.copy(childsConcern);
@@ -235,14 +232,11 @@ angular.module('starter.controllers')
  };
 
  $scope.showConfirmChildsConcern = function(item) {
-  $translate(['DeleteChildsConcernTitle','DeleteChildsConcernBody', 'CancelOption','YesMessage']).then (function(translations){
    var confirmPopup = $ionicPopup.confirm({
-    title: translations.DeleteChildsConcernTitle,
-     template: translations.DeleteUnsolvedProblemBody,
-     cancelText: translations.CancelOption,
-     okText: translations.YesMessage
+     title: "Delete Child's Concern",
+     template: "Are you sure you want to delete this child's concern?"
    });
-  
+
    confirmPopup.then(function(res) {
      if(res) {
         $scope.deleteChildsConcern(item);
@@ -253,7 +247,6 @@ angular.module('starter.controllers')
         }
      }
    });
-  });
  };
  $scope.unableAnimation = function() {
    $scope.firstItemAnimationShown = true;
@@ -262,15 +255,12 @@ angular.module('starter.controllers')
    return ( $scope.childsConcerns.length === 0 || $scope.firstItemAnimationShown );
  };
  $scope.showHint = function() {
-  $translate(['ChildsConcernHint', 'CancelOption','YesMessage']).then (function(translations){
    if(localStorage.getItem("showHint") === null){
        localStorage.setItem("showHint", true);
        var confirmPopup = $ionicPopup.alert({
-         title: translations.ChildsConcernHint,
-         okText: translations.YesMessage
+         title: "After you identify all of your child's concerns, click the arrow to move on to adult concerns step"
        });
      }
-    });
    };
   $scope.googleAnalyticsView = function() {
     if(typeof analytics !== 'undefined') {

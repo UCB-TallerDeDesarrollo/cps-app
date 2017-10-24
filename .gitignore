@@ -4,6 +4,7 @@
 node_modules
 .tmp
 .sass-cache
+www/lib
 platforms
 plugins
 *.swp

@@ -1,13 +1,7 @@
 angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory, $ionicSideMenuDelegate){
-  $scope.pairExist = false;
   $ionicSideMenuDelegate.canDragContent(false);
   $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
   $scope.solutions = [];
-
-
-      $scope.pair = { solutionId:$stateParams.unsolvedProblemId  };
-      $scope.pair.description = "";
-
   UnsolvedProblemFactory.find($stateParams.unsolvedProblemId,function(result){
     $scope.unsolvedProblem = result.rows.item(0);
     ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
@@ -25,8 +19,6 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.showChilds=false;
   $scope.showAdults=false;
   $scope.shouldShowReorder = false;
-
-
 
   $scope.toggleChilds= function(){
     if($scope.showChilds===true){
@@ -78,16 +70,8 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     if (!inputFieldIsEmpty($scope.solution.description)) {
       $scope.solution.rating=0;
       PossibleSolutionFactory.insert($scope.solution);
-
-      PossibleSolutionFactory.getLast($scope.solution.unsolvedProblemId,function(idLast){
-        $scope.idSolutionAlfin = idLast;
-         $scope.createPair($scope.idSolutionAlfin.id);
-
-      });
-
       $scope.solution.description = "";
       $scope.closeModal();
-
       if(typeof analytics !== 'undefined') {
            analytics.trackEvent('Child solution', 'New')
       } else {
@@ -97,13 +81,6 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
         $scope.solutions = res;
       });
     }
-  };
-
-  $scope.createPair = function(idSolutionAlfin){
-    if (!inputFieldIsEmpty($scope.pair.description)) {
-        PossibleSolutionFactory.insertPair($scope.pair,idSolutionAlfin);
-         $scope.pair.description = "";
-     }
   };
 
   $scope.showDeletionConfirm = function(solution) {
@@ -117,7 +94,6 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       }
     });
   };
-
   $scope.deleteSolution = function (solution) {
     PossibleSolutionFactory.delete(solution.id, function(){
       $scope.solutions.splice($scope.solutions.indexOf(solution), 1);
@@ -131,73 +107,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     };
     $scope.openModalEdit();
   };
-
-$scope.editablePair=[];
-
-
-  $scope.editPair = function(editableSolution) {
-    PossibleSolutionFactory.findPair(editableSolution.id,function(pairsEdit){
-    $scope.editablePair = pairsEdit;
-    if($scope.editablePair!=null){
-          $scope.openModaEditToChooseAdultConcernToChildConcern();
-    }
-    if($scope.editablePair===null){
-        $scope.openModalToChooseAdultConcernToChildConcernAfterCreatingSolution(editableSolution.id);
-    }
-    });
-
-  };
-  $scope.existPair=false;
-  $scope.solutionId2=0;
-  $scope.openModaEditToChooseAdultConcernToChildConcern = function() {
-      $scope.existPair=true;
-        $scope.modalEditToChooseAdultConcernToChildConcern.show();
-
-  };
-
-  $ionicModal.fromTemplateUrl('choose-AdultConcern-To-ChildConcern-After-creating-solution-without-pairs.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modalToChooseAdultConcernToChildConcernAfterCreatingSolution = modal;
-    $scope.modalToChooseAdultConcernToChildConcernAfterCreatingSolution.hide();
-  });
-
-  $scope.openModalToChooseAdultConcernToChildConcernAfterCreatingSolution = function(editableSolutionId) {
-    $scope.existPair=false;
-  $scope.solutionId2=editableSolutionId;
-    $scope.modalToChooseAdultConcernToChildConcernAfterCreatingSolution.show();
-    $scope.showHint();
-  };
-  $scope.closeModalToChooseAdultConcernToChildConcernAfterCreatingSolution = function() {
-    $scope.modalToChooseAdultConcernToChildConcernAfterCreatingSolution.hide();
-    $ionicListDelegate.closeOptionButtons();
-    $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
-  };
-  $scope.updatePair = function(){
-   if($scope.existPair!=false){
-       if (!inputFieldIsEmpty($scope.editablePair.description)) {
-             console.log($scope.editablePair);
-         PossibleSolutionFactory.updatePair($scope.editablePair);
-         $scope.modalEditToChooseAdultConcernToChildConcern.hide();
-        }
-       else {
-         $scope.emptyInput = true;
-       }
-    }
-    else{
-    $scope.createPair($scope.solutionId2);
-    $scope.closeModalToChooseAdultConcernToChildConcernAfterCreatingSolution();
-
-
-    }
-  };
-
-
-
-
   $scope.updateSolution = function(){
-
     if (!inputFieldIsEmpty($scope.editableSolution.description)) {
       PossibleSolutionFactory.update($scope.editableSolution);
       $scope.modalEdit.hide();
@@ -210,42 +120,6 @@ $scope.editablePair=[];
       $scope.emptyInput = true;
     }
   };
-  $ionicModal.fromTemplateUrl('choose-AdultConcern-To-ChildConcern.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modalToChooseAdultConcernToChildConcern = modal;
-    $scope.modalToChooseAdultConcernToChildConcern.hide();
-  });
-  $scope.openModalToChooseAdultConcernToChildConcern = function() {
-    $scope.modalToChooseAdultConcernToChildConcern.show();
-    $scope.showHint();
-  };
-  $scope.closeModalToChooseAdultConcernToChildConcern = function() {
-    $scope.modalToChooseAdultConcernToChildConcern.hide();
-    $ionicListDelegate.closeOptionButtons();
-    $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
-  };
-
-  $ionicModal.fromTemplateUrl('edit-AdultConcern-To-ChildConcern.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modalEditToChooseAdultConcernToChildConcern = modal;
-      $scope.modalEditToChooseAdultConcernToChildConcern.hide();
-    });
-
-
-
-
-    $scope.closeModalEditToChooseAdultConcernToChildConcern = function() {
-      $scope.modalEditToChooseAdultConcernToChildConcern.hide();
-      $ionicListDelegate.closeOptionButtons();
-      $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
-    };
-
-
-
   $ionicModal.fromTemplateUrl('create-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -333,7 +207,7 @@ $scope.editablePair=[];
             analytics.trackEvent('Child solution rate', 'Broken heart')
           } else {
             console.log("Google Analytics Unavailable");
-          }
+          }          
         }
       },
       { type: 'button-balanced ion-heart' ,
@@ -344,7 +218,7 @@ $scope.editablePair=[];
             analytics.trackEvent('Child solution rate', 'Heart')
           } else {
             console.log("Google Analytics Unavailable");
-          }
+          }         
         }
       },
       { type: 'button-calm ion-happy-outline',
@@ -354,7 +228,7 @@ $scope.editablePair=[];
             analytics.trackEvent('Child solution rate', 'Happy')
           } else {
             console.log("Google Analytics Unavailable");
-          }
+          }          
         }
       }
     ]
@@ -475,15 +349,6 @@ $scope.editablePair=[];
   $scope.goToSolution = function(solution){
     $state.go('app.solution', {solutionId:solution.id});
   };
-
-  $scope.showHint = function() {
-    if(localStorage.getItem("showInfo") === null){
-        localStorage.setItem("showInfo", true);
-        var confirmPopup = $ionicPopup.alert({
-          title: "Solving too many concerns at once doesn't usually go well, so for now, just pick 1 adult concern and 1 child concern to solve"
-        });
-      }
-    };
 
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 });
