@@ -7,6 +7,8 @@ angular.module('starter.controllers')
     $scope.user.phone="";
     $scope.user.email="";
     $scope.user.password="";
+    //$link_root = "http://localhost:3000";
+    $link_root = "http://cpsapi.herokuapp.com";
     $scope.user.password_confirmation="";
     $scope.emailRegularExpression = /\S+@\S+\.\S+/;
     $scope.anyStringRegExpression = /\S+/;
@@ -20,7 +22,7 @@ angular.module('starter.controllers')
     });
     $scope.get_user_info = function(){
       var email = localStorage.getItem("email")
-      $http.get('http://cpsapi.herokuapp.com/me?email='+'email', 
+      $http.get($link_root+'/me?email='+'email', 
           { params: { "email": email } }
       , 
       {
@@ -103,7 +105,8 @@ angular.module('starter.controllers')
     $scope.signup = function(){
       var number = $scope.user.phone.toString();
       var email = $scope.user.email;
-      $http.post('http://cpsapi.herokuapp.com/signup', 
+      console.log("Link raiz: "+ $link_root);
+      $http.post($link_root+'/signup', 
       { 
         name:$scope.user.names,
         last_name:$scope.user.last_name,
@@ -143,7 +146,7 @@ angular.module('starter.controllers')
     
     $scope.login = function(){
       var email = $scope.user.email;
-      $http.post('http://cpsapi.herokuapp.com/auth/login', 
+      $http.post($link_root+'/auth/login', 
       { 
         email:$scope.user.email,
         password:$scope.user.password,

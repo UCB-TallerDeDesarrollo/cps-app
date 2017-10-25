@@ -27,6 +27,8 @@ angular
     $scope.child = {};
     $scope.child.first_name = "";
     $scope.child.gender = "Female";
+    //$link_root = "http://localhost:3000";
+    $link_root =  "http://cpsapi.herokuapp.com";
     $scope.child.birthday = new Date();
     ChildrenFactory.all(function(children) {
       $scope.childs = children;
@@ -178,7 +180,7 @@ angular
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");   
       $scope.formattedDate =   $filter('date')($scope.child.birthday, "yyyy-MM-dd");        
-      $http.post("http://cpsapi.herokuapp.com/users/"+user_id+"/children", 
+      $http.post( $link_root +"/users/"+user_id+"/children", 
       { 
         //id: $scope.child.id,
         child_id: $scope.child.id,
@@ -213,7 +215,7 @@ angular
 
     $scope.downloadChild = function(){        
       var user_id = localStorage.getItem("user_id")
-      var link = "http://cpsapi.herokuapp.com/users/"+user_id+"/children/";
+      var link =  $link_root +"/users/"+user_id+"/children/";
       var data = {                  
       };
       $http.get(link+$scope.child.id).then(data => {        
@@ -235,7 +237,7 @@ angular
 
       $scope.uploadUnsolvedProblem = function() {
         var user_id = localStorage.getItem("user_id")
-        var link = "http://cpsapi.herokuapp.com/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
+        var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
         $scope.unsolvedProblems = {};
         UnsolvedProblemFactory.all($scope.child.id,function(result){
           var data = result;
@@ -270,7 +272,7 @@ angular
 
       $scope.downloadUnsolvedProblems = function(){
         var user_id = localStorage.getItem("user_id")
-        var link = "http://cpsapi.herokuapp.com/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
+        var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
         $scope.unsolvedProblems ;
         $http.get(link).then(data => {        
           $scope.unsolvedProblems = data.data;                
@@ -294,7 +296,7 @@ angular
         data = LaggingSkills.getChecked($scope.laggingSkills);
         console.log(data);
         
-        $http.post("http://cpsapi.herokuapp.com/users/"+user_id+"/children/"+$scope.child.id+"/lagging_skill", 
+        $http.post( $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/lagging_skill", 
         { 
           data: angular.toJson(data)
         }, 
@@ -318,7 +320,7 @@ angular
 
       $scope.downloadLaggingSkill  = function(){        
         var user_id = localStorage.getItem("user_id")
-        var link = "http://cpsapi.herokuapp.com/users/"+user_id+"/children/"+$scope.child.id+"/getLaggingSkills";
+        var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/getLaggingSkills";
         var data = {        
         };
         $http.get(link).then(data => {        
@@ -343,7 +345,7 @@ angular
             var user_id = localStorage.getItem("user_id"); 
             
             angular.forEach(dataUP,function(unsolvedProblem){
-              var link = "http://cpsapi.herokuapp.com/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
+              var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
               AdultConcernFactory.all(unsolvedProblem.id,function(result){
                 var data = result;
                 console.log(data)
@@ -381,13 +383,13 @@ angular
         $scope.downloadAdultConcern = function(){
           var user_id = localStorage.getItem("user_id")
 
-          var linkUPData = "http://cpsapi.herokuapp.com/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
+          var linkUPData =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
           
           $scope.unsolvedProblems ;
           $http.get(linkUPData).then(data => {        
             $scope.unsolvedProblems = data.data;                
             angular.forEach($scope.unsolvedProblems, function(valueUP, key){
-              var link = "http://cpsapi.herokuapp.com/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/myAdultConcerns";
+              var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/myAdultConcerns";
               $http.get(link).then(data => {        
                 $scope.adultConcerns = data.data;                
                 angular.forEach($scope.adultConcerns, function(value, key){
@@ -411,7 +413,7 @@ angular
             console.log(dataUP);
             var user_id = localStorage.getItem("user_id");             
             angular.forEach(dataUP,function(unsolvedProblem){
-              var link = "http://cpsapi.herokuapp.com/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/child_concern";
+              var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/child_concern";
               console.log(link);
               ChildConcernFactory.all(unsolvedProblem.id,function(result){
                 var data = result;
@@ -447,12 +449,12 @@ angular
               
         $scope.downloadChildConcerns = function(){
           var user_id = localStorage.getItem("user_id")          
-          var linkUPData = "http://cpsapi.herokuapp.com/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";          
+          var linkUPData =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";          
           $scope.unsolvedProblems ;
           $http.get(linkUPData).then(data => {        
             $scope.unsolvedProblems = data.data;                
             angular.forEach($scope.unsolvedProblems, function(valueUP, key){
-              var link = "http://cpsapi.herokuapp.com/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/getChildConcern";
+              var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/getChildConcern";
               $http.get(link).then(data => {        
                 $scope.childConcerns = data.data;                
                 angular.forEach($scope.childConcerns, function(value, key){
