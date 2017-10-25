@@ -27,7 +27,7 @@ angular
     $scope.child = {};
     $scope.child.first_name = "";
     $scope.child.gender = "Female";
-    //$link_root = "http://localhost:3000";
+    // $link_root = "http://localhost:3000";
     $link_root =  "http://cpsapi.herokuapp.com";
     $scope.child.birthday = new Date();
     ChildrenFactory.all(function(children) {
@@ -51,7 +51,7 @@ angular
         console.log("Google Analytics Unavailable");
       }
     };
-    
+
     $scope.closeModalCreate = function() {
       $scope.modalCreate.hide();
       $scope.child.first_name = "";
@@ -134,7 +134,7 @@ angular
         });
       }
     };
-    
+
     $scope.updateChild = function() {
       if (!inputFieldIsEmpty($scope.editableChild.first_name)) {
         ChildrenFactory.update($scope.editableChild);
@@ -157,7 +157,7 @@ angular
       scope: $scope
     }).then(function(modal) {
       $scope.syncChildModal = modal;
-    }); 
+    });
 
     $scope.showSyncModal = function(child){
         $scope.child = child;
@@ -173,21 +173,21 @@ angular
     $scope.downloadData = function(){
       $scope.downloadChild();
       $scope.downloadUnsolvedProblems();
-      $scope.downloadLaggingSkill();  
+      $scope.downloadLaggingSkill();
       $scope.downloadChildConcerns();
       $scope.downloadAdultConcern();
     }
     $scope.uploadChild = function(){
-      var user_id = localStorage.getItem("user_id");   
-      $scope.formattedDate =   $filter('date')($scope.child.birthday, "yyyy-MM-dd");        
-      $http.post( $link_root +"/users/"+user_id+"/children", 
-      { 
+      var user_id = localStorage.getItem("user_id");
+      $scope.formattedDate =   $filter('date')($scope.child.birthday, "yyyy-MM-dd");
+      $http.post( $link_root +"/users/"+user_id+"/children",
+      {
         //id: $scope.child.id,
         child_id: $scope.child.id,
         name: $scope.child.first_name,
         gender: $scope.child.gender,
         birthday: $scope.formattedDate
-      }, 
+      },
       {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         transformRequest: function(obj) {
@@ -210,28 +210,28 @@ angular
       function(response) {
         console.log(response.data.message);
       });
-      
-    };    
 
-    $scope.downloadChild = function(){        
+    };
+
+    $scope.downloadChild = function(){
       var user_id = localStorage.getItem("user_id")
       var link =  $link_root +"/users/"+user_id+"/children/";
-      var data = {                  
+      var data = {
       };
-      $http.get(link+$scope.child.id).then(data => {        
-        $scope.s_child = data.data;                
-        console.log($scope.s_child.child_id);               
+      $http.get(link+$scope.child.id).then(data => {
+        $scope.s_child = data.data;
+        console.log($scope.s_child.child_id);
         var query = "UPDATE childs SET first_name = ?, gender = ? , birthday = ? where id = ?";
         var params = [$scope.s_child.name, $scope.s_child.gender,$scope.s_child.birthday, $scope.s_child.child_id];
         console.log("Nombre: "+ $scope.s_child.name);
-        $cordovaSQLite.execute(db, query, params);         
+        $cordovaSQLite.execute(db, query, params);
         ChildrenFactory.all(function(children){
           $scope.childs = children;
-        });            
-        console.log("Child updated");  
-        // location.reload();   
+        });
+        console.log("Child updated");
+        // location.reload();
         $scope.syncChildModal.hide();
-        
+
         })
       };
 
@@ -242,13 +242,13 @@ angular
         UnsolvedProblemFactory.all($scope.child.id,function(result){
           var data = result;
           console.log(data);
-          var user_id = localStorage.getItem("user_id"); 
-          
-        $http.post(link, 
-        { 
+          var user_id = localStorage.getItem("user_id");
+
+        $http.post(link,
+        {
           data: angular.toJson(data),
           user_id: user_id
-        }, 
+        },
         {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           transformRequest: function(obj) {
@@ -264,42 +264,42 @@ angular
         },
           function(response) {
             console.log(response.data.message);
-        }); 
+        });
         $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
-          
-        }); 
+
+        });
       };
 
       $scope.downloadUnsolvedProblems = function(){
         var user_id = localStorage.getItem("user_id")
         var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
         $scope.unsolvedProblems ;
-        $http.get(link).then(data => {        
-          $scope.unsolvedProblems = data.data;                
+        $http.get(link).then(data => {
+          $scope.unsolvedProblems = data.data;
           angular.forEach($scope.unsolvedProblems, function(value, key){
             var query = "UPDATE unsolved_problems SET description = ?, unsolved_order = ? where id = ?";
             var params = [value.description, value.unsolved_order, value.unsolved_problem_id_app];
             console.log(value)
             $cordovaSQLite.execute(db, query, params);
          });
-         var alertForAccountCreated = $ionicPopup.alert({            
+         var alertForAccountCreated = $ionicPopup.alert({
           title: " Success!",
           template: "Child's unsovled problems downloaded"
-        });    
-        console.log("Child's unssolved problems downloaded");  
+        });
+        console.log("Child's unssolved problems downloaded");
           })
       };
-      
+
       $scope.uploadLaggingSkill = function(){
         var user_id = localStorage.getItem("user_id");
         var data = [];
         data = LaggingSkills.getChecked($scope.laggingSkills);
         console.log(data);
-        
-        $http.post( $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/lagging_skill", 
-        { 
+
+        $http.post( $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/lagging_skill",
+        {
           data: angular.toJson(data)
-        }, 
+        },
         {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           transformRequest: function(obj) {
@@ -314,16 +314,16 @@ angular
         },
           function(response) {
             console.log(response.data.message);
-        }); 
-        $timeout(function() { $scope.displayErrorMsg = false;}, 4000); 
+        });
+        $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
       };
 
-      $scope.downloadLaggingSkill  = function(){        
+      $scope.downloadLaggingSkill  = function(){
         var user_id = localStorage.getItem("user_id")
         var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/getLaggingSkills";
-        var data = {        
+        var data = {
         };
-        $http.get(link).then(data => {        
+        $http.get(link).then(data => {
           $scope.list = data.data;
           console.log($scope.list);
 
@@ -332,28 +332,28 @@ angular
               var params = [laggingSkill.description, laggingSkill.checked,$scope.child.id, laggingSkill.id];
               $cordovaSQLite.execute(db, query, params);
             })
-            
-            console.log("LaggingSkills Updated");  
-          })
-        }      
 
-        $scope.uploadAdultConcern = function() {    
-          
+            console.log("LaggingSkills Updated");
+          })
+        }
+
+        $scope.uploadAdultConcern = function() {
+
           $scope.unsolvedProblems = {};
           UnsolvedProblemFactory.all($scope.child.id,function(result){
             var dataUP = result;
-            var user_id = localStorage.getItem("user_id"); 
-            
+            var user_id = localStorage.getItem("user_id");
+
             angular.forEach(dataUP,function(unsolvedProblem){
               var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/adult_concern";
               AdultConcernFactory.all(unsolvedProblem.id,function(result){
                 var data = result;
                 console.log(data)
-  
-                $http.post(link, 
-                  { 
+
+                $http.post(link,
+                  {
                     data: angular.toJson(data)
-                  }, 
+                  },
                   {
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     transformRequest: function(obj) {
@@ -369,13 +369,13 @@ angular
                   },
                   function(response) {
                     console.log(response.data.message);
-                }); 
+                });
                 $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
               })
 
             });
-            
-          }); 
+
+          });
 
           $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
         };
@@ -384,26 +384,26 @@ angular
           var user_id = localStorage.getItem("user_id")
 
           var linkUPData =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
-          
+
           $scope.unsolvedProblems ;
-          $http.get(linkUPData).then(data => {        
-            $scope.unsolvedProblems = data.data;                
+          $http.get(linkUPData).then(data => {
+            $scope.unsolvedProblems = data.data;
             angular.forEach($scope.unsolvedProblems, function(valueUP, key){
               var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/myAdultConcerns";
-              $http.get(link).then(data => {        
-                $scope.adultConcerns = data.data;                
+              $http.get(link).then(data => {
+                $scope.adultConcerns = data.data;
                 angular.forEach($scope.adultConcerns, function(value, key){
                   var query = "UPDATE adults_concerns SET description = ?, unsolved_problem_id = ? where id = ?";
                   var params = [value.description, value.unsolved_problem_id, value.id];
                   console.log(value)
                   $cordovaSQLite.execute(db, query, params);
                });
-                 
-                console.log("AdultConcerns from UnsolvedProblem downloaded");  
+
+                console.log("AdultConcerns from UnsolvedProblem downloaded");
               })
            });
 
-            console.log("Unsolved problems downloaded");  
+            console.log("Unsolved problems downloaded");
           })
         };
         $scope.uploadChildConcern = function() {
@@ -411,17 +411,17 @@ angular
           UnsolvedProblemFactory.all($scope.child.id,function(result){
             var dataUP = result;
             console.log(dataUP);
-            var user_id = localStorage.getItem("user_id");             
+            var user_id = localStorage.getItem("user_id");
             angular.forEach(dataUP,function(unsolvedProblem){
               var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/child_concern";
               console.log(link);
               ChildConcernFactory.all(unsolvedProblem.id,function(result){
                 var data = result;
                 console.log(data)
-                $http.post(link, 
-                  { 
+                $http.post(link,
+                  {
                     data: angular.toJson(data)
-                  }, 
+                  },
                   {
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     transformRequest: function(obj) {
@@ -436,39 +436,39 @@ angular
                   },
                   function(response) {
                     console.log(response.data.message);
-                }); 
+                });
                 $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
               })
             });
-            
-          }); 
+
+          });
 
           $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
         };
 
-              
+
         $scope.downloadChildConcerns = function(){
-          var user_id = localStorage.getItem("user_id")          
-          var linkUPData =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";          
+          var user_id = localStorage.getItem("user_id")
+          var linkUPData =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
           $scope.unsolvedProblems ;
-          $http.get(linkUPData).then(data => {        
-            $scope.unsolvedProblems = data.data;                
+          $http.get(linkUPData).then(data => {
+            $scope.unsolvedProblems = data.data;
             angular.forEach($scope.unsolvedProblems, function(valueUP, key){
               var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/getChildConcern";
-              $http.get(link).then(data => {        
-                $scope.childConcerns = data.data;                
+              $http.get(link).then(data => {
+                $scope.childConcerns = data.data;
                 angular.forEach($scope.childConcerns, function(value, key){
                   var query = "UPDATE childs_concerns SET description = ?, unsolved_order =? , unsolved_problem_id = ? where id = ?";
                   var params = [value.description, value.order, value.unsolved_problem_id, value.id];
                   console.log(value)
                   $cordovaSQLite.execute(db, query, params);
               });
-                
-                console.log("ChildConcerns from UnsolvedProblem downloaded");  
+
+                console.log("ChildConcerns from UnsolvedProblem downloaded");
               })
           });
 
-            console.log("Unsolved problems downloaded");  
+            console.log("Unsolved problems downloaded");
           })
         };
 

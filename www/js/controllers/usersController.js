@@ -22,7 +22,7 @@ angular.module('starter.controllers')
     });
     $scope.get_user_info = function(){
       var email = localStorage.getItem("email")
-      $http.get($link_root+'/me',
+      $http.get($link_root+'/users/me',
 
       {
 
