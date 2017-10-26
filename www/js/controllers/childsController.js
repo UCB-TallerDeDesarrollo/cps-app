@@ -459,7 +459,7 @@ angular
                 $scope.childConcerns = data.data;
                 angular.forEach($scope.childConcerns, function(value, key){
                   var query = "UPDATE childs_concerns SET description = ?, unsolved_order =? , unsolved_problem_id = ? where id = ?";
-                  var params = [value.description, value.order, value.unsolved_problem_id, value.id];
+                  var params = [value.description, value.order, value.unsolved_problem_id, value.concern_id];
                   console.log(value)
                   $cordovaSQLite.execute(db, query, params);
               });
