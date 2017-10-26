@@ -19,7 +19,8 @@ angular
     $http,
     LaggingSkills,
     AdultConcernFactory,
-    ChildConcernFactory
+    ChildConcernFactory,
+    PossibleSolutionFactory
   ) {
 
 
@@ -259,6 +260,7 @@ angular
         .then(data => {
             $scope.uploadAdultConcern();
             $scope.uploadChildConcern();
+            $scope.uploadSolution();
         },
           function(response) {
             console.log(response.data.message);
@@ -470,6 +472,54 @@ angular
           })
         };
 
+    $scope.uploadSolution= function() {
+          $scope.unsolvedProblems = {};
+          UnsolvedProblemFactory.all($scope.child.id,function(result){
+            var dataUP = result;
+            console.log("UNSOLVEDPROBLEMS: ");
+            console.log(dataUP);
+            var user_id = localStorage.getItem("user_id");             
+            angular.forEach(dataUP,function(unsolvedProblem){
+              var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/posible_solution";
+              console.log(link);
+              PossibleSolutionFactory.all(unsolvedProblem.id,function(result){
+                var data = result;
+                console.log("SOLUTIONS: ");
+                console.log(data)
+                $http.post(link, 
+                  { 
+                    data: angular.toJson(data),
+                    user_id: user_id,
+                    child_id: $scope.child.id,
+                    unsolved_problem_id:unsolvedProblem.id
+                  }, 
+                  {
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    transformRequest: function(obj) {
+                              var str = [];
+                              for(var p in obj)
+                              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                              return str.join("&");
+                          },
+                  })
+                  .then(data => {
+                    console.log(data)
+                  },
+                  function(response) {
+                    console.log(response.data.message);
+                }); 
+                $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
+              })
+            });
+            
+          }); 
+
+          $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
+        };
+
+
+
+        
     $scope.showActionsheet = function(child) {
       $translate([
         "EditChildTitle",
