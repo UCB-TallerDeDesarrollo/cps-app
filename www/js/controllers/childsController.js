@@ -27,8 +27,6 @@ angular
     $scope.child = {};
     $scope.child.first_name = "";
     $scope.child.gender = "Female";
-    // $link_root = "http://localhost:3000";
-    $link_root =  "http://cpsapi.herokuapp.com";
     $scope.child.birthday = new Date();
     ChildrenFactory.all(function(children) {
       $scope.childs = children;

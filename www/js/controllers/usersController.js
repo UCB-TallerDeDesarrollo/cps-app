@@ -7,8 +7,6 @@ angular.module('starter.controllers')
     $scope.user.phone="";
     $scope.user.email="";
     $scope.user.password="";
-    // $link_root = "http://localhost:3000";
-    $link_root = "http://cpsapi.herokuapp.com";
     $scope.user.password_confirmation="";
     $scope.emailRegularExpression = /\S+@\S+\.\S+/;
     $scope.anyStringRegExpression = /\S+/;
