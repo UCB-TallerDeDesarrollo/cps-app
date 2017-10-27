@@ -238,7 +238,7 @@ angular.module('starter.controllers')
   $translate(['DeleteChildsConcernTitle','DeleteChildsConcernBody', 'CancelOption','YesMessage']).then (function(translations){
    var confirmPopup = $ionicPopup.confirm({
     title: translations.DeleteChildsConcernTitle,
-     template: translations.DeleteUnsolvedProblemBody,
+     template: translations.DeleteChildsConcernBody,
      cancelText: translations.CancelOption,
      okText: translations.YesMessage
    });

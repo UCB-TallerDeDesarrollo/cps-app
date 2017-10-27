@@ -120,6 +120,18 @@ var $translations_en = {
     DeleteCommentBody: "Are you sure you want to delete this comment?",
     InvitationStepHint: "Solving too many concerns at once doesn't usually go well, so for now, just pick 1 adult concern and 1 child concern to solve",
 
+    //For Define AdultsConcerns
+    DefineAdultsConcernDescription: "My worry is...",
+    ListAdultsConcern: "List of Adult's Concerns",
+    MessageAdultsConcernNotRegistred: "No adult's concern registered. Please register one above.",
+    NewAdultsConcern: "New Adult&apos;s Concern",
+    EditAdultsConcern: "Edit Adult&apos;s Concern",
+    DeleteAdultConcernTitle: "Delete Adult&apos;s Concern",
+    DeleteAdultConcernTemplate: "Are you sure you want to delete this adult's concern?",
+    TypeAdultsConcernPlaceholder: "Type a new adult's concern here.",
+    MoveToInvitationStep: "After you've listed all of your concerns, click the arrow to move on to the invitation step",
+    
+
     Step: "Step",
     wasntUnlock: "wasn\'t unlocked",
     haveToFinishSteps: "You have to finish previous steps to continue." ,

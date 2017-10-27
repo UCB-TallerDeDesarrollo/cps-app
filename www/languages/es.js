@@ -74,10 +74,10 @@ var $translations_es = {
 
     //EmpathyStep
     EmpathyStep: "Paso de Empatía",
-    NewChildsConcern: "Nueva Preocución del Niño",
+    NewChildsConcern: "Nueva preocupación del niño",
     TypeChildsConcernPlaceholder: "Escriba una nueva preocupación del niño.",
     EditChildsConcern: "Editar Preocupación del Niño",
-    DefineAdultsConcern: "Definir la Preocupación del Adulto",
+    DefineAdultsConcern: "Preocupación del Adulto",
     EmpathyStepMessage: "He notado que ",
     EmpathyStepMessageContinue: ", ¿qué es lo que pasa? ",
     ListChildsConcerns: "Lista de Preocupaciones del Niño",
@@ -122,6 +122,17 @@ var $translations_es = {
     DeleteCommentBody: "¿Estás seguro de que quieres borrar este comentario?",
     InvitationStepHint: "Resolver demasiadas inquietudes a la vez no suele salir bien, así que por ahora, solo elige 1 preocupación de un adulto y 1 preocupación de un niño para resolver",
 
+    //For Define AdultsConcerns
+    DefineAdultsConcernDescription: "Mi preocupación es...",
+    ListAdultsConcern: "Lista de preocupaciones del adulto",
+    MessageAdultsConcernNotRegistred: "No se registró ninguna preocupación del adulto. Por favor registra una arriba.",
+    NewAdultsConcern: "Nueva preocupación del adulto",
+    EditAdultsConcern: "Editar preocupación del adulto",
+    DeleteAdultConcernTitle: "Borrar preocupación de adulto",
+    DeleteAdultConcernTemplate: "¿Estás seguro de que quieres borrar esta Preocupación del Adulto?",
+    TypeAdultsConcernPlaceholder: "Escriba una nueva preocupación del adulto.",
+    MoveToInvitationStep: "Despues de haber enlistado todas sus preocupaciónes, Haga clic en la flecha para moverse a la etapa de la invitación.",
+    
     Step: "Paso",
     wasntUnlock: "no fue desbloqueado",
     haveToFinishSteps: "Tienes que terminar los pasos anteriores para continuar.", 
