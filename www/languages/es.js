@@ -131,7 +131,7 @@ var $translations_es = {
     DeleteAdultConcernTitle: "Borrar preocupación de adulto",
     DeleteAdultConcernTemplate: "¿Estás seguro de que quieres borrar esta Preocupación del Adulto?",
     TypeAdultsConcernPlaceholder: "Escriba una nueva preocupación del adulto.",
-    MoveToInvitationStep: "Despues de haber enlistado todas sus preocupaciónes, Haga clic en la flecha para moverse a la etapa de la invitación.",    
+    MoveToInvitationStep: "Despues de haber enlistado todas sus preocupaciónes, haga tab en la flecha para moverse a la etapa de la invitación.",    
 
     Step: "Paso",
     wasntUnlock: "no fue desbloqueado",
