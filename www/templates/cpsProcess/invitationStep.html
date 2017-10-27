@@ -1,4 +1,4 @@
-<ion-view cache-view="false" view-title="Invitation Step" ng-controller="InvitationCtrl" on-tap="unableAnimation()">
+<ion-view cache-view="false" view-title="{{'InvitationStep' | translate }}" ng-controller="InvitationCtrl" on-tap="unableAnimation()">
   <div class="bar bar-subheader bar-positive">
     <h2 class="title">{{unsolvedProblem.description}}</h2>
   </div>
@@ -6,7 +6,7 @@
     <div class="item item-divider item-text-wrap">
       <div class="row">
         <div class="col col-80">
-          <h2>I wonder if there's something we can do about...</h2>
+          <h2>{{'Text1InvitationStep' | translate }}</h2>
         </div>
         <div class="col col-10">
           <i ng-show="childsConcerns.length > 1 && showChilds" ng-click="shouldShowReorder = !shouldShowReorder" ng-class="(shouldShowReorder) ? 'icon-floppy' : 'icon-sort-alt-down' ;"></i>
@@ -32,7 +32,7 @@
       <div class="item item-divider item-text-wrap">
         <div class="row">
           <div class="col col-90">
-            <h2>and also do something about...</h2>
+            <h2>{{'Text2InvitationStep' | translate }}</h2>
           </div>
           <div class="col col-10">
               <i ng-if = "adultsConcerns.length > 1" ng-class="showAdults? 'ion-chevron-up': 'ion-chevron-down'" ng-click="toggleAdults()"></i>
@@ -49,7 +49,7 @@
       </div>
       <div class="item item-divider item-text-wrap">
         <div class="col col-90">
-          <h2>Do you have any ideas?</h2>
+          <h2>{{'Text3InvitationStep' | translate }}</h2>
         </div>
       </div>
     </ion-list>
@@ -61,7 +61,7 @@
         </a>
         <a class="watchlist_menu button button-small button-clear button-positive icon ion-help-circled" href="#/app/helpForInvitation"></a>
         <div class="col col-75">
-          <h2><b>List of Possible Solutions</b></h2>
+          <h2><b>{{'ListPossibleSolutions' | translate }}</b></h2>
 
         </div>
       </div>
@@ -83,7 +83,7 @@
 
         </ion-item>
         <div class="item item-text-wrap" ng-if="solutions.length == 0">
-          <p> Identifying a solution doesn't meant you are done!. You still have to discuss whether the solution is truly realistic and truly mutually satisfactory.</p>
+          <p>{{'MessageList' | translate }}</p>
         </div>
       </ion-list>
     </div>
@@ -91,23 +91,23 @@
     <script id="create-modal.html" type="text/ng-template">
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
         <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title">New Possible Solution</h1>
-          <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
+          <h1 class="title">{{'NewPossibleSolution' | translate }}</h1>
+          <button class="button button-clear button-primary" ng-click="closeModal()">{{'CancelOption' | translate }}</button>
         </ion-header-bar>
         <ion-content class="padding scroll-content ionic-scroll  has-header">
           <div class="scroll modal-animation">
             <div class="list">
               <div class="right">
               <button class = "button button-small button-positive right" ng-click="openModalToChooseAdultConcernToChildConcern()">
-                        Related to ...
+                {{'RelatedTo' | translate }}
                 </button>
               </div>
               <label class="item item-input">
-                <textarea rows=5 placeholder="Agree upon a solution." ng-model="solution.description">
+                <textarea rows=5 placeholder="{{'PlaceHolderPossibleSolution' | translate }}" ng-model="solution.description">
                 </textarea>
               </label>
-              <button class="button button-full button-positive" ng-if="!solution.description.length" ng-click="createSolution()" disabled>Create</button>
-              <button class="button button-full button-positive" ng-if="solution.description.length > 0" ng-click="createSolution()">Create</button>
+              <button class="button button-full button-positive" ng-if="!solution.description.length" ng-click="createSolution()" disabled>{{'CreateTitle' | translate }}</button>
+              <button class="button button-full button-positive" ng-if="solution.description.length > 0" ng-click="createSolution()">{{'CreateTitle' | translate }}</button>
             </div>
           </div>
           <div class="scroll-bar scroll-bar-v">
@@ -125,8 +125,8 @@
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active" >
 
         <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title">Related to ...</h1>
-          <button class="button button-clear button-primary" ng-click="closeModalToChooseAdultConcernToChildConcern()">Cancel</button>
+          <h1 class="title">{{'RelatedTo' | translate }}</h1>
+          <button class="button button-clear button-primary" ng-click="closeModalToChooseAdultConcernToChildConcern()">{{'CancelOption' | translate }}</button>
         </ion-header-bar>
 
         <ion-content  class="padding scroll-content ionic-scroll  has-header"  >
@@ -135,20 +135,20 @@
 
                  <ion-list radio-group  >
                     <div class=" item item-divider">
-                        Child's concerns
+                      {{'ChildsConcerns' | translate }}
                     </div>
                     <ion-radio  name="a"  ng-model="pair.description" ng-value="childConcern.description" ng-repeat="childConcern in childsConcerns" ng-checked="true"  >{{childConcern.description}}</ion-radio>
                 </ion-list>
 
                  <ion-list radio-group  >
                    <div class=" item item-divider">
-                         Adult's concerns
+                    {{'AdultsConcerns' | translate }}
                    </div>
                    <ion-radio name="b" ng-model="pair.description2" ng-value="adultConcern.description" ng-repeat="adultConcern in adultsConcerns" ng-checked="true">{{adultConcern.description}}</ion-radio>
                  </ion-list>
 
-                 <button class="button button-full button-positive" ng-if="!pair.description.length || !pair.description2.length"  ng-click="closeModalToChooseAdultConcernToChildConcern()" disabled>Save</button>
-                 <button class="button button-full button-positive" ng-if="pair.description.length> 0 && pair.description2.length> 0"  ng-click="closeModalToChooseAdultConcernToChildConcern()" >Save</button>
+                 <button class="button button-full button-positive" ng-if="!pair.description.length || !pair.description2.length"  ng-click="closeModalToChooseAdultConcernToChildConcern()" disabled>{{'SaveTitle' | translate }}</button>
+                 <button class="button button-full button-positive" ng-if="pair.description.length> 0 && pair.description2.length> 0"  ng-click="closeModalToChooseAdultConcernToChildConcern()" >{{'SaveTitle' | translate }}</button>
 
           </div>
           <div class="scroll-bar scroll-bar-v">
@@ -167,8 +167,8 @@
     <script id="edit-AdultConcern-To-ChildConcern.html" type="text/ng-template">
     <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
       <ion-header-bar class="bar bar-header bar-positive">
-        <h1 class="title">Edit Related to ...</h1>
-        <button class="button button-clear button-primary" ng-click="closeModalEditToChooseAdultConcernToChildConcern()">Cancel</button>
+        <h1 class="title">{{'EditRelatedTo' | translate }}</h1>
+        <button class="button button-clear button-primary" ng-click="closeModalEditToChooseAdultConcernToChildConcern()">{{'CancelOption' | translate }}</button>
       </ion-header-bar>
 
       <ion-content class="padding scroll-content ionic-scroll  has-header">
@@ -176,20 +176,20 @@
         <div class="scroll modal-animation">
                <ion-list radio-group  >
                   <div class=" item item-divider">
-                      Child's concerns
+                    {{'ChildsConcerns' | translate }}
                   </div>
                   <ion-radio  name="a"  ng-model="editablePair.description" ng-value="childConcern.description" ng-repeat="childConcern in childsConcerns" ng-checked="true"  >{{childConcern.description}}</ion-radio>
               </ion-list>
 
                <ion-list radio-group  >
                  <div class=" item item-divider">
-                       Adult's concerns
+                  {{'AdultsConcerns' | translate }}
                  </div>
                  <ion-radio name="b" ng-model="editablePair.description2" ng-value="adultConcern.description" ng-repeat="adultConcern in adultsConcerns" ng-checked="true">{{adultConcern.description}}</ion-radio>
                </ion-list>
 
-               <button class="button button-full button-positive" ng-if="!editablePair.description.length || !editablePair.description2.length"  ng-click="updatePair()" disabled>Save</button>
-               <button class="button button-full button-positive" ng-if="editablePair.description.length> 0 && editablePair.description2.length> 0"  ng-click="updatePair()" >Save</button>
+               <button class="button button-full button-positive" ng-if="!editablePair.description.length || !editablePair.description2.length"  ng-click="updatePair()" disabled>{{'SaveTitle' | translate }}</button>
+               <button class="button button-full button-positive" ng-if="editablePair.description.length> 0 && editablePair.description2.length> 0"  ng-click="updatePair()" >{{'SaveTitle' | translate }}</button>
         </div>
         <div class="scroll-bar scroll-bar-v">
           <div class="scroll-bar-indicator scroll-bar-fade-out modal-animation">
@@ -205,8 +205,8 @@
     <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active" >
 
       <ion-header-bar class="bar bar-header bar-positive">
-        <h1 class="title">Related to ...</h1>
-        <button class="button button-clear button-primary" ng-click="closeModalToChooseAdultConcernToChildConcernAfterCreatingSolution()">Cancel</button>
+        <h1 class="title">{{'RelatedTo' | translate }}</h1>
+        <button class="button button-clear button-primary" ng-click="closeModalToChooseAdultConcernToChildConcernAfterCreatingSolution()">{{'CancelOption' | translate }}</button>
       </ion-header-bar>
 
       <ion-content  class="padding scroll-content ionic-scroll  has-header"  >
@@ -215,20 +215,20 @@
 
                <ion-list radio-group  >
                   <div class=" item item-divider">
-                      Child's concerns
+                    {{'ChildsConcerns' | translate }}
                   </div>
                   <ion-radio  name="a"  ng-model="pair.description" ng-value="childConcern.description" ng-repeat="childConcern in childsConcerns" ng-checked="true"  >{{childConcern.description}}</ion-radio>
               </ion-list>
 
                <ion-list radio-group  >
                  <div class=" item item-divider">
-                       Adult's concerns
+                  {{'AdultsConcerns' | translate }}
                  </div>
                  <ion-radio name="b" ng-model="pair.description2" ng-value="adultConcern.description" ng-repeat="adultConcern in adultsConcerns" ng-checked="true">{{adultConcern.description}}</ion-radio>
                </ion-list>
 
-               <button class="button button-full button-positive" ng-if="!pair.description.length || !pair.description2.length"  ng-click="updatePair()" disabled>Save</button>
-               <button class="button button-full button-positive" ng-if="pair.description.length> 0 && pair.description2.length> 0"  ng-click="updatePair()" >Save</button>
+               <button class="button button-full button-positive" ng-if="!pair.description.length || !pair.description2.length"  ng-click="updatePair()" disabled>{{'SaveTitle' | translate }}</button>
+               <button class="button button-full button-positive" ng-if="pair.description.length> 0 && pair.description2.length> 0"  ng-click="updatePair()" >{{'SaveTitle' | translate }}</button>
 
         </div>
         <div class="scroll-bar scroll-bar-v">
@@ -246,13 +246,13 @@
     <script id="edit-modal.html" type="text/ng-template">
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
         <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title">Edit Possible Solution</h1>
-          <button class="button button-clear button-primary" ng-click="closeModalEdit()">Cancel</button>
+          <h1 class="title">{{'EditPossibleSolution' | translate }}</h1>
+          <button class="button button-clear button-primary" ng-click="closeModalEdit()">{{'CancelOption' | translate }}</button>
         </ion-header-bar>
         <ion-content class="padding scroll-content ionic-scroll  has-header">
           <div class="scroll modal-animation">
             <button class = "button button-small button-positive right" ng-click="editPair(editableSolution)">
-                      Related to ...
+              {{'RelatedTo' | translate }}
               </button>
             <form>
 
@@ -260,8 +260,8 @@
                 <textarea rows=5 placeholder="Agree upon a solution" ng-model="editableSolution.description">
                 </textarea>
               </label>
-              <button class="button button-full button-positive" ng-if="!editableSolution.description.length" ng-click="updateSolution()" disabled>Save</button>
-              <button class="button button-full button-positive" ng-if="editableSolution.description.length > 0" ng-click="updateSolution()">Save</button>
+              <button class="button button-full button-positive" ng-if="!editableSolution.description.length" ng-click="updateSolution()" disabled>{{'SaveTitle' | translate }}</button>
+              <button class="button button-full button-positive" ng-if="editableSolution.description.length > 0" ng-click="updateSolution()">{{'SaveTitle' | translate }}</button>
             </form>
 
 
@@ -273,13 +273,13 @@
   </ion-content>
   <div class="footer" >
     <ion-tabs class="tabs-positive tabs-icon-top" delegate-handle="myTabs">
-      <ion-tab ng-click="selectTabWithIndex(0)" title="Empathy Step" icon-on="step1" icon-off="step1">
+      <ion-tab ng-click="selectTabWithIndex(0)" title="{{'EmpathyStep' | translate }}" icon-on="step1" icon-off="step1">
       </ion-tab>
 
-      <ion-tab ng-click="selectTabWithIndex(1)" title="Define Adult's Concern" icon-on="step2" icon-off="step2" >
+      <ion-tab ng-click="selectTabWithIndex(1)" title="{{'DefineAdultsConcern' | translate }}" icon-on="step2" icon-off="step2" >
       </ion-tab>
 
-      <ion-tab ng-click="selectTabWithIndex(2)" title="Invitation Step" icon-on="step3" icon-off="step3">
+      <ion-tab ng-click="selectTabWithIndex(2)" title="{{'InvitationStep' | translate }}" icon-on="step3" icon-off="step3">
       </ion-tab>
     </ion-tabs>
   </div>

@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory, $ionicSideMenuDelegate){
+angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory, $ionicSideMenuDelegate, $translate){
   $scope.pairExist = false;
   $ionicSideMenuDelegate.canDragContent(false);
   $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
@@ -107,15 +107,19 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   };
 
   $scope.showDeletionConfirm = function(solution) {
+    $translate(['DeleteSolutionTitle','DeleteSolutionBody', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Delete Solution',
-      template: 'Are you sure you want to delete this solution?'
+      title: translations.DeleteSolutionTitle,
+      template: translations.DeleteSolutionBody,
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
     });
     confirmPopup.then(function(res) {
       if(res) {
         $scope.deleteSolution(solution);
       }
     });
+  });
   };
 
   $scope.deleteSolution = function (solution) {

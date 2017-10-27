@@ -71,6 +71,7 @@ var $translations_es = {
     UnsolvedProblemHintBody: "Un problema sin resolver es una alerta de que su hijo tiene dificultades para reunirse de manera confiable. Puedes escribir más de un problema sin resolver para una habilidad rezagada determinada, pero no necesitas escribir el mismo problema sin resolver en más de una vez. Después de haber hecho una lista completa de problemas sin resolver, presione en la flecha a lado del que desea resolver primero.",
     Got_It: "Lo tengo",
     goingTo: "Ir a",
+
     //EmpathyStep
     EmpathyStep: "Paso de Empatía",
     NewChildsConcern: "Nueva Preocución del Niño",
@@ -85,7 +86,24 @@ var $translations_es = {
     NoChildsConcern: "No se registró ninguna preocupación del niño. Por favor registra uno arriba.",
     step2VerifyBody: "¿Ha enlistado suficientes preocupaciones del niño?",
     ChildsConcernHint: "Después de identificar todas las preocupaciones del niño, haga clic en la flecha para pasar al paso de las preocupaciones del adulto",
+
+    //Para InvitationStep
     InvitationStep: "Paso de Invitación",
+    Text1InvitationStep: "Me pregunto si hay un remedio... ",
+    Text2InvitationStep: "y también hacer algo sobre...",
+    Text3InvitationStep: "¿Alguna idea?",
+    ListPossibleSolutions: "Lista de Posibles Soluciones",
+    MessageList: "Identificar una solución no significa que has terminado. Todavía tiene que discutir si la solución es realista y mutuamente satisfactoria.",
+    NewPossibleSolution: "Nueva Posible Solución",
+    PlaceHolderPossibleSolution: "Estoy de acuerdo con una solución.",
+    RelatedTo: "Relacionado con...",
+    AdultsConcerns: "Preocupaciones del adulto",
+    ChildsConcerns: "Preocupaciones del niño",
+    EditRelatedTo: "Editar Relación con...",
+    EditPossibleSolution: "Editar Posible Solución",
+    DeleteSolutionTitle: "Borrar Solución",
+    DeleteSolutionBody: "¿Estás seguro de que quieres borrar esta solución?",
+
     Step: "Paso",
     wasntUnlock: "no fue desbloqueado",
     haveToFinishSteps: "Tienes que terminar los pasos anteriores para continuar.", 
