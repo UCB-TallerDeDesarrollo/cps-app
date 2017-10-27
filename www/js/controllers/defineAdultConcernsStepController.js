@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicListDelegate,$ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory, AdultConcernFactory,$ionicSideMenuDelegate){
+.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicListDelegate,$ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory, AdultConcernFactory,$ionicSideMenuDelegate,$translate){
   $ionicSideMenuDelegate.canDragContent(false);
   $scope.adultsConcerns = {};
   $scope.adultsConcern = {description:""};
@@ -17,13 +17,15 @@ angular.module('starter.controllers')
     });
   };
   $scope.showAdultsConcernHint = function() {
-    if(localStorage.getItem("showAdultsConcernHint") === null){
-        localStorage.setItem("showAdultsConcernHint", true);
-        var confirmPopup = $ionicPopup.alert({
-          title: "After you've listed all of your concerns, click the arrow to move on to the invitation step"
-        });
-     }
-    };
+    $translate(['MoveToInvitationStep']).then (function(translations){
+      if(localStorage.getItem("showAdultsConcernHint") === null){
+          localStorage.setItem("showAdultsConcernHint", true);
+          var confirmPopup = $ionicPopup.alert({
+            title: translations.MoveToInvitationStep
+          });
+      }
+    });
+  };
   $scope.createAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.adultsConcern.description)) {
       $scope.adultsConcern.unsolvedProblemId = $stateParams.unsolvedProblemId;
@@ -62,15 +64,19 @@ angular.module('starter.controllers')
   };
 
   $scope.showDeleteConfirmationPopup = function(adultsConcern) {
-    var confirmPopup = $ionicPopup.confirm({
-      title: "Delete Adult's Concern",
-      template: "Are you sure you want to delete this adult's concern?"
-    });
+    $translate(['DeleteAdultConcernTitle','DeleteAdultConcernTemplate','CancelOption','YesMessage']).then (function(translations){
+      var confirmPopup = $ionicPopup.confirm({
+        title: translations.DeleteAdultConcernTitle,
+        template: translations.DeleteAdultConcernTemplate,
+        cancelText: translations.CancelOption,
+        okText: translations.YesMessage
+      });
 
-    confirmPopup.then(function(res) {
-      if(res){
-        $scope.deleteAdultsConcern(adultsConcern);
-      }
+      confirmPopup.then(function(res) {
+        if(res){
+          $scope.deleteAdultsConcern(adultsConcern);
+        }
+      });
     });
   };
 

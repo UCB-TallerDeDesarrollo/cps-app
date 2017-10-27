@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory, $ionicSideMenuDelegate){
+angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory, $ionicSideMenuDelegate, $translate){
   $scope.pairExist = false;
   $ionicSideMenuDelegate.canDragContent(false);
   $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
@@ -107,15 +107,19 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   };
 
   $scope.showDeletionConfirm = function(solution) {
+    $translate(['DeleteSolutionTitle','DeleteSolutionBody', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Delete Solution',
-      template: 'Are you sure you want to delete this solution?'
+      title: translations.DeleteSolutionTitle,
+      template: translations.DeleteSolutionBody,
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
     });
     confirmPopup.then(function(res) {
       if(res) {
         $scope.deleteSolution(solution);
       }
     });
+  });
   };
 
   $scope.deleteSolution = function (solution) {
@@ -311,9 +315,10 @@ $scope.editablePair=[];
 
   //function here
   $scope.showRatingPopup = function(solution,unsolvedProblem) {
+    $translate(['SubtitleRating','TitleRating']).then (function(translations){
     var myPopup = $ionicPopup.show({
-    title: 'Is the solution working?',
-    subTitle: 'You can rate it by clicking one of the buttons below',
+    title: translations.TitleRating,
+    subTitle: translations.SubtitleRating,
     buttons: [
       { type: 'button-assertive ion-sad-outline ',
         onTap: function(e) {
@@ -359,12 +364,16 @@ $scope.editablePair=[];
       }
     ]
   });
-  IonicClosePopupService.register(myPopup);
 
+  IonicClosePopupService.register(myPopup);
+});
   $scope.showConfirmBestRate = function(solution,rate,unsolvedProblem) {
+    $translate(['BestRatingTitle','BestRatingBody', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Best Rate for this solution',
-      template: 'Are you sure that this solution solved the unsolved problem?'
+      title: translations.BestRatingTitle,
+      template: translations.BestRatingBody,
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
     });
 
     confirmPopup.then(function(res) {
@@ -373,12 +382,16 @@ $scope.editablePair=[];
         $scope.BestRate(unsolvedProblem);
       }
     });
+  });
   };
 
   $scope.showConfirmWorstRate = function(solution,rate,unsolvedProblem) {
+    $translate(['WorstRatingTitle','WorstRatingBody', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Worst Rate for this solution',
-      template: 'Are you sure that this solution doesn&#39;t help to solve the unsolved problem?'
+      title: translations.WorstRatingTitle,
+      template: translations.WorstRatingBody,
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
     });
 
     confirmPopup.then(function(res) {
@@ -387,6 +400,7 @@ $scope.editablePair=[];
         $scope.BestRate(unsolvedProblem);
       }
     });
+  });
   };
 
   };
@@ -477,13 +491,16 @@ $scope.editablePair=[];
   };
 
   $scope.showHint = function() {
+    $translate(['InvitationStepHint', 'YesMessage']).then (function(translations){
     if(localStorage.getItem("showInfo") === null){
         localStorage.setItem("showInfo", true);
         var confirmPopup = $ionicPopup.alert({
-          title: "Solving too many concerns at once doesn't usually go well, so for now, just pick 1 adult concern and 1 child concern to solve"
+          title: translations.InvitationStepHint,
+          okText: translations.YesMessage
         });
       }
+    });
     };
-
+ 
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 });

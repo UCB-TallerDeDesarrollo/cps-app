@@ -1,4 +1,4 @@
-<ion-view cache-view="false" view-title="Define Adult's Concern" ng-controller="AdultConcernsCrtl" on-tap="unableAnimation()">
+<ion-view cache-view="false" title="{{'DefineAdultsConcern' | translate }}" ng-controller="AdultConcernsCrtl" on-tap="unableAnimation()">
   <div class="bar bar-subheader bar-positive item-text-wrap">
       <h2 class="title">{{unsolvedProblem.description}}</h2>
   </div>
@@ -6,7 +6,7 @@
   <ion-content  ng-init="findChildConcern();findUnsolvedProblem();showAdultsConcernHint();googleAnalyticsView()"  class="has-subheader has-tabs" on-swipe-left="selectTabWithIndex(2)" on-swipe-right="selectTabWithIndex(0)">
     <div class="list">
         <div class="item item-divider">
-          My worry is...
+            {{'DefineAdultsConcernDescription' | translate }}
         </div>
  		</div>
     <div class="padding">
@@ -16,7 +16,7 @@
         </a>
         <a class="watchlist_menu button button-small button-clear button-positive icon ion-help-circled" href="#/app/mainHelp/helpDefineAdultsConcern"></a>
         <div class="col col-75">
-          <h2><b>List of Adult's Concerns</b></h2>
+          <h2><b>{{'ListAdultsConcern' | translate }}</b></h2>
         </div>
       </div>
       <ion-list>
@@ -31,7 +31,7 @@
           <ion-option-button ng-click="showDeleteConfirmationPopup(adultsConcern)" class="button-assertive ion-trash-a" ></ion-option-button>
         </ion-item>
         <div class="item item-text-wrap" ng-if="adultsConcerns.length == 0">
-          <p>No adult's concern registered. Please register one above.</p>
+          <p>{{'MessageAdultsConcernNotRegistred' | translate }}</p>
         </div>
       </ion-list>
     </div>
@@ -39,13 +39,13 @@
   </ion-content>
   <div class="footer" >
     <ion-tabs class="tabs-positive tabs-icon-top" delegate-handle="myTabs" >
-      <ion-tab ng-click="selectTabWithIndex(0)" title="Empathy Step" icon-on="step1" icon-off="step1">
+      <ion-tab ng-click="selectTabWithIndex(0)" title="{{'EmpathyStep' | translate }}" icon-on="step1" icon-off="step1">
       </ion-tab>
 
-      <ion-tab ng-click="selectTabWithIndex(1)" title="Define Adult's Concern" icon-on="step2" icon-off="step2" >
+      <ion-tab ng-click="selectTabWithIndex(1)" title="{{'DefineAdultsConcern' | translate }}" icon-on="step2" icon-off="step2" >
       </ion-tab>
 
-      <ion-tab ng-click="selectTabWithIndex(2)" title="Invitation Step" icon-on="step3" icon-off="step3">
+      <ion-tab ng-click="selectTabWithIndex(2)" title="{{'InvitationStep' | translate }}" icon-on="step3" icon-off="step3">
       </ion-tab>
     </ion-tabs>
   </div>

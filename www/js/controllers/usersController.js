@@ -20,17 +20,12 @@ angular.module('starter.controllers')
     });
     $scope.get_user_info = function(){
       var email = localStorage.getItem("email")
-      $http.get('http://localhost:3000/me?email='+'email', 
-          { params: { "email": email } }
-      , 
+      $http.get($link_root+'/users/me',
+
       {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        transformRequest: function(obj) {
-                var str = [];
-                for(var p in obj)
-                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                return str.join("&");
-            }
+
+        headers: { 'Authorization': localStorage.getItem("auth_token") },
+
       })
       .then(data => {
           if(data.data!=null){
@@ -39,8 +34,8 @@ angular.module('starter.controllers')
           }
       }).catch(error => {
         console.log(error.status);
-      }); 
-              
+      });
+
   }
     $scope.openModalSignup = function() {
       $scope.modalSignup.show();
@@ -103,16 +98,17 @@ angular.module('starter.controllers')
     $scope.signup = function(){
       var number = $scope.user.phone.toString();
       var email = $scope.user.email;
-      $http.post('http://localhost:3000/signup', 
-      { 
+      console.log("Link raiz: "+ $link_root);
+      $http.post($link_root+'/signup',
+      {
         name:$scope.user.names,
         last_name:$scope.user.last_name,
         email:$scope.user.email,
         phone:number,
         password:$scope.user.password,
         password_confirmation:$scope.user.password
-                    
-      }, 
+
+      },
       {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         transformRequest: function(obj) {
@@ -140,14 +136,14 @@ angular.module('starter.controllers')
       });
       $state.go('app.childs',{reload: true});
     };
-    
+
     $scope.login = function(){
       var email = $scope.user.email;
-      $http.post('http://localhost:3000/auth/login', 
-      { 
+      $http.post($link_root+'/auth/login',
+      {
         email:$scope.user.email,
         password:$scope.user.password,
-      }, 
+      },
       {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         transformRequest: function(obj) {
@@ -167,6 +163,10 @@ angular.module('starter.controllers')
             });
             $scope.get_user_info();
       }).catch(error => {
+        var alertForAccountCreated = $ionicPopup.alert({
+          title: 'Error!',
+          template: 'Incorrect username or password.'
+        });
         console.log(error.status);
       });
       $scope.closeModalLogin();
@@ -174,11 +174,11 @@ angular.module('starter.controllers')
         disableBack: true
       });
       $state.go('app.childs',{reload: true});
-      
+
     };
 
     $scope.passwordInfoAlert = function(){
-    $translate(['passwordInfo','passwordMustHave','passwordCondition1','passwordCondition2','passwordCondition3']).then (function(translations){    
+    $translate(['passwordInfo','passwordMustHave','passwordCondition1','passwordCondition2','passwordCondition3']).then (function(translations){
       var alertForNoActiveChild = $ionicPopup.alert({
           title: translations.passwordInfo,
           template: translations.passwordMustHave
