@@ -99,42 +99,47 @@ angular.module('starter.controllers')
       var number = $scope.user.phone.toString();
       var email = $scope.user.email;
       console.log("Link raiz: "+ $link_root);
-      $http.post($link_root+'/signup',
-      {
-        name:$scope.user.names,
-        last_name:$scope.user.last_name,
-        email:$scope.user.email,
-        phone:number,
-        password:$scope.user.password,
-        password_confirmation:$scope.user.password
+      $translate([
+        "SuccessTitle",
+        "AcountCreatedSuccessfully"        
+      ]).then(function(translations) {
+        $http.post($link_root+'/signup',
+        {
+          name:$scope.user.names,
+          last_name:$scope.user.last_name,
+          email:$scope.user.email,
+          phone:number,
+          password:$scope.user.password,
+          password_confirmation:$scope.user.password
 
-      },
-      {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        transformRequest: function(obj) {
-                var str = [];
-                for(var p in obj)
-                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                return str.join("&");
-            },
+        },
+        {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          transformRequest: function(obj) {
+                  var str = [];
+                  for(var p in obj)
+                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                  return str.join("&");
+              },
+        })
+        .then(data => {
+          console.log(data.data.auth_token);
+          localStorage.setItem("auth_token",data.data.auth_token);
+          localStorage.setItem("email",email);
+          var alertForAccountCreated = $ionicPopup.alert({
+                  title: translations.SuccessTitle,
+                  template: translations.AcountCreatedSuccessfully
+              });
+          $scope.get_user_info();
+        }).catch(error => {
+          console.log(error.status);
+        });
+        $scope.closeModalSignup();
+        $ionicHistory.nextViewOptions({
+          disableBack: true
+        });
+        $state.go('app.childs',{reload: true});
       })
-      .then(data => {
-        console.log(data.data.auth_token);
-        localStorage.setItem("auth_token",data.data.auth_token);
-        localStorage.setItem("email",email);
-        var alertForAccountCreated = $ionicPopup.alert({
-                title: 'Success!',
-                template: 'Your account has been created'
-            });
-        $scope.get_user_info();
-      }).catch(error => {
-        console.log(error.status);
-      });
-      $scope.closeModalSignup();
-      $ionicHistory.nextViewOptions({
-        disableBack: true
-      });
-      $state.go('app.childs',{reload: true});
     };
 
     $scope.login = function(){

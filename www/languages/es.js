@@ -26,7 +26,7 @@ var $translations_es = {
     TypeYourEmailTitle: "Escribe tu correo electronico.",
     PasswordTitle: 'Contraseña',
     TypeYourPasswordTitle: "Escribe tu contraseña aqui.",
-    PasswordConfirmationTitle: 'Confirmacion de contraseña',
+    PasswordConfirmationTitle: 'Confirmar contraseña',
     TypeYourPasswordConfirmationTitle: "Escribe la confirmacion de tu contraseña aqui.",
     passwordInfo: "Información de la contraseña",
     passwordMustHave:"Tu contraseña debe tener al menos: ",
@@ -41,7 +41,7 @@ var $translations_es = {
     DeleteChildTitle: 'Eliminar Niño',
     SaveTitle: 'Guardar',
     CancelOption: 'Cancelar',
-    ALSUPHelpOption: 'Ayuda ALSUP',
+    ALSUPHelpOption: 'Ayuda en ALSUP',
     InTheHeatMomentOption: 'En el calor del momento',
     OptionClear: 'Limpiar',
     FAQOption:"Preguntas frecuentes",
@@ -178,10 +178,21 @@ var $translations_es = {
     ErrorTitle: "¡Error!",
     IncorrectUserOrPassword: "Usuario y/o contraseña incorrecto(s)",
     LogoutTitle: "Cerrar sesión",
+    Invalid: "*Invalido",
+    InvalidPassword: "*Contraseña invalida, revisa:",
+    PasswordsDontMatch: "*No coinciden",
+    SuccessTitle: "¡Exito!",
+    AcountCreatedSuccessfully: "Tu cuenta ha sido creada",
+    
+    //Logout PopUps
+    LogoutSuccessfull: "¡Cierre de sesión exitoso!",
+    ConfirmationToLogout: "¿Seguro que quieres cerrar sesión?",    
 
     //Plan B Help
     PlanBHelp: "Ayuda en el Plan B",
-    VideoOfPlanBInAction: "Video de plan B en acción"
+    VideoOfPlanBInAction: "Video de plan B en acción",
+
+    //ALSUP Help
 
 };
 
