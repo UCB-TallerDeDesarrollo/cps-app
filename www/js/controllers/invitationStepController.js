@@ -315,9 +315,10 @@ $scope.editablePair=[];
 
   //function here
   $scope.showRatingPopup = function(solution,unsolvedProblem) {
+    $translate(['SubtitleRating','TitleRating']).then (function(translations){
     var myPopup = $ionicPopup.show({
-    title: 'Is the solution working?',
-    subTitle: 'You can rate it by clicking one of the buttons below',
+    title: translations.TitleRating,
+    subTitle: translations.SubtitleRating,
     buttons: [
       { type: 'button-assertive ion-sad-outline ',
         onTap: function(e) {
@@ -363,12 +364,16 @@ $scope.editablePair=[];
       }
     ]
   });
-  IonicClosePopupService.register(myPopup);
 
+  IonicClosePopupService.register(myPopup);
+});
   $scope.showConfirmBestRate = function(solution,rate,unsolvedProblem) {
+    $translate(['BestRatingTitle','BestRatingBody', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Best Rate for this solution',
-      template: 'Are you sure that this solution solved the unsolved problem?'
+      title: translations.BestRatingTitle,
+      template: translations.BestRatingBody,
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
     });
 
     confirmPopup.then(function(res) {
@@ -377,12 +382,16 @@ $scope.editablePair=[];
         $scope.BestRate(unsolvedProblem);
       }
     });
+  });
   };
 
   $scope.showConfirmWorstRate = function(solution,rate,unsolvedProblem) {
+    $translate(['WorstRatingTitle','WorstRatingBody', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Worst Rate for this solution',
-      template: 'Are you sure that this solution doesn&#39;t help to solve the unsolved problem?'
+      title: translations.WorstRatingTitle,
+      template: translations.WorstRatingBody,
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
     });
 
     confirmPopup.then(function(res) {
@@ -391,6 +400,7 @@ $scope.editablePair=[];
         $scope.BestRate(unsolvedProblem);
       }
     });
+  });
   };
 
   };

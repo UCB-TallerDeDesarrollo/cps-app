@@ -103,6 +103,12 @@ var $translations_es = {
     EditPossibleSolution: "Editar Posible Solución",
     DeleteSolutionTitle: "Borrar Solución",
     DeleteSolutionBody: "¿Estás seguro de que quieres borrar esta solución?",
+    SubtitleRating: "Puede calificar haciendo clic en uno de los botones a continuación",
+    TitleRating: "¿Está funcionando la solución?",
+    WorstRatingTitle: "Peor calificación para esta solución",
+    WorstRatingBody: "¿Está seguro que está solución no esta ayudando a resolver el problema?",
+    BestRatingTitle: "Mejor calificación para esta solución",
+    BestRatingBody: "¿Está seguro que está solución resolvió el problema?",
 
     Step: "Paso",
     wasntUnlock: "no fue desbloqueado",

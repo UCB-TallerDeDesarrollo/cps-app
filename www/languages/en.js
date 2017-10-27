@@ -101,6 +101,12 @@ var $translations_en = {
     EditPossibleSolution: "Edit Possible Solution",
     DeleteSolutionTitle: "Delete Solution",
     DeleteSolutionBody: "Are you sure you want to delete this solution?",
+    SubtitleRating: "You can rate it by clicking one of the buttons below",
+    TitleRating: "Is the solution working?",
+    WorstRatingTitle: "Worst Rate for this solution",
+    WorstRatingBody: "Are you sure that this solution doesn&#39;t help to solve the unsolved problem?",
+    BestRatingTitle: "Best Rate for this solution",
+    BestRatingBody: "Are you sure that this solution solved the unsolved problem?",
 
     Step: "Step",
     wasntUnlock: "wasn\'t unlocked",
