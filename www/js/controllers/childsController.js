@@ -330,7 +330,7 @@ angular
 
             angular.forEach($scope.list,function(laggingSkill){
               var query = "UPDATE lagging_skills SET description = ?, checked = ? , child_id = ? where id = ?";
-              var params = [laggingSkill.description, laggingSkill.checked,$scope.child.id, laggingSkill.id];
+              var params = [laggingSkill.description, laggingSkill.checked,$scope.child.id, laggingSkill.lagskill_id];
               $cordovaSQLite.execute(db, query, params);
             })
 
