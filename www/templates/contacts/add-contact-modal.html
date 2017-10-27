@@ -1,0 +1,20 @@
+<ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Add Contact</h1>
+        <button class="button button-clear button-primary" ng-click="closeModalAddContact()">{{'CancelOption' | translate }}</button>
+    </ion-header-bar>
+    <ion-content class="padding scroll-content ionic-scroll  has-header">
+        <div class="scroll modal-animation">
+            <div class="list">
+                <label class="item item-input item-stacked-label ">
+                    <span class="input-label">Mail or Name</span>
+                    <input type="text" placeholder="Type a mail or name for search contact" ng-model="contact.mail">
+                    </input>
+                </label>
+                <button class="button button-full button-positive" ng-if="contact.mail.length === 0"
+                    disabled>Search</button>
+                <button class="button button-full button-positive" ng-if="contact.mail.length > 0" ng-click="">Search</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

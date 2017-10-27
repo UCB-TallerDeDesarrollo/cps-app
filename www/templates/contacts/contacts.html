@@ -1,0 +1,51 @@
+<ion-view cache-view="false" view-title="Contacts">
+    <ion-content ng-controller="ContactsCtrl">
+        <div ng-init="">
+            <div class="item item-divider item-text-wrap">
+                <a ng-click="openModalAddContact()" class="watchlist_menu button button-small button-clear button-positive">
+                    <i class="icon ion-plus"></i>
+                </a>
+                <div class="col col-75">
+                    <h2>
+                        <b>My contacts</b>
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <ion-list >
+            <ion-item class="item item-stable item-text-wrap item-icon-right">
+                <b>Accepted</b> 
+                <span class="badge badge-balanced">4</span>
+            </ion-item>
+            <ion-item ng-repeat="child in childs">
+                <h2>
+                    <b>Name: </b> {{child.first_name}}
+                </h2>
+                <p>
+                    <b>{{'BirthDateTitle' | translate }}</b> {{convertStringToDate(child.birthday) | date:"dd/MM/yy"}}
+                </p>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item class="item item-stable item-text-wrap item-icon-right">
+                <b>Request</b>
+                <span class="badge badge-calm">4</span>
+            </ion-item>
+            <ion-item ng-repeat="child in childs" class="row">
+                <div class="col col-60">
+                <h2>
+                    <b>Name: </b> {{child.first_name}}
+                </h2>
+                </div>                
+                <div class="button-bar" >
+                    <div class="button button-small button-balanced">
+                        Accept
+                    </div>
+                    <div class="button button-small button-assertive">
+                        Deny
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
