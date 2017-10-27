@@ -175,6 +175,7 @@ angular
       $scope.downloadLaggingSkill();
       $scope.downloadChildConcerns();
       $scope.downloadAdultConcern();
+      $scope.downloadPosibleSolutions();
     }
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");
@@ -394,7 +395,7 @@ angular
                 $scope.adultConcerns = data.data;
                 angular.forEach($scope.adultConcerns, function(value, key){
                   var query = "UPDATE adults_concerns SET description = ?, unsolved_problem_id = ? where id = ?";
-                  var params = [value.description, value.unsolved_problem_id, value.id];
+                  var params = [value.description, value.unsolved_problem_id, value.concern_id];
                   console.log(value)
                   $cordovaSQLite.execute(db, query, params);
                });
@@ -478,7 +479,7 @@ angular
             var dataUP = result;
             console.log("UNSOLVEDPROBLEMS: ");
             console.log(dataUP);
-            var user_id = localStorage.getItem("user_id");             
+            var user_id = localStorage.getItem("user_id");
             angular.forEach(dataUP,function(unsolvedProblem){
               var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/posible_solution";
               console.log(link);
@@ -486,13 +487,13 @@ angular
                 var data = result;
                 console.log("SOLUTIONS: ");
                 console.log(data)
-                $http.post(link, 
-                  { 
+                $http.post(link,
+                  {
                     data: angular.toJson(data),
                     user_id: user_id,
                     child_id: $scope.child.id,
                     unsolved_problem_id:unsolvedProblem.id
-                  }, 
+                  },
                   {
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     transformRequest: function(obj) {
@@ -507,19 +508,40 @@ angular
                   },
                   function(response) {
                     console.log(response.data.message);
-                }); 
+                });
                 $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
               })
             });
-            
-          }); 
+
+          });
 
           $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
         };
 
 
+        $scope.downloadPosibleSolutions = function(){
+          var user_id = localStorage.getItem("user_id")
+          var linkUPData =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
+          $scope.unsolvedProblems;
+          $http.get(linkUPData).then(data => {
+            $scope.unsolvedProblems = data.data;
+            angular.forEach($scope.unsolvedProblems, function(valueUP, key){
+              var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+valueUP.id+"/posible_solution";
+              $http.get(link).then(data => {
+                $scope.possibleSolution = data.data;
+                console.log($scope.possibleSolution = data.data);
+                angular.forEach($scope.possibleSolution, function(value, key){
+                  var query = "UPDATE solutions SET description = ?, rating =? where id = ? AND unsolved_problem_id = ?";
+                  var params = [value.description, value.rating, value.posible_solution_id, value.unsolved_problem_id];
+                  console.log(value)
+                  $cordovaSQLite.execute(db, query, params);
+                });
+                console.log("Posibble Solutions downloaded");
+              })
+          });
+          })
+        };
 
-        
     $scope.showActionsheet = function(child) {
       $translate([
         "EditChildTitle",
