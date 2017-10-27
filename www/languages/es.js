@@ -73,11 +73,11 @@ var $translations_es = {
     goingTo: "Ir a",
 
     //EmpathyStep
-    EmpathyStep: "Paso de Empatía",
+    EmpathyStep: "Etapa de la Empatía",
     NewChildsConcern: "Nueva preocupación del niño",
     TypeChildsConcernPlaceholder: "Escriba una nueva preocupación del niño.",
     EditChildsConcern: "Editar Preocupación del Niño",
-    DefineAdultsConcern: "Preocupación del Adulto",
+    DefineAdultsConcern: "Etapa de la Definición del problema",
     EmpathyStepMessage: "He notado que ",
     EmpathyStepMessageContinue: ", ¿qué es lo que pasa? ",
     ListChildsConcerns: "Lista de Preocupaciones del Niño",
@@ -88,7 +88,7 @@ var $translations_es = {
     ChildsConcernHint: "Después de identificar todas las preocupaciones del niño, haga clic en la flecha para pasar al paso de las preocupaciones del adulto",
 
     //Para InvitationStep
-    InvitationStep: "Paso de Invitación",
+    InvitationStep: "Etapa de la Invitación",
     Text1InvitationStep: "Me pregunto si hay un remedio... ",
     Text2InvitationStep: "y también hacer algo sobre...",
     Text3InvitationStep: "¿Alguna idea?",
@@ -131,8 +131,8 @@ var $translations_es = {
     DeleteAdultConcernTitle: "Borrar preocupación de adulto",
     DeleteAdultConcernTemplate: "¿Estás seguro de que quieres borrar esta Preocupación del Adulto?",
     TypeAdultsConcernPlaceholder: "Escriba una nueva preocupación del adulto.",
-    MoveToInvitationStep: "Despues de haber enlistado todas sus preocupaciónes, Haga clic en la flecha para moverse a la etapa de la invitación.",
-    
+    MoveToInvitationStep: "Despues de haber enlistado todas sus preocupaciónes, Haga clic en la flecha para moverse a la etapa de la invitación.",    
+
     Step: "Paso",
     wasntUnlock: "no fue desbloqueado",
     haveToFinishSteps: "Tienes que terminar los pasos anteriores para continuar.", 
@@ -177,7 +177,12 @@ var $translations_es = {
     WelcomeBackMessage: "¡Bienvenido de vuelta!",
     ErrorTitle: "¡Error!",
     IncorrectUserOrPassword: "Usuario y/o contraseña incorrecto(s)",
-    LogoutTitle: "Cerrar sesión"
+    LogoutTitle: "Cerrar sesión",
+
+    //Plan B Help
+    PlanBHelp: "Ayuda en el Plan B",
+    VideoOfPlanBInAction: "Video de plan B en acción"
+
 };
 
 
