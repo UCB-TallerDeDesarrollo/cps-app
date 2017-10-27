@@ -169,7 +169,15 @@ var $translations_es = {
     LaggingSkill_20:"Dificultad para darse cuenta de cómo su comportamiento puede afectar a los demás",
     LaggingSkill_21:"Dificultad para mostrar empatía con los demás, para valorar la óptica o el punto de vista ajeno",
     LaggingSkill_22:"Dificultad para valorar la percepción propia y la forma en que la perciben los demás",
-    LaggingSkill_23:"Dificulatades sensonriales/motoras"
+    LaggingSkill_23:"Dificulatades sensonriales/motoras",
+
+    
+    //Login PopUps
+    LoginSuccessful: "¡Inicio de sesión exitoso!",
+    WelcomeBackMessage: "¡Bienvenido de vuelta!",
+    ErrorTitle: "¡Error!",
+    IncorrectUserOrPassword: "Usuario y/o contraseña incorrecto(s)",
+    LogoutTitle: "Cerrar sesión"
 };
 
 

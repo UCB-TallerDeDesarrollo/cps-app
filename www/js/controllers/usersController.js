@@ -138,43 +138,49 @@ angular.module('starter.controllers')
     };
 
     $scope.login = function(){
-      var email = $scope.user.email;
-      $http.post($link_root+'/auth/login',
-      {
-        email:$scope.user.email,
-        password:$scope.user.password,
-      },
-      {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        transformRequest: function(obj) {
-                var str = [];
-                for(var p in obj)
-                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                return str.join("&");
-            },
-      })
-      .then(data => {
-        console.log(data.data);
-        localStorage.setItem("auth_token",data.data.auth_token);
-        localStorage.setItem("email",email);
-        var alertForAccountCreated = $ionicPopup.alert({
-                title: 'Login successful!',
-                template: 'Welcome Back!.'
-            });
-            $scope.get_user_info();
-      }).catch(error => {
-        var alertForAccountCreated = $ionicPopup.alert({
-          title: 'Error!',
-          template: 'Incorrect username or password.'
+      $translate([
+        "LoginSuccessful",
+        "WelcomeBackMessage",
+        "ErrorTitle",
+        "IncorrectUserOrPassword"
+      ]).then(function(translations) {
+        var email = $scope.user.email;
+        $http.post($link_root+'/auth/login',
+        {
+          email:$scope.user.email,
+          password:$scope.user.password,
+        },
+        {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          transformRequest: function(obj) {
+                  var str = [];
+                  for(var p in obj)
+                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                  return str.join("&");
+              },
+        })
+        .then(data => {
+          console.log(data.data);
+          localStorage.setItem("auth_token",data.data.auth_token);
+          localStorage.setItem("email",email);
+          var alertForAccountCreated = $ionicPopup.alert({
+                  title: translations.LoginSuccessful,
+                  template: translations.WelcomeBackMessage
+              });
+              $scope.get_user_info();
+        }).catch(error => {
+          var alertForAccountCreated = $ionicPopup.alert({
+            title: translations.ErrorTitle,
+            template: translations.IncorrectUserOrPassword
+          });
+          console.log(error.status);
         });
-        console.log(error.status);
-      });
-      $scope.closeModalLogin();
-      $ionicHistory.nextViewOptions({
-        disableBack: true
-      });
-      $state.go('app.childs',{reload: true});
-
+        $scope.closeModalLogin();
+        $ionicHistory.nextViewOptions({
+          disableBack: true
+        });
+        $state.go('app.childs',{reload: true});
+      })
     };
 
     $scope.passwordInfoAlert = function(){

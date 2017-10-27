@@ -168,5 +168,12 @@ var $translations_en = {
     LaggingSkill_20:"Difficulty appreciating how his/her behavior is affecting others",
     LaggingSkill_21:"Difficulty empathizing with others, appreciating another person’s perspective or point of view",
     LaggingSkill_22:"Difficulty appreciating how s/he is coming across or being perceived by others",
-    LaggingSkill_23:"Sensory/motor difficulties"
+    LaggingSkill_23:"Sensory/motor difficulties",
+
+    //Login PopUps
+    LoginSuccessful: "Login successful!",
+    WelcomeBackMessage: "Welcome Back!",
+    ErrorTitle: "Error!",
+    IncorrectUserOrPassword: "Incorrect username or password",
+    LogoutTitle: "Log out"
 };
