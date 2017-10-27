@@ -118,6 +118,7 @@ var $translations_en = {
     EditComment: "Edit Comment",
     DeleteCommentTitle: "Delete comment",
     DeleteCommentBody: "Are you sure you want to delete this comment?",
+    InvitationStepHint: "Solving too many concerns at once doesn't usually go well, so for now, just pick 1 adult concern and 1 child concern to solve",
 
     Step: "Step",
     wasntUnlock: "wasn\'t unlocked",

@@ -95,7 +95,7 @@ var $translations_es = {
     ListPossibleSolutions: "Lista de Posibles Soluciones",
     MessageList: "Identificar una solución no significa que has terminado. Todavía tiene que discutir si la solución es realista y mutuamente satisfactoria.",
     NewPossibleSolution: "Nueva Posible Solución",
-    PlaceHolderPossibleSolution: "Estoy de acuerdo con una solución.",
+    PlaceHolderPossibleSolution: "Acuerde una solución.",
     RelatedTo: "Relacionado con...",
     AdultsConcerns: "Preocupaciones del adulto",
     ChildsConcerns: "Preocupaciones del niño",
@@ -120,7 +120,7 @@ var $translations_es = {
     EditComment: "Editar Comentario",
     DeleteCommentTitle: "Borrar comentario",
     DeleteCommentBody: "¿Estás seguro de que quieres borrar este comentario?",
-
+    InvitationStepHint: "Resolver demasiadas inquietudes a la vez no suele salir bien, así que por ahora, solo elige 1 preocupación de un adulto y 1 preocupación de un niño para resolver",
 
     Step: "Paso",
     wasntUnlock: "no fue desbloqueado",

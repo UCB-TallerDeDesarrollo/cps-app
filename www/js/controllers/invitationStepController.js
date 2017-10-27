@@ -491,13 +491,16 @@ $scope.editablePair=[];
   };
 
   $scope.showHint = function() {
+    $translate(['InvitationStepHint', 'YesMessage']).then (function(translations){
     if(localStorage.getItem("showInfo") === null){
         localStorage.setItem("showInfo", true);
         var confirmPopup = $ionicPopup.alert({
-          title: "Solving too many concerns at once doesn't usually go well, so for now, just pick 1 adult concern and 1 child concern to solve"
+          title: translations.InvitationStepHint,
+          okText: translations.YesMessage
         });
       }
+    });
     };
-
+ 
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 });
