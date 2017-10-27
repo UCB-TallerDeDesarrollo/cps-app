@@ -394,7 +394,7 @@ angular
                 $scope.adultConcerns = data.data;
                 angular.forEach($scope.adultConcerns, function(value, key){
                   var query = "UPDATE adults_concerns SET description = ?, unsolved_problem_id = ? where id = ?";
-                  var params = [value.description, value.unsolved_problem_id, value.id];
+                  var params = [value.description, value.unsolved_problem_id, value.concern_id];
                   console.log(value)
                   $cordovaSQLite.execute(db, query, params);
                });
