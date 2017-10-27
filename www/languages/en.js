@@ -108,6 +108,17 @@ var $translations_en = {
     BestRatingTitle: "Best Rate for this solution",
     BestRatingBody: "Are you sure that this solution solved the unsolved problem?",
 
+    //For Solutions Info
+    SolutionsInfo: "Solution's Info",
+    TextSolutions: "You haven't related this solution to any concern.",
+    ListComments: "List of Comments",
+    TextComments: "No comments registered. Please register one above.",
+    NewComment: "New Comment",
+    PlaceHolderComment: "Write a comment about this solution.",
+    EditComment: "Edit Comment",
+    DeleteCommentTitle: "Delete comment",
+    DeleteCommentBody: "Are you sure you want to delete this comment?",
+
     Step: "Step",
     wasntUnlock: "wasn\'t unlocked",
     haveToFinishSteps: "You have to finish previous steps to continue." ,

@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $ionicListDelegate,$cordovaSQLite, $ionicPopup, PossibleSolutionFactory ){
+angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $ionicListDelegate,$cordovaSQLite, $ionicPopup, PossibleSolutionFactory, $translate ){
   $scope.comment = { solutionId: $stateParams.solutionId };
 
   $scope.pair = { solutionId: $stateParams.solutionId };
@@ -100,9 +100,12 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
   };
 
   $scope.showDeletionConfirm = function(comment) {
+    $translate(['DeleteCommentTitle','DeleteCommentBody', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Delete comment',
-      template: 'Are you sure you want to delete this comment?'
+      title: translations.DeleteCommentTitle,
+      template: translations.DeleteCommentBody,
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
     });
     confirmPopup.then(function(res) {
       if(res) {
@@ -114,6 +117,7 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
         });
       }
     });
+  });
   };
 
   $scope.parseDate = function(commented_at){

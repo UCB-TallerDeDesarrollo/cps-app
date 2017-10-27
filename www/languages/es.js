@@ -110,6 +110,18 @@ var $translations_es = {
     BestRatingTitle: "Mejor calificación para esta solución",
     BestRatingBody: "¿Está seguro que está solución resolvió el problema?",
 
+    //Para Solutions Info
+    SolutionsInfo: "Información de Solución",
+    TextSolutions: "No ha relacionado esta solución con ninguna preocupación.",
+    ListComments: "Lista de Comentarios",
+    TextComments: "No hay comentarios registrados. Por favor registra uno arriba.",
+    NewComment: "Nuevo Comentario",
+    PlaceHolderComment: "Escribe un comentario sobre esta solución.",
+    EditComment: "Editar Comentario",
+    DeleteCommentTitle: "Borrar comentario",
+    DeleteCommentBody: "¿Estás seguro de que quieres borrar este comentario?",
+
+
     Step: "Paso",
     wasntUnlock: "no fue desbloqueado",
     haveToFinishSteps: "Tienes que terminar los pasos anteriores para continuar.", 
