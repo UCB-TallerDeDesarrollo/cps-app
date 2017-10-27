@@ -40,26 +40,34 @@ app
         return true;     
     }
     $scope.logout = function(){
-        
-        var confirmPopup = $ionicPopup.confirm({
-            title: "Log out",
-            template: "Are you sure you want to log out?",
-            cancelText: "No",
-            okText: "yes"
-          });
-  
-          confirmPopup.then(function(res) {
-            if (res) {
-                localStorage.removeItem("auth_token");
-                localStorage.removeItem("email");
-                localStorage.removeItem("user_name");
-                
-                var alertForAccountCreated = $ionicPopup.alert({
-                    title: 'Success!',
-                    template: 'Log out Succesfull!.'
-                });
-            }
-          });
+        $translate([
+            "SuccessTitle",
+            "LogoutSuccessfull",
+            "LogoutTitle",
+            "ConfirmationToLogout",
+            "YesMessage",
+            "NoMessage"
+          ]).then(function(translations) {
+            var confirmPopup = $ionicPopup.confirm({
+                title: translations.LogoutTitle,
+                template: translations.ConfirmationToLogout,
+                cancelText: translations.NoMessage,
+                okText: translations.YesMessage
+            });
+    
+            confirmPopup.then(function(res) {
+                if (res) {
+                    localStorage.removeItem("auth_token");
+                    localStorage.removeItem("email");
+                    localStorage.removeItem("user_name");
+                    
+                    var alertForAccountCreated = $ionicPopup.alert({
+                        title: translations.SuccessTitle,
+                        template: translations.LogoutSuccessfull
+                    });
+                }
+            });
+        })
     };
     $scope.activeChild = { first_name: "" };
     $scope.getActiveChild = function() {

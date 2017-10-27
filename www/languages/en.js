@@ -124,13 +124,12 @@ var $translations_en = {
     DefineAdultsConcernDescription: "My worry is...",
     ListAdultsConcern: "List of Adult's Concerns",
     MessageAdultsConcernNotRegistred: "No adult's concern registered. Please register one above.",
-    NewAdultsConcern: "New Adult&apos;s Concern",
-    EditAdultsConcern: "Edit Adult&apos;s Concern",
-    DeleteAdultConcernTitle: "Delete Adult&apos;s Concern",
+    NewAdultsConcern: "New Adult's Concern",
+    EditAdultsConcern: "Edit Adult's Concern",
+    DeleteAdultConcernTitle: "Delete Adult's Concern",
     DeleteAdultConcernTemplate: "Are you sure you want to delete this adult's concern?",
     TypeAdultsConcernPlaceholder: "Type a new adult's concern here.",
     MoveToInvitationStep: "After you've listed all of your concerns, click the arrow to move on to the invitation step",
-    
 
     Step: "Step",
     wasntUnlock: "wasn\'t unlocked",
@@ -175,5 +174,21 @@ var $translations_en = {
     WelcomeBackMessage: "Welcome Back!",
     ErrorTitle: "Error!",
     IncorrectUserOrPassword: "Incorrect username or password",
-    LogoutTitle: "Log out"
+    LogoutTitle: "Log out",
+    Invalid: "*Invalid",
+    InvalidPassword: "*Invalid password. Check: ",
+    PasswordsDontMatch: "*Does not match",
+    SuccessTitle: "Success!",
+    AcountCreatedSuccessfully: "Your account has been created",
+
+    //Logout PopUps
+    LogoutSuccessfull: "Log out Successfull!",
+    ConfirmationToLogout: "Are you sure you want to log out?",
+
+    //Plan B Help
+    PlanBHelp: "Plan B Help",
+    VideoOfPlanBInAction: "Video of plan B in action",
+    
+    //ALSUP Help
+    AudioHowToUseTheALSUP: "Audio: How to use the ALSUP",
 };
