@@ -371,7 +371,7 @@ angular
                   function(response) {
                     console.log(response.data.message);
                 });
-                $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
+                $timeout(function() { $scope.displayErrorMsg = false;}, 5000);
               })
 
             });
@@ -438,7 +438,7 @@ angular
                   function(response) {
                     console.log(response.data.message);
                 });
-                $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
+                $timeout(function() { $scope.displayErrorMsg = false;}, 8000);
               })
             });
 
@@ -509,7 +509,7 @@ angular
                   function(response) {
                     console.log(response.data.message);
                 });
-                $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
+                $timeout(function() { $scope.displayErrorMsg = false;}, 12000);
               })
             });
 
