@@ -1,49 +1,67 @@
 <ion-view cache-view="false" view-title="Contacts">
-    <ion-content ng-controller="ContactsCtrl">
-        <div ng-init="">
-            <div class="item item-divider item-text-wrap">
-                <a ng-click="openModalAddContact()" class="watchlist_menu button button-small button-clear button-positive">
-                    <i class="icon ion-plus"></i>
-                </a>
-                <div class="col col-75">
-                    <h2>
-                        <b>My contacts</b>
-                    </h2>
-                </div>
-            </div>
+    <ion-content ng-controller="ContactsCtrl">        
+        <div class="bar item-input-inset">
+            <label class="item-input-wrapper">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="Search" ng-model="searchWord">
+            </label>
+            <burtton ng-click="openModalAddContact()" class="button button-small button-positive" ng-show="!searchWord.length">
+                <i class="icon ion-plus"></i>
+            </burtton>
+            <button class="button ion-close input-button button-small" ng-click="searchWord = ''" ng-show="searchWord.length">
+                Clear
+            </button>
         </div>
         <ion-list >
-            <ion-item class="item item-stable item-text-wrap item-icon-right">
-                <b>Accepted</b> 
-                <span class="badge badge-balanced">4</span>
+            <ion-item class="item item-divider" ng-click="toggleAccepted()">
+                Accepted
+                <span class="badge badge-dark">4</span>
+                <i ng-class="isAcceptedShown() ? 'icon ion-chevron-down' : 'icon ion-chevron-up'"></i>
             </ion-item>
-            <ion-item ng-repeat="child in childs">
-                <h2>
-                    <b>Name: </b> {{child.first_name}}
-                </h2>
-                <p>
-                    <b>{{'BirthDateTitle' | translate }}</b> {{convertStringToDate(child.birthday) | date:"dd/MM/yy"}}
-                </p>
+            <ion-item ng-repeat="child in childs" class="row item-accordion" ng-show="!isAcceptedShown()">
+                <div class="col">
+                    <h2>
+                        <b> {{child.first_name}}</b>
+                    </h2>
+                    <p>ejemplo@gmail.com</p>
+                </div>
             </ion-item>
         </ion-list>
         <ion-list>
-            <ion-item class="item item-stable item-text-wrap item-icon-right">
-                <b>Request</b>
-                <span class="badge badge-calm">4</span>
+            <ion-item class="item item-divider" ng-click="toggleRequest()">
+                Requests
+                <span class="badge badge-balanced">4</span>
+                <i ng-class="isResquestShown() ? 'icon ion-chevron-up' : 'icon ion-chevron-down'"></i>
             </ion-item>
-            <ion-item ng-repeat="child in childs" class="row">
-                <div class="col col-60">
-                <h2>
-                    <b>Name: </b> {{child.first_name}}
-                </h2>
+            <ion-item ng-repeat="child in childs" class="row" ng-show="isResquestShown()">
+                <div class="col col-67">
+                    <h2>
+                        <b> {{child.first_name}}</b>
+                    </h2>
+                    <p>ejemplo@gmail.com</p>
                 </div>                
-                <div class="button-bar" >
-                    <div class="button button-small button-balanced">
-                        Accept
+                <div class="button-bar col-center" >
+                    <div class="button button-small button-positive">
+                        <i class="icon ion-checkmark-round"></i>
                     </div>
                     <div class="button button-small button-assertive">
-                        Deny
+                        <i class="icon ion-close-round"></i>
                     </div>
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item class="item item-divider" ng-click="togglePending()">
+                Waiting response
+                <span class="badge badge-royal">4</span>
+                <i ng-class="isPendingShown() ? 'icon ion-chevron-up' : 'icon ion-chevron-down'"></i>
+            </ion-item>
+            <ion-item ng-repeat="child in childs" class="row" ng-show="isPendingShown()">
+                <div class="col">
+                    <h2>
+                        <b> {{child.first_name}}</b>
+                    </h2>
+                    <p>ejemplo@gmail.com</p>
                 </div>
             </ion-item>
         </ion-list>
