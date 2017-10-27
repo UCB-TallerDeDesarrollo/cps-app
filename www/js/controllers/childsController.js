@@ -444,7 +444,7 @@ angular
 
           });
 
-          $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
+          $timeout(function() { $scope.displayErrorMsg = false;}, 8000);
         };
 
 
