@@ -501,6 +501,7 @@ angular
                   })
                   .then(data => {
                     console.log(data)
+                    $scope.uploadSolutionComentary();
                   },
                   function(response) {
                     console.log(response.data.message);
@@ -540,6 +541,53 @@ angular
           })
         };
 
+        $scope.uploadSolutionComentary= function() {
+          var user_id = localStorage.getItem("user_id");
+          UnsolvedProblemFactory.all($scope.child.id,function(result){
+            var dataUP = result;
+            angular.forEach(dataUP,function(unsolvedProblem){
+              PossibleSolutionFactory.all(unsolvedProblem.id,function(result){
+                var dataSolutions = result;
+                angular.forEach(dataSolutions,function(solutions){
+                  var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/posible_solution/"+solutions.id+"/solution_commentary";
+                  PossibleSolutionFactory.getComments(solutions.id,function(result){
+                    var data = result;
+                    console.log("All commentaries:")
+                    console.log(data);             
+                    $http.post(link,
+                      {
+                        data: angular.toJson(data),
+                        user_id: user_id,
+                        child_id: $scope.child.id,
+                        unsolved_problem_id:unsolvedProblem.id,
+                        solution_id: solutions.id
+                      },
+                      {
+                      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        transformRequest: function(obj) {
+                                  var str = [];
+                                  for(var p in obj)
+                                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                                  return str.join("&");
+                              },
+                      })
+                      .then(data => {
+                        console.log(data)
+                      },
+                      function(response) {
+                        console.log(response.data.message);
+                      });
+                      $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
+
+                  })
+                })
+              })
+            });
+
+          });
+
+          $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
+        };
 
     $scope.showActionsheet = function(child) {
       $translate([
