@@ -327,6 +327,16 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         templateUrl: 'templates/appHelps/inTheHeatOfTheMoment.html'
       }
     }
+  })
+  
+  
+  .state('app.contacts',{
+    url: '/contacts',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/contacts/contacts.html'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
