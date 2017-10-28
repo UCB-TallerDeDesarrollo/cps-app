@@ -198,6 +198,13 @@ var $translations_es = {
     translateImage1:"img/translationAppTutorial/1.png",
     translateImage2:"img/translationAppTutorial/2.png",
     translateImage3:"img/translationAppTutorial/3.png",
+    translateImage4:"img/translationAppTutorial/4.gif",
+    translateImage5:"img/translationAppTutorial/5.gif",
+    translateImage6:"img/translationAppTutorial/6.gif",
+    translateImage7:"img/translationAppTutorial/7.gif",
+    translateImage8:"img/translationAppTutorial/8.gif",
+    translateImage9:"img/translationAppTutorial/9.gif",
+    translateImage10:"img/translationAppTutorial/10.gif",
 
 
 

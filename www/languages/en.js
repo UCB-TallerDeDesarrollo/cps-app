@@ -197,4 +197,11 @@ var $translations_en = {
     translateImage1:"img/appTutorial/1.png",
     translateImage2:"img/appTutorial/2.png",
     translateImage3:"img/appTutorial/3.png",
+    translateImage4:"img/appTutorial/4.gif",
+    translateImage5:"img/appTutorial/5.gif",
+    translateImage6:"img/appTutorial/6.gif",
+    translateImage7:"img/appTutorial/7.gif",
+    translateImage8:"img/appTutorial/8.gif",
+    translateImage9:"img/appTutorial/9.gif",
+    translateImage10:"img/appTutorial/10.gif",
 };
