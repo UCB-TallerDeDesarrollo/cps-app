@@ -176,6 +176,7 @@ angular
       $scope.downloadChildConcerns();
       $scope.downloadAdultConcern();
       $scope.downloadPosibleSolutions();
+      $scope.downloadSolutionComentary();
     }
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");
@@ -529,7 +530,6 @@ angular
                 console.log("All UP API:");
                 console.log($scope.possibleSolution = data.data);
                 angular.forEach($scope.possibleSolution, function(value, key){
-                  console.log(" --------UP API--------: ");
                   var query = "UPDATE solutions SET description = ?, rating =? where id = ? ";
                   var params = [value.description, value.rating, value.posible_solution_id];
                   console.log(value)
@@ -553,7 +553,7 @@ angular
                   PossibleSolutionFactory.getComments(solutions.id,function(result){
                     var data = result;
                     console.log("All commentaries:")
-                    console.log(data);             
+                    console.log(data);
                     $http.post(link,
                       {
                         data: angular.toJson(data),
@@ -589,6 +589,33 @@ angular
           $timeout(function() { $scope.displayErrorMsg = false;}, 4000);
         };
 
+    $scope.downloadSolutionComentary = function(){
+      var user_id = localStorage.getItem("user_id")
+      var unsolvedProblemsLink =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem";
+      $scope.unsolvedProblems;
+      $scope.possibleSolutions;
+      $http.get(unsolvedProblemsLink).then(data => {
+        $scope.unsolvedProblems = data.data;
+        angular.forEach($scope.unsolvedProblems, function(unsolvedProblem, key){
+          var possibleSolutionsLink =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.unsolved_problem_id_app+"/posible_solution";
+          $http.get(possibleSolutionsLink).then(data => {
+            $scope.possibleSolutions = data.data;
+            angular.forEach($scope.possibleSolutions, function(possibleSolution, key){
+              var commentariesLink =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.unsolved_problem_id_app+"/posible_solution/"+possibleSolution.posible_solution_id+"/solution_commentary";
+              $http.get(commentariesLink).then(data => {
+                $scope.commentaries = data.data;
+                angular.forEach($scope.commentaries, function(value, key){
+                  var query = "UPDATE solution_comments SET description = ?, commented_at =? where id = ? ";
+                  var params = [value.description, value.updated_at, value.solution_commentary_id_app];
+                  $cordovaSQLite.execute(db, query, params);
+                });
+              })
+            });
+            console.log("Commentaries Downloaded");
+          })
+      });
+      })
+    };
     $scope.showActionsheet = function(child) {
       $translate([
         "EditChildTitle",
