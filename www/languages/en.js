@@ -192,6 +192,9 @@ var $translations_en = {
     //ALSUP Help
     AudioHowToUseTheALSUP: "Audio: How to use the ALSUP",
 
-    //CloseTutorial
+    //Tutorial
     CloseTutorial:"Close",
+    translateImage1:"img/appTutorial/1.png",
+    translateImage2:"img/appTutorial/2.png",
+    translateImage3:"img/appTutorial/3.png",
 };

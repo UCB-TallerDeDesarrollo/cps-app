@@ -193,7 +193,12 @@ var $translations_es = {
     VideoOfPlanBInAction: "Video de plan B en acción",
 
     //ALSUP Help
-    //CloseTutorial
+    //Tutorial
     CloseTutorial:"Cerrar",
+    translateImage1:"img/translationAppTutorial/1.png",
+    translateImage2:"img/translationAppTutorial/2.png",
+    translateImage3:"img/translationAppTutorial/3.png",
+
+
 
 };

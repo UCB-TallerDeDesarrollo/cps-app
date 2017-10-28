@@ -9,13 +9,13 @@
             </ion-nav-buttons>
         <ion-slide-box class="tutorialSlide"on-slide-changed="slideChanged(index)">
           <ion-slide>
-              <img src="img/appTutorial/1.png">
+              <img ng-src= "{{ 'translateImage1' | translate }}"/>
           </ion-slide>
           <ion-slide>
-              <img src="img/appTutorial/2.png">
+              <img ng-src="{{ 'translateImage2' | translate }}"/>
           </ion-slide>
           <ion-slide>
-              <img src="img/appTutorial/3.png">
+              <img ng-src="{{ 'translateImage3' | translate }}"/>
           </ion-slide>
           <ion-slide>
               <img src="img/appTutorial/4.gif">
