@@ -22,12 +22,9 @@ angular
     ChildConcernFactory,
     PossibleSolutionFactory
   ) {
-
     ChildrenFactory.all(function(children) {
       $scope.childs = children;
     });
-
-
     $scope.contact = {};
     $scope.contact.mail = "";
     $ionicModal
@@ -41,11 +38,6 @@ angular
       });
     $scope.openModalAddContact = function() {
       $scope.modalCreate.show();
-      if (typeof analytics !== "undefined") {
-        analytics.trackView("Create child view");
-      } else {
-        console.log("Google Analytics Unavailable");
-      }
     };
 
     $scope.closeModalAddContact = function() {      
