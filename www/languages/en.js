@@ -28,12 +28,12 @@ var $translations_en = {
     PasswordTitle: 'Password',
     TypeYourPasswordTitle: "Type your password here.",
     PasswordConfirmationTitle: 'Password Confirmation',
-    TypeYourPasswordConfirmationTitle: "Type your password confirmation here.", 
+    TypeYourPasswordConfirmationTitle: "Type your password confirmation here.",
     passwordInfo: "Password information",
     passwordMustHave:"Your password must have at least: ",
     passwordCondition1: "characters. ",
     passwordCondition2: "One capital letter. ",
-    passwordCondition3: "One lower case letter. ", 
+    passwordCondition3: "One lower case letter. ",
     GenderTitle: "Gender",
     MaleTitle: 'Male',
     FemaleTitle: 'Female',
@@ -58,7 +58,7 @@ var $translations_en = {
     SyncupTitle: "Sync up",
     UploadChildTitle: "Upload data",
     DownloadChildTitle: "Download data",
-    planB: 'Plan B',  
+    planB: 'Plan B',
     NoUnsolvedProblems: 'No unsolved problems registered. Please register one above.',
     NewUnsolvedProblem: 'New Unsolved Problem',
     EditUnsolvedProblem: 'Edit Unsolved Problem',
@@ -188,7 +188,20 @@ var $translations_en = {
     //Plan B Help
     PlanBHelp: "Plan B Help",
     VideoOfPlanBInAction: "Video of plan B in action",
-    
+
     //ALSUP Help
     AudioHowToUseTheALSUP: "Audio: How to use the ALSUP",
+
+    //Tutorial
+    CloseTutorial:"Close",
+    translateImage1:"img/appTutorial/1.png",
+    translateImage2:"img/appTutorial/2.png",
+    translateImage3:"img/appTutorial/3.png",
+    translateImage4:"img/appTutorial/4.gif",
+    translateImage5:"img/appTutorial/5.gif",
+    translateImage6:"img/appTutorial/6.gif",
+    translateImage7:"img/appTutorial/7.gif",
+    translateImage8:"img/appTutorial/8.gif",
+    translateImage9:"img/appTutorial/9.gif",
+    translateImage10:"img/appTutorial/10.gif",
 };
