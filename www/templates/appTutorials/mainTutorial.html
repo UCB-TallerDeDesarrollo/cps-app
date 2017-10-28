@@ -1,10 +1,10 @@
-<ion-view cache-view="false" view-title="App Tutorial" ng-controller="TutorialCtrl">
+<ion-view cache-view="false" view-title="{{ 'AppTutorialTitle' | translate }}" ng-controller="TutorialCtrl">
         <ion-nav-buttons side="left">
             </ion-nav-buttons>
             <ion-nav-buttons side="right">
               <button class="button button-positive button-clear no-animation"
                       ng-click="startApp()">
-                Close
+                      {{ 'CloseTutorial' | translate }}
               </button>
             </ion-nav-buttons>
         <ion-slide-box class="tutorialSlide"on-slide-changed="slideChanged(index)">
