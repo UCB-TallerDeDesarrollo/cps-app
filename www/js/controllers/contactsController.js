@@ -27,6 +27,9 @@ angular
     });
     $scope.contact = {};
     $scope.contact.mail = "";
+    $scope.userFriends;
+    $scope.userFriendsRequest;
+    $scope.searchResults;
     $ionicModal
       .fromTemplateUrl("templates/contacts/add-contact-modal.html", {
         scope: $scope,
@@ -44,6 +47,8 @@ angular
       $scope.modalCreate.hide();
       $scope.contact.mail = "";
       $ionicListDelegate.closeOptionButtons();
+      $state.go($state.current, {}, {reload: true});
+      
     };
 
       $scope.searchInit = function() {
@@ -87,4 +92,125 @@ angular
         $scope.shownPending = false;
       }
     };
+
+    $scope.getFriendsRequests = function(){
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+'/friends_requests',
+
+      {
+
+        headers: { 'Authorization': localStorage.getItem("auth_token") },
+
+      })
+      .then(data => {
+        $scope.userFriendsRequest = data.data
+      }).catch(error => {
+        console.log(error.message);
+      });
+    }
+
+    $scope.getUserFriends = function(){
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+'/contacts',
+      {
+        headers: { 'Authorization': localStorage.getItem("auth_token") },
+      })
+      .then(data => {
+          $scope.userFriends = data.data
+      }).catch(error => {
+        console.log(error.message);
+      });
+    }
+
+
+    $scope.searchUser = function(search_options){
+      console.log(search_options)
+      $http.get($link_root+'/users/search?search_options='+search_options,
+
+      {
+
+        headers: { 'Authorization': localStorage.getItem("auth_token") },
+
+      })
+      .then(data => {
+          $scope.searchResults = data.data
+      }).catch(error => {
+        console.log(error.status);
+      });
+    }
+
+    $scope.acceptFriendRequest = function(request_id){
+      var user_id = localStorage.getItem("user_id");
+      $http.post( $link_root +'/users/'+user_id+'/friends_requests/'+request_id+'/accept',
+      {
+        
+      },
+      {
+      headers: { 'Authorization': localStorage.getItem("auth_token") },
+       
+      })
+      .then(data => {
+        var alertForAcceptedRequest = $ionicPopup.alert({
+          title: data.data.status,
+          template: data.data.message,
+        });
+        alertForAcceptedRequest.then(function(res) {
+          if (res) {
+            $state.go($state.current, {}, {reload: true});
+          } 
+        });
+      },
+        function(response) {
+          console.log(response.data.message);
+      });
+    };
+
+    $scope.rejectFriendRequest = function(request_id){
+      var user_id = localStorage.getItem("user_id");
+      $http.post( $link_root +'/users/'+user_id+'/friends_requests/'+request_id+'/reject',
+      {
+        
+      },
+      {
+      headers: { 'Authorization': localStorage.getItem("auth_token") },
+       
+      })
+      .then(data => {
+        var alertForAcceptedRequest = $ionicPopup.alert({
+          title: data.data.status,
+          template: data.data.message,
+        });
+        alertForAcceptedRequest.then(function(res) {
+          if (res) {
+            $state.go($state.current, {}, {reload: true});
+          } 
+        });
+      },
+        function(response) {
+          console.log(response.data.message);
+      });
+    };
+
+    $scope.sendFriendRequest = function(friend_id){
+      var user_id = localStorage.getItem("user_id");
+      $http.post( $link_root +'/users/'+user_id+'/friends_requests?applicant_id='+friend_id,
+      {
+        
+      },
+      {
+      headers: { 'Authorization': localStorage.getItem("auth_token") },
+       
+      })
+      .then(data => {
+        var alertForSentRequest = $ionicPopup.alert({
+          title: data.data.status,
+          template: data.data.message,
+        });
+        
+      },
+        function(response) {
+          console.log(response.data.message);
+      });
+    };
+
 });

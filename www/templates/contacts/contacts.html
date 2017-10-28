@@ -1,6 +1,6 @@
 <ion-view cache-view="false" view-title="Contacts">
-    <ion-content ng-controller="ContactsCtrl">        
-        <div class="bar item-input-inset">
+    <ion-content ng-controller="ContactsCtrl" >        
+        <div class="bar item-input-inset" ng-init="getUserFriends(); getFriendsRequests();">
             <label class="item-input-wrapper">
                 <i class="icon ion-search placeholder-icon"></i>
                 <input type="search" placeholder="Search" ng-model="searchWord">
@@ -14,54 +14,39 @@
         </div>
         <ion-list>
             <ion-item class="item item-divider" ng-click="toggleAccepted()">
-                Accepted
-                <span class="badge badge-dark">4</span>
+                Friends
+                <span class="badge badge-dark">{{userFriends.length}}</span>
                 <i ng-class="isAcceptedShown() ? 'icon ion-chevron-down' : 'icon ion-chevron-up'"></i>
             </ion-item>
-            <ion-item ng-repeat="child in childs" class="row item-accordion" ng-show="!isAcceptedShown()">
+            <ion-item ng-repeat="friend in userFriends" class="row item-accordion" ng-show="!isAcceptedShown()">
                 <div class="col">
                     <h2>
-                        <b> {{child.first_name}}</b>
+                        <b> {{friend.name + ' ' +friend.last_name}}</b>
                     </h2>
-                    <p>ejemplo@gmail.com</p>
+                    <p>{{friend.email}}</p>
                 </div>
             </ion-item>
         </ion-list>
         <ion-list>
             <ion-item class="item item-divider" ng-click="toggleRequest()">
-                Requests
-                <span class="badge badge-balanced">4</span>
-                <i ng-class="isResquestShown() ? 'icon ion-chevron-up' : 'icon ion-chevron-down'"></i>
+                Friends requests
+                <span class="badge badge-balanced">{{userFriendsRequest.length}}</span>
+                <i ng-class="!isResquestShown() ? 'icon ion-chevron-up' : 'icon ion-chevron-down'"></i>
             </ion-item>
-            <ion-item ng-repeat="child in childs" class="row" ng-show="isResquestShown()">
+            <ion-item ng-repeat="request in userFriendsRequest" class="row" ng-show="!isResquestShown()">
                 <div class="col col-67">
                     <h2>
-                        <b> {{child.first_name}}</b>
+                        <b> {{ request.user.name + ' ' + request.user.last_name }}</b>
                     </h2>
-                    <p>ejemplo@gmail.com</p>
+                    <p>{{ request.user.email }}</p>
                 </div>                
                 <div class="button-bar col-center" >
-                    <div class="button button-small button-positive">
+                    <div class="button button-small button-positive" ng-click="acceptFriendRequest(request.id)">
                         <i class="icon ion-checkmark-round"></i>
                     </div>
-                    <div class="button button-small button-assertive">
+                    <div class="button button-small button-assertive" ng-click="rejectFriendRequest(request.id)">
                         <i class="icon ion-close-round"></i>
                     </div>
-                </div>
-            </ion-item>
-        </ion-list>
-        <ion-list>
-            <ion-item class="item item-divider" ng-click="togglePending()">
-                Waiting response
-                <span class="badge badge-royal">4</span>
-                <i ng-class="isPendingShown() ? 'icon ion-chevron-up' : 'icon ion-chevron-down'"></i>
-            </ion-item>
-            <ion-item ng-repeat="child in childs" class="row" ng-show="isPendingShown()">
-                <div class="col">
-                    <h2>
-                        <b> {{child.first_name}}</b>
-                    </h2>
-                    <p>ejemplo@gmail.com</p>
                 </div>
             </ion-item>
         </ion-list>

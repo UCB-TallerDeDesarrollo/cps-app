@@ -13,19 +13,19 @@
                 </label>
                 <button class="button button-full button-positive" ng-if="contact.mail.length === 0"
                     disabled>Search</button>
-                <button class="button button-full button-positive" ng-if="contact.mail.length > 0" ng-click="">Search</button>
+                <button class="button button-full button-positive" ng-if="contact.mail.length > 0" ng-click="searchUser(contact.mail)">Search</button>
             </div>
             <ion-list>
                 <ion-item class="item item-divider">Results</ion-item>
-                <ion-item class="row" ng-repeat="child in childs">
+                <ion-item class="row" ng-repeat="result in searchResults">
                     <div class="col col-75">
                         <h2>
-                            <b> {{child.first_name}}</b>
+                            <b> {{ result.name + ' ' +  result.last_name }}</b>
                         </h2>
-                        <p>ejemplo@gmail.com</p>
+                        <p>{{ result.email }}</p>
                     </div>
                     <div class="button-bar col-center">
-                        <div class="button button-small button-balanced">
+                        <div class="button button-small button-balanced" ng-click="sendFriendRequest(result.id)">
                             <i class="icon ion-person-add"></i>
                         </div>
                     </div>
