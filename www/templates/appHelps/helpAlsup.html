@@ -1,22 +1,42 @@
 <ion-view title="{{'ALSUPHelpOption' | translate }}">
-	<ion-content ng-controller="AlsupCtrl" ng-init="googleAnalyticsView()">
-    <ion-list>
-      <div ng-repeat="help in alsupHelpDir">
-        <ion-item class="item item-stable item-text-wrap"
-									ng-click="toggleContent(help)"
-									ng-class="{active: isContentShown(help)}">
-					<i class="icon" ng-class="isContentShown(help) ? 'ion-minus' : 'ion-plus'"></i> &nbsp;
-          <b>{{help.title}}</b>
-        </ion-item>
-				<div ng-repeat="topic in help.topics">
-					<ion-item class="item item-accordion item-text-wrap item-icon-right"
-										ng-show="isContentShown(help)"
-										ng-click="browserInstance.openBrowser(topic.url)">
-						{{topic.content}}
-						<i class="icon ion-ios-browsers-outline font-21"></i>
+	<ion-content ng-controller="AlsupCtrl" ng-init="googleAnalyticsView();">
+    <ion-list>						
+			<div ng-if="isSpanish()">
+				<div ng-repeat="help in alsupHelpDirEs">
+					<ion-item class="item item-stable item-text-wrap"
+										ng-click="toggleContent(help)"
+										ng-class="{active: isContentShown(help)}">
+						<i class="icon" ng-class="isContentShown(help) ? 'ion-minus' : 'ion-plus'"></i> &nbsp;
+						<b>{{help.title}}</b>
 					</ion-item>
-				</div>
-      </div>
+					<div ng-repeat="topic in help.topics">
+						<ion-item class="item item-accordion item-text-wrap item-icon-right"
+											ng-show="isContentShown(help)"
+											ng-click="browserInstance.openBrowser(topic.url)">
+							{{topic.content}}
+							<i class="icon ion-ios-browsers-outline font-21"></i>
+						</ion-item>
+					</div>
+				</div>			
+			</div>
+			<div ng-if="isEnglish()">
+				<div ng-repeat="help in alsupHelpDirEn">
+					<ion-item class="item item-stable item-text-wrap"
+										ng-click="toggleContent(help)"
+										ng-class="{active: isContentShown(help)}">
+						<i class="icon" ng-class="isContentShown(help) ? 'ion-minus' : 'ion-plus'"></i> &nbsp;
+						<b>{{help.title}}</b>
+					</ion-item>
+					<div ng-repeat="topic in help.topics">
+						<ion-item class="item item-accordion item-text-wrap item-icon-right"
+											ng-show="isContentShown(help)"
+											ng-click="browserInstance.openBrowser(topic.url)">
+							{{topic.content}}
+							<i class="icon ion-ios-browsers-outline font-21"></i>
+						</ion-item>
+					</div>
+				</div>			
+			</div>
     </ion-list>
   </ion-content>
 </ion-view>
