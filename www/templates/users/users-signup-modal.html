@@ -17,7 +17,7 @@
       </label>
       <label class="item item-input item-stacked-label ">
         <span class="input-label">{{'EmailTitle' | translate }}
-          <label class="assertive" ng-if="!emailRegularExpression.test(user.email) && anyStringRegExpression.test(user.email)"> *Invalid</label>
+          <label class="assertive" ng-if="!emailRegularExpression.test(user.email) && anyStringRegExpression.test(user.email)"> {{ 'Invalid' | translate}}</label>
         </span>
         <input type="email" placeholder=" {{'TypeYourEmailTitle' | translate }} "ng-model="user.email">
         </input>
@@ -29,7 +29,7 @@
       </label>
       <label class="item item-input item-stacked-label ">
         <span class="input-label">{{'PasswordTitle' | translate }}
-          <label class="assertive" ng-if="!passwordRegularExpression.test(user.password) && anyStringRegExpression.test(user.password)"> *Invalid password. Tap "i" for more.</label>
+          <label class="assertive" ng-if="!passwordRegularExpression.test(user.password) && anyStringRegExpression.test(user.password)"> {{'InvalidPassword' | translate}}</label>
           <label class="button button-icon ion-information-circled tiny" ng-click="passwordInfoAlert()"></label>
         </span>
         <input type="password" placeholder=" {{'TypeYourPasswordTitle' | translate }} "ng-model="user.password">
@@ -37,7 +37,7 @@
       </label>
       <label class="item item-input item-stacked-label ">
         <span class="input-label">{{'PasswordConfirmationTitle' | translate }}
-          <label class="assertive" ng-if="!(user.password === user.password_confirmation) && anyStringRegExpression.test(user.password_confirmation)"> *Does not match</label>
+          <label class="assertive" ng-if="!(user.password === user.password_confirmation) && anyStringRegExpression.test(user.password_confirmation)"> {{'PasswordsDontMatch' | translate}}</label>
         </span>
         <input type="password" placeholder=" {{'TypeYourPasswordConfirmationTitle' | translate }} "ng-model="user.password_confirmation">
         </input>

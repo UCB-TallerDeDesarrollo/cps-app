@@ -16,18 +16,18 @@ var $translations_es = {
     BirthDateTitle: 'Fecha de Nacimiento: ',
     NewChildTitle: 'Nuevo Niño',
     NameTitle: 'Nombre',
-    TypeChildNameTitle: "Escribe el nombre del niño aqui.",
-    TypeYourNameTitle: "Escribe tu nombre aqui.",
+    TypeChildNameTitle: "Escribe el nombre del niño aquí.",
+    TypeYourNameTitle: "Escribe tu nombre aquí.",
     LastNameTitle: 'Apellido',
-    TypeYourLastNameTitle: "Escribe tu apellido aqui.",
-    PhoneTitle: 'Numero telefonico',
-    TypeYourPhoneTitle: "Escribe tu numeros telefonico aqui.",
-    EmailTitle: 'Correo electronico',
-    TypeYourEmailTitle: "Escribe tu correo electronico.",
+    TypeYourLastNameTitle: "Escribe tu apellido aquí.",
+    PhoneTitle: 'Número telefónico',
+    TypeYourPhoneTitle: "Escribe tu número telefónico aqui.",
+    EmailTitle: 'Correo electrónico',
+    TypeYourEmailTitle: "Escribe tu correo electrónico.",
     PasswordTitle: 'Contraseña',
     TypeYourPasswordTitle: "Escribe tu contraseña aqui.",
-    PasswordConfirmationTitle: 'Confirmacion de contraseña',
-    TypeYourPasswordConfirmationTitle: "Escribe la confirmacion de tu contraseña aqui.",
+    PasswordConfirmationTitle: 'Confirmar contraseña',
+    TypeYourPasswordConfirmationTitle: "Escribe la confirmación de tu contraseña aquí.",
     passwordInfo: "Información de la contraseña",
     passwordMustHave:"Tu contraseña debe tener al menos: ",
     passwordCondition1: "caracteres. ",
@@ -41,7 +41,7 @@ var $translations_es = {
     DeleteChildTitle: 'Eliminar Niño',
     SaveTitle: 'Guardar',
     CancelOption: 'Cancelar',
-    ALSUPHelpOption: 'Ayuda ALSUP',
+    ALSUPHelpOption: 'Ayuda en ALSUP',
     InTheHeatMomentOption: 'En el calor del momento',
     OptionClear: 'Limpiar',
     FAQOption:"Preguntas frecuentes",
@@ -131,7 +131,7 @@ var $translations_es = {
     DeleteAdultConcernTitle: "Borrar preocupación de adulto",
     DeleteAdultConcernTemplate: "¿Estás seguro de que quieres borrar esta Preocupación del Adulto?",
     TypeAdultsConcernPlaceholder: "Escriba una nueva preocupación del adulto.",
-    MoveToInvitationStep: "Despues de haber enlistado todas sus preocupaciónes, Haga clic en la flecha para moverse a la etapa de la invitación.",    
+    MoveToInvitationStep: "Despues de haber enlistado todas sus preocupaciónes, haga tab en la flecha para moverse a la etapa de la invitación.",    
 
     Step: "Paso",
     wasntUnlock: "no fue desbloqueado",
@@ -178,10 +178,21 @@ var $translations_es = {
     ErrorTitle: "¡Error!",
     IncorrectUserOrPassword: "Usuario y/o contraseña incorrecto(s)",
     LogoutTitle: "Cerrar sesión",
+    Invalid: "*Invalido",
+    InvalidPassword: "*Contraseña invalida, revisa:",
+    PasswordsDontMatch: "*No coinciden",
+    SuccessTitle: "¡Exito!",
+    AcountCreatedSuccessfully: "Tu cuenta ha sido creada",
+    
+    //Logout PopUps
+    LogoutSuccessfull: "¡Cierre de sesión exitoso!",
+    ConfirmationToLogout: "¿Seguro que quieres cerrar sesión?",    
 
     //Plan B Help
     PlanBHelp: "Ayuda en el Plan B",
-    VideoOfPlanBInAction: "Video de plan B en acción"
+    VideoOfPlanBInAction: "Video de plan B en acción",
+
+    //ALSUP Help
 
 };
 
