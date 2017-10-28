@@ -597,28 +597,21 @@ angular
       $http.get(unsolvedProblemsLink).then(data => {
         $scope.unsolvedProblems = data.data;
         angular.forEach($scope.unsolvedProblems, function(unsolvedProblem, key){
-          console.log(unsolvedProblem);
           var possibleSolutionsLink =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.unsolved_problem_id_app+"/posible_solution";
           $http.get(possibleSolutionsLink).then(data => {
             $scope.possibleSolutions = data.data;
-            console.log("-------------SOLUCIONES---------------");
-            console.log($scope.possibleSolutions);
             angular.forEach($scope.possibleSolutions, function(possibleSolution, key){
-              console.log(possibleSolution);
               var commentariesLink =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.unsolved_problem_id_app+"/posible_solution/"+possibleSolution.posible_solution_id+"/solution_commentary";
               $http.get(commentariesLink).then(data => {
                 $scope.commentaries = data.data;
-                console.log("-------------COMENTARIOS---------------");
-                console.log($scope.commentaries);
                 angular.forEach($scope.commentaries, function(value, key){
                   var query = "UPDATE solution_comments SET description = ?, commented_at =? where id = ? ";
                   var params = [value.description, value.updated_at, value.solution_commentary_id_app];
-                  console.log(value)
                   $cordovaSQLite.execute(db, query, params);
                 });
               })
             });
-            console.log("Posibble Solutions downloaded");
+            console.log("Commentaries Downloaded");
           })
       });
       })
