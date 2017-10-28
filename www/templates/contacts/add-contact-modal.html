@@ -15,6 +15,22 @@
                     disabled>Search</button>
                 <button class="button button-full button-positive" ng-if="contact.mail.length > 0" ng-click="">Search</button>
             </div>
+            <ion-list>
+                <ion-item class="item item-divider">Results</ion-item>
+                <ion-item class="row" ng-repeat="child in childs">
+                    <div class="col col-75">
+                        <h2>
+                            <b> {{child.first_name}}</b>
+                        </h2>
+                        <p>ejemplo@gmail.com</p>
+                    </div>
+                    <div class="button-bar col-center">
+                        <div class="button button-small button-balanced">
+                            <i class="icon ion-person-add"></i>
+                        </div>
+                    </div>
+                </ion-item>
+            </ion-list>
         </div>
     </ion-content>
 </ion-modal-view>
