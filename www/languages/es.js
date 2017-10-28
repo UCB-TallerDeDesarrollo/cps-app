@@ -32,7 +32,7 @@ var $translations_es = {
     passwordMustHave:"Tu contraseña debe tener al menos: ",
     passwordCondition1: "caracteres. ",
     passwordCondition2: "Una letra mayuscula. ",
-    passwordCondition3: "Una letra minuscula. ", 
+    passwordCondition3: "Una letra minuscula. ",
     GenderTitle: "Género",
     MaleTitle: 'Masculino',
     FemaleTitle: 'Femenino',
@@ -60,8 +60,8 @@ var $translations_es = {
     UploadChildTitle: "Guardar datos",
     DownloadChildTitle: "Descargar datos",
 
-    planB: 'Plan B',  
-    NoUnsolvedProblems: 'No se registró ningun problema sin resolver. Por favor registrar uno arriba', 
+    planB: 'Plan B',
+    NoUnsolvedProblems: 'No se registró ningun problema sin resolver. Por favor registrar uno arriba',
     NewUnsolvedProblem: 'Nuevo Problema Sin Resolver',
     EditUnsolvedProblem: 'Editar Problema Sin Resolver',
     DeleteUnsolvedProblemTitle: "Borrar Problema Sin Resolver",
@@ -131,11 +131,11 @@ var $translations_es = {
     DeleteAdultConcernTitle: "Borrar preocupación de adulto",
     DeleteAdultConcernTemplate: "¿Estás seguro de que quieres borrar esta Preocupación del Adulto?",
     TypeAdultsConcernPlaceholder: "Escriba una nueva preocupación del adulto.",
-    MoveToInvitationStep: "Despues de haber enlistado todas sus preocupaciónes, haga tab en la flecha para moverse a la etapa de la invitación.",    
+    MoveToInvitationStep: "Despues de haber enlistado todas sus preocupaciónes, haga tab en la flecha para moverse a la etapa de la invitación.",
 
     Step: "Paso",
     wasntUnlock: "no fue desbloqueado",
-    haveToFinishSteps: "Tienes que terminar los pasos anteriores para continuar.", 
+    haveToFinishSteps: "Tienes que terminar los pasos anteriores para continuar.",
     step1VerifyBody: "¿Enlistó todos los ejemplos que le vienen a la mente cuando piensa que su hijo tiene dificultades con esta habilidad rezagada?",
     imSure: "estoy seguro",
     keepDrilling: "seguir enlistando",
@@ -171,7 +171,7 @@ var $translations_es = {
     LaggingSkill_22:"Dificultad para valorar la percepción propia y la forma en que la perciben los demás",
     LaggingSkill_23:"Dificulatades sensonriales/motoras",
 
-    
+
     //Login PopUps
     LoginSuccessful: "¡Inicio de sesión exitoso!",
     WelcomeBackMessage: "¡Bienvenido de vuelta!",
@@ -183,17 +183,17 @@ var $translations_es = {
     PasswordsDontMatch: "*No coinciden",
     SuccessTitle: "¡Exito!",
     AcountCreatedSuccessfully: "Tu cuenta ha sido creada",
-    
+
     //Logout PopUps
     LogoutSuccessfull: "¡Cierre de sesión exitoso!",
-    ConfirmationToLogout: "¿Seguro que quieres cerrar sesión?",    
+    ConfirmationToLogout: "¿Seguro que quieres cerrar sesión?",
 
     //Plan B Help
     PlanBHelp: "Ayuda en el Plan B",
     VideoOfPlanBInAction: "Video de plan B en acción",
 
     //ALSUP Help
+    //CloseTutorial
+    CloseTutorial:"Cerrar",
 
 };
-
-
