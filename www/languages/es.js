@@ -5,6 +5,7 @@ var $translations_es = {
     LoginTitle: 'Iniciar Sesión',
     SignupTitle: 'Regístrate',
     CloseOption: 'Cerrar',
+    NoActiveChildTitle: 'Ningún niño activo',
     ManageChildrenTitle: 'Gestionar Niños',
     LaggingSkillsTitle: 'Habilidades Rezagadas',
     UnsolvedProblemsTitle: 'Problemas Sin Resolver',
