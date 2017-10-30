@@ -5,6 +5,7 @@ var $translations_en = {
     LoginTitle: 'Log In',
     SignupTitle: 'Sign Up',
     CloseOption: 'Close',
+    NoActiveChildTitle: 'No active child',
     ManageChildrenTitle: 'Manage Children',
     LaggingSkillsTitle: 'Lagging Skills',
     UnsolvedProblemsTitle: 'Unsolved Problems',
