@@ -201,12 +201,7 @@ angular
       .then(data => {
         console.log($scope.child.id);
         console.log("Child created");
-        var alertForAccountCreated = $ionicPopup.alert({
-            title: 'Success!',
-            template: 'Child uploaded.'
-        });
         $scope.uploadUnsolvedProblem();
-        $scope.uploadLaggingSkill();
       },
       function(response) {
         console.log(response.data.message);
@@ -261,8 +256,7 @@ angular
         })
         .then(data => {
             $scope.uploadAdultConcern();
-            $scope.uploadChildConcern();
-            $scope.uploadSolution();
+           
         },
           function(response) {
             console.log(response.data.message);
@@ -313,6 +307,10 @@ angular
         })
         .then(data => {
           console.log("LaggingSkill uploated");
+          var alertForAccountCreated = $ionicPopup.alert({
+            title: 'Success!',
+            template: 'Child uploaded.'
+        });
         },
           function(response) {
             console.log(response.data.message);
@@ -368,6 +366,9 @@ angular
                   .then(data => {
                     console.log(data)
                     console.log("Adult Concern uploated")
+
+                    $scope.uploadChildConcern();
+                    
                   },
                   function(response) {
                     console.log(response.data.message);
@@ -435,6 +436,8 @@ angular
                   })
                   .then(data => {
                     console.log(data)
+                    $scope.uploadSolution();
+                    
                   },
                   function(response) {
                     console.log(response.data.message);
@@ -573,6 +576,8 @@ angular
                       })
                       .then(data => {
                         console.log(data)
+                        $scope.uploadLaggingSkill();
+
                       },
                       function(response) {
                         console.log(response.data.message);
