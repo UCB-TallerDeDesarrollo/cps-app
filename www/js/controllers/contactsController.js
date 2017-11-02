@@ -218,6 +218,7 @@ angular
         title:"Delete contact",
         cancelText: "No",
         template: "Are you sure you want to delete this contact?",
+        okText: 'Yes'
       });
       alertForDeleteContact.then(function(res) {
         if (res) {
