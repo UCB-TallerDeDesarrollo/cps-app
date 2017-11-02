@@ -213,4 +213,36 @@ angular
       });
     };
 
+    $scope.confirmDeleteContact =function(friend_id){
+      var alertForDeleteContact = $ionicPopup.confirm({
+        title:"Delete contact",
+        cancelText: "No",
+        template: "Are you sure you want to delete this contact?",
+      });
+      alertForDeleteContact.then(function(res) {
+        if (res) {
+          $scope.deleteContact(friend_id);
+        } 
+      });
+    }
+
+    $scope.deleteContact = function(friend_id){
+      var user_id = localStorage.getItem("user_id");
+      $http.delete( $link_root +'/users/'+user_id+'/contacts/'+friend_id,
+      {
+      headers: { 'Authorization': localStorage.getItem("auth_token") },
+       
+      })
+      .then(data => {
+        var alertForSentRequest = $ionicPopup.alert({
+          title: data.data.status,
+          template: data.data.message,
+        });
+        $state.go($state.current, {}, {reload: true});
+      },
+        function(response) {
+          console.log(response.data.message);
+      });
+    };
+
 });

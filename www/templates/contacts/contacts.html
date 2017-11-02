@@ -18,12 +18,14 @@
                 <span class="badge badge-dark">{{userFriends.length}}</span>
                 <i ng-class="isAcceptedShown() ? 'icon ion-chevron-down' : 'icon ion-chevron-up'"></i>
             </ion-item>
-            <ion-item ng-repeat="friend in userFriends" class="row item-accordion" ng-show="!isAcceptedShown()">
+            <ion-item ng-repeat="friend in userFriends"  class="item-text-wrap  item-icon-right" ng-show="!isAcceptedShown()">
                 <div class="col">
                     <h2>
                         <b> {{friend.name + ' ' +friend.last_name}}</b>
                     </h2>
                     <p>{{friend.email}}</p>
+                    <i class="icon dark ion-chevron-right"></i>
+                    <ion-option-button class="button-assertive ion-trash-a" ng-click="confirmDeleteContact(friend.id)"></ion-option-button>
                 </div>
             </ion-item>
         </ion-list>
