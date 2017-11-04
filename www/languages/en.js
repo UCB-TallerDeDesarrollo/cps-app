@@ -107,7 +107,9 @@ var $translations_en = {
     WorstRatingTitle: "Worst Rate for this solution",
     WorstRatingBody: "Are you sure that this solution doesn&#39;t help to solve the unsolved problem?",
     BestRatingTitle: "Best Rate for this solution",
+    TitlehelpInvitation: "Help Categories for Invitation Step",
     BestRatingBody: "Are you sure that this solution solved the unsolved problem?",
+
 
     //For Solutions Info
     SolutionsInfo: "Solution's Info",

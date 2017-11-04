@@ -109,7 +109,9 @@ var $translations_es = {
     WorstRatingTitle: "Peor calificación para esta solución",
     WorstRatingBody: "¿Está seguro que está solución no esta ayudando a resolver el problema?",
     BestRatingTitle: "Mejor calificación para esta solución",
+    TitlehelpInvitation: "Categorías de Ayuda para la Etapa de la Invitación",
     BestRatingBody: "¿Está seguro que está solución resolvió el problema?",
+
 
     //Para Solutions Info
     SolutionsInfo: "Información de Solución",
