@@ -69,6 +69,21 @@ app
             });
         })
     };
+
+    $scope.isSpanish = function() {    
+        if($translate.use()=='es') {
+            return true;
+        } else{
+            return false;
+        }
+    };
+    $scope.isEnglish = function() {    
+        if($translate.use()=='en') {
+            return true;
+        } else{
+            return false;
+        }
+    };
     $scope.activeChild = { first_name: "" };
     $scope.getActiveChild = function() {
         $scope.activeChild = { first_name: "" };
