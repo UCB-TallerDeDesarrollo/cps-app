@@ -54,18 +54,16 @@
         </ion-list>
         <ion-list>
             <ion-item class="item item-divider" ng-click="togglePendingSentRequests()">
-                Sent requests
+                Pending for response
                 <span class="badge badge-positive">{{userPendingSentRequest.length}}</span>
                 <i ng-class="!isPendingSentResquestShown() ? 'icon ion-chevron-up' : 'icon ion-chevron-down'"></i>
             </ion-item>
-            <ion-item ng-repeat="pendingRequest in userPendingSentRequest"  class="item-text-wrap  item-icon-right" ng-show="!isPendingSentResquestShown()">
-                <div class="col">
+            <ion-item ng-repeat="pendingRequest in userPendingSentRequest" class="row" ng-show="!isPendingSentResquestShown()">
+                <div class="col col-67">
                     <h2>
                         <b> {{ pendingRequest.name + ' ' + pendingRequest.last_name }}</b>
                     </h2>
                     <p>{{ pendingRequest.email }}</p>
-                    <i class="icon dark ion-chevron-right"></i>
-                    <ion-option-button class="button-assertive ion-trash-a"></ion-option-button>
                 </div>
             </ion-item>
         </ion-list>
