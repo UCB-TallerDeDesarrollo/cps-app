@@ -70,14 +70,14 @@ app
         })
     };
 
-    $scope.isSpanish = function() {    
+    $scope.isSpanish = function() {
         if($translate.use()=='es') {
             return true;
         } else{
             return false;
         }
     };
-    $scope.isEnglish = function() {    
+    $scope.isEnglish = function() {
         if($translate.use()=='en') {
             return true;
         } else{
@@ -283,7 +283,7 @@ app
     };
 })
 
-.controller('HelpCategoryInvitationCtrl', function($scope, $translate, AppTools) {
+.controller('HelpCategoryInvitationCtrl', function($scope,AppTools) {
     $scope.toggleHelp = function(topic) {
         if ($scope.isTopicShown(topic)) {
             $scope.shownTopic = null;
@@ -308,20 +308,6 @@ app
             console.log("Google Analytics Unavailable");
         }
     };''
-    $scope.isSpanish = function() {
-      if($translate.use()=='es') {
-        return true;
-      } else{
-        return false;
-      }
-    }
-    $scope.isEnglish = function() {
-      if($translate.use()=='en') {
-        return true;
-      } else{
-        return false;
-      }
-    }
 
     $scope.helpCategoriesInvitationEs = [{
             description: "Etapa de la Invitación | Ingrediente/Objetivo",
