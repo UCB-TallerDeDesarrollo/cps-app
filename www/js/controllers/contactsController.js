@@ -85,7 +85,7 @@ angular
     $scope.isPendingSentResquestShown = function() {
         return $scope.shownSentResquest === false;
     };
-    
+
     $scope.togglePendingSentRequests = function() {
         if ($scope.isPendingSentResquestShown(false)) {
           $scope.shownSentResquest = true;
@@ -125,11 +125,8 @@ angular
     $scope.getPengingSentRequests = function(){
       var user_id = localStorage.getItem("user_id");
       $http.get($link_root+'/users/'+user_id+'/pendingRequests',
-
       {
-
         headers: { 'Authorization': localStorage.getItem("auth_token") },
-
       })
       .then(data => {
         $scope.userPendingSentRequest = data.data

@@ -54,24 +54,18 @@
         </ion-list>
         <ion-list>
             <ion-item class="item item-divider" ng-click="togglePendingSentRequests()">
-                Pending requests
-                <span class="badge badge-balanced">{{userPendingSentRequest.length}}</span>
+                Sent requests
+                <span class="badge badge-positive">{{userPendingSentRequest.length}}</span>
                 <i ng-class="!isPendingSentResquestShown() ? 'icon ion-chevron-up' : 'icon ion-chevron-down'"></i>
             </ion-item>
-            <ion-item ng-repeat="pendingRequest in userPendingSentRequest" class="row" ng-show="!isPendingSentResquestShown()">
-                <div class="col col-67">
+            <ion-item ng-repeat="pendingRequest in userPendingSentRequest"  class="item-text-wrap  item-icon-right" ng-show="!isPendingSentResquestShown()">
+                <div class="col">
                     <h2>
-                        <b> {{ pendingRequest.user.name + ' ' + pendingRequest.user.last_name }}</b>
+                        <b> {{ pendingRequest.name + ' ' + pendingRequest.last_name }}</b>
                     </h2>
-                    <p>{{ pendingRequest.user.email }}</p>
-                </div>
-                <div class="button-bar col-center" >
-                    <div class="button button-small button-positive" ng-click="acceptFriendRequest(request.id)">
-                        <i class="icon ion-checkmark-round"></i>
-                    </div>
-                    <div class="button button-small button-assertive" ng-click="rejectFriendRequest(request.id)">
-                        <i class="icon ion-close-round"></i>
-                    </div>
+                    <p>{{ pendingRequest.email }}</p>
+                    <i class="icon dark ion-chevron-right"></i>
+                    <ion-option-button class="button-assertive ion-trash-a"></ion-option-button>
                 </div>
             </ion-item>
         </ion-list>
