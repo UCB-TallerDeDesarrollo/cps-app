@@ -1,6 +1,6 @@
 <ion-view cache-view="false" view-title="Contacts">
-    <ion-content ng-controller="ContactsCtrl" >        
-        <div class="bar item-input-inset" ng-init="getUserFriends(); getFriendsRequests();">
+    <ion-content ng-controller="ContactsCtrl" >
+        <div class="bar item-input-inset" ng-init="getUserFriends(); getFriendsRequests(); getPengingSentRequests();">
             <label class="item-input-wrapper">
                 <i class="icon ion-search placeholder-icon"></i>
                 <input type="search" placeholder="Search" ng-model="searchWord">
@@ -41,7 +41,30 @@
                         <b> {{ request.user.name + ' ' + request.user.last_name }}</b>
                     </h2>
                     <p>{{ request.user.email }}</p>
-                </div>                
+                </div>
+                <div class="button-bar col-center" >
+                    <div class="button button-small button-positive" ng-click="acceptFriendRequest(request.id)">
+                        <i class="icon ion-checkmark-round"></i>
+                    </div>
+                    <div class="button button-small button-assertive" ng-click="rejectFriendRequest(request.id)">
+                        <i class="icon ion-close-round"></i>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item class="item item-divider" ng-click="togglePendingSentRequests()">
+                Pending requests
+                <span class="badge badge-balanced">{{userPendingSentRequest.length}}</span>
+                <i ng-class="!isPendingSentResquestShown() ? 'icon ion-chevron-up' : 'icon ion-chevron-down'"></i>
+            </ion-item>
+            <ion-item ng-repeat="pendingRequest in userPendingSentRequest" class="row" ng-show="!isPendingSentResquestShown()">
+                <div class="col col-67">
+                    <h2>
+                        <b> {{ pendingRequest.user.name + ' ' + pendingRequest.user.last_name }}</b>
+                    </h2>
+                    <p>{{ pendingRequest.user.email }}</p>
+                </div>
                 <div class="button-bar col-center" >
                     <div class="button button-small button-positive" ng-click="acceptFriendRequest(request.id)">
                         <i class="icon ion-checkmark-round"></i>

@@ -29,6 +29,7 @@ angular
     $scope.contact.mail = "";
     $scope.userFriends;
     $scope.userFriendsRequest;
+    $scope.userPendingSentRequest;
     $scope.searchResults;
     $ionicModal
       .fromTemplateUrl("templates/contacts/add-contact-modal.html", {
@@ -43,12 +44,12 @@ angular
       $scope.modalCreate.show();
     };
 
-    $scope.closeModalAddContact = function() {      
+    $scope.closeModalAddContact = function() {
       $scope.modalCreate.hide();
       $scope.contact.mail = "";
       $ionicListDelegate.closeOptionButtons();
       $state.go($state.current, {}, {reload: true});
-      
+
     };
 
       $scope.searchInit = function() {
@@ -81,6 +82,18 @@ angular
         }
     };
 
+    $scope.isPendingSentResquestShown = function() {
+        return $scope.shownSentResquest === false;
+    };
+    
+    $scope.togglePendingSentRequests = function() {
+        if ($scope.isPendingSentResquestShown(false)) {
+          $scope.shownSentResquest = true;
+        } else {
+          $scope.shownSentResquest = false;
+        }
+    };
+
     $scope.isPendingShown = function() {
         return $scope.shownPending === false;
     };
@@ -104,6 +117,23 @@ angular
       })
       .then(data => {
         $scope.userFriendsRequest = data.data
+      }).catch(error => {
+        console.log(error.message);
+      });
+    }
+
+    $scope.getPengingSentRequests = function(){
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+'/pendingRequests',
+
+      {
+
+        headers: { 'Authorization': localStorage.getItem("auth_token") },
+
+      })
+      .then(data => {
+        $scope.userPendingSentRequest = data.data
+        console.log($scope.userPendingSentRequest);
       }).catch(error => {
         console.log(error.message);
       });
@@ -143,11 +173,11 @@ angular
       var user_id = localStorage.getItem("user_id");
       $http.post( $link_root +'/users/'+user_id+'/friends_requests/'+request_id+'/accept',
       {
-        
+
       },
       {
       headers: { 'Authorization': localStorage.getItem("auth_token") },
-       
+
       })
       .then(data => {
         var alertForAcceptedRequest = $ionicPopup.alert({
@@ -157,7 +187,7 @@ angular
         alertForAcceptedRequest.then(function(res) {
           if (res) {
             $state.go($state.current, {}, {reload: true});
-          } 
+          }
         });
       },
         function(response) {
@@ -169,11 +199,11 @@ angular
       var user_id = localStorage.getItem("user_id");
       $http.post( $link_root +'/users/'+user_id+'/friends_requests/'+request_id+'/reject',
       {
-        
+
       },
       {
       headers: { 'Authorization': localStorage.getItem("auth_token") },
-       
+
       })
       .then(data => {
         var alertForAcceptedRequest = $ionicPopup.alert({
@@ -183,7 +213,7 @@ angular
         alertForAcceptedRequest.then(function(res) {
           if (res) {
             $state.go($state.current, {}, {reload: true});
-          } 
+          }
         });
       },
         function(response) {
@@ -195,18 +225,18 @@ angular
       var user_id = localStorage.getItem("user_id");
       $http.post( $link_root +'/users/'+user_id+'/friends_requests?applicant_id='+friend_id,
       {
-        
+
       },
       {
       headers: { 'Authorization': localStorage.getItem("auth_token") },
-       
+
       })
       .then(data => {
         var alertForSentRequest = $ionicPopup.alert({
           title: data.data.status,
           template: data.data.message,
         });
-        
+
       },
         function(response) {
           console.log(response.data.message);
@@ -223,7 +253,7 @@ angular
       alertForDeleteContact.then(function(res) {
         if (res) {
           $scope.deleteContact(friend_id);
-        } 
+        }
       });
     }
 
@@ -232,7 +262,7 @@ angular
       $http.delete( $link_root +'/users/'+user_id+'/contacts/'+friend_id,
       {
       headers: { 'Authorization': localStorage.getItem("auth_token") },
-       
+
       })
       .then(data => {
         var alertForSentRequest = $ionicPopup.alert({
