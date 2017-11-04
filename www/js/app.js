@@ -11,26 +11,35 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    var push = PushNotification.init({
-      "android": {
-        "senderID": "43078495548",
-        "icon": 'iconName',
-        "iconColor": '#248BD0'
-      },
-      "ios":{"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
-    push.on('registration', function(data){
-     console.log(data.registrationId);
-     $("#gcm_id").html(data.registrationId);
-    })
+    // var push = PushNotification.init({
+    //   "android": {
+    //     "senderID": "43078495548",
+    //     "icon": 'iconName',
+    //     "iconColor": '#248BD0'
+    //   },
+    //   "ios":{"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
+    // push.on('registration', function(data){
+    //  console.log(data.registrationId);
+    //  $("#gcm_id").html(data.registrationId);
+    // })
 
-    push.on('notification', function(data){
-      console.log(data.message);
-     alert(data.title+" Message: " +data.message);
-     });
+    // push.on('notification', function(data){
+    //   console.log(data.message);
+    //  alert(data.title+" Message: " +data.message);
+    //  });
 
-     push.on('error', function(e){
-       console.log(e.message);
-     });
+    //  push.on('error', function(e){
+    //    console.log(e.message);
+    //  });
+
+     var notificationOpenedCallback = function(jsonData) {
+        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+      };
+  
+    window.plugins.OneSignal
+      .startInit("46f73879-5b3e-45a0-90de-91f455b65eb4")
+      .handleNotificationOpened(notificationOpenedCallback)
+      .endInit();
 
 
 
