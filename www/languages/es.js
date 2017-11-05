@@ -195,6 +195,9 @@ var $translations_es = {
     PlanBHelp: "Ayuda en el Plan B",
     VideoOfPlanBInAction: "Video de plan B en acción",
 
+    //HelpDefineAdultsConcern
+    HelpDefineAdultsConcern: "Ayuda para Definir Preocupación del Adulto",
+
     //ALSUP Help
     //Tutorial
     CloseTutorial:"Cerrar",

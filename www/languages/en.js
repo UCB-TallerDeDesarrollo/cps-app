@@ -195,6 +195,9 @@ var $translations_en = {
     //ALSUP Help
     AudioHowToUseTheALSUP: "Audio: How to use the ALSUP",
 
+    //HelpDefineAdultsConcern
+    HelpDefineAdultsConcern: "Help to Define an Adult's Concern",
+
     //Tutorial
     CloseTutorial:"Close",
     translateImage1:"img/appTutorial/1.png",

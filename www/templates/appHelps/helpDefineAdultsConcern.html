@@ -1,18 +1,19 @@
-<ion-view cache-view="false" view-title="Help to Define an Adult's Concern"  ng-controller="planBHelpCtrl">
+<ion-view cache-view="false" view-title="{{'HelpDefineAdultsConcern' | translate }}"  ng-controller="planBHelpCtrl">
   <div class="bar bar-subheader item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-search placeholder-icon"></i>
-      <input type="search" placeholder="Search" ng-model="searchWord">
+      <input type="search" placeholder="{{'SearchText' | translate }}" ng-model="searchWord">
     </label>
     <button class="button ion-close input-button button-small"
             ng-click="searchWord = ''"
             ng-show="searchWord.length">
-        Clear
+            {{'OptionClear' | translate }}
     </button>
   </div>
   <ion-content ng-init="googleAnalyticsView();" class="has-subheader">
     <ion-list>
-      <div ng-repeat="help in step2helps | filter: searchWord">
+    <div ng-if="isSpanish()">
+      <div ng-repeat="help in step2helpsEs | filter: searchWord">
         <ion-item class="item item-stable item-text-wrap"
                   ng-click="toggleContent(help)"
                   ng-class="{active: isContentShown(help)}">
@@ -41,6 +42,40 @@
           </div>
         </ion-list>
       </div>
+    </div>
+
+    <div ng-if="isEnglish()">
+        <div ng-repeat="help in step2helpsEn | filter: searchWord">
+          <ion-item class="item item-stable item-text-wrap"
+                    ng-click="toggleContent(help)"
+                    ng-class="{active: isContentShown(help)}">
+            <i class="icon" ng-class="isContentShown(help) ? 'ion-minus' : 'ion-plus'"></i> &nbsp;
+            <b>{{help.title}}</b>
+          </ion-item>
+          <ion-list>
+            <div ng-repeat="topic in help.topics">
+              <ion-item class="item item-stable item-text-wrap"
+                        ng-if="topic.title && !topic.url"
+                        ng-click="toggleContent(help)"
+                        ng-show="isContentShown(help)">
+                  <b>{{topic.title}}</b>
+              </ion-item>
+              <ion-item class="item item-stable item-text-wrap item-icon-right"
+                        ng-show="isContentShown(help)"
+                        ng-if="topic.url"
+                        ng-click="browserInstance.openBrowser(topic.url)">
+                  <b>{{topic.title}}</b>
+                  <i class="icon ion-ios-browsers-outline font-21"></i>
+              </ion-item>
+              <ion-item class="item-accordion item-text-wrap"
+                        ng-show="isContentShown(help)">
+                  <span class="pre-wrap">{{topic.content}}</span>
+              </ion-item>
+            </div>
+          </ion-list>
+        </div>
+      </div>
+
     </ion-list>
   </ion-content>
 </ion-view>
