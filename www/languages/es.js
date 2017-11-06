@@ -111,7 +111,9 @@ var $translations_es = {
     WorstRatingTitle: "Peor calificación para esta solución",
     WorstRatingBody: "¿Está seguro que está solución no esta ayudando a resolver el problema?",
     BestRatingTitle: "Mejor calificación para esta solución",
+    TitlehelpInvitation: "Categorías de Ayuda para la Etapa de la Invitación",
     BestRatingBody: "¿Está seguro que está solución resolvió el problema?",
+
 
     //Para Solutions Info
     SolutionsInfo: "Información de Solución",
@@ -194,6 +196,9 @@ var $translations_es = {
     //Plan B Help
     PlanBHelp: "Ayuda en el Plan B",
     VideoOfPlanBInAction: "Video de plan B en acción",
+
+    //HelpDefineAdultsConcern
+    HelpDefineAdultsConcern: "Ayuda para Definir Preocupación del Adulto",
 
     //ALSUP Help
     //Tutorial

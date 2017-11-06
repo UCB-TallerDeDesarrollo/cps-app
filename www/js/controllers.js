@@ -36,8 +36,8 @@ app
     $scope.isUserLogged = function(){
         if(localStorage.getItem("auth_token") !== null ){
             return false;
-        }else 
-        return true;     
+        }else
+        return true;
     }
     $scope.logout = function(){
         $translate([
@@ -54,13 +54,13 @@ app
                 cancelText: translations.NoMessage,
                 okText: translations.YesMessage
             });
-    
+
             confirmPopup.then(function(res) {
                 if (res) {
                     localStorage.removeItem("auth_token");
                     localStorage.removeItem("email");
                     localStorage.removeItem("user_name");
-                    
+
                     var alertForAccountCreated = $ionicPopup.alert({
                         title: translations.SuccessTitle,
                         template: translations.LogoutSuccessfull
@@ -68,6 +68,21 @@ app
                 }
             });
         })
+    };
+
+    $scope.isSpanish = function() {
+        if($translate.use()=='es') {
+            return true;
+        } else{
+            return false;
+        }
+    };
+    $scope.isEnglish = function() {
+        if($translate.use()=='en') {
+            return true;
+        } else{
+            return false;
+        }
     };
     $scope.activeChild = { first_name: "" };
     $scope.getActiveChild = function() {
@@ -239,7 +254,7 @@ app
         },
         function(response) {
           console.log(response.data.message);
-        });      
+        });
       };
 })
 
@@ -268,7 +283,7 @@ app
     };
 })
 
-.controller('HelpCategoryInvitationCtrl', function($scope, AppTools) {
+.controller('HelpCategoryInvitationCtrl', function($scope,AppTools) {
     $scope.toggleHelp = function(topic) {
         if ($scope.isTopicShown(topic)) {
             $scope.shownTopic = null;
@@ -292,9 +307,47 @@ app
         } else {
             console.log("Google Analytics Unavailable");
         }
-    };
+    };''
 
-    $scope.helpCategoriesInvitation = [{
+    $scope.helpCategoriesInvitationEs = [{
+            description: "Etapa de la Invitación | Ingrediente/Objetivo",
+            topics: [{ description: "Reflexionar conjuntamente sobre soluciones que sean realistas (el niño y el adulto pueden hacer lo que han acordado) y satisfactorias para ambos (la solución trata realmente las preocupaciones del niño y del adulto)" }]
+        },
+        {
+            description: "Palabras ",
+            topics: [{ description: "Reiterar las preocupaciones que han sido identificadas durante las dos primeras etapas, empezando habitualmente por “Me pregunto si hay un remedio... ”" }]
+        },
+        {
+            description: "Lo que usted piensa",
+            topics: [{ description: "¿He resumido convenientemente y con precisión las dos preocupaciones? ¿Hemos considerado de verdad la posibilidad de realizar ambos lo acordado?  ¿La solución trata de verdad las preocupaciones de los dos ? ¿Cuál es mi valoración de las probabilidades de éxito de esta solución? " }]
+        },
+        {
+            description: "Usted no debe",
+            topics: [{ description: "Precipitar tampoco esta etapa" },
+                { description: "Iniciar esta etapa con soluciones preconcebidas e “ingeniosas” " },
+                { description: "Terminar con soluciones que no sean realizables" },
+                { description: "Terminar con soluciones que no traten las preocupaciones de ambas partes" }
+            ]
+        },
+        {
+            description: "Consejos!",
+            topics: [{ description: " Atenerse lo máximo posible a las preocupaciones que han sido identificadas en las dos primeras etapas" },
+                { description: "Si bien es una buena idea dar al niño la primera oportunidad de proponer una solución, generar soluciones es un trabajo de equipo" },
+                { description: "Es una buena idea considerar las probabilidades de éxito de una solución... si usted piensa que las probabilidades de éxito están por debajo del 60-70 por ciento, considere el por qué de sus dudas y hable de ello" },
+                { description: "Esta etapa se termina siempre con la decisión de volver al Plan B si esta primera solución no resiste el paso del tiempo" }
+            ]
+        },
+        {
+            description: "Ayuda sobre el tema",
+            topics: [
+                { description: "¿Tiene dudas?", url: "http://www.blogtalkradio.com/dr-ross-greene/2013/09/16/parenting-your-challenging-child" },
+                { description: "La solución no funcionó", url: "http://www.blogtalkradio.com/dr-ross-greene/2011/03/15/parenting-challenging-kids-collaborative-problem-solving-at-home" }
+            ]
+        }
+    ];
+
+
+    $scope.helpCategoriesInvitationEn = [{
             description: "Invitation Step | Ingredient/Goal",
             topics: [{ description: "Generate solutions that are realistic (meaning both parties can do what they are agreeing to) and mutually satisfactory (meaning the solution truly addresses the concerns of both parties)" }]
         },

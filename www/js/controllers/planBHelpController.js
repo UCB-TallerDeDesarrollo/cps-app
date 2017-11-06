@@ -1,7 +1,7 @@
 angular.module('starter.controllers')
 .controller('planBHelpCtrl', function($scope, AppTools, $stateParams){
   $scope.searchWord = '';
-  $scope.step2helps = [
+  $scope.step2helpsEn = [
     {
       title:"DEFINE THE PROBLEM STEP | INGREDIENT/GOAL",
       topics: [
@@ -35,6 +35,46 @@ angular.module('starter.controllers')
         },
         {
           title: "My child is having difficulty hearing my concerns",
+          url: "http://www.blogtalkradio.com/dr-ross-greene/2011/04/12/parenting-challenging-kids-collaborative-problem-solving-at-home"
+        }
+      ]
+    }
+  ];
+
+  $scope.step2helpsEs = [
+    {
+      title:"ETAPA DE LA DEFINICIÓN DEL PROBLEMA | INGREDIENTE/OBJETIVO",
+      topics: [
+        { content:"Tomar en cuenta la preocupación de la segunda persona (por lo general el adulto)" }
+      ]
+    },
+    {
+      title:"PALABRAS | Consulta Inicial (observación neutral)",
+      topics: [
+        { content:"Lo que ocurre es que (insertar la preocupación del adulto)… ó lo que me preocupa es que (insertar la preocupación del adulto)…" }
+      ]
+    },
+    {
+      title:"LO QUE USTED PIENSA",
+      topics: [
+        { content:"¿He sido lo suficientemente claro en lo que respecta a mi preocupación?  ¿Entiende el niño lo que he dicho ?" }
+      ]
+    },
+    {
+      title:"USTED NO DEBE",
+      topics: [
+        { content:"Empezar a hablar primero de soluciones. Sermonear, juzgar, aleccionar, usar el sarcasmo. " }
+      ]
+    },
+    {
+      title:"Ayuda sobre el tema",
+      topics: [
+        {
+          title: "No estoy seguro de cómo expresar mi preocupación",
+          content: "La mayor parte de las preocupaciones de los adultos se reúnen en dos categorías :\n1. Cómo afecta el problema al niño.\n2. Cómo afecta el problema a los demás "
+        },
+        {
+          title: "Mi hijo tiene dificultades para escuchar mis preocupaciones",
           url: "http://www.blogtalkradio.com/dr-ross-greene/2011/04/12/parenting-challenging-kids-collaborative-problem-solving-at-home"
         }
       ]
