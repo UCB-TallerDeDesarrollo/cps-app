@@ -31,6 +31,8 @@ angular.module('starter.controllers')
           if(data.data!=null){
            localStorage.setItem("user_name",data.data.name + ' ' + data.data.last_name);
            localStorage.setItem("user_id",data.data.id);
+           
+           window.plugins.OneSignal.sendTag("User_Id", localStorage.user_id);
           }
       }).catch(error => {
         console.log(error.status);
