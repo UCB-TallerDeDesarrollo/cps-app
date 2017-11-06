@@ -214,6 +214,19 @@ var $translations_es = {
     translateImage9:"img/translationAppTutorial/9.gif",
     translateImage10:"img/translationAppTutorial/10.gif",
 
-
+    //For Empathy Step in help views
+    titleHelpCategories:"Categorías de ayuda para la etapa 1",
+    help_category_01:"El niño no está hablando",
+    help_category_02: "Mi hijo es demasiado joven para hacer CPS",
+    help_category_03: "El niño o niña habló pero no sé qué hacer con lo que dijo",
+    help_category_01topic_02:"¿Tal vez estás usando la Emergencia B (en el momento en que el niño ya está molesto) en lugar de Proactive B?",
+    help_category_01topic_05: "Tal vez el o ella necesita que el problema este dividido en sus componentes:",
+    help_category_01topic_07:"Tal vez él/ella no encuentra las palabras para decirtelo",
+    help_category_03topic_01:"¿Estas confundido?",
+    help_category_03topic_02:"¿Necesitas más información?",
+    help_category_03topic_03:"El niño dijo algo que es diferente a lo que observé",
+    help_category_03topic_04:"El niño dijo algunas cosas que le preocupan, pero creo que hay más.",
+    help_category_03topic_05:"No estoy seguro de haber terminado con la etapa 1",
+    help_category_03topic_06:"No sé cómo profundizar",
 
 };
