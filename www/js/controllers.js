@@ -61,6 +61,7 @@ app
                     localStorage.removeItem("email");
                     localStorage.removeItem("user_name");
 
+                    window.plugins.OneSignal.sendTag("User_Id", "");
                     var alertForAccountCreated = $ionicPopup.alert({
                         title: translations.SuccessTitle,
                         template: translations.LogoutSuccessfull

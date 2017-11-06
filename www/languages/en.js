@@ -41,6 +41,8 @@ var $translations_en = {
     CreateTitle: 'Create',
     EditChildTitle: 'Edit Child',
     DeleteChildTitle: 'Delete Child',
+    ShareALSUP: 'Share ALSUP',
+    unShareALSUP: "Stop sharing with ",
     SaveTitle: 'Save',
     CancelOption: 'Cancel',
     ALSUPHelpOption: 'ALSUP Help',

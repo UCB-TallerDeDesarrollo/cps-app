@@ -40,6 +40,8 @@ var $translations_es = {
     CreateTitle: 'Crear',
     EditChildTitle: 'Editar Niño',
     DeleteChildTitle: 'Eliminar Niño',
+    ShareALSUP: 'Compartir ALSUP',
+    unShareALSUP: "Dejar de compartir con ",
     SaveTitle: 'Guardar',
     CancelOption: 'Cancelar',
     ALSUPHelpOption: 'Ayuda en ALSUP',
