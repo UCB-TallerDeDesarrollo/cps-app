@@ -41,8 +41,6 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       .handleNotificationOpened(notificationOpenedCallback)
       .endInit();
 
-    //window.plugins.OneSignal.sendTag("User_Id", "3");
-
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
       cordova.plugins.Keyboard.disableScroll(true);
