@@ -23,12 +23,14 @@ angular
     PossibleSolutionFactory
   ) {
 
-
-
+    $scope.friendName ="";
+    $scope.pair = { id: "" };
+    $scope.pair.id = "";
     $scope.child = {};
     $scope.child.first_name = "";
     $scope.child.gender = "Female";
     $scope.child.birthday = new Date();
+
     ChildrenFactory.all(function(children) {
       $scope.childs = children;
     });
@@ -50,6 +52,13 @@ angular
         console.log("Google Analytics Unavailable");
       }
     };
+
+    $scope.createPair = function(idSolutionAlfin){
+    if (!inputFieldIsEmpty($scope.pair.description)) {
+        PossibleSolutionFactory.insertPair($scope.pair,idSolutionAlfin);
+         $scope.pair.description = "";
+     }
+  };
 
     $scope.closeModalCreate = function() {
       $scope.modalCreate.hide();
@@ -80,11 +89,31 @@ angular
         $scope.modalEdit = modal;
         $scope.modalEdit.hide();
       });
+
+    $ionicModal
+      .fromTemplateUrl("templates/child/share-child-modal.html", {
+        scope: $scope,
+        animation: "slide-in-up"
+      })
+      .then(function(modal) {
+        $scope.modalShare = modal;
+        $scope.modalShare.hide();
+      });
+
     $scope.openModalEdit = function() {
       $scope.modalEdit.show();
     };
+
+    $scope.openModalShare = function() {
+      $scope.modalShare.show();
+    };
     $scope.closeModalEdit = function() {
       $scope.modalEdit.hide();
+      $ionicListDelegate.closeOptionButtons();
+    };
+
+    $scope.closeModalShare = function() {
+      $scope.modalShare.hide();
       $ionicListDelegate.closeOptionButtons();
     };
     // Cleanup the modal when we're done with it!
@@ -97,6 +126,19 @@ angular
     });
     // Execute action on remove modal
     $scope.$on("modalEdit.removed", function() {
+      // Execute action
+    });
+
+        // Cleanup the modal when we're done with it!
+    $scope.$on("$destroy", function() {
+      $scope.modalShare.remove();
+    });
+    // Execute action on hide modal
+    $scope.$on("modalShare.hidden", function() {
+      // Execute action
+    });
+    // Execute action on remove modal
+    $scope.$on("modalShare.removed", function() {
       // Execute action
     });
 
@@ -150,6 +192,61 @@ angular
           console.log("Google Analytics Unavailable");
         }
       }
+    };
+
+
+    $scope.shareChildForm = function(friend_id) {
+      child_id = $scope.shareChild.id;
+      console.log("Amigo ID: "+ friend_id );
+      console.log("Child ID: "+ child_id);
+      var user_id = localStorage.getItem("user_id");
+      $http.post($link_root+'/users/'+user_id+'/children/'+child_id+'/alsup_share',
+      {
+        friend_id: friend_id,
+      },
+      {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+      })
+      .then(data => {
+          console.log("Datos: ");
+          console.log(data.data);
+          var alertForAcceptedRequest = $ionicPopup.alert({
+          title: "Resultado",
+          template: data.data.message,
+          });
+      }).catch(error => {
+        console.log(error.status);
+      });
+      $scope.closeModalShare();
+    };
+
+    $scope.friendShared =function (child_id){
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+'/children/'+child_id+'/showShered',
+      {
+
+        headers: { 'Authorization': localStorage.getItem("auth_token") },
+
+      })
+      .then(data => {
+          console.log("Amigo: ");
+          console.log(data.data);
+          if(data.data == false){
+           $scope.friendName = "";
+          }else{
+           $scope.friendName = data.data.name + " "+data.data.last_name;
+          }
+          console.log("Nombre: "+$scope.friendName);
+
+      }).catch(error => {
+        console.log(error.message);
+      });
     };
 
     $ionicModal.fromTemplateUrl('templates/child/sync-child-modal.html', {
@@ -621,14 +718,23 @@ angular
       });
       })
     };
+    
     $scope.showActionsheet = function(child) {
       $translate([
         "EditChildTitle",
         "CancelOption",
-        "DeleteChildTitle"
+        "DeleteChildTitle",
+        "ShareALSUP",
+        "unShareALSUP"
       ]).then(function(translations) {
+        // Link para factorizar ionicActionSheet: https://www.ghadeer.io/ionicactionsheet-example/
+        var buttons = [{ text: translations.EditChildTitle },{text: translations.ShareALSUP} ];        
+        console.log("Buttons push: "+$scope.friendName);
+        if ($scope.friendName!="" && $scope.friendName != undefined){
+          buttons.push({text: translations.unShareALSUP + $scope.friendName});
+        }
         $ionicActionSheet.show({
-          buttons: [{ text: translations.EditChildTitle }],
+          buttons: buttons,
           cancelText: translations.CancelOption,
           cancel: function() {
             $ionicListDelegate.closeOptionButtons();
@@ -646,6 +752,20 @@ angular
               );
               $scope.openModalEdit();
             }
+            if (index === 1) {
+              if ($scope.friendName!="") {
+                var confirmPopup = $ionicPopup.confirm({
+                  template: "ALSUP ya compartido con <br>" + "<i>"+$scope.friendName+"</i><br>Desea dejar de compartir ALSUP?",
+                  cancelText: "No",
+                  okText: translations.YesMessage
+                });
+              }else{
+                $scope.shareChild= angular.copy(child);
+                $scope.friendShared(child.id)
+                $scope.openModalShare();
+              }
+             
+            }
             $ionicListDelegate.closeOptionButtons();
 
             return true;
@@ -653,6 +773,20 @@ angular
         });
       });
     };
+
+    $scope.getUserFriends = function(){
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+'/contacts',
+      {
+        headers: { 'Authorization': localStorage.getItem("auth_token") },
+      })
+      .then(data => {
+          $scope.userFriends = data.data
+      }).catch(error => {
+        console.log(error.message);
+      });
+    }
+
     $scope.activateChild = function(item) {
       ChildrenFactory.activate(item.id, function() {
         ChildrenFactory.all(function(children) {
