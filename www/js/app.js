@@ -9,29 +9,6 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
 
 .run(function($ionicPlatform, $cordovaSQLite, DataSeed, $state, $rootScope) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    // var push = PushNotification.init({
-    //   "android": {
-    //     "senderID": "43078495548",
-    //     "icon": 'iconName',
-    //     "iconColor": '#248BD0'
-    //   },
-    //   "ios":{"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
-    // push.on('registration', function(data){
-    //  console.log(data.registrationId);
-    //  $("#gcm_id").html(data.registrationId);
-    // })
-
-    // push.on('notification', function(data){
-    //   console.log(data.message);
-    //  alert(data.title+" Message: " +data.message);
-    //  });
-
-    //  push.on('error', function(e){
-    //    console.log(e.message);
-    //  });
-
      var notificationOpenedCallback = function(jsonData) {
         console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
       };
@@ -69,8 +46,8 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   $httpProvider.defaults.headers.post = {};
   $httpProvider.defaults.headers.put = {};
   $httpProvider.defaults.headers.patch = {};
-  //$link_root = "http://localhost:3000";
-  $link_root = "http://cpsapi.herokuapp.com";
+  $link_root = "http://localhost:3000";
+  //$link_root = "http://cpsapi.herokuapp.com";
   $httpProvider.defaults.useXDomain = true;
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
   var defaultOptions = {
