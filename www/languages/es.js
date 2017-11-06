@@ -212,6 +212,11 @@ var $translations_es = {
     translateImage9:"img/translationAppTutorial/9.gif",
     translateImage10:"img/translationAppTutorial/10.gif",
 
-
+    //For Empathy Step in help views
+    titleHelpCategories:"Categorías de ayuda para la etapa 1",
+    help_category_01:"El niño no está hablando",
+    help_category_02: "Mi hijo es demasiado joven para hacer CPS",
+    help_category_03: "El niño o niña habló pero no sé qué hacer con lo que dijo",
+    topic_02:"¿Tal vez estás usando la Emergencia B (en el momento en que el niño ya está molesto) en lugar de Proactive B?",
 
 };

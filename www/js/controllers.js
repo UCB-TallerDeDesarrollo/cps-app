@@ -262,8 +262,9 @@ app
     $scope.params = $stateParams;
 })
 
-.controller('HelpCategoryTopicsCtrl', function($scope, HelpCategoriesStep1, $stateParams, AppTools) {
+.controller('HelpCategoryTopicsCtrl', function($scope, HelpCategoriesStep1, HelpCategoriesStep1Es, $stateParams, AppTools) {
     $scope.category = HelpCategoriesStep1.get($stateParams.id_category);
+    $scope.categoryEs = HelpCategoriesStep1Es.get($stateParams.id_category);
     $scope.browserInstance = {};
     $scope.browserInstance = AppTools.newBrowser({
         scope: $scope,
@@ -272,8 +273,9 @@ app
 })
 
 
-.controller('HelpCategoryCtrl', function($scope, HelpCategoriesStep1) {
+.controller('HelpCategoryCtrl', function($scope, HelpCategoriesStep1, HelpCategoriesStep1Es) {
     $scope.helpCategories = HelpCategoriesStep1.all();
+    $scope.helpCategoriesEs = HelpCategoriesStep1Es.all();
     $scope.googleAnalyticsForHelpCategoriesStep1 = function() {
         if (typeof analytics !== 'undefined') {
             analytics.trackView('Help Categories for step 1 view');
@@ -307,7 +309,7 @@ app
         } else {
             console.log("Google Analytics Unavailable");
         }
-    };''
+    };
 
     $scope.helpCategoriesInvitationEs = [{
             description: "Etapa de la Invitación | Ingrediente/Objetivo",
@@ -386,8 +388,9 @@ app
 
 })
 
-.controller('HelpTopicContentCtrl', function($scope, HelpCategoriesStep1, $stateParams, AppTools) {
+.controller('HelpTopicContentCtrl', function($scope, HelpCategoriesStep1, HelpCategoriesStep1Es, $stateParams, AppTools) {
     $scope.topic = HelpCategoriesStep1.getContent($stateParams.id_category, $stateParams.id_topic);
+    $scope.topicEs = HelpCategoriesStep1Es.getContent($stateParams.id_category, $stateParams.id_topic);
     $scope.browserInstance = AppTools.newBrowser({
         scope: $scope,
         animation: 'slide-in-right'

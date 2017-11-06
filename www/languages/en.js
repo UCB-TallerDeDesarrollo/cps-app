@@ -210,4 +210,12 @@ var $translations_en = {
     translateImage8:"img/appTutorial/8.gif",
     translateImage9:"img/appTutorial/9.gif",
     translateImage10:"img/appTutorial/10.gif",
+
+    //For Empathy Step in help views
+    titleHelpCategories:"Help Categories for Step 1",
+    help_category_01:"The kid isn’t talking",
+    help_category_02: "My kid is too young to do CPS",
+    help_category_03: "The kid talked but I don’t know what to do with what s/he said",
+    topic_02:"Maybe you are using Emergency B (in the heat of the moment when the kid is already upset) instead of Proactive B?",
+
 };
