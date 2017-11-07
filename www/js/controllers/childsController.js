@@ -22,10 +22,9 @@ angular
     ChildConcernFactory,
     PossibleSolutionFactory
   ) {
-
-    $scope.friendName ="";
-    $scope.pair = { id: "" };
-    $scope.pair.id = "";
+    $scope.friendShareID;
+    $scope.user_friend = { id: "" };
+    $scope.user_friend.id = "";
     $scope.child = {};
     $scope.child.first_name = "";
     $scope.child.gender = "Female";
@@ -196,9 +195,8 @@ angular
 
 
     $scope.shareChildForm = function(friend_id) {
-      child_id = $scope.shareChild.id;
-      console.log("Amigo ID: "+ friend_id );
-      console.log("Child ID: "+ child_id);
+      $scope.uploadData();
+      child_id = $scope.child.id;
       var user_id = localStorage.getItem("user_id");
       $http.post($link_root+'/users/'+user_id+'/children/'+child_id+'/alsup_share',
       {
@@ -223,10 +221,10 @@ angular
       }).catch(error => {
         console.log(error.status);
       });
-      $scope.closeModalShare();
+      $scope.getFriendShared(child_id); 
     };
 
-    $scope.friendShared =function (child_id){
+    $scope.getFriendShared =function (child_id){
       var user_id = localStorage.getItem("user_id");
       $http.get($link_root+'/users/'+user_id+'/children/'+child_id+'/showShered',
       {
@@ -235,15 +233,11 @@ angular
 
       })
       .then(data => {
-          console.log("Amigo: ");
-          console.log(data.data);
           if(data.data == false){
            $scope.friendName = "";
           }else{
-           $scope.friendName = data.data.name + " "+data.data.last_name;
+           $scope.friendName = data.data;
           }
-          console.log("Nombre: "+$scope.friendName);
-
       }).catch(error => {
         console.log(error.message);
       });
@@ -728,11 +722,8 @@ angular
         "unShareALSUP"
       ]).then(function(translations) {
         // Link para factorizar ionicActionSheet: https://www.ghadeer.io/ionicactionsheet-example/
-        var buttons = [{ text: translations.EditChildTitle },{text: translations.ShareALSUP} ];        
-        console.log("Buttons push: "+$scope.friendName);
-        if ($scope.friendName!="" && $scope.friendName != undefined){
-          buttons.push({text: translations.unShareALSUP + $scope.friendName});
-        }
+        var buttons = [{ text: translations.EditChildTitle },{text: translations.ShareALSUP} ];
+        $scope.getFriendShared(child.id);        
         $ionicActionSheet.show({
           buttons: buttons,
           cancelText: translations.CancelOption,
@@ -753,18 +744,8 @@ angular
               $scope.openModalEdit();
             }
             if (index === 1) {
-              if ($scope.friendName!="") {
-                var confirmPopup = $ionicPopup.confirm({
-                  template: "ALSUP ya compartido con <br>" + "<i>"+$scope.friendName+"</i><br>Desea dejar de compartir ALSUP?",
-                  cancelText: "No",
-                  okText: translations.YesMessage
-                });
-              }else{
-                $scope.shareChild= angular.copy(child);
-                $scope.friendShared(child.id)
-                $scope.openModalShare();
-              }
-             
+              $scope.child = angular.copy(child);             
+              $scope.openModalShare();
             }
             $ionicListDelegate.closeOptionButtons();
 

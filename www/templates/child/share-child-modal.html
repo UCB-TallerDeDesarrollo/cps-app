@@ -5,16 +5,27 @@
   </ion-header-bar>
   <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll modal-animation">
     <div class="list" ng-init="getUserFriends();">
-      <label class="item item-input item-stacked-label ">
         <ion-list radio-group  >
           <div class=" item item-divider">
             Friends to share
           </div>
-          <ion-radio  name="a"  ng-model="pair.id" ng-value="friend.id" ng-repeat="friend in userFriends" ng-checked="true"  >{{friend.name + ' ' +friend.last_name}}</ion-radio>
+          <ion-item ng-repeat="friend in userFriends" class="row">
+          <div class="col col-67">
+              <h2>
+                <b> {{ friend.name + ' ' + friend.last_name }}</b>
+              </h2>
+              <p>{{ friend.email }}</p>
+            </div>
+              <div class="button-bar col-center" >
+                <div class="button button-small button-positive"  ng-click="shareChildForm(friend.id)" ng-show="!friendName.email">
+                  <i>Share</i>
+                </div>
+                <div class="button button-small button-assertive" ng-click="" ng-show="friendName.email===friend.email">
+                  <i >Stop sharing</i>
+                </div>
+            </div>
+          </ion-item>
          </ion-list>
-      </label>
-         <button class="button button-full button-positive" ng-if="!pair.id"  ng-click="shareChildForm(pair.id)" disabled>{{'SaveTitle' | translate }}</button>
-         <button class="button button-full button-positive" ng-if="pair.id> 0"  ng-click="shareChildForm(pair.id)">{{'SaveTitle' | translate }}</button>
     </div>
   </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out modal-animation"></div></div></ion-content>
 </ion-modal-view>
