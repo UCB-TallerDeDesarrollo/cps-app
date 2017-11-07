@@ -332,6 +332,27 @@ angular.module('starter.controllers')
             answer: "Early on, it will probably be whoever volunteers!  But if you have several willing collaborators, you might want to give thought to who has the best relationship with the student, who he’s already talking to, and, if the problem is related to interactions with one member of the team, whether it would be better for that member to approach the kid or potentially more productive for him to talk about it with a different member."
         }];
 
+
+        $scope.classroomQuestionsEs = [{
+            question: "¿No lleva mucho tiempo ayudar a los niños con problemas de conducta?",
+            answer: "Sí, ayudar - especialmente el tipo que implica enseñar habilidades y resolver problemas de manera duradera - toma tiempo. Pero lidiar constantemente con los desafíos de los niños de formas que no funcionan requiere más. Y no se olvide, el Plan proactivo B se lleva a cabo en los momentos oportunos, no en condiciones de emergencia."
+        }, {
+            question: "Soy un maestro de aula, tengo 25 niños en mi clase, soy el único allí, y tengo un montón de niños en que están en programas de educación especial y necesitan mi atención. ¿Cuándo voy a hacer el Plan B?",
+            answer: "La mayoría de los maestros encuentran que el Plan B puede hacerse durante los momentos en que dedican atención individual a otros problemas de los estudiantes (por ejemplo, desafíos académicos), como antes de la escuela, después de la escuela, durante el recreo o durante el almuerzo; cada vez que hay una oportunidad de tomar cinco o diez minutos para ayudar a un niño. También descubrí que los directores y subdirectores suelen estar felices de encontrar cobertura, por lo que puede dedicar más tiempo a un alumno exigente. Es probable que desee dirigir sus esfuerzos iniciales del Plan B a los niños cuyos desafíos son más graves y que están alterando el proceso del aula. Luego pase al resto de los niños que necesitan el Plan B. Probablemente ya esté dedicando mucho tiempo a los niños con problemas de conducta. Si bien el Plan B toma un poco más de tiempo y planificación desde el principio, mi experiencia es que reduce drásticamente la cantidad de tiempo que gasta en un comportamiento desafiante en general."
+        }, {
+            question: "¿Hay algunos niños desafiantes que sean tan volátiles e inestables que los académicos deban ser desacentuados hasta que las cosas estén más tranquilas?",
+            answer: "Absolutamente. Algunos niños simplemente no están 'disponibles' para el aprendizaje académico hasta que se ha avanzado en los desafíos que pueden estar impidiendo el aprendizaje. En tales casos, los académicos pueden tener que tomar un asiento trasero hasta que el progreso ocurra en estos desafíos. Sumergirse hacia adelante con los académicos cuando un niño está atascado en los desafíos del comportamiento es por lo general un ejercicio inutil."
+        }, {
+            question: "¿Este modelo es realmente realista en una escuela secundaria intermedia, secundaria o preparatoria, donde los niños tienen maestros múltiples que no siempre tienen la oportunidad de comunicarse entre ellos?",
+            answer: "Muchas escuelas intermedias y secundarias están organizadas en equipos o comunidades de aprendizaje en estos días, por lo que debería facilitar las cosas. Nada reemplaza el asegurarse de que el personal tenga tiempo para hablar sobre los niños de alta prioridad y reunirse periódicamente (preferiblemente, al menos semanalmente) para monitorear el progreso de los niños. Una vez más, los únicos modelos de atención que no requieren buena comunicación son los ineficaces. Este modelo no es la respuesta a todos los problemas de comunicación y programación que afectan a las escuelas secundarias intermedias, intermedias y superiores, pero puede ayudar a abordar los problemas de comunicación de dos maneras: Primero, proporcionando al personal un marco para organizar y comunicar información sobre un niño desafiante En segundo lugar, Plan B proporciona al personal los elementos y procesos que necesitarán para abordar y resolver sus problemas de comunicación restantes."
+        }, {
+            question: "Si estoy trabajando dentro de un equipo docente, ¿cómo determinamos cuál de nosotros debería estar haciendo el Plan B con un determinado estudiante sobre un problema en particular?",
+            answer: "Al principio, ¡será quien sea voluntario! Pero si tiene varios colaboradores dispuestos, es posible que desee reflexionar sobre quién tiene la mejor relación con el alumno, con quién ya está hablando y, si el problema está relacionado con las interacciones con un miembro del equipo, si sería Es mejor que ese miembro se acerque al niño o que sea potencialmente más productivo para que él lo hable con un miembro diferente."
+        }];
+
+
+
+
         $scope.googleAnalyticsViewPoliciesAndPracticesQuestions = function() {
             if (typeof analytics !== 'undefined') {
                 analytics.trackView('Question about policies and practices view');
@@ -397,6 +418,7 @@ angular.module('starter.controllers')
             question: "¿Cómo sabré si nuestra escuela ha “doblado la esquina” en nuestro tratamiento de niños provocativos?",
             answer: "No hay una referencia única que indique que ha 'llegado', dado que la mejora es un proceso continuo. Pero hay algunos indicadores bastante claros: la mentalidad hacia los niños desafiantes en su escuela está orientada hacia las dificultades en habilidades y los problemas no resueltos, y las personas están utilizando activamente el ALSUP y el Diagrama de flujo del Plan B en su evaluación de estos niños. Las personas son expertas en el Plan B y lo usan activamente. Existen estructuras que respaldan el uso del modelo, incluidos los mecanismos para (1) responder a los problemas de conducta de forma proactiva en lugar de emergente; (2) comunicarse y colaborar entre el personal y con los padres; (3) practicar, entrenar y monitorear las habilidades del Plan B; y (4) orientar al nuevo personal al modelo. Existen mecanismos para la evaluación continua de la disciplina escolar y las derivaciones disciplinarias, detenciones, suspensiones y expulsiones están en declive."
         }];
+
 
 
 
