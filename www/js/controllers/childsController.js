@@ -215,13 +215,13 @@ angular
           console.log("Datos: ");
           console.log(data.data);
           var alertForAcceptedRequest = $ionicPopup.alert({
-          title: "Resultado",
+          title: "Result",
           template: data.data.message,
           });
       }).catch(error => {
         console.log(error.status);
       });
-      $scope.getFriendShared(child_id); 
+      $scope.modalShare.hide();
     };
 
     $scope.getFriendShared =function (child_id){
