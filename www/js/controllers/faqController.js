@@ -11,7 +11,57 @@ angular.module('starter.controllers')
         };
         $scope.isQuestionShown = function(question) {
             return $scope.shownQuestion === question;
-	};
+    };
+    
+
+    $scope.googleAnalyticsViewChallengingKids = function() {
+        if(typeof analytics !== 'undefined') {
+            analytics.trackView('Challenging Kids F.A.Q view');
+        } else {
+            console.log("Google Analytics Unavailable");
+        }
+    };
+
+
+    $scope.googleAnalyticsViewCPSModelFAQ = function() {
+        if(typeof analytics !== 'undefined') {
+        analytics.trackView('CPS Model FAQ');
+        } else {
+            console.log("Google Analytics Unavailable");
+        }
+    };
+         
+    $scope.googleAnalyticsViewplansQuestions = function() {
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView('Question about the plans view');
+        } else {
+            console.log("Google Analytics Unavailable");
+        }
+    };
+
+    $scope.googleAnalyticsViewclassroomQuestions = function() {
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView('Question about the problems in the classroom view');
+        } else {
+            console.log("Google Analytics Unavailable");
+        }
+    };
+
+    $scope.googleAnalyticsViewPoliciesAndPracticesQuestions = function() {
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView('Question about policies and practices view');
+        } else {
+            console.log("Google Analytics Unavailable");
+        }
+    };
+
+    $scope.googleAnalyticsViewFAQ = function() {
+        if(typeof analytics !== 'undefined') {
+        analytics.trackView('F.A.Q view');
+            } else {
+                console.log("Google Analytics Unavailable");
+            }
+    };
 
 
     $scope.challengingKidsQuestions = [{
@@ -190,14 +240,6 @@ angular.module('starter.controllers')
     ];
 
 
-     $scope.googleAnalyticsViewFAQ = function() {
-        if(typeof analytics !== 'undefined') {
-        analytics.trackView('F.A.Q view');
-            } else {
-                console.log("Google Analytics Unavailable");
-            }
-    };
-
     $scope.challengingKidsQuestionsEs = [
         {
           question:"¿Por qué los niños desafiantes? desafían",
@@ -375,46 +417,4 @@ angular.module('starter.controllers')
             answer: "No hay una referencia única que indique que ha 'llegado', dado que la mejora es un proceso continuo. Pero hay algunos indicadores bastante claros: la mentalidad hacia los niños desafiantes en su escuela está orientada hacia las dificultades en habilidades y los problemas no resueltos, y las personas están utilizando activamente el ALSUP y el Diagrama de flujo del Plan B en su evaluación de estos niños. Las personas son expertas en el Plan B y lo usan activamente. Existen estructuras que respaldan el uso del modelo, incluidos los mecanismos para (1) responder a los problemas de conducta de forma proactiva en lugar de emergente; (2) comunicarse y colaborar entre el personal y con los padres; (3) practicar, entrenar y monitorear las habilidades del Plan B; y (4) orientar al nuevo personal al modelo. Existen mecanismos para la evaluación continua de la disciplina escolar y las derivaciones disciplinarias, detenciones, suspensiones y expulsiones están en declive."
         }
     ];
-
-
-    $scope.googleAnalyticsViewChallengingKids = function() {
-        if(typeof analytics !== 'undefined') {
-            analytics.trackView('Challenging Kids F.A.Q view');
-        } else {
-            console.log("Google Analytics Unavailable");
-        }
-    };
-
-
-    $scope.googleAnalyticsViewCPSModelFAQ = function() {
-        if(typeof analytics !== 'undefined') {
-        analytics.trackView('CPS Model FAQ');
-        } else {
-            console.log("Google Analytics Unavailable");
-        }
-    };
-         
-    $scope.googleAnalyticsViewplansQuestions = function() {
-        if (typeof analytics !== 'undefined') {
-            analytics.trackView('Question about the plans view');
-        } else {
-            console.log("Google Analytics Unavailable");
-        }
-    };
-
-    $scope.googleAnalyticsViewclassroomQuestions = function() {
-        if (typeof analytics !== 'undefined') {
-            analytics.trackView('Question about the problems in the classroom view');
-        } else {
-            console.log("Google Analytics Unavailable");
-        }
-    };
-
-    $scope.googleAnalyticsViewPoliciesAndPracticesQuestions = function() {
-        if (typeof analytics !== 'undefined') {
-            analytics.trackView('Question about policies and practices view');
-        } else {
-            console.log("Google Analytics Unavailable");
-        }
-    };
     });
