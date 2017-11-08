@@ -1,19 +1,32 @@
-<ion-view view-title="CPS FAQ" ng-controller="FaqCtrl">
+<ion-view view-title="{{'generalQuestionsAboutCPSTitle' | translate }}" ng-controller="FaqCtrl">
   <div class="bar bar-subheader item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-search placeholder-icon"></i>
-      <input type="search" placeholder="Search" ng-model="searchWord">
+      <input type="search" placeholder="{{'SearchText' | translate }}" ng-model="searchWord">
     </label>
     <button class="button ion-close input-button button-small"
             ng-click="searchWord = ''"
             ng-show="searchWord.length">
-        Clear
+            {{'OptionClear' | translate }}
     </button>
   </div>
   <div ng-init="googleAnalyticsViewCPSModelFAQ()">
   <ion-content class="has-subheader">
       <ion-list>
-        <div ng-repeat="question in modelQuestions | filter: searchWord">
+        <div ng-repeat="question in modelQuestions | filter: searchWord" ng-if="isEnglish()">
+          <ion-item class="item item-stable item-text-wrap"
+                    ng-click="toggleQuestion(question)"
+                    ng-class="{active: isQuestionShown(question)}">
+              <i class="icon" ng-class="isQuestionShown(question) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            {{question.question}}
+          </ion-item>
+          <ion-item class="item-accordion item-text-wrap"
+                    ng-show="isQuestionShown(question)">
+            {{question.answer}}
+          </ion-item>
+        </div>
+        <div ng-repeat="question in modelQuestionsEs | filter: searchWord" ng-if="isSpanish()">
           <ion-item class="item item-stable item-text-wrap"
                     ng-click="toggleQuestion(question)"
                     ng-class="{active: isQuestionShown(question)}">

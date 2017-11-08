@@ -229,4 +229,13 @@ var $translations_es = {
     help_category_03topic_05:"No estoy seguro de haber terminado con la etapa 1",
     help_category_03topic_06:"No sé cómo profundizar",
 
+
+    //FAQ
+    challengingKidsTitle: "Niños Desafiantes",
+    generalQuestionsAboutCPSTitle: "Preguntas generales sobre CPS",
+    questionAboutThePlansTitle: "Preguntas sobre los planes",
+    questionsAboutTheClassroomTitle: "Preguntas sobre resolver los problemas en el salon de clase",
+    questionsAboutPoliciesTitle: "Preguntas sobre las politicas y practicas",
+
+    
 };
