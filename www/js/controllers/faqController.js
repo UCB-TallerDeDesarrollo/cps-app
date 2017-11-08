@@ -257,7 +257,7 @@ angular.module('starter.controllers')
           question:"¿Dónde puedo aprender más acerca de este modelo?",
           answer:"El sitio web Lives in the Balance es un muy buen lugar para comenzar. Tiene una tonelada de recursos gratuitos para ayudarlo a aprender y aplicar el enfoque CPS, que incluye transmisión de video, programación de audio, comentarios, soporte y mucho más."
         },{
-          question:"¿no es este el mismo modelo que lo que se conocía anteriormente como Solución Colaborativa de Problemas?",
+          question:"¿No es este el mismo modelo que lo que se conocía anteriormente como Solución Colaborativa de Problemas?",
           answer:"El Dr. Greene es el creador del enfoque de Solución colaborativa de problemas, y durante muchos años se refirió a su modelo con ese nombre en sus trabajos de investigación, artículos académicos, libros y talleres. Ahora llama a su modelo Collaborative & Proactive Solutions (CPS). ¡Ten cuidado! ¡Hay otros que usan el nombre de Solución de problemas colaborativa, pero no tienen nada que ver con el origen o el desarrollo del Modelo de CPS y no están asociados con el Dr. Greene o Lives in the Balance de ninguna manera!"
         }
     ];
