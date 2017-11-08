@@ -242,7 +242,7 @@ angular.module('starter.controllers')
 
     $scope.challengingKidsQuestionsEs = [
         {
-          question:"¿Por qué los niños desafiantes? desafían",
+          question:"¿Por qué los niños desafiantes desafían?",
           answer:"Porque carecen de las habilidades para no ser un desafiantes. Si tuvieran las habilidades, no serían desafiantes. Eso es porque -Y este es quizás el tema clave del modelo- A los niños les va bien si pueden. Y porque (aquí hay otro tema clave) Hacer las cosas bien es preferible a no hacerlo bien. Esto, por supuesto, es una desviación dramática de la visión de los niños desafiantes como buscadores de atención, manipuladores, coercitivos, limitados y mal motivados. Es un conjunto de lentes completamente diferente, respaldado por la investigación en neurociencias en los últimos 30-40 años, y tiene implicaciones dramáticas sobre cómo los cuidadores ayudan a esos niños."
         },{
           question:"¿Cuándo desafían los niños desafiantes?",
