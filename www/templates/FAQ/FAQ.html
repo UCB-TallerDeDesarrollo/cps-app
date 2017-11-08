@@ -1,41 +1,55 @@
-<ion-view view-title="FAQ" ng-controller="FaqCtrl">
+<ion-view view-title="{{'FAQOption' | translate }}" ng-controller="FaqCtrl">
   <div class="bar bar-subheader item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-search placeholder-icon"></i>
-      <input type="search" placeholder="Search" ng-model="searchWord">
+      <input type="search" placeholder="{{'SearchText' | translate }}" ng-model="searchWord">
     </label>
     <button class="button ion-close input-button button-small"
             ng-click="searchWord = ''"
             ng-show="searchWord.length">
-        Clear
+            {{'OptionClear' | translate }}
     </button>
   </div>
   <ion-content ng-init="googleAnalyticsViewFAQ()" class="has-subheader">
 
     <ion-list ng-if="searchWord === ''">
       <ion-item class="item item-text-wrap" href="#/app/faq/challengingKids">
-        Challenging Kids
+        {{'challengingKidsTitle' | translate }}
       </ion-item>
       <ion-item class="item item-text-wrap" href="#/app/faq/model">
-        General questions about CPS
+        {{'generalQuestionsAboutCPSTitle' | translate }}
       </ion-item>
       <ion-item class="item item-text-wrap" href="#/app/faq/plans">
-        Questions about the plans
+        {{'questionAboutThePlansTitle' | translate }}
       </ion-item>
       <ion-item class="item item-text-wrap" href="#/app/faq/classroom">
-        Questions about solving the problems in the classroom</ion-item>
+        {{'questionsAboutTheClassroomTitle' | translate }}
+      </ion-item>
       <ion-item class="item item-text-wrap" href="#/app/faq/policiesAndPractices">
-        Questions about policies and practices
+        {{'questionsAboutPoliciesTitle' | translate }}
       </ion-item>
     </ion-list>
 
     <ion-list ng-if="searchWord.length !== 0">
       <div name="search-results-challengingKidsQuestions" ng-if="searchResults.challengingKidsQuestions.length !== 0">
         <ion-item class="item item-divider">
-          <b>Challenging Kids</b>
+          <b>{{'challengingKidsTitle' | translate }}</b>
         </ion-item>
         <ion-list>
-          <div ng-repeat="question in challengingKidsQuestions | filter: searchWord">
+          <div ng-repeat="question in challengingKidsQuestions | filter: searchWord" ng-if="isEnglish()">
+            <ion-item class="item item-text-wrap"
+                      ng-click="toggleQuestion(question)"
+                      ng-class="{active: isQuestionShown(question)}">
+                <i class="icon" ng-class="isQuestionShown(question) ? 'ion-minus' : 'ion-plus'"></i>
+              &nbsp;
+              {{question.question}}
+            </ion-item>
+            <ion-item class="item-accordion item-text-wrap"
+                      ng-show="isQuestionShown(question)">
+              {{question.answer}}
+            </ion-item>
+          </div>
+          <div ng-repeat="question in challengingKidsQuestionsEs | filter: searchWord" ng-if="isSpanish()">
             <ion-item class="item item-text-wrap"
                       ng-click="toggleQuestion(question)"
                       ng-class="{active: isQuestionShown(question)}">
@@ -53,10 +67,23 @@
 
       <div name="search-results-modelQuestions" ng-if="searchResults.modelQuestions.length !== 0">
         <ion-item class="item item-divider">
-          <b>General questions about CPS Model</b>
+          <b>{{'generalQuestionsAboutCPSTitle' | translate }}</b>
         </ion-item>
         <ion-list>
-          <div ng-repeat="question in modelQuestions | filter: searchWord">
+          <div ng-repeat="question in modelQuestions | filter: searchWord" ng-if="isEnglish()">
+            <ion-item class="item item-text-wrap"
+                      ng-click="toggleQuestion(question)"
+                      ng-class="{active: isQuestionShown(question)}">
+                <i class="icon" ng-class="isQuestionShown(question) ? 'ion-minus' : 'ion-plus'"></i>
+              &nbsp;
+              {{question.question}}
+            </ion-item>
+            <ion-item class="item-accordion item-text-wrap"
+                      ng-show="isQuestionShown(question)">
+              {{question.answer}}
+            </ion-item>
+          </div>
+          <div ng-repeat="question in modelQuestionsEs | filter: searchWord" ng-if="isSpanish()">
             <ion-item class="item item-text-wrap"
                       ng-click="toggleQuestion(question)"
                       ng-class="{active: isQuestionShown(question)}">
@@ -75,10 +102,23 @@
 
       <div name="search-results-plansQuestions" ng-if="searchResults.plansQuestions.length !== 0">
         <ion-item class="item item-divider">
-          <b>Questions about the plans</b>
+          <b>{{'questionAboutThePlansTitle' | translate }}</b>
         </ion-item>
         <ion-list>
-          <div ng-repeat="question in plansQuestions | filter: searchWord">
+          <div ng-repeat="question in plansQuestions | filter: searchWord" ng-if="isEnglish()">
+            <ion-item class="item item-text-wrap"
+                      ng-click="toggleQuestion(question)"
+                      ng-class="{active: isQuestionShown(question)}">
+                <i class="icon" ng-class="isQuestionShown(question) ? 'ion-minus' : 'ion-plus'"></i>
+              &nbsp;
+              {{question.question}}
+            </ion-item>
+            <ion-item class="item-accordion item-text-wrap"
+                      ng-show="isQuestionShown(question)">
+              {{question.answer}}
+            </ion-item>
+          </div>
+          <div ng-repeat="question in plansQuestionsEs | filter: searchWord" ng-if="isSpanish()">
             <ion-item class="item item-text-wrap"
                       ng-click="toggleQuestion(question)"
                       ng-class="{active: isQuestionShown(question)}">
@@ -97,10 +137,23 @@
 
       <div name="search-results-classroomQuestions" ng-if="searchResults.classroomQuestions.length !== 0">
         <ion-item class="item item-divider">
-          <b>Questions about solving the problems in the classroom</b>
+          <b>{{'questionsAboutTheClassroomTitle' | translate }}</b>
         </ion-item>
         <ion-list>
-          <div ng-repeat="question in classroomQuestions | filter: searchWord">
+          <div ng-repeat="question in classroomQuestions | filter: searchWord" ng-if="isEnglish()">  
+            <ion-item class="item item-text-wrap"
+                      ng-click="toggleQuestion(question)"
+                      ng-class="{active: isQuestionShown(question)}">
+                <i class="icon" ng-class="isQuestionShown(question) ? 'ion-minus' : 'ion-plus'"></i>
+              &nbsp;
+              {{question.question}}
+            </ion-item>
+            <ion-item class="item-accordion item-text-wrap"
+                      ng-show="isQuestionShown(question)">
+              {{question.answer}}
+            </ion-item>
+          </div>
+          <div ng-repeat="question in classroomQuestionsEs | filter: searchWord" ng-if="isSpanish()">
             <ion-item class="item item-text-wrap"
                       ng-click="toggleQuestion(question)"
                       ng-class="{active: isQuestionShown(question)}">
@@ -119,10 +172,23 @@
 
       <div name="search-results-policiesAndPracticesQuestions" ng-if="searchResults.policiesAndPracticesQuestions.length !== 0">
         <ion-item class="item item-divider">
-          <b>Questions about policies and practices</b>
+          <b>{{'questionsAboutPoliciesTitle' | translate }}</b>
         </ion-item>
         <ion-list>
-          <div ng-repeat="question in policiesAndPracticesQuestions | filter: searchWord">
+          <div ng-repeat="question in policiesAndPracticesQuestions | filter: searchWord" ng-if="isEnglish()">
+            <ion-item class="item item-text-wrap"
+                      ng-click="toggleQuestion(question)"
+                      ng-class="{active: isQuestionShown(question)}">
+                <i class="icon" ng-class="isQuestionShown(question) ? 'ion-minus' : 'ion-plus'"></i>
+              &nbsp;
+              {{question.question}}
+            </ion-item>
+            <ion-item class="item-accordion item-text-wrap"
+                      ng-show="isQuestionShown(question)">
+              {{question.answer}}
+            </ion-item>
+          </div>
+          <div ng-repeat="question in policiesAndPracticesQuestionsEs | filter: searchWord" ng-if="isSpanish()">
             <ion-item class="item item-text-wrap"
                       ng-click="toggleQuestion(question)"
                       ng-class="{active: isQuestionShown(question)}">

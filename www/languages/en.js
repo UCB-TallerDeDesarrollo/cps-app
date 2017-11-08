@@ -228,4 +228,11 @@ var $translations_en = {
     help_category_03topic_05:"I’m not sure I’m done with Step 1",
     help_category_03topic_06:"I don’t know how to drill",
     
+    //FAQ 
+    challengingKidsTitle: "Challening Kids",
+    generalQuestionsAboutCPSTitle: "General questions about CPS",
+    questionAboutThePlansTitle: "Questions about the plans",
+    questionsAboutTheClassroomTitle: "Questions about solving the problems in the classroom",
+    questionsAboutPoliciesTitle: "Questions about policies and practices",
+
 };
