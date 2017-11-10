@@ -38,6 +38,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   });
 
   $rootScope.state = $state;
+  $rootScope.Global = "Hola";
 
 })
 
