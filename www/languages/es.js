@@ -52,8 +52,8 @@ var $translations_es = {
     ConfirmDeleteChildMessage: '¿Seguro de que quieres eliminar este niño?',
     YesMessage: 'Si',
     NoMessage: "No",
-    WelcomeMessage: 'Bienvenido a Lens Changer',
-    ChooseAnOptionMessage: '¡Puedes elegir una opción!',
+    WelcomeMessage: 'Bienvenido a The Lens Changer 2',
+    ChooseAnOptionMessage: '¡Elige tu rol!',
     ParentOption: "Padre",
     EducatorOption: "Educador",
     SignInOption: "Registrarse",
@@ -237,5 +237,5 @@ var $translations_es = {
     questionsAboutTheClassroomTitle: "Preguntas sobre resolver los problemas en el salon de clase",
     questionsAboutPoliciesTitle: "Preguntas sobre las politicas y practicas",
 
-    
+
 };
