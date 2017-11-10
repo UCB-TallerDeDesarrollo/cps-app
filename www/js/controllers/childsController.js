@@ -347,7 +347,7 @@ angular
         })
         .then(data => {
             $scope.uploadAdultConcern();
-           
+
         },
           function(response) {
             console.log(response.data.message);
@@ -459,7 +459,7 @@ angular
                     console.log("Adult Concern uploated")
 
                     $scope.uploadChildConcern();
-                    
+
                   },
                   function(response) {
                     console.log(response.data.message);
@@ -528,7 +528,7 @@ angular
                   .then(data => {
                     console.log(data)
                     $scope.uploadSolution();
-                    
+
                   },
                   function(response) {
                     console.log(response.data.message);
@@ -712,7 +712,7 @@ angular
       });
       })
     };
-    
+
     $scope.showActionsheet = function(child) {
       $translate([
         "EditChildTitle",
@@ -722,8 +722,9 @@ angular
         "unShareALSUP"
       ]).then(function(translations) {
         // Link para factorizar ionicActionSheet: https://www.ghadeer.io/ionicactionsheet-example/
-        var buttons = [{ text: translations.EditChildTitle },{text: translations.ShareALSUP} ];
-        $scope.getFriendShared(child.id);        
+        // var buttons = [{ text: translations.EditChildTitle },{text: translations.ShareALSUP} ];
+        var buttons = [{ text: translations.EditChildTitle } ];
+        $scope.getFriendShared(child.id);
         $ionicActionSheet.show({
           buttons: buttons,
           cancelText: translations.CancelOption,
@@ -744,7 +745,7 @@ angular
               $scope.openModalEdit();
             }
             if (index === 1) {
-              $scope.child = angular.copy(child);             
+              $scope.child = angular.copy(child);
               $scope.openModalShare();
             }
             $ionicListDelegate.closeOptionButtons();
