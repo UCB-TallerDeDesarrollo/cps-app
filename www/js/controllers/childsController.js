@@ -29,6 +29,7 @@ angular
     $scope.child.first_name = "";
     $scope.child.gender = "Female";
     $scope.child.birthday = new Date();
+    $scope.sharedAlsups; 
 
     ChildrenFactory.all(function(children) {
       $scope.childs = children;
@@ -241,6 +242,19 @@ angular
       }).catch(error => {
         console.log(error.message);
       });
+    };
+
+    $scope.getSharedAlsups = function() {
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+'/alsup_share', {
+          headers: { Authorization: localStorage.getItem("auth_token") }
+        })
+        .then(data => {
+          $scope.sharedAlsups = data.data;
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
     };
 
     $ionicModal.fromTemplateUrl('templates/child/sync-child-modal.html', {
