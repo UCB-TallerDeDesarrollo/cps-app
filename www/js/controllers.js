@@ -373,7 +373,7 @@ app
         {
             description: "Tips!",
             topics: [{ description: "Stick as closely to the concerns that were identified in the first two steps" },
-                { description: "While it’s a good idea to give the kid the first opportunity to propose a solution, generating solutions is a team effort" },
+                { description: "While it’s a good idea to give the child the first opportunity to propose a solution, generating solutions is a team effort" },
                 { description: "It’s a good idea to consider the odds of a given solution actually working …if you think the odds are below 60-70 percent, consider what it is that’s making you skeptical and talk about it" },
                 { description: "This step always ends with agreement to return to Plan B if the first solution doesn’t stand the test of time " }
             ]
