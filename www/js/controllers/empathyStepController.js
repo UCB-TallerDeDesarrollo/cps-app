@@ -194,18 +194,18 @@ angular.module('starter.controllers')
   $scope.selectTabWithIndexShared = function(index) {
         if (index === 0) {
           $ionicTabsDelegate.select(index);
-          $state.go("app.showUnsolvedProblem", {
+          $state.go("app.sharedShowUnsolvedProblem", {
             unsolvedProblemId: $scope.unsolvedProblem.id
           });
         }
         if (index == 1) {
           $ionicTabsDelegate.select(index);
-          $state.go("app.defineTheProblem", {
+          $state.go("app.sharedDefineTheProblem", {
             unsolvedProblemId: $scope.unsolvedProblem.id
           });
         }
         if (index == 2) {
-          $state.go("app.invitation", {
+          $state.go("app.sharedInvitation", {
             unsolvedProblemId: $scope.unsolvedProblem.id
           });
           $ionicTabsDelegate.select(index);
@@ -306,7 +306,7 @@ angular.module('starter.controllers')
 
   $scope.sharedChildConcerns;
 
-    $scope.getSharedUnsolveProblems = function(user_id,child_id,unsolved_problem_id) {
+    $scope.getSharedChildConcerns = function(user_id,child_id,unsolved_problem_id) {
         $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/unsolved_problem/"+unsolved_problem_id+"/sharedChildConcerns", {
             headers: { Authorization: localStorage.getItem("auth_token") }
           })

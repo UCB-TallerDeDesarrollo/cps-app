@@ -38,10 +38,11 @@
             <p>{{'NoSharedLaggingSkills' | translate }}</p>
           </div>
         </ion-item>
-        <ion-item class="item item-text-wrap" ng-repeat="sharelagging in shareLaggingSkills" href="#/app/unsolvedProblems/shared/{{sharedChild}}">
+        <ion-item class="item item-text-wrap item-icon-right" ng-repeat="sharelagging in shareLaggingSkills" href="#/app/unsolvedProblems/shared/{{sharedChild}}">
           <div class="positive">
             {{sharelagging.description | translate}}
           </div>
+          <i class="icon dark ion-chevron-right"></i>
         </ion-item>
       </ion-list>
     </ion-content>

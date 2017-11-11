@@ -125,13 +125,11 @@ app
     $scope.unsolvedProblemFromShared;
 
     $scope.getDataUnsolvedProblem = function(unsolved_problem_id) {
-        console.log(unsolved_problem_id);
       $http.get($link_root+"/unsolved_problem/"+unsolved_problem_id, {
           headers: { Authorization: localStorage.getItem("auth_token") }
         })
         .then(data => {
           $scope.unsolvedProblemFromShared = data.data;
-          console.log($scope.unsolvedProblemFromShared);
         })
         .catch(error => {
           console.log(error.message);

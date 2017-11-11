@@ -62,7 +62,7 @@
 
 
   <!--Shared Child concern view-->
-  <div ng-if="sharedChild > 0" ng-init="getDataUnsolvedProblem(unsolvedProblemID); getSharedUnsolveProblems(childFromShared.user_id,childFromShared.child_id,unsolvedProblemIDapp);">
+  <div ng-if="sharedChild > 0" ng-init="getDataUnsolvedProblem(unsolvedProblemID); getSharedChildConcerns(childFromShared.user_id,childFromShared.child_id,unsolvedProblemIDapp);">
     <div class="bar bar-subheader bar-positive">
       <h2 class="title">{{unsolvedProblemFromShared.description}} </h2>
     </div>
