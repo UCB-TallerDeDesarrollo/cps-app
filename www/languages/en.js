@@ -52,8 +52,8 @@ var $translations_en = {
     ConfirmDeleteChildMessage: 'Are you sure you want to delete this child?',
     YesMessage: 'Yes',
     NoMessage: "No",
-    WelcomeMessage: 'Welcome to Lens Changer',
-    ChooseAnOptionMessage: 'You can choose a option!',
+    WelcomeMessage: 'Welcome to The Lens Changer 2',
+    ChooseAnOptionMessage: 'Choose your role!',
     ParentOption: "Parent",
     EducatorOption: "Educator",
     SignInOption: "Sign in",
@@ -215,10 +215,10 @@ var $translations_en = {
 
     //For Empathy Step in help views
     titleHelpCategories:"Help Categories for Step 1",
-    help_category_01:"The kid isn’t talking",
-    help_category_02: "My kid is too young to do CPS",
-    help_category_03: "The kid talked but I don’t know what to do with what s/he said",
-    help_category_01topic_02:"Maybe you are using Emergency B (in the heat of the moment when the kid is already upset) instead of Proactive B?",
+    help_category_01:"The Child isn’t talking",
+    help_category_02: "My Child is too young to do CPS",
+    help_category_03: "The Child talked but I don’t know what to do with what s/he said",
+    help_category_01topic_02:"Maybe you are using Emergency B (in the heat of the moment when the child is already upset) instead of Proactive B?",
     help_category_01topic_05:"Maybe s/he needs the problem broken down into its component parts:",
     help_category_01topic_07:"Maybe s/he doesn’t have the words to tell you",
     help_category_03topic_01:"Are you confused?",
@@ -227,9 +227,9 @@ var $translations_en = {
     help_category_03topic_04:"The child said some concerns but I think there are more!",
     help_category_03topic_05:"I’m not sure I’m done with Step 1",
     help_category_03topic_06:"I don’t know how to drill",
-    
-    //FAQ 
-    challengingKidsTitle: "Challening Kids",
+
+    //FAQ
+    challengingKidsTitle: "Challenging Childs",
     generalQuestionsAboutCPSTitle: "General questions about CPS",
     questionAboutThePlansTitle: "Questions about the plans",
     questionsAboutTheClassroomTitle: "Questions about solving the problems in the classroom",

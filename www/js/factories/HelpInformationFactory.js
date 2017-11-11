@@ -3,7 +3,7 @@ angular.module('starter.services').factory('HelpInformationFactory', function() 
   var step1Help = [
     {
       name : "help_category_01",
-      description : "The kid isn’t talking",
+      description : "The child isn’t talking",
       image: "category_1.png",
       id:1,
       topics: [
@@ -14,7 +14,7 @@ angular.module('starter.services').factory('HelpInformationFactory', function() 
         },
         {
           name: "topic_02",
-          description: "Maybe you are using Emergency B (in the heat of the moment when the kid is already upset) instead of Proactive B?",
+          description: "Maybe you are using Emergency B (in the heat of the moment when the child is already upset) instead of Proactive B?",
           id:"2",
           contents: [
             {
@@ -40,7 +40,7 @@ angular.module('starter.services').factory('HelpInformationFactory', function() 
             {name: "content_01", description: "Give your kid the fingers",link:"http://www.blogtalkradio.com/dr-ross-greene/2016/03/14/give-your-kid-the-fingers", id:"1"}
           ]
         },
-        {name: "topic_08", description: "My kid won’t talk to me", id:"8", link:"http://www.blogtalkradio.com/dr-ross-greene/2010/09/21/parenting-challenging-kids-collaborative-problem-s"},
+        {name: "topic_08", description: "My child won’t talk to me", id:"8", link:"http://www.blogtalkradio.com/dr-ross-greene/2010/09/21/parenting-challenging-kids-collaborative-problem-s"},
         {name: "topic_09", description: "Talking about talking", id:"9", link:"http://www.blogtalkradio.com/dr-ross-greene/2013/05/20/parenting-your-challenging-child"}
       ]
     },

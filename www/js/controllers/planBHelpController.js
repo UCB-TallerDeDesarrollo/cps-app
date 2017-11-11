@@ -31,7 +31,7 @@ angular.module('starter.controllers')
       topics: [
         {
           title: "I’m not sure how to word my concern",
-          content: "Most adult concerns fall into one of two categories:\n1. How the problem is affecting the kid.\n2. How the problem is affecting others"
+          content: "Most adult concerns fall into one of two categories:\n1. How the problem is affecting the child.\n2. How the problem is affecting others"
         },
         {
           title: "My child is having difficulty hearing my concerns",
