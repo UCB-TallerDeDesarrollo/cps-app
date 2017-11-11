@@ -344,4 +344,24 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
          console.log("Google Analytics Unavailable");
      }
    };
+  
+
+   $scope.sharedUnsolveProblems;
+
+    $scope.getSharedUnsolveProblems = function(child_id) {
+      var user_id = localStorage.getItem("user_id");
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/sharedUnsolvedProblems", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedUnsolveProblems = data.data;
+             console.log($scope.sharedUnsolveProblems);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
+
+
+
 });

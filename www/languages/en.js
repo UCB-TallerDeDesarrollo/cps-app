@@ -235,4 +235,8 @@ var $translations_en = {
     questionsAboutTheClassroomTitle: "Questions about solving the problems in the classroom",
     questionsAboutPoliciesTitle: "Questions about policies and practices",
 
+    //Share
+    NoSharedLaggingSkills: "No lagging skills shared yet. TAP FOR NEXT",
+    NoSharedUnsolvedProblem: "No unsolved problems shared yet",
+
 };
