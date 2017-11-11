@@ -22,7 +22,6 @@ app
     //});
     $scope.firstTimeHelp = false;
     // Form data for the login modal
-    $scope.childFromShared;
     $scope.loginData = {};
     $scope.user_name = localStorage.getItem("user_name");
     $scope.$watch(function () {
@@ -107,6 +106,8 @@ app
           });
       };
 
+    $scope.childFromShared;
+
     $scope.getDataChildShared = function(child_id) {
       var user_id = localStorage.getItem("user_id");
       $http.get($link_root+'/users/'+user_id+"/children/"+child_id+"/getChild", {
@@ -115,6 +116,22 @@ app
         .then(data => {
           $scope.childFromShared = data.data;
           $scope.getSharedLaggingSkills($scope.childFromShared.user_id, $scope.childFromShared.child_id);
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    };
+
+    $scope.unsolvedProblemFromShared;
+
+    $scope.getDataUnsolvedProblem = function(unsolved_problem_id) {
+        console.log(unsolved_problem_id);
+      $http.get($link_root+"/unsolved_problem/"+unsolved_problem_id, {
+          headers: { Authorization: localStorage.getItem("auth_token") }
+        })
+        .then(data => {
+          $scope.unsolvedProblemFromShared = data.data;
+          console.log($scope.unsolvedProblemFromShared);
         })
         .catch(error => {
           console.log(error.message);

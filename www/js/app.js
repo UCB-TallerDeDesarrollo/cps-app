@@ -39,13 +39,21 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
 
   $rootScope.state = $state;
   $rootScope.sharedChild = 0;
+  $rootScope.unsolvedProblemIDapp = 0;
+  $rootScope.unsolvedProblemID = 0;
 
   $rootScope.activeSharedChild = function(id){
     $rootScope.sharedChild = id;
   };
 
+  $rootScope.activeUnsolvedProblemID = function(up_id_app,up_id) {
+    $rootScope.unsolvedProblemIDapp = up_id_app;
+    $rootScope.unsolvedProblemID = up_id;
+  };
+
   $rootScope.setSharedChild = function(id) {
     $rootScope.sharedChild = 0;
+    $rootScope.unsolvedProblemID = 0;
   };
 
 })
@@ -356,13 +364,33 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   })
   
   .state('app.sharedUnsolvedProblem', {
-      url: '/unsolvedProblems/shared/:laggingSkillsId',
+      url: '/unsolvedProblems/shared/:sharedChild',
       views: {
         'menuContent': {
           templateUrl: 'templates/unsolvedProblems/newUnsolvedProblem.html',
           controller: 'UnsolvedProblemCtrl'
         }
       }
+  })
+
+  .state('app.sharedShowUnsolvedProblem', {
+    url: '/unsolvedProblem/shared/show/:sharedChild',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/cpsProcess/empathyStep.html',
+        controller: 'ChildsConcernsCtrl'
+      }
+    }
+  })
+
+  .state('app.sharedDefineTheProblem', {
+    url: '/shared/defineTheProblem/:unsolvedProblemId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/cpsProcess/defineAdultConcern.html',
+        controller: 'DefineTheProblemCtrl'
+      }
+    }
   })
   ;
 

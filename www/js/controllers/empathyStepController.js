@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory, ChildConcernFactory,AdultConcernFactory,$ionicSideMenuDelegate, $translate){
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory, ChildConcernFactory,AdultConcernFactory,$ionicSideMenuDelegate, $translate, $http){
   $ionicSideMenuDelegate.canDragContent(false);
     $scope.childsConcern = {
     description: ""
@@ -131,6 +131,9 @@ angular.module('starter.controllers')
   $scope.goUnsolvedProblems = function(){
     $state.go('app.newUnsolvedProblem');
   };
+  $scope.goUnsolvedProblemsShared = function() {
+    $state.go("app.sharedUnsolvedProblem");
+  };
   $scope.verifyToGoToStep2 = function() {
     $translate(['goingTo','Step', 'DefineAdultsConcern','NoMessage','YesMessage','keepDrilling','step2VerifyBody','imSure']).then (function(translations){
     if($scope.adultsConcerns.length === 0){
@@ -186,6 +189,27 @@ angular.module('starter.controllers')
       }
     }
   });
+  };
+
+  $scope.selectTabWithIndexShared = function(index) {
+        if (index === 0) {
+          $ionicTabsDelegate.select(index);
+          $state.go("app.showUnsolvedProblem", {
+            unsolvedProblemId: $scope.unsolvedProblem.id
+          });
+        }
+        if (index == 1) {
+          $ionicTabsDelegate.select(index);
+          $state.go("app.defineTheProblem", {
+            unsolvedProblemId: $scope.unsolvedProblem.id
+          });
+        }
+        if (index == 2) {
+          $state.go("app.invitation", {
+            unsolvedProblemId: $scope.unsolvedProblem.id
+          });
+          $ionicTabsDelegate.select(index);
+        }
   };
   $scope.editChildsConcern = function(childsConcern){
     $scope.editableChildsConcern = angular.copy(childsConcern);
@@ -278,5 +302,20 @@ angular.module('starter.controllers')
     } else {
         console.log("Google Analytics Unavailable");
     }
-  }
+  };
+
+  $scope.sharedChildConcerns;
+
+    $scope.getSharedUnsolveProblems = function(user_id,child_id,unsolved_problem_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/unsolved_problem/"+unsolved_problem_id+"/sharedChildConcerns", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedChildConcerns = data.data;
+             console.log($scope.sharedChildConcerns);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
 });

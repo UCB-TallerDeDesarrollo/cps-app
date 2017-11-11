@@ -89,7 +89,7 @@
         <div class="item item-divider item-text-wrap">
           <div class="col col-75">
             <h2>
-              <b>Shared Children</b>{{sharedChild}}
+              <b>Shared Children</b>
               <span class="badge badge-energized">{{sharedAlsups.length}}</span>
             </h2>
           </div>
@@ -119,7 +119,7 @@
             </div>
             <div class="col col-50" ng-if="sharedAlsups[$index+1]">
               <div class="card">
-                <div class="item item-text-wrap text-center" ng-click="setSharedChild()">
+                <div class="item item-text-wrap text-center">
                   <img class="full-image" ng-src="img/childs/boy.png" ng-if="sharedAlsups[$index+1].gender === 'Male'">
                   <img class="full-image" ng-src="img/childs/girl.png" ng-if="sharedAlsups[$index+1].gender === 'Female'">
                   <h2>

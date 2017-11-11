@@ -61,7 +61,8 @@
           </div>
         </div>
         <ion-list>
-          <ion-item class="item-text-wrap item-icon-left item-icon-right" ng-click="verifyToGoToStep1({{unsolvedProblem.id}})" ng-repeat="sharedunsolved in sharedUnsolveProblems">
+          <ion-item class="item-text-wrap item-icon-left item-icon-right" ng-repeat="sharedunsolved in sharedUnsolveProblems" href="#/app/unsolvedProblem/shared/show/{{sharedChild}}" 
+          ng-click="activeUnsolvedProblemID(sharedunsolved.unsolved_problem_id_app,sharedunsolved.id)">
             <!-- <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration"> -->
             <div name="content">
               <i class="icon dark {{getRatingIcon(sharedunsolved)}}"></i>
@@ -70,8 +71,8 @@
             </div>
             <!-- </a> -->
           </ion-item>
-          <div class="item item-text-wrap" ng-if="unsolvedProblems.length === 0">
-            <p>{{'NoUnsolvedProblems' | translate }}</p>
+          <div class="item item-text-wrap" ng-if="sharedUnsolveProblems.length === 0">
+            <p>{{'NoSharedUnsolvedProblem' | translate }}</p>
           </div>
         </ion-list>
       </div>
