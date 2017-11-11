@@ -239,5 +239,9 @@ var $translations_es = {
     questionsAboutTheClassroomTitle: "Preguntas sobre resolver los problemas en el salon de clase",
     questionsAboutPoliciesTitle: "Preguntas sobre las politicas y practicas",
 
+    //Share
+    NoSharedLaggingSkills: "Aún no se compartieron dificultades. TOCA PARA CONTINUAR",
+    NoSharedUnsolvedProblem: "Aún no se compartieron problemas sin resolver",
+
 
 };

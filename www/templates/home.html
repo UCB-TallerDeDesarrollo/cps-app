@@ -9,9 +9,12 @@
         <img src="img/home/laggingskills-icon.png">
        {{'LaggingSkillsTitle' | translate }}
       </a>
-      <a class="item item-thumbnail-left" ng-click="checkActiveToContinue('app.newUnsolvedProblem')">
+      <a class="item item-thumbnail-left" ng-if="sharedChild == 0" ng-click="checkActiveToContinue('app.newUnsolvedProblem')">
         <img src="img/home/unsolvedproblem-icon.png">
         {{'UnsolvedProblemsTitle' | translate }}
+      </a>
+      <a class="item item-thumbnail-left" ng-if="sharedChild > 0" ng-click="getDataChildShared(sharedChild)" href="#/app/unsolvedProblems/shared/{{sharedChild}}">
+        <img src="img/home/unsolvedproblem-icon.png"> {{'UnsolvedProblemsTitle' | translate }}
       </a>
     </div>
   </ion-content>

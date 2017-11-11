@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory, $ionicSideMenuDelegate, $translate){
+angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory, $ionicSideMenuDelegate, $translate, $http){
   $scope.pairExist = false;
   $ionicSideMenuDelegate.canDragContent(false);
   $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
@@ -465,6 +465,21 @@ $scope.editablePair=[];
 
   };
 
+  $scope.selectTabWithIndexShared = function(index) {
+    if (index === 0) {
+      $ionicTabsDelegate.select(index);
+      $state.go("app.sharedShowUnsolvedProblem", {unsolvedProblemId: $scope.unsolvedProblemFromShared.id});
+    }
+    if (index == 1) {
+      $ionicTabsDelegate.select(index);
+      $state.go("app.sharedDefineTheProblem", {unsolvedProblemId: $scope.unsolvedProblemFromShared.id });
+    }
+    if (index == 2) {
+      $state.go("app.sharedInvitation", {unsolvedProblemId: $scope.unsolvedProblemFromShared.id});
+      $ionicTabsDelegate.select(index);
+    }
+  };
+
   $scope.getRatingIcon = function(solution) {
     var rating = solution.rating;
     if (rating === 0) {
@@ -501,6 +516,52 @@ $scope.editablePair=[];
       }
     });
     };
+
+    $scope.sharedChildConcerns;
+
+    $scope.getSharedChildConcerns = function(user_id,child_id,unsolved_problem_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/unsolved_problem/"+unsolved_problem_id+"/sharedChildConcerns", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedChildConcerns = data.data;
+             console.log($scope.sharedChildConcerns);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
+
+      $scope.sharedAdultConcerns;
+
+    $scope.getSharedAdultConcerns = function(user_id,child_id,unsolved_problem_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/unsolved_problem/"+unsolved_problem_id+"/sharedAdultConcerns", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedAdultConcerns = data.data;
+             console.log($scope.sharedAdultConcerns);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
+
+      $scope.sharedPosibleSolutions;
+
+    $scope.getSharedPosibleSolutions = function(user_id,child_id,unsolved_problem_id_app,unsolved_problem_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/unsolved_problem/"+unsolved_problem_id+"/sharedPosibleSolutions", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedPosibleSolutions = data.data;
+            $scope.getSharedChildConcerns(user_id, child_id, unsolved_problem_id_app);
+            $scope.getSharedAdultConcerns(user_id, child_id, unsolved_problem_id_app);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
  
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 });

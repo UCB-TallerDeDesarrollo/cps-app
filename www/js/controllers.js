@@ -93,6 +93,49 @@ app
         });
     };
 
+    $scope.shareLaggingSkills;
+    $scope.getSharedLaggingSkills = function(user_id,child_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/getLaggingSkills", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.shareLaggingSkills = data.data;
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
+
+    $scope.childFromShared;
+
+    $scope.getDataChildShared = function(child_id) {
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+"/children/"+child_id+"/getChild", {
+          headers: { Authorization: localStorage.getItem("auth_token") }
+        })
+        .then(data => {
+          $scope.childFromShared = data.data;
+          $scope.getSharedLaggingSkills($scope.childFromShared.user_id, $scope.childFromShared.child_id);
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    };
+
+    $scope.unsolvedProblemFromShared;
+
+    $scope.getDataUnsolvedProblem = function(unsolved_problem_id) {
+      $http.get($link_root+"/unsolved_problem/"+unsolved_problem_id, {
+          headers: { Authorization: localStorage.getItem("auth_token") }
+        })
+        .then(data => {
+          $scope.unsolvedProblemFromShared = data.data;
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    };
+
     //Changes the language of translation
     $scope.ChangeLanguage = function(lang){
         $translate.use(lang);
@@ -222,7 +265,7 @@ app
         } else {
             console.log("Google Analytics Unavailable");
         }
-    }
+    };
 
     $scope.uploadLaggingSkill = function(laggingskillList,laggingskillId){
         $scope.activeLaggingSkill = LaggingSkills.get(laggingskillList,laggingskillId);
