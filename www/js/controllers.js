@@ -206,6 +206,10 @@ app
     $scope.openModalHint = function() {
         $scope.modalHint.show();
     };
+    $scope.goToAlsupHelp = function() {
+        $scope.modalHint.hide();
+        $state.go("app.alsupHelp");
+    }
     $ionicModal.fromTemplateUrl('templates/laggingSkills/laggingSkillsHints.html', {
         scope: $scope,
         animation: 'slide-in-up'
