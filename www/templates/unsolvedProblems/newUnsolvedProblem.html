@@ -48,9 +48,33 @@
   </div>
   <!--Shared unsolved problem view-->
   <div ng-if="sharedChild > 0">
-    <div class="bar bar-subheader bar-positive item-text-wrap" ng-init="getDataChildShared(sharedChild)">
+    <div class="bar bar-subheader bar-positive item-text-wrap" ng-init="getSharedUnsolveProblems(sharedChild)">
       <h2 class="title">{{childFromShared.name}}</h2>
-      <a class=" button button-small button-clear button-white icon ion-help-circled" ng-click="unsolvedProblemHint()"></a>
     </div>
+    <ion-content class="has-subheader" ng-controller="UnsolvedProblemCtrl" ng-init="googleAnalyticsView()">
+      <div>
+        <div class="item item-divider item-text-wrap">
+          <div class="col col-75">
+            <h2>
+              <b>{{'UnsolvedProblemsTitle' | translate }}</b>
+            </h2>
+          </div>
+        </div>
+        <ion-list>
+          <ion-item class="item-text-wrap item-icon-left item-icon-right" ng-click="verifyToGoToStep1({{unsolvedProblem.id}})" ng-repeat="sharedunsolved in sharedUnsolveProblems">
+            <!-- <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration"> -->
+            <div name="content">
+              <i class="icon dark {{getRatingIcon(sharedunsolved)}}"></i>
+              <p>{{sharedunsolved.description}}</p>
+              <i class="icon dark ion-chevron-right"></i>
+            </div>
+            <!-- </a> -->
+          </ion-item>
+          <div class="item item-text-wrap" ng-if="unsolvedProblems.length === 0">
+            <p>{{'NoUnsolvedProblems' | translate }}</p>
+          </div>
+        </ion-list>
+      </div>
+    </ion-content>
   </div>
 </ion-view>
