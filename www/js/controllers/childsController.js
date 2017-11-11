@@ -29,7 +29,7 @@ angular
     $scope.child.first_name = "";
     $scope.child.gender = "Female";
     $scope.child.birthday = new Date();
-    $scope.sharedAlsups; 
+    $scope.sharedAlsups;
 
     ChildrenFactory.all(function(children) {
       $scope.childs = children;
@@ -256,6 +256,8 @@ angular
           console.log(error.message);
         });
     };
+
+
 
     $ionicModal.fromTemplateUrl('templates/child/sync-child-modal.html', {
       scope: $scope

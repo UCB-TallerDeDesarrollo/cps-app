@@ -9,7 +9,7 @@
         </button>
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
-        <a class="button button-icon button-clear ion-person-stalker" href="#/app/childs" ng-hide="state.includes('app.childs')"></a>
+        <a class="button button-icon button-clear ion-person-stalker" href="#/app/childs" ng-hide="state.includes('app.childs')" ng-click="setSharedChild()"></a>
       </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
@@ -28,23 +28,23 @@
         <ion-item menu-close href="#/app/search">
 
         </ion-item-->
-        <ion-item menu-close class="item item-icon-left" href="#/app/childs">
+        <ion-item menu-close class="item item-icon-left" href="#/app/childs" ng-click="setSharedChild()">
           <i class="icon ion-person-stalker"></i>
           {{'ManageChildrenTitle' | translate }}
         </ion-item>
-        <ion-item menu-close class="item item-icon-left" ng-click="checkActiveToContinue('app.laggingSkills')">
+        <ion-item menu-close class="item item-icon-left" ng-click="setSharedChild(); checkActiveToContinue('app.laggingSkills')">
           <i class="icon ion-clipboard"></i>
           {{'LaggingSkillsTitle' | translate}}
         </ion-item>
-        <ion-item menu-close class="item item-icon-left" ng-click="checkActiveToContinue('app.newUnsolvedProblem')">
+        <ion-item menu-close class="item item-icon-left" ng-click="setSharedChild(); checkActiveToContinue('app.newUnsolvedProblem')">
           <i class="icon ion-edit"></i>
           {{'UnsolvedProblemsTitle' | translate}}
         </ion-item>
-        <ion-item menu-close class="item item-icon-left" href="#/app/mainHelp">
+        <ion-item menu-close class="item item-icon-left" href="#/app/mainHelp" ng-click="setSharedChild()">
           <i class="icon ion-help-circled"></i>
           {{'MainHelpTitle' | translate}}
         </ion-item>
-        <ion-item menu-close class="item item-icon-left"  href="#/app/tutorial">
+        <ion-item menu-close class="item item-icon-left"  href="#/app/tutorial" ng-click="setSharedChild()">
           <i><img src="img/mainHelp/tour_icon.png" style="width: 35px; height:35px; top:10px;" class="icon"></i>
           {{'AppTutorialTitle' | translate}}
         </ion-item>
@@ -52,15 +52,15 @@
           <i class="icon ion-earth"></i>
           {{'LanguageTitle' | translate }}
         </ion-item>
-        <ion-item ng-if="!isUserLogged()" menu-close class="item item-icon-left" href="#/app/contacts">
+        <ion-item ng-if="!isUserLogged()" menu-close class="item item-icon-left" href="#/app/contacts" ng-click="setSharedChild()">
           <i class="icon ion-ios-bookmarks"></i>
           Contacts
         </ion-item>
-        <ion-item ng-if="isUserLogged()" menu-close class="item item-icon-left"  href="#/app/login">
+        <ion-item ng-if="isUserLogged()" menu-close class="item item-icon-left"  href="#/app/login" ng-click="setSharedChild()">
           <i class="icon ion-log-in"></i>
           {{'LoginTitle' | translate }}
         </ion-item>
-        <ion-item ng-if="!isUserLogged()" menu-close class="item item-icon-left" ng-click="logout()" >
+        <ion-item ng-if="!isUserLogged()" menu-close class="item item-icon-left" ng-click="logout()" ng-click="setSharedChild()">
           <i class="icon ion-log-in"></i>
           {{'LogoutTitle' | translate }}
         </ion-item>

@@ -22,6 +22,7 @@ app
     //});
     $scope.firstTimeHelp = false;
     // Form data for the login modal
+    $scope.childFromShared;
     $scope.loginData = {};
     $scope.user_name = localStorage.getItem("user_name");
     $scope.$watch(function () {
@@ -90,6 +91,33 @@ app
         $scope.activeChild = { first_name: "" };
         ChildrenFactory.active(function(active_child) {
             $scope.activeChild = active_child;
+        });
+    };
+
+    $scope.shareLaggingSkills;
+    $scope.getSharedLaggingSkills = function(user_id,child_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/getLaggingSkills", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.shareLaggingSkills = data.data;
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
+
+    $scope.getDataChildShared = function(child_id) {
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+"/children/"+child_id+"/getChild", {
+          headers: { Authorization: localStorage.getItem("auth_token") }
+        })
+        .then(data => {
+          $scope.childFromShared = data.data;
+          $scope.getSharedLaggingSkills($scope.childFromShared.user_id, $scope.childFromShared.child_id);
+        })
+        .catch(error => {
+          console.log(error.message);
         });
     };
 
@@ -222,7 +250,7 @@ app
         } else {
             console.log("Google Analytics Unavailable");
         }
-    }
+    };
 
     $scope.uploadLaggingSkill = function(laggingskillList,laggingskillId){
         $scope.activeLaggingSkill = LaggingSkills.get(laggingskillList,laggingskillId);

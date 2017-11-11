@@ -6,7 +6,7 @@
           <i class="icon ion-plus"></i>
         </a>
         <div class="col col-75">
-          <h2><b>{{'MyChildrenTitle' | translate }}</b> {{Global}}</h2>
+          <h2><b>{{'MyChildrenTitle' | translate }}</b></h2>
         </div>
       </div>
       <div class="row" ng-if="childs.length === 0">
@@ -91,7 +91,7 @@
         <div class="item item-divider item-text-wrap">
           <div class="col col-75">
             <h2>
-              <b>Shared Children</b>
+              <b>Shared Children</b>{{sharedChild}}
               <span class="badge badge-energized">{{sharedAlsups.length}}</span>
             </h2>
           </div>
@@ -112,7 +112,7 @@
                 </div>
                 <div class="item item-divider item-text-wrap text-center">
                   <div class="button-bar">
-                    <div class="button button-small button-energized">
+                    <div class="button button-small button-energized" ng-click="activeSharedChild(shared.id); goTo('app.home')">
                       <i class="icon ion-arrow-right-b"></i>
                     </div>
                   </div>
@@ -121,7 +121,7 @@
             </div>
             <div class="col col-50" ng-if="sharedAlsups[$index+1]">
               <div class="card">
-                <div class="item item-text-wrap text-center">
+                <div class="item item-text-wrap text-center" ng-click="setSharedChild()">
                   <img class="full-image" ng-src="img/childs/boy.png" ng-if="sharedAlsups[$index+1].gender === 'Male'">
                   <img class="full-image" ng-src="img/childs/girl.png" ng-if="sharedAlsups[$index+1].gender === 'Female'">
                   <h2>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="item item-divider item-text-wrap text-center">
                   <div class="button-bar">
-                    <div class="button button-small button-energized">
+                    <div class="button button-small button-energized" ng-click="activeSharedChild(sharedAlsups[$index+1].id); goTo('app.home')">
                       <i class="icon ion-arrow-right-b"></i>
                     </div>
                   </div>

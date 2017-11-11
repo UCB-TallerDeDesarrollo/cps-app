@@ -38,7 +38,15 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   });
 
   $rootScope.state = $state;
-  $rootScope.Global = "Hola";
+  $rootScope.sharedChild = 0;
+
+  $rootScope.activeSharedChild = function(id){
+    $rootScope.sharedChild = id;
+  };
+
+  $rootScope.setSharedChild = function(id) {
+    $rootScope.sharedChild = 0;
+  };
 
 })
 
@@ -345,7 +353,18 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         templateUrl: 'templates/contacts/contacts.html'
       }
     }
-  });
+  })
+  
+  .state('app.sharedUnsolvedProblem', {
+      url: '/unsolvedProblems/shared/:laggingSkillsId',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/unsolvedProblems/newUnsolvedProblem.html',
+          controller: 'UnsolvedProblemCtrl'
+        }
+      }
+  })
+  ;
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/childs');
