@@ -72,6 +72,8 @@ var $translations_en = {
     UnsolvedProblemHintBody: "An unsolved problem is an expectation your child is having difficulty reliably meeting. You can write in more than one unsolved problem for a given lagging skill, but you don't need to type the same unsolved problem in more than once. After you've made a comprehensive list of unsolved problems, click on the arrow next to the one you want to solve first.",
     Got_It: "Got it",
     goingTo: "Going to",
+    InvalidBirthDate: "Invalid Birth date!!",
+    InsertaDatePrior:"Please insert a date prior to today date.",
 
     //For Empathy Step
     EmpathyStep: "Empathy Step",
@@ -234,5 +236,9 @@ var $translations_en = {
     questionAboutThePlansTitle: "Questions about the plans",
     questionsAboutTheClassroomTitle: "Questions about solving the problems in the classroom",
     questionsAboutPoliciesTitle: "Questions about policies and practices",
+
+    //Share
+    NoSharedLaggingSkills: "No lagging skills shared yet. TAP FOR NEXT",
+    NoSharedUnsolvedProblem: "No unsolved problems shared yet",
 
 };

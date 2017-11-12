@@ -19,7 +19,7 @@
           <div class="item item-text-wrap item-icon-right" ng-if="!topic.contents && !topic.link">
             <h3>{{topic.description}}</h3>
           </div>
-          <a class="item item-text-wrap item-icon-right" ng-click="browserInstance.openBrowser(topic.link)" ng-if="topic.link.length > 0  && !topic.contents">
+          <a class="item item-text-wrap item-icon-right" ng-click="checkConnection();browserInstance.openBrowser(topic.link)" ng-if="topic.link.length > 0  && !topic.contents">
             <i class="icon ion-ios-browsers-outline"></i>
             <h3>{{topic.description}}</h3>
           </a>
@@ -50,7 +50,7 @@
           <div class="item item-text-wrap item-icon-right" ng-if="!topic.contents && !topic.link">
             <h3>{{topic.description}}</h3>
           </div>
-          <a class="item item-text-wrap item-icon-right" ng-click="browserInstance.openBrowser(topic.link)" ng-if="topic.link.length > 0  && !topic.contents">
+          <a class="item item-text-wrap item-icon-right" ng-click="checkConnection();browserInstance.openBrowser(topic.link)" ng-if="topic.link.length > 0  && !topic.contents">
             <i class="icon ion-ios-browsers-outline"></i>
             <h3>{{topic.description}}</h3>
           </a>

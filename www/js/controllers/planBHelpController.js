@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('planBHelpCtrl', function($scope, AppTools, $stateParams){
+.controller('planBHelpCtrl', function($scope, AppTools, $stateParams, $ionicPopup){
   $scope.searchWord = '';
   $scope.step2helpsEn = [
     {
@@ -106,6 +106,18 @@ angular.module('starter.controllers')
     animation: 'slide-in-right'
   });
 
+  $scope.checkConnection = function(){
+    console.log("Entro");
+    if(window.Connection) {
+    if(navigator.connection.type == Connection.NONE)
+    { 
+      var alertNotConnection = $ionicPopup.alert({
+        title: 'Required Connection',
+        template: "Internet access is required to view this page. Please check your internet settings and try again."
+      });
+     
+    }}
+}
   $scope.googleAnalyticsView = function() {
     if(typeof analytics !== 'undefined') {
       analytics.trackView('Help Adult Concerns step view');

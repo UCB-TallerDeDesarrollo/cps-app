@@ -1,26 +1,30 @@
 <ion-view cache-view="false" title="{{'SolutionsInfo' | translate }}" ng-controller="SolutionsCtrl">
+  <div ng-if="sharedChild == 0">
     <div class="bar bar-subheader bar-positive">
       <h2 class="title">{{solution.description}}</h2>
     </div>
-
+    
     <ion-content class="has-subheader">
       <div class="item item-divider item-text-wrap">
-      <h2>{{'RelatedTo' | translate }}</h2>
-    </div>
-    <ion-item class="item item-text-wrap" ng-if="!pairs.description.length" >
-      <p>{{'TextSolutions' | translate }}</p>
+        <h2>{{'RelatedTo' | translate }}</h2>
+      </div>
+      <ion-item class="item item-text-wrap" ng-if="!pairs.description.length">
+        <p>{{'TextSolutions' | translate }}</p>
       </ion-item>
-
-      <ion-item class="item item-text-wrap"   ng-if="pairs.description.length > 0">
-        {{pairs.description}}  <br> {{pairs.description2}}
-
+    
+      <ion-item class="item item-text-wrap" ng-if="pairs.description.length > 0">
+        {{pairs.description}}
+        <br> {{pairs.description2}}
+    
       </ion-item>
-
+    
       <div class="padding">
-
+    
         <ion-list>
           <ion-item class="item item-divider item-icon-right">
-            <h2><b>{{'ListComments' | translate }}</b></h2>
+            <h2>
+              <b>{{'ListComments' | translate }}</b>
+            </h2>
             <a ng-click="openModal()">
               <i class="icon ion-plus"></i>
             </a>
@@ -28,19 +32,65 @@
           <div class="item item-text-wrap" ng-if="comments.length == 0">
             <p>{{'TextComments' | translate }}</p>
           </div>
-
-
+    
+    
           <ion-item class="item item-text-wrap" ng-repeat="item in comments">
-            {{item.description}}
-            -
+            {{item.description}} -
             <b>{{parseDate(item.commented_at)}}</b>
             <ion-option-button class="button button-balanced ion-edit" ng-click="editComment(item)"></ion-option-button>
-            <ion-option-button class="button button-assertive ion-trash-a" ng-click="showDeletionConfirm(item)" ></ion-option-button>
+            <ion-option-button class="button button-assertive ion-trash-a" ng-click="showDeletionConfirm(item)"></ion-option-button>
           </ion-item>
         </ion-list>
       </div>
+    </ion-content>
+  </div>
 
-      <script id="create-modal.html" type="text/ng-template">
+  <!-- shared comments view-->
+  <div ng-if="sharedChild > 0" ng-init="getSharedPosibleSolutions(posibleSolution.id)">
+    <div class="bar bar-subheader bar-positive">
+      <h2 class="title">{{posibleSolution.description}}</h2>
+    </div>
+  
+    <ion-content class="has-subheader">
+      <div class="item item-divider item-text-wrap">
+        <h2>{{'RelatedTo' | translate }}</h2>
+      </div>
+      <ion-item class="item item-text-wrap" ng-if="!pairs.description.length">
+        <p>{{'TextSolutions' | translate }}</p>
+      </ion-item>
+  
+      <ion-item class="item item-text-wrap" ng-if="pairs.description.length > 0">
+        {{pairs.description}}
+        <br> {{pairs.description2}}
+  
+      </ion-item>
+  
+      <div class="padding">
+  
+        <ion-list>
+          <ion-item class="item item-divider item-icon-right">
+            <h2>
+              <b>{{'ListComments' | translate }}</b>
+            </h2>
+          </ion-item>
+          <div class="item item-text-wrap" ng-if="sharedCommentSolutions.length == 0">
+            <p>{{'TextComments' | translate }}</p>
+          </div>
+  
+  
+          <ion-item class="item item-text-wrap" ng-repeat="sharedComment in sharedCommentSolutions">
+            {{sharedComment.description}} -
+            <b>{{parseDate(sharedComment.commented_at)}}</b>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-content>
+  </div>
+  
+</ion-view>
+
+
+<script id="create-modal.html" type="text/ng-template">
         <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
           <ion-header-bar class="bar bar-header bar-positive">
             <h1 class="title">{{'NewComment' | translate }}</h1>
@@ -65,7 +115,7 @@
         </ion-modal-view>
       </script>
 
-      <script id="edit-modal.html" type="text/ng-template">
+<script id="edit-modal.html" type="text/ng-template">
         <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
           <ion-header-bar class="bar bar-header bar-positive">
             <h1 class="title">{{'EditComment' | translate }}</h1>
@@ -85,6 +135,3 @@
           </ion-content>
         </ion-modal-view>
       </script>
-
-    </ion-content>
-</ion-view>

@@ -1,4 +1,4 @@
-angular.module('starter.services').factory('ChildrenFactory', function($cordovaSQLite, $ionicPopup) {
+angular.module('starter.services').factory('ChildrenFactory', function($cordovaSQLite, $ionicPopup, $translate) {
 
   showNameAlert = function() {
   var alertPopup = $ionicPopup.alert({
@@ -13,13 +13,15 @@ angular.module('starter.services').factory('ChildrenFactory', function($cordovaS
 
 
 showDateAlert = function() {
+  $translate(['InvalidBirthDate', 'InsertaDatePrior']).then (function(translations){
 var alertPopup = $ionicPopup.alert({
-  title: 'Invalid Birth date!!',
-  template: 'Please insert a date prior to today&#39;s date.'
+  title: translations.InvalidBirthDate,
+  template: translations.InsertaDatePrior
 });
 
 alertPopup.then(function(res) {
 
+});
 });
 };
 

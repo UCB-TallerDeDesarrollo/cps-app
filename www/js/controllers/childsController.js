@@ -29,6 +29,7 @@ angular
     $scope.child.first_name = "";
     $scope.child.gender = "Female";
     $scope.child.birthday = new Date();
+    $scope.sharedAlsups;
 
     ChildrenFactory.all(function(children) {
       $scope.childs = children;
@@ -243,12 +244,39 @@ angular
       });
     };
 
+    $scope.getSharedAlsups = function() {
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+'/alsup_share', {
+          headers: { Authorization: localStorage.getItem("auth_token") }
+        })
+        .then(data => {
+          $scope.sharedAlsups = data.data;
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    };
+
+
+
     $ionicModal.fromTemplateUrl('templates/child/sync-child-modal.html', {
       scope: $scope
     }).then(function(modal) {
       $scope.syncChildModal = modal;
     });
 
+    $scope.checkConnection = function(){
+      console.log("Entro");
+      if(window.Connection) {
+      if(navigator.connection.type == Connection.NONE)
+      { 
+        var alertNotConnection = $ionicPopup.alert({
+          title: 'Required Connection',
+          template: "Internet access is required to view this page. Please check your internet settings and try again."
+        });
+       
+      }}
+  }
     $scope.showSyncModal = function(child){
         $scope.child = child;
         $scope.syncChildModal.show();
@@ -722,8 +750,7 @@ angular
         "unShareALSUP"
       ]).then(function(translations) {
         // Link para factorizar ionicActionSheet: https://www.ghadeer.io/ionicactionsheet-example/
-        // var buttons = [{ text: translations.EditChildTitle },{text: translations.ShareALSUP} ];
-        var buttons = [{ text: translations.EditChildTitle } ];
+        var buttons = [{ text: translations.EditChildTitle },{text: translations.ShareALSUP} ];
         $scope.getFriendShared(child.id);
         $ionicActionSheet.show({
           buttons: buttons,
@@ -942,8 +969,9 @@ angular
           $scope.sign_inPage = function() {
             $window.open("", "_system", "location=yes");
           };
-      });
+            });
       }
+
     };
 
     $scope.showTutorialFirstTime = function() {

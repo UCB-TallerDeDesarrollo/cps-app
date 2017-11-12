@@ -39,6 +39,19 @@ app
         }else
         return true;
     }
+
+    $scope.checkConnection = function(){
+        console.log("Entro");
+        if(window.Connection) {
+        if(navigator.connection.type == Connection.NONE)
+        { 
+          var alertNotConnection = $ionicPopup.alert({
+            title: 'Required Connection',
+            template: "Internet access is required to view this page. Please check your internet settings and try again."
+          });
+         
+        }}
+    }
     $scope.logout = function(){
         $translate([
             "SuccessTitle",
@@ -90,6 +103,49 @@ app
         $scope.activeChild = { first_name: "" };
         ChildrenFactory.active(function(active_child) {
             $scope.activeChild = active_child;
+        });
+    };
+
+    $scope.shareLaggingSkills;
+    $scope.getSharedLaggingSkills = function(user_id,child_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/getLaggingSkills", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.shareLaggingSkills = data.data;
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
+
+    $scope.childFromShared;
+
+    $scope.getDataChildShared = function(child_id) {
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+"/children/"+child_id+"/getChild", {
+          headers: { Authorization: localStorage.getItem("auth_token") }
+        })
+        .then(data => {
+          $scope.childFromShared = data.data;
+          $scope.getSharedLaggingSkills($scope.childFromShared.user_id, $scope.childFromShared.child_id);
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    };
+
+    $scope.unsolvedProblemFromShared;
+
+    $scope.getDataUnsolvedProblem = function(unsolved_problem_id) {
+      $http.get($link_root+"/unsolved_problem/"+unsolved_problem_id, {
+          headers: { Authorization: localStorage.getItem("auth_token") }
+        })
+        .then(data => {
+          $scope.unsolvedProblemFromShared = data.data;
+        })
+        .catch(error => {
+          console.log(error.message);
         });
     };
 
@@ -226,7 +282,7 @@ app
         } else {
             console.log("Google Analytics Unavailable");
         }
-    }
+    };
 
     $scope.uploadLaggingSkill = function(laggingskillList,laggingskillId){
         $scope.activeLaggingSkill = LaggingSkills.get(laggingskillList,laggingskillId);
@@ -267,7 +323,7 @@ app
     $scope.params = $stateParams;
 })
 
-.controller('HelpCategoryTopicsCtrl', function($scope, HelpCategoriesStep1, HelpCategoriesStep1Es, $stateParams, AppTools) {
+.controller('HelpCategoryTopicsCtrl', function($scope, HelpCategoriesStep1, HelpCategoriesStep1Es, $stateParams, AppTools,$ionicPopup) {
     $scope.category = HelpCategoriesStep1.get($stateParams.id_category);
     $scope.categoryEs = HelpCategoriesStep1Es.get($stateParams.id_category);
     $scope.browserInstance = {};
@@ -275,10 +331,23 @@ app
         scope: $scope,
         animation: 'slide-in-right'
     });
+
+    $scope.checkConnection = function(){
+        console.log("Entro");
+        if(window.Connection) {
+        if(navigator.connection.type == Connection.NONE)
+        { 
+          var alertNotConnection = $ionicPopup.alert({
+            title: 'Required Connection',
+            template: "Internet access is required to view this page. Please check your internet settings and try again."
+          });
+         
+        }}
+    }
 })
 
 
-.controller('HelpCategoryCtrl', function($scope, HelpCategoriesStep1, HelpCategoriesStep1Es) {
+.controller('HelpCategoryCtrl', function($scope, HelpCategoriesStep1, HelpCategoriesStep1Es, $ionicPopup) {
     $scope.helpCategories = HelpCategoriesStep1.all();
     $scope.helpCategoriesEs = HelpCategoriesStep1Es.all();
     $scope.googleAnalyticsForHelpCategoriesStep1 = function() {
@@ -288,9 +357,23 @@ app
             console.log("Google Analytics Unavailable");
         }
     };
+
+    $scope.checkConnection = function(){
+        console.log("Entro");
+        if(window.Connection) {
+        if(navigator.connection.type == Connection.NONE)
+        { 
+          var alertNotConnection = $ionicPopup.alert({
+            title: 'Required Connection',
+            template: "Internet access is required to view this page. Please check your internet settings and try again."
+          });
+         
+        }}
+    }
+    
 })
 
-.controller('HelpCategoryInvitationCtrl', function($scope,AppTools) {
+.controller('HelpCategoryInvitationCtrl', function($scope,AppTools, $ionicPopup) {
     $scope.toggleHelp = function(topic) {
         if ($scope.isTopicShown(topic)) {
             $scope.shownTopic = null;
@@ -307,6 +390,19 @@ app
         scope: $scope,
         animation: 'slide-in-right'
     });
+
+    $scope.checkConnection = function(){
+        console.log("Entro");
+        if(window.Connection) {
+        if(navigator.connection.type == Connection.NONE)
+        { 
+          var alertNotConnection = $ionicPopup.alert({
+            title: 'Required Connection',
+            template: "Internet access is required to view this page. Please check your internet settings and try again."
+          });
+         
+        }}
+    }
 
     $scope.googleAnalyticsView = function() {
         if (typeof analytics !== 'undefined') {
@@ -393,13 +489,26 @@ app
 
 })
 
-.controller('HelpTopicContentCtrl', function($scope, HelpCategoriesStep1, HelpCategoriesStep1Es, $stateParams, AppTools) {
+.controller('HelpTopicContentCtrl', function($scope, HelpCategoriesStep1, HelpCategoriesStep1Es, $stateParams, AppTools, $ionicPopup) {
     $scope.topic = HelpCategoriesStep1.getContent($stateParams.id_category, $stateParams.id_topic);
     $scope.topicEs = HelpCategoriesStep1Es.getContent($stateParams.id_category, $stateParams.id_topic);
     $scope.browserInstance = AppTools.newBrowser({
         scope: $scope,
         animation: 'slide-in-right'
     });
+
+    $scope.checkConnection = function(){
+        console.log("Entro");
+        if(window.Connection) {
+        if(navigator.connection.type == Connection.NONE)
+        { 
+          var alertNotConnection = $ionicPopup.alert({
+            title: 'Required Connection',
+            template: "Internet access is required to view this page. Please check your internet settings and try again."
+          });
+         
+        }}
+    }
 })
 
 .controller('DefineTheProblemCtrl', function($scope, $stateParams) {

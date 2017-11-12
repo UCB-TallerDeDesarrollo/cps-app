@@ -31,7 +31,7 @@
             <ion-item class="item item-stable item-text-wrap item-icon-right"
                       ng-show="isContentShown(help)"
                       ng-if="topic.url"
-                      ng-click="browserInstance.openBrowser(topic.url)">
+                      ng-click="checkConnection();browserInstance.openBrowser(topic.url)">
                 <b>{{topic.title}}</b>
                 <i class="icon ion-ios-browsers-outline font-21"></i>
             </ion-item>
@@ -63,7 +63,7 @@
               <ion-item class="item item-stable item-text-wrap item-icon-right"
                         ng-show="isContentShown(help)"
                         ng-if="topic.url"
-                        ng-click="browserInstance.openBrowser(topic.url)">
+                        ng-click="checkConnection();browserInstance.openBrowser(topic.url)">
                   <b>{{topic.title}}</b>
                   <i class="icon ion-ios-browsers-outline font-21"></i>
               </ion-item>
