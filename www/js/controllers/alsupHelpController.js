@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('AlsupCtrl', function($scope, $translate, AppTools) { 
+.controller('AlsupCtrl', function($scope, $translate, AppTools, Connection, $ionicPopup) { 
   $scope.toggleContent = function(content) {
     if ($scope.isContentShown(content)) {
       $scope.shownContent = null;
@@ -11,11 +11,23 @@ angular.module('starter.controllers')
     return $scope.shownContent === content;
   };
 
-  $scope.browserInstance = {};
+  //$scope.browserInstance = {};
   $scope.browserInstance = AppTools.newBrowser({
     scope: $scope,
     animation: 'slide-in-right'
+    
   });
+
+  $scope.checkConnection = function(){
+    if(navigator.connection.type == Connection.NONE)
+    {
+      var alertNotConnection = $ionicPopup.alert({
+        title: 'Alert!',
+        template: "No Inter"
+      });
+    }
+}
+  
   $scope.googleAnalyticsView = function() {
     if(typeof analytics !== 'undefined') {
       analytics.trackView('ALSUP Help view');
