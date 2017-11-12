@@ -30,7 +30,7 @@
 					<div ng-repeat="topic in help.topics">
 						<ion-item class="item item-accordion item-text-wrap item-icon-right"
 											ng-show="isContentShown(help)"
-											ng-click="checkConnection();browserInstance.openBrowser(topic.url)">
+											ng-click="on();browserInstance.openBrowser(topic.url)">
 							{{topic.content}}
 							<i class="icon ion-ios-browsers-outline font-21"></i>
 						</ion-item>

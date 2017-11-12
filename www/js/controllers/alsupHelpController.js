@@ -1,5 +1,6 @@
 angular.module('starter.controllers')
-.controller('AlsupCtrl', function($scope, $translate, AppTools, Connection, $ionicPopup) { 
+.controller('AlsupCtrl', function($scope, $translate, AppTools, $ionicPopup) { 
+  
   $scope.toggleContent = function(content) {
     if ($scope.isContentShown(content)) {
       $scope.shownContent = null;
