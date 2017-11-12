@@ -52,11 +52,11 @@
           <i class="icon ion-earth"></i>
           {{'LanguageTitle' | translate }}
         </ion-item>
-        <ion-item ng-if="!isUserLogged()" menu-close class="item item-icon-left" href="#/app/contacts" ng-click="setSharedChild()">
+        <ion-item ng-if="!isUserLogged()" menu-close class="item item-icon-left" href="#/app/contacts" ng-click="checkConnection();setSharedChild()">
           <i class="icon ion-ios-bookmarks"></i>
           Contacts
         </ion-item>
-        <ion-item ng-if="isUserLogged()" menu-close class="item item-icon-left"  href="#/app/login" ng-click="setSharedChild()">
+        <ion-item ng-if="isUserLogged()" menu-close class="item item-icon-left"  href="#/app/login" ng-click="checkConnection();setSharedChild()">
           <i class="icon ion-log-in"></i>
           {{'LoginTitle' | translate }}
         </ion-item>

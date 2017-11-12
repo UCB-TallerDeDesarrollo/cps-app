@@ -1,5 +1,6 @@
 angular.module('starter.controllers')
-.controller('AlsupCtrl', function($scope, $translate, AppTools) { 
+.controller('AlsupCtrl', function($scope, $translate, AppTools, $ionicPopup) { 
+  
   $scope.toggleContent = function(content) {
     if ($scope.isContentShown(content)) {
       $scope.shownContent = null;
@@ -11,11 +12,26 @@ angular.module('starter.controllers')
     return $scope.shownContent === content;
   };
 
-  $scope.browserInstance = {};
+  //$scope.browserInstance = {};
   $scope.browserInstance = AppTools.newBrowser({
     scope: $scope,
     animation: 'slide-in-right'
+    
   });
+
+  $scope.checkConnection = function(){
+    console.log("Entro");
+    if(window.Connection) {
+    if(navigator.connection.type == Connection.NONE)
+    { 
+      var alertNotConnection = $ionicPopup.alert({
+        title: 'Required Connection',
+        template: "Internet access is required to view this page. Please check your internet settings and try again."
+      });
+     
+    }}
+}
+  
   $scope.googleAnalyticsView = function() {
     if(typeof analytics !== 'undefined') {
       analytics.trackView('ALSUP Help view');
