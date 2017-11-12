@@ -52,8 +52,8 @@ var $translations_en = {
     ConfirmDeleteChildMessage: 'Are you sure you want to delete this child?',
     YesMessage: 'Yes',
     NoMessage: "No",
-    WelcomeMessage: 'Welcome to Lens Changer',
-    ChooseAnOptionMessage: 'You can choose a option!',
+    WelcomeMessage: 'Welcome to The Lens Changer 2',
+    ChooseAnOptionMessage: 'Choose your role!',
     ParentOption: "Parent",
     EducatorOption: "Educator",
     SignInOption: "Sign in",
@@ -227,8 +227,8 @@ var $translations_en = {
     help_category_03topic_04:"The child said some concerns but I think there are more!",
     help_category_03topic_05:"I’m not sure I’m done with Step 1",
     help_category_03topic_06:"I don’t know how to drill",
-    
-    //FAQ 
+
+    //FAQ
     challengingKidsTitle: "Challenging Childs",
     generalQuestionsAboutCPSTitle: "General questions about CPS",
     questionAboutThePlansTitle: "Questions about the plans",
