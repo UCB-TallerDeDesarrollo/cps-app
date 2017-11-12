@@ -29,7 +29,7 @@
               {{topic.description}}
             </div>
           </ion-item>
-          <ion-item ng-show="isTopicShown(helpCategory)" ng-click="browserInstance.openBrowser(topic.url)" ng-if="topic.url.length > 0">
+          <ion-item ng-show="isTopicShown(helpCategory)" ng-click="checkConnection();browserInstance.openBrowser(topic.url)" ng-if="topic.url.length > 0">
             <div class=" item-text-wrap" >
               {{topic.description}}
               <i ng-show="topic.url" class="icon ion-ios-browsers-outline pull-right"></i>
@@ -55,7 +55,7 @@
                 {{topic.description}}
               </div>
             </ion-item>
-            <ion-item ng-show="isTopicShown(helpCategory)" ng-click="browserInstance.openBrowser(topic.url)" ng-if="topic.url.length > 0">
+            <ion-item ng-show="isTopicShown(helpCategory)" ng-click="checkConnection();browserInstance.openBrowser(topic.url)" ng-if="topic.url.length > 0">
               <div class=" item-text-wrap" >
                 {{topic.description}}
                 <i ng-show="topic.url" class="icon ion-ios-browsers-outline pull-right"></i>
