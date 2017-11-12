@@ -20,13 +20,17 @@ angular.module('starter.controllers')
   });
 
   $scope.checkConnection = function(){
-    if(navigator.connection.type == Connection.NONE)
-    {
+    console.log("entro1");
+    if(window.Connection) {
+      console.log("entro2");
+    if(navigator.connection.type !== Connection.NONE)
+    { 
       var alertNotConnection = $ionicPopup.alert({
         title: 'Alert!',
         template: "No Inter"
       });
-    }
+     
+    }}
 }
   
   $scope.googleAnalyticsView = function() {
