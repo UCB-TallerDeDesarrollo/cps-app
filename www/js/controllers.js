@@ -93,6 +93,49 @@ app
         });
     };
 
+    $scope.shareLaggingSkills;
+    $scope.getSharedLaggingSkills = function(user_id,child_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/getLaggingSkills", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.shareLaggingSkills = data.data;
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
+
+    $scope.childFromShared;
+
+    $scope.getDataChildShared = function(child_id) {
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+"/children/"+child_id+"/getChild", {
+          headers: { Authorization: localStorage.getItem("auth_token") }
+        })
+        .then(data => {
+          $scope.childFromShared = data.data;
+          $scope.getSharedLaggingSkills($scope.childFromShared.user_id, $scope.childFromShared.child_id);
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    };
+
+    $scope.unsolvedProblemFromShared;
+
+    $scope.getDataUnsolvedProblem = function(unsolved_problem_id) {
+      $http.get($link_root+"/unsolved_problem/"+unsolved_problem_id, {
+          headers: { Authorization: localStorage.getItem("auth_token") }
+        })
+        .then(data => {
+          $scope.unsolvedProblemFromShared = data.data;
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    };
+
     //Changes the language of translation
     $scope.ChangeLanguage = function(lang){
         $translate.use(lang);
@@ -222,7 +265,7 @@ app
         } else {
             console.log("Google Analytics Unavailable");
         }
-    }
+    };
 
     $scope.uploadLaggingSkill = function(laggingskillList,laggingskillId){
         $scope.activeLaggingSkill = LaggingSkills.get(laggingskillList,laggingskillId);
@@ -373,7 +416,7 @@ app
         {
             description: "Tips!",
             topics: [{ description: "Stick as closely to the concerns that were identified in the first two steps" },
-                { description: "While it’s a good idea to give the kid the first opportunity to propose a solution, generating solutions is a team effort" },
+                { description: "While it’s a good idea to give the child the first opportunity to propose a solution, generating solutions is a team effort" },
                 { description: "It’s a good idea to consider the odds of a given solution actually working …if you think the odds are below 60-70 percent, consider what it is that’s making you skeptical and talk about it" },
                 { description: "This step always ends with agreement to return to Plan B if the first solution doesn’t stand the test of time " }
             ]

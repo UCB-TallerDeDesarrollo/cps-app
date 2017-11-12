@@ -52,8 +52,8 @@ var $translations_es = {
     ConfirmDeleteChildMessage: '¿Seguro de que quieres eliminar este niño?',
     YesMessage: 'Si',
     NoMessage: "No",
-    WelcomeMessage: 'Bienvenido a Lens Changer',
-    ChooseAnOptionMessage: '¡Puedes elegir una opción!',
+    WelcomeMessage: 'Bienvenido a The Lens Changer 2',
+    ChooseAnOptionMessage: '¡Elige tu rol!',
     ParentOption: "Padre",
     EducatorOption: "Educador",
     SignInOption: "Registrarse",
@@ -74,6 +74,8 @@ var $translations_es = {
     UnsolvedProblemHintBody: "Un problema sin resolver es una alerta de que su hijo tiene dificultades para reunirse de manera confiable. Puedes escribir más de un problema sin resolver para una habilidad rezagada determinada, pero no necesitas escribir el mismo problema sin resolver en más de una vez. Después de haber hecho una lista completa de problemas sin resolver, presione en la flecha a lado del que desea resolver primero.",
     Got_It: "Lo tengo",
     goingTo: "Ir a",
+    InvalidBirthDate:"La fecha de nacimiento no es válida!!",
+    InsertaDatePrior:"Por favor inserte una fecha anterior a la fecha de hoy.",
 
     //EmpathyStep
     EmpathyStep: "Etapa de la Empatía",
@@ -237,5 +239,9 @@ var $translations_es = {
     questionsAboutTheClassroomTitle: "Preguntas sobre resolver los problemas en el salon de clase",
     questionsAboutPoliciesTitle: "Preguntas sobre las politicas y practicas",
 
-    
+    //Share
+    NoSharedLaggingSkills: "Aún no se compartieron dificultades. TOCA PARA CONTINUAR",
+    NoSharedUnsolvedProblem: "Aún no se compartieron problemas sin resolver",
+
+
 };

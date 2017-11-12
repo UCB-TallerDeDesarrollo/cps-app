@@ -1,6 +1,6 @@
 <ion-view cache-view="false" view-title="{{'ManageChildrenTitle' | translate }}">
   <ion-content ng-controller="ChildsCtrl">
-    <div ng-init="updateUnsolvedProblems(); googleAnalyticsView();showTutorialFirstTime();">
+    <div ng-init="updateUnsolvedProblems(); googleAnalyticsView();showTutorialFirstTime(); getSharedAlsups();">
       <div  class="item item-divider item-text-wrap">
         <a ng-click="openModalCreate()" class="watchlist_menu button button-small button-clear button-positive">
           <i class="icon ion-plus"></i>
@@ -35,7 +35,6 @@
                 <img class="full-image" ng-src="img/childs/girl.png" ng-if="child.gender === 'Female'">
                 <h2><b>{{child.first_name}}</b></h2>
                 <p><b>{{'BirthDateTitle' | translate }}</b> {{convertStringToDate(child.birthday) | date:"dd/MM/yy"}}</p>
-
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">
@@ -62,7 +61,6 @@
                 <img class="full-image" ng-src="img/childs/girl.png" ng-if="childs[$index+1].gender === 'Female'">
                 <h2><b>{{childs[$index+1].first_name}}</b></h2>
                 <p><b>{{'BirthDateTitle' | translate }}</b> {{convertStringToDate(childs[$index+1].birthday) | date:"dd/MM/yy"}}</p>
-
               </div>
               <div class="item item-divider item-text-wrap text-center">
                 <div class="button-bar">
@@ -84,6 +82,64 @@
           </div>
         </div>
       </div>
+
+      <!-- Shared Section -->
+
+      <div ng-show="sharedAlsups.length > 0 && !isUserLogged()">
+        <div class="item item-divider item-text-wrap">
+          <div class="col col-75">
+            <h2>
+              <b>Shared Children</b>
+              <span class="badge badge-energized">{{sharedAlsups.length}}</span>
+            </h2>
+          </div>
+        </div>
+  
+        <div ng-repeat="shared in sharedAlsups">
+          <div ng-if="$index%2==0" class="row">
+            <div class="col col-50">
+              <div class="card">
+                <div class="item item-text-wrap text-center">
+                  <img class="full-image" ng-src="img/childs/boy.png" ng-if="shared.gender === 'Male'">
+                  <img class="full-image" ng-src="img/childs/girl.png" ng-if="shared.gender === 'Female'">
+                  <h2>
+                    <b>{{shared.name}}</b>
+                  </h2>
+                  <p>
+                    <b>{{'BirthDateTitle' | translate }}</b> {{convertStringToDate(shared.birthday) | date:"dd/MM/yy"}}</p>       
+                </div>
+                <div class="item item-divider item-text-wrap text-center">
+                  <div class="button-bar">
+                    <div class="button button-small button-energized" ng-click="activeSharedChild(shared.id); goTo('app.home')">
+                      <i class="icon ion-arrow-right-b"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col col-50" ng-if="sharedAlsups[$index+1]">
+              <div class="card">
+                <div class="item item-text-wrap text-center">
+                  <img class="full-image" ng-src="img/childs/boy.png" ng-if="sharedAlsups[$index+1].gender === 'Male'">
+                  <img class="full-image" ng-src="img/childs/girl.png" ng-if="sharedAlsups[$index+1].gender === 'Female'">
+                  <h2>
+                    <b>{{sharedAlsups[$index+1].name}}</b>
+                  </h2>
+                  <p>
+                    <b>{{'BirthDateTitle' | translate }}</b> {{convertStringToDate(sharedAlsups[$index+1].birthday) | date:"dd/MM/yy"}}</p>
+                </div>
+                <div class="item item-divider item-text-wrap text-center">
+                  <div class="button-bar">
+                    <div class="button button-small button-energized" ng-click="activeSharedChild(sharedAlsups[$index+1].id); goTo('app.home')">
+                      <i class="icon ion-arrow-right-b"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>     
     </div>
   </ion-content>
 </ion-view>

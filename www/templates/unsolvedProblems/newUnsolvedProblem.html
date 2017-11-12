@@ -1,34 +1,38 @@
 <ion-view cache-view="false" view-title="{{'planB' | translate }}" ng-controller="UnsolvedProblemCtrl" >
-  <div class="bar bar-subheader bar-positive item-text-wrap">
+  <div ng-if="sharedChild == 0">
+    <div class="bar bar-subheader bar-positive item-text-wrap">
       <h2 class="title">{{activeChild.first_name}}</h2>
-      <a class=" button button-small button-clear button-white icon ion-help-circled" ng-click = "unsolvedProblemHint()"></a>
+      <a class=" button button-small button-clear button-white icon ion-help-circled" ng-click="unsolvedProblemHint()"></a>
     </div>
-  <ion-content class="has-subheader" ng-controller="UnsolvedProblemCtrl" ng-init="googleAnalyticsView()" on-tap="unableAnimation()">
-    <div >
-      <div class="item item-divider item-text-wrap">
-        <a ng-click="openModalCreate()" class="watchlist_menu button button-small button-clear button-positive">
-          <i class="icon ion-plus"></i>
-        </a>
-        <a class="watchlist_menu button button-small button-clear button-positive" ng-show="unsolvedProblems.length > 1" ng-click="shouldShowReorder = !shouldShowReorder">
-          <i ng-class="(shouldShowReorder) ? 'icon icon-floppy' : 'icon icon-sort-alt-down'"></i>
-        </a>
-        <div class="col col-75">
-          <h2><b>{{'UnsolvedProblemsTitle' | translate }}</b></h2>
+    <ion-content class="has-subheader" ng-controller="UnsolvedProblemCtrl" ng-init="googleAnalyticsView()" on-tap="unableAnimation()">
+      <div>
+        <div class="item item-divider item-text-wrap">
+          <a ng-click="openModalCreate()" class="watchlist_menu button button-small button-clear button-positive">
+            <i class="icon ion-plus"></i>
+          </a>
+          <a class="watchlist_menu button button-small button-clear button-positive" ng-show="unsolvedProblems.length > 1" ng-click="shouldShowReorder = !shouldShowReorder">
+            <i ng-class="(shouldShowReorder) ? 'icon icon-floppy' : 'icon icon-sort-alt-down'"></i>
+          </a>
+          <div class="col col-75">
+            <h2>
+              <b>{{'UnsolvedProblemsTitle' | translate }}</b>
+            </h2>
+          </div>
         </div>
-      </div>
-      <ion-list show-delete="false" can-swipe="true" show-reorder="shouldShowReorder">
-        <div ng-hide="hideFakeButtons()" class="fake-buttons">
-          <button class="item-options item fake-button button button-balanced ion-edit"></button>
-          <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
-          <button class="item-options item fake-button button button-positive ion-more"></button>
-        </div>
-          <ion-item class="item-text-wrap item-icon-left item-icon-right" ng-click="verifyToGoToStep1({{unsolvedProblem.id}})" ng-repeat="unsolvedProblem in unsolvedProblems" ng-class="{ slidein: $first && !firstItemAnimationShown}">
+        <ion-list show-delete="false" can-swipe="true" show-reorder="shouldShowReorder">
+          <div ng-hide="hideFakeButtons()" class="fake-buttons">
+            <button class="item-options item fake-button button button-balanced ion-edit"></button>
+            <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
+            <button class="item-options item fake-button button button-positive ion-more"></button>
+          </div>
+          <ion-item class="item-text-wrap item-icon-left item-icon-right" ng-click="verifyToGoToStep1({{unsolvedProblem.id}})" ng-repeat="unsolvedProblem in unsolvedProblems"
+            ng-class="{ slidein: $first && !firstItemAnimationShown}">
             <!-- <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration"> -->
-              <div name="content">
-                <i class="icon dark {{getRatingIcon(unsolvedProblem)}}"></i>
-                <p>{{unsolvedProblem.description}}</p>
-                <i class="icon dark ion-chevron-right"></i>
-              </div>
+            <div name="content">
+              <i class="icon dark {{getRatingIcon(unsolvedProblem)}}"></i>
+              <p>{{unsolvedProblem.description}}</p>
+              <i class="icon dark ion-chevron-right"></i>
+            </div>
             <!-- </a> -->
             <ion-option-button class="button button-balanced ion-edit" ng-click="editUnsolvedProblem(unsolvedProblem)" ng-hide="{{shouldShowReorder}}"></ion-option-button>
             <ion-option-button class="button-assertive ion-trash-a" ng-click="showConfirm(unsolvedProblem)"></ion-option-button>
@@ -38,7 +42,40 @@
           <div class="item item-text-wrap" ng-if="unsolvedProblems.length === 0">
             <p>{{'NoUnsolvedProblems' | translate }}</p>
           </div>
-      </ion-list>
+        </ion-list>
+      </div>
+    </ion-content>
+  </div>
+  <!--Shared unsolved problem view-->
+  <div ng-if="sharedChild > 0">
+    <div class="bar bar-subheader bar-positive item-text-wrap" ng-init="getSharedUnsolveProblems(sharedChild)">
+      <h2 class="title">{{childFromShared.name}}</h2>
     </div>
-  </ion-content>
+    <ion-content class="has-subheader" ng-controller="UnsolvedProblemCtrl" ng-init="googleAnalyticsView()">
+      <div>
+        <div class="item item-divider item-text-wrap">
+          <div class="col col-75">
+            <h2>
+              <b>{{'UnsolvedProblemsTitle' | translate }}</b>
+            </h2>
+          </div>
+        </div>
+        <ion-list>
+          <ion-item class="item-text-wrap item-icon-left item-icon-right" ng-repeat="sharedunsolved in sharedUnsolveProblems" href="#/app/unsolvedProblem/shared/show/{{sharedChild}}" 
+          ng-click="activeUnsolvedProblemID(sharedunsolved.unsolved_problem_id_app,sharedunsolved.id)">
+            <!-- <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration"> -->
+            <div name="content">
+              <i class="icon dark {{getRatingIcon(sharedunsolved)}}"></i>
+              <p>{{sharedunsolved.description}}</p>
+              <i class="icon dark ion-chevron-right"></i>
+            </div>
+            <!-- </a> -->
+          </ion-item>
+          <div class="item item-text-wrap" ng-if="sharedUnsolveProblems.length === 0">
+            <p>{{'NoSharedUnsolvedProblem' | translate }}</p>
+          </div>
+        </ion-list>
+      </div>
+    </ion-content>
+  </div>
 </ion-view>

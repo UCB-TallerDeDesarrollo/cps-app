@@ -90,10 +90,10 @@ angular.module('starter.services', ['ngCordova'])
   // First Step help categories and data
 
   var helpCategoriesForStep1 = [
-    {name : "help_category_01" , description : "The kid isn’t talking", image: "category_1.png",id:1,
+    {name : "help_category_01" , description : "The child isn’t talking", image: "category_1.png",id:1,
       topics: [
         {name: "topic_01", description: "Maybe the unsolved problem wasn’t free of challenging behavior, or it wasn’t specific, or it contained an adult theory, or it was 'clumped'?", id:"1"},
-        {name: "topic_02", title:"help_category_01topic_02", description: "Maybe you are using Emergency B (in the heat of the moment when the kid is already upset) instead of Proactive B?", id:"2",
+        {name: "topic_02", title:"help_category_01topic_02", description: "Maybe you are using Emergency B (in the heat of the moment when the child is already upset) instead of Proactive B?", id:"2",
           contents: [
             {name: "content_01", description: "Make an appointment", link:"http://www.blogtalkradio.com/dr-ross-greene/2011/05/24/parenting-challenging-kids-collaborative-problem-solving-at-home", id:"1"},
             {name: "content_02", description: "What's the best thing to do in the heat of the moment", link: "http://www.blogtalkradio.com/dr-ross-greene/2016/01/25/the-heat-of-the-moment",id:"2"},
@@ -110,21 +110,21 @@ angular.module('starter.services', ['ngCordova'])
         {name: "topic_06", description: "Maybe s/he needs time to think", id:"6"},
         {name: "topic_07", title:"help_category_01topic_07", description: "Maybe s/he doesn’t have the words to tell you", id:"7",
           contents: [
-            {name: "content_01", description: "Give your kid the fingers",link:"http://www.blogtalkradio.com/dr-ross-greene/2016/03/14/give-your-kid-the-fingers", id:"1"}
+            {name: "content_01", description: "Give your child the fingers",link:"http://www.blogtalkradio.com/dr-ross-greene/2016/03/14/give-your-kid-the-fingers", id:"1"}
           ]
         },
-        {name: "topic_08", description: "My kid won’t talk to me", id:"8", link:"http://www.blogtalkradio.com/dr-ross-greene/2010/09/21/parenting-challenging-kids-collaborative-problem-s"},
+        {name: "topic_08", description: "My child won’t talk to me", id:"8", link:"http://www.blogtalkradio.com/dr-ross-greene/2010/09/21/parenting-challenging-kids-collaborative-problem-s"},
         {name: "topic_09", description: "Talking about talking", id:"9", link:"http://www.blogtalkradio.com/dr-ross-greene/2013/05/20/parenting-your-challenging-child"}
       ]
     },
 
-      {name : "help_category_02", description : "My kid is too young to do CPS",image: "category_2.png", id:2,
+      {name : "help_category_02", description : "My child is too young to do CPS",image: "category_2.png", id:2,
         topics: [
           {name: "topic_01", description: "Solving problems collaboratively with young children", id:"1",link:"http://www.blogtalkradio.com/dr-ross-greene/2010/04/27/parenting-challenging-kids-collaborative-problem-s"},
-          {name: "topic_02", description: "Can you use Plan B with young kids?", id:"2", link:"http://www.blogtalkradio.com/dr-ross-greene/2011/03/08/parenting-challenging-kids-collaborative-problem-solving-at-home"},
+          {name: "topic_02", description: "Can you use Plan B with young childs?", id:"2", link:"http://www.blogtalkradio.com/dr-ross-greene/2011/03/08/parenting-challenging-kids-collaborative-problem-solving-at-home"},
         ]
       },
-      {name : "help_category_03", description : "The kid talked but I don’t know what to do with what s/he said", image: "category_3.png", id:3,
+      {name : "help_category_03", description : "The child talked but I don’t know what to do with what s/he said", image: "category_3.png", id:3,
         topics:[
           {name: "topic_01", title:"help_category_03topic_01", description: "Are you confused?", id:"1",
             contents: [
@@ -159,7 +159,7 @@ angular.module('starter.services', ['ngCordova'])
             contents: [
               {name: "content_01", description: "Drilling video", link:"http://livesinthebalance.org/step-three-fourth-video", id:"1"},
               {name: "content_02", description: "Creative drilling",link:"http://www.blogtalkradio.com/dr-ross-greene/2015/10/05/creative-drilling", id:"2"},
-              {name: "content_03", description: "Can’t solve problems without identifying a kids’ concern",link:"http://www.blogtalkradio.com/dr-ross-greene/2011/10/25/parenting-your-challenging-child", id:"3"}
+              {name: "content_03", description: "Can’t solve problems without identifying a childs’ concern",link:"http://www.blogtalkradio.com/dr-ross-greene/2011/10/25/parenting-your-challenging-child", id:"3"}
 
             ]
         }

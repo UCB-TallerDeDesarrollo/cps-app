@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $ionicListDelegate,$cordovaSQLite, $ionicPopup, PossibleSolutionFactory, $translate ){
+angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $ionicListDelegate,$cordovaSQLite, $ionicPopup, PossibleSolutionFactory, $translate, $http){
   $scope.comment = { solutionId: $stateParams.solutionId };
 
   $scope.pair = { solutionId: $stateParams.solutionId };
@@ -139,4 +139,20 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
       return 'ion-happy';
     }
   };
+
+  $scope.sharedCommentSolutions;
+
+    $scope.getSharedPosibleSolutions = function(posible_solution_id) {
+        console.log(posible_solution_id);
+        $http.get($link_root +"/solution_commentaries/"+posible_solution_id, {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedCommentSolutions = data.data;
+            console.log($scope.sharedCommentSolutions);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
 });

@@ -38,6 +38,31 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   });
 
   $rootScope.state = $state;
+  $rootScope.sharedChild = 0;
+  $rootScope.unsolvedProblemIDapp = 0;
+  $rootScope.unsolvedProblemID = 0;
+  $rootScope.posibleSolution = {};
+
+  $rootScope.activeSharedChild = function(id){
+    $rootScope.sharedChild = id;
+  };
+
+  $rootScope.activePosibleSolution = function(ps) {
+    $rootScope.posibleSolution = ps;
+    console.log($rootScope.posibleSolution);
+  };
+
+  $rootScope.activeUnsolvedProblemID = function(up_id_app,up_id) {
+    $rootScope.unsolvedProblemIDapp = up_id_app;
+    $rootScope.unsolvedProblemID = up_id;
+  };
+
+  $rootScope.setSharedChild = function(id) {
+    $rootScope.sharedChild = 0;
+    $rootScope.unsolvedProblemID = 0;
+    $rootScope.unsolvedProblemIDapp = 0;
+    $rootScope.posibleSolutionID = 0;
+  };
 
 })
 
@@ -344,7 +369,57 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         templateUrl: 'templates/contacts/contacts.html'
       }
     }
-  });
+  })
+  
+  .state('app.sharedUnsolvedProblem', {
+      url: '/unsolvedProblems/shared/:sharedChild',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/unsolvedProblems/newUnsolvedProblem.html',
+          controller: 'UnsolvedProblemCtrl'
+        }
+      }
+  })
+
+  .state('app.sharedShowUnsolvedProblem', {
+    url: '/unsolvedProblem/shared/show/:sharedChild',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/cpsProcess/empathyStep.html',
+        controller: 'ChildsConcernsCtrl'
+      }
+    }
+  })
+
+  .state('app.sharedDefineTheProblem', {
+    url: '/shared/defineTheProblem',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/cpsProcess/defineAdultConcern.html',
+        controller: 'DefineTheProblemCtrl'
+      }
+    }
+  })
+
+  .state('app.sharedInvitation', {
+    url: '/shared/invitation',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/cpsProcess/invitationStep.html',
+        controller: 'InvitationCtrl'
+      }
+    }
+  })
+
+  .state('app.sharedSolution', {
+    url: '/shared/solutions',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/solutionComments/showSolution.html'
+      }
+    }
+  })
+  ;
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/childs');

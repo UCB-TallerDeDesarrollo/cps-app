@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicListDelegate,$ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory, AdultConcernFactory,$ionicSideMenuDelegate,$translate){
+.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicListDelegate,$ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory, AdultConcernFactory,$ionicSideMenuDelegate,$translate, $http){
   $ionicSideMenuDelegate.canDragContent(false);
   $scope.adultsConcerns = {};
   $scope.adultsConcern = {description:""};
@@ -184,6 +184,27 @@ angular.module('starter.controllers')
       }
     }
   };
+
+  $scope.selectTabWithIndexShared = function(index) {
+    if (index === 0) {
+      $ionicTabsDelegate.select(index);
+      $state.go("app.sharedShowUnsolvedProblem", {
+        unsolvedProblemId: $scope.unsolvedProblem.id
+      });
+    }
+    if (index == 1) {
+      $ionicTabsDelegate.select(index);
+      $state.go("app.sharedDefineTheProblem", {
+        unsolvedProblemId: $scope.unsolvedProblem.id
+      });
+    }
+    if (index == 2) {
+      $state.go("app.sharedInvitation", {
+        unsolvedProblemId: $scope.unsolvedProblem.id
+      });
+      $ionicTabsDelegate.select(index);
+    }
+  };
   $scope.unableAnimation = function(){
     $scope.firstItemAnimationShown = true;
   };
@@ -199,6 +220,21 @@ angular.module('starter.controllers')
       console.log("Google Analytics Unavailable");
     }
   };
+
+  $scope.sharedAdultConcerns;
+
+    $scope.getSharedAdultConcerns = function(user_id,child_id,unsolved_problem_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/unsolved_problem/"+unsolved_problem_id+"/sharedAdultConcerns", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedAdultConcerns = data.data;
+             console.log($scope.sharedAdultConcerns);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
 
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(1,10));});
 

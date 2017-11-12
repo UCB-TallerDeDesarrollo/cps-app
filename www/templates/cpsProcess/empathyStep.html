@@ -1,53 +1,118 @@
 <ion-view cache-view="false" view-title="{{'EmpathyStep' | translate }}" on-tap="unableAnimation()" ng-controller="ChildsConcernsCtrl">
-  <div class="bar bar-subheader bar-positive">
-    <h2 class="title">{{unsolvedProblem.description}} </h2>
-  </div>
-
-  <ion-content  ng-init="findUnsolvedProblem(unsolvedProblem);showHint();googleAnalyticsView();"  class="has-subheader has-tabs" on-swipe-left="selectTabWithIndex(1)" on-swipe-right="goUnsolvedProblems()">
-    <div class="item item-text-wrap text-center">
-      <h2>{{'EmpathyStepMessage' | translate }} <strong>{{unsolvedProblem.description}}</strong>{{'EmpathyStepMessageContinue' | translate }}</h2>
+  <div ng-if="sharedChild == 0">
+    <div class="bar bar-subheader bar-positive">
+      <h2 class="title">{{unsolvedProblem.description}} </h2>
     </div>
-    <div ng-init="updateInformation()" class="padding">
+    
+    <ion-content ng-init="findUnsolvedProblem(unsolvedProblem);showHint();googleAnalyticsView();" class="has-subheader has-tabs"
+      on-swipe-left="selectTabWithIndex(1)" on-swipe-right="goUnsolvedProblems()">
+      <div class="item item-text-wrap text-center">
+        <h2>{{'EmpathyStepMessage' | translate }}
+          <strong>{{unsolvedProblem.description}}</strong>{{'EmpathyStepMessageContinue' | translate }}</h2>
+      </div>
+      <div ng-init="updateInformation()" class="padding">
         <div class="item item-divider item-text-wrap">
           <a ng-click="openModal()" class="watchlist_menu button button-small button-clear button-positive">
             <i class="icon ion-plus"></i>
           </a>
-          <a class="watchlist_menu button button-small button-clear button-positive" ng-show="childsConcerns.length > 1" ng-click="shouldShowReorder = !shouldShowReorder">  <i ng-class="(shouldShowReorder) ? 'icon icon-floppy' : 'icon icon-sort-alt-down'"></i></a>
+          <a class="watchlist_menu button button-small button-clear button-positive" ng-show="childsConcerns.length > 1" ng-click="shouldShowReorder = !shouldShowReorder">
+            <i ng-class="(shouldShowReorder) ? 'icon icon-floppy' : 'icon icon-sort-alt-down'"></i>
+          </a>
           <a class="watchlist_menu button button-small button-clear button-positive icon ion-help-circled" href="#/app/helpCategories"></a>
           <div class="col col-75">
-            <h2><b>{{'ListChildsConcerns' | translate }}</b></h2>
+            <h2>
+              <b>{{'ListChildsConcerns' | translate }}</b>
+            </h2>
+          </div>
+        </div>
+    
+        <ion-list can-swipe="true" show-reorder="shouldShowReorder">
+          <div ng-hide="hideFakeButtons()" class="fake-buttons">
+            <button class="item-options item fake-button button button-balanced ion-edit"></button>
+            <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
+          </div>
+          <ion-item class="item item-text-wrap item-icon-right" ng-click="verifyToGoToStep2()" ng-repeat="childsConcern in childsConcerns"
+            ng-class="{ slidein: $first && !firstItemAnimationShown }">
+            <p>{{childsConcern.description}}</p>
+            <i class="icon dark ion-chevron-right"></i>
+            <ion-option-button class="button button-balanced ion-edit" ng-click="editChildsConcern(childsConcern)" ng-hide="{{shouldShowReorder}}"></ion-option-button>
+            <ion-option-button ng-click="showConfirmChildsConcern(childsConcern)" class="button-assertive ion-trash-a"></ion-option-button>
+            <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(childsConcern, $fromIndex, $toIndex)">
+            </ion-reorder-button>
+          </ion-item>
+          <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
+            <p>{{'NoChildsConcern' | translate }}</p>
+          </div>
+        </ion-list>
+      </div>
+    </ion-content>
+    <div class="footer">
+      <ion-tabs class="tabs-positive tabs-icon-top" delegate-handle="myTabs">
+        <ion-tab ng-click="selectTabWithIndex(0)" title="{{'EmpathyStep' | translate }}" icon-on="step1" icon-off="step1">
+        </ion-tab>
+    
+        <ion-tab ng-click="selectTabWithIndex(1)" title="{{'DefineAdultsConcern' | translate }}" icon-on="step2" icon-off="step2">
+        </ion-tab>
+    
+        <ion-tab ng-click="selectTabWithIndex(2)" title="{{'InvitationStep' | translate }}" icon-on="step3" icon-off="step3">
+        </ion-tab>
+      </ion-tabs>
+    </div>
+  </div>
+
+
+  <!--Shared Child concern view-->
+  <div ng-if="sharedChild > 0" ng-init="getDataUnsolvedProblem(unsolvedProblemID); getSharedChildConcerns(childFromShared.user_id,childFromShared.child_id,unsolvedProblemIDapp);">
+    <div class="bar bar-subheader bar-positive">
+      <h2 class="title">{{unsolvedProblemFromShared.description}} </h2>
+    </div>
+
+    <ion-content class="has-subheader has-tabs" on-swipe-left="selectTabWithIndexShared(1)" on-swipe-right="goUnsolvedProblemsShared()">
+      <div class="item item-text-wrap text-center">
+        <h2>{{'EmpathyStepMessage' | translate }}
+          <strong>{{unsolvedProblemFromShared.description}}</strong>{{'EmpathyStepMessageContinue' | translate }}</h2>
+      </div>
+      <div ng-init="updateInformation()" class="padding">
+        <div class="item item-divider item-text-wrap">
+          <a class="watchlist_menu button button-small button-clear button-positive" ng-show="childsConcerns.length > 1" ng-click="shouldShowReorder = !shouldShowReorder">
+            <i ng-class="(shouldShowReorder) ? 'icon icon-floppy' : 'icon icon-sort-alt-down'"></i>
+          </a>
+          <div class="col col-75">
+            <h2>
+              <b>{{'ListChildsConcerns' | translate }}</b>
+            </h2>
           </div>
         </div>
 
-      <ion-list can-swipe="true" show-reorder="shouldShowReorder">
-        <div ng-hide="hideFakeButtons()" class="fake-buttons">
-          <button class="item-options item fake-button button button-balanced ion-edit"></button>
-          <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
-        </div>
-        <ion-item class="item item-text-wrap item-icon-right" ng-click="verifyToGoToStep2()" ng-repeat="childsConcern in childsConcerns" ng-class="{ slidein: $first && !firstItemAnimationShown }">
-          <p>{{childsConcern.description}}</p>
-          <i class="icon dark ion-chevron-right"></i>
-          <ion-option-button class="button button-balanced ion-edit" ng-click="editChildsConcern(childsConcern)" ng-hide="{{shouldShowReorder}}"></ion-option-button>
-          <ion-option-button ng-click="showConfirmChildsConcern(childsConcern)" class="button-assertive ion-trash-a" ></ion-option-button>
-          <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(childsConcern, $fromIndex, $toIndex)">
-          </ion-reorder-button>
-        </ion-item>
-        <div class="item item-text-wrap" ng-if="childsConcerns.length == 0">
-          <p>{{'NoChildsConcern' | translate }}</p>
-        </div>
-      </ion-list>
+        <ion-list>
+          <div ng-hide="hideFakeButtons()" class="fake-buttons">
+            <button class="item-options item fake-button button button-balanced ion-edit"></button>
+            <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
+          </div>
+          <ion-item class="item item-text-wrap item-icon-right" ng-repeat="sharedchildsConcern in sharedChildConcerns"
+             ng-click="selectTabWithIndexShared(1)" ng-class="{ slidein: $first && !firstItemAnimationShown }">
+            <p>{{sharedchildsConcern.description}}</p>
+            <i class="icon dark ion-chevron-right"></i>
+          </ion-item>
+          <div class="item item-text-wrap" ng-if="sharedchildsConcern.length == 0">
+            <p>{{'NoChildsConcern' | translate }}</p>
+          </div>
+        </ion-list>
+      </div>
+    </ion-content>
+
+    <div class="footer">
+      <ion-tabs class="tabs-positive tabs-icon-top" delegate-handle="myTabs">
+        <ion-tab ng-click="selectTabWithIndexShared(0)" title="{{'EmpathyStep' | translate }}" icon-on="step1" icon-off="step1">
+        </ion-tab>
+    
+        <ion-tab ng-click="selectTabWithIndexShared(1)" title="{{'DefineAdultsConcern' | translate }}" icon-on="step2" icon-off="step2">
+        </ion-tab>
+    
+        <ion-tab ng-click="selectTabWithIndexShared(2)" title="{{'InvitationStep' | translate }}" icon-on="step3" icon-off="step3">
+        </ion-tab>
+      </ion-tabs>
     </div>
-  </ion-content>
-  <div class="footer" >
-    <ion-tabs class="tabs-positive tabs-icon-top" delegate-handle="myTabs" >
-      <ion-tab ng-click="selectTabWithIndex(0)" title="{{'EmpathyStep' | translate }}" icon-on="step1" icon-off="step1">
-      </ion-tab>
-
-      <ion-tab ng-click="selectTabWithIndex(1)" title="{{'DefineAdultsConcern' | translate }}" icon-on="step2" icon-off="step2" >
-      </ion-tab>
-
-      <ion-tab ng-click="selectTabWithIndex(2)" title="{{'InvitationStep' | translate }}" icon-on="step3" icon-off="step3">
-      </ion-tab>
-    </ion-tabs>
   </div>
+
 </ion-view>

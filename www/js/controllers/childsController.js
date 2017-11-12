@@ -29,6 +29,7 @@ angular
     $scope.child.first_name = "";
     $scope.child.gender = "Female";
     $scope.child.birthday = new Date();
+    $scope.sharedAlsups;
 
     ChildrenFactory.all(function(children) {
       $scope.childs = children;
@@ -243,6 +244,21 @@ angular
       });
     };
 
+    $scope.getSharedAlsups = function() {
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+'/alsup_share', {
+          headers: { Authorization: localStorage.getItem("auth_token") }
+        })
+        .then(data => {
+          $scope.sharedAlsups = data.data;
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    };
+
+
+
     $ionicModal.fromTemplateUrl('templates/child/sync-child-modal.html', {
       scope: $scope
     }).then(function(modal) {
@@ -347,7 +363,7 @@ angular
         })
         .then(data => {
             $scope.uploadAdultConcern();
-           
+
         },
           function(response) {
             console.log(response.data.message);
@@ -459,7 +475,7 @@ angular
                     console.log("Adult Concern uploated")
 
                     $scope.uploadChildConcern();
-                    
+
                   },
                   function(response) {
                     console.log(response.data.message);
@@ -528,7 +544,7 @@ angular
                   .then(data => {
                     console.log(data)
                     $scope.uploadSolution();
-                    
+
                   },
                   function(response) {
                     console.log(response.data.message);
@@ -712,7 +728,7 @@ angular
       });
       })
     };
-    
+
     $scope.showActionsheet = function(child) {
       $translate([
         "EditChildTitle",
@@ -723,7 +739,7 @@ angular
       ]).then(function(translations) {
         // Link para factorizar ionicActionSheet: https://www.ghadeer.io/ionicactionsheet-example/
         var buttons = [{ text: translations.EditChildTitle },{text: translations.ShareALSUP} ];
-        $scope.getFriendShared(child.id);        
+        $scope.getFriendShared(child.id);
         $ionicActionSheet.show({
           buttons: buttons,
           cancelText: translations.CancelOption,
@@ -744,7 +760,7 @@ angular
               $scope.openModalEdit();
             }
             if (index === 1) {
-              $scope.child = angular.copy(child);             
+              $scope.child = angular.copy(child);
               $scope.openModalShare();
             }
             $ionicListDelegate.closeOptionButtons();
@@ -891,11 +907,6 @@ angular
     };
 
     $scope.showIntroductionPage = function() {
-      $translate([
-        "WelcomeMessage",
-        "ChooseAnOptionMessage",
-        "ReadyOption"
-      ]).then(function(translations) {
         if (
           localStorage.getItem("pop_up_first_time") === null &&
           localStorage.getItem("tutorial_first_time") != null
@@ -913,6 +924,11 @@ angular
             '<b><font size="2">{{"SignInOption" | translate }}</font></b>' +
             "</a>" +
             "<div>";
+            $translate([
+              "WelcomeMessage",
+              "ChooseAnOptionMessage",
+              "ReadyOption"
+            ]).then(function(translations) {
           var myPopup = $ionicPopup.show({
             title: translations.WelcomeMessage,
             subTitle: translations.ChooseAnOptionMessage,
@@ -940,8 +956,9 @@ angular
           $scope.sign_inPage = function() {
             $window.open("", "_system", "location=yes");
           };
+            });
         }
-      });
+
     };
 
     $scope.showTutorialFirstTime = function() {
