@@ -907,11 +907,6 @@ angular
     };
 
     $scope.showIntroductionPage = function() {
-      $translate([
-        "WelcomeMessage",
-        "ChooseAnOptionMessage",
-        "ReadyOption"
-      ]).then(function(translations) {
         if (
           localStorage.getItem("pop_up_first_time") === null &&
           localStorage.getItem("tutorial_first_time") != null
@@ -929,6 +924,11 @@ angular
             '<b><font size="2">{{"SignInOption" | translate }}</font></b>' +
             "</a>" +
             "<div>";
+            $translate([
+              "WelcomeMessage",
+              "ChooseAnOptionMessage",
+              "ReadyOption"
+            ]).then(function(translations) {
           var myPopup = $ionicPopup.show({
             title: translations.WelcomeMessage,
             subTitle: translations.ChooseAnOptionMessage,
@@ -956,8 +956,9 @@ angular
           $scope.sign_inPage = function() {
             $window.open("", "_system", "location=yes");
           };
+            });
         }
-      });
+
     };
 
     $scope.showTutorialFirstTime = function() {
