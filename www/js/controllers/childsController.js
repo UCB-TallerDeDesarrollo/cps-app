@@ -919,6 +919,7 @@ angular
     };
 
     $scope.showIntroductionPage = function() {
+
         if (
           localStorage.getItem("pop_up_first_time") === null &&
           localStorage.getItem("tutorial_first_time") != null
@@ -969,7 +970,7 @@ angular
             $window.open("", "_system", "location=yes");
           };
             });
-        }
+      }
 
     };
 
