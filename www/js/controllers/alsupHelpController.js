@@ -23,7 +23,7 @@ angular.module('starter.controllers')
     console.log("entro1");
     if(window.Connection) {
       console.log("entro2");
-    if(navigator.connection.type !== Connection.NONE)
+    if(navigator.connection.type == Connection.NONE)
     { 
       var alertNotConnection = $ionicPopup.alert({
         title: 'Alert!',
