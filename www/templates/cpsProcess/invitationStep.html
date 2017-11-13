@@ -173,7 +173,7 @@
           </div>
           <ion-list>    
             <ion-item ng-click="activePosibleSolution(sharedPosibleSolution)" class="item item-text-wrap item-icon-left item-icon-right" ng-repeat="sharedPosibleSolution in sharedPosibleSolutions" ng-class="{ slidein: $first && !firstItemAnimationShown}">
-              <i class="icon {{getRatingIcon(solution)}}"></i>
+              <i class="icon {{getRatingIcon(sharedPosibleSolution)}}"></i>
               <p>{{sharedPosibleSolution.description}}</p>
               <a class="icon ion-eye" href="#/app/shared/solutions"></a> 
             </ion-item>
