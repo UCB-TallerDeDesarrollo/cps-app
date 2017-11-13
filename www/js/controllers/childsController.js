@@ -257,6 +257,57 @@ angular
         });
     };
 
+    $scope.sharedChildId;
+    $scope.getSharedChildId = function(shareChildId){
+      $scope.sharedChildId = shareChildId;
+      console.log($scope.sharedChildId);
+    };
+
+    $scope.confirmStopSharedAlsup = function(friend) {
+      var user_id = localStorage.getItem("user_id");
+      $http.get($link_root+'/users/'+user_id+'/children/'+$scope.sharedChildId+'/shareChildId',
+      {
+
+        headers: { 'Authorization': localStorage.getItem("auth_token") },
+
+      })
+      .then(data => {
+          $scope.sharedChildId = data.data;
+      }).catch(error => {
+        console.log(error.message);
+      });
+      var alertForStopSharedAlsup = $ionicPopup.confirm({
+        title: "Stop sharing ALSUP",
+        cancelText: "No",
+        template: "Are you sure you want to stop share this ALSUP with your friend "+friend.name+" "+friend.last_name+"?",
+        okText: "Yes"
+      });
+      alertForStopSharedAlsup.then(function(res) {
+        if (res) {
+           console.log(friend.id);
+          $scope.stopSharedAlsup(friend.id);
+        }
+      });
+    };
+
+    $scope.stopSharedAlsup = function(friend_id){
+      $http.delete( $link_root +'/users/'+friend_id+'/alsup_share/'+$scope.sharedChildId.id,
+      {
+      headers: { 'Authorization': localStorage.getItem("auth_token") },
+
+      })
+      .then(data => {
+        var alertForSentRequest = $ionicPopup.alert({
+          title: data.data.status,
+          template: data.data.message,
+        });
+        $state.go($state.current, {}, {reload: true});
+      },
+        function(response) {
+          console.log(response.data.message);
+      });
+    };
+
 
 
     $ionicModal.fromTemplateUrl('templates/child/sync-child-modal.html', {
