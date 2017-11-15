@@ -264,18 +264,6 @@ angular
     };
 
     $scope.confirmStopSharedAlsup = function(friend) {
-      var user_id = localStorage.getItem("user_id");
-      $http.get($link_root+'/users/'+user_id+'/children/'+$scope.sharedChildId+'/shareChildId',
-      {
-
-        headers: { 'Authorization': localStorage.getItem("auth_token") },
-
-      })
-      .then(data => {
-          $scope.sharedChildId = data.data;
-      }).catch(error => {
-        console.log(error.message);
-      });
       var alertForStopSharedAlsup = $ionicPopup.confirm({
         title: "Stop sharing ALSUP",
         cancelText: "No",
@@ -291,7 +279,8 @@ angular
     };
 
     $scope.stopSharedAlsup = function(friend_id){
-      $http.delete( $link_root +'/users/'+friend_id+'/alsup_share/'+$scope.sharedChildId.id,
+      var user_id = localStorage.getItem("user_id");
+      $http.delete( $link_root +'/users/'+user_id+'/children/'+$scope.sharedChildId+'/alsup_share_delete',
       {
       headers: { 'Authorization': localStorage.getItem("auth_token") },
 
