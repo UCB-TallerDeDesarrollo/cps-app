@@ -70,7 +70,7 @@
                   <div class="col col-50 button button-small button-balanced" ng-click="goTo('app.home')" ng-if="childs[$index+1].active === 1">
                     <i class="icon ion-arrow-right-c"></i>
                   </div>
-                  <div class="col col-50 button button-small button-calm" ng-click="getSharedChildId(child.id+1); friendShared(childs[$index+1].id); showActionsheet(childs[$index+1]);">
+                  <div class="col col-50 button button-small button-calm" ng-click="getSharedChildId(childs[$index+1].id); friendShared(childs[$index+1].id); showActionsheet(childs[$index+1]);">
                     <i class="icon ion-more"></i>
                   </div>
                   <div class="col col-50 button button-small button-positive" ng-click = "UPbutton(childs[$index+1])" ng-if="UpButtonConfirm(childs[$index+1]) === 0">
