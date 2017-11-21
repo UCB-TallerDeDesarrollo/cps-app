@@ -67,7 +67,7 @@ var $translations_en = {
     EditUnsolvedProblem: 'Edit Unsolved Problem',
     DeleteUnsolvedProblemTitle: "Delete Unsolved Problem",
     DeleteUnsolvedProblemBody: "Are you sure you want to delete this unsolved problem?",
-    TypeUnsolvedProblemPlaceholder: "Type a new unsolved problem here.",
+    TypeUnsolvedProblemPlaceholder: "Type a new child's concern here.",
     UnsolvedProblemHintTitle: "Unsolved problem hint",
     UnsolvedProblemHintBodyPart1: "An unsolved problem is an expectation your child is having difficulty reliably meeting.",
     UnsolvedProblemHintBodyPart2: "Each lagging skill can have multiple unsolved problems, one, or even none. Each unsolved problem can be associated with multiple lagging skills, but only needs to be entered once.",
@@ -79,7 +79,7 @@ var $translations_en = {
     //For Empathy Step
     EmpathyStep: "Empathy Step",
     NewChildsConcern: "New Child's Concern",
-    TypeChildsConcernPlaceholder: "Type a new child's concern here.",
+    TypeChildsConcernPlaceholder: "Enter the child’s concern here.",
     EditChildsConcern: "Edit Child's Concern",
     DefineAdultsConcern: "Define Adult's Concern",
     EmpathyStepMessage: "I've noticed that you been having ",

@@ -72,7 +72,7 @@ var $translations_es = {
     TypeUnsolvedProblemPlaceholder: "Escriba un nuevo problema sin resolver.",
     UnsolvedProblemHintTitle: "Consejo de Problema Sin Resolver",
     UnsolvedProblemHintBodyPart1: "Un problema sin resolver es una alerta de que su hijo tiene dificultades para reunirse de manera confiable.",
-    UnsolvedProblemHintBodyPart2: "Cada habilidad rezagada puede tener multiples problemas sin resolver, uno solo, o incluso ninguno. Cada problema sin resolver puede estas asociado con multiples habilidades rezagadas, pero no necesitas escribir el mismo problema sin resolver más de una vez.",
+    UnsolvedProblemHintBodyPart2: "Cada habilidad rezagada puede tener multiples problemas sin resolver, uno solo, o incluso ninguno. Cada problema sin resolver puede estas asociado con multiples habilidades rezagadas, pero no necesitas escribir el mismo problema sin resolver en más de una vez.",
     Got_It: "Lo tengo",
     goingTo: "Ir a",
     InvalidBirthDate:"La fecha de nacimiento no es válida!!",
@@ -81,7 +81,7 @@ var $translations_es = {
     //EmpathyStep
     EmpathyStep: "Etapa de la Empatía",
     NewChildsConcern: "Nueva preocupación del niño",
-    TypeChildsConcernPlaceholder: "Escriba una nueva preocupación del niño.",
+    TypeChildsConcernPlaceholder: "Escriba la preocupación del niño aquí.",
     EditChildsConcern: "Editar Preocupación del Niño",
     DefineAdultsConcern: "Etapa de la Definición del problema",
     EmpathyStepMessage: "He notado que ",
