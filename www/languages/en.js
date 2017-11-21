@@ -131,7 +131,7 @@ var $translations_en = {
     //For Define AdultsConcerns
     DefineAdultsConcernDescription: "My worry is...",
     ListAdultsConcern: "List of Adult's Concerns",
-    MessageAdultsConcernNotRegistred: "No adult's concern registered. Please register one above.",
+    MessageAdultsConcernNotRegistred: 'Please add the adult concerns by clicking on the “+” above.',
     NewAdultsConcern: "New Adult's Concern",
     EditAdultsConcern: "Edit Adult's Concern",
     DeleteAdultConcernTitle: "Delete Adult's Concern",
