@@ -81,7 +81,7 @@ var $translations_es = {
     //EmpathyStep
     EmpathyStep: "Etapa de la Empatía",
     NewChildsConcern: "Nueva preocupación del niño",
-    TypeChildsConcernPlaceholder: "Escriba una nueva preocupación del niño.",
+    TypeChildsConcernPlaceholder: "Escriba la preocupación del niño aquí.",
     EditChildsConcern: "Editar Preocupación del Niño",
     DefineAdultsConcern: "Etapa de la Definición del problema",
     EmpathyStepMessage: "He notado que ",

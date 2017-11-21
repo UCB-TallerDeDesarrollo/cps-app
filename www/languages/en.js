@@ -79,7 +79,7 @@ var $translations_en = {
     //For Empathy Step
     EmpathyStep: "Empathy Step",
     NewChildsConcern: "New Child's Concern",
-    TypeChildsConcernPlaceholder: "Type a new child's concern here.",
+    TypeChildsConcernPlaceholder: "Enter the child’s concern here.",
     EditChildsConcern: "Edit Child's Concern",
     DefineAdultsConcern: "Define Adult's Concern",
     EmpathyStepMessage: "I've noticed that you been having ",
