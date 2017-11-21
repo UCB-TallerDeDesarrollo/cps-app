@@ -72,6 +72,7 @@ var $translations_en = {
     UnsolvedProblemHintBodyPart1: "An unsolved problem is an expectation your child is having difficulty reliably meeting.",
     UnsolvedProblemHintBodyPart2: "Each lagging skill can have multiple unsolved problems, one, or even none. Each unsolved problem can be associated with multiple lagging skills, but only needs to be entered once.",
     Got_It: "Got it",
+    Tell_me_more: "Tell me more",
     goingTo: "Going to",
     InvalidBirthDate: "Invalid Birth date!!",
     InsertaDatePrior:"Please insert a date prior to today date.",

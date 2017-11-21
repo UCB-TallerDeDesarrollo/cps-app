@@ -74,6 +74,7 @@ var $translations_es = {
     UnsolvedProblemHintBodyPart1: "Un problema sin resolver es una alerta de que su hijo tiene dificultades para reunirse de manera confiable.",
     UnsolvedProblemHintBodyPart2: "Cada habilidad rezagada puede tener multiples problemas sin resolver, uno solo, o incluso ninguno. Cada problema sin resolver puede estas asociado con multiples habilidades rezagadas, pero no necesitas escribir el mismo problema sin resolver en más de una vez.",
     Got_It: "Lo tengo",
+    Tell_me_more: "Más información",
     goingTo: "Ir a",
     InvalidBirthDate:"La fecha de nacimiento no es válida!!",
     InsertaDatePrior:"Por favor inserte una fecha anterior a la fecha de hoy.",
