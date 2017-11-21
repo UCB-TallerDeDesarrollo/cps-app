@@ -134,12 +134,12 @@ var $translations_es = {
     //For Define AdultsConcerns
     DefineAdultsConcernDescription: "Mi preocupación es...",
     ListAdultsConcern: "Lista de preocupaciones del adulto",
-    MessageAdultsConcernNotRegistred: "No se registró ninguna preocupación del adulto. Por favor registra una arriba.",
+    MessageAdultsConcernNotRegistred: "Por favor agregue la preocupación del adulto haciendo click en el botón '+' de arriba.",
     NewAdultsConcern: "Nueva preocupación del adulto",
     EditAdultsConcern: "Editar preocupación del adulto",
     DeleteAdultConcernTitle: "Borrar preocupación de adulto",
     DeleteAdultConcernTemplate: "¿Estás seguro de que quieres borrar esta Preocupación del Adulto?",
-    TypeAdultsConcernPlaceholder: "Escriba una nueva preocupación del adulto.",
+    TypeAdultsConcernPlaceholder: "Ingrese una nueva preocupación del adulto aquí.",
     MoveToInvitationStep: "Despues de haber enlistado todas sus preocupaciónes, haga tab en la flecha para moverse a la etapa de la invitación.",
 
     Step: "Paso",
