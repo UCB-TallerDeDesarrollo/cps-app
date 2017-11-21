@@ -136,7 +136,7 @@ var $translations_en = {
     EditAdultsConcern: "Edit Adult's Concern",
     DeleteAdultConcernTitle: "Delete Adult's Concern",
     DeleteAdultConcernTemplate: "Are you sure you want to delete this adult's concern?",
-    TypeAdultsConcernPlaceholder: "Type a new adult's concern here.",
+    TypeAdultsConcernPlaceholder: "Enter the adult’s concern here.",
     MoveToInvitationStep: "After you've listed all of your concerns, click the arrow to move on to the invitation step",
 
     Step: "Step",
