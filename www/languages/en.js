@@ -71,6 +71,7 @@ var $translations_en = {
     UnsolvedProblemHintTitle: "Unsolved problem hint",
     UnsolvedProblemHintBodyPart1: "An unsolved problem is an expectation your child is having difficulty reliably meeting.",
     UnsolvedProblemHintBodyPart2: "Each lagging skill can have multiple unsolved problems, one, or even none. Each unsolved problem can be associated with multiple lagging skills, but only needs to be entered once.",
+    UnsolvedProblemHintBodyPart3: "After you've made a comprehensive list of unsolved problems, click on the arrow next to the one you want to solve first.",
     Got_It: "Got it",
     Tell_me_more: "Tell me more",
     goingTo: "Going to",
@@ -89,7 +90,7 @@ var $translations_en = {
     DeleteChildsConcernTitle: "Delete Child's Concern",
     DeleteChildsConcernBody: "Are you sure you want to delete this child's concern?",
     NoChildsConcern: "Please add your child’s concerns by clicking on the “+” above.",
-    step2VerifyBody: "Have you drilled enough to get all your child's concerns?",
+    step2VerifyBody: "Have you drilled enough to get all of your child's concerns?",
     ChildsConcernHint: "After you identify all of your child's concerns, click the arrow to move on to adult concerns step",
 
     //For Invitation Step

@@ -73,6 +73,7 @@ var $translations_es = {
     UnsolvedProblemHintTitle: "Consejo de Problema Sin Resolver",
     UnsolvedProblemHintBodyPart1: "Un problema sin resolver es una alerta de que su hijo tiene dificultades para reunirse de manera confiable.",
     UnsolvedProblemHintBodyPart2: "Cada habilidad rezagada puede tener multiples problemas sin resolver, uno solo, o incluso ninguno. Cada problema sin resolver puede estas asociado con multiples habilidades rezagadas, pero no necesitas escribir el mismo problema sin resolver en más de una vez.",
+    UnsolvedProblemHintBodyPart3: "Después de hacer una lista completa de los problemas no resueltos, apreta en la flecha que está a lado del que desea resolver primero.",
     Got_It: "Lo tengo",
     Tell_me_more: "Más información",
     goingTo: "Ir a",
