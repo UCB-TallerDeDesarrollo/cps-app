@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
-.controller('AlsupCtrl', function($scope, $translate, AppTools, $ionicPopup) { 
-  
+.controller('AlsupCtrl', function($scope, $translate, AppTools, $ionicPopup) {
+
   $scope.toggleContent = function(content) {
     if ($scope.isContentShown(content)) {
       $scope.shownContent = null;
@@ -16,34 +16,43 @@ angular.module('starter.controllers')
   $scope.browserInstance = AppTools.newBrowser({
     scope: $scope,
     animation: 'slide-in-right'
-    
-  });
 
+  });
+  $scope.comes_from_help = localStorage.getItem("coming_from_hint");
+  $scope.from_help = function(content){
+    if ((content.title == "Help with the wording of unsolved problems" || content.title == "Ayuda con la redacción de problemas no resueltos") && $scope.comes_from_help){
+        localStorage.removeItem("coming_from_hint");
+        return true
+      }
+      else {
+        return false
+      }
+  }
   $scope.checkConnection = function(){
     console.log("Entro");
     if(window.Connection) {
     if(navigator.connection.type == Connection.NONE)
-    { 
+    {
       var alertNotConnection = $ionicPopup.alert({
         title: 'Required Connection',
         template: "Internet access is required to view this page. Please check your internet settings and try again."
       });
-     
+
     }}
 }
-  
+
   $scope.googleAnalyticsView = function() {
     if(typeof analytics !== 'undefined') {
       analytics.trackView('ALSUP Help view');
     } else {
         console.log("Google Analytics Unavailable");
     }
-  }  
-  
+  }
+
   $scope.alsupHelpDirEs = [
     {
       title: "Audio: Como usar el ALSUP",
-      topics: [ 
+      topics: [
         { content: "Usando la evaluación de las habilidades rezagadas y los problemas no resueltos",
           url:"http://www.blogtalkradio.com/drrosswgreene/2012/01/23/collaborative-problem-solving-at-school"
         }
@@ -84,9 +93,9 @@ angular.module('starter.controllers')
         }
       ]
     }
-  ];  
-     
-    
+  ];
+
+
   $scope.alsupHelpDirEn = [
     {
       title: "Audio: How to use the ALSUP",
@@ -131,5 +140,5 @@ angular.module('starter.controllers')
         }
       ]
     }
-  ];        
+  ];
 });
