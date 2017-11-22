@@ -1,14 +1,19 @@
 angular.module('starter.controllers')
 .controller('AlsupCtrl', function($scope, $translate, AppTools, $ionicPopup) {
-
+$scope.alert = function(){
+  $scope.shownContent = null;
+}
   $scope.toggleContent = function(content) {
+    localStorage.removeItem("coming_from_hint");
     if ($scope.isContentShown(content)) {
       $scope.shownContent = null;
     } else {
       $scope.shownContent = content;
     }
+
   };
   $scope.isContentShown = function(content) {
+
     return $scope.shownContent === content;
   };
 
@@ -20,8 +25,9 @@ angular.module('starter.controllers')
   });
   $scope.comes_from_help = localStorage.getItem("coming_from_hint");
   $scope.from_help = function(content){
+    // console.log((content.title == "Help with the wording of unsolved problems" || content.title == "Ayuda con la redacción de problemas no resueltos") && $scope.comes_from_help)
     if ((content.title == "Help with the wording of unsolved problems" || content.title == "Ayuda con la redacción de problemas no resueltos") && $scope.comes_from_help){
-        localStorage.removeItem("coming_from_hint");
+
         return true
       }
       else {

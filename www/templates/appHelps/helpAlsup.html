@@ -1,5 +1,5 @@
-<ion-view title="{{'ALSUPHelpOption' | translate }}">
-	<ion-content ng-controller="AlsupCtrl" ng-init="googleAnalyticsView();showFirst();">
+<ion-view cache-view="false" title="{{'ALSUPHelpOption' | translate }}">
+	<ion-content ng-controller="AlsupCtrl" ng-init="googleAnalyticsView();alert()">
     <ion-list>
 			<div ng-if="isSpanish()">
 				<div ng-repeat="help in alsupHelpDirEs">
@@ -29,7 +29,7 @@
 					</ion-item>
 					<div ng-repeat="topic in help.topics">
 						<ion-item class="item item-accordion item-text-wrap item-icon-right "
-											ng-show="isContentShown(help) || from_help(help)"
+											ng-show=" from_help(help) || isContentShown(help) "
 											ng-click="checkConnection();browserInstance.openBrowser(topic.url)">
 							{{topic.content}}
 							<i class="icon ion-ios-browsers-outline font-21"></i>

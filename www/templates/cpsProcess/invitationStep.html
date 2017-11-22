@@ -2,6 +2,7 @@
   <div ng-if="sharedChild == 0">
     <div class="bar bar-subheader bar-positive">
       <h2 class="title">{{unsolvedProblem.description}}</h2>
+      <a class="button button-small button-clear button-white icon ion-help-circled" href="#/app/helpForInvitation"></a>
     </div>
     <ion-content class="has-tabs has-subheader" on-swipe-right="selectTabWithIndex(1)">
       <div class="item item-divider item-text-wrap">
@@ -60,7 +61,7 @@
           <a ng-click="openModal()" class="watchlist_menu button button-small button-clear button-positive">
             <i class="icon ion-plus"></i>
           </a>
-          <a class="watchlist_menu button button-small button-clear button-positive icon ion-help-circled" href="#/app/helpForInvitation"></a>
+          
           <div class="col col-75">
             <h2>
               <b>{{'ListPossibleSolutions' | translate }}</b>
@@ -79,7 +80,7 @@
     
             <i class="icon {{getRatingIcon(solution)}}"></i>
             <p>{{solution.description}}</p>
-            <i class="icon ion-star" ng-click="showRatingPopup(solution,unsolvedProblem)"></i>
+            <i class="icon dark ion-chevron-right" ng-click="showRatingPopup(solution,unsolvedProblem)"></i>
             <ion-option-button class="button button-balanced ion-edit" ng-click="editSolution(solution)"></ion-option-button>
             <ion-option-button ng-click="showDeletionConfirm(solution)" class="button-assertive ion-trash-a"></ion-option-button>
             <ion-option-button ng-click="goToSolution(solution)" class="button-positive ion-eye"></ion-option-button>
