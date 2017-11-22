@@ -88,7 +88,7 @@ var $translations_en = {
     DeleteChildsConcernTitle: "Delete Child's Concern",
     DeleteChildsConcernBody: "Are you sure you want to delete this child's concern?",
     NoChildsConcern: "Please add your child’s concerns by clicking on the “+” above.",
-    step2VerifyBody: "Have you drilled enough to get all your child's concerns?",
+    step2VerifyBody: "Have you drilled enough to get all of your child's concerns?",
     ChildsConcernHint: "After you identify all of your child's concerns, click the arrow to move on to adult concerns step",
 
     //For Invitation Step
