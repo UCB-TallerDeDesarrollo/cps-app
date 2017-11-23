@@ -10,19 +10,7 @@
         <input type="text" placeholder=" {{'TypeChildNameTitle' | translate }} "ng-model="child.first_name">
         </input>
       </label>
-      <label class="item item-input item-select">
-        <span class="input-label">{{'GenderTitle' | translate }}</span>
-        <select ng-model="child.gender">
-            <option value="Male">{{'MaleTitle' | translate }}</option>
-            <option selected value="Female">{{'FemaleTitle' | translate }}</option>
-         </select>
-      </label>
-      <label class="item item-input item-select">
-        <span class="input-label">{{'BirthDateTitle' | translate }}</span>
-        <input type="date" class="text-align-right" ng-model="child.birthday">
-        </input>
-      </label>
-      <h2>{{child.birthdate}}</h2>
+
 
       <button class="button button-full button-positive" ng-if="child.first_name.length === 0 || child.birthday === null || !child.birthday" disabled>{{'CreateTitle' | translate }}</button>
       <button class="button button-full button-positive" ng-if="child.first_name.length > 0 && child.birthday " ng-click="createChild()">{{'CreateTitle' | translate }}</button>

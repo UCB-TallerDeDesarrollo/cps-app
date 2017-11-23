@@ -27,8 +27,6 @@ angular
     $scope.user_friend.id = "";
     $scope.child = {};
     $scope.child.first_name = "";
-    $scope.child.gender = "Female";
-    $scope.child.birthday = new Date();
     $scope.sharedAlsups;
 
     ChildrenFactory.all(function(children) {
@@ -63,8 +61,6 @@ angular
     $scope.closeModalCreate = function() {
       $scope.modalCreate.hide();
       $scope.child.first_name = "";
-      $scope.child.gender = "Female";
-      $scope.child.birthday = new Date();
       $ionicListDelegate.closeOptionButtons();
     };
     // Cleanup the modal when we're done with it!
@@ -151,8 +147,6 @@ angular
       if (!inputFieldIsEmpty($scope.child.first_name)) {
         ChildrenFactory.insert($scope.child, function() {
           $scope.child.first_name = "";
-          $scope.child.gender = "Female";
-          $scope.child.birthday = new Date();
           $scope.closeModalCreate();
           if (typeof analytics !== "undefined") {
             analytics.trackEvent("Child", "Create");
@@ -180,8 +174,6 @@ angular
       if (!inputFieldIsEmpty($scope.editableChild.first_name)) {
         ChildrenFactory.update($scope.editableChild);
         $scope.editableChild.first_name = "";
-        $scope.editableChild.gender = "Female";
-        $scope.editableChild.birthday = new Date();
         $scope.closeModalEdit();
         ChildrenFactory.all(function(children) {
           $scope.childs = children;
@@ -339,14 +331,11 @@ angular
     }
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");
-      $scope.formattedDate =   $filter('date')($scope.child.birthday, "yyyy-MM-dd");
       $http.post( $link_root +"/users/"+user_id+"/children",
       {
         //id: $scope.child.id,
         child_id: $scope.child.id,
         name: $scope.child.first_name,
-        gender: $scope.child.gender,
-        birthday: $scope.formattedDate
       },
       {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -376,8 +365,8 @@ angular
       $http.get(link+$scope.child.id).then(data => {
         $scope.s_child = data.data;
         console.log($scope.s_child.child_id);
-        var query = "UPDATE childs SET first_name = ?, gender = ? , birthday = ? where id = ?";
-        var params = [$scope.s_child.name, $scope.s_child.gender,$scope.s_child.birthday, $scope.s_child.child_id];
+        var query = "UPDATE childs SET first_name = ? where id = ?";
+        var params = [$scope.s_child.name,$scope.s_child.child_id];
         console.log("Nombre: "+ $scope.s_child.name);
         $cordovaSQLite.execute(db, query, params);
         ChildrenFactory.all(function(children){
@@ -806,9 +795,6 @@ angular
           buttonClicked: function(index) {
             if (index === 0) {
               $scope.editableChild = angular.copy(child);
-              $scope.editableChild.birthday = $scope.convertStringToDate(
-                child.birthday
-              );
               $scope.openModalEdit();
             }
             if (index === 1) {
