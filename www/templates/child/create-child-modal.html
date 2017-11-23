@@ -12,8 +12,8 @@
       </label>
 
 
-      <button class="button button-full button-positive" ng-if="child.first_name.length === 0 || child.birthday === null || !child.birthday" disabled>{{'CreateTitle' | translate }}</button>
-      <button class="button button-full button-positive" ng-if="child.first_name.length > 0 && child.birthday " ng-click="createChild()">{{'CreateTitle' | translate }}</button>
+      <button class="button button-full button-positive" ng-if="child.first_name.length === 0" disabled>{{'CreateTitle' | translate }}</button>
+      <button class="button button-full button-positive" ng-if="child.first_name.length > 0 " ng-click="createChild()">{{'CreateTitle' | translate }}</button>
     </div>
   </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out modal-animation"></div></div></ion-content>
 </ion-modal-view>

@@ -10,8 +10,8 @@
         <input type="text" placeholder="Type a new child's name here." ng-model="editableChild.first_name">
         </input>
       </label>
-        <button class="button button-full button-positive" ng-if="editableChild.first_name.length == 0 || child.birthday === null || !child.birthday" disabled>{{'SaveTitle' | translate }}</button>
-        <button class="button button-full button-positive" ng-if="editableChild.first_name.length > 0 && child.birthday" ng-click="updateChild()">{{'SaveTitle' | translate }}</button>
+        <button class="button button-full button-positive" ng-if="editableChild.first_name.length == 0 " disabled>{{'SaveTitle' | translate }}</button>
+        <button class="button button-full button-positive" ng-if="editableChild.first_name.length > 0" ng-click="updateChild()">{{'SaveTitle' | translate }}</button>
     </div>
   </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out modal-animation"></div></div></ion-content>
 </ion-modal-view>
