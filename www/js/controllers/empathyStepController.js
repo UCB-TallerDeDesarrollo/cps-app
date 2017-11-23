@@ -318,4 +318,35 @@ angular.module('starter.controllers')
             console.log(error.message);
           });
       };
+
+      $scope.empathyStepHint = function(){
+        $scope.openModalHint();
+        if(typeof analytics !== 'undefined') {
+            analytics.trackEvent('Empathy Step Hint', 'Open')
+        } else {
+            console.log("Google Analytics Unavailable");
+        }
+      };
+
+      $scope.openModalHint = function() {
+        $scope.modalHint.show();
+      };
+
+    $ionicModal.fromTemplateUrl('templates/cpsProcess/empathyStepHints.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modalHint = modal;
+          $scope.closeModalEdit();
+      });
+    $scope.closeModalHint = function() {
+        $scope.modalHint.hide();
+        $ionicListDelegate.closeOptionButtons();
+      };
+
+      $scope.goToAlsupHelp = function() {
+        $scope.modalHint.hide();
+        localStorage.setItem("coming_from_hint","true")
+          $state.go("app.helpCategories");
+      }
 });
