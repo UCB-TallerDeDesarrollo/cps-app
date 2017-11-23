@@ -150,6 +150,9 @@ var $translations_es = {
     imSure: "estoy seguro",
     keepDrilling: "seguir enlistando",
 
+    // From Define adult's concern to Empathy Step
+    step2VerifyBody: "¿Esta seguro de haber enlistado todas las preocupaciones del adulto?",
+
     //Para Laggin Skills
     LaggingSkillTitle:"Dificultades en habilidades",
     CheckButton:"Marcar",

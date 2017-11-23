@@ -221,6 +221,23 @@ angular.module('starter.controllers')
     }
   };
 
+  $scope.verifyToGoToStep3 = function(id) {
+    $translate(['goingTo','Step', 'InvitationStep','NoMessage','YesMessage','keepDrilling','step2VerifyBody','imSure']).then (function(translations){   
+      var confirmPopup = $ionicPopup.confirm({
+        title: translations.goingTo +" "+ translations.Step + " 2: " +translations.InvitationStep, //translations.goingTo +" "+ translations.Step + " 1: " +translations.EmpathyStep,
+        template: translations.step2VerifyBody,
+        cancelText: translations.NoMessage+", " + translations.keepDrilling,
+        okText: translations.YesMessage + ", "+ translations.imSure
+      });
+      confirmPopup.then(function(res) {
+      if(res) {
+       $state.go('app.invitation',{ unsolvedProblemId:id});
+      }
+      });   
+   });
+  };
+
+
   $scope.sharedAdultConcerns;
 
     $scope.getSharedAdultConcerns = function(user_id,child_id,unsolved_problem_id) {
