@@ -39,6 +39,9 @@
             <ion-option-button class="button-positive ion-more" ng-click="showActionsheet(unsolvedProblem)"></ion-option-button>
             <ion-reorder-button on-reorder="moveItem(unsolvedProblem, $fromIndex, $toIndex)"><img src="img/unsolvedProblems/reorder.png" width="80%"></ion-reorder-button>
           </ion-item>
+          <div class="item item-text-wrap" ng-hide="!shouldShowReorder">
+            <p>Remember that the higher up a problem is, the more important it is</p>
+          </div>
           <div class="item item-text-wrap" ng-if="unsolvedProblems.length === 0">
             <p>{{'NoUnsolvedProblems' | translate }}</p>
           </div>
