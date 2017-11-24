@@ -52,7 +52,7 @@ var $translations_en = {
     ConfirmDeleteChildMessage: 'Are you sure you want to delete this child?',
     YesMessage: 'Yes',
     NoMessage: "No",
-    WelcomeMessage: 'Welcome to The Lens Changer 2',
+    WelcomeMessage: 'Welcome to Lens Changer',
     ChooseAnOptionMessage: 'Choose your role!',
     ParentOption: "Parent",
     EducatorOption: "Educator",
@@ -246,5 +246,8 @@ var $translations_en = {
     //Share
     NoSharedLaggingSkills: "No lagging skills shared yet. TAP FOR NEXT",
     NoSharedUnsolvedProblem: "No unsolved problems shared yet",
-
+    
+    // First popUp
+    launchApp: "Launch the app",
+    tellMeMoreCps: "Tell me more about CPS!",
 };

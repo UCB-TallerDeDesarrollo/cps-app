@@ -952,30 +952,23 @@ angular
           localStorage.setItem("pop_up_first_time", true);
           var buttonsTemplate =
             '<div class="button-bar">' +
-            '<a href="http://livesinthebalance.org/walking-tour-parents" class="button button-assertive">' +
-            '<b><font size="2">{{"ParentOption" | translate }}</font></b>' +
-            "</a>" +
-            '<a href="http://livesinthebalance.org/workshopstraining" class="button ng-binding button-energized">' +
-            '<b><font size="2">{{"EducatorOption" | translate }}</font></b>' +
-            "</a>" +
-            '<a href="https://visitor.constantcontact.com/manage/optin?v=001DFTCDgfTjagIuIbRq2pgrG8ZVHSiKAKz7c-CMCvU_l22aSgjxedUQV-Irm8JNXt17JXGXj5O1MaEkvyw53H3fs3le1gcsNGw" class="button ng-binding button-calm">' +
-            '<b><font size="2">{{"SignInOption" | translate }}</font></b>' +
+            '<a href="https://livesinthebalance.org/about-cps" class="button ng-binding button-energized" white-space: normal;>' +
+            '<b><font size="2">{{"tellMeMoreCps" | translate }}</font></b>' +
             "</a>" +
             "<div>";
             $translate([
               "WelcomeMessage",
               "ChooseAnOptionMessage",
-              "ReadyOption"
+              "launchApp"
             ]).then(function(translations) {
           var myPopup = $ionicPopup.show({
             title: translations.WelcomeMessage,
-            subTitle: translations.ChooseAnOptionMessage,
             template: buttonsTemplate,
             cssClass: "popup-intro",
             buttons: [
               {
                 type: "button button-balanced",
-                text: translations.ReadyOption,
+                text: translations.launchApp,
                 onTap: function(e) {
                   myPopup.close();
                 }
@@ -1000,10 +993,10 @@ angular
     };
 
     $scope.showTutorialFirstTime = function() {
-      $scope.showIntroductionPage();
       if (localStorage.getItem("tutorial_first_time") === null) {
         localStorage.setItem("tutorial_first_time", true);
         $state.go("app.tutorial");
+        $scope.showIntroductionPage();
       }
     };
 
