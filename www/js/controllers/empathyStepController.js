@@ -242,6 +242,9 @@ angular.module('starter.controllers')
 
   $scope.updateChildsConcern = function(){
 
+    ChildConcernFactory.findchildConcernPair($scope.auxForUpdateChildConcernPair.description,function(childConcernPair){
+    $scope.childConcernPair=childConcernPair;
+
     if (!inputFieldIsEmpty($scope.editableChildsConcern.description)) {
       ChildConcernFactory.update($scope.editableChildsConcern);
       $scope.modalEdit.hide();
@@ -254,12 +257,10 @@ angular.module('starter.controllers')
       $scope.emptyInput = true;
     }
 
-    ChildConcernFactory.findchildConcernPair($scope.auxForUpdateChildConcernPair.description,function(childConcernPair){
-   $scope.childConcernPair=childConcernPair;
 
     if($scope.childConcernPair!=null)
         {
-          console.log($scope.editableChildsConcern.description);
+        
           ChildConcernFactory.updateChildsConcernPair($scope.editableChildsConcern.description,$scope.childConcernPair);
         }
       });
