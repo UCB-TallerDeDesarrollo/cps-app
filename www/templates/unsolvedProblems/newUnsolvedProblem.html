@@ -30,7 +30,11 @@
             <!-- <a href="#/app/unsolvedProblem/show/{{unsolvedProblem.id}}" class="no-text-decoration"> -->
             <div name="content">
               <i class="icon dark {{getRatingIcon(unsolvedProblem)}}"></i>
-              <p>{{unsolvedProblem.description}}</p>
+              <p>
+                <span ng-if="unsolvedProblem.unsolved_order == 0" class="item-note-left assertive"><b>! </b></span>
+                <span ng-if="unsolvedProblem.unsolved_order > 0 && unsolvedProblem.unsolved_order < 3"class="item-note-left energized"><b>! </b></span>
+                {{unsolvedProblem.description}}
+              </p>
               <i class="icon dark ion-chevron-right"></i>
             </div>
             <!-- </a> -->
