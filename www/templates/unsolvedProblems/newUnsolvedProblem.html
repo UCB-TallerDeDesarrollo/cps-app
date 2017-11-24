@@ -37,7 +37,7 @@
             <ion-option-button class="button button-balanced ion-edit" ng-click="editUnsolvedProblem(unsolvedProblem)" ng-hide="{{shouldShowReorder}}"></ion-option-button>
             <ion-option-button class="button-assertive ion-trash-a" ng-click="showConfirm(unsolvedProblem)"></ion-option-button>
             <ion-option-button class="button-positive ion-more" ng-click="showActionsheet(unsolvedProblem)"></ion-option-button>
-            <ion-reorder-button class="ion-navicon-round" on-reorder="moveItem(unsolvedProblem, $fromIndex, $toIndex)"> </ion-reorder-button>
+            <ion-reorder-button on-reorder="moveItem(unsolvedProblem, $fromIndex, $toIndex)"><img src="img/unsolvedProblems/reorder.png" width="80%"></ion-reorder-button>
           </ion-item>
           <div class="item item-text-wrap" ng-if="unsolvedProblems.length === 0">
             <p>{{'NoUnsolvedProblems' | translate }}</p>
