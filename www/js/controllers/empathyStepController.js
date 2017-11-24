@@ -242,8 +242,7 @@ angular.module('starter.controllers')
 
   $scope.updateChildsConcern = function(){
 
-    ChildConcernFactory.findchildConcernPair($scope.auxForUpdateChildConcernPair.description,function(childConcernPair){
-    $scope.childConcernPair=childConcernPair;
+
 
     if (!inputFieldIsEmpty($scope.editableChildsConcern.description)) {
       ChildConcernFactory.update($scope.editableChildsConcern);
@@ -258,13 +257,17 @@ angular.module('starter.controllers')
     }
 
 
-    if($scope.childConcernPair!=null)
-        {
-        
-          ChildConcernFactory.updateChildsConcernPair($scope.editableChildsConcern.description,$scope.childConcernPair);
+      ChildConcernFactory.getPair(function(respAux){
+      $scope.resp=respAux;
+        for(i=0;i<$scope.resp.length;i++) {
+          if($scope.resp[i].description === $scope.auxForUpdateChildConcernPair.description)
+          {
+              $scope.childConcernPair=$scope.resp[i];
+             ChildConcernFactory.updateChildsConcernPair($scope.editableChildsConcern.description,$scope.childConcernPair);
+          }
         }
-      });
 
+      });
   };
 
 

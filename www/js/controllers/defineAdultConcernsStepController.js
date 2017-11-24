@@ -51,8 +51,6 @@ angular.module('starter.controllers')
   };
 
   $scope.updateAdultsConcern = function(){
-    AdultConcernFactory.findAdultsConcernPair($scope.auxForUpdateAdultsConcernPair.description,function(adultsConcernPair){
-    $scope.adultsConcernPair=adultsConcernPair;
 
     if (!inputFieldIsEmpty($scope.editableAdultsConcern.description)) {
       AdultConcernFactory.update($scope.editableAdultsConcern);
@@ -66,12 +64,24 @@ angular.module('starter.controllers')
       $scope.emptyInput = true;
     }
 
-    if($scope.adultsConcernPair!=null)
-        {
-          
-          AdultConcernFactory.updateAdultsConcernPair($scope.editableAdultsConcern.description,$scope.adultsConcernPair);
+      AdultConcernFactory.getPair(function(respAux){
+        $scope.resp=respAux;
+        for(i=0;i<$scope.resp.length;i++) {
+
+          if($scope.resp[i].description2 === $scope.auxForUpdateAdultsConcernPair.description)
+          {
+                $scope.adultsConcernPair=$scope.resp[i];
+
+                      AdultConcernFactory.updateAdultsConcernPair($scope.editableAdultsConcern.description,$scope.adultsConcernPair);
+
+            }
+
+
         }
+
       });
+
+
 
   };
 
