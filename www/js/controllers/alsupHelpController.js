@@ -44,7 +44,11 @@ $scope.alert = function(){
         template: "Internet access is required to view this page. Please check your internet settings and try again."
       });
 
-    }}
+    }
+    else{
+      browserInstance.openBrowser(topic.url)
+    }
+  }
 }
 
   $scope.googleAnalyticsView = function() {
