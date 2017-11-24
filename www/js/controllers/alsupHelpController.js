@@ -45,7 +45,10 @@ $scope.alert = function(){
       });
 
     }
-    else{
+    if(navigator.connection.type == Connection.WIFI ||
+      navigator.connection.type == Connection.CELL_2G ||
+      navigator.connection.type == Connection.CELL_3G ||
+      navigator.connection.type == Connection.CELL_4G){
       browserInstance.openBrowser(topic.url)
     }
   }
