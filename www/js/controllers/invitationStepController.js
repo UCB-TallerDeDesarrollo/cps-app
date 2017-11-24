@@ -330,29 +330,18 @@ $scope.editablePair=[];
           }
         }
       },
-      { type: 'button-energized ion-heart-broken' ,
+      { type: 'button-energized ion-android-sad' ,
         onTap: function(e) {
-          $scope.RateSolution(solution,2);
-          $scope.BestRate(unsolvedProblem);
+          $scope.showConfirmBestRate2(solution,2,unsolvedProblem);
           if(typeof analytics !== 'undefined') {
-            analytics.trackEvent('Child solution rate', 'Broken heart')
+            analytics.trackEvent('Child solution rate', 'Android Sad')
           } else {
             console.log("Google Analytics Unavailable");
           }
         }
       },
-      { type: 'button-balanced ion-heart' ,
-        onTap: function(e) {
-          $scope.RateSolution(solution,3);
-          $scope.BestRate(unsolvedProblem);
-          if(typeof analytics !== 'undefined') {
-            analytics.trackEvent('Child solution rate', 'Heart')
-          } else {
-            console.log("Google Analytics Unavailable");
-          }
-        }
-      },
-      { type: 'button-calm ion-happy-outline',
+      
+      { type: 'button-balanced ion-happy-outline',
         onTap: function(e) {
           $scope.showConfirmBestRate(solution,4,unsolvedProblem);
           if(typeof analytics !== 'undefined') {
@@ -380,10 +369,32 @@ $scope.editablePair=[];
       if(res) {
         $scope.RateSolution(solution,rate);
         $scope.BestRate(unsolvedProblem);
+        $scope.goToUnsolvedProblems();
       }
     });
   });
   };
+  $scope.showConfirmBestRate2 = function(solution,rate,unsolvedProblem) {
+    $translate(['BestRatingTitle', 'CancelOption','YesMessage']).then (function(translations){
+    var confirmPopup = $ionicPopup.confirm({
+      title: translations.BestRatingTitle,
+      template: "Some times the solution need some time to work, give it a try",
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
+    });
+
+    confirmPopup.then(function(res) {
+      if(res) {
+        $scope.RateSolution(solution,rate);
+        $scope.BestRate(unsolvedProblem);
+      }
+    });
+  });
+  };
+
+  $scope.goToUnsolvedProblems = function() {
+      $state.go("app.newUnsolvedProblem");
+  }
 
   $scope.showConfirmWorstRate = function(solution,rate,unsolvedProblem) {
     $translate(['WorstRatingTitle','WorstRatingBody', 'CancelOption','YesMessage']).then (function(translations){
@@ -487,9 +498,7 @@ $scope.editablePair=[];
     } else if (rating === 1) {
       return 'ion-sad';
     } else if (rating === 2) {
-      return 'ion-heart-broken';
-    } else if (rating === 3) {
-      return 'ion-heart';
+      return 'ion-android-sad';
     } else  {
       return 'ion-happy';
     }

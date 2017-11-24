@@ -36,6 +36,33 @@ angular.module('starter.services').factory('AdultConcernFactory', function($cord
     });
   }
 
+  function getPair(callback){
+    var pair = [];
+    var query ="SELECT * FROM pair_childConcerntoadultConcern";
+    $cordovaSQLite.execute(db,query)
+    .then(function(result) {
+      var rows = result.rows;
+      if(rows.length) {
+        for(var i=0; i < rows.length; i++){
+          pair.push(rows.item(i));
+        }
+      }
+      callback(pair);
+    },function(err) {
+        console.log(err.message);
+    });
+
+   }
+
+
+
+
+
+   function updateAdultsConcernPair(adultsConcernDescription,pair){
+     var query = "UPDATE pair_childConcerntoadultConcern SET description = ?, description2 = ? where id = ?";
+     $cordovaSQLite.execute(db, query, [pair.description,adultsConcernDescription, pair.id]);
+    }
+
   return {
     all: function(unsolvedProblemId,callback) {
       getAdultsConcerns(unsolvedProblemId,callback);
@@ -45,6 +72,12 @@ angular.module('starter.services').factory('AdultConcernFactory', function($cord
     },
     update: function(adultsConcern) {
       updateAdultsConcern(adultsConcern);
+    },
+    updateAdultsConcernPair: function(adultsConcernDescription,pair) {
+       updateAdultsConcernPair(adultsConcernDescription,pair);
+    },
+    getPair: function(callback) {
+       getPair(callback);
     },
     delete: function(adultsConcern, callback) {
       deleteAdultsConcern(adultsConcern, callback);
