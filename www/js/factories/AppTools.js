@@ -12,9 +12,21 @@ angular.module('starter.services')
     });
 
     browserInstance.openBrowser = function(link) {
+      if(window.Connection) {
+        if(navigator.connection.type == Connection.NONE)
+        {
+          var alertNotConnection = $ionicPopup.alert({
+            title: 'Required Connection',
+            template: "Internet access is required to view this page. Please check your internet settings and try again."
+          });
+    
+        }
+        else{
       this.title = link;
       this.destination = $sce.trustAsResourceUrl(link);
       this.browser.show();
+        }
+      }
       // $cordovaInAppBrowser.open(link, '_self')
       // .then(function(event) {
       //   // success
