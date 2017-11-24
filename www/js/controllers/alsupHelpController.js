@@ -37,14 +37,13 @@ $scope.alert = function(){
   $scope.checkConnection = function(){
     console.log("Entro");
     if(window.Connection) {
-      if(navigator.connection.type == Connection.NONE)
-      {
-        var alertNotConnection = $ionicPopup.alert({
-          title: 'Required Connection',
-          template: "Internet access is required to view this page. Please check your internet settings and try again."
-        });
+    if(navigator.connection.type == Connection.NONE)
+    {
+      var alertNotConnection = $ionicPopup.alert({
+        title: 'Required Connection',
+        template: "Internet access is required to view this page. Please check your internet settings and try again."
+      });
 
-      }
     }
     else{
       browserInstance.openBrowser(topic.url)
