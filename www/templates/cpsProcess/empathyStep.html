@@ -2,7 +2,7 @@
   <div ng-if="sharedChild == 0">
     <div class="bar bar-subheader bar-positive">
       <h2 class="title">{{unsolvedProblem.description}} </h2>
-      <a class="button button-small button-clear button-white icon ion-help-circled" href="#/app/helpCategories"></a>
+      <a class="button button-small button-clear button-white icon ion-help-circled" ng-click="empathyStepHint()"></a>
     </div>
     
     <ion-content ng-init="findUnsolvedProblem(unsolvedProblem);showHint();googleAnalyticsView();" class="has-subheader has-tabs"
