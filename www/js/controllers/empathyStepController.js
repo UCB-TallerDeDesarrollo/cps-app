@@ -156,7 +156,7 @@ angular.module('starter.controllers')
   });
   };
   $scope.selectTabWithIndex = function(index) {
-    $translate(['CancelOption','Step','EmpathyStep','DefineAdultsConcern','InvitationStep','wasntUnlock','haveToFinishSteps']).then (function(translations){ 
+    $translate(['CancelOption','Step','EmpathyStep','DefineAdultsConcern','InvitationStep','wasntUnlock','haveToFinishSteps']).then (function(translations){
     if(index === 0){
       $ionicTabsDelegate.select(index);
       $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
@@ -212,6 +212,7 @@ angular.module('starter.controllers')
         }
   };
   $scope.editChildsConcern = function(childsConcern){
+    $scope.auxForUpdateChildConcernPair=childsConcern;
     $scope.editableChildsConcern = angular.copy(childsConcern);
     $scope.openModalEdit();
     if(typeof analytics !== 'undefined') {
@@ -240,6 +241,7 @@ angular.module('starter.controllers')
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(0,10));});
 
   $scope.updateChildsConcern = function(){
+
     if (!inputFieldIsEmpty($scope.editableChildsConcern.description)) {
       ChildConcernFactory.update($scope.editableChildsConcern);
       $scope.modalEdit.hide();
@@ -251,7 +253,20 @@ angular.module('starter.controllers')
     else {
       $scope.emptyInput = true;
     }
+
+    ChildConcernFactory.findchildConcernPair($scope.auxForUpdateChildConcernPair.description,function(childConcernPair){
+   $scope.childConcernPair=childConcernPair;
+
+    if($scope.childConcernPair!=null)
+        {
+          console.log($scope.editableChildsConcern.description);
+          ChildConcernFactory.updateChildsConcernPair($scope.editableChildsConcern.description,$scope.childConcernPair);
+        }
+      });
+
   };
+
+
   $scope.deleteChildsConcern = function(childConcern) {
     ChildConcernFactory.delete(childConcern,function(){
       $scope.childsConcerns.splice($scope.childsConcerns.indexOf(childConcern), 1);
@@ -266,7 +281,7 @@ angular.module('starter.controllers')
      cancelText: translations.CancelOption,
      okText: translations.YesMessage
    });
-  
+
    confirmPopup.then(function(res) {
      if(res) {
         $scope.deleteChildsConcern(item);
