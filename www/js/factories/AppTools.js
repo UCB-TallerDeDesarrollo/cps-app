@@ -1,5 +1,5 @@
 angular.module('starter.services')
-.factory('AppTools', function($sce, $ionicModal, $window ,$cordovaInAppBrowser, $ionicPlatform) {
+.factory('AppTools', function($sce, $ionicModal, $window ,$cordovaInAppBrowser, $ionicPlatform, $ionicPopup) {
   function createNewBrowser(options){
     var browserInstance = {
       title: '',
