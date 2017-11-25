@@ -125,21 +125,21 @@ angular.module('starter.controllers')
               },
         })
         .then(data => {
-          console.log(data.data.auth_token);
+          console.log(data.data.auth_token);          
           localStorage.setItem("auth_token",data.data.auth_token);
           localStorage.setItem("email",email);
           var alertForAccountCreated = $ionicPopup.alert({
                   title: translations.SuccessTitle,
-                  template: translations.AcountCreatedSuccessfully
-              });
+                  template: translations.AcountCreatedSuccessfully + ".</br> An Email confirmation has been send to activate your account, please check your email."
+              });          
           $scope.get_user_info();
         }).catch(error => {
           console.log(error.status);
         });
-        $scope.closeModalSignup();
+        $scope.closeModalSignup();        
         $ionicHistory.nextViewOptions({
           disableBack: true
-        });
+        });        
         $state.go('app.childs',{reload: true});
       })
     };
