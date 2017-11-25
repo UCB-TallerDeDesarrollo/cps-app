@@ -132,15 +132,16 @@ angular.module('starter.controllers')
                   title: translations.SuccessTitle,
                   template: translations.AcountCreatedSuccessfully + ".</br> An Email confirmation has been send to activate your account, please check your email."
               });          
-          $scope.get_user_info();
+          //$scope.get_user_info();
         }).catch(error => {
           console.log(error.status);
         });
         $scope.closeModalSignup();        
+        $scope.openModalLogin(); 
         $ionicHistory.nextViewOptions({
           disableBack: true
-        });        
-        $state.go('app.childs',{reload: true});
+        });                       
+        $state.go('app.login',{reload: true});
       })
     };
 
