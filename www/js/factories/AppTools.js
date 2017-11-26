@@ -23,7 +23,10 @@ angular.module('starter.services')
           });
     
         }
-        this.browser.show();
+        else{
+          this.browser.show();
+        }
+        
       }
       
       
