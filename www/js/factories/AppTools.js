@@ -21,12 +21,11 @@ angular.module('starter.services')
           });
     
         }
-        else{
+        
+      }
       this.title = link;
       this.destination = $sce.trustAsResourceUrl(link);
       this.browser.show();
-        }
-      }
       // $cordovaInAppBrowser.open(link, '_self')
       // .then(function(event) {
       //   // success
