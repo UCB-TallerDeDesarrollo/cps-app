@@ -12,6 +12,8 @@ angular.module('starter.services')
     });
 
     browserInstance.openBrowser = function(link) {
+      this.title = link;
+      this.destination = $sce.trustAsResourceUrl(link);
       if(window.Connection) {
         if(navigator.connection.type == Connection.NONE)
         {
@@ -21,11 +23,10 @@ angular.module('starter.services')
           });
     
         }
-        
+        this.browser.show();
       }
-      this.title = link;
-      this.destination = $sce.trustAsResourceUrl(link);
-      this.browser.show();
+      
+      
       // $cordovaInAppBrowser.open(link, '_self')
       // .then(function(event) {
       //   // success
