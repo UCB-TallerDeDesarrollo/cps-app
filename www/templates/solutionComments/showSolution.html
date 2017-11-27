@@ -34,11 +34,12 @@
           </div>
     
     
-          <ion-item class="item item-text-wrap" ng-repeat="item in comments">
+          <ion-item class="item item-text-wrap item-icon-right" ng-repeat="item in comments">
             {{item.description}} -
             <b>{{parseDate(item.commented_at)}}</b>
             <ion-option-button class="button button-balanced ion-edit" ng-click="editComment(item)"></ion-option-button>
             <ion-option-button class="button button-assertive ion-trash-a" ng-click="showDeletionConfirm(item)"></ion-option-button>
+            <i class="icon dark ion-chevron-right"></i>
           </ion-item>
         </ion-list>
       </div>
