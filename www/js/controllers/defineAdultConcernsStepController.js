@@ -45,11 +45,13 @@ angular.module('starter.controllers')
   };
 
   $scope.editAdultsConcern = function(adultsConcern){
+    $scope.auxForUpdateAdultsConcernPair=adultsConcern;
     $scope.editableAdultsConcern = angular.copy(adultsConcern);
     $scope.openModalEdit();
   };
 
   $scope.updateAdultsConcern = function(){
+
     if (!inputFieldIsEmpty($scope.editableAdultsConcern.description)) {
       AdultConcernFactory.update($scope.editableAdultsConcern);
       $scope.modalEdit.hide();
@@ -61,6 +63,26 @@ angular.module('starter.controllers')
     else {
       $scope.emptyInput = true;
     }
+
+      AdultConcernFactory.getPair(function(respAux){
+        $scope.resp=respAux;
+        for(i=0;i<$scope.resp.length;i++) {
+
+          if($scope.resp[i].description2 === $scope.auxForUpdateAdultsConcernPair.description)
+          {
+                $scope.adultsConcernPair=$scope.resp[i];
+
+                      AdultConcernFactory.updateAdultsConcernPair($scope.editableAdultsConcern.description,$scope.adultsConcernPair);
+
+            }
+
+
+        }
+
+      });
+
+
+
   };
 
   $scope.showDeleteConfirmationPopup = function(adultsConcern) {
@@ -222,7 +244,7 @@ angular.module('starter.controllers')
   };
 
   $scope.verifyToGoToStep3 = function(id) {
-    $translate(['goingTo','Step', 'InvitationStep','NoMessage','YesMessage','keepDrilling','step2VerifyBody','imSure']).then (function(translations){   
+    $translate(['goingTo','Step', 'InvitationStep','NoMessage','YesMessage','keepDrilling','step2VerifyBody','imSure']).then (function(translations){
       var confirmPopup = $ionicPopup.confirm({
         title: translations.goingTo +" "+ translations.Step + " 2: " +translations.InvitationStep, //translations.goingTo +" "+ translations.Step + " 1: " +translations.EmpathyStep,
         template: translations.step2VerifyBody,
@@ -233,7 +255,7 @@ angular.module('starter.controllers')
       if(res) {
        $state.go('app.invitation',{ unsolvedProblemId:id});
       }
-      });   
+      });
    });
   };
 

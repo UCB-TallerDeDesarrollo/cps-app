@@ -302,9 +302,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
      } else if (rating === 1) {
        return 'ion-sad';
      } else if (rating === 2) {
-       return 'ion-heart-broken';
-     } else if (rating === 3) {
-       return 'ion-heart';
+       return 'ion-android-sad';
      } else  {
        return 'ion-happy';
      }

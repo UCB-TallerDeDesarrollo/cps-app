@@ -28,6 +28,7 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
     return solutions;
   }
 
+
   function insertSolution(solution){
     var query ="INSERT INTO solutions(description,unsolved_problem_id,rating) VALUES (?,?,?)";
     $cordovaSQLite.execute(db,query,[solution.description, solution.unsolvedProblemId, solution.rating]);
@@ -59,7 +60,19 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
       }
     },function(err){console.log(err.message);});
   }
-
+  function getAllPairs(solutionId, callback) {
+    var pairs = [];
+    var query ="SELECT * FROM pair_childConcerntoadultConcern WHERE solution_id = ?";
+    $cordovaSQLite.execute(db,query,[solutionId]).then(function(result) {
+      var rows = result.rows;
+      if(rows.length) {
+        for(var i=0; i < rows.length; i++){
+          pairs.push(rows.item(i));
+        }
+        callback(pairs);
+      }
+    },function(err){console.log(err.message);});
+  }
   function insertComment(comment){
     var now = new Date();
     var query ="INSERT INTO solution_comments(description,commented_at,solution_id) VALUES (?,?,?)";
@@ -118,6 +131,9 @@ angular.module('starter.services').factory('PossibleSolutionFactory', function($
   return {
     all: function(unsolvedProblemId, callback){
       getAllSolutions(unsolvedProblemId, callback);
+    },
+    allPairs: function(solutionId, callback){
+      getAllPairs(solutionId, callback);
     },
     insert: function(possibleSolution){
       insertSolution(possibleSolution);
