@@ -10,20 +10,8 @@
         <input type="text" placeholder="Type a new child's name here." ng-model="editableChild.first_name">
         </input>
       </label>
-      <label class="item item-input item-select">
-        <span class="input-label">{{'GenderTitle' | translate }}</span>
-        <select ng-model="editableChild.gender">
-          <option value="Male">{{'MaleTitle' | translate }}</option>
-          <option selected value="Female">{{'FemaleTitle' | translate }}</option>
-         </select>
-      </label>
-      <label class="item item-input item-select">
-        <span class="input-label">{{'BirthDateTitle' | translate }}</span>
-        <input type="date" class="text-align-right" ng-model="editableChild.birthday">
-        </input>
-      </label>
-        <button class="button button-full button-positive" ng-if="editableChild.first_name.length == 0 || child.birthday === null || !child.birthday" disabled>{{'SaveTitle' | translate }}</button>
-        <button class="button button-full button-positive" ng-if="editableChild.first_name.length > 0 && child.birthday" ng-click="updateChild()">{{'SaveTitle' | translate }}</button>
+        <button class="button button-full button-positive" ng-if="editableChild.first_name.length == 0 " disabled>{{'SaveTitle' | translate }}</button>
+        <button class="button button-full button-positive" ng-if="editableChild.first_name.length > 0" ng-click="updateChild()">{{'SaveTitle' | translate }}</button>
     </div>
   </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out modal-animation"></div></div></ion-content>
 </ion-modal-view>

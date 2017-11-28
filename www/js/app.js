@@ -71,8 +71,8 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
   $httpProvider.defaults.headers.post = {};
   $httpProvider.defaults.headers.put = {};
   $httpProvider.defaults.headers.patch = {};
-  $link_root = "http://localhost:3000";
-  //$link_root = "http://cpsapi.herokuapp.com";
+  // $link_root = "http://localhost:3000";
+  $link_root = "http://cpsapi.herokuapp.com";
   $httpProvider.defaults.useXDomain = true;
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
   var defaultOptions = {
@@ -370,7 +370,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       }
     }
   })
-  
+
   .state('app.sharedUnsolvedProblem', {
       url: '/unsolvedProblems/shared/:sharedChild',
       views: {

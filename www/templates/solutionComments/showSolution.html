@@ -34,11 +34,12 @@
           </div>
     
     
-          <ion-item class="item item-text-wrap" ng-repeat="item in comments">
+          <ion-item class="item item-text-wrap item-icon-right" ng-repeat="item in comments">
             {{item.description}} -
             <b>{{parseDate(item.commented_at)}}</b>
             <ion-option-button class="button button-balanced ion-edit" ng-click="editComment(item)"></ion-option-button>
             <ion-option-button class="button button-assertive ion-trash-a" ng-click="showDeletionConfirm(item)"></ion-option-button>
+            <i class="icon dark ion-chevron-right"></i>
           </ion-item>
         </ion-list>
       </div>
@@ -52,18 +53,7 @@
     </div>
   
     <ion-content class="has-subheader">
-      <div class="item item-divider item-text-wrap">
-        <h2>{{'RelatedTo' | translate }}</h2>
-      </div>
-      <ion-item class="item item-text-wrap" ng-if="!pairs.description.length">
-        <p>{{'TextSolutions' | translate }}</p>
-      </ion-item>
-  
-      <ion-item class="item item-text-wrap" ng-if="pairs.description.length > 0">
-        {{pairs.description}}
-        <br> {{pairs.description2}}
-  
-      </ion-item>
+
   
       <div class="padding">
   

@@ -2,6 +2,7 @@
   <div ng-if="sharedChild == 0">
     <div class="bar bar-subheader bar-positive item-text-wrap">
       <h2 class="title">{{unsolvedProblem.description}}</h2>
+      <a class="button button-small button-clear button-white icon ion-help-circled" href="#/app/mainHelp/helpDefineAdultsConcern"></a>
     </div>
     <ion-content ng-init="findChildConcern();findUnsolvedProblem();showAdultsConcernHint();googleAnalyticsView()" class="has-subheader has-tabs"
       on-swipe-left="selectTabWithIndex(2)" on-swipe-right="selectTabWithIndex(0)">
@@ -15,7 +16,7 @@
           <a ng-click="openModal()" class="watchlist_menu button button-small button-clear button-positive">
             <i class="icon ion-plus"></i>
           </a>
-          <a class="watchlist_menu button button-small button-clear button-positive icon ion-help-circled" href="#/app/mainHelp/helpDefineAdultsConcern"></a>
+          
           <div class="col col-75">
             <h2>
               <b>{{'ListAdultsConcern' | translate }}</b>
@@ -27,7 +28,7 @@
             <button class="item-options item fake-button button button-balanced ion-edit"></button>
             <button class="item-options item fake-button button button-assertive ion-trash-a"></button>
           </div>
-          <ion-item class="item item-text-wrap item-icon-right" href="#/app/invitation/{{unsolvedProblem.id}}" ng-repeat="adultsConcern in adultsConcerns"
+          <ion-item class="item item-text-wrap item-icon-right" ng-click="verifyToGoToStep3({{unsolvedProblem.id}})"  ng-repeat="adultsConcern in adultsConcerns"
             ng-class="{ slidein: $first && !firstItemAnimationShown}">
             <p>{{adultsConcern.description}}</p>
             <i class="icon dark ion-chevron-right"></i>

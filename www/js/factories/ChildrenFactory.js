@@ -12,18 +12,6 @@ angular.module('starter.services').factory('ChildrenFactory', function($cordovaS
 };
 
 
-showDateAlert = function() {
-  $translate(['InvalidBirthDate', 'InsertaDatePrior']).then (function(translations){
-var alertPopup = $ionicPopup.alert({
-  title: translations.InvalidBirthDate,
-  template: translations.InsertaDatePrior
-});
-
-alertPopup.then(function(res) {
-
-});
-});
-};
 
 var date = new Date();
 
@@ -32,19 +20,10 @@ var date = new Date();
       showNameAlert();
       return;
     }
-    date.setDate(date.getDate() + 1);
-    if (child.birthday > date  ) {
-      showDateAlert();
-      return;
-    }
-
-    if (child.birthday <= date) {
-      var query = "INSERT INTO childs(first_name,gender,birthday,active, unsolved_problems, lagging_skills_check) VALUES (?,?,?,1,0,0)";
-      $cordovaSQLite.execute(db,query,[child.first_name,child.gender,child.birthday]).then(function(){
-        callback();
-      });
-    }
-
+    var query = "INSERT INTO childs(first_name,active, unsolved_problems, lagging_skills_check) VALUES (?,1,0,0)";
+    $cordovaSQLite.execute(db,query,[child.first_name]).then(function(){
+      callback();
+    });
   }
   function getChildren(callback) {
     var children = [];
@@ -100,12 +79,9 @@ var date = new Date();
 
 
   function updateChild(child){
-    if (child.birthday > date) {
-      showDateAlert();
-      return;
-    }
-    var query = "UPDATE childs SET first_name = ?, gender = ? , birthday = ? where id = ?";
-    var params = [child.first_name, child.gender, child.birthday, child.id];
+
+    var query = "UPDATE childs SET first_name = ? where id = ?";
+    var params = [child.first_name,  child.id];
     $cordovaSQLite.execute(db, query, params);
   }
 

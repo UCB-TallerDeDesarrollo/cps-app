@@ -10,7 +10,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       $scope.laggingSkills = res;
     });
   });
-  
+
   $scope.updateUnsolvedProblems = function(){
     ChildrenFactory.active(function(active_child){
       $scope.activeChild = active_child;
@@ -210,7 +210,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   $scope.childsFlag = 0;
   $scope.adultsFlag = 0;
   $scope.showActionsheet = function(unsolvedProblem) {
-    $translate(['CancelOption','Step','EmpathyStep','DefineAdultsConcern','InvitationStep','wasntUnlock','haveToFinishSteps']).then (function(translations){ 
+    $translate(['CancelOption','Step','EmpathyStep','DefineAdultsConcern','InvitationStep','wasntUnlock','haveToFinishSteps']).then (function(translations){
     $scope.adultsConcernsFlag(unsolvedProblem);
     $scope.childsConcernsFlag(unsolvedProblem);
     $ionicActionSheet.show({
@@ -260,7 +260,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
     });
    });
   };
-  
+
   $scope.editSolution = function(solution) {
     $state.go('app.editSolution',{ solutionId: solution.id});
   };
@@ -292,7 +292,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
       }
 
      });
-    });   
+    });
    };
 
    $scope.getRatingIcon = function(unsolvedProblem) {
@@ -302,9 +302,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
      } else if (rating === 1) {
        return 'ion-sad';
      } else if (rating === 2) {
-       return 'ion-heart-broken';
-     } else if (rating === 3) {
-       return 'ion-heart';
+       return 'ion-android-sad';
      } else  {
        return 'ion-happy';
      }
@@ -344,7 +342,7 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
          console.log("Google Analytics Unavailable");
      }
    };
-  
+
 
    $scope.sharedUnsolveProblems;
 
@@ -362,6 +360,10 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
           });
       };
 
-
+  $scope.goToAlsupHelp = function() {
+    $scope.modalHint.hide();
+    localStorage.setItem("coming_from_hint","true")
+      $state.go("app.alsupHelp");
+  }
 
 });

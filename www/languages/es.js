@@ -52,7 +52,7 @@ var $translations_es = {
     ConfirmDeleteChildMessage: '¿Seguro de que quieres eliminar este niño?',
     YesMessage: 'Si',
     NoMessage: "No",
-    WelcomeMessage: 'Bienvenido a The Lens Changer 2',
+    WelcomeMessage: 'Bienvenido a Lens Changer',
     ChooseAnOptionMessage: '¡Elige tu rol!',
     ParentOption: "Padre",
     EducatorOption: "Educador",
@@ -73,7 +73,9 @@ var $translations_es = {
     UnsolvedProblemHintTitle: "Consejo de Problema Sin Resolver",
     UnsolvedProblemHintBodyPart1: "Un problema sin resolver es una alerta de que su hijo tiene dificultades para reunirse de manera confiable.",
     UnsolvedProblemHintBodyPart2: "Cada habilidad rezagada puede tener multiples problemas sin resolver, uno solo, o incluso ninguno. Cada problema sin resolver puede estas asociado con multiples habilidades rezagadas, pero no necesitas escribir el mismo problema sin resolver en más de una vez.",
+    UnsolvedProblemHintBodyPart3: "Después de hacer una lista completa de los problemas no resueltos, apreta en la flecha que está a lado del que desea resolver primero.",
     Got_It: "Lo tengo",
+    Tell_me_more: "Más información",
     goingTo: "Ir a",
     InvalidBirthDate:"La fecha de nacimiento no es válida!!",
     InsertaDatePrior:"Por favor inserte una fecha anterior a la fecha de hoy.",
@@ -147,6 +149,9 @@ var $translations_es = {
     step1VerifyBody: "¿Enlistó todos los ejemplos que le vienen a la mente cuando piensa que su hijo tiene dificultades con esta habilidad rezagada?",
     imSure: "estoy seguro",
     keepDrilling: "seguir enlistando",
+
+    // From Define adult's concern to Empathy Step
+    step2VerifyBody: "¿Esta seguro de haber enlistado todas las preocupaciones del adulto?",
 
     //Para Laggin Skills
     LaggingSkillTitle:"Dificultades en habilidades",
@@ -244,5 +249,8 @@ var $translations_es = {
     NoSharedLaggingSkills: "Aún no se compartieron dificultades. TOCA PARA CONTINUAR",
     NoSharedUnsolvedProblem: "Aún no se compartieron problemas sin resolver",
 
+    // First popUp
+    launchApp: "Ir a la aplicación",
+    tellMeMoreCps: "Mas información sobre CPS!",
 
 };

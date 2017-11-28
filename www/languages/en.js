@@ -52,7 +52,7 @@ var $translations_en = {
     ConfirmDeleteChildMessage: 'Are you sure you want to delete this child?',
     YesMessage: 'Yes',
     NoMessage: "No",
-    WelcomeMessage: 'Welcome to The Lens Changer 2',
+    WelcomeMessage: 'Welcome to Lens Changer',
     ChooseAnOptionMessage: 'Choose your role!',
     ParentOption: "Parent",
     EducatorOption: "Educator",
@@ -67,11 +67,13 @@ var $translations_en = {
     EditUnsolvedProblem: 'Edit Unsolved Problem',
     DeleteUnsolvedProblemTitle: "Delete Unsolved Problem",
     DeleteUnsolvedProblemBody: "Are you sure you want to delete this unsolved problem?",
-    TypeUnsolvedProblemPlaceholder: "Type a new child's concern here.",
+    TypeUnsolvedProblemPlaceholder: "Type a new unsolved problem here.",
     UnsolvedProblemHintTitle: "Unsolved problem hint",
     UnsolvedProblemHintBodyPart1: "An unsolved problem is an expectation your child is having difficulty reliably meeting.",
     UnsolvedProblemHintBodyPart2: "Each lagging skill can have multiple unsolved problems, one, or even none. Each unsolved problem can be associated with multiple lagging skills, but only needs to be entered once.",
+    UnsolvedProblemHintBodyPart3: "After you've made a comprehensive list of unsolved problems, click on the arrow next to the one you want to solve first.",
     Got_It: "Got it",
+    Tell_me_more: "Tell me more",
     goingTo: "Going to",
     InvalidBirthDate: "Invalid Birth date!!",
     InsertaDatePrior:"Please insert a date prior to today date.",
@@ -146,6 +148,9 @@ var $translations_en = {
     imSure: "I'm sure",
     keepDrilling: "keep drilling",
 
+    // From Define adult's concern to Empathy Step
+    step2VerifyBody: "Do you think you have listed all the adult's concerns?",
+
     //For Laggin Skills
     LaggingSkillTitle:"Lagging Skills",
     CheckButton: "Check",
@@ -208,12 +213,12 @@ var $translations_en = {
     translateImage1:"img/appTutorial/1.png",
     translateImage2:"img/appTutorial/2.png",
     translateImage3:"img/appTutorial/3.png",
-    translateImage4:"img/appTutorial/4.gif",
-    translateImage5:"img/appTutorial/5.gif",
-    translateImage6:"img/appTutorial/6.gif",
-    translateImage7:"img/appTutorial/7.gif",
-    translateImage8:"img/appTutorial/8.gif",
-    translateImage9:"img/appTutorial/9.gif",
+    translateImage4:"img/appTutorial/4.png",
+    translateImage5:"img/appTutorial/5.png",
+    translateImage6:"img/appTutorial/6.png",
+    translateImage7:"img/appTutorial/7.png",
+    translateImage8:"img/appTutorial/8.png",
+    translateImage9:"img/appTutorial/9.png",
     translateImage10:"img/appTutorial/10.gif",
 
     //For Empathy Step in help views
@@ -242,4 +247,7 @@ var $translations_en = {
     NoSharedLaggingSkills: "No lagging skills shared yet. TAP FOR NEXT",
     NoSharedUnsolvedProblem: "No unsolved problems shared yet",
 
+    // First popUp
+    launchApp: "Launch the app",
+    tellMeMoreCps: "Tell me more about CPS!",
 };
