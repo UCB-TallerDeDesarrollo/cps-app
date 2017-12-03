@@ -149,7 +149,7 @@ var $translations_en = {
     keepDrilling: "keep drilling",
 
     // From Define adult's concern to Empathy Step
-    step2VerifyBody: "Do you think you have listed all the adult's concerns?",
+    step3VerifyBody: "Do you think you have listed all the adult's concerns?",
 
     //For Laggin Skills
     LaggingSkillTitle:"Lagging Skills",
