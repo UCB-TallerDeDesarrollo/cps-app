@@ -12,7 +12,7 @@
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
-
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ionic-close-popup/ionic-close-popup.js"></script>
@@ -51,12 +51,18 @@
     <script src="js/controllers/childsController.js"></script>
     <script src="js/controllers/alsupHelpController.js"></script>
     <script src="js/controllers/heatOfTheMomentController.js"></script>
-
+    <script src="js/controllers/usersController.js"></script>
+    <script src="lib/angular-translate/angular-translate.js"></script>
+    <script src="languages/en.js"></script>
+    <script src="languages/es.js"></script>
+    <script src="js/controllers/contactsController.js"></script>
+    <script src="js/push.js"></script>
 
 
   </head>
 
   <body ng-app="starter">
     <ion-nav-view></ion-nav-view>
+    <p id="gcm_id"></p>
   </body>
 </html>

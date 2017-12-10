@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-    .controller('HeatMomentCtrl', function($scope, AppTools) {
+    .controller('HeatMomentCtrl', function($scope, AppTools, $ionicPopup) {
 
         $scope.toggleContent = function(content) {
             if ($scope.isContentShown(content)) {
@@ -26,7 +26,21 @@ angular.module('starter.controllers')
             }
         };
 
-        $scope.heatMoments = [{
+        
+        $scope.checkConnection = function(){
+            console.log("Entro");
+            if(window.Connection) {
+            if(navigator.connection.type == Connection.NONE)
+            { 
+              var alertNotConnection = $ionicPopup.alert({
+                title: 'Required Connection',
+                template: "Internet access is required to view this page. Please check your internet settings and try again."
+              });
+             
+            }}
+        }
+
+        $scope.heatMomentsEn = [{
                 title: "Breathe so that you can get curious."
             },
             {
@@ -45,4 +59,23 @@ angular.module('starter.controllers')
                 url: "http://www.blogtalkradio.com/dr-ross-greene/2015/03/30/the-heat-of-the-moment"
             }
         ];
+        $scope.heatMomentsEs = [{
+            title: "Respira para que puedas sentirte curioso."
+        },
+        {
+            title: "Recuerde que, para ayudar, primero debe comprender.",
+            topics: [
+                { content: "Emergencia Plan B: Pareces molesto por ________. ¿Que pasa?" },
+                { content: "Añade seguridad: \n- No estoy enojado contigo. \n- No estás en problemas. \n- Solo trato de entender." }
+            ]
+        },
+        {
+            title: "El calor del momento 01/25",
+            url: "http://www.blogtalkradio.com/dr-ross-greene/2016/01/25/the-heat-of-the-moment"
+        },
+        {
+            title: "El calor del momento  03/30",
+            url: "http://www.blogtalkradio.com/dr-ross-greene/2015/03/30/the-heat-of-the-moment"
+        }
+    ];
     });

@@ -1,34 +1,43 @@
-<ion-view cache-view="false" view-title="App Tutorial" ng-controller="TutorialCtrl">
+<ion-view cache-view="false" view-title="{{ 'AppTutorialTitle' | translate }}" ng-controller="TutorialCtrl">
+        <ion-nav-buttons side="left">
+            </ion-nav-buttons>
+            <ion-nav-buttons side="right">
+              <button class="button button-positive button-clear no-animation"
+                      ng-click="startApp()">
+                      {{ 'CloseTutorial' | translate }}
+              </button>
+            </ion-nav-buttons>
         <ion-slide-box class="tutorialSlide"on-slide-changed="slideChanged(index)">
           <ion-slide>
-              <img src="img/appTutorial/1.png">
+              <img ng-src= "{{ 'translateImage1' | translate }}"/>
           </ion-slide>
           <ion-slide>
-              <img src="img/appTutorial/2.png">
+              <img ng-src="{{ 'translateImage2' | translate }}"/>
           </ion-slide>
           <ion-slide>
-              <img src="img/appTutorial/3.png">
+              <img ng-src="{{ 'translateImage3' | translate }}"/>
           </ion-slide>
           <ion-slide>
-              <img src="img/appTutorial/4.gif">
+              <img ng-src="{{ 'translateImage4' | translate }}">
           </ion-slide>
           <ion-slide>
-              <img src="img/appTutorial/5.gif">
+              <img ng-src="{{ 'translateImage5' | translate }}">
           </ion-slide>
           <ion-slide>
-            <img src="img/appTutorial/6.gif">
+            <img ng-src="{{ 'translateImage6' | translate }}">
         </ion-slide>
         <ion-slide>
-            <img src="img/appTutorial/7.gif">
+            <img ng-src="{{ 'translateImage7' | translate }}">
         </ion-slide>
         <ion-slide>
-            <img src="img/appTutorial/8.gif">
+            <img ng-src="{{ 'translateImage8' | translate }}">
         </ion-slide>
         <ion-slide>
-            <img src="img/appTutorial/9.gif">
+            <img ng-src="{{ 'translateImage9' | translate }}">
         </ion-slide>
         <ion-slide>
-            <img src="img/appTutorial/10.gif">
+            <img ng-src="{{ 'translateImage10' | translate }}">
         </ion-slide>
         </ion-slide-box>
+        </ion-content>
       </ion-view>

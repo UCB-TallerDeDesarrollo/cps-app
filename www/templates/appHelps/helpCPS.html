@@ -1,17 +1,17 @@
-<ion-view view-title="Plan B Help">
+<ion-view view-title="{{ 'PlanBHelp' | translate }}">
     <ion-content ng-controller="AlsupCtrl">
         <div class="list">
             <a class="item item-thumbnail-left" href="#/app/helpCategories">
-                <img src="img/mainHelp/icon-step1.png"> Empathy Step
+                <img src="img/mainHelp/icon-step1.png"> {{ 'EmpathyStep' | translate }}
             </a>
             <a class="item item-thumbnail-left" href="#/app/mainHelp/helpDefineAdultsConcern">
-                <img src="img/mainHelp/icon-step2.png"> Define Adult's Concern
+                <img src="img/mainHelp/icon-step2.png"> {{ 'DefineAdultsConcern' | translate }}
             </a>
             <a class="item item-thumbnail-left" href="#/app/helpForInvitation">
-                <img src="img/mainHelp/icon-step3.png"> Invitation Step
+                <img src="img/mainHelp/icon-step3.png"> {{ 'InvitationStep' | translate }}
             </a>
-            <a class="item item-thumbnail-left" href="https://vimeo.com/155317247/8cc924e8e1">
-                <img src="img/planBHelp/video.png"> Video of plan B in action
+            <a class="item item-thumbnail-left" href="https://vimeo.com/155317247/8cc924e8e1" ng-click="checkConnection()">
+                <img src="img/planBHelp/video.png"> {{ 'VideoOfPlanBInAction' | translate }}
             </a>
         </div>
     </ion-content>

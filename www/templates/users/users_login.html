@@ -1,0 +1,43 @@
+<ion-view class="modal slide-in-up ng-enter active ng-enter-active" cache-view="false" view-title="{{'LoginTitle' | translate }}">
+    <style media="screen">        
+        #Logo{                        
+            margin-bottom: -20px;          
+            height: 220px;
+            width: 220px;  
+        }
+        #Button1,#Button2{
+          border: hidden;
+          margin-bottom: -20px;          
+          margin-left: 20px;
+          margin-right: 20px;
+        }
+        @media screen and (orientation:landscape) { 
+            #Logo{
+              width: 100px;
+              height: 100px;
+            }            
+            #Button2{
+              padding-top: 0px;
+            }
+        }
+    </style>
+  <ion-content>
+      <div class="list">   
+          <label class="item"  >
+            <div style="text-align: center">
+          <img src="img/logo.png" id="Logo"> 
+            </div>
+          </label>           
+          <label class="item" id="Button1" ng-click="openModalLogin()">
+            <div class="button button-block button-positive" >
+              <i>{{'LoginTitle' | translate }}</i>
+            </div>
+          </label>
+          <label class="item" id="Button2" ng-click="openModalSignup()">          
+            <div class="button button-block button-positive" >
+              <i>{{'SignupTitle' | translate }}</i>
+            </div>
+          </label>
+      </div>
+  </ion-content>
+</ion-view>

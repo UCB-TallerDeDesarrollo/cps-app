@@ -1,0 +1,22 @@
+<ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">{{'LoginTitle' | translate }}</h1>
+          <button class="button button-clear button-primary" ng-click="closeModalLogin()">{{'CancelOption' | translate }}</button>
+        </ion-header-bar>
+        <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll modal-animation">
+          <div class="list">
+            <label class="item item-input item-stacked-label ">
+              <span class="input-label">{{'EmailTitle' | translate}}</span>
+              <input type="text" placeholder="{{'EmailTitle' | translate}}" ng-model="user.email">
+              </input>
+            </label>
+            <label class="item item-input item-stacked-label ">
+                    <span class="input-label">{{'PasswordTitle' | translate}}</span>
+                    <input type="password" placeholder= "{{'PasswordTitle' | translate}}" ng-model="user.password">
+                    </input>
+                  </label>
+            <button class="button button-full button-positive"  ng-click="login()">{{'LoginTitle' | translate }}</button> 
+          </div>
+        </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out modal-animation"></div></div></ion-content>
+      </ion-modal-view>
+      

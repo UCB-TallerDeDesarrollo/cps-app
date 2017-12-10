@@ -1,0 +1,71 @@
+<ion-view cache-view="false" view-title="Contacts">
+    <ion-content ng-controller="ContactsCtrl" >
+        <div class="bar item-input-inset" ng-init="getUserFriends(); getFriendsRequests(); getPengingSentRequests();">
+            <label class="item-input-wrapper">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="Search" ng-model="searchWord">
+            </label>
+            <burtton ng-click="openModalAddContact()" class="button button-small button-positive" ng-show="!searchWord.length">
+                <i class="icon ion-plus"></i>
+            </burtton>
+            <button class="button ion-close input-button button-small" ng-click="searchWord = ''" ng-show="searchWord.length">
+                Clear
+            </button>
+        </div>
+        <ion-list>
+            <ion-item class="item item-divider" ng-click="toggleAccepted()">
+                Friends
+                <span class="badge badge-dark">{{userFriends.length}}</span>
+                <i ng-class="isAcceptedShown() ? 'icon ion-chevron-down' : 'icon ion-chevron-up'"></i>
+            </ion-item>
+            <ion-item ng-repeat="friend in userFriends"  class="item-text-wrap  item-icon-right" ng-show="!isAcceptedShown()">
+                <div class="col">
+                    <h2>
+                        <b> {{friend.name + ' ' +friend.last_name}}</b>
+                    </h2>
+                    <p>{{friend.email}}</p>
+                    <i class="icon dark ion-chevron-right"></i>
+                    <ion-option-button class="button-assertive ion-trash-a" ng-click="confirmDeleteContact(friend.id)"></ion-option-button>
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item class="item item-divider" ng-click="toggleRequest()">
+                Friends requests
+                <span class="badge badge-balanced">{{userFriendsRequest.length}}</span>
+                <i ng-class="!isResquestShown() ? 'icon ion-chevron-up' : 'icon ion-chevron-down'"></i>
+            </ion-item>
+            <ion-item ng-repeat="request in userFriendsRequest" class="row" ng-show="!isResquestShown()">
+                <div class="col col-67">
+                    <h2>
+                        <b> {{ request.user.name + ' ' + request.user.last_name }}</b>
+                    </h2>
+                    <p>{{ request.user.email }}</p>
+                </div>
+                <div class="button-bar col-center" >
+                    <div class="button button-small button-positive" ng-click="acceptFriendRequest(request.id)">
+                        <i class="icon ion-checkmark-round"></i>
+                    </div>
+                    <div class="button button-small button-assertive" ng-click="rejectFriendRequest(request.id)">
+                        <i class="icon ion-close-round"></i>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item class="item item-divider" ng-click="togglePendingSentRequests()">
+                Pending requests
+                <span class="badge badge-positive">{{userPendingSentRequest.length}}</span>
+                <i ng-class="!isPendingSentResquestShown() ? 'icon ion-chevron-up' : 'icon ion-chevron-down'"></i>
+            </ion-item>
+            <ion-item ng-repeat="pendingRequest in userPendingSentRequest" class="item-text-wrap" ng-show="!isPendingSentResquestShown()">
+                <div class="col col-67">
+                    <h2>
+                        <b> {{ pendingRequest.name + ' ' + pendingRequest.last_name }}</b>
+                    </h2>
+                    <p>{{ pendingRequest.email }}</p>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,24 +1,50 @@
-<ion-view cache-view="false" view-title="Lagging Skills">
-  <div class="bar bar-subheader bar-positive item-text-wrap">
-    <h2 class="title">{{activeChild.first_name}}</h2>
-    <a class=" button button-small button-clear button-white icon ion-help-circled" ng-click = "laggingSkillsHint()"></a>
+<ion-view cache-view="false" view-title="{{'LaggingSkillTitle' | translate}}" ng-init="getDataChildShared(sharedChild)">
+  <div ng-if="sharedChild == 0">
+      <div class="bar bar-subheader bar-positive item-text-wrap">
+        <h2 class="title">{{activeChild.first_name}}</h2>
+        <a class=" button button-small button-clear button-white icon ion-help-circled" ng-click="laggingSkillsHint()"></a>
+      </div>
+      <ion-content class="has-subheader" ng-init="googleAnalyticsView()">
+        <ion-list>
+          <ion-item class="item item-text-wrap item-icon-right" ng-repeat="laggingSkill in laggingSkills" href="#/app/unsolvedProblems/new/{{laggingSkill.id}}">
+            <div class="positive" ng-if="laggingSkill.checked">
+              {{laggingSkill.description | translate}}
+            </div>
+            <div class="dark" ng-if="!laggingSkill.checked">
+              {{laggingSkill.description | translate}}
+            </div>
+            <a href="#/app/unsolvedProblems/new/{{laggingSkill.id}}">
+              <i class="icon dark ion-chevron-right" ng-if="laggingSkill.checked === 0"></i>
+              <i class="icon positive ion-chevron-right" ng-if="laggingSkill.checked === 1"></i>
+            </a>
+            <ion-option-button class="button-positive ion-checkmark" ng-click="checkLaggingSkill({{laggingSkill.id}},{{laggingSkill.child_id}})"
+              ng-if="!laggingSkill.checked">&nbsp;{{'CheckButton' | translate }}</ion-option-button>
+            <ion-option-button class="button-dark ion-close" ng-click="uncheckLaggingSkill({{laggingSkill.id}},{{laggingSkill.child_id}})"
+              ng-if="laggingSkill.checked">&nbsp;{{'UncheckButton' | translate }}</ion-option-button>
+          </ion-item>
+        </ion-list>
+      </ion-content>
   </div>
-  <ion-content class="has-subheader" ng-init="googleAnalyticsView()">
-    <ion-list>
-      <ion-item class="item item-text-wrap item-icon-right" ng-repeat="laggingSkill in laggingSkills" href="#/app/unsolvedProblems/new/{{laggingSkill.id}}">
-          <div class="positive" ng-if="laggingSkill.checked">
-            {{laggingSkill.description}}
+  
+  <!-- Shared view-->
+  <div ng-if="sharedChild > 0">
+    <div class="bar bar-subheader bar-positive item-text-wrap">
+      <h2 class="title">{{childFromShared.name}}</h2> 
+    </div>
+    <ion-content class="has-subheader">            
+      <ion-list>
+        <ion-item ng-if="shareLaggingSkills.length == 0" class="item item-text-wrap" href="#/app/unsolvedProblems/shared/{{sharedChild}}">
+          <div>
+            <p>{{'NoSharedLaggingSkills' | translate }}</p>
           </div>
-          <div class="dark" ng-if="!laggingSkill.checked">
-            {{laggingSkill.description}}
+        </ion-item>
+        <ion-item class="item item-text-wrap item-icon-right" ng-repeat="sharelagging in shareLaggingSkills" href="#/app/unsolvedProblems/shared/{{sharedChild}}">
+          <div class="positive">
+            {{sharelagging.description | translate}}
           </div>
-          <a href="#/app/unsolvedProblems/new/{{laggingSkill.id}}">
-            <i class="icon dark ion-chevron-right" ng-if="laggingSkill.checked === 0"></i>
-            <i class="icon positive ion-chevron-right" ng-if="laggingSkill.checked === 1"></i>
-          </a>
-        <ion-option-button class="button-positive ion-checkmark" ng-click="checkLaggingSkill({{laggingSkill.id}})" ng-if="!laggingSkill.checked">&nbsp;Check</ion-option-button>
-        <ion-option-button class="button-dark ion-close" ng-click="uncheckLaggingSkill({{laggingSkill.id}})" ng-if="laggingSkill.checked">&nbsp;Uncheck</ion-option-button>
-      </ion-item>
-    </ion-list>
-  </ion-content>
+          <i class="icon dark ion-chevron-right"></i>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </div>
 </ion-view>

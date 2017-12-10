@@ -1,45 +1,100 @@
-<ion-view cache-view="false" title="Solution's Info" ng-controller="SolutionsCtrl">
+<ion-view cache-view="false" title="{{'SolutionsInfo' | translate }}" ng-controller="SolutionsCtrl">
+  <div ng-if="sharedChild == 0">
     <div class="bar bar-subheader bar-positive">
       <h2 class="title">{{solution.description}}</h2>
     </div>
-
+    
     <ion-content class="has-subheader">
+      <div class="item item-divider item-text-wrap">
+        <h2>{{'RelatedTo' | translate }}</h2>
+      </div>
+      <ion-item class="item item-text-wrap" ng-if="!pairs.description.length">
+        <p>{{'TextSolutions' | translate }}</p>
+      </ion-item>
+    
+      <ion-item class="item item-text-wrap" ng-if="pairs.description.length > 0">
+        {{pairs.description}}
+        <br> {{pairs.description2}}
+    
+      </ion-item>
+    
       <div class="padding">
+    
         <ion-list>
           <ion-item class="item item-divider item-icon-right">
-            <h2><b>List of Comments</b></h2>
+            <h2>
+              <b>{{'ListComments' | translate }}</b>
+            </h2>
             <a ng-click="openModal()">
               <i class="icon ion-plus"></i>
             </a>
           </ion-item>
           <div class="item item-text-wrap" ng-if="comments.length == 0">
-            <p>No comments registered. Please register one above. </p>
+            <p>{{'TextComments' | translate }}</p>
           </div>
-          <ion-item class="item item-text-wrap" ng-repeat="item in comments">
-            {{item.description}}
-            -
+    
+    
+          <ion-item class="item item-text-wrap item-icon-right" ng-repeat="item in comments">
+            {{item.description}} -
             <b>{{parseDate(item.commented_at)}}</b>
             <ion-option-button class="button button-balanced ion-edit" ng-click="editComment(item)"></ion-option-button>
-            <ion-option-button class="button button-assertive ion-trash-a" ng-click="showDeletionConfirm(item)" ></ion-option-button>
+            <ion-option-button class="button button-assertive ion-trash-a" ng-click="showDeletionConfirm(item)"></ion-option-button>
+            <i class="icon dark ion-chevron-right"></i>
           </ion-item>
         </ion-list>
       </div>
+    </ion-content>
+  </div>
 
-      <script id="create-modal.html" type="text/ng-template">
+  <!-- shared comments view-->
+  <div ng-if="sharedChild > 0" ng-init="getSharedPosibleSolutions(posibleSolution.id)">
+    <div class="bar bar-subheader bar-positive">
+      <h2 class="title">{{posibleSolution.description}}</h2>
+    </div>
+  
+    <ion-content class="has-subheader">
+
+  
+      <div class="padding">
+  
+        <ion-list>
+          <ion-item class="item item-divider item-icon-right">
+            <h2>
+              <b>{{'ListComments' | translate }}</b>
+            </h2>
+          </ion-item>
+          <div class="item item-text-wrap" ng-if="sharedCommentSolutions.length == 0">
+            <p>{{'TextComments' | translate }}</p>
+          </div>
+  
+  
+          <ion-item class="item item-text-wrap" ng-repeat="sharedComment in sharedCommentSolutions">
+            {{sharedComment.description}} -
+            <b>{{parseDate(sharedComment.commented_at)}}</b>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-content>
+  </div>
+  
+</ion-view>
+
+
+<script id="create-modal.html" type="text/ng-template">
         <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
           <ion-header-bar class="bar bar-header bar-positive">
-            <h1 class="title">New Comment</h1>
-            <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
+            <h1 class="title">{{'NewComment' | translate }}</h1>
+            <button class="button button-clear button-primary" ng-click="closeModal()">{{'CancelOption' | translate }}</button>
           </ion-header-bar>
           <ion-content class="padding scroll-content ionic-scroll  has-header">
             <div class="scroll modal-animation">
               <div class="list">
                 <label class="item item-input">
-                  <textarea rows=5 placeholder="Write a comment about this solution." ng-model="comment.description">
+                  <textarea rows=5 placeholder="{{'PlaceHolderComment' | translate }}" ng-model="comment.description">
                   </textarea>
                 </label>
-                <button class="button button-full button-positive" ng-if="!comment.description.length" disabled>Create</button>
-                <button class="button button-full button-positive" ng-if="comment.description.length > 0" ng-click="createComment()">Create</button>
+                <button class="button button-full button-positive" ng-if="!comment.description.length" disabled>{{'CreateTitle' | translate }}</button>
+                <button class="button button-full button-positive" ng-if="comment.description.length > 0" ng-click="createComment()">{{'CreateTitle' | translate }}</button>
               </div>
             </div>
             <div class="scroll-bar scroll-bar-v">
@@ -50,26 +105,23 @@
         </ion-modal-view>
       </script>
 
-      <script id="edit-modal.html" type="text/ng-template">
+<script id="edit-modal.html" type="text/ng-template">
         <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
           <ion-header-bar class="bar bar-header bar-positive">
-            <h1 class="title">Edit Comment</h1>
-            <button class="button button-clear button-primary" ng-click="closeModalEdit()">Cancel</button>
+            <h1 class="title">{{'EditComment' | translate }}</h1>
+            <button class="button button-clear button-primary" ng-click="closeModalEdit()">{{'CancelOption' | translate }}</button>
           </ion-header-bar>
           <ion-content class="padding scroll-content ionic-scroll has-header">
             <div class="scroll modal-animation">
               <form>
                 <label class="item item-input">
-                  <textarea rows=5 placeholder="What can you say about this solution." ng-model="editableComment.description">
+                  <textarea rows=5 placeholder="{{'PlaceHolderComment' | translate }}" ng-model="editableComment.description">
                   </textarea>
                 </label>
-                <button class="button button-full button-positive" ng-if="!editableComment.description.length" ng-click="updateComment()" disabled>Save</button>
-                <button class="button button-full button-positive" ng-if="editableComment.description.length > 0" ng-click="updateComment()">Save</button>
+                <button class="button button-full button-positive" ng-if="!editableComment.description.length" ng-click="updateComment()" disabled>{{'SaveTitle' | translate }}</button>
+                <button class="button button-full button-positive" ng-if="editableComment.description.length > 0" ng-click="updateComment()">{{'SaveTitle' | translate }}</button>
               </form>
             </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out modal-animation"></div></div>
           </ion-content>
         </ion-modal-view>
       </script>
-
-    </ion-content>
-</ion-view>

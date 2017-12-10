@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicListDelegate,$ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory, AdultConcernFactory,$ionicSideMenuDelegate){
+.controller('AdultConcernsCrtl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $stateParams, $ionicListDelegate,$ionicTabsDelegate, $timeout, UnsolvedProblemFactory, ChildConcernFactory, AdultConcernFactory,$ionicSideMenuDelegate,$translate, $http){
   $ionicSideMenuDelegate.canDragContent(false);
   $scope.adultsConcerns = {};
   $scope.adultsConcern = {description:""};
@@ -17,13 +17,15 @@ angular.module('starter.controllers')
     });
   };
   $scope.showAdultsConcernHint = function() {
-    if(localStorage.getItem("showAdultsConcernHint") === null){
-        localStorage.setItem("showAdultsConcernHint", true);
-        var confirmPopup = $ionicPopup.alert({
-          title: "After you've listed all of your concerns, click the arrow to move on to the invitation step"
-        });
-     }
-    };
+    $translate(['MoveToInvitationStep']).then (function(translations){
+      if(localStorage.getItem("showAdultsConcernHint") === null){
+          localStorage.setItem("showAdultsConcernHint", true);
+          var confirmPopup = $ionicPopup.alert({
+            title: translations.MoveToInvitationStep
+          });
+      }
+    });
+  };
   $scope.createAdultsConcern = function(){
     if (!inputFieldIsEmpty($scope.adultsConcern.description)) {
       $scope.adultsConcern.unsolvedProblemId = $stateParams.unsolvedProblemId;
@@ -43,11 +45,13 @@ angular.module('starter.controllers')
   };
 
   $scope.editAdultsConcern = function(adultsConcern){
+    $scope.auxForUpdateAdultsConcernPair=adultsConcern;
     $scope.editableAdultsConcern = angular.copy(adultsConcern);
     $scope.openModalEdit();
   };
 
   $scope.updateAdultsConcern = function(){
+
     if (!inputFieldIsEmpty($scope.editableAdultsConcern.description)) {
       AdultConcernFactory.update($scope.editableAdultsConcern);
       $scope.modalEdit.hide();
@@ -59,18 +63,42 @@ angular.module('starter.controllers')
     else {
       $scope.emptyInput = true;
     }
+
+      AdultConcernFactory.getPair(function(respAux){
+        $scope.resp=respAux;
+        for(i=0;i<$scope.resp.length;i++) {
+
+          if($scope.resp[i].description2 === $scope.auxForUpdateAdultsConcernPair.description)
+          {
+                $scope.adultsConcernPair=$scope.resp[i];
+
+                      AdultConcernFactory.updateAdultsConcernPair($scope.editableAdultsConcern.description,$scope.adultsConcernPair);
+
+            }
+
+
+        }
+
+      });
+
+
+
   };
 
   $scope.showDeleteConfirmationPopup = function(adultsConcern) {
-    var confirmPopup = $ionicPopup.confirm({
-      title: "Delete Adult's Concern",
-      template: "Are you sure you want to delete this adult's concern?"
-    });
+    $translate(['DeleteAdultConcernTitle','DeleteAdultConcernTemplate','CancelOption','YesMessage']).then (function(translations){
+      var confirmPopup = $ionicPopup.confirm({
+        title: translations.DeleteAdultConcernTitle,
+        template: translations.DeleteAdultConcernTemplate,
+        cancelText: translations.CancelOption,
+        okText: translations.YesMessage
+      });
 
-    confirmPopup.then(function(res) {
-      if(res){
-        $scope.deleteAdultsConcern(adultsConcern);
-      }
+      confirmPopup.then(function(res) {
+        if(res){
+          $scope.deleteAdultsConcern(adultsConcern);
+        }
+      });
     });
   };
 
@@ -178,6 +206,27 @@ angular.module('starter.controllers')
       }
     }
   };
+
+  $scope.selectTabWithIndexShared = function(index) {
+    if (index === 0) {
+      $ionicTabsDelegate.select(index);
+      $state.go("app.sharedShowUnsolvedProblem", {
+        unsolvedProblemId: $scope.unsolvedProblem.id
+      });
+    }
+    if (index == 1) {
+      $ionicTabsDelegate.select(index);
+      $state.go("app.sharedDefineTheProblem", {
+        unsolvedProblemId: $scope.unsolvedProblem.id
+      });
+    }
+    if (index == 2) {
+      $state.go("app.sharedInvitation", {
+        unsolvedProblemId: $scope.unsolvedProblem.id
+      });
+      $ionicTabsDelegate.select(index);
+    }
+  };
   $scope.unableAnimation = function(){
     $scope.firstItemAnimationShown = true;
   };
@@ -193,6 +242,38 @@ angular.module('starter.controllers')
       console.log("Google Analytics Unavailable");
     }
   };
+
+  $scope.verifyToGoToStep3 = function(id) {
+    $translate(['goingTo','Step', 'InvitationStep','NoMessage','YesMessage','keepDrilling','step3VerifyBody','imSure']).then (function(translations){
+      var confirmPopup = $ionicPopup.confirm({
+        title: translations.goingTo +" "+ translations.Step + " 3: " +translations.InvitationStep, //translations.goingTo +" "+ translations.Step + " 1: " +translations.EmpathyStep,
+        template: translations.step3VerifyBody,
+        cancelText: translations.NoMessage+", " + translations.keepDrilling,
+        okText: translations.YesMessage + ", "+ translations.imSure
+      });
+      confirmPopup.then(function(res) {
+      if(res) {
+       $state.go('app.invitation',{ unsolvedProblemId:id});
+      }
+      });
+   });
+  };
+
+
+  $scope.sharedAdultConcerns;
+
+    $scope.getSharedAdultConcerns = function(user_id,child_id,unsolved_problem_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/unsolved_problem/"+unsolved_problem_id+"/sharedAdultConcerns", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedAdultConcerns = data.data;
+             console.log($scope.sharedAdultConcerns);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
 
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(1,10));});
 

@@ -9,8 +9,11 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
 
 .run(function($ionicPlatform, $cordovaSQLite, DataSeed, $state, $rootScope) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
+     var notificationOpenedCallback = function(jsonData) {
+        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+      };
+
+
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
       cordova.plugins.Keyboard.disableScroll(true);
@@ -28,16 +31,50 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
     } else {
          console.log("Google Analytics Unavailable");
      }
+     window.plugins.OneSignal
+     .startInit("46f73879-5b3e-45a0-90de-91f455b65eb4")
+     .handleNotificationOpened(notificationOpenedCallback)
+     .endInit();
   });
 
   $rootScope.state = $state;
+  $rootScope.sharedChild = 0;
+  $rootScope.unsolvedProblemIDapp = 0;
+  $rootScope.unsolvedProblemID = 0;
+  $rootScope.posibleSolution = {};
+
+  $rootScope.activeSharedChild = function(id){
+    $rootScope.sharedChild = id;
+  };
+
+  $rootScope.activePosibleSolution = function(ps) {
+    $rootScope.posibleSolution = ps;
+    console.log($rootScope.posibleSolution);
+  };
+
+  $rootScope.activeUnsolvedProblemID = function(up_id_app,up_id) {
+    $rootScope.unsolvedProblemIDapp = up_id_app;
+    $rootScope.unsolvedProblemID = up_id;
+  };
+
+  $rootScope.setSharedChild = function(id) {
+    $rootScope.sharedChild = 0;
+    $rootScope.unsolvedProblemID = 0;
+    $rootScope.unsolvedProblemIDapp = 0;
+    $rootScope.posibleSolutionID = 0;
+  };
 
 })
 
 .config(function($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider, $httpProvider) {
+  $httpProvider.defaults.headers.common = {};
+  $httpProvider.defaults.headers.post = {};
+  $httpProvider.defaults.headers.put = {};
+  $httpProvider.defaults.headers.patch = {};
+  // $link_root = "http://localhost:3000";
+  $link_root = "http://cpsapi.herokuapp.com";
   $httpProvider.defaults.useXDomain = true;
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
   var defaultOptions = {
     location: 'no',
     clearcache: 'no',
@@ -284,6 +321,16 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       }
     }
   })
+  .state('app.login',{
+    url: '/login',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/users/users_login.html',
+        controller: 'UserCtrl'
+
+      }
+    }
+  })
   .state('app.helpDefineAdultsConcern',{
       url: '/mainHelp/helpDefineAdultsConcern',
       params: {
@@ -312,7 +359,67 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
         templateUrl: 'templates/appHelps/inTheHeatOfTheMoment.html'
       }
     }
-  });
+  })
+
+
+  .state('app.contacts',{
+    url: '/contacts',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/contacts/contacts.html'
+      }
+    }
+  })
+
+  .state('app.sharedUnsolvedProblem', {
+      url: '/unsolvedProblems/shared/:sharedChild',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/unsolvedProblems/newUnsolvedProblem.html',
+          controller: 'UnsolvedProblemCtrl'
+        }
+      }
+  })
+
+  .state('app.sharedShowUnsolvedProblem', {
+    url: '/unsolvedProblem/shared/show/:sharedChild',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/cpsProcess/empathyStep.html',
+        controller: 'ChildsConcernsCtrl'
+      }
+    }
+  })
+
+  .state('app.sharedDefineTheProblem', {
+    url: '/shared/defineTheProblem',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/cpsProcess/defineAdultConcern.html',
+        controller: 'DefineTheProblemCtrl'
+      }
+    }
+  })
+
+  .state('app.sharedInvitation', {
+    url: '/shared/invitation',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/cpsProcess/invitationStep.html',
+        controller: 'InvitationCtrl'
+      }
+    }
+  })
+
+  .state('app.sharedSolution', {
+    url: '/shared/solutions',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/solutionComments/showSolution.html'
+      }
+    }
+  })
+  ;
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/childs');

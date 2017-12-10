@@ -1,15 +1,15 @@
 <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
   <ion-header-bar class="bar bar-header bar-positive">
-    <h1 class="title">New Unsolved Problem</h1>
-    <button class="button button-clear button-primary" ng-click="closeModalCreate()">Cancel</button>
+    <h1 class="title">{{'NewUnsolvedProblem' | translate }}</h1>
+    <button class="button button-clear button-primary" ng-click="closeModalCreate()">{{'CancelOption' | translate }}</button>
   </ion-header-bar>
   <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll modal-animation">
     <div class="list">
       <label class="item item-input">
-        <textarea rows=5 placeholder="Type a new unsolved problem here." ng-model="unsolvedProblem.description">
+        <textarea rows=5 placeholder="{{'TypeUnsolvedProblemPlaceholder' | translate }}" ng-model="unsolvedProblem.description">
         </textarea>
       </label>
-      <button class="button button-full button-positive" ng-disabled="!unsolvedProblem.description.length" ng-click="createUnsolvedProblem()">Create</button>
+      <button class="button button-full button-positive" ng-disabled="!unsolvedProblem.description.length" ng-click="createUnsolvedProblem()">{{'CreateTitle' | translate }}</button>
     </div>
   </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out modal-animation"></div></div></ion-content>
 </ion-modal-view>

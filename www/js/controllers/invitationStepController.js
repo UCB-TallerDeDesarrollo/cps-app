@@ -1,7 +1,13 @@
-angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory, $ionicSideMenuDelegate){
+angular.module('starter.controllers').controller('InvitationCtrl', function($scope, $cordovaSQLite, $state, $stateParams, $ionicModal, $ionicPopup, $ionicActionSheet, $ionicTabsDelegate, $timeout, IonicClosePopupService,$ionicListDelegate, ChildConcernFactory, AdultConcernFactory, PossibleSolutionFactory, UnsolvedProblemFactory, $ionicSideMenuDelegate, $translate, $http){
+  $scope.pairExist = false;
   $ionicSideMenuDelegate.canDragContent(false);
   $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
   $scope.solutions = [];
+
+
+      $scope.pair = { solutionId:$stateParams.unsolvedProblemId  };
+      $scope.pair.description = "";
+
   UnsolvedProblemFactory.find($stateParams.unsolvedProblemId,function(result){
     $scope.unsolvedProblem = result.rows.item(0);
     ChildConcernFactory.all($stateParams.unsolvedProblemId,function(childConcerns){
@@ -19,6 +25,8 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
   $scope.showChilds=false;
   $scope.showAdults=false;
   $scope.shouldShowReorder = false;
+
+
 
   $scope.toggleChilds= function(){
     if($scope.showChilds===true){
@@ -70,8 +78,16 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     if (!inputFieldIsEmpty($scope.solution.description)) {
       $scope.solution.rating=0;
       PossibleSolutionFactory.insert($scope.solution);
+
+      PossibleSolutionFactory.getLast($scope.solution.unsolvedProblemId,function(idLast){
+        $scope.idSolutionAlfin = idLast;
+         $scope.createPair($scope.idSolutionAlfin.id);
+
+      });
+
       $scope.solution.description = "";
       $scope.closeModal();
+
       if(typeof analytics !== 'undefined') {
            analytics.trackEvent('Child solution', 'New')
       } else {
@@ -83,17 +99,29 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     }
   };
 
+  $scope.createPair = function(idSolutionAlfin){
+    if (!inputFieldIsEmpty($scope.pair.description)) {
+        PossibleSolutionFactory.insertPair($scope.pair,idSolutionAlfin);
+         $scope.pair.description = "";
+     }
+  };
+
   $scope.showDeletionConfirm = function(solution) {
+    $translate(['DeleteSolutionTitle','DeleteSolutionBody', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Delete Solution',
-      template: 'Are you sure you want to delete this solution?'
+      title: translations.DeleteSolutionTitle,
+      template: translations.DeleteSolutionBody,
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
     });
     confirmPopup.then(function(res) {
       if(res) {
         $scope.deleteSolution(solution);
       }
     });
+  });
   };
+
   $scope.deleteSolution = function (solution) {
     PossibleSolutionFactory.delete(solution.id, function(){
       $scope.solutions.splice($scope.solutions.indexOf(solution), 1);
@@ -107,7 +135,73 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     };
     $scope.openModalEdit();
   };
+
+$scope.editablePair=[];
+
+
+  $scope.editPair = function(editableSolution) {
+    PossibleSolutionFactory.findPair(editableSolution.id,function(pairsEdit){
+    $scope.editablePair = pairsEdit;
+    if($scope.editablePair!=null){
+          $scope.openModaEditToChooseAdultConcernToChildConcern();
+    }
+    if($scope.editablePair===null){
+        $scope.openModalToChooseAdultConcernToChildConcernAfterCreatingSolution(editableSolution.id);
+    }
+    });
+
+  };
+  $scope.existPair=false;
+  $scope.solutionId2=0;
+  $scope.openModaEditToChooseAdultConcernToChildConcern = function() {
+      $scope.existPair=true;
+        $scope.modalEditToChooseAdultConcernToChildConcern.show();
+
+  };
+
+  $ionicModal.fromTemplateUrl('choose-AdultConcern-To-ChildConcern-After-creating-solution-without-pairs.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modalToChooseAdultConcernToChildConcernAfterCreatingSolution = modal;
+    $scope.modalToChooseAdultConcernToChildConcernAfterCreatingSolution.hide();
+  });
+
+  $scope.openModalToChooseAdultConcernToChildConcernAfterCreatingSolution = function(editableSolutionId) {
+    $scope.existPair=false;
+  $scope.solutionId2=editableSolutionId;
+    $scope.modalToChooseAdultConcernToChildConcernAfterCreatingSolution.show();
+    $scope.showHint();
+  };
+  $scope.closeModalToChooseAdultConcernToChildConcernAfterCreatingSolution = function() {
+    $scope.modalToChooseAdultConcernToChildConcernAfterCreatingSolution.hide();
+    $ionicListDelegate.closeOptionButtons();
+    $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
+  };
+  $scope.updatePair = function(){
+   if($scope.existPair!=false){
+       if (!inputFieldIsEmpty($scope.editablePair.description)) {
+             console.log($scope.editablePair);
+         PossibleSolutionFactory.updatePair($scope.editablePair);
+         $scope.modalEditToChooseAdultConcernToChildConcern.hide();
+        }
+       else {
+         $scope.emptyInput = true;
+       }
+    }
+    else{
+    $scope.createPair($scope.solutionId2);
+    $scope.closeModalToChooseAdultConcernToChildConcernAfterCreatingSolution();
+
+
+    }
+  };
+
+
+
+
   $scope.updateSolution = function(){
+
     if (!inputFieldIsEmpty($scope.editableSolution.description)) {
       PossibleSolutionFactory.update($scope.editableSolution);
       $scope.modalEdit.hide();
@@ -120,6 +214,42 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
       $scope.emptyInput = true;
     }
   };
+  $ionicModal.fromTemplateUrl('choose-AdultConcern-To-ChildConcern.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modalToChooseAdultConcernToChildConcern = modal;
+    $scope.modalToChooseAdultConcernToChildConcern.hide();
+  });
+  $scope.openModalToChooseAdultConcernToChildConcern = function() {
+    $scope.modalToChooseAdultConcernToChildConcern.show();
+    $scope.showHint();
+  };
+  $scope.closeModalToChooseAdultConcernToChildConcern = function() {
+    $scope.modalToChooseAdultConcernToChildConcern.hide();
+    $ionicListDelegate.closeOptionButtons();
+    $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
+  };
+
+  $ionicModal.fromTemplateUrl('edit-AdultConcern-To-ChildConcern.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modalEditToChooseAdultConcernToChildConcern = modal;
+      $scope.modalEditToChooseAdultConcernToChildConcern.hide();
+    });
+
+
+
+
+    $scope.closeModalEditToChooseAdultConcernToChildConcern = function() {
+      $scope.modalEditToChooseAdultConcernToChildConcern.hide();
+      $ionicListDelegate.closeOptionButtons();
+      $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
+    };
+
+
+
   $ionicModal.fromTemplateUrl('create-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -185,9 +315,10 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
 
   //function here
   $scope.showRatingPopup = function(solution,unsolvedProblem) {
+    $translate(['SubtitleRating','TitleRating']).then (function(translations){
     var myPopup = $ionicPopup.show({
-    title: 'Is the solution working?',
-    subTitle: 'You can rate it by clicking one of the buttons below',
+    title: translations.TitleRating,
+    subTitle: translations.SubtitleRating,
     buttons: [
       { type: 'button-assertive ion-sad-outline ',
         onTap: function(e) {
@@ -199,46 +330,57 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
           }
         }
       },
-      { type: 'button-energized ion-heart-broken' ,
+      { type: 'button-energized ion-android-sad' ,
         onTap: function(e) {
-          $scope.RateSolution(solution,2);
-          $scope.BestRate(unsolvedProblem);
+          $scope.showConfirmBestRate2(solution,2,unsolvedProblem);
           if(typeof analytics !== 'undefined') {
-            analytics.trackEvent('Child solution rate', 'Broken heart')
+            analytics.trackEvent('Child solution rate', 'Android Sad')
           } else {
             console.log("Google Analytics Unavailable");
-          }          
+          }
         }
       },
-      { type: 'button-balanced ion-heart' ,
-        onTap: function(e) {
-          $scope.RateSolution(solution,3);
-          $scope.BestRate(unsolvedProblem);
-          if(typeof analytics !== 'undefined') {
-            analytics.trackEvent('Child solution rate', 'Heart')
-          } else {
-            console.log("Google Analytics Unavailable");
-          }         
-        }
-      },
-      { type: 'button-calm ion-happy-outline',
+      
+      { type: 'button-balanced ion-happy-outline',
         onTap: function(e) {
           $scope.showConfirmBestRate(solution,4,unsolvedProblem);
           if(typeof analytics !== 'undefined') {
             analytics.trackEvent('Child solution rate', 'Happy')
           } else {
             console.log("Google Analytics Unavailable");
-          }          
+          }
         }
       }
     ]
   });
-  IonicClosePopupService.register(myPopup);
 
+  IonicClosePopupService.register(myPopup);
+});
   $scope.showConfirmBestRate = function(solution,rate,unsolvedProblem) {
+    $translate(['BestRatingTitle','BestRatingBody', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Best Rate for this solution',
-      template: 'Are you sure that this solution solved the unsolved problem?'
+      title: translations.BestRatingTitle,
+      template: translations.BestRatingBody,
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
+    });
+
+    confirmPopup.then(function(res) {
+      if(res) {
+        $scope.RateSolution(solution,rate);
+        $scope.BestRate(unsolvedProblem);
+        $scope.goToUnsolvedProblems();
+      }
+    });
+  });
+  };
+  $scope.showConfirmBestRate2 = function(solution,rate,unsolvedProblem) {
+    $translate(['BestRatingTitle', 'CancelOption','YesMessage']).then (function(translations){
+    var confirmPopup = $ionicPopup.confirm({
+      title: translations.BestRatingTitle,
+      template: "Some times the solution need some time to work, give it a try",
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
     });
 
     confirmPopup.then(function(res) {
@@ -247,12 +389,20 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
         $scope.BestRate(unsolvedProblem);
       }
     });
+  });
   };
 
+  $scope.goToUnsolvedProblems = function() {
+      $state.go("app.newUnsolvedProblem");
+  }
+
   $scope.showConfirmWorstRate = function(solution,rate,unsolvedProblem) {
+    $translate(['WorstRatingTitle','WorstRatingBody', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Worst Rate for this solution',
-      template: 'Are you sure that this solution doesn&#39;t help to solve the unsolved problem?'
+      title: translations.WorstRatingTitle,
+      template: translations.WorstRatingBody,
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
     });
 
     confirmPopup.then(function(res) {
@@ -261,6 +411,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
         $scope.BestRate(unsolvedProblem);
       }
     });
+  });
   };
 
   };
@@ -325,6 +476,21 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
 
   };
 
+  $scope.selectTabWithIndexShared = function(index) {
+    if (index === 0) {
+      $ionicTabsDelegate.select(index);
+      $state.go("app.sharedShowUnsolvedProblem", {unsolvedProblemId: $scope.unsolvedProblemFromShared.id});
+    }
+    if (index == 1) {
+      $ionicTabsDelegate.select(index);
+      $state.go("app.sharedDefineTheProblem", {unsolvedProblemId: $scope.unsolvedProblemFromShared.id });
+    }
+    if (index == 2) {
+      $state.go("app.sharedInvitation", {unsolvedProblemId: $scope.unsolvedProblemFromShared.id});
+      $ionicTabsDelegate.select(index);
+    }
+  };
+
   $scope.getRatingIcon = function(solution) {
     var rating = solution.rating;
     if (rating === 0) {
@@ -332,9 +498,7 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     } else if (rating === 1) {
       return 'ion-sad';
     } else if (rating === 2) {
-      return 'ion-heart-broken';
-    } else if (rating === 3) {
-      return 'ion-heart';
+      return 'ion-android-sad';
     } else  {
       return 'ion-happy';
     }
@@ -350,5 +514,63 @@ angular.module('starter.controllers').controller('InvitationCtrl', function($sco
     $state.go('app.solution', {solutionId:solution.id});
   };
 
+  $scope.showHint = function() {
+    $translate(['InvitationStepHint', 'YesMessage']).then (function(translations){
+    if(localStorage.getItem("showInfo") === null){
+        localStorage.setItem("showInfo", true);
+        var confirmPopup = $ionicPopup.alert({
+          title: translations.InvitationStepHint,
+          okText: translations.YesMessage
+        });
+      }
+    });
+    };
+
+    $scope.sharedChildConcerns;
+
+    $scope.getSharedChildConcerns = function(user_id,child_id,unsolved_problem_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/unsolved_problem/"+unsolved_problem_id+"/sharedChildConcerns", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedChildConcerns = data.data;
+             console.log($scope.sharedChildConcerns);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
+
+      $scope.sharedAdultConcerns;
+
+    $scope.getSharedAdultConcerns = function(user_id,child_id,unsolved_problem_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/unsolved_problem/"+unsolved_problem_id+"/sharedAdultConcerns", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedAdultConcerns = data.data;
+             console.log($scope.sharedAdultConcerns);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
+
+      $scope.sharedPosibleSolutions;
+
+    $scope.getSharedPosibleSolutions = function(user_id,child_id,unsolved_problem_id_app,unsolved_problem_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/unsolved_problem/"+unsolved_problem_id+"/sharedPosibleSolutions", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedPosibleSolutions = data.data;
+            $scope.getSharedChildConcerns(user_id, child_id, unsolved_problem_id_app);
+            $scope.getSharedAdultConcerns(user_id, child_id, unsolved_problem_id_app);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
+ 
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 });

@@ -1,0 +1,49 @@
+<ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">{{'SignupTitle' | translate }}</h1>
+    <button class="button button-clear button-primary" ng-click="closeModalSignup()">{{'CancelOption' | translate }}</button>
+  </ion-header-bar>
+  <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll modal-animation">
+    <div class="list">
+      <label class="item item-input item-stacked-label ">
+        <span class="input-label">{{'NameTitle' | translate }}</span>
+        <input type="text" placeholder=" {{'TypeYourNameTitle' | translate }} "ng-model="user.names">
+        </input>
+      </label>
+      <label class="item item-input item-stacked-label ">
+        <span class="input-label">{{'LastNameTitle' | translate }}</span>
+        <input type="text" placeholder=" {{'TypeYourLastNameTitle' | translate }} "ng-model="user.last_name">
+        </input>
+      </label>
+      <label class="item item-input item-stacked-label ">
+        <span class="input-label">{{'EmailTitle' | translate }}
+          <label class="assertive" ng-if="!emailRegularExpression.test(user.email) && anyStringRegExpression.test(user.email)"> {{ 'Invalid' | translate}}</label>
+        </span>
+        <input type="email" placeholder=" {{'TypeYourEmailTitle' | translate }} "ng-model="user.email">
+        </input>
+      </label>
+      <label class="item item-input item-stacked-label ">
+        <span class="input-label">{{'PhoneTitle' | translate }}</span>
+        <input type="number" placeholder=" {{'TypeYourPhoneTitle' | translate }} "ng-model="user.phone">
+        </input>
+      </label>
+      <label class="item item-input item-stacked-label ">
+        <span class="input-label">{{'PasswordTitle' | translate }}
+          <label class="assertive" ng-if="!passwordRegularExpression.test(user.password) && anyStringRegExpression.test(user.password)"> {{'InvalidPassword' | translate}}</label>
+          <label class="button button-icon ion-information-circled tiny" ng-click="passwordInfoAlert()"></label>
+        </span>
+        <input type="password" placeholder=" {{'TypeYourPasswordTitle' | translate }} "ng-model="user.password">
+        </input>
+      </label>
+      <label class="item item-input item-stacked-label ">
+        <span class="input-label">{{'PasswordConfirmationTitle' | translate }}
+          <label class="assertive" ng-if="!(user.password === user.password_confirmation) && anyStringRegExpression.test(user.password_confirmation)"> {{'PasswordsDontMatch' | translate}}</label>
+        </span>
+        <input type="password" placeholder=" {{'TypeYourPasswordConfirmationTitle' | translate }} "ng-model="user.password_confirmation">
+        </input>
+      </label>
+      <button class="button button-full button-positive" ng-if="user.names.length === 0 || user.last_name.length === 0 || user.email.length === 0 || user.phone.length === 0 || user.password.length === 0 || user.password != user.password_confirmation || !passwordRegularExpression.test(user.password)" disabled>{{'CreateTitle' | translate }}</button>
+      <button class="button button-full button-positive" ng-if="user.names.length > 0 && user.last_name.length > 0 && (emailRegularExpression.test(user.email)) && user.phone > 0 && (passwordRegularExpression.test(user.password)) && (user.password === user.password_confirmation) " ng-click="signup()">{{'CreateTitle' | translate }}</button>
+    </div>
+  </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out modal-animation"></div></div></ion-content>
+</ion-modal-view>

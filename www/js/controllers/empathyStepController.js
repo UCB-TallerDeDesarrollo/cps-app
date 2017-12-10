@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory, ChildConcernFactory,AdultConcernFactory,$ionicSideMenuDelegate){
+.controller('ChildsConcernsCtrl', function($scope, $cordovaSQLite, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $ionicTabsDelegate, $stateParams, $timeout, UnsolvedProblemFactory, ChildConcernFactory,AdultConcernFactory,$ionicSideMenuDelegate, $translate, $http){
   $ionicSideMenuDelegate.canDragContent(false);
     $scope.childsConcern = {
     description: ""
@@ -131,13 +131,17 @@ angular.module('starter.controllers')
   $scope.goUnsolvedProblems = function(){
     $state.go('app.newUnsolvedProblem');
   };
+  $scope.goUnsolvedProblemsShared = function() {
+    $state.go("app.sharedUnsolvedProblem");
+  };
   $scope.verifyToGoToStep2 = function() {
+    $translate(['goingTo','Step', 'DefineAdultsConcern','NoMessage','YesMessage','keepDrilling','step2VerifyBody','imSure']).then (function(translations){
     if($scope.adultsConcerns.length === 0){
       var confirmPopup = $ionicPopup.confirm({
-        title: "Going to Step 2: Define Adult's Concerns",
-        template: "Have you drilled enough to get all your child's concerns?",
-        cancelText: "No, keep drilling",
-        okText: "Yes, I'm sure"
+        title: translations.goingTo + " "+ translations.Step + " 2: " + translations.DefineAdultsConcern,
+        template: translations.step2VerifyBody,
+        cancelText: translations.NoMessage+", " + translations.keepDrilling,
+        okText: translations.YesMessage + ", "+ translations.imSure
       });
 
       confirmPopup.then(function(res) {
@@ -149,8 +153,10 @@ angular.module('starter.controllers')
     else {
       $state.go('app.defineTheProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
     }
+  });
   };
   $scope.selectTabWithIndex = function(index) {
+    $translate(['CancelOption','Step','EmpathyStep','DefineAdultsConcern','InvitationStep','wasntUnlock','haveToFinishSteps']).then (function(translations){
     if(index === 0){
       $ionicTabsDelegate.select(index);
       $state.go('app.showUnsolvedProblem',{ unsolvedProblemId: $scope.unsolvedProblem.id});
@@ -158,8 +164,8 @@ angular.module('starter.controllers')
     if(index == 1){
       if($scope.childsConcerns.length === 0){
         var alertPopup = $ionicPopup.alert({
-           title: 'Step 2 wasn\'t unlocked.',
-           template: 'You have to finish previous steps to continue.'
+          title: translations.Step + " 2 "+ translations.wasntUnlock,
+          template: translations.haveToFinishSteps
          });
          alertPopup.then(function(res) {
          });
@@ -172,8 +178,8 @@ angular.module('starter.controllers')
     if(index==2){
       if($scope.adultsConcerns.length === 0 || $scope.childsConcerns.length === 0){
         var alertPopupForUnsolved = $ionicPopup.alert({
-           title: 'Step 3 wasn\'t unlocked.',
-           template: 'You have to finish previous steps to continue.'
+          title: translations.Step + " 3 "+ translations.wasntUnlock,
+          template: translations.haveToFinishSteps
          });
          alertPopupForUnsolved.then(function(res) {
          });
@@ -182,9 +188,31 @@ angular.module('starter.controllers')
         $ionicTabsDelegate.select(index);
       }
     }
+  });
+  };
 
+  $scope.selectTabWithIndexShared = function(index) {
+        if (index === 0) {
+          $ionicTabsDelegate.select(index);
+          $state.go("app.sharedShowUnsolvedProblem", {
+            unsolvedProblemId: $scope.unsolvedProblem.id
+          });
+        }
+        if (index == 1) {
+          $ionicTabsDelegate.select(index);
+          $state.go("app.sharedDefineTheProblem", {
+            unsolvedProblemId: $scope.unsolvedProblem.id
+          });
+        }
+        if (index == 2) {
+          $state.go("app.sharedInvitation", {
+            unsolvedProblemId: $scope.unsolvedProblem.id
+          });
+          $ionicTabsDelegate.select(index);
+        }
   };
   $scope.editChildsConcern = function(childsConcern){
+    $scope.auxForUpdateChildConcernPair=childsConcern;
     $scope.editableChildsConcern = angular.copy(childsConcern);
     $scope.openModalEdit();
     if(typeof analytics !== 'undefined') {
@@ -213,6 +241,9 @@ angular.module('starter.controllers')
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(0,10));});
 
   $scope.updateChildsConcern = function(){
+
+
+
     if (!inputFieldIsEmpty($scope.editableChildsConcern.description)) {
       ChildConcernFactory.update($scope.editableChildsConcern);
       $scope.modalEdit.hide();
@@ -224,7 +255,22 @@ angular.module('starter.controllers')
     else {
       $scope.emptyInput = true;
     }
+
+
+      ChildConcernFactory.getPair(function(respAux){
+      $scope.resp=respAux;
+        for(i=0;i<$scope.resp.length;i++) {
+          if($scope.resp[i].description === $scope.auxForUpdateChildConcernPair.description)
+          {
+              $scope.childConcernPair=$scope.resp[i];
+             ChildConcernFactory.updateChildsConcernPair($scope.editableChildsConcern.description,$scope.childConcernPair);
+          }
+        }
+
+      });
   };
+
+
   $scope.deleteChildsConcern = function(childConcern) {
     ChildConcernFactory.delete(childConcern,function(){
       $scope.childsConcerns.splice($scope.childsConcerns.indexOf(childConcern), 1);
@@ -232,9 +278,12 @@ angular.module('starter.controllers')
  };
 
  $scope.showConfirmChildsConcern = function(item) {
+  $translate(['DeleteChildsConcernTitle','DeleteChildsConcernBody', 'CancelOption','YesMessage']).then (function(translations){
    var confirmPopup = $ionicPopup.confirm({
-     title: "Delete Child's Concern",
-     template: "Are you sure you want to delete this child's concern?"
+    title: translations.DeleteChildsConcernTitle,
+     template: translations.DeleteChildsConcernBody,
+     cancelText: translations.CancelOption,
+     okText: translations.YesMessage
    });
 
    confirmPopup.then(function(res) {
@@ -247,6 +296,7 @@ angular.module('starter.controllers')
         }
      }
    });
+  });
  };
  $scope.unableAnimation = function() {
    $scope.firstItemAnimationShown = true;
@@ -255,12 +305,15 @@ angular.module('starter.controllers')
    return ( $scope.childsConcerns.length === 0 || $scope.firstItemAnimationShown );
  };
  $scope.showHint = function() {
+  $translate(['ChildsConcernHint', 'CancelOption','YesMessage']).then (function(translations){
    if(localStorage.getItem("showHint") === null){
        localStorage.setItem("showHint", true);
        var confirmPopup = $ionicPopup.alert({
-         title: "After you identify all of your child's concerns, click the arrow to move on to adult concerns step"
+         title: translations.ChildsConcernHint,
+         okText: translations.YesMessage
        });
      }
+    });
    };
   $scope.googleAnalyticsView = function() {
     if(typeof analytics !== 'undefined') {
@@ -268,5 +321,51 @@ angular.module('starter.controllers')
     } else {
         console.log("Google Analytics Unavailable");
     }
-  }
+  };
+
+  $scope.sharedChildConcerns;
+
+    $scope.getSharedChildConcerns = function(user_id,child_id,unsolved_problem_id) {
+        $http.get($link_root +"/users/"+user_id+"/children/"+child_id+"/unsolved_problem/"+unsolved_problem_id+"/sharedChildConcerns", {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedChildConcerns = data.data;
+             console.log($scope.sharedChildConcerns);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
+
+      $scope.empathyStepHint = function(){
+        $scope.openModalHint();
+        if(typeof analytics !== 'undefined') {
+            analytics.trackEvent('Empathy Step Hint', 'Open')
+        } else {
+            console.log("Google Analytics Unavailable");
+        }
+      };
+
+      $scope.openModalHint = function() {
+        $scope.modalHint.show();
+      };
+
+    $ionicModal.fromTemplateUrl('templates/cpsProcess/empathyStepHints.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modalHint = modal;
+          $scope.closeModalEdit();
+      });
+    $scope.closeModalHint = function() {
+        $scope.modalHint.hide();
+        $ionicListDelegate.closeOptionButtons();
+      };
+
+      $scope.goToAlsupHelp = function() {
+        $scope.modalHint.hide();
+        localStorage.setItem("coming_from_hint","true")
+          $state.go("app.helpCategories");
+      }
 });

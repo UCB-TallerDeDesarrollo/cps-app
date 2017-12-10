@@ -6,7 +6,9 @@ angular.module('starter.seed', [])
   }
 
   function seedChilds($cordovaSQLite, db){
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS childs (id integer primary key autoincrement, first_name text, last_name text, gender text, birthday date, active integer default 0);");
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS childs (id integer primary key autoincrement, first_name text, last_name text, active integer default 0);");
+    $cordovaSQLite.execute(db, "ALTER TABLE  childs ADD COLUMN unsolved_problems integer default 0");
+    $cordovaSQLite.execute(db, "ALTER TABLE  childs ADD COLUMN lagging_skills_check integer default 0");
   }
 
   function seedUnsolvedProblems($cordovaSQLite, db){
@@ -23,6 +25,8 @@ angular.module('starter.seed', [])
   function seedSolutions($cordovaSQLite, db){
     $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS solutions (id integer primary key autoincrement, description text, unsolved_problem_id integer, rating integer, FOREIGN KEY (unsolved_problem_id) REFERENCES adults_concerns (id))");
     $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS solution_comments (id integer primary key autoincrement, description text, commented_at date, solution_id integer, FOREIGN KEY (solution_id) REFERENCES solutions (id))");
+
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS pair_childConcerntoadultConcern (id integer primary key autoincrement, description text,description2 text, solution_id integer, FOREIGN KEY (solution_id) REFERENCES solutions (id))");
   }
 
   return {
@@ -42,6 +46,7 @@ angular.module('starter.seed', [])
       $cordovaSQLite.execute(db, "DROP TABLE adults_concerns");
       $cordovaSQLite.execute(db, "DROP TABLE solutions");
       $cordovaSQLite.execute(db, "DROP TABLE solution_comments");
+      $cordovaSQLite.execute(db, "DROP TABLE pair_childConcerntoadultConcern");
       $cordovaSQLite.execute(db, "DROP TABLE childs");
     }
   };

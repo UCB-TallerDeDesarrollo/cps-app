@@ -1,11 +1,20 @@
-angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $ionicListDelegate,$cordovaSQLite, $ionicPopup, PossibleSolutionFactory ){
+angular.module('starter.controllers').controller('SolutionsCtrl', function($scope, $state, $stateParams, $ionicModal, $ionicListDelegate,$cordovaSQLite, $ionicPopup, PossibleSolutionFactory, $translate, $http){
   $scope.comment = { solutionId: $stateParams.solutionId };
+
+  $scope.pair = { solutionId: $stateParams.solutionId };
+
 
   PossibleSolutionFactory.find($stateParams.solutionId,function(solution){
     $scope.solution = solution;
   });
 
+  PossibleSolutionFactory.findPair($stateParams.solutionId,function(pairs){
+    $scope.pairs = pairs;
+  });
+
   $scope.comments = [];
+    $scope.pairs = [];
+
   PossibleSolutionFactory.getComments($stateParams.solutionId,function(comments){
     $scope.comments = comments;
   });
@@ -45,6 +54,7 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
       $scope.closeModal();
     }
   };
+
 
   $ionicModal.fromTemplateUrl('edit-modal.html', {
     scope: $scope,
@@ -90,9 +100,12 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
   };
 
   $scope.showDeletionConfirm = function(comment) {
+    $translate(['DeleteCommentTitle','DeleteCommentBody', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Delete comment',
-      template: 'Are you sure you want to delete this comment?'
+      title: translations.DeleteCommentTitle,
+      template: translations.DeleteCommentBody,
+      cancelText: translations.CancelOption,
+      okText: translations.YesMessage
     });
     confirmPopup.then(function(res) {
       if(res) {
@@ -104,6 +117,7 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
         });
       }
     });
+  });
   };
 
   $scope.parseDate = function(commented_at){
@@ -125,4 +139,20 @@ angular.module('starter.controllers').controller('SolutionsCtrl', function($scop
       return 'ion-happy';
     }
   };
+
+  $scope.sharedCommentSolutions;
+
+    $scope.getSharedPosibleSolutions = function(posible_solution_id) {
+        console.log(posible_solution_id);
+        $http.get($link_root +"/solution_commentaries/"+posible_solution_id, {
+            headers: { Authorization: localStorage.getItem("auth_token") }
+          })
+          .then(data => {
+            $scope.sharedCommentSolutions = data.data;
+            console.log($scope.sharedCommentSolutions);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      };
 });

@@ -1,5 +1,5 @@
 
-<ion-view view-title="Help Categories for Invitation Step" >
+<ion-view view-title="{{'TitlehelpInvitation' | translate }}"  >
   <div class="bar bar-subheader item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-search placeholder-icon"></i>
@@ -13,7 +13,9 @@
   </div>
   <ion-content ng-init="googleAnalyticsView();" class="has-subheader" ng-controller="HelpCategoryInvitationCtrl">
     <ion-list>
-    <div ng-repeat="helpCategory in helpCategoriesInvitation | filter: searchWord">
+
+    <div ng-if="isSpanish()">
+    <div ng-repeat="helpCategory in helpCategoriesInvitationEs | filter: searchWord">
         <ion-item class="item item-stable item-text-wrap" ng-click="toggleHelp(helpCategory)"
           ng-click="toggleHelp(helpCategory)"
           ng-class="{active: isTopicShown(helpCategory)}">
@@ -27,7 +29,7 @@
               {{topic.description}}
             </div>
           </ion-item>
-          <ion-item ng-show="isTopicShown(helpCategory)" ng-click="browserInstance.openBrowser(topic.url)" ng-if="topic.url.length > 0">
+          <ion-item ng-show="isTopicShown(helpCategory)" ng-click="checkConnection();browserInstance.openBrowser(topic.url)" ng-if="topic.url.length > 0">
             <div class=" item-text-wrap" >
               {{topic.description}}
               <i ng-show="topic.url" class="icon ion-ios-browsers-outline pull-right"></i>
@@ -36,6 +38,33 @@
         </div>
         </ion-list>
       </div>
+      </div>
+
+      <div ng-if="isEnglish()">
+      <div ng-repeat="helpCategory in helpCategoriesInvitationEn | filter: searchWord">
+          <ion-item class="item item-stable item-text-wrap" ng-click="toggleHelp(helpCategory)"
+            ng-click="toggleHelp(helpCategory)"
+            ng-class="{active: isTopicShown(helpCategory)}">
+            <i class="icon" ng-class="isTopicShown(helpCategory) ? 'ion-minus' : 'ion-plus'" ></i>
+            <b>{{helpCategory.description}}</b>
+          </ion-item>
+          <ion-list>
+            <div ng-repeat="topic in helpCategory.topics">
+            <ion-item ng-show="isTopicShown(helpCategory)"  ng-if="!topic.url">
+              <div class="item-text-wrap" >
+                {{topic.description}}
+              </div>
+            </ion-item>
+            <ion-item ng-show="isTopicShown(helpCategory)" ng-click="checkConnection();browserInstance.openBrowser(topic.url)" ng-if="topic.url.length > 0">
+              <div class=" item-text-wrap" >
+                {{topic.description}}
+                <i ng-show="topic.url" class="icon ion-ios-browsers-outline pull-right"></i>
+              </div>
+            </ion-item>
+          </div>
+          </ion-list>
+        </div>
+        </div>
       </ion-list>
   </ion-content>
 </ion-view>
