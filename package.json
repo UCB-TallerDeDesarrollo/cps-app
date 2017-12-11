@@ -4,6 +4,7 @@
   "description": "cps-app: An Ionic project",
   "dependencies": {
     "cordova-android": "^6.3.0",
+    "cordova-ios": "^4.5.0",
     "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-device": "^1.1.6",
     "cordova-plugin-google-analytics": "^1.8.3",
@@ -18,8 +19,7 @@
     "gulp-sass": "^2.0.4",
     "ionic-plugin-keyboard": "^2.2.1",
     "onesignal-cordova-plugin": "^2.2.2",
-    "phonegap-plugin-push": "^2.1.0",
-    "cordova-ios": "^4.4.0"
+    "phonegap-plugin-push": "git+https://github.com/phonegap/phonegap-plugin-push.git"
   },
   "devDependencies": {
     "@ionic/cli-plugin-cordova": "1.6.2",
