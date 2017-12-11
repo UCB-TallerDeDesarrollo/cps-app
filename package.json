@@ -18,7 +18,8 @@
     "gulp-sass": "^2.0.4",
     "ionic-plugin-keyboard": "^2.2.1",
     "onesignal-cordova-plugin": "^2.2.2",
-    "phonegap-plugin-push": "^2.1.0"
+    "phonegap-plugin-push": "^2.1.0",
+    "cordova-ios": "^4.4.0"
   },
   "devDependencies": {
     "@ionic/cli-plugin-cordova": "1.6.2",
@@ -52,7 +53,8 @@
       "cordova-plugin-network-information": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

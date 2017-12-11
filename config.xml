@@ -7,7 +7,7 @@
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
     <allow-navigation href="*" />
-    <name>Lens Changer</name>
+    <name>The Lens Changer</name>
     <description>
 
 
@@ -100,5 +100,5 @@
         <variable name="SENDER_ID" value="ionicpush-185011" />
     </plugin>
     <plugin name="onesignal-cordova-plugin" spec="^2.2.2" />
-    <plugin name="cordova-plugin-network-information" spec="https://github.com/apache/cordova-plugin-network-information" />
+    <plugin name="cordova-plugin-network-information" spec="git+https://github.com/apache/cordova-plugin-network-information.git" />
 </widget>
