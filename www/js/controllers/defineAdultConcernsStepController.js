@@ -244,10 +244,10 @@ angular.module('starter.controllers')
   };
 
   $scope.verifyToGoToStep3 = function(id) {
-    $translate(['goingTo','Step', 'InvitationStep','NoMessage','YesMessage','keepDrilling','step2VerifyBody','imSure']).then (function(translations){
+    $translate(['goingTo','Step', 'InvitationStep','NoMessage','YesMessage','keepDrilling','step3VerifyBody','imSure']).then (function(translations){
       var confirmPopup = $ionicPopup.confirm({
-        title: translations.goingTo +" "+ translations.Step + " 2: " +translations.InvitationStep, //translations.goingTo +" "+ translations.Step + " 1: " +translations.EmpathyStep,
-        template: translations.step2VerifyBody,
+        title: translations.goingTo +" "+ translations.Step + " 3: " +translations.InvitationStep, //translations.goingTo +" "+ translations.Step + " 1: " +translations.EmpathyStep,
+        template: translations.step3VerifyBody,
         cancelText: translations.NoMessage+", " + translations.keepDrilling,
         okText: translations.YesMessage + ", "+ translations.imSure
       });
