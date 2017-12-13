@@ -44,7 +44,14 @@ $scope.alert = function(){
         template: "Internet access is required to view this page. Please check your internet settings and try again."
       });
 
-    }}
+    }
+    if(navigator.connection.type == Connection.WIFI ||
+      navigator.connection.type == Connection.CELL_2G ||
+      navigator.connection.type == Connection.CELL_3G ||
+      navigator.connection.type == Connection.CELL_4G){
+      browserInstance.openBrowser(topic.url)
+    }
+  }
 }
 
   $scope.googleAnalyticsView = function() {
