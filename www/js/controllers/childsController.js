@@ -847,7 +847,8 @@ angular
         "unShareALSUP"
       ]).then(function(translations) {
         // Link para factorizar ionicActionSheet: https://www.ghadeer.io/ionicactionsheet-example/
-        var buttons = [{ text: translations.EditChildTitle },{text: translations.ShareALSUP} ];
+        var buttons = [{ text: translations.EditChildTitle } ];
+        //var buttons = [{ text: translations.EditChildTitle },{text: translations.ShareALSUP} ];
         $scope.getFriendShared(child.id);
         $ionicActionSheet.show({
           buttons: buttons,
@@ -1013,6 +1014,7 @@ angular
     };
 
     $scope.showIntroductionPage = function() {
+
         if (
           localStorage.getItem("pop_up_first_time") === null &&
           localStorage.getItem("tutorial_first_time") != null
@@ -1056,7 +1058,7 @@ angular
             $window.open("", "_system", "location=yes");
           };
             });
-        }
+      }
 
     };
 
