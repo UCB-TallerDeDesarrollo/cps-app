@@ -149,7 +149,7 @@ var $translations_en = {
     keepDrilling: "keep drilling",
 
     // From Define adult's concern to Empathy Step
-    step2VerifyBody: "Do you think you have listed all the adult's concerns?",
+    step3VerifyBody: "Do you think you have listed all the adult's concerns?",
 
     //For Laggin Skills
     LaggingSkillTitle:"Lagging Skills",
@@ -214,11 +214,11 @@ var $translations_en = {
     translateImage2:"img/appTutorial/2.png",
     translateImage3:"img/appTutorial/3.png",
     translateImage4:"img/appTutorial/4.png",
-    translateImage5:"img/appTutorial/5.gif",
-    translateImage6:"img/appTutorial/6.gif",
-    translateImage7:"img/appTutorial/7.gif",
-    translateImage8:"img/appTutorial/8.gif",
-    translateImage9:"img/appTutorial/9.gif",
+    translateImage5:"img/appTutorial/5.png",
+    translateImage6:"img/appTutorial/6.png",
+    translateImage7:"img/appTutorial/7.png",
+    translateImage8:"img/appTutorial/8.png",
+    translateImage9:"img/appTutorial/9.png",
     translateImage10:"img/appTutorial/10.gif",
 
     //For Empathy Step in help views
@@ -246,7 +246,7 @@ var $translations_en = {
     //Share
     NoSharedLaggingSkills: "No lagging skills shared yet. TAP FOR NEXT",
     NoSharedUnsolvedProblem: "No unsolved problems shared yet",
-    
+
     // First popUp
     launchApp: "Launch the app",
     tellMeMoreCps: "Tell me more about CPS!",

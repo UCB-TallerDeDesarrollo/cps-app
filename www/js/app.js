@@ -370,7 +370,7 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       }
     }
   })
-  
+
   .state('app.sharedUnsolvedProblem', {
       url: '/unsolvedProblems/shared/:sharedChild',
       views: {

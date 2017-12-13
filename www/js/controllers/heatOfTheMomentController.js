@@ -26,6 +26,7 @@ angular.module('starter.controllers')
             }
         };
 
+        
         $scope.checkConnection = function(){
             console.log("Entro");
             if(window.Connection) {
