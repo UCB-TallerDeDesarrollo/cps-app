@@ -301,12 +301,12 @@ angular
       console.log("Entro");
       if(window.Connection) {
       if(navigator.connection.type == Connection.NONE)
-      { 
+      {
         var alertNotConnection = $ionicPopup.alert({
           title: 'Required Connection',
           template: "Internet access is required to view this page. Please check your internet settings and try again."
         });
-       
+
       }}
   }
     $scope.showSyncModal = function(child){
@@ -328,6 +328,7 @@ angular
       $scope.downloadAdultConcern();
       $scope.downloadPosibleSolutions();
       $scope.downloadSolutionComentary();
+      $scope.downloadPairSolution();
     }
     $scope.uploadChild = function(){
       var user_id = localStorage.getItem("user_id");
@@ -654,6 +655,8 @@ angular
                   .then(data => {
                     console.log(data)
                     $scope.uploadSolutionComentary();
+                    $scope.uploadPairSolution();
+                    $scope.uploadLaggingSkill();
                   },
                   function(response) {
                     console.log(response.data.message);
@@ -724,8 +727,6 @@ angular
                       })
                       .then(data => {
                         console.log(data)
-                        $scope.uploadLaggingSkill();
-
                       },
                       function(response) {
                         console.log(response.data.message);
@@ -769,7 +770,74 @@ angular
       });
       })
     };
+    $scope.uploadPairSolution = function(){
+      var user_id = localStorage.getItem("user_id");
+      UnsolvedProblemFactory.all($scope.child.id,function(result){
+        var dataUP = result;
+        angular.forEach(dataUP,function(unsolvedProblem){
+          PossibleSolutionFactory.all(unsolvedProblem.id,function(result){
+            var dataSolutions = result;
+            angular.forEach(dataSolutions,function(solutions){
+              var link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/"+unsolvedProblem.id+"/posible_solution/"+solutions.id+"/solution_pairs";
+              PossibleSolutionFactory.allPairs(solutions.id,function(result){
+                var data = result;
+                console.log("All pairs:")
+                console.log(data);
+                $http.post(link,
+                  {
+                    data: angular.toJson(data),
+                    user_id: user_id,
+                    child_id: $scope.child.id,
+                    unsolved_problem_id:unsolvedProblem.id,
+                    solution_id: solutions.id
+                  },
+                  {
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    transformRequest: function(obj) {
+                              var str = [];
+                              for(var p in obj)
+                              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                              return str.join("&");
+                          },
+                  })
+                  .then(data => {
+                    console.log(data)
+                    $timeout(function() { $scope.displayErrorMsg = false;}, 3000);
+                  },
+                  function(response) {
+                    console.log(response.data.message);
+                  });
 
+              })
+            })
+          })
+        });
+
+      });
+
+    };
+    $scope.downloadPairSolution = function(){
+      console.log("entra a pares")
+      var user_id = localStorage.getItem("user_id")
+      var solution_pairs_link =  $link_root +"/users/"+user_id+"/children/"+$scope.child.id+"/unsolved_problem/1/posible_solution/1/solution_pairs";
+      $http.get(solution_pairs_link,{
+
+        headers: { 'Authorization': localStorage.getItem("auth_token") },
+
+      })
+      .then(data => {
+
+        $scope.solution_pairs = data.data;
+        angular.forEach($scope.solution_pairs, function(value, key){
+          var query = "UPDATE pair_childConcerntoadultConcern SET description = ?, description2 = ? where id = ? ";
+          var params = [value.description, value.description2, value.solution_id];
+          $cordovaSQLite.execute(db, query, params);
+          console.log("Solutions pairs Downloaded");
+        });
+
+      })
+      
+    }
     $scope.showActionsheet = function(child) {
       $translate([
         "EditChildTitle",
