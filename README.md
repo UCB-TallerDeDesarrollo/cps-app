@@ -23,3 +23,7 @@ The version 1.0.3 of the application is available to free download at:
 This application was developed by Systems Engineering students at the [Universidad Católica Boliviana San Pablo](https://www.ucbcba.edu.bo/)
 
 2016 - Cochabamba, Bolivia
+
+### API
+The application use a RESTful JSON API made with Rails 5,to share the alsup process with other people, the repository is located in a [Github repository]
+(https://github.com/gabolucuy/Lens-Changer-API.git)
