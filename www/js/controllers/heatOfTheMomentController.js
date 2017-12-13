@@ -26,19 +26,6 @@ angular.module('starter.controllers')
             }
         };
 
-        $scope.checkConnection = function(){
-            console.log("Entro");
-            if(window.Connection) {
-            if(navigator.connection.type == Connection.NONE)
-            { 
-              var alertNotConnection = $ionicPopup.alert({
-                title: 'Required Connection',
-                template: "Internet access is required to view this page. Please check your internet settings and try again."
-              });
-             
-            }}
-        }
-
         $scope.heatMomentsEn = [{
                 title: "Breathe so that you can get curious."
             },
