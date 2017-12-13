@@ -25,5 +25,5 @@ This application was developed by Systems Engineering students at the [Universid
 2016 - Cochabamba, Bolivia
 
 ### API
-The application use a RESTful JSON API made with Rails 5,to share the alsup process with other people, the repository is located in a [Github repository]
-(https://github.com/gabolucuy/Lens-Changer-API.git)
+The application use a RESTful JSON API made with Rails 5,to share the alsup process with other people, the repository is located in a *[Github repository](https://github.com/gabolucuy/Lens-Changer-API.git/)
+
