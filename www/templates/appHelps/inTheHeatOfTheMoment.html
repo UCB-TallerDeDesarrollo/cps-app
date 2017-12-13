@@ -6,7 +6,7 @@
                 <ion-item class="item item-stable item-text-wrap" ng-if="!moment.topics && !moment.url">
                     <b>{{moment.title}}</b>
                 </ion-item>
-                <ion-item class="item item-stable item-text-wrap item-icon-right" ng-if="moment.url" ng-click="checkConnection();browserInstance.openBrowser(moment.url)">
+                <ion-item class="item item-stable item-text-wrap item-icon-right" ng-if="moment.url" ng-click="browserInstance.openBrowser(moment.url)">
                     <b>{{moment.title}}</b>
                     <i class="icon ion-ios-browsers-outline font-21"></i>
                 </ion-item>
@@ -26,7 +26,7 @@
                     <ion-item class="item item-stable item-text-wrap" ng-if="!moment.topics && !moment.url">
                         <b>{{moment.title}}</b>
                     </ion-item>
-                    <ion-item class="item item-stable item-text-wrap item-icon-right" ng-if="moment.url" ng-click="checkConnection();browserInstance.openBrowser(moment.url)">
+                    <ion-item class="item item-stable item-text-wrap item-icon-right" ng-if="moment.url" ng-click="browserInstance.openBrowser(moment.url)">
                         <b>{{moment.title}}</b>
                         <i class="icon ion-ios-browsers-outline font-21"></i>
                     </ion-item>
