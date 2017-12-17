@@ -12,10 +12,10 @@ The basic project requirements are:
 
 ### Donwload
 
-The version 1.0.3 of the application is available to free download at:
+The version 1.4.0 of the application is available to free download at:
 
 * [Play Store](https://play.google.com/store/apps/details?id=com.livesinthebalance.cpsapp211049)
-* App Store (comming soon)
+* App Store
 
 
 ### Team
@@ -26,4 +26,3 @@ This application was developed by Systems Engineering students at the [Universid
 
 ### API
 The application use a RESTful JSON API made with Rails 5,to share the alsup process with other people, the repository is located in a [Github repository](https://github.com/gabolucuy/Lens-Changer-API.git/)
-
