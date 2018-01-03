@@ -378,7 +378,7 @@ $scope.editablePair=[];
     $translate(['BestRatingTitle', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
       title: translations.BestRatingTitle,
-      template: "Some times the solution need some time to work, give it a try",
+      template: "Sometimes the solution needs time to work - we are giving it a try.",
       cancelText: translations.CancelOption,
       okText: translations.YesMessage
     });
