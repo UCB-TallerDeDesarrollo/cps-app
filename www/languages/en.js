@@ -12,7 +12,7 @@ var $translations_en = {
   MainHelpTitle: "Main Help",
   AppTutorialTitle: "App Tutorial",
   FAQOption: "F.A.Q.",
-  MyChildrenTitle: "My Children",
+  MyChildrenTitle: "Children",
   HavntRegisteredAChildAlert: " You haven't registered a child. ",
   RegisterChildMessage: "PLEASE REGISTER ONE ABOVE",
   BirthDateTitle: "Birt Date: ",
@@ -51,6 +51,7 @@ var $translations_en = {
   SearchText: "Search",
   ConfirmDeleteChildMessage: "Are you sure you want to delete this child?",
   YesMessage: "Yes",
+  OKMessage: "Ok",
   NoMessage: "No",
   WelcomeMessage: "Welcome to Lens Changer",
   ChooseAnOptionMessage: "Choose your role!",
@@ -98,12 +99,13 @@ var $translations_en = {
   NoChildsConcern:
     "Please add your child’s concerns by clicking on the “+” above.",
   step2VerifyBody:
-    "Have you drilled enough to get all of your child's concerns?",
+    "Have you drilled enough so that you fully understand the child's concerns?",
   ChildsConcernHint:
-    "After you identify all of your child's concerns, click the arrow to move on to adult concerns step",
+    "After you identify all of the child's concern, click the arrow to move on to the adult concerns step",
 
   //For Invitation Step
   InvitationStep: "Invitation Step",
+  DefineAdultConcerns: "Define adult's concerns",
   Text1InvitationStep: "I wonder if there's something we can do about...",
   Text2InvitationStep: "and also do something about...",
   Text3InvitationStep: "Do you have any ideas?",
@@ -162,7 +164,8 @@ var $translations_en = {
   step1VerifyBody:
     "Did you list all of the examples that come to mind when you think of the child having difficulty with this lagging skill?",
   imSure: "I'm sure",
-  idid:"I did",
+  iHave: "I have",
+  idid: "I did",
   listmoreexples: "list more examples",
   keepDrilling: "keep drilling",
 
