@@ -278,7 +278,7 @@ var $translations_en = {
   help_category_03topic_06: "I don’t know how to drill",
 
   //FAQ
-  challengingKidsTitle: "Challenging Childs",
+  challengingKidsTitle: "Challenging Children",
   generalQuestionsAboutCPSTitle: "General questions about CPS",
   questionAboutThePlansTitle: "Questions about the plans",
   questionsAboutTheClassroomTitle:
