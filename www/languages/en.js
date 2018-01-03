@@ -160,8 +160,10 @@ var $translations_en = {
   wasntUnlock: "wasn't unlocked",
   haveToFinishSteps: "You have to finish previous steps to continue.",
   step1VerifyBody:
-    "Did you list all of the examples that come to mind when you think of your child having difficulty with this lagging skill?",
+    "Did you list all of the examples that come to mind when you think of the child having difficulty with this lagging skill?",
   imSure: "I'm sure",
+  idid:"I did",
+  listmoreexples: "list more examples",
   keepDrilling: "keep drilling",
 
   // From Define adult's concern to Empathy Step
