@@ -90,7 +90,7 @@
             <div class="scroll modal-animation">
               <div class="list">
                 <label class="item item-input">
-                  <textarea rows=5 placeholder="{{'PlaceHolderComment' | translate }}" ng-model="comment.description">
+                  <textarea rows=5 placeholder="{{'PlaceHolderComment' | translate }}" ng-model="comment.description" maxlength="255">
                   </textarea>
                 </label>
                 <button class="button button-full button-positive" ng-if="!comment.description.length" disabled>{{'CreateTitle' | translate }}</button>
@@ -115,7 +115,7 @@
             <div class="scroll modal-animation">
               <form>
                 <label class="item item-input">
-                  <textarea rows=5 placeholder="{{'PlaceHolderComment' | translate }}" ng-model="editableComment.description">
+                  <textarea rows=5 placeholder="{{'PlaceHolderComment' | translate }}" ng-model="editableComment.description" maxlength="255">
                   </textarea>
                 </label>
                 <button class="button button-full button-positive" ng-if="!editableComment.description.length" ng-click="updateComment()" disabled>{{'SaveTitle' | translate }}</button>

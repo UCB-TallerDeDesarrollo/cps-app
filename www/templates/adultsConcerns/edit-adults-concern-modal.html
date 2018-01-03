@@ -6,7 +6,7 @@
   <ion-content class="padding scroll-content ionic-scroll  has-header"><div class="scroll modal-animation">
     <form>
       <label class="item item-input">
-        <textarea rows=5 placeholder="{{'TypeAdultsConcernPlaceholder' | translate }}" ng-model="editableAdultsConcern.description">
+        <textarea rows=5 placeholder="{{'TypeAdultsConcernPlaceholder' | translate }}" ng-model="editableAdultsConcern.description" maxlength="255">
         </textarea>
       </label>
       <button class="button button-full button-positive" ng-if="!editableAdultsConcern.description.length" ng-click="updateAdultsConcern()" disabled>{{'SaveTitle' | translate }}</button>

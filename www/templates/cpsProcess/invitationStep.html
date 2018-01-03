@@ -211,7 +211,7 @@
                 </button>
               </div>
               <label class="item item-input">
-                <textarea rows=5 placeholder="{{'PlaceHolderPossibleSolution' | translate }}" ng-model="solution.description">
+                <textarea rows=5 placeholder="{{'PlaceHolderPossibleSolution' | translate }}" ng-model="solution.description" maxlength="255">
                 </textarea>
               </label>
               <button class="button button-full button-positive" ng-if="!solution.description.length" ng-click="createSolution()" disabled>{{'CreateTitle' | translate }}</button>
@@ -367,7 +367,7 @@
             <form>
 
               <label class="item item-input">
-                <textarea rows=5 placeholder="Agree upon a solution" ng-model="editableSolution.description">
+                <textarea rows=5 placeholder="Agree upon a solution" ng-model="editableSolution.description" maxlength="255">
                 </textarea>
               </label>
               <button class="button button-full button-positive" ng-if="!editableSolution.description.length" ng-click="updateSolution()" disabled>{{'SaveTitle' | translate }}</button>
