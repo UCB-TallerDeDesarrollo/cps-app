@@ -375,9 +375,9 @@ $scope.editablePair=[];
   });
   };
   $scope.showConfirmBestRate2 = function(solution,rate,unsolvedProblem) {
-    $translate(['BestRatingTitle', 'CancelOption','YesMessage']).then (function(translations){
+    $translate(['MediumRatingTitle', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: translations.BestRatingTitle,
+      title: translations.MediumRatingTitle,
       template: "Sometimes the solution needs time to work - we are giving it a try.",
       cancelText: translations.CancelOption,
       okText: translations.YesMessage
