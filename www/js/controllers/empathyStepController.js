@@ -135,13 +135,13 @@ angular.module('starter.controllers')
     $state.go("app.sharedUnsolvedProblem");
   };
   $scope.verifyToGoToStep2 = function() {
-    $translate(['goingTo','Step', 'DefineAdultsConcern','NoMessage','YesMessage','keepDrilling','step2VerifyBody','imSure']).then (function(translations){
+    $translate(['goingTo','Step', 'DefineAdultsConcern','NoMessage','YesMessage','keepDrilling','step2VerifyBody','iHave']).then (function(translations){
     if($scope.adultsConcerns.length === 0){
       var confirmPopup = $ionicPopup.confirm({
         title: translations.goingTo + " "+ translations.Step + " 2: " + translations.DefineAdultsConcern,
         template: translations.step2VerifyBody,
         cancelText: translations.NoMessage+", " + translations.keepDrilling,
-        okText: translations.YesMessage + ", "+ translations.imSure
+        okText: translations.YesMessage + ", "+ translations.iHave
       });
 
       confirmPopup.then(function(res) {
@@ -305,12 +305,12 @@ angular.module('starter.controllers')
    return ( $scope.childsConcerns.length === 0 || $scope.firstItemAnimationShown );
  };
  $scope.showHint = function() {
-  $translate(['ChildsConcernHint', 'CancelOption','YesMessage']).then (function(translations){
+  $translate(['ChildsConcernHint', 'CancelOption','OKMessage']).then (function(translations){
    if(localStorage.getItem("showHint") === null){
        localStorage.setItem("showHint", true);
        var confirmPopup = $ionicPopup.alert({
          title: translations.ChildsConcernHint,
-         okText: translations.YesMessage
+         okText: translations.OKMessage
        });
      }
     });
