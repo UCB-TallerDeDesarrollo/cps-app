@@ -1,7 +1,7 @@
 <ion-view cache-view="false" title="{{'DefineAdultsConcern' | translate }}" ng-controller="AdultConcernsCrtl" on-tap="unableAnimation()">
   <div ng-if="sharedChild == 0">
     <div class="bar bar-subheader bar-positive item-text-wrap">
-      <h2 class="title">{{unsolvedProblem.description}}</h2>
+      <h2 class=" col col-90 title">{{unsolvedProblem.description}}</h2>
       <a class="button button-small button-clear button-white icon ion-help-circled" href="#/app/mainHelp/helpDefineAdultsConcern"></a>
     </div>
     <ion-content ng-init="findChildConcern();findUnsolvedProblem();showAdultsConcernHint();googleAnalyticsView()" class="has-subheader has-tabs"

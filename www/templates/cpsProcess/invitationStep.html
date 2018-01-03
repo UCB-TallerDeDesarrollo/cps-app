@@ -1,7 +1,7 @@
 <ion-view cache-view="false" view-title="{{'InvitationStep' | translate }}" ng-controller="InvitationCtrl" on-tap="unableAnimation()">
   <div ng-if="sharedChild == 0">
     <div class="bar bar-subheader bar-positive">
-      <h2 class="title">{{unsolvedProblem.description}}</h2>
+      <h2 class="col col-90 title">{{unsolvedProblem.description}}</h2>
       <a class="button button-small button-clear button-white icon ion-help-circled" href="#/app/helpForInvitation"></a>
     </div>
     <ion-content class="has-tabs has-subheader" on-swipe-right="selectTabWithIndex(1)">
