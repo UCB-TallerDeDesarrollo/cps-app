@@ -111,7 +111,7 @@ var $translations_en = {
   Text3InvitationStep: "Do you have any ideas?",
   ListPossibleSolutions: "List of Possible Solutions",
   MessageList:
-    "Identifying a solution doesn't meant you are done!. You still have to discuss whether the solution is truly realistic and truly mutually satisfactory.",
+    "Identifying a solution doesn't meant you are done! You still have to discuss whether the solution is truly realistic and truly mutually satisfactory.",
   NewPossibleSolution: "New Possible Solution",
   PlaceHolderPossibleSolution: "Agree upon a solution.",
   RelatedTo: "Related to...",
@@ -123,10 +123,11 @@ var $translations_en = {
   DeleteSolutionBody: "Are you sure you want to delete this solution?",
   SubtitleRating: "You can rate it by clicking one of the buttons below",
   TitleRating: "Is the solution working?",
-  WorstRatingTitle: "Worst Rate for this solution",
+  WorstRatingTitle: "Worst rate for this solution",
   WorstRatingBody:
     "Are you sure that this solution doesn&#39;t help to solve the unsolved problem?",
-  BestRatingTitle: "Not sure about this solution?",
+  BestRatingTitle: "Best rate for this solution",
+  MediumRatingTitle: "Not sure about this solution?",
   TitlehelpInvitation: "Help Categories for Invitation Step",
   BestRatingBody:
     "Are you sure that this solution solved the unsolved problem?",
