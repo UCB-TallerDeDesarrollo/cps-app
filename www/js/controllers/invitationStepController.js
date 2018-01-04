@@ -228,7 +228,6 @@ $scope.editablePair=[];
   $scope.closeModalToChooseAdultConcernToChildConcern = function() {
     $scope.modalToChooseAdultConcernToChildConcern.hide();
     $ionicListDelegate.closeOptionButtons();
-    $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
   };
 
   $ionicModal.fromTemplateUrl('edit-AdultConcern-To-ChildConcern.html', {
@@ -340,7 +339,7 @@ $scope.editablePair=[];
           }
         }
       },
-      
+
       { type: 'button-balanced ion-happy-outline',
         onTap: function(e) {
           $scope.showConfirmBestRate(solution,4,unsolvedProblem);
@@ -571,6 +570,6 @@ $scope.editablePair=[];
             console.log(error.message);
           });
       };
- 
+
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 });
