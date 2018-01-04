@@ -75,7 +75,7 @@ $scope.alert = function(){
       title: "Copia del ALSUP",
       topics: [
         { content: "Evaluación de las habilidades rezagadas y los problemas sin resolver",
-          url:"http://livesinthebalance.org/sites/default/files/ALSUP%20Rev%2011-12-12%20pdf%20%282%29_1.pdf"
+          url:"https://docs.google.com/gview?embedded=true&url=http://livesinthebalance.org/sites/default/files/ALSUP%20Rev%2011-12-12%20pdf%20%282%29_1.pdf"
         }
       ]
     },
@@ -83,7 +83,7 @@ $scope.alert = function(){
       title: "Guía del ALSUP",
       topics: [
         { content: "Soluciones Colaborativas y Proactivas - Guía del ALSUP",
-          url:"http://livesinthebalance.org/sites/default/files/ALSUP%20Guide%209-16-14_1.pdf"
+          url:"https://docs.google.com/gview?embedded=true&url=http://livesinthebalance.org/sites/default/files/ALSUP%20Guide%209-16-14_1.pdf"
         }
       ]
     },
@@ -122,7 +122,7 @@ $scope.alert = function(){
       title: "Copy of the ALSUP",
       topics: [
         { content: "Assessment Of Lagging Skills & Unsolved Problems",
-          url:"http://livesinthebalance.org/sites/default/files/ALSUP%20Rev%2011-12-12%20pdf%20%282%29_1.pdf"
+          url:"https://docs.google.com/gview?embedded=true&url=http://livesinthebalance.org/sites/default/files/ALSUP%20Rev%2011-12-12%20pdf%20%282%29_1.pdf"
         }
       ]
     },
@@ -130,7 +130,7 @@ $scope.alert = function(){
       title: "ALSUP Guide",
       topics: [
         { content: "Collaborative & Proactive Solutions - ALSUP Guide",
-          url:"http://livesinthebalance.org/sites/default/files/ALSUP%20Guide%209-16-14_1.pdf"
+          url:"https://docs.google.com/gview?embedded=true&url=http://livesinthebalance.org/sites/default/files/ALSUP%20Guide%209-16-14_1.pdf"
         }
       ]
     },
