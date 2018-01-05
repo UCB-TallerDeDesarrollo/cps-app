@@ -422,7 +422,15 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
       url: "/videoPlanBInAction",
       views: {
         menuContent: {
-          templateUrl: "templates/appHelps/videoPlanBInAction.html"
+          templateUrl: "templates/video/videoPlanBInAction.html"
+        }
+      }
+    })
+    .state("app.drillingVideo", {
+      url: "/drillingVideo",
+      views: {
+        menuContent: {
+          templateUrl: "templates/video/videoDrilling.html"
         }
       }
     });
