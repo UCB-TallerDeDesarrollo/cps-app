@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('AlsupCtrl', function($scope, $translate, AppTools, $ionicPopup) {
+.controller('AlsupCtrl', function($scope, $state, $translate, AppTools, $ionicPopup) {
 $scope.alert = function(){
   $scope.shownContent = null;
 }
@@ -43,22 +43,37 @@ $scope.alert = function(){
   $scope.checkConnection = function(){
     console.log("Entro");
     if(window.Connection) {
-    if(navigator.connection.type == Connection.NONE)
-    {
-      var alertNotConnection = $ionicPopup.alert({
-        title: 'Required Connection',
-        template: "Internet access is required to view this page. Please check your internet settings and try again."
-      });
-
-    }
-    if(navigator.connection.type == Connection.WIFI ||
+      if(navigator.connection.type == Connection.NONE)
+      {
+        var alertNotConnection = $ionicPopup.alert({
+          title: 'Required Connection',
+          template: "Internet access is required to view this page. Please check your internet settings and try again."
+        });
+      }
+      if(navigator.connection.type == Connection.WIFI ||
       navigator.connection.type == Connection.CELL_2G ||
       navigator.connection.type == Connection.CELL_3G ||
       navigator.connection.type == Connection.CELL_4G){
-      browserInstance.openBrowser(topic.url)
+        browserInstance.openBrowser(topic.url)
+      }
     }
   }
-}
+
+  $scope.checkPlanBVideoConnection = function(){
+    if(window.Connection) {
+      console.log("Entro");
+      if(navigator.connection.type == Connection.NONE)
+      {
+        var alertNotConnection = $ionicPopup.alert({
+          title: 'Required Connection',
+          template: "Internet access is required to view this page. Please check your internet settings and try again."
+        });
+      }else{
+        $state.go("app.videoPlanBInAction")
+        console.log("Salio");
+      }
+    }
+  }
 
   $scope.googleAnalyticsView = function() {
     if(typeof analytics !== 'undefined') {
