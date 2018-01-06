@@ -954,20 +954,27 @@ angular
       if (child.active === 1) {
         var beforeIndex;
         var beforeItem;
-        if($scope.childs.length>1){
+        var sizeOfList = $scope.childs.length;
+        if(sizeOfList>1){
           beforeIndex = $scope.childs.indexOf(child)-1;
           beforeItem = $scope.childs[beforeIndex];
+          console.log(sizeOfList);
           console.log(beforeIndex);
           console.log(beforeItem);
-          console.log(beforeItem.first_name);
-          if(beforeIndex >= 0)
+          if(sizeOfList > (beforeIndex+2)){
+            active_child={first_name: $scope.childs[sizeOfList-1].first_name}
+            $scope.activateChild($scope.childs[sizeOfList-1]);
+          }
+          else if(beforeIndex >= 0)
           {
             active_child = {first_name: beforeItem.first_name };
+            console.log(beforeItem.first_name);
             $scope.activateChild(beforeItem);
           }
           else{
             active_child = { first_name: "" };
           }
+          
           console.log(active_child);
         }
         else {
