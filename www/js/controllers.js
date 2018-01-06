@@ -52,6 +52,8 @@ app
          
         }}
     }
+
+
     $scope.logout = function(){
         $translate([
             "SuccessTitle",
@@ -209,6 +211,22 @@ app
             });
         }
     };
+
+    $scope.checkDrillingVideoConnection = function(url){
+        if(window.Connection) {
+          console.log("Entro");
+          if(navigator.connection.type == Connection.NONE)
+          {
+            var alertNotConnection = $ionicPopup.alert({
+              title: 'Required Connection',
+              template: "Internet access is required to view this page. Please check your internet settings and try again."
+            });
+          }else{
+            $state.go(url)
+            console.log("Salio");
+          }
+        }
+      }
 
     $scope.checkActiveToContinue = function(route) {
         if ($scope.activeChild.first_name === '') {
