@@ -38,7 +38,7 @@
 							{{topic.content}}
 							<i class="icon ion-ios-browsers-outline font-21"></i>
 						</ion-item>
-						<a ng-if="topic.video" class="item item-accordion item-text-wrap item-icon-right " ng-show="isContentShown(help) " style=" color: inherit; text-decoration: inherit;" ng-click="checkConnection()" href="#/app/{{topic.video}}">
+						<a ng-if="topic.video" class="item item-accordion item-text-wrap item-icon-right " ng-show="isContentShown(help) " style=" color: inherit; text-decoration: inherit;" ng-click="checkPAlsupMeetingVideoConnection('app.{{topic.video}}')" >
 								{{topic.content}}
 							<i class="icon ion-ios-browsers-outline font-21"></i>
 						</a>

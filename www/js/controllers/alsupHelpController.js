@@ -16,7 +16,7 @@ $scope.alert = function(){
     return $scope.shownContent === content;
   };
 
-  //$scope.browserInstance = {};
+  $scope.browserInstance = {};
   $scope.browserInstance = AppTools.newBrowser({
     scope: $scope,
     animation: 'slide-in-right'
@@ -49,11 +49,7 @@ $scope.alert = function(){
           title: 'Required Connection',
           template: "Internet access is required to view this page. Please check your internet settings and try again."
         });
-      }
-      if(navigator.connection.type == Connection.WIFI ||
-      navigator.connection.type == Connection.CELL_2G ||
-      navigator.connection.type == Connection.CELL_3G ||
-      navigator.connection.type == Connection.CELL_4G){
+      }else{
         browserInstance.openBrowser(topic.url)
       }
     }
@@ -70,6 +66,21 @@ $scope.alert = function(){
         });
       }else{
         $state.go("app.videoPlanBInAction")
+        console.log("Salio");
+      }
+    }
+  }
+  $scope.checkPAlsupMeetingVideoConnection = function(url){
+    if(window.Connection) {
+      console.log("Entro");
+      if(navigator.connection.type == Connection.NONE)
+      {
+        var alertNotConnection = $ionicPopup.alert({
+          title: 'Required Connection',
+          template: "Internet access is required to view this page. Please check your internet settings and try again."
+        });
+      }else{
+        $state.go(url)
         console.log("Salio");
       }
     }
