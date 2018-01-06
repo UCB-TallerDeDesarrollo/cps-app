@@ -275,6 +275,16 @@ angular.module('starter.controllers')
     ChildConcernFactory.delete(childConcern,function(){
       $scope.childsConcerns.splice($scope.childsConcerns.indexOf(childConcern), 1);
     });
+    ChildConcernFactory.getPair(function(auxPair){
+      for(i=0;i<auxPair.length;i++) {
+        if(auxPair[i].description === childConcern.description)
+        {
+            $scope.childConcernPair=auxPair[i];
+           ChildConcernFactory.deleteChildsConcernPair($scope.childConcernPair);
+        }
+      }
+
+    });
  };
 
  $scope.showConfirmChildsConcern = function(item) {
