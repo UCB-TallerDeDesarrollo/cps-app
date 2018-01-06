@@ -10,6 +10,7 @@ $scope.alert = function(){
     } else {
       $scope.shownContent = content;
     }
+    $scope.comes_from_help = false;
   };
   $scope.isContentShown = function(content) {
 
@@ -33,13 +34,26 @@ $scope.alert = function(){
       {
         return $scope.shownContent === content;
       }
-    }
-    else
-    {
+    }else{
       return $scope.shownContent === content;
-    }
-    
+    }    
   }
+  $scope.isIonminus = function(content){
+    if($scope.comes_from_help)
+    {
+      if ((content.title == "Help with the wording of unsolved problems" || content.title == "Ayuda con la redacción de problemas no resueltos")){
+        return true;
+      }
+      else
+      {
+        return false;
+       }
+    }else{
+      return false;
+    }    
+  }
+
+
   $scope.checkConnection = function(){
     console.log("Entro");
     if(window.Connection) {
