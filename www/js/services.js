@@ -268,7 +268,7 @@ angular.module('starter.services', ['ngCordova'])
         },
           {name: "topic_06", title:"help_category_03topic_06", description: "No sé cómo profundizar", id:"6",
             contents: [
-              {name: "content_01", description: "Video de profundización", link:"http://livesinthebalance.org/step-three-fourth-video", id:"1"},
+              {name: "content_01", description: "Video de profundización", video:"drillingVideo", id:"1"},
               {name: "content_02", description: "Profundización creativa",link:"http://www.blogtalkradio.com/dr-ross-greene/2015/10/05/creative-drilling", id:"2"},
               {name: "content_03", description: "No se puede resolver problemas sin identificar la preocupación de los niños",link:"http://www.blogtalkradio.com/dr-ross-greene/2011/10/25/parenting-your-challenging-child", id:"3"}
 

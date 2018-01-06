@@ -433,6 +433,14 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
           templateUrl: "templates/video/videoDrilling.html"
         }
       }
+    })
+    .state("app.alsupMeetingVideo", {
+      url: "/alsupMeetingVideo",
+      views: {
+        menuContent: {
+          templateUrl: "templates/video/videoAlsupMeeting.html"
+        }
+      }
     });
 
   // if none of the above states are matched, use this as the fallback

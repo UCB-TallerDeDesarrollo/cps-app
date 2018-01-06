@@ -102,7 +102,7 @@ $scope.alert = function(){
       title: "Video de la reunión ALSUP",
       topics: [
         { content: "Reunión ALSUP (Video)",
-          url:"http://www.livesinthebalance.org/ALSUP-meeting#overlay-context=walking-tour-parents"
+          video:"alsupMeetingVideo"
         }
       ]
     }
@@ -149,7 +149,7 @@ $scope.alert = function(){
       title: "Video of ALSUP meeting",
       topics: [
         { content: "ALSUP Meeting (Video)",
-          url:"http://www.livesinthebalance.org/ALSUP-meeting#overlay-context=walking-tour-parents"
+          video:"alsupMeetingVideo"
         }
       ]
     }
