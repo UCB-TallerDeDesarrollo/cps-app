@@ -5,8 +5,8 @@
 				<div ng-repeat="help in alsupHelpDirEs">
 					<ion-item class="item item-stable item-text-wrap"
 										ng-click="toggleContent(help)"
-										ng-class="{active: isContentShown(help)}">
-						<i class="icon" ng-class="isContentShown(help) ? 'ion-minus' : 'ion-plus'"></i> &nbsp;
+										ng-class="{active: isContentShown(help) || isIonminus(help)}">
+						<i class="icon"ng-class="(isContentShown(help) || isIonminus(help))? 'ion-minus' : 'ion-plus'"></i> &nbsp;
 						<b>{{help.title}}</b>
 					</ion-item>
 					<div ng-repeat="topic in help.topics">
@@ -28,7 +28,7 @@
 					<ion-item class="item item-stable item-text-wrap"
 										ng-click="toggleContent(help)"
 										ng-class="{active: isContentShown(help) || isIonminus(help)}">
-						<i class="icon"  ng-class="(isContentShown(help) || isIonminus(help))? 'ion-minus' : 'ion-plus'"></i>
+						<i class="icon"  ng-class="(isContentShown(help) || isIonminus(help))? 'ion-minus' : 'ion-plus'"></i> &nbsp;
 						<b>{{help.title}}</b>
 					</ion-item>
 					<div ng-repeat="topic in help.topics">
