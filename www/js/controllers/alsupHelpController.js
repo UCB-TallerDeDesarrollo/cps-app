@@ -3,14 +3,34 @@ angular.module('starter.controllers')
 $scope.alert = function(){
   $scope.shownContent = null;
 }
+
   $scope.toggleContent = function(content) {
-      localStorage.removeItem("coming_from_hint");
-    if ($scope.isContentShown(content)) {
-      $scope.shownContent = null;
-    } else {
-      $scope.shownContent = content;
+   localStorage.removeItem("coming_from_hint");
+    if($scope.comes_from_help)
+    {
+      if ((content.title == "Help with the wording of unsolved problems" || content.title == "Ayuda con la redacción de problemas no resueltos")){
+        if ($scope.isContentShown(content)) {
+          $scope.shownContent = content;
+        } else {
+          $scope.shownContent = null;
+        }
+        }
+      else
+      {
+        if ($scope.isContentShown(content)) {
+          $scope.shownContent = null;
+        } else {
+          $scope.shownContent = content;
+        }
+      }
+       $scope.comes_from_help = false;
+    }else{
+      if ($scope.isContentShown(content)) {
+        $scope.shownContent = null;
+      } else {
+        $scope.shownContent = content;
+      }
     }
-    $scope.comes_from_help = false;
   };
   $scope.isContentShown = function(content) {
 
