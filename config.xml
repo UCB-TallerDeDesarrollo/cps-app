@@ -7,7 +7,7 @@
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
     <allow-navigation href="*" />
-    <name>The Lens Changer</name>
+    <name>Lens Changer</name>
     <description>
 
 

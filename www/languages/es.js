@@ -69,7 +69,7 @@ var $translations_es = {
     EditUnsolvedProblem: 'Editar Problema Sin Resolver',
     DeleteUnsolvedProblemTitle: "Borrar Problema Sin Resolver",
     DeleteUnsolvedProblemBody: "¿Estás seguro de que quieres borrar este Problema Sin Resolver?",
-    TypeUnsolvedProblemPlaceholder: "Escriba un nuevo problema sin resolver.",
+    TypeUnsolvedProblemPlaceholder: "Ingrese aquí el problema sin resolver.",
     UnsolvedProblemHintTitle: "Consejo de Problema Sin Resolver",
     UnsolvedProblemHintBodyPart1: "Un problema sin resolver es una alerta de que su hijo tiene dificultades para reunirse de manera confiable.",
     UnsolvedProblemHintBodyPart2: "Cada habilidad rezagada puede tener multiples problemas sin resolver, uno solo, o incluso ninguno. Cada problema sin resolver puede estas asociado con multiples habilidades rezagadas, pero no necesitas escribir el mismo problema sin resolver en más de una vez.",

@@ -5,17 +5,21 @@
 				<div ng-repeat="help in alsupHelpDirEs">
 					<ion-item class="item item-stable item-text-wrap"
 										ng-click="toggleContent(help)"
-										ng-class="{active: isContentShown(help)}">
-						<i class="icon" ng-class="isContentShown(help) ? 'ion-minus' : 'ion-plus'"></i> &nbsp;
+										ng-class="{active: isContentShown(help) || isIonminus(help)}">
+						<i class="icon"ng-class="(isContentShown(help) || isIonminus(help))? 'ion-minus' : 'ion-plus'"></i> &nbsp;
 						<b>{{help.title}}</b>
 					</ion-item>
 					<div ng-repeat="topic in help.topics">
-						<ion-item class="item item-accordion item-text-wrap item-icon-right"
-											ng-show="isContentShown(help) || from_help(help)"
-											ng-click="checkConnection();browserInstance.openBrowser(topic.url)">
+						<ion-item ng-if="!topic.video" class="item item-accordion item-text-wrap item-icon-right " ng-show="from_help(help)"
+						 ng-click="browserInstance.openBrowser(topic.url)">
 							{{topic.content}}
 							<i class="icon ion-ios-browsers-outline font-21"></i>
 						</ion-item>
+						<a ng-if="topic.video" class="item item-accordion item-text-wrap item-icon-right " ng-show="isContentShown(help) " style=" color: inherit; text-decoration: inherit;"
+						ng-click="checkPAlsupMeetingVideoConnection('app.{{topic.video}}')" >
+							{{topic.content}}
+							<i class="icon ion-ios-browsers-outline font-21"></i>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -23,17 +27,21 @@
 				<div ng-repeat="help in alsupHelpDirEn">
 					<ion-item class="item item-stable item-text-wrap"
 										ng-click="toggleContent(help)"
-										ng-class="{active: isContentShown(help)}">
-						<i class="icon" ng-class="isContentShown(help) ? 'ion-minus' : 'ion-plus'"></i> &nbsp;
+										ng-class="{active: isContentShown(help) || isIonminus(help)}">
+						<i class="icon"  ng-class="(isContentShown(help) || isIonminus(help))? 'ion-minus' : 'ion-plus'"></i> &nbsp;
 						<b>{{help.title}}</b>
 					</ion-item>
 					<div ng-repeat="topic in help.topics">
-						<ion-item class="item item-accordion item-text-wrap item-icon-right "
-											ng-show=" from_help(help) || isContentShown(help) "
-											ng-click="checkConnection();browserInstance.openBrowser(topic.url)">
+						<ion-item ng-if="!topic.video" class="item item-accordion item-text-wrap item-icon-right "
+											ng-show="from_help(help)"
+											ng-click="browserInstance.openBrowser(topic.url)">
 							{{topic.content}}
 							<i class="icon ion-ios-browsers-outline font-21"></i>
 						</ion-item>
+						<a ng-if="topic.video" class="item item-accordion item-text-wrap item-icon-right " ng-show="isContentShown(help) " style=" color: inherit; text-decoration: inherit;" ng-click="checkPAlsupMeetingVideoConnection('app.{{topic.video}}')" >
+								{{topic.content}}
+							<i class="icon ion-ios-browsers-outline font-21"></i>
+						</a>
 					</div>
 				</div>
 			</div>

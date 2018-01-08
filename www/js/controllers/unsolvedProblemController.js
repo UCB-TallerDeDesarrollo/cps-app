@@ -115,13 +115,13 @@ angular.module('starter.controllers').controller('UnsolvedProblemCtrl', function
   };
 
   $scope.verifyToGoToStep1 = function(id) {
-    $translate(['goingTo','Step', 'EmpathyStep','NoMessage','YesMessage','keepDrilling','step1VerifyBody','imSure']).then (function(translations){
+    $translate(['goingTo','Step', 'EmpathyStep','NoMessage','YesMessage','listmoreexples','step1VerifyBody','idid']).then (function(translations){
     if($scope.unsolvedProblems.length > 0){
       var confirmPopup = $ionicPopup.confirm({
         title: translations.goingTo +" "+ translations.Step + " 1: " +translations.EmpathyStep,
         template: translations.step1VerifyBody,
-        cancelText: translations.NoMessage+", " + translations.keepDrilling,
-        okText: translations.YesMessage + ", "+ translations.imSure
+        cancelText: translations.NoMessage+", " + translations.listmoreexples,
+        okText: translations.YesMessage + ", "+ translations.idid
       });
 
       confirmPopup.then(function(res) {

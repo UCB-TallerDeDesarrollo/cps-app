@@ -3,7 +3,7 @@ angular.module('starter.services').factory('ChildrenFactory', function($cordovaS
   showNameAlert = function() {
   var alertPopup = $ionicPopup.alert({
     title: 'The name is too big!!',
-    template: 'please try again.'
+    template: 'Please try again.'
   });
 
   alertPopup.then(function(res) {
