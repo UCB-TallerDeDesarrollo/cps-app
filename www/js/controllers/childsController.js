@@ -33,6 +33,7 @@ angular
       $scope.childs = children;
     });
     $scope.activeChild = { first_name: "" };
+    $scope.secondActiveChild ={first_name: ""} ;
     $ionicModal
       .fromTemplateUrl("templates/child/create-child-modal.html", {
         scope: $scope,
@@ -952,10 +953,39 @@ angular
 
     $scope.deleteChild = function(child) {
       if (child.active === 1) {
-        $scope.activeChild = { first_name: "" };
+        var beforeIndex;
+        var beforeItem;
+        var sizeOfList = $scope.childs.length;
+        if(sizeOfList>1){
+          beforeIndex = $scope.childs.indexOf(child)-1;
+          beforeItem = $scope.childs[beforeIndex];
+          console.log(sizeOfList);
+          console.log(beforeIndex);
+          console.log(beforeItem);
+          if(sizeOfList > (beforeIndex+2)){
+            active_child={first_name: $scope.childs[sizeOfList-1].first_name}
+            $scope.activateChild($scope.childs[sizeOfList-1]);
+          }
+          else if(beforeIndex >= 0)
+          {
+            active_child = {first_name: beforeItem.first_name };
+            console.log(beforeItem.first_name);
+            $scope.activateChild(beforeItem);
+          }
+          else{
+            active_child = { first_name: "" };
+          }
+          
+          console.log(active_child);
+        }
+        else {
+          active_child = { first_name: "" };
+        }
+        
       }
       ChildrenFactory.delete(child, function() {
         $scope.childs.splice($scope.childs.indexOf(child), 1);
+        
         ChildrenFactory.active(function(active_child) {
           $scope.activeChild = active_child;
         });

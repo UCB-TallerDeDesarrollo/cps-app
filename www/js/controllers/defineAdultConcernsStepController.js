@@ -106,6 +106,16 @@ angular.module('starter.controllers')
     AdultConcernFactory.delete(adultsConcern,function(){
       $scope.adultsConcerns.splice($scope.adultsConcerns.indexOf(adultsConcern), 1);
     });
+    AdultConcernFactory.getPair(function(auxPair){
+     for(i=0;i<auxPair.length;i++) {
+       if(auxPair[i].description2 === adultsConcern.description)
+       {
+           $scope.adultsConcernPair=auxPair[i];
+          AdultConcernFactory.deleteAdultsConcernPair($scope.adultsConcernPair);
+       }
+     }
+
+   });
   };
 
   $ionicModal.fromTemplateUrl('templates/adultsConcerns/create-adults-concern-modal.html', {
@@ -244,9 +254,9 @@ angular.module('starter.controllers')
   };
 
   $scope.verifyToGoToStep3 = function(id) {
-    $translate(['goingTo','Step', 'InvitationStep','NoMessage','YesMessage','keepDrilling','step3VerifyBody','imSure']).then (function(translations){
+    $translate(['goingTo','Step', 'DefineAdultConcerns','NoMessage','YesMessage','keepDrilling','step3VerifyBody','imSure']).then (function(translations){
       var confirmPopup = $ionicPopup.confirm({
-        title: translations.goingTo +" "+ translations.Step + " 3: " +translations.InvitationStep, //translations.goingTo +" "+ translations.Step + " 1: " +translations.EmpathyStep,
+        title: translations.goingTo +" "+ translations.Step + " 3: " +translations.DefineAdultConcerns, //translations.goingTo +" "+ translations.Step + " 1: " +translations.EmpathyStep,
         template: translations.step3VerifyBody,
         cancelText: translations.NoMessage+", " + translations.keepDrilling,
         okText: translations.YesMessage + ", "+ translations.imSure

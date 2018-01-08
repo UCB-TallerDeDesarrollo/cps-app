@@ -13,9 +13,13 @@
       <div class="list">
         <div ng-repeat="content in topic.contents | filter: searchWord">
           <div class="item item-text-wrap item-icon-right" ng-if="!content.link">
-            <h3>{{content.description}}</h3>
+            <a style=" color: inherit; text-decoration: inherit;" ng-if="content.video" ng-click="checkDrillingVideoConnection('app.{{content.video}}')" >
+              <h3>{{content.description}}</h3>
+              <i class="icon ion-ios-browsers-outline"></i>
+            </a>
+            <h3 ng-if="!content.video">{{content.description}}</h3>
           </div>
-          <a class="item item-text-wrap item-icon-right" ng-click="checkConnection();browserInstance.openBrowser(content.link)" ng-if="content.link.length > 0">
+          <a class="item item-text-wrap item-icon-right" ng-click="browserInstance.openBrowser(content.link)" ng-if="content.link.length > 0">
             <h3>{{content.description}}</h3>
             <i class="icon ion-ios-browsers-outline"></i>
           </a>
@@ -37,9 +41,13 @@
         <div class="list">
           <div ng-repeat="content in topicEs.contents | filter: searchWord">
             <div class="item item-text-wrap item-icon-right" ng-if="!content.link">
-              <h3>{{content.description}}</h3>
+              <a style=" color: inherit; text-decoration: inherit;" ng-if="content.video" ng-click="checkDrillingVideoConnection('app.{{content.video}}')" >
+                <h3>{{content.description}}</h3>
+                <i class="icon ion-ios-browsers-outline"></i>
+              </a>
+              <h3 ng-if="!content.video">{{content.description}}</h3>
             </div>
-            <a class="item item-text-wrap item-icon-right" ng-click="checkConnection();browserInstance.openBrowser(content.link)" ng-if="content.link.length > 0">
+            <a class="item item-text-wrap item-icon-right" ng-click="browserInstance.openBrowser(content.link)" ng-if="content.link.length > 0">
               <h3>{{content.description}}</h3>
               <i class="icon ion-ios-browsers-outline"></i>
             </a>
