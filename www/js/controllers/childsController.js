@@ -1043,6 +1043,18 @@ angular
         );
     };
 
+    $scope.openLink = function(text){
+      $cordovaInAppBrowser.open(text, '_self')
+      .then(function(event) {
+        console.log("abrio");
+        // success
+      })
+      .catch(function(event) {
+        console.log("cerro");
+        // error
+      });
+    };
+
     $scope.showIntroductionPage = function() {
 
         if (
@@ -1052,9 +1064,9 @@ angular
           localStorage.setItem("pop_up_first_time", true);
           var buttonsTemplate =
             '<div class="button-bar">' +
-            '<a href="https://livesinthebalance.org/about-cps" class="button ng-binding button-energized" white-space: normal;>' +
-            '<b><font size="2">{{"tellMeMoreCps" | translate }}</font></b>' +
-            "</a>" +
+            '<button class="button button-light" ng-click= "openLink("https://livesinthebalance.org/about-cps")">'+
+            '{{"tellMeMoreCps" | translate }}' +
+            '</button>'+
             "<div>";
             $translate([
               "WelcomeMessage",
