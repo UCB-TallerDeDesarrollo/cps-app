@@ -7,6 +7,7 @@ angular
     $window,
     $ionicActionSheet,
     $ionicListDelegate,
+    $cordovaInAppBrowser,
     AppTools,
     $ionicPopup,
     $ionicModal,
@@ -1325,6 +1326,8 @@ angular
         );
     };
 
+    
+
     $scope.showIntroductionPage = function() {
       if (
         localStorage.getItem("pop_up_first_time") === null &&
@@ -1345,8 +1348,16 @@ angular
                 text: translations.tellMeMoreCps,
                 onTap: function(e)  {
                   console.log("Entro");
-                  myPopup.close();
+                  $scope.browserInstance = {};
+                  $scope.browserInstance = AppTools.newBrowser(
+                    {
+                      scope: $scope,
+                      animation: "slide-in-right"
+                    }
+                  );
+                  console.log("Creo instancia");
                   if (window.Connection) {
+                    console.log("Conexion");
                     if (navigator.connection.type == Connection.NONE) {
                       var alertNotConnection = $ionicPopup.alert({
                         title: "Required Connection",
@@ -1354,7 +1365,10 @@ angular
                           "Internet access is required to view this page. Please check your internet settings and try again."
                       });
                     } else {
-                      $scope.browserInstance.openBrowser("www.google.com");
+                      myPopup.close();
+                      console.log("chuta");
+                      $scope.browserInstance.openBrowser("http://www.blogtalkradio.com/dr-ross-greene/2015/03/30/the-heat-of-the-moment");
+                      console.log("Salio");
                     }
                   }
                 }
