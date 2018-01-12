@@ -7,8 +7,6 @@ angular
     $window,
     $ionicActionSheet,
     $ionicListDelegate,
-    $cordovaInAppBrowser,
-    AppTools,
     $ionicPopup,
     $ionicModal,
     $stateParams,
@@ -22,7 +20,8 @@ angular
     LaggingSkills,
     AdultConcernFactory,
     ChildConcernFactory,
-    PossibleSolutionFactory
+    PossibleSolutionFactory,
+    AppTools
   ) {
     $scope.friendShareID;
     $scope.user_friend = { id: "" };
@@ -37,7 +36,7 @@ angular
     $scope.activeChild = { first_name: "" };
     $scope.secondActiveChild = { first_name: "" };
     $ionicModal
-      .fromTemplateUrl("templates/child/create-child-modal.html", {
+      .fromTemplateUrl("templates/child/welcomeBrowser.html", {
         scope: $scope,
         animation: "slide-in-up"
       })
@@ -1326,53 +1325,29 @@ angular
         );
     };
 
-    
-
     $scope.showIntroductionPage = function() {
-      if (
-        localStorage.getItem("pop_up_first_time") === null &&
-        localStorage.getItem("tutorial_first_time") != null
-      ) {
-        localStorage.setItem("pop_up_first_time", true);
-        $translate([
-          "WelcomeMessage",
-          "ChooseAnOptionMessage",
-          "launchApp",
-          "tellMeMoreCps"
-        ]).then(function(translations) {
+
+        if (
+          localStorage.getItem("pop_up_first_time") === null &&
+          localStorage.getItem("tutorial_first_time") != null
+        ) {
+          localStorage.setItem("pop_up_first_time", true);
+          var buttonsTemplate =
+            '<div class="button-bar">' +
+            '<a class="button ng-binding button-energized" white-space: normal;>' +
+            '<b><font size="2">{{"tellMeMoreCps" | translate }}</font></b>' +
+            "</a>" +
+            "<div>";
+            $translate([
+              "WelcomeMessage",
+              "ChooseAnOptionMessage",
+              "launchApp"
+            ]).then(function(translations) {
           var myPopup = $ionicPopup.show({
             title: translations.WelcomeMessage,
+            template: buttonsTemplate,
+            cssClass: "popup-intro",
             buttons: [
-              {
-                type: "button button-energized",
-                text: translations.tellMeMoreCps,
-                onTap: function(e)  {
-                  console.log("Entro");
-                  $scope.browserInstance = {};
-                  $scope.browserInstance = AppTools.newBrowser(
-                    {
-                      scope: $scope,
-                      animation: "slide-in-right"
-                    }
-                  );
-                  console.log("Creo instancia");
-                  if (window.Connection) {
-                    console.log("Conexion");
-                    if (navigator.connection.type == Connection.NONE) {
-                      var alertNotConnection = $ionicPopup.alert({
-                        title: "Required Connection",
-                        template:
-                          "Internet access is required to view this page. Please check your internet settings and try again."
-                      });
-                    } else {
-                      myPopup.close();
-                      console.log("chuta");
-                      $scope.browserInstance.openBrowser("http://www.blogtalkradio.com/dr-ross-greene/2015/03/30/the-heat-of-the-moment");
-                      console.log("Salio");
-                    }
-                  }
-                }
-              },
               {
                 type: "button button-balanced",
                 text: translations.launchApp,
@@ -1386,7 +1361,6 @@ angular
           function parentsPage() {
             $window.open("", "_system", "location=yes");
           }
-
           $scope.educatorPage = function() {
             $window.open("", "_system", "location=yes");
           };
