@@ -7,6 +7,7 @@ angular
     $window,
     $ionicActionSheet,
     $ionicListDelegate,
+    AppTools,
     $ionicPopup,
     $ionicModal,
     $stateParams,
@@ -20,8 +21,7 @@ angular
     LaggingSkills,
     AdultConcernFactory,
     ChildConcernFactory,
-    PossibleSolutionFactory,
-    AppTools
+    PossibleSolutionFactory
   ) {
     $scope.friendShareID;
     $scope.user_friend = { id: "" };
@@ -1324,13 +1324,6 @@ angular
           }
         );
     };
-
-    $scope.browserInstance = {};
-    $scope.browserInstance = AppTools.newBrowser({
-      scope: $scope,
-      animation: "slide-in-right"
-    });
-
 
     $scope.showIntroductionPage = function() {
       if (
