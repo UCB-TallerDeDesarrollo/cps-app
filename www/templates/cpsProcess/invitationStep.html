@@ -1,7 +1,7 @@
 <ion-view cache-view="false" view-title="{{'InvitationStep' | translate }}" ng-controller="InvitationCtrl" on-tap="unableAnimation()">
   <div ng-if="sharedChild == 0">
     <div class="bar bar-subheader bar-positive">
-      <h2 class="title">{{unsolvedProblem.description}}</h2>
+      <h2 class="col col-90 title">{{unsolvedProblem.description}}</h2>
       <a class="button button-small button-clear button-white icon ion-help-circled" href="#/app/helpForInvitation"></a>
     </div>
     <ion-content class="has-tabs has-subheader" on-swipe-right="selectTabWithIndex(1)">
@@ -194,9 +194,7 @@
         </ion-tabs>
       </div>
     </div>
-</ion-view>
-
-<script id="create-modal.html" type="text/ng-template">
+    <script id="create-modal.html" type="text/ng-template">
       <ion-modal-view cache-view="false" class="modal slide-in-up ng-enter active ng-enter-active">
         <ion-header-bar class="bar bar-header bar-positive">
           <h1 class="title">{{'NewPossibleSolution' | translate }}</h1>
@@ -211,7 +209,7 @@
                 </button>
               </div>
               <label class="item item-input">
-                <textarea rows=5 placeholder="{{'PlaceHolderPossibleSolution' | translate }}" ng-model="solution.description">
+                <textarea rows=5 placeholder="{{'PlaceHolderPossibleSolution' | translate }}" ng-model="solution.description" maxlength="255">
                 </textarea>
               </label>
               <button class="button button-full button-positive" ng-if="!solution.description.length" ng-click="createSolution()" disabled>{{'CreateTitle' | translate }}</button>
@@ -349,8 +347,6 @@
   </script>
 <!--  FIN PARA ELEGIR EL NINO Y EL CONCERN-->
 
-
-
 <script id="edit-modal.html" type="text/ng-template">
       <ion-modal-view class="modal slide-in-up ng-enter active ng-enter-active">
         <ion-header-bar class="bar bar-header bar-positive">
@@ -367,7 +363,7 @@
             <form>
 
               <label class="item item-input">
-                <textarea rows=5 placeholder="Agree upon a solution" ng-model="editableSolution.description">
+                <textarea rows=5 placeholder="Agree upon a solution" ng-model="editableSolution.description" maxlength="255">
                 </textarea>
               </label>
               <button class="button button-full button-positive" ng-if="!editableSolution.description.length" ng-click="updateSolution()" disabled>{{'SaveTitle' | translate }}</button>
@@ -379,3 +375,6 @@
         </ion-content>
       </ion-modal-view>
     </script>
+</ion-view>
+
+

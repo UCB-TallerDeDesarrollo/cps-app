@@ -228,7 +228,6 @@ $scope.editablePair=[];
   $scope.closeModalToChooseAdultConcernToChildConcern = function() {
     $scope.modalToChooseAdultConcernToChildConcern.hide();
     $ionicListDelegate.closeOptionButtons();
-    $scope.solution = { unsolvedProblemId: $stateParams.unsolvedProblemId };
   };
 
   $ionicModal.fromTemplateUrl('edit-AdultConcern-To-ChildConcern.html', {
@@ -340,7 +339,7 @@ $scope.editablePair=[];
           }
         }
       },
-      
+
       { type: 'button-balanced ion-happy-outline',
         onTap: function(e) {
           $scope.showConfirmBestRate(solution,4,unsolvedProblem);
@@ -375,10 +374,10 @@ $scope.editablePair=[];
   });
   };
   $scope.showConfirmBestRate2 = function(solution,rate,unsolvedProblem) {
-    $translate(['BestRatingTitle', 'CancelOption','YesMessage']).then (function(translations){
+    $translate(['MediumRatingTitle', 'CancelOption','YesMessage']).then (function(translations){
     var confirmPopup = $ionicPopup.confirm({
-      title: translations.BestRatingTitle,
-      template: "Some times the solution need some time to work, give it a try",
+      title: translations.MediumRatingTitle,
+      template: "Sometimes the solution needs time to work - we are giving it a try.",
       cancelText: translations.CancelOption,
       okText: translations.YesMessage
     });
@@ -571,6 +570,6 @@ $scope.editablePair=[];
             console.log(error.message);
           });
       };
- 
+
   $timeout( function() {$ionicTabsDelegate.$getByHandle('myTabs').select( parseInt(2,10));});
 });

@@ -106,6 +106,16 @@ angular.module('starter.controllers')
     AdultConcernFactory.delete(adultsConcern,function(){
       $scope.adultsConcerns.splice($scope.adultsConcerns.indexOf(adultsConcern), 1);
     });
+    AdultConcernFactory.getPair(function(auxPair){
+     for(i=0;i<auxPair.length;i++) {
+       if(auxPair[i].description2 === adultsConcern.description)
+       {
+           $scope.adultsConcernPair=auxPair[i];
+          AdultConcernFactory.deleteAdultsConcernPair($scope.adultsConcernPair);
+       }
+     }
+
+   });
   };
 
   $ionicModal.fromTemplateUrl('templates/adultsConcerns/create-adults-concern-modal.html', {

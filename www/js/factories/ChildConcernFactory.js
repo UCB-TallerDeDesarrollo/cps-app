@@ -62,6 +62,11 @@ angular.module('starter.services').factory('ChildConcernFactory', function($cord
     });
   }
 
+  function deleteChildsConcernPair(pair) {
+    var query = "DELETE FROM pair_childConcerntoadultConcern where id = ?";
+    $cordovaSQLite.execute(db, query, [pair.id]);
+  }
+
   return {
     all: function(unsolvedProblemId,callback) {
       getChildConcerns(unsolvedProblemId,callback);
@@ -78,6 +83,9 @@ angular.module('starter.services').factory('ChildConcernFactory', function($cord
     updateChildsConcernPair: function(ChildsConcernDescription,pair) {
        updateChildsConcernPair(ChildsConcernDescription,pair);
     },
+    deleteChildsConcernPair: function(pair) {
+      deleteChildsConcernPair(pair);
+   },
     delete: function(childsConcern, callback) {
       deleteChildsConcern(childsConcern, callback);
     }

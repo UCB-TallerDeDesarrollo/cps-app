@@ -1,5 +1,5 @@
 angular.module('starter.services')
-.factory('AppTools', function($sce, $ionicModal, $window ,$cordovaInAppBrowser, $ionicPlatform) {
+.factory('AppTools', function($sce, $ionicModal, $window ,$cordovaInAppBrowser, $ionicPlatform, $ionicPopup) {
   function createNewBrowser(options){
     var browserInstance = {
       title: '',
@@ -14,7 +14,23 @@ angular.module('starter.services')
     browserInstance.openBrowser = function(link) {
       this.title = link;
       this.destination = $sce.trustAsResourceUrl(link);
-      this.browser.show();
+      if(window.Connection) {
+        if(navigator.connection.type == Connection.NONE)
+        {
+          var alertNotConnection = $ionicPopup.alert({
+            title: 'Required Connection',
+            template: "Internet access is required to view this page. Please check your internet settings and try again."
+          });
+    
+        }
+        else{
+          console.log("show...");
+          this.browser.show();
+        }
+        
+      }
+      
+      
       // $cordovaInAppBrowser.open(link, '_self')
       // .then(function(event) {
       //   // success
