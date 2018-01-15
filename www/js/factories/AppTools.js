@@ -24,7 +24,6 @@ angular.module('starter.services')
     
         }
         else{
-          console.log("show...");
           this.browser.show();
         }
         

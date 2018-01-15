@@ -441,14 +441,6 @@ angular.module('starter', ['ionic','ionic.closePopup' ,'starter.controllers', 's
           templateUrl: "templates/video/videoAlsupMeeting.html"
         }
       }
-    })
-    .state("app.welcomeBrowser", {
-      url: "/welcomeBrowser",
-      views: {
-        menuContent: {
-          templateUrl: "templates/welcomeBrowser.html"
-        }
-      }
     });
 
   // if none of the above states are matched, use this as the fallback
